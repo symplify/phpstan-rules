@@ -27,7 +27,7 @@ final class ForbiddenMethodCallOnNewRule extends AbstractSymplifyRule
     /**
      * @var array<class-string<Finder>>
      */
-    private const ALLOWED_TYPES = ['Symfony\Component\Finder\Finder', 'DateTime', 'Nette\Utils\DateTime'];
+    private const ALLOWED_TYPES = ['Symfony\Component\Finder\Finder'];
 
     /**
      * @var ContainsTypeAnalyser
