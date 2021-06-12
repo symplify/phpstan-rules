@@ -18,9 +18,9 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\Rules\Missing\CheckRequiredClassInAnnotationRule\CheckRequiredClassInAnnotationRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Missing\CheckReferencedClassInAnnotationRule\CheckReferencedClassInAnnotationRuleTest
  */
-final class CheckRequiredClassInAnnotationRule extends AbstractSymplifyRule
+final class CheckReferencedClassInAnnotationRule extends AbstractSymplifyRule
 {
     /**
      * @var string
@@ -79,13 +79,13 @@ final class CheckRequiredClassInAnnotationRule extends AbstractSymplifyRule
         // foreach with configureaiton
         $classReferences = $this->classAnnotationResolver->resolveClassReferences($node, $scope);
 
+        $errorMessages = [];
         foreach ($classReferences as $classReference) {
             if ($this->reflectionProvider->hasClass($classReference)) {
                 continue;
             }
 
-            $errorMessage = sprintf(self::ERROR_MESSAGE, $classReference);
-            return [$errorMessage];
+            $errorMessages[] = sprintf(self::ERROR_MESSAGE, $classReference);
         }
 
         // foreach with configureaiton
@@ -104,11 +104,14 @@ final class CheckRequiredClassInAnnotationRule extends AbstractSymplifyRule
                 continue;
             }
 
-            $errorMessage = sprintf(self::CONSTANT_ERROR_MESSAGE, $constant, $class);
-            return [$errorMessage];
+            if ($classReflection->hasMethod($constant)) {
+                continue;
+            }
+
+            $errorMessages[] = sprintf(self::CONSTANT_ERROR_MESSAGE, $constant, $class);
         }
 
-        return [];
+        return $errorMessages;
     }
 
     public function getRuleDefinition(): RuleDefinition
