@@ -14,7 +14,6 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use Symplify\Astral\ValueObject\AttributeKey;
-use Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver;
 use Symplify\PHPStanRules\PhpDoc\PhpDocNodeTraverser\ClassReferencePhpDocNodeTraverser;
 use Symplify\PHPStanRules\Reflection\ClassReflectionResolver;
 use Symplify\PHPStanRules\Rules\AbstractSymplifyRule;
@@ -66,12 +65,10 @@ final class CheckReferencedClassInAnnotationRule extends AbstractSymplifyRule
 
     public function __construct(
         SimplePhpDocParser $simplePhpDocParser,
-        ClassAnnotationResolver $classAnnotationResolver,
         ReflectionProvider $reflectionProvider,
         ClassReflectionResolver $classReflectionResolver,
         ClassReferencePhpDocNodeTraverser $classReferencePhpDocNodeTraverser
     ) {
-        $this->classAnnotationResolver = $classAnnotationResolver;
         $this->reflectionProvider = $reflectionProvider;
         $this->classReflectionResolver = $classReflectionResolver;
         $this->classReferencePhpDocNodeTraverser = $classReferencePhpDocNodeTraverser;
@@ -102,7 +99,6 @@ final class CheckReferencedClassInAnnotationRule extends AbstractSymplifyRule
             return [];
         }
 
-        $errorMessages = [];
         $this->classReferencePhpDocNodeTraverser->decoratePhpDocNode($phpDocNode, $classReflection);
 
         foreach ($phpDocNode->getTags() as $phpDocTagNode) {
@@ -116,8 +112,7 @@ final class CheckReferencedClassInAnnotationRule extends AbstractSymplifyRule
             $classConstantsErrorMessages = $this->collectClassConstantsErrorMessages($genericTagValueNode);
             $methodCallsErrorMessages = $this->collectMethodCallsErrorMessages($genericTagValueNode);
 
-            $errorMessages = array_merge($classErrorMessages, $classConstantsErrorMessages, $methodCallsErrorMessages);
-            return $errorMessages;
+            return array_merge($classErrorMessages, $classConstantsErrorMessages, $methodCallsErrorMessages);
         }
 
         return [];
