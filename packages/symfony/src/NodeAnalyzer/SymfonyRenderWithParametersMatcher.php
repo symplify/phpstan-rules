@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Symfony\NodeAnalyzer;
 
+use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Type\ObjectType;
@@ -11,8 +12,8 @@ use PHPStan\Type\ThisType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symplify\Astral\Naming\SimpleNameResolver;
+use Symplify\PHPStanRules\NodeAnalyzer\PathResolver;
 use Symplify\PHPStanRules\Symfony\ValueObject\RenderTemplateWithParameters;
-use Symplify\PHPStanRules\Templates\RenderTemplateWithParametersMatcher;
 use Twig\Environment;
 
 final class SymfonyRenderWithParametersMatcher
@@ -24,7 +25,7 @@ final class SymfonyRenderWithParametersMatcher
 
     public function __construct(
         private SimpleNameResolver $simpleNameResolver,
-        private RenderTemplateWithParametersMatcher $renderTemplateWithParametersMatcher,
+        private PathResolver $pathResolver,
     ) {
     }
 
@@ -43,7 +44,7 @@ final class SymfonyRenderWithParametersMatcher
             return null;
         }
 
-        return $this->renderTemplateWithParametersMatcher->match($methodCall, $scope, 'twig');
+        return $this->matchRenderTempalteWithParmatersOnArgs($methodCall, $scope);
     }
 
     public function matchTwigRender(MethodCall $methodCall, Scope $scope): RenderTemplateWithParameters|null
@@ -61,7 +62,21 @@ final class SymfonyRenderWithParametersMatcher
             return null;
         }
 
-        return $this->renderTemplateWithParametersMatcher->match($methodCall, $scope, 'twig');
+        return $this->matchRenderTempalteWithParmatersOnArgs($methodCall, $scope);
+    }
+
+    private function resolveParameterArray(MethodCall $methodCall): Array_
+    {
+        if (! isset($methodCall->args[1])) {
+            return new Array_();
+        }
+
+        $secondArgValue = $methodCall->args[1]->value;
+        if (! $secondArgValue instanceof Array_) {
+            return new Array_();
+        }
+
+        return $secondArgValue;
     }
 
     private function isTwigCallerType(ObjectType $objectType, MethodCall $methodCall): bool
@@ -75,5 +90,22 @@ final class SymfonyRenderWithParametersMatcher
         }
 
         return false;
+    }
+
+    private function matchRenderTempalteWithParmatersOnArgs(
+        MethodCall $methodCall,
+        Scope $scope
+    ): ?RenderTemplateWithParameters {
+        $firstArgValue = $methodCall->args[0]->value;
+
+        $resolvedTemplateFilePaths = $this->pathResolver->resolveExistingFilePaths($firstArgValue, $scope);
+        if ($resolvedTemplateFilePaths === []) {
+            return null;
+        }
+
+        // we need array parameters
+        $parametersArray = $this->resolveParameterArray($methodCall);
+
+        return new RenderTemplateWithParameters($resolvedTemplateFilePaths, $parametersArray);
     }
 }

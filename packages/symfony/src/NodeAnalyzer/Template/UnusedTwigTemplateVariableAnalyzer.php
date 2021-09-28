@@ -24,14 +24,9 @@ final class UnusedTwigTemplateVariableAnalyzer
         array $templateFilePaths,
         Scope $scope
     ): array {
-        $templatesUsedVariableNames = [];
-        foreach ($templateFilePaths as $templateFilePath) {
-            $currentUsedVariableNames = $this->twigVariableNamesResolver->resolveFromFilePath($templateFilePath);
-            $templatesUsedVariableNames = array_merge($templatesUsedVariableNames, $currentUsedVariableNames);
-        }
-
+        $templateUsedVariableNames = $this->twigVariableNamesResolver->resolveFromFiles($templateFilePaths);
         $passedVariableNames = $this->methodCallArrayResolver->resolveArrayKeysOnPosition($methodCall, $scope, 1);
 
-        return array_diff($passedVariableNames, $templatesUsedVariableNames);
+        return array_diff($passedVariableNames, $templateUsedVariableNames);
     }
 }

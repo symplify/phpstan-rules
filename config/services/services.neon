@@ -4,11 +4,8 @@ includes:
     - ../../packages/nette/config/nette-services.neon
 
 services:
-    # templates
-    - Symplify\PHPStanRules\Templates\RenderTemplateWithParametersMatcher
-    - Symplify\PHPStanRules\Templates\TemplateErrorsFactory
-
     - Symplify\PHPStanRules\Matcher\SharedNamePrefixMatcher
+    - Symplify\PHPStanRules\Templates\TemplateErrorsFactory
 
     # doctrine
     - Symplify\PHPStanRules\NodeAnalyzer\Doctrine\EntityClassDetector

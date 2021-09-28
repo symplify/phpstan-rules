@@ -109,7 +109,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @param array<Arg|Node\VariadicPlaceholder> $args
+     * @param Arg[] $args
      * @return RuleError[]
      */
     private function validateArgVsParamTypes(array $args, MethodCall $methodCall, Scope $scope): array
@@ -132,10 +132,6 @@ CODE_SAMPLE
         foreach ($args as $position => $arg) {
             $param = $params[$position] ?? [];
             if (! $param instanceof Param) {
-                continue;
-            }
-
-            if (! $arg instanceof Arg) {
                 continue;
             }
 

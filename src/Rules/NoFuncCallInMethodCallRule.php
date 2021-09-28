@@ -45,10 +45,6 @@ final class NoFuncCallInMethodCallRule extends AbstractSymplifyRule
         $messages = [];
 
         foreach ($node->args as $arg) {
-            if (! $arg instanceof Arg) {
-                continue;
-            }
-
             if (! $arg->value instanceof FuncCall) {
                 continue;
             }

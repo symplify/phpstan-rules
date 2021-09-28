@@ -19,7 +19,7 @@ final class PathResolver
     /**
      * @return string[]
      */
-    public function resolveExistingFilePaths(Expr $expr, Scope $scope, string $templateSuffix): array
+    public function resolveExistingFilePaths(Expr $expr, Scope $scope): array
     {
         $resolvedValue = $this->nodeValueResolver->resolveWithScope($expr, $scope);
 
@@ -43,7 +43,7 @@ final class PathResolver
             }
 
             // 2. look for possible template candidate in /templates directory
-            $filePath = $this->findCandidateInTemplatesDirectory($possibleTemplateFilePath, $templateSuffix);
+            $filePath = $this->findCandidateInTemplatesDirectory($possibleTemplateFilePath);
             if ($filePath === null) {
                 continue;
             }
@@ -62,10 +62,8 @@ final class PathResolver
     /**
      * Helps with mapping of short name to FQN template name; Make configurable via rule constructor?
      */
-    private function findCandidateInTemplatesDirectory(
-        string $resolvedTemplateFilePath,
-        string $templateSuffix
-    ): string|null {
+    private function findCandidateInTemplatesDirectory(string $resolvedTemplateFilePath): string|null
+    {
         $symfonyTemplatesDirectory = getcwd() . '/templates';
         if (! file_exists($symfonyTemplatesDirectory)) {
             return null;
@@ -74,7 +72,7 @@ final class PathResolver
         $finder = new Finder();
         $finder->in($symfonyTemplatesDirectory)
             ->files()
-            ->name('*.' . $templateSuffix);
+            ->name('*.twig');
 
         foreach ($finder->getIterator() as $fileInfo) {
             if (str_ends_with($fileInfo->getRealPath(), $resolvedTemplateFilePath)) {

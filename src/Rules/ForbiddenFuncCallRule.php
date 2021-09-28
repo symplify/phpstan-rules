@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\FuncCall;
 use PHPStan\Analyser\Scope;
 use SimpleXMLElement;
@@ -134,12 +133,7 @@ CODE_SAMPLE
             return false;
         }
 
-        $argOrVariadicPlaceholder = $funcCall->args[0];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return false;
-        }
-
-        $firstArgValue = $argOrVariadicPlaceholder->value;
+        $firstArgValue = $funcCall->args[0]->value;
         $firstArgType = $scope->getType($firstArgValue);
 
         return $this->objectTypeAnalyzer->isObjectOrUnionOfObjectType($firstArgType, SimpleXMLElement::class);

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Nette\NodeAnalyzer;
 
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
@@ -48,7 +47,6 @@ final class UsedLocalComponentNamesResolver
 
         /** @var MethodCall[] $methodCalls */
         $methodCalls = $this->nodeFinder->findInstanceOf($class, MethodCall::class);
-
         foreach ($methodCalls as $methodCall) {
             if (! $methodCall->var instanceof Variable) {
                 continue;
@@ -62,10 +60,7 @@ final class UsedLocalComponentNamesResolver
                 continue;
             }
 
-            $firstArg = $methodCall->args[0] ?? null;
-            if (! $firstArg instanceof Arg) {
-                continue;
-            }
+            $firstArg = $methodCall->args[0];
 
             $firstArgValue = $firstArg->value;
             if (! $firstArgValue instanceof String_) {

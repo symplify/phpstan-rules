@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use Symplify\Astral\Naming\SimpleNameResolver;
@@ -62,12 +61,7 @@ final class PreventDoubleSetParameterRule extends AbstractSymplifyRule
             return [];
         }
 
-        $argOrVariadicPlaceholder = $node->args[0];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        $setParameterName = $this->nodeValueResolver->resolve($argOrVariadicPlaceholder->value, $scope->getFile());
+        $setParameterName = $this->nodeValueResolver->resolve($node->args[0]->value, $scope->getFile());
         if ($setParameterName === null) {
             return [];
         }

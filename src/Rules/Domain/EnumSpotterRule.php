@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Domain;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
@@ -124,10 +123,6 @@ CODE_SAMPLE
         int $minLength
     ): void {
         foreach ($methodCall->args as $position => $arg) {
-            if (! $arg instanceof Arg) {
-                continue;
-            }
-
             if (! $arg->value instanceof String_) {
                 continue;
             }

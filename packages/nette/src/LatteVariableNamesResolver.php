@@ -8,14 +8,14 @@ use PhpParser\Node\Stmt;
 use PhpParser\NodeFinder;
 use PhpParser\NodeTraverser;
 use Symplify\Astral\Naming\SimpleNameResolver;
-use Symplify\PHPStanRules\Contract\Templates\UsedVariableNamesResolverInterface;
 use Symplify\PHPStanRules\LattePHPStanPrinter\LatteToPhpCompiler;
+use Symplify\PHPStanRules\LattePHPStanPrinter\ValueObject\VariableAndType;
 use Symplify\PHPStanRules\Nette\Latte\RelatedFileResolver\IncludedSnippetTemplateFileResolver;
 use Symplify\PHPStanRules\Nette\Latte\RelatedFileResolver\ParentLayoutTemplateFileResolver;
 use Symplify\PHPStanRules\Nette\PhpParser\NodeVisitor\TemplateVariableCollectingNodeVisitor;
 use Symplify\PHPStanRules\Nette\PhpParser\ParentNodeAwarePhpParser;
 
-final class LatteVariableNamesResolver implements UsedVariableNamesResolverInterface
+final class LatteVariableNamesResolver
 {
     public function __construct(
         private ParentNodeAwarePhpParser $parentNodeAwarePhpParser,
@@ -30,27 +30,27 @@ final class LatteVariableNamesResolver implements UsedVariableNamesResolverInter
     /**
      * @return string[]
      */
-    public function resolveFromFilePath(string $filePath): array
+    public function resolveFromFile(string $templateFilePath): array
     {
-        $stmts = $this->parseTemplateFileNameToPhpNodes($filePath);
+        $stmts = $this->parseTemplateFileNameToPhpNodes($templateFilePath, []);
 
         // resolve parent layout variables
         // 1. current template
-        $templateFilePaths = [$filePath];
+        $templateFilePaths = [$templateFilePath];
 
         // 2. parent layout
-        $parentLayoutFileName = $this->parentLayoutTemplateFileResolver->resolve($filePath, $stmts);
+        $parentLayoutFileName = $this->parentLayoutTemplateFileResolver->resolve($templateFilePath, $stmts);
         if ($parentLayoutFileName !== null) {
             $templateFilePaths[] = $parentLayoutFileName;
         }
 
         // 3. included templates
-        $includedTemplateFilePaths = $this->includedSnippetTemplateFileResolver->resolve($filePath, $stmts);
+        $includedTemplateFilePaths = $this->includedSnippetTemplateFileResolver->resolve($templateFilePath, $stmts);
         $templateFilePaths = array_merge($templateFilePaths, $includedTemplateFilePaths);
 
         $usedVariableNames = [];
         foreach ($templateFilePaths as $templateFilePath) {
-            $stmts = $this->parseTemplateFileNameToPhpNodes($templateFilePath);
+            $stmts = $this->parseTemplateFileNameToPhpNodes($templateFilePath, []);
             $currentUsedVariableNames = $this->resolveUsedVariableNamesFromPhpNodes($stmts);
             $usedVariableNames = array_merge($usedVariableNames, $currentUsedVariableNames);
         }
@@ -79,11 +79,12 @@ final class LatteVariableNamesResolver implements UsedVariableNamesResolverInter
     }
 
     /**
+     * @param VariableAndType[] $variablesAndTypes
      * @return Stmt[]
      */
-    private function parseTemplateFileNameToPhpNodes(string $templateFilePath): array
+    private function parseTemplateFileNameToPhpNodes(string $templateFilePath, array $variablesAndTypes): array
     {
-        $parentLayoutCompiledPhp = $this->latteToPhpCompiler->compileFilePath($templateFilePath, [], []);
+        $parentLayoutCompiledPhp = $this->latteToPhpCompiler->compileFilePath($templateFilePath, $variablesAndTypes);
         return $this->parentNodeAwarePhpParser->parsePhpContent($parentLayoutCompiledPhp);
     }
 }

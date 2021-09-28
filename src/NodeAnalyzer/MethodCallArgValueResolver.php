@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\NodeAnalyzer;
 
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
@@ -37,12 +36,7 @@ final class MethodCallArgValueResolver
         $names = [];
 
         foreach ($methodCalls as $methodCall) {
-            $firstArg = $methodCall->args[0];
-            if (! $firstArg instanceof Arg) {
-                continue;
-            }
-
-            $firstArgValue = $firstArg->value;
+            $firstArgValue = $methodCall->args[0]->value;
             $resolvedValue = $this->nodeValueResolver->resolve($firstArgValue, $scope->getFile());
             if (! is_string($resolvedValue)) {
                 continue;

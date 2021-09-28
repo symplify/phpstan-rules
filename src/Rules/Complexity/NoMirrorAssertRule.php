@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Complexity;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
@@ -94,19 +93,8 @@ CODE_SAMPLE
             return [];
         }
 
-        $firstArgOrVariadicPlaceholder = $node->args[0];
-        if (! $firstArgOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        $firstArgValue = $firstArgOrVariadicPlaceholder->value;
-
-        $secondArgOrVariadicPlaceholder = $node->args[1];
-        if (! $secondArgOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        $secondArgValue = $secondArgOrVariadicPlaceholder->value;
+        $firstArgValue = $node->args[0]->value;
+        $secondArgValue = $node->args[1]->value;
 
         $firstArgValueContent = $this->standard->prettyPrintExpr($firstArgValue);
         $secondArgValueContent = $this->standard->prettyPrintExpr($secondArgValue);

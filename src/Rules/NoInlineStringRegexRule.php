@@ -6,7 +6,6 @@ namespace Symplify\PHPStanRules\Rules;
 
 use Nette\Utils\Strings;
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Scalar\String_;
@@ -94,13 +93,10 @@ CODE_SAMPLE
             return [];
         }
 
-        $firstArgOrVariadicPlaceholder = $funcCall->args[0];
-        if (! $firstArgOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
+        $firstArgValue = $funcCall->args[0]->value;
 
         // it's not string → good
-        if (! $firstArgOrVariadicPlaceholder->value instanceof String_) {
+        if (! $firstArgValue instanceof String_) {
             return [];
         }
 
@@ -116,12 +112,7 @@ CODE_SAMPLE
             return [];
         }
 
-        $argOrVariadicPlaceholder = $staticCall->args[1];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        $secondArgValue = $argOrVariadicPlaceholder->value;
+        $secondArgValue = $staticCall->args[1]->value;
 
         // it's not string → good
         if (! $secondArgValue instanceof String_) {

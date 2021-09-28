@@ -10,14 +10,11 @@ use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
 use Symplify\Astral\Naming\SimpleNameResolver;
-use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 use Symplify\PHPStanRules\LattePHPStanPrinter\Latte\Filters\DefaultFilterMatcher;
 use Symplify\PHPStanRules\LattePHPStanPrinter\Latte\LineCommentCorrector;
 use Symplify\PHPStanRules\LattePHPStanPrinter\Latte\UnknownMacroAwareLatteCompiler;
-use Symplify\PHPStanRules\LattePHPStanPrinter\PhpParser\NodeVisitor\ControlRenderToExplicitCallNodeVisitor;
 use Symplify\PHPStanRules\LattePHPStanPrinter\PhpParser\NodeVisitor\MagicFilterToExplicitCallNodeVisitor;
 use Symplify\PHPStanRules\LattePHPStanPrinter\ValueObject\VariableAndType;
-use Symplify\PHPStanRules\ValueObject\ComponentNameAndType;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
 /**
@@ -37,16 +34,10 @@ final class LatteToPhpCompiler
     }
 
     /**
-     * @param VariableAndType[] $variablesAndTypes
-     * @param ComponentNameAndType[] $componentNamesAndtTypes
+     * @param array<VariableAndType> $variablesAndTypes
      */
-    public function compileContent(
-        string $templateFileContent,
-        array $variablesAndTypes,
-        array $componentNamesAndtTypes
-    ): string {
-        $this->ensureIsNotFilePath($templateFileContent);
-
+    public function compileContent(string $templateFileContent, array $variablesAndTypes): string
+    {
         $latteTokens = $this->latteParser->parse($templateFileContent);
 
         $rawPhpContent = $this->unknownMacroAwareLatteCompiler->compile($latteTokens, 'DummyTemplateClass');
@@ -54,23 +45,19 @@ final class LatteToPhpCompiler
 
         $phpStmts = $this->parsePhpContentToPhpStmts($rawPhpContent);
 
-        $this->decorateStmts($phpStmts, $componentNamesAndtTypes);
+        $this->transformFilterMagicClosureToExplicitStaticCall($phpStmts);
         $phpContent = $this->printerStandard->prettyPrintFile($phpStmts);
 
         return $this->latteVarTypeDocBlockDecorator->decorateLatteContentWithTypes($phpContent, $variablesAndTypes);
     }
 
     /**
-     * @param VariableAndType[] $variablesAndTypes
-     * @param ComponentNameAndType[] $componentNamesAndTypes
+     * @param array<VariableAndType> $variablesAndTypes
      */
-    public function compileFilePath(
-        string $templateFilePath,
-        array $variablesAndTypes,
-        array $componentNamesAndTypes
-    ): string {
+    public function compileFilePath(string $templateFilePath, array $variablesAndTypes): string
+    {
         $templateFileContent = $this->smartFileSystem->readFile($templateFilePath);
-        return $this->compileContent($templateFileContent, $variablesAndTypes, $componentNamesAndTypes);
+        return $this->compileContent($templateFileContent, $variablesAndTypes);
     }
 
     /**
@@ -86,9 +73,8 @@ final class LatteToPhpCompiler
 
     /**
      * @param Stmt[] $phpStmts
-     * @param ComponentNameAndType[] $componentNamesAndTypes
      */
-    private function decorateStmts(array $phpStmts, array $componentNamesAndTypes): void
+    private function transformFilterMagicClosureToExplicitStaticCall(array $phpStmts): void
     {
         $nodeTraverser = new NodeTraverser();
         $magicFilterToExplicitCallNodeVisitor = new MagicFilterToExplicitCallNodeVisitor(
@@ -96,27 +82,7 @@ final class LatteToPhpCompiler
             new DefaultFilterMatcher()
         );
 
-        $controlRenderToExplicitCallNodeVisitor = new ControlRenderToExplicitCallNodeVisitor(
-            $this->simpleNameResolver,
-            $componentNamesAndTypes
-        );
-
         $nodeTraverser->addVisitor($magicFilterToExplicitCallNodeVisitor);
-        $nodeTraverser->addVisitor($controlRenderToExplicitCallNodeVisitor);
         $nodeTraverser->traverse($phpStmts);
-    }
-
-    private function ensureIsNotFilePath(string $templateFileContent): void
-    {
-        if (! file_exists($templateFileContent)) {
-            return;
-        }
-
-        $errorMessage = sprintf(
-            'The file path "%s" was passed as 1st argument in "%s()" metohd. Must be file content instead.',
-            $templateFileContent,
-            __METHOD__
-        );
-        throw new ShouldNotHappenException($errorMessage);
     }
 }

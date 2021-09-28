@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Nette\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use Symplify\PHPStanRules\Nette\NodeAnalyzer\TemplateRenderAnalyzer;
@@ -54,14 +53,9 @@ final class NoNetteRenderUnusedVariableRule extends AbstractSymplifyRule
             return [];
         }
 
-        $firstArgOrVariadicPlaceholder = $node->args[0];
-        if (! $firstArgOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
+        $firstArgValue = $node->args[0]->value;
 
-        $firstArgValue = $firstArgOrVariadicPlaceholder->value;
-
-        $templateFilePaths = $this->pathResolver->resolveExistingFilePaths($firstArgValue, $scope, 'latte');
+        $templateFilePaths = $this->pathResolver->resolveExistingFilePaths($firstArgValue, $scope);
         if ($templateFilePaths === []) {
             return [];
         }

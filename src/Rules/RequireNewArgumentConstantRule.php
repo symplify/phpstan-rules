@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Name\FullyQualified;
@@ -61,12 +60,7 @@ final class RequireNewArgumentConstantRule extends AbstractSymplifyRule implemen
         $positions = $this->constantArgByNewByType[$className];
 
         foreach ($positions as $position) {
-            $argOrVariadicPlaceholder = $args[$position];
-            if (! $argOrVariadicPlaceholder instanceof Arg) {
-                continue;
-            }
-
-            if (! $argOrVariadicPlaceholder->value instanceof ClassConstFetch) {
+            if (! $args[$position]->value instanceof ClassConstFetch) {
                 return [sprintf(self::ERROR_MESSAGE, $position)];
             }
         }

@@ -9,7 +9,6 @@ use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\VariadicPlaceholder;
 use PHPStan\Analyser\Scope;
 use Symplify\Astral\Naming\SimpleNameResolver;
 use Symplify\PHPStanRules\Matcher\PositionMatcher;
@@ -122,12 +121,8 @@ CODE_SAMPLE
     /**
      * @param int[] $positions
      */
-    private function shouldSkipArg(int $key, array $positions, Arg|VariadicPlaceholder $arg): bool
+    private function shouldSkipArg(int $key, array $positions, Arg $arg): bool
     {
-        if (! $arg instanceof Arg) {
-            return true;
-        }
-
         if (! in_array($key, $positions, true)) {
             return true;
         }

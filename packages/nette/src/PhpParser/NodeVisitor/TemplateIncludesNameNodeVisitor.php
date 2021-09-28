@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Nette\PhpParser\NodeVisitor;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Stmt;
 use PhpParser\NodeVisitorAbstract;
@@ -88,12 +87,7 @@ final class TemplateIncludesNameNodeVisitor extends NodeVisitorAbstract
             return null;
         }
 
-        $argOrVariadicPlaceholder = $methodCall->args[0];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return null;
-        }
-
-        $firstArgValue = $argOrVariadicPlaceholder->value;
+        $firstArgValue = $methodCall->args[0]->value;
         return $this->nodeValueResolver->resolve($firstArgValue, $this->templateFilePath);
     }
 }
