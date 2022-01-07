@@ -154,7 +154,7 @@ CODE_SAMPLE
     private function getSeeTagNodes(ResolvedPhpDocBlock $resolvedPhpDocBlock): array
     {
         /** @var PhpDocNode $phpDocNode */
-        $phpDocNode = $this->privatesAccessor->getPrivatePropertyOfClass($resolvedPhpDocBlock, 'phpDocNode', PhpDocNode::class);
+        $phpDocNode = $this->privatesAccessor->getPrivateProperty($resolvedPhpDocBlock, 'phpDocNode');
 
         return $phpDocNode->getTagsByName('@see');
     }
