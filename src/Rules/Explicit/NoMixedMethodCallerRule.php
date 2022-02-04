@@ -20,7 +20,7 @@ final class NoMixedMethodCallerRule extends AbstractSymplifyRule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Anonymous variables in a method call can lead to false dead methods. Make sure the variable type is known';
+    public const ERROR_MESSAGE = 'Anonymous variables in a method call can lead to false dead methods. Make sure the variable type is known in method name `%s()`';
 
     /**
      * @return array<class-string<Node>>
@@ -41,7 +41,7 @@ final class NoMixedMethodCallerRule extends AbstractSymplifyRule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [sprintf(self::ERROR_MESSAGE, ...)];
     }
 
     public function getRuleDefinition(): RuleDefinition
