@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredRawDataInTestDataProviderRule\PreferredRawDataInTestDataProviderRuleTest
  */
-final class PreferredRawDataInTestDataProviderRule implements Rule, DocumentedRuleInterface
+final class PreferredRawDataInTestDataProviderRule implements Rule
 {
     /**
      * @var string

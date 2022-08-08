@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Nette\Rules\NoNetteArrayAccessInControlRule\NoNetteArrayAccessInControlRuleTest
  */
-final class NoNetteArrayAccessInControlRule implements Rule, DocumentedRuleInterface
+final class NoNetteArrayAccessInControlRule implements Rule
 {
     /**
      * @var string

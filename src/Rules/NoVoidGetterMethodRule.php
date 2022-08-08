@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoVoidGetterMethodRule\NoVoidGetterMethodRuleTest
  */
-final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
+final class NoVoidGetterMethodRule implements Rule
 {
     /**
      * @var string

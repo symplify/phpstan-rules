@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\CognitiveComplexity\Rules\ClassLikeCognitiveComplexityRule\ClassLikeCognitiveComplexityRuleTest
  */
-final class ClassLikeCognitiveComplexityRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ClassLikeCognitiveComplexityRule implements Rule, ConfigurableRuleInterface
 {
     /**
      * @var string

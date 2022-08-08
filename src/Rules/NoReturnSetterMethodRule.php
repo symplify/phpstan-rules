@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
-final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
+final class NoReturnSetterMethodRule implements Rule
 {
     /**
      * @var string

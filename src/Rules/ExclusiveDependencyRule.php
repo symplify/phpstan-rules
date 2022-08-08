@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ExclusiveDependencyRule\ExclusiveDependencyRuleTest
  */
-final class ExclusiveDependencyRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ExclusiveDependencyRule implements Rule, ConfigurableRuleInterface
 {
     /**
      * @var string

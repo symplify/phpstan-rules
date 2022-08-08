@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\RequireSpecificReturnTypeOverAbstractRule\RequireSpecificReturnTypeOverAbstractRuleTest
  */
-final class RequireSpecificReturnTypeOverAbstractRule implements Rule, DocumentedRuleInterface
+final class RequireSpecificReturnTypeOverAbstractRule implements Rule
 {
     /**
      * @var string

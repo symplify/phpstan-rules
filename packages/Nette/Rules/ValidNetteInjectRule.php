@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Nette\Rules\ValidNetteInjectRule\ValidNetteInjectRuleTest
  */
-final class ValidNetteInjectRule implements Rule, DocumentedRuleInterface
+final class ValidNetteInjectRule implements Rule
 {
     /**
      * @var string

@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\NoMirrorAssertRule\NoMirrorAssertRuleTest
  */
-final class NoMirrorAssertRule implements Rule, DocumentedRuleInterface
+final class NoMirrorAssertRule implements Rule
 {
     /**
      * @var string

@@ -29,7 +29,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMixedArrayDimFetchRule\NoMixedArrayDimFetchRuleTest
  */
-final class NoMixedArrayDimFetchRule implements Rule, DocumentedRuleInterface
+final class NoMixedArrayDimFetchRule implements Rule
 {
     /**
      * @var string

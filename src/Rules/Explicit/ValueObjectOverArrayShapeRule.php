@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\ValueObjectOverArrayShapeRule\ValueObjectOverArrayShapeRuleTest
  */
-final class ValueObjectOverArrayShapeRule implements Rule, DocumentedRuleInterface
+final class ValueObjectOverArrayShapeRule implements Rule
 {
     /**
      * @var string

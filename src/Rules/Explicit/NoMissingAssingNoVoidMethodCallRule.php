@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<Expression>
  */
-final class NoMissingAssingNoVoidMethodCallRule implements Rule, DocumentedRuleInterface
+final class NoMissingAssingNoVoidMethodCallRule implements Rule
 {
     /**
      * @var string

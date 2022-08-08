@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Spotter\IfElseToMatchSpotterRule\IfElseToMatchSpotterRuleTest
  */
-final class IfElseToMatchSpotterRule implements Rule, DocumentedRuleInterface
+final class IfElseToMatchSpotterRule implements Rule
 {
     /**
      * @var string

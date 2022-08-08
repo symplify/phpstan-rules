@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ClassExtendingExclusiveNamespaceRule\ClassExtendingExclusiveNamespaceRuleTest
  */
-final class ClassExtendingExclusiveNamespaceRule implements ConfigurableRuleInterface, Rule, DocumentedRuleInterface
+final class ClassExtendingExclusiveNamespaceRule implements ConfigurableRuleInterface, Rule
 {
     /**
      * @var string

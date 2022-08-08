@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireNewArgumentConstantRule\RequireNewArgumentConstantRuleTest
  */
-final class RequireNewArgumentConstantRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class RequireNewArgumentConstantRule implements Rule, ConfigurableRuleInterface
 {
     /**
      * @var string

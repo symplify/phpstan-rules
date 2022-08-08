@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenParamTypeRemovalRule\ForbiddenParamTypeRemovalRuleTest
  */
-final class ForbiddenParamTypeRemovalRule implements Rule, DocumentedRuleInterface
+final class ForbiddenParamTypeRemovalRule implements Rule
 {
     /**
      * @var string

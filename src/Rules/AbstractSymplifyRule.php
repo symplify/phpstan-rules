@@ -14,7 +14,7 @@ use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 /**
  * @implements Rule<Node>
  */
-abstract class AbstractSymplifyRule implements Rule, ManyNodeRuleInterface, DocumentedRuleInterface
+abstract class AbstractSymplifyRule implements Rule, ManyNodeRuleInterface
 {
     /**
      * @return class-string<Node>

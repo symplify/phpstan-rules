@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireStringRegexMatchKeyRule\RequireStringRegexMatchKeyRuleTest
  */
-final class RequireStringRegexMatchKeyRule implements Rule, DocumentedRuleInterface
+final class RequireStringRegexMatchKeyRule implements Rule
 {
     /**
      * @var string

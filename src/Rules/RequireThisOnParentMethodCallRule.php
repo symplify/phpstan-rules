@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireThisOnParentMethodCallRule\RequireThisOnParentMethodCallRuleTest
  * @implements Rule<InClassNode>
  */
-final class RequireThisOnParentMethodCallRule implements Rule, DocumentedRuleInterface
+final class RequireThisOnParentMethodCallRule implements Rule
 {
     /**
      * @var string

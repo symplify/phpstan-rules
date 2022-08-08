@@ -27,7 +27,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\NoMultiArrayAssignRule\NoMultiArrayAssignRuleTest
  * @implements Rule<Node>
  */
-final class NoMultiArrayAssignRule implements Rule, DocumentedRuleInterface
+final class NoMultiArrayAssignRule implements Rule
 {
     /**
      * @var string

@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireThisCallOnLocalMethodRule\RequireThisCallOnLocalMethodRuleTest
  * @implements Rule<InClassNode>
  */
-final class RequireThisCallOnLocalMethodRule implements Rule, DocumentedRuleInterface
+final class RequireThisCallOnLocalMethodRule implements Rule
 {
     /**
      * @var string

@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PrefixAbstractClassRule\PrefixAbstractClassRuleTest
  */
-final class PrefixAbstractClassRule implements Rule, DocumentedRuleInterface
+final class PrefixAbstractClassRule implements Rule
 {
     /**
      * @var string

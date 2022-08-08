@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\EmbeddedEnumClassConstSpotterRule\EmbeddedEnumClassConstSpotterRuleTest
  */
-final class EmbeddedEnumClassConstSpotterRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class EmbeddedEnumClassConstSpotterRule implements Rule, ConfigurableRuleInterface
 {
     /**
      * @var string

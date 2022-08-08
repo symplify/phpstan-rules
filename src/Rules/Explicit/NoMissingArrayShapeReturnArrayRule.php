@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMissingArrayShapeReturnArrayRule\NoMissingArrayShapeReturnArrayRuleTest
  * @implements Rule<ClassMethod>
  */
-final class NoMissingArrayShapeReturnArrayRule implements Rule, DocumentedRuleInterface
+final class NoMissingArrayShapeReturnArrayRule implements Rule
 {
     /**
      * @var string

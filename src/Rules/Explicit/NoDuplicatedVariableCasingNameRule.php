@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoDuplicatedVariableCasingNameRule\NoDuplicatedVariableCasingNameRuleTest
  */
-final class NoDuplicatedVariableCasingNameRule implements Rule, DocumentedRuleInterface
+final class NoDuplicatedVariableCasingNameRule implements Rule
 {
     /**
      * @var string

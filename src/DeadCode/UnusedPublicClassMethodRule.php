@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\DeadCode\UnusedPublicClassMethodRule\UnusedPublicClassMethodRuleTest
  */
-final class UnusedPublicClassMethodRule implements Rule, DocumentedRuleInterface
+final class UnusedPublicClassMethodRule implements Rule
 {
     /**
      * @var string

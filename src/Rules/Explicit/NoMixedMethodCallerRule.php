@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMixedMethodCallerRule\NoMixedMethodCallerRuleTest
  */
-final class NoMixedMethodCallerRule implements Rule, DocumentedRuleInterface
+final class NoMixedMethodCallerRule implements Rule
 {
     /**
      * @var string

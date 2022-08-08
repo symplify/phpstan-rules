@@ -21,7 +21,7 @@ use Throwable;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoEmptyClassRule\NoEmptyClassRuleTest
  */
-final class NoEmptyClassRule implements Rule, DocumentedRuleInterface
+final class NoEmptyClassRule implements Rule
 {
     /**
      * @var string

@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNestedCallInAssertMethodCallRule\ForbiddenNestedCallInAssertMethodCallRuleTest
  */
-final class ForbiddenNestedCallInAssertMethodCallRule implements Rule, DocumentedRuleInterface
+final class ForbiddenNestedCallInAssertMethodCallRule implements Rule
 {
     /**
      * @var string

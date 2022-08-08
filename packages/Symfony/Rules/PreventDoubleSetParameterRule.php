@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<Closure>
  */
-final class PreventDoubleSetParameterRule implements Rule, DocumentedRuleInterface
+final class PreventDoubleSetParameterRule implements Rule
 {
     /**
      * @var string

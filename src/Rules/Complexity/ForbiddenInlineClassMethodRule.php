@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenInlineClassMethodRule\ForbiddenInlineClassMethodRuleTest
  */
-final class ForbiddenInlineClassMethodRule implements Rule, DocumentedRuleInterface
+final class ForbiddenInlineClassMethodRule implements Rule
 {
     /**
      * @var string

@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenThisArgumentRule\ForbiddenThisArgumentRuleTest
  */
-final class ForbiddenThisArgumentRule implements Rule, DocumentedRuleInterface
+final class ForbiddenThisArgumentRule implements Rule
 {
     /**
      * @var string

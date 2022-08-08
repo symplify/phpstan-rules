@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Nette\Rules\ForbiddenNetteInjectOverrideRule\ForbiddenNetteInjectOverrideRuleTest
  * @implements Rule<InClassNode>
  */
-final class ForbiddenNetteInjectOverrideRule implements Rule, DocumentedRuleInterface
+final class ForbiddenNetteInjectOverrideRule implements Rule
 {
     /**
      * @var string

@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Nette\Rules\NoInjectOnFinalRule\NoInjectOnFinalRuleTest
  * @implements Rule<InClassNode>
  */
-final class NoInjectOnFinalRule implements Rule, DocumentedRuleInterface
+final class NoInjectOnFinalRule implements Rule
 {
     /**
      * @var string

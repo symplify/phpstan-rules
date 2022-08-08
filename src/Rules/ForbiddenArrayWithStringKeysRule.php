@@ -25,7 +25,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<Return_>
  */
-final class ForbiddenArrayWithStringKeysRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayWithStringKeysRule implements Rule
 {
     /**
      * @var string

@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMixedPropertyFetcherRule\NoMixedPropertyFetcherRuleTest
  */
-final class NoMixedPropertyFetcherRule implements Rule, DocumentedRuleInterface
+final class NoMixedPropertyFetcherRule implements Rule
 {
     /**
      * @var string

@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoStaticPropertyRule\NoStaticPropertyRuleTest
  */
-final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
+final class NoStaticPropertyRule implements Rule
 {
     /**
      * @var string

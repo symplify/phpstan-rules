@@ -30,7 +30,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckTypehintCallerTypeRule\CheckTypehintCallerTypeRuleTest
  */
-final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
+final class CheckTypehintCallerTypeRule implements Rule
 {
     /**
      * @var string

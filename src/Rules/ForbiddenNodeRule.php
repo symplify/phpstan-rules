@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ForbiddenNodeRule implements Rule, ConfigurableRuleInterface
 {
     /**
      * @var string

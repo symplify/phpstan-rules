@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<InClassNode>
  */
-final class RequireNamedCommandRule implements Rule, DocumentedRuleInterface
+final class RequireNamedCommandRule implements Rule
 {
     /**
      * @var string

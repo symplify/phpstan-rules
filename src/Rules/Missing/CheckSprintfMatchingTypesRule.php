@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @inspiration by https://github.com/phpstan/phpstan-src/blob/master/src/Rules/Functions/PrintfParametersRule.php
  */
-final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterface
+final class CheckSprintfMatchingTypesRule implements Rule
 {
     /**
      * @var string

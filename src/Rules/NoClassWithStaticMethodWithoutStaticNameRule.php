@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoClassWithStaticMethodWithoutStaticNameRule\NoClassWithStaticMethodWithoutStaticNameRuleTest
  */
-final class NoClassWithStaticMethodWithoutStaticNameRule implements Rule, DocumentedRuleInterface
+final class NoClassWithStaticMethodWithoutStaticNameRule implements Rule
 {
     /**
      * @var string

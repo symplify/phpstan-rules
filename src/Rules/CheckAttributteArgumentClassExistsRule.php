@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckAttributteArgumentClassExistsRule\CheckAttributteArgumentClassExistsRuleTest
  */
-final class CheckAttributteArgumentClassExistsRule extends AbstractAttributeRule implements DocumentedRuleInterface
+final class CheckAttributteArgumentClassExistsRule extends AbstractAttributeRule
 {
     /**
      * @var string
@@ -32,7 +32,6 @@ final class CheckAttributteArgumentClassExistsRule extends AbstractAttributeRule
     {
         $this->reflectionProvider = $reflectionProvider;
     }
-
     /**
      * @return string[]
      */
@@ -61,7 +60,6 @@ final class CheckAttributteArgumentClassExistsRule extends AbstractAttributeRule
 
         return $errors;
     }
-
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
@@ -82,7 +80,6 @@ CODE_SAMPLE
             ),
         ]);
     }
-
     private function isClassConstFetch(Expr $expr): bool
     {
         if (! $expr instanceof ClassConstFetch) {

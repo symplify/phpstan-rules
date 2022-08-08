@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\ObjectCalisthenics\Rules\NoChainMethodCallRule\NoChainMethodCallRuleTest
  * @implements Rule<MethodCall>
  */
-final class NoChainMethodCallRule implements Rule, DocumentedRuleinterface, ConfigurableRuleInterface
+final class NoChainMethodCallRule implements Rule, ConfigurableRuleInterface
 {
     /**
      * @var string

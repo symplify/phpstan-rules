@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireExceptionNamespaceRule\RequireExceptionNamespaceRuleTest
  */
-final class RequireExceptionNamespaceRule implements Rule, DocumentedRuleInterface
+final class RequireExceptionNamespaceRule implements Rule
 {
     /**
      * @var string

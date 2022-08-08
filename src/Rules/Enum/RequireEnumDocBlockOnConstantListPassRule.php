@@ -27,7 +27,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<MethodCall>
  */
-final class RequireEnumDocBlockOnConstantListPassRule implements Rule, DocumentedRuleInterface
+final class RequireEnumDocBlockOnConstantListPassRule implements Rule
 {
     /**
      * @var string

@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireAttributeNamespaceRule\RequireAttributeNamespaceRuleTest
  */
-final class RequireAttributeNamespaceRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNamespaceRule implements Rule
 {
     /**
      * @var string

@@ -18,7 +18,7 @@ use Throwable;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDefaultExceptionRule\NoDefaultExceptionRuleTest
  */
-final class NoDefaultExceptionRule implements Rule, DocumentedRuleInterface
+final class NoDefaultExceptionRule implements Rule
 {
     /**
      * @var string

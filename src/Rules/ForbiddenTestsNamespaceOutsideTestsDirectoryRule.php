@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenTestsNamespaceOutsideTestsDirectoryRule\ForbiddenTestsNamespaceOutsideTestsDirectoryRuleTest
  */
-final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule, DocumentedRuleInterface
+final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule
 {
     /**
      * @var string

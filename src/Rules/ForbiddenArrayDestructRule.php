@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenArrayDestructRule\ForbiddenArrayDestructRuleTest
  */
-final class ForbiddenArrayDestructRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayDestructRule implements Rule
 {
     /**
      * @var string

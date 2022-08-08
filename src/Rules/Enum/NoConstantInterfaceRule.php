@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\NoConstantInterfaceRule\NoConstantInterfaceRuleTest
  */
-final class NoConstantInterfaceRule implements Rule, DocumentedRuleInterface
+final class NoConstantInterfaceRule implements Rule
 {
     /**
      * @var string

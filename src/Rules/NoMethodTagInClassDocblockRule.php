@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoMethodTagInClassDocblockRule\NoMethodTagInClassDocblockRuleTest
  */
-final class NoMethodTagInClassDocblockRule implements Rule, DocumentedRuleInterface
+final class NoMethodTagInClassDocblockRule implements Rule
 {
     /**
      * @var string

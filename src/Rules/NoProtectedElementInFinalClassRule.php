@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoProtectedElementInFinalClassRule\NoProtectedElementInFinalClassRuleTest
  */
-final class NoProtectedElementInFinalClassRule implements Rule, DocumentedRuleInterface
+final class NoProtectedElementInFinalClassRule implements Rule
 {
     /**
      * @var string

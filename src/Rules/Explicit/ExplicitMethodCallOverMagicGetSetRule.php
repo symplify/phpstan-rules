@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\ExplicitMethodCallOverMagicGetSetRule\ExplicitMethodCallOverMagicGetSetRuleTest
  */
-final class ExplicitMethodCallOverMagicGetSetRule implements Rule, DocumentedRuleInterface
+final class ExplicitMethodCallOverMagicGetSetRule implements Rule
 {
     /**
      * @var string

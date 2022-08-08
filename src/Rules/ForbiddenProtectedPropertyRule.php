@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<InClassNode>
  */
-final class ForbiddenProtectedPropertyRule implements Rule, DocumentedRuleInterface
+final class ForbiddenProtectedPropertyRule implements Rule
 {
     /**
      * @var string

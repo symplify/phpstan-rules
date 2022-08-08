@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoRelativeFilePathRule\NoRelativeFilePathRuleTest
  */
-final class NoRelativeFilePathRule implements Rule, DocumentedRuleInterface
+final class NoRelativeFilePathRule implements Rule
 {
     /**
      * @var string

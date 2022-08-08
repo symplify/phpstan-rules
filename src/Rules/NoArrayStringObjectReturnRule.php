@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoArrayStringObjectReturnRule\NoArrayStringObjectReturnRuleTest
  */
-final class NoArrayStringObjectReturnRule implements Rule, DocumentedRuleInterface
+final class NoArrayStringObjectReturnRule implements Rule
 {
     /**
      * @var string

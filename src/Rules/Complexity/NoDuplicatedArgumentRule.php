@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\NoDuplicatedArgumentRule\NoDuplicatedArgumentRuleTest
  */
-final class NoDuplicatedArgumentRule implements Rule, DocumentedRuleInterface
+final class NoDuplicatedArgumentRule implements Rule
 {
     /**
      * @var string

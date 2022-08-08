@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Nette\Rules\NoNetteDoubleTemplateAssignRule\NoNetteDoubleTemplateAssignRuleTest
  */
-final class NoNetteDoubleTemplateAssignRule implements Rule, DocumentedRuleInterface
+final class NoNetteDoubleTemplateAssignRule implements Rule
 {
     /**
      * @var string
