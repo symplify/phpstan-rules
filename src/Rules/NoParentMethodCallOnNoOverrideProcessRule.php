@@ -26,10 +26,14 @@ final class NoParentMethodCallOnNoOverrideProcessRule implements Rule, Documente
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not call parent method if no override process';
+    /**
+     * @var \Symplify\PHPStanRules\Printer\NodeComparator
+     */
+    private $nodeComparator;
 
-    public function __construct(
-        private NodeComparator $nodeComparator
-    ) {
+    public function __construct(NodeComparator $nodeComparator)
+    {
+        $this->nodeComparator = $nodeComparator;
     }
 
     /**

@@ -27,14 +27,22 @@ final class PreferredAttributeOverAnnotationRule implements Rule, DocumentedRule
      * @var string
      */
     public const ERROR_MESSAGE = 'Use attribute instead of "%s" annotation';
+    /**
+     * @var \Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
+     */
+    private $classAnnotationResolver;
+    /**
+     * @var string[]
+     */
+    private $annotations;
 
     /**
      * @param string[] $annotations
      */
-    public function __construct(
-        private ClassAnnotationResolver $classAnnotationResolver,
-        private array $annotations
-    ) {
+    public function __construct(ClassAnnotationResolver $classAnnotationResolver, array $annotations)
+    {
+        $this->classAnnotationResolver = $classAnnotationResolver;
+        $this->annotations = $annotations;
     }
 
     public function getNodeType(): string

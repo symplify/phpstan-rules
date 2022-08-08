@@ -47,10 +47,13 @@ final class NoMissingAssingNoVoidMethodCallRule implements Rule, DocumentedRuleI
         'React\Promise\Promise',
         'React\Promise\PromiseInterface',
     ];
-
-    public function __construct(
-        private AllowedChainCallSkipper $allowedChainCallSkipper,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\AllowedChainCallSkipper
+     */
+    private $allowedChainCallSkipper;
+    public function __construct(AllowedChainCallSkipper $allowedChainCallSkipper)
+    {
+        $this->allowedChainCallSkipper = $allowedChainCallSkipper;
     }
 
     /**

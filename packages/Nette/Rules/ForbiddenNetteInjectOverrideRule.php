@@ -29,11 +29,18 @@ final class ForbiddenNetteInjectOverrideRule implements Rule, DocumentedRuleInte
      * @var string
      */
     public const ERROR_MESSAGE = 'Assign to already injected property is not allowed';
-
-    public function __construct(
-        private NetteInjectAnalyzer $netteInjectAnalyzer,
-        private NodeFinder $nodeFinder,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\Nette\NetteInjectAnalyzer
+     */
+    private $netteInjectAnalyzer;
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    public function __construct(NetteInjectAnalyzer $netteInjectAnalyzer, NodeFinder $nodeFinder)
+    {
+        $this->netteInjectAnalyzer = $netteInjectAnalyzer;
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**
@@ -104,7 +111,7 @@ abstract class AbstractParent
      * @var SomeType
      */
     #[Inject]
-    protected $someType;
+    public $someType;
 }
 
 final class SomeChild extends AbstractParent
@@ -125,7 +132,7 @@ abstract class AbstractParent
      * @var SomeType
      */
     #[Inject]
-    protected $someType;
+    public $someType;
 }
 
 final class SomeChild extends AbstractParent

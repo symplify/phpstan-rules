@@ -73,7 +73,7 @@ CODE_SAMPLE
 
         // is class in "Exception" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Exception\\')) {
+        if (strpos($className, '\\Exception\\') !== false) {
             return [];
         }
 

@@ -44,11 +44,18 @@ final class RequireEnumDocBlockOnConstantListPassRule implements Rule, Documente
         AbstractConfigurator::class,
         ParameterBagInterface::class,
     ];
-
-    public function __construct(
-        private MethodCallNodeAnalyzer $methodCallNodeAnalyzer,
-        private MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
+     */
+    private $methodCallNodeAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\MethodCallClassConstFetchPositionResolver
+     */
+    private $methodCallClassConstFetchPositionResolver;
+    public function __construct(MethodCallNodeAnalyzer $methodCallNodeAnalyzer, MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver)
+    {
+        $this->methodCallNodeAnalyzer = $methodCallNodeAnalyzer;
+        $this->methodCallClassConstFetchPositionResolver = $methodCallClassConstFetchPositionResolver;
     }
 
     /**
@@ -173,7 +180,7 @@ CODE_SAMPLE
         }
 
         // skip vendor classes, as we cannot change them
-        if (str_contains($fileName, '/vendor/')) {
+        if (strpos($fileName, '/vendor/') !== false) {
             return true;
         }
 

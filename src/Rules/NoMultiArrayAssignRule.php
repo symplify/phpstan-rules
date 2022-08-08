@@ -33,10 +33,14 @@ final class NoMultiArrayAssignRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     public const ERROR_MESSAGE = 'Use value object over multi array assign';
+    /**
+     * @var \Symplify\PHPStanRules\Printer\NodeComparator
+     */
+    private $nodeComparator;
 
-    public function __construct(
-        private NodeComparator $nodeComparator
-    ) {
+    public function __construct(NodeComparator $nodeComparator)
+    {
+        $this->nodeComparator = $nodeComparator;
     }
 
     public function getNodeType(): string

@@ -19,16 +19,18 @@ final class ClassLikeNameMatcher
 
     public function isClassLikeNameMatchedAgainstPattern(string $classLikeName, string $namespaceWildcardPattern): bool
     {
-        $regex = Strings::replace(
-            $namespaceWildcardPattern,
-            self::REGEX_FOR_WILDCARD_TO_REGEX,
-            static fn (array $matches): string => match ($matches[0]) {
-                '**' => '.*',
-                '*' => '[^\\\\]*',
-                '?' => '[^\\\\]',
-                default => '\\' . $matches[0],
-            },
-        );
+        $regex = Strings::replace($namespaceWildcardPattern, self::REGEX_FOR_WILDCARD_TO_REGEX, static function (array $matches) : string {
+            switch ($matches[0]) {
+                case '**':
+                    return '.*';
+                case '*':
+                    return '[^\\\\]*';
+                case '?':
+                    return '[^\\\\]';
+                default:
+                    return '\\' . $matches[0];
+            }
+        });
 
         return (bool) Strings::match($classLikeName, '#^' . $regex . '$#s');
     }

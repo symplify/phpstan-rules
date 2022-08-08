@@ -29,15 +29,20 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
     /**
      * @var array<class-string<Node>>
      */
-    private array $forbiddenNodes = [];
+    private $forbiddenNodes = [];
+    /**
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        private Standard $standard,
+        Standard $standard,
         array $forbiddenNodes
     ) {
+        $this->standard = $standard;
         Assert::allIsAOf($forbiddenNodes, Node::class);
 
         $this->forbiddenNodes = $forbiddenNodes;

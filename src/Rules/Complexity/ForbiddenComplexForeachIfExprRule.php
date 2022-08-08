@@ -45,11 +45,18 @@ final class ForbiddenComplexForeachIfExprRule extends AbstractSymplifyRule
      * @var array<class-string>
      */
     private const ALLOWED_CLASS_TYPES = [Strings::class, TrinaryLogic::class];
-
-    public function __construct(
-        private NodeFinder $nodeFinder,
-        private ContainsTypeAnalyser $containsTypeAnalyser,
-    ) {
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
+    public function __construct(NodeFinder $nodeFinder, ContainsTypeAnalyser $containsTypeAnalyser)
+    {
+        $this->nodeFinder = $nodeFinder;
+        $this->containsTypeAnalyser = $containsTypeAnalyser;
     }
 
     /**
@@ -108,7 +115,10 @@ CODE_SAMPLE
         ]);
     }
 
-    private function shouldSkipCall(MethodCall | StaticCall $expr, Scope $scope): bool
+    /**
+     * @param \PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\StaticCall $expr
+     */
+    private function shouldSkipCall($expr, Scope $scope): bool
     {
         if ($expr->args === []) {
             return true;
@@ -126,7 +136,10 @@ CODE_SAMPLE
         return $callType instanceof BooleanType;
     }
 
-    private function isAllowedCallerType(Scope $scope, StaticCall | MethodCall $node): bool
+    /**
+     * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\MethodCall $node
+     */
+    private function isAllowedCallerType(Scope $scope, $node): bool
     {
         if ($node instanceof StaticCall) {
             if ($node->class instanceof Name) {

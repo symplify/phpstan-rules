@@ -13,11 +13,18 @@ use Symplify\PHPStanRules\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisit
 
 final class ClassReferencePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
 {
-    private ?string $className = null;
+    /**
+     * @var string|null
+     */
+    private $className;
+    /**
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function configureClassName(string $className): void

@@ -23,10 +23,13 @@ final class NoMixedMethodCallerRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     public const ERROR_MESSAGE = 'Anonymous variable in a `%s->...()` method call can lead to false dead methods. Make sure the variable type is known';
-
-    public function __construct(
-        private Standard $printerStandard,
-    ) {
+    /**
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $printerStandard;
+    public function __construct(Standard $printerStandard)
+    {
+        $this->printerStandard = $printerStandard;
     }
 
     /**

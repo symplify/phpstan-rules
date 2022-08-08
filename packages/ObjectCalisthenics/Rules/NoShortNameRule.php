@@ -30,14 +30,22 @@ final class NoShortNameRule extends AbstractSymplifyRule implements Configurable
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not name "%s", shorter than %d chars';
+    /**
+     * @var int
+     */
+    private $minNameLength;
+    /**
+     * @var string[]
+     */
+    private $allowedShortNames = ['i', 'j', 'y', 'z'];
 
     /**
      * @param string[] $allowedShortNames
      */
-    public function __construct(
-        private int $minNameLength,
-        private array $allowedShortNames = ['i', 'j', 'y', 'z']
-    ) {
+    public function __construct(int $minNameLength, array $allowedShortNames = ['i', 'j', 'y', 'z'])
+    {
+        $this->minNameLength = $minNameLength;
+        $this->allowedShortNames = $allowedShortNames;
     }
 
     /**

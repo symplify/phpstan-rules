@@ -41,15 +41,25 @@ final class DibiMaskMatchesVariableTypeRule extends AbstractSymplifyRule
      * @see https://dibiphp.com/en/documentation#toc-modifiers-for-arrays
      * @var array<string, Type>
      */
-    private array $masksToExpectedTypes = [];
-
-    public function __construct(
-        private DibiQueryAnalyzer $dibiQueryAnalyzer,
-        private QueryMasksResolver $queryMasksResolver,
-        private ArgTypeResolver $argTypeResolver,
-    ) {
+    private $masksToExpectedTypes = [];
+    /**
+     * @var \Symplify\PHPStanRules\Nette\NodeAnalyzer\DibiQueryAnalyzer
+     */
+    private $dibiQueryAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\Nette\Dibi\QueryMasksResolver
+     */
+    private $queryMasksResolver;
+    /**
+     * @var \Symplify\PHPStanRules\TypeResolver\ArgTypeResolver
+     */
+    private $argTypeResolver;
+    public function __construct(DibiQueryAnalyzer $dibiQueryAnalyzer, QueryMasksResolver $queryMasksResolver, ArgTypeResolver $argTypeResolver)
+    {
+        $this->dibiQueryAnalyzer = $dibiQueryAnalyzer;
+        $this->queryMasksResolver = $queryMasksResolver;
+        $this->argTypeResolver = $argTypeResolver;
         $arrayType = new ArrayType(new MixedType(), new MixedType());
-
         $this->masksToExpectedTypes = [
             '%v' => $arrayType,
             '%and' => $arrayType,

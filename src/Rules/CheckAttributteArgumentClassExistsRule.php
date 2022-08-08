@@ -24,10 +24,13 @@ final class CheckAttributteArgumentClassExistsRule extends AbstractAttributeRule
      * @var string
      */
     public const ERROR_MESSAGE = 'Class was not found';
-
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     /**

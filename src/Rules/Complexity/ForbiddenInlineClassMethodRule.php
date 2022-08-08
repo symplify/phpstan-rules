@@ -29,10 +29,13 @@ final class ForbiddenInlineClassMethodRule implements Rule, DocumentedRuleInterf
      * @var string
      */
     public const ERROR_MESSAGE = 'Method "%s()" only calling another method call and has no added value. Use the inlined call instead';
-
-    public function __construct(
-        private NodeFinder $nodeFinder,
-    ) {
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    public function __construct(NodeFinder $nodeFinder)
+    {
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**

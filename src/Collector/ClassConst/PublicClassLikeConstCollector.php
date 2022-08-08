@@ -16,9 +16,13 @@ use Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer;
  */
 final class PublicClassLikeConstCollector implements Collector
 {
-    public function __construct(
-        private ApiDocStmtAnalyzer $apiDocStmtAnalyzer
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
+     */
+    private $apiDocStmtAnalyzer;
+    public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer)
+    {
+        $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
     }
 
     public function getNodeType(): string

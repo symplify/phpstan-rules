@@ -30,12 +30,24 @@ final class NoMissingArrayShapeReturnArrayRule implements Rule, DocumentedRuleIn
      * @var string
      */
     public const ERROR_MESSAGE = 'Complete known array shape to the method @return type';
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\TypeResolver\ClassMethodReturnTypeResolver
+     */
+    private $classMethodReturnTypeResolver;
+    /**
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ArrayShapeDetector
+     */
+    private $arrayShapeDetector;
 
-    public function __construct(
-        private NodeFinder $nodeFinder,
-        private ClassMethodReturnTypeResolver $classMethodReturnTypeResolver,
-        private ArrayShapeDetector $arrayShapeDetector
-    ) {
+    public function __construct(NodeFinder $nodeFinder, ClassMethodReturnTypeResolver $classMethodReturnTypeResolver, ArrayShapeDetector $arrayShapeDetector)
+    {
+        $this->nodeFinder = $nodeFinder;
+        $this->classMethodReturnTypeResolver = $classMethodReturnTypeResolver;
+        $this->arrayShapeDetector = $arrayShapeDetector;
     }
 
     /**

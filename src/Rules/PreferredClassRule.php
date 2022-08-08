@@ -28,13 +28,17 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
+    /**
+     * @var string[]
+     */
+    private $oldToPreferredClasses;
 
     /**
      * @param string[] $oldToPreferredClasses
      */
-    public function __construct(
-        private array $oldToPreferredClasses
-    ) {
+    public function __construct(array $oldToPreferredClasses)
+    {
+        $this->oldToPreferredClasses = $oldToPreferredClasses;
     }
 
     /**
@@ -163,8 +167,9 @@ CODE_SAMPLE
 
     /**
      * @return string[]
+     * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\Instanceof_ $node
      */
-    private function processExprWithClass(StaticCall|Instanceof_ $node): array
+    private function processExprWithClass($node): array
     {
         if ($node->class instanceof Expr) {
             return [];

@@ -41,7 +41,10 @@ final class QueryMasksResolver
         return $this->resolveMasksFromString($queryStringValue);
     }
 
-    public function resolveSingleQueryMask(Expr|null $expr, Scope $scope): ?string
+    /**
+     * @param \PhpParser\Node\Expr|null $expr
+     */
+    public function resolveSingleQueryMask($expr, Scope $scope): ?string
     {
         if ($expr === null) {
             return null;
@@ -71,7 +74,7 @@ final class QueryMasksResolver
     private function resolveMasksFromString(string $queryString): array
     {
         // compare only if string contains masks
-        if (! str_contains($queryString, '%')) {
+        if (strpos($queryString, '%') === false) {
             return [];
         }
 

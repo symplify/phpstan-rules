@@ -25,10 +25,14 @@ final class ForbiddenParamTypeRemovalRule implements Rule, DocumentedRuleInterfa
      * @var string
      */
     public const ERROR_MESSAGE = 'Removing parent param type is forbidden';
+    /**
+     * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
+     */
+    private $methodNodeAnalyser;
 
-    public function __construct(
-        private MethodNodeAnalyser $methodNodeAnalyser
-    ) {
+    public function __construct(MethodNodeAnalyser $methodNodeAnalyser)
+    {
+        $this->methodNodeAnalyser = $methodNodeAnalyser;
     }
 
     /**

@@ -25,13 +25,16 @@ final class NoPublicPropertyByTypeRule implements Rule, DocumentedRuleInterface,
      * @var string
      */
     public const ERROR_MESSAGE = 'Class cannot have public properties. Use getter/setters instead';
-
+    /**
+     * @var string[]
+     */
+    private $classTypes;
     /**
      * @param string[] $classTypes
      */
-    public function __construct(
-        private array $classTypes,
-    ) {
+    public function __construct(array $classTypes)
+    {
+        $this->classTypes = $classTypes;
     }
 
     public function getNodeType(): string

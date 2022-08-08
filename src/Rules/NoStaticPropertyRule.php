@@ -32,10 +32,14 @@ final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
      * @var array<class-string>
      */
     private const ALLOWED_TYPES = [ContainerInterface::class, Container::class, KernelInterface::class];
+    /**
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
 
-    public function __construct(
-        private ContainsTypeAnalyser $containsTypeAnalyser
-    ) {
+    public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
+    {
+        $this->containsTypeAnalyser = $containsTypeAnalyser;
     }
 
     /**

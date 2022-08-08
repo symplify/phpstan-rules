@@ -6,11 +6,23 @@ namespace Symplify\PHPStanRules\ValueObject;
 
 final class VariableNameMetadata
 {
-    public function __construct(
-        private string $variableName,
-        private string $filePath,
-        private int $lineNumber
-    ) {
+    /**
+     * @var string
+     */
+    private $variableName;
+    /**
+     * @var string
+     */
+    private $filePath;
+    /**
+     * @var int
+     */
+    private $lineNumber;
+    public function __construct(string $variableName, string $filePath, int $lineNumber)
+    {
+        $this->variableName = $variableName;
+        $this->filePath = $filePath;
+        $this->lineNumber = $lineNumber;
     }
 
     public function getVariableName(): string

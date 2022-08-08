@@ -28,13 +28,28 @@ final class NetteInjectAnalyzer
      * @var string
      */
     private const INJECT_ATTRIBUTE_CLASS = 'Nette\DI\Attributes\Inject';
-
-    public function __construct(
-        private AnnotationAttributeDetector $annotationAttributeDetector,
-        private ReflectionParser $reflectionParser,
-        private NodeFinder $nodeFinder,
-        private NodeComparator $nodeComparator,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\PhpDoc\AnnotationAttributeDetector
+     */
+    private $annotationAttributeDetector;
+    /**
+     * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
+     */
+    private $reflectionParser;
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\Printer\NodeComparator
+     */
+    private $nodeComparator;
+    public function __construct(AnnotationAttributeDetector $annotationAttributeDetector, ReflectionParser $reflectionParser, NodeFinder $nodeFinder, NodeComparator $nodeComparator)
+    {
+        $this->annotationAttributeDetector = $annotationAttributeDetector;
+        $this->reflectionParser = $reflectionParser;
+        $this->nodeFinder = $nodeFinder;
+        $this->nodeComparator = $nodeComparator;
     }
 
     /**
@@ -93,7 +108,7 @@ final class NetteInjectAnalyzer
         }
 
         $methodName = $classMethod->name->toString();
-        return \str_starts_with($methodName, 'inject');
+        return strncmp($methodName, 'inject', strlen('inject')) === 0;
     }
 
     private function hasPropertyReflectionInjectAnnotationAttribute(
@@ -121,7 +136,7 @@ final class NetteInjectAnalyzer
 
         $reflectionMethods = $nativeReflection->getMethods(ReflectionMethod::IS_PUBLIC);
         foreach ($reflectionMethods as $reflectionMethod) {
-            if (! str_starts_with($reflectionMethod->getName(), 'inject')) {
+            if (strncmp($reflectionMethod->getName(), 'inject', strlen('inject')) !== 0) {
                 continue;
             }
 

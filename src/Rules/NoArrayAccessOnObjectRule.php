@@ -28,10 +28,14 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
      * @var array<class-string>
      */
     private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement'];
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
+     */
+    private $arrayStringAndFnMatcher;
 
-    public function __construct(
-        private ArrayStringAndFnMatcher $arrayStringAndFnMatcher
-    ) {
+    public function __construct(ArrayStringAndFnMatcher $arrayStringAndFnMatcher)
+    {
+        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
     }
 
     /**

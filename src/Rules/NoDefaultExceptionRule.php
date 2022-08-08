@@ -54,7 +54,7 @@ final class NoDefaultExceptionRule implements Rule, DocumentedRuleInterface
         }
 
         // fast way to detect native exceptions
-        if (\str_contains($exceptionClassName, '\\')) {
+        if (strpos($exceptionClassName, '\\') !== false) {
             return [];
         }
 

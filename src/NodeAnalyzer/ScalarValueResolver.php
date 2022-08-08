@@ -21,7 +21,9 @@ final class ScalarValueResolver
         // filter out false/true values
         $resolvedValuesWithoutBool = \array_filter(
             $resolveValues,
-            fn ($value): bool => ! $this->shouldSkipValue($value)
+            function ($value) : bool {
+                return ! $this->shouldSkipValue($value);
+            }
         );
         if ($resolvedValuesWithoutBool === []) {
             return [];
@@ -72,15 +74,18 @@ final class ScalarValueResolver
 
         // the array_count_values ignores "null", so we have to translate it to string here
         /** @var array<string|int> $values */
-        $values = array_filter($values, fn (mixed $value): bool => $this->isFilterableValue($value));
+        $values = array_filter($values, function ($value) : bool {
+            return $this->isFilterableValue($value);
+        });
 
         return \array_count_values($values);
     }
 
     /**
      * Makes values ready for array_count_values(), it accepts only numeric or strings; no objects nor arrays
+     * @param mixed $value
      */
-    private function isFilterableValue(mixed $value): bool
+    private function isFilterableValue($value): bool
     {
         if (is_numeric($value)) {
             return true;
@@ -89,7 +94,10 @@ final class ScalarValueResolver
         return is_string($value);
     }
 
-    private function shouldSkipValue(mixed $value): bool
+    /**
+     * @param mixed $value
+     */
+    private function shouldSkipValue($value): bool
     {
         // value could not be resolved
         if ($value === null) {

@@ -18,11 +18,23 @@ use Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor\NestingNodeVisitor;
  */
 final class AstCognitiveComplexityAnalyzer
 {
-    public function __construct(
-        private ComplexityNodeTraverserFactory $complexityNodeTraverserFactory,
-        private CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
-        private NestingNodeVisitor $nestingNodeVisitor
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeTraverser\ComplexityNodeTraverserFactory
+     */
+    private $complexityNodeTraverserFactory;
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
+     */
+    private $cognitiveComplexityDataCollector;
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor\NestingNodeVisitor
+     */
+    private $nestingNodeVisitor;
+    public function __construct(ComplexityNodeTraverserFactory $complexityNodeTraverserFactory, CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, NestingNodeVisitor $nestingNodeVisitor)
+    {
+        $this->complexityNodeTraverserFactory = $complexityNodeTraverserFactory;
+        $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
+        $this->nestingNodeVisitor = $nestingNodeVisitor;
     }
 
     public function analyzeClassLike(Class_ $class): int
@@ -37,8 +49,9 @@ final class AstCognitiveComplexityAnalyzer
 
     /**
      * @api
+     * @param \PhpParser\Node\Stmt\Function_|\PhpParser\Node\Stmt\ClassMethod $functionLike
      */
-    public function analyzeFunctionLike(Function_ | ClassMethod $functionLike): int
+    public function analyzeFunctionLike($functionLike): int
     {
         $this->cognitiveComplexityDataCollector->reset();
         $this->nestingNodeVisitor->reset();

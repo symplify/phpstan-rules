@@ -38,10 +38,14 @@ final class ExplicitMethodCallOverMagicGetSetRule implements Rule, DocumentedRul
      * @var string
      */
     private const SET_METHOD_NAME = '__set';
+    /**
+     * @var \Symplify\PHPStanRules\Reflection\PublicClassReflectionAnalyzer
+     */
+    private $publicClassReflectionAnalyzer;
 
-    public function __construct(
-        private PublicClassReflectionAnalyzer $publicClassReflectionAnalyzer
-    ) {
+    public function __construct(PublicClassReflectionAnalyzer $publicClassReflectionAnalyzer)
+    {
+        $this->publicClassReflectionAnalyzer = $publicClassReflectionAnalyzer;
     }
 
     public function getRuleDefinition(): RuleDefinition
@@ -136,7 +140,10 @@ CODE_SAMPLE
         return $this->processGetterMethodCall($node, $callerClassReflection, $propertyName);
     }
 
-    private function resolveClassReflection(Scope $scope, Expr $expr): ClassReflection|null
+    /**
+     * @return \PHPStan\Reflection\ClassReflection|null
+     */
+    private function resolveClassReflection(Scope $scope, Expr $expr)
     {
         $callerType = $scope->getType($expr);
         if (! $callerType instanceof TypeWithClassName) {

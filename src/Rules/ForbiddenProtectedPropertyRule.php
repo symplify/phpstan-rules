@@ -28,11 +28,18 @@ final class ForbiddenProtectedPropertyRule implements Rule, DocumentedRuleInterf
      * @var string
      */
     public const ERROR_MESSAGE = 'Property with protected modifier is not allowed. Use interface contract method instead';
-
-    public function __construct(
-        private ProtectedAnalyzer $protectedAnalyzer,
-        private ParentPropertyGuard $parentPropertyGuard,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\ProtectedAnalyzer
+     */
+    private $protectedAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentPropertyGuard
+     */
+    private $parentPropertyGuard;
+    public function __construct(ProtectedAnalyzer $protectedAnalyzer, ParentPropertyGuard $parentPropertyGuard)
+    {
+        $this->protectedAnalyzer = $protectedAnalyzer;
+        $this->parentPropertyGuard = $parentPropertyGuard;
     }
 
     /**

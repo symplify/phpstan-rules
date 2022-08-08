@@ -14,11 +14,14 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 
 final class ClassMethodNodeFinder
 {
-    public function __construct(
-        private ReflectionParser $reflectionParser,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
+     */
+    private $reflectionParser;
+    public function __construct(ReflectionParser $reflectionParser)
+    {
+        $this->reflectionParser = $reflectionParser;
     }
-
     public function findByMethodCall(MethodCall $methodCall, Scope $scope): ?ClassMethod
     {
         $classReflection = $scope->getClassReflection();

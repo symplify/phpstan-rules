@@ -37,11 +37,19 @@ final class FunctionLikeCognitiveComplexityRule implements Rule, DocumentedRulei
      * @var string
      */
     public const ERROR_MESSAGE = 'Cognitive complexity for "%s" is %d, keep it under %d';
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\AstCognitiveComplexityAnalyzer
+     */
+    private $astCognitiveComplexityAnalyzer;
+    /**
+     * @var int
+     */
+    private $maxMethodCognitiveComplexity = 8;
 
-    public function __construct(
-        private AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer,
-        private int $maxMethodCognitiveComplexity = 8
-    ) {
+    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, int $maxMethodCognitiveComplexity = 8)
+    {
+        $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
+        $this->maxMethodCognitiveComplexity = $maxMethodCognitiveComplexity;
     }
 
     /**

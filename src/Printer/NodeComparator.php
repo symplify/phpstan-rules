@@ -12,9 +12,13 @@ use Symplify\PHPStanRules\Enum\AttributeKey;
 
 final class NodeComparator
 {
-    public function __construct(
-        private Standard $standard
-    ) {
+    /**
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $standard;
+    public function __construct(Standard $standard)
+    {
+        $this->standard = $standard;
     }
 
     public function areNodesEqual(Node $firstNode, Node $secondNode): bool

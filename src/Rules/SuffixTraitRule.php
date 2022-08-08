@@ -38,7 +38,7 @@ final class SuffixTraitRule implements Rule, DocumentedRuleInterface
     public function processNode(Node $node, Scope $scope): array
     {
         $traitName = (string) $node->name;
-        if (\str_ends_with($traitName, 'Trait')) {
+        if (substr_compare($traitName, 'Trait', -strlen('Trait')) === 0) {
             if ($node instanceof Trait_) {
                 return [];
             }

@@ -38,10 +38,14 @@ final class PreferredRawDataInTestDataProviderRule implements Rule, DocumentedRu
      * @see https://regex101.com/r/WaNbZ1/2
      */
     private const DATAPROVIDER_REGEX = '#\*\s+@dataProvider\s+(?<dataProviderMethod>.*)\n?#';
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
 
-    public function __construct(
-        private NodeFinder $nodeFinder
-    ) {
+    public function __construct(NodeFinder $nodeFinder)
+    {
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**

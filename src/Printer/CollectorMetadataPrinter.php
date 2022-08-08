@@ -27,7 +27,10 @@ use Symplify\PHPStanRules\Enum\Types\ResolvedTypes;
 
 final class CollectorMetadataPrinter
 {
-    private Standard $printerStandard;
+    /**
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $printerStandard;
 
     public function __construct()
     {

@@ -24,22 +24,20 @@ final class ClassLikeNameFinder
     /**
      * @var array<string,string[]>
      */
-    private static array $cache = [];
+    private static $cache = [];
 
     /**
      * @var array<string, string|string[]>
      */
-    private array $autoloadPsr4Paths = [];
-
-    public function __construct(
-        private ClassLikeNameMatcher $classLikeNameMatcher,
-        ComposerAutoloadResolver $composerAutoloadResolver,
-        ComposerVendorAutoloadResolver $composerVendorAutoloadResolver,
-    ) {
-        $this->autoloadPsr4Paths = array_merge(
-            $composerAutoloadResolver->getPsr4Autoload(),
-            $composerVendorAutoloadResolver->getPsr4Autoload(),
-        );
+    private $autoloadPsr4Paths = [];
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ClassLikeNameMatcher
+     */
+    private $classLikeNameMatcher;
+    public function __construct(ClassLikeNameMatcher $classLikeNameMatcher, ComposerAutoloadResolver $composerAutoloadResolver, ComposerVendorAutoloadResolver $composerVendorAutoloadResolver)
+    {
+        $this->classLikeNameMatcher = $classLikeNameMatcher;
+        $this->autoloadPsr4Paths = array_merge($composerAutoloadResolver->getPsr4Autoload(), $composerVendorAutoloadResolver->getPsr4Autoload());
     }
 
     /**
@@ -56,7 +54,9 @@ final class ClassLikeNameFinder
 
         $narrowedNamespace = $this->getNarrowedNamespaceForSearch($namespacePattern);
         $possibleDirectories = $this->getPossibleDirectoriesForNamespace($narrowedNamespace);
-        $keepExistingDirectoriesCallback = static fn (string $directory): bool => is_dir($directory);
+        $keepExistingDirectoriesCallback = static function (string $directory) : bool {
+            return is_dir($directory);
+        };
         $filteredPossibleDirectories = array_filter($possibleDirectories, $keepExistingDirectoriesCallback);
 
         if ($filteredPossibleDirectories === []) {
@@ -106,7 +106,7 @@ final class ClassLikeNameFinder
         $namespacePatternParts = explode('\\', $namespacePattern);
         $namespacePatternPartsBeforeVariable = [];
         foreach ($namespacePatternParts as $namespacePatternPart) {
-            if (str_contains($namespacePatternPart, '*') || str_contains($namespacePatternPart, '?')) {
+            if (strpos($namespacePatternPart, '*') !== false || strpos($namespacePatternPart, '?') !== false) {
                 $isNarrowed = true;
                 break;
             }
@@ -131,7 +131,7 @@ final class ClassLikeNameFinder
         $possibleDirectories = [];
         $narrowestNamespaceLength = 0;
         foreach ($this->autoloadPsr4Paths as $namespace => $directories) {
-            if ($narrowedNamespaceIsEmpty || str_starts_with($narrowedNamespace, $namespace)) {
+            if ($narrowedNamespaceIsEmpty || strncmp($narrowedNamespace, $namespace, strlen($namespace)) === 0) {
                 if (! $narrowedNamespaceIsEmpty) {
                     $namespaceLength = strlen($namespace);
                     if ($narrowestNamespaceLength < $namespaceLength) {

@@ -36,11 +36,19 @@ final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     public const ERROR_MESSAGE = 'Parameter %d should use "%s" type as the only type passed to this method';
+    /**
+     * @var \Symplify\PHPStanRules\NodeFinder\MethodCallNodeFinder
+     */
+    private $methodCallNodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\NodeFinder\ClassMethodNodeFinder
+     */
+    private $classMethodNodeFinder;
 
-    public function __construct(
-        private MethodCallNodeFinder $methodCallNodeFinder,
-        private ClassMethodNodeFinder $classMethodNodeFinder
-    ) {
+    public function __construct(MethodCallNodeFinder $methodCallNodeFinder, ClassMethodNodeFinder $classMethodNodeFinder)
+    {
+        $this->methodCallNodeFinder = $methodCallNodeFinder;
+        $this->classMethodNodeFinder = $classMethodNodeFinder;
     }
 
     /**

@@ -36,7 +36,10 @@ final class NoMixedArrayDimFetchRule implements Rule, DocumentedRuleInterface
      */
     public const ERROR_MESSAGE = 'Add explicit array type to assigned "%s" expression';
 
-    private Standard $printerStandard;
+    /**
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $printerStandard;
 
     public function __construct()
     {
@@ -165,6 +168,6 @@ CODE_SAMPLE
             return false;
         }
 
-        return str_contains($fileName, '/vendor/');
+        return strpos($fileName, '/vendor/') !== false;
     }
 }

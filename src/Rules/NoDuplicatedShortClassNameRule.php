@@ -42,11 +42,15 @@ final class NoDuplicatedShortClassNameRule implements Rule, DocumentedRuleInterf
     /**
      * @var array<string, string[]>
      */
-    private array $declaredClassesByShortName = [];
+    private $declaredClassesByShortName = [];
+    /**
+     * @var int
+     */
+    private $toleratedNestingLevel;
 
-    public function __construct(
-        private int $toleratedNestingLevel
-    ) {
+    public function __construct(int $toleratedNestingLevel)
+    {
+        $this->toleratedNestingLevel = $toleratedNestingLevel;
     }
 
     /**

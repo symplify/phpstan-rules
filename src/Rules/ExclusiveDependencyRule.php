@@ -29,14 +29,22 @@ final class ExclusiveDependencyRule implements Rule, DocumentedRuleInterface, Co
      * @var string
      */
     public const ERROR_MESSAGE = '"%s" dependency is allowed only in "%s" types';
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
+     */
+    private $arrayStringAndFnMatcher;
+    /**
+     * @var array<string, string[]>
+     */
+    private $allowedExclusiveDependencyInTypes;
 
     /**
      * @param array<string, string[]> $allowedExclusiveDependencyInTypes
      */
-    public function __construct(
-        private ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
-        private array $allowedExclusiveDependencyInTypes
-    ) {
+    public function __construct(ArrayStringAndFnMatcher $arrayStringAndFnMatcher, array $allowedExclusiveDependencyInTypes)
+    {
+        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
+        $this->allowedExclusiveDependencyInTypes = $allowedExclusiveDependencyInTypes;
     }
 
     /**

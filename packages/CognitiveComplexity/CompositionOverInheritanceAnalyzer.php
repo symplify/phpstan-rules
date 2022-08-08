@@ -26,10 +26,14 @@ final class CompositionOverInheritanceAnalyzer
      * @var int
      */
     private const INHERITANCE_CLASS_SCORE = 25;
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\AstCognitiveComplexityAnalyzer
+     */
+    private $astCognitiveComplexityAnalyzer;
 
-    public function __construct(
-        private AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer
-    ) {
+    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer)
+    {
+        $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
     }
 
     public function analyzeClassLike(Class_ $class): int

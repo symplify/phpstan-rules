@@ -16,11 +16,14 @@ use PHPStan\Type\Type;
 
 final class StaticCallNodeAnalyzer
 {
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
-
     /**
      * @api
      */

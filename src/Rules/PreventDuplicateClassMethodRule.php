@@ -42,12 +42,20 @@ final class PreventDuplicateClassMethodRule implements Rule, DocumentedRuleInter
     /**
      * @var array<array<string, string>>
      */
-    private array $classMethodContents = [];
+    private $classMethodContents = [];
+    /**
+     * @var \Symplify\PHPStanRules\Printer\DuplicatedClassMethodPrinter
+     */
+    private $duplicatedClassMethodPrinter;
+    /**
+     * @var int
+     */
+    private $minimumLineCount = 3;
 
-    public function __construct(
-        private DuplicatedClassMethodPrinter $duplicatedClassMethodPrinter,
-        private int $minimumLineCount = 3
-    ) {
+    public function __construct(DuplicatedClassMethodPrinter $duplicatedClassMethodPrinter, int $minimumLineCount = 3)
+    {
+        $this->duplicatedClassMethodPrinter = $duplicatedClassMethodPrinter;
+        $this->minimumLineCount = $minimumLineCount;
     }
 
     /**
@@ -192,6 +200,6 @@ CODE_SAMPLE
             return true;
         }
 
-        return \str_ends_with($className, 'Test');
+        return substr_compare($className, 'Test', -strlen('Test')) === 0;
     }
 }

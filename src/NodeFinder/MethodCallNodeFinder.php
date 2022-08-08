@@ -15,13 +15,24 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 
 final class MethodCallNodeFinder
 {
-    public function __construct(
-        private ReflectionParser $reflectionParser,
-        private NodeFinder $nodeFinder,
-        private NodeComparator $nodeComparator,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
+     */
+    private $reflectionParser;
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\Printer\NodeComparator
+     */
+    private $nodeComparator;
+    public function __construct(ReflectionParser $reflectionParser, NodeFinder $nodeFinder, NodeComparator $nodeComparator)
+    {
+        $this->reflectionParser = $reflectionParser;
+        $this->nodeFinder = $nodeFinder;
+        $this->nodeComparator = $nodeComparator;
     }
-
     /**
      * @return MethodCall[]
      */

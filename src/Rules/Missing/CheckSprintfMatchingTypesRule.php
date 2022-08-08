@@ -35,12 +35,23 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
      * @var string
      */
     private const SPECIFIERS = '[bcdeEfFgGosuxX%s]';
-
-    public function __construct(
-        private SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver,
-        private MatchingTypeAnalyzer $matchingTypeAnalyzer,
-        private ArgTypeResolver $argTypeResolver,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\SprintfSpecifierTypeResolver
+     */
+    private $sprintfSpecifierTypeResolver;
+    /**
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\MatchingTypeAnalyzer
+     */
+    private $matchingTypeAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\TypeResolver\ArgTypeResolver
+     */
+    private $argTypeResolver;
+    public function __construct(SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver, MatchingTypeAnalyzer $matchingTypeAnalyzer, ArgTypeResolver $argTypeResolver)
+    {
+        $this->sprintfSpecifierTypeResolver = $sprintfSpecifierTypeResolver;
+        $this->matchingTypeAnalyzer = $matchingTypeAnalyzer;
+        $this->argTypeResolver = $argTypeResolver;
     }
 
     /**

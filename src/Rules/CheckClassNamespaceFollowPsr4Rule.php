@@ -29,13 +29,23 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
     /**
      * @var array<string, string|string[]>
      */
-    private array $autoloadPsr4Paths = [];
+    private $autoloadPsr4Paths = [];
+    /**
+     * @var \Symplify\PHPStanRules\Composer\Psr4PathValidator
+     */
+    private $psr4PathValidator;
+    /**
+     * @var \Symplify\PHPStanRules\Composer\ClassNamespaceMatcher
+     */
+    private $classNamespaceMatcher;
 
     public function __construct(
         ComposerAutoloadResolver $composerAutoloadResolver,
-        private Psr4PathValidator $psr4PathValidator,
-        private ClassNamespaceMatcher $classNamespaceMatcher
+        Psr4PathValidator $psr4PathValidator,
+        ClassNamespaceMatcher $classNamespaceMatcher
     ) {
+        $this->psr4PathValidator = $psr4PathValidator;
+        $this->classNamespaceMatcher = $classNamespaceMatcher;
         $this->autoloadPsr4Paths = $composerAutoloadResolver->getPsr4Autoload();
     }
 

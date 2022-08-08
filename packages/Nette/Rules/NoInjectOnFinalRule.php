@@ -26,10 +26,14 @@ final class NoInjectOnFinalRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     public const ERROR_MESSAGE = 'Use constructor on final classes, instead of property injection';
+    /**
+     * @var \Symplify\PHPStanRules\Nette\NetteInjectAnalyzer
+     */
+    private $netteInjectAnalyzer;
 
-    public function __construct(
-        private NetteInjectAnalyzer $netteInjectAnalyzer
-    ) {
+    public function __construct(NetteInjectAnalyzer $netteInjectAnalyzer)
+    {
+        $this->netteInjectAnalyzer = $netteInjectAnalyzer;
     }
 
     public function getRuleDefinition(): RuleDefinition

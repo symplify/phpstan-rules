@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use PhpParser\Node;
 use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\FuncCall;
@@ -16,6 +15,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Type\ThisType;
 use Symfony\Component\HttpKernel\Kernel;
+use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -38,10 +38,14 @@ final class ForbiddenThisArgumentRule implements Rule, DocumentedRuleInterface
         // workaround type
         'Symplify\PackageBuilder\Reflection\PrivatesCaller',
     ];
+    /**
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
 
-    public function __construct(
-        private ContainsTypeAnalyser $containsTypeAnalyser
-    ) {
+    public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
+    {
+        $this->containsTypeAnalyser = $containsTypeAnalyser;
     }
 
     /**
@@ -107,7 +111,10 @@ CODE_SAMPLE
         return $classReflection->isSubclassOf(Kernel::class);
     }
 
-    private function shouldSkip(MethodCall | FuncCall | StaticCall $node, Scope $scope): bool
+    /**
+     * @param \PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\StaticCall $node
+     */
+    private function shouldSkip($node, Scope $scope): bool
     {
         if ($node instanceof MethodCall) {
             return $this->containsTypeAnalyser->containsExprTypes($node->var, $scope, self::ALLOWED_CALLER_CLASSES);

@@ -18,12 +18,19 @@ use Symplify\PHPStanRules\ValueObject\MethodCallReference;
  */
 final class MethodCallCollector implements Collector
 {
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-        private ClassMethodCallReferenceResolver $classMethodCallReferenceResolver,
-    ) {
+    /**
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ClassMethodCallReferenceResolver
+     */
+    private $classMethodCallReferenceResolver;
+    public function __construct(ReflectionProvider $reflectionProvider, ClassMethodCallReferenceResolver $classMethodCallReferenceResolver)
+    {
+        $this->reflectionProvider = $reflectionProvider;
+        $this->classMethodCallReferenceResolver = $classMethodCallReferenceResolver;
     }
-
     public function getNodeType(): string
     {
         return MethodCall::class;

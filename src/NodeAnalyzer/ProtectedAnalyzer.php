@@ -9,12 +9,19 @@ use PhpParser\Node\Stmt\Property;
 
 final class ProtectedAnalyzer
 {
-    public function __construct(
-        private DependencyNodeAnalyzer $dependencyNodeAnalyzer,
-        private TypeNodeAnalyzer $typeNodeAnalyzer,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\DependencyNodeAnalyzer
+     */
+    private $dependencyNodeAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\TypeNodeAnalyzer
+     */
+    private $typeNodeAnalyzer;
+    public function __construct(DependencyNodeAnalyzer $dependencyNodeAnalyzer, TypeNodeAnalyzer $typeNodeAnalyzer)
+    {
+        $this->dependencyNodeAnalyzer = $dependencyNodeAnalyzer;
+        $this->typeNodeAnalyzer = $typeNodeAnalyzer;
     }
-
     public function isProtectedPropertyOrClassConstAllowed(Property $property, Class_ $class): bool
     {
         if ($this->dependencyNodeAnalyzer->isInsideAbstractClassAndPassedAsDependency($property, $class)) {

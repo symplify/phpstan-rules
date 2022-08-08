@@ -17,7 +17,10 @@ final class AutowiredMethodPropertyAnalyzer
      */
     private const REQUIRED_DOCBLOCK_REGEX = '#\*\s+@(required|inject)\n?#';
 
-    public function detect(ClassMethod | Property $stmt): bool
+    /**
+     * @param \PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\Property $stmt
+     */
+    public function detect($stmt): bool
     {
         $docComment = $stmt->getDocComment();
         if (! $docComment instanceof Doc) {
@@ -39,8 +42,9 @@ final class AutowiredMethodPropertyAnalyzer
 
     /**
      * @param string[] $desiredAttributeClasses
+     * @param \PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\Property $stmt
      */
-    private function hasAttributes(ClassMethod | Property $stmt, array $desiredAttributeClasses): bool
+    private function hasAttributes($stmt, array $desiredAttributeClasses): bool
     {
         foreach ($stmt->attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attribute) {

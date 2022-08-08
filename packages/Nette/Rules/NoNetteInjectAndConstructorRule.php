@@ -25,10 +25,14 @@ final class NoNetteInjectAndConstructorRule implements Rule, DocumentedRuleInter
      * @var string
      */
     public const ERROR_MESSAGE = 'Use either __construct() or @inject, not both together';
+    /**
+     * @var \Symplify\PHPStanRules\Nette\NetteInjectAnalyzer
+     */
+    private $netteInjectAnalyzer;
 
-    public function __construct(
-        private NetteInjectAnalyzer $netteInjectAnalyzer
-    ) {
+    public function __construct(NetteInjectAnalyzer $netteInjectAnalyzer)
+    {
+        $this->netteInjectAnalyzer = $netteInjectAnalyzer;
     }
 
     /**

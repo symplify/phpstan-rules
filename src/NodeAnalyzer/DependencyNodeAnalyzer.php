@@ -16,10 +16,18 @@ use Symplify\PHPStanRules\Enum\MethodName;
 
 final class DependencyNodeAnalyzer
 {
-    public function __construct(
-        private NodeFinder $nodeFinder,
-        private AutowiredMethodPropertyAnalyzer $autowiredMethodPropertyAnalyzer
-    ) {
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\AutowiredMethodPropertyAnalyzer
+     */
+    private $autowiredMethodPropertyAnalyzer;
+    public function __construct(NodeFinder $nodeFinder, AutowiredMethodPropertyAnalyzer $autowiredMethodPropertyAnalyzer)
+    {
+        $this->nodeFinder = $nodeFinder;
+        $this->autowiredMethodPropertyAnalyzer = $autowiredMethodPropertyAnalyzer;
     }
 
     public function isInsideAbstractClassAndPassedAsDependency(Property $property, Class_ $class): bool

@@ -57,7 +57,7 @@ final class NoFuncCallInMethodCallRule implements Rule, DocumentedRuleInterface
 
             $funcCallName = $this->resolveFuncCallName($arg);
 
-            if (\str_contains($funcCallName, '\\')) {
+            if (strpos($funcCallName, '\\') !== false) {
                 continue;
             }
 

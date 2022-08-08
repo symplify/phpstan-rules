@@ -24,10 +24,14 @@ final class ValidNetteInjectRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     public const ERROR_MESSAGE = 'Property with @inject annotation or #[Nette\DI\Attributes\Inject] attribute must be public';
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\AutowiredMethodPropertyAnalyzer
+     */
+    private $autowiredMethodPropertyAnalyzer;
 
-    public function __construct(
-        private AutowiredMethodPropertyAnalyzer $autowiredMethodPropertyAnalyzer
-    ) {
+    public function __construct(AutowiredMethodPropertyAnalyzer $autowiredMethodPropertyAnalyzer)
+    {
+        $this->autowiredMethodPropertyAnalyzer = $autowiredMethodPropertyAnalyzer;
     }
 
     public function getNodeType(): string

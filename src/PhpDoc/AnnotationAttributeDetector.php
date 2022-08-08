@@ -10,11 +10,14 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 
 final class AnnotationAttributeDetector
 {
-    public function __construct(
-        private BarePhpDocParser $barePhpDocParser,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
+     */
+    private $barePhpDocParser;
+    public function __construct(BarePhpDocParser $barePhpDocParser)
+    {
+        $this->barePhpDocParser = $barePhpDocParser;
     }
-
     public function hasNodeAnnotationOrAttribute(
         Property $property,
         string $annotationName,
@@ -28,7 +31,10 @@ final class AnnotationAttributeDetector
         return $this->hasAttributeClass($property, $attributeClass);
     }
 
-    private function hasAttributeClass(ClassMethod | Property $node, string $attributeClass): bool
+    /**
+     * @param \PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\Property $node
+     */
+    private function hasAttributeClass($node, string $attributeClass): bool
     {
         foreach ($node->attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attribute) {

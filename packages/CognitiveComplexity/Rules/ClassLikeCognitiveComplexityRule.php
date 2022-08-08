@@ -27,17 +27,37 @@ final class ClassLikeCognitiveComplexityRule implements Rule, DocumentedRuleInte
      * @var string
      */
     public const ERROR_MESSAGE = 'Class cognitive complexity is %d, keep it under %d';
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\AstCognitiveComplexityAnalyzer
+     */
+    private $astCognitiveComplexityAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\CompositionOverInheritanceAnalyzer
+     */
+    private $compositionOverInheritanceAnalyzer;
+    /**
+     * @var int
+     */
+    private $maxClassCognitiveComplexity = 50;
+    /**
+     * @var array<string, int>
+     */
+    private $limitsByTypes = [];
+    /**
+     * @var bool
+     */
+    private $scoreCompositionOverInheritance = false;
 
     /**
      * @param array<string, int> $limitsByTypes
      */
-    public function __construct(
-        private AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer,
-        private CompositionOverInheritanceAnalyzer $compositionOverInheritanceAnalyzer,
-        private int $maxClassCognitiveComplexity = 50,
-        private array $limitsByTypes = [],
-        private bool $scoreCompositionOverInheritance = false
-    ) {
+    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, CompositionOverInheritanceAnalyzer $compositionOverInheritanceAnalyzer, int $maxClassCognitiveComplexity = 50, array $limitsByTypes = [], bool $scoreCompositionOverInheritance = false)
+    {
+        $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
+        $this->compositionOverInheritanceAnalyzer = $compositionOverInheritanceAnalyzer;
+        $this->maxClassCognitiveComplexity = $maxClassCognitiveComplexity;
+        $this->limitsByTypes = $limitsByTypes;
+        $this->scoreCompositionOverInheritance = $scoreCompositionOverInheritance;
     }
 
     /**

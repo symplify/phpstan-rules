@@ -37,11 +37,18 @@ final class ForbiddenArrayWithStringKeysRule implements Rule, DocumentedRuleInte
      * @see https://regex101.com/r/ddj4mB/2
      */
     private const TEST_FILE_REGEX = '#(Test|TestCase)\.php$#';
-
-    public function __construct(
-        private ParentMethodReturnTypeResolver $parentMethodReturnTypeResolver,
-        private ArrayAnalyzer $arrayAnalyzer,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodReturnTypeResolver
+     */
+    private $parentMethodReturnTypeResolver;
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\ArrayAnalyzer
+     */
+    private $arrayAnalyzer;
+    public function __construct(ParentMethodReturnTypeResolver $parentMethodReturnTypeResolver, ArrayAnalyzer $arrayAnalyzer)
+    {
+        $this->parentMethodReturnTypeResolver = $parentMethodReturnTypeResolver;
+        $this->arrayAnalyzer = $arrayAnalyzer;
     }
 
     /**
@@ -131,11 +138,11 @@ CODE_SAMPLE
                 return true;
             }
 
-            if (str_contains($classReflection->getName(), 'json')) {
+            if (strpos($classReflection->getName(), 'json') !== false) {
                 return true;
             }
 
-            if (str_contains($classReflection->getName(), 'Json')) {
+            if (strpos($classReflection->getName(), 'Json') !== false) {
                 return true;
             }
         }
@@ -143,11 +150,11 @@ CODE_SAMPLE
         $filePath = $scope->getFile();
 
         // php-scoper config, it return magic array by design
-        if (\str_contains($filePath, 'scoper')) {
+        if (strpos($filePath, 'scoper') !== false) {
             return true;
         }
 
         // skip Symfony bundles.php
-        return \str_ends_with($filePath, 'bundles.php');
+        return substr_compare($filePath, 'bundles.php', -strlen('bundles.php')) === 0;
     }
 }

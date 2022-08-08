@@ -26,13 +26,17 @@ final class RequireNewArgumentConstantRule implements Rule, DocumentedRuleInterf
      * @var string
      */
     public const ERROR_MESSAGE = 'New expression argument on position %d must use constant over value';
+    /**
+     * @var array<class-string, int[]>
+     */
+    private $constantArgByNewByType;
 
     /**
      * @param array<class-string, int[]> $constantArgByNewByType
      */
-    public function __construct(
-        private array $constantArgByNewByType
-    ) {
+    public function __construct(array $constantArgByNewByType)
+    {
+        $this->constantArgByNewByType = $constantArgByNewByType;
     }
 
     /**

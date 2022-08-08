@@ -27,11 +27,19 @@ final class NoDuplicatedArgumentRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     public const ERROR_MESSAGE = 'This call has duplicate argument';
+    /**
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\ScalarValueResolver
+     */
+    private $scalarValueResolver;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-        private ScalarValueResolver $scalarValueResolver
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider, ScalarValueResolver $scalarValueResolver)
+    {
+        $this->reflectionProvider = $reflectionProvider;
+        $this->scalarValueResolver = $scalarValueResolver;
     }
 
     /**
@@ -87,7 +95,10 @@ CODE_SAMPLE
         );
     }
 
-    private function shouldSkip(StaticCall|MethodCall|FuncCall $expr, Scope $scope): bool
+    /**
+     * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\FuncCall $expr
+     */
+    private function shouldSkip($expr, Scope $scope): bool
     {
         if (\count($expr->args) < 2) {
             return true;

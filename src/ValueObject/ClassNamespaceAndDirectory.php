@@ -6,11 +6,23 @@ namespace Symplify\PHPStanRules\ValueObject;
 
 final class ClassNamespaceAndDirectory
 {
-    public function __construct(
-        private string $namespace,
-        private string $directory,
-        private string $namespaceBeforeClass
-    ) {
+    /**
+     * @var string
+     */
+    private $namespace;
+    /**
+     * @var string
+     */
+    private $directory;
+    /**
+     * @var string
+     */
+    private $namespaceBeforeClass;
+    public function __construct(string $namespace, string $directory, string $namespaceBeforeClass)
+    {
+        $this->namespace = $namespace;
+        $this->directory = $directory;
+        $this->namespaceBeforeClass = $namespaceBeforeClass;
     }
 
     public function getNamespace(): string

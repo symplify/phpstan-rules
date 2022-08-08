@@ -28,11 +28,19 @@ final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterf
      * @var string
      */
     public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
+     */
+    private $regexFuncCallAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
+     */
+    private $regexStaticCallAnalyzer;
 
-    public function __construct(
-        private RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private RegexStaticCallAnalyzer $regexStaticCallAnalyzer
-    ) {
+    public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
+    {
+        $this->regexFuncCallAnalyzer = $regexFuncCallAnalyzer;
+        $this->regexStaticCallAnalyzer = $regexStaticCallAnalyzer;
     }
 
     /**
@@ -105,7 +113,7 @@ CODE_SAMPLE
         }
 
         $constantName = (string) $expr->name;
-        if (\str_ends_with($constantName, '_REGEX')) {
+        if (substr_compare($constantName, '_REGEX', -strlen('_REGEX')) === 0) {
             return [];
         }
 

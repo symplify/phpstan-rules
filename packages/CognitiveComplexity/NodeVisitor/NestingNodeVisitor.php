@@ -33,14 +33,27 @@ final class NestingNodeVisitor extends NodeVisitorAbstract
         Ternary::class,
     ];
 
-    private int $measuredNestingLevel = 1;
+    /**
+     * @var int
+     */
+    private $measuredNestingLevel = 1;
 
-    private int $previousNestingLevel = 0;
-
-    public function __construct(
-        private CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
-        private ComplexityAffectingNodeFinder $complexityAffectingNodeFinder,
-    ) {
+    /**
+     * @var int
+     */
+    private $previousNestingLevel = 0;
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
+     */
+    private $cognitiveComplexityDataCollector;
+    /**
+     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeAnalyzer\ComplexityAffectingNodeFinder
+     */
+    private $complexityAffectingNodeFinder;
+    public function __construct(CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, ComplexityAffectingNodeFinder $complexityAffectingNodeFinder)
+    {
+        $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
+        $this->complexityAffectingNodeFinder = $complexityAffectingNodeFinder;
     }
 
     public function reset(): void

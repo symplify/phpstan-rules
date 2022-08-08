@@ -35,13 +35,17 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
      * @var string
      */
     private const EXCLUDED_NAMESPACE_REGEX = '#\\\\(Exception|Contract)\\\\#';
+    /**
+     * @var string[]
+     */
+    private $namespaceParts;
 
     /**
      * @param string[] $namespaceParts
      */
-    public function __construct(
-        private array $namespaceParts
-    ) {
+    public function __construct(array $namespaceParts)
+    {
+        $this->namespaceParts = $namespaceParts;
     }
 
     /**
@@ -72,7 +76,7 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
         }
 
         foreach ($this->namespaceParts as $namespacePart) {
-            if (! \str_ends_with($namespace, $namespacePart)) {
+            if (substr_compare($namespace, $namespacePart, -strlen($namespacePart)) !== 0) {
                 continue;
             }
 
@@ -80,7 +84,7 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
                 continue;
             }
 
-            if (\str_ends_with($className, $namespacePart)) {
+            if (substr_compare($className, $namespacePart, -strlen($namespacePart)) === 0) {
                 continue;
             }
 

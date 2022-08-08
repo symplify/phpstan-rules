@@ -27,14 +27,22 @@ final class RequireConstantInMethodCallPositionRule implements Rule, DocumentedR
      * @var string
      */
     public const ERROR_MESSAGE = 'Parameter argument on position %d must use constant';
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\PositionMatcher
+     */
+    private $positionMatcher;
+    /**
+     * @var array<class-string, array<string, int[]>>
+     */
+    private $requiredConstantInMethodCall;
 
     /**
      * @param array<class-string, array<string, int[]>> $requiredConstantInMethodCall
      */
-    public function __construct(
-        private PositionMatcher $positionMatcher,
-        private array $requiredConstantInMethodCall
-    ) {
+    public function __construct(PositionMatcher $positionMatcher, array $requiredConstantInMethodCall)
+    {
+        $this->positionMatcher = $positionMatcher;
+        $this->requiredConstantInMethodCall = $requiredConstantInMethodCall;
     }
 
     /**

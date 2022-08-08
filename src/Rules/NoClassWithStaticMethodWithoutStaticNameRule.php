@@ -38,11 +38,19 @@ final class NoClassWithStaticMethodWithoutStaticNameRule implements Rule, Docume
         'Symfony\Component\EventDispatcher\EventSubscriberInterface',
         'Symfony\Component\Console\Command\Command',
     ];
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
+     */
+    private $arrayStringAndFnMatcher;
 
-    public function __construct(
-        private NodeFinder $nodeFinder,
-        private ArrayStringAndFnMatcher $arrayStringAndFnMatcher
-    ) {
+    public function __construct(NodeFinder $nodeFinder, ArrayStringAndFnMatcher $arrayStringAndFnMatcher)
+    {
+        $this->nodeFinder = $nodeFinder;
+        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
     }
 
     /**
@@ -79,7 +87,7 @@ final class NoClassWithStaticMethodWithoutStaticNameRule implements Rule, Docume
         }
 
         // already has "Static" in the name
-        if (\str_contains($shortClassName, 'Static')) {
+        if (strpos($shortClassName, 'Static') !== false) {
             return [];
         }
 

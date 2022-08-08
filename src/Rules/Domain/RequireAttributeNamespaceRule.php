@@ -70,7 +70,7 @@ CODE_SAMPLE
 
         // is class in "Attribute" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Attribute\\')) {
+        if (strpos($className, '\\Attribute\\') !== false) {
             return [];
         }
 

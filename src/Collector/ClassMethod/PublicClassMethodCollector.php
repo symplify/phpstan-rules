@@ -17,12 +17,19 @@ use Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer;
  */
 final class PublicClassMethodCollector implements Collector
 {
-    public function __construct(
-        private ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
-        private PublicClassMethodMatcher $publicClassMethodMatcher,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
+     */
+    private $apiDocStmtAnalyzer;
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\Collector\PublicClassMethodMatcher
+     */
+    private $publicClassMethodMatcher;
+    public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, PublicClassMethodMatcher $publicClassMethodMatcher)
+    {
+        $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
+        $this->publicClassMethodMatcher = $publicClassMethodMatcher;
     }
-
     public function getNodeType(): string
     {
         return ClassMethod::class;

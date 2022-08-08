@@ -134,7 +134,7 @@ CODE_SAMPLE
             return true;
         }
 
-        if (\str_contains($relativeDirPath, '*')) {
+        if (strpos($relativeDirPath, '*') !== false) {
             return true;
         }
 

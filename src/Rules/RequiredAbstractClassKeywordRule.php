@@ -47,7 +47,7 @@ final class RequiredAbstractClassKeywordRule implements Rule, DocumentedRuleInte
         }
 
         $shortClassName = $node->name->toString();
-        if (! \str_starts_with($shortClassName, 'Abstract')) {
+        if (strncmp($shortClassName, 'Abstract', strlen('Abstract')) !== 0) {
             return [];
         }
 

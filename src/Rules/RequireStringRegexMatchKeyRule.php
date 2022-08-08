@@ -32,11 +32,18 @@ final class RequireStringRegexMatchKeyRule implements Rule, DocumentedRuleInterf
      * @var string
      */
     public const ERROR_MESSAGE = 'Regex must use string named capture groups instead of numeric';
-
-    public function __construct(
-        private NodeFinder $nodeFinder,
-        private ReflectionParser $reflectionParser,
-    ) {
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
+     * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
+     */
+    private $reflectionParser;
+    public function __construct(NodeFinder $nodeFinder, ReflectionParser $reflectionParser)
+    {
+        $this->nodeFinder = $nodeFinder;
+        $this->reflectionParser = $reflectionParser;
     }
 
     /**

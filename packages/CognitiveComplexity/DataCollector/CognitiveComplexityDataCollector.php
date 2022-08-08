@@ -6,9 +6,15 @@ namespace Symplify\PHPStanRules\CognitiveComplexity\DataCollector;
 
 final class CognitiveComplexityDataCollector
 {
-    private int $operationComplexity = 0;
+    /**
+     * @var int
+     */
+    private $operationComplexity = 0;
 
-    private int $nestingComplexity = 0;
+    /**
+     * @var int
+     */
+    private $nestingComplexity = 0;
 
     public function increaseOperation(): void
     {

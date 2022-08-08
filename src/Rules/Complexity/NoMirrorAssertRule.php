@@ -29,11 +29,18 @@ final class NoMirrorAssertRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     public const ERROR_MESSAGE = 'The assert is tautology that compares to itself. Fix it to different values';
-
-    public function __construct(
-        private Standard $standard,
-        private NodeFinder $nodeFinder,
-    ) {
+    /**
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $standard;
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    public function __construct(Standard $standard, NodeFinder $nodeFinder)
+    {
+        $this->standard = $standard;
+        $this->nodeFinder = $nodeFinder;
     }
 
     public function getRuleDefinition(): RuleDefinition
@@ -148,7 +155,7 @@ CODE_SAMPLE
             }
 
             $methodCallName = $methodCall->name->toString();
-            if (! str_starts_with($methodCallName, 'assert')) {
+            if (strncmp($methodCallName, 'assert', strlen('assert')) !== 0) {
                 continue;
             }
 

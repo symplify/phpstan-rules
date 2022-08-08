@@ -26,15 +26,27 @@ final class ClassExtendingExclusiveNamespaceRule implements ConfigurableRuleInte
      * @var string
      */
     public const ERROR_MESSAGE = 'Class "%s" is authorized to exist in one of the following namespaces: %s, but it is in namespace "%s". Please move it to one of the authorized namespaces.';
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ClassLikeNameMatcher
+     */
+    private $classLikeNameMatcher;
+    /**
+     * @var \Symplify\PHPStanRules\NodeFinder\ClassLikeNameFinder
+     */
+    private $classLikeNameFinder;
+    /**
+     * @var array<string, array<string>>
+     */
+    private $guards;
 
     /**
      * @param array<string, array<string>> $guards
      */
-    public function __construct(
-        private ClassLikeNameMatcher $classLikeNameMatcher,
-        private ClassLikeNameFinder $classLikeNameFinder,
-        private array $guards
-    ) {
+    public function __construct(ClassLikeNameMatcher $classLikeNameMatcher, ClassLikeNameFinder $classLikeNameFinder, array $guards)
+    {
+        $this->classLikeNameMatcher = $classLikeNameMatcher;
+        $this->classLikeNameFinder = $classLikeNameFinder;
+        $this->guards = $guards;
     }
 
     /**
@@ -66,12 +78,7 @@ final class ClassExtendingExclusiveNamespaceRule implements ConfigurableRuleInte
 
             if (! $this->isInAllowedNamespace($allowedNamespacePatterns, $classLikeName)) {
                 $nativeReflectionClass = $classReflection->getNativeReflection();
-                $errorMessage = sprintf(
-                    self::ERROR_MESSAGE,
-                    $classLikeName,
-                    Json::encode($allowedNamespacePatterns, JSON_THROW_ON_ERROR),
-                    $nativeReflectionClass->getNamespaceName(),
-                );
+                $errorMessage = sprintf(self::ERROR_MESSAGE, $classLikeName, Json::encode($allowedNamespacePatterns, 0), $nativeReflectionClass->getNamespaceName());
 
                 return [$errorMessage];
             }
@@ -144,24 +151,16 @@ CODE_SAMPLE
         ]);
     }
 
-    private function isSubjectToGuardedTypeOrNamespacePattern(
-        ClassReflection $classReflection,
-        string $guardedTypeOrNamespacePattern,
-    ): bool {
-        $isGuardedSubjectNamespacePattern = str_contains($guardedTypeOrNamespacePattern, '*') || str_contains(
-            $guardedTypeOrNamespacePattern,
-            '?'
-        );
+    private function isSubjectToGuardedTypeOrNamespacePattern(ClassReflection $classReflection, string $guardedTypeOrNamespacePattern): bool
+    {
+        $isGuardedSubjectNamespacePattern = strpos($guardedTypeOrNamespacePattern, '*') !== false || strpos($guardedTypeOrNamespacePattern, '?') !== false;
         $isGuardedSubjectType = ! $isGuardedSubjectNamespacePattern;
-
         if ($isGuardedSubjectType && ! $classReflection->isSubclassOf($guardedTypeOrNamespacePattern)) {
             return false;
         }
-
         if (! $isGuardedSubjectNamespacePattern) {
             return true;
         }
-
         return $this->isSubjectSubclassOfGuardedPattern($guardedTypeOrNamespacePattern, $classReflection);
     }
 
@@ -181,7 +180,10 @@ CODE_SAMPLE
         return false;
     }
 
-    private function isInAllowedNamespace(mixed $allowedNamespacePatterns, string $classLikeName): bool
+    /**
+     * @param mixed $allowedNamespacePatterns
+     */
+    private function isInAllowedNamespace($allowedNamespacePatterns, string $classLikeName): bool
     {
         foreach ($allowedNamespacePatterns as $allowedNamespacePattern) {
             if ($this->classLikeNameMatcher->isClassLikeNameMatchedAgainstPattern(

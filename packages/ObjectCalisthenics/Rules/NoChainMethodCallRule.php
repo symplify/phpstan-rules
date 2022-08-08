@@ -27,14 +27,21 @@ final class NoChainMethodCallRule implements Rule, DocumentedRuleinterface, Conf
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not use chained method calls. Put each on separated lines.';
-
+    /**
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\AllowedChainCallSkipper
+     */
+    private $allowedChainCallSkipper;
+    /**
+     * @var class-string[]
+     */
+    private $allowedChainTypes = [];
     /**
      * @param class-string[] $allowedChainTypes
      */
-    public function __construct(
-        private AllowedChainCallSkipper $allowedChainCallSkipper,
-        private array $allowedChainTypes = [],
-    ) {
+    public function __construct(AllowedChainCallSkipper $allowedChainCallSkipper, array $allowedChainTypes = [])
+    {
+        $this->allowedChainCallSkipper = $allowedChainCallSkipper;
+        $this->allowedChainTypes = $allowedChainTypes;
     }
 
     /**

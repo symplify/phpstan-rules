@@ -57,7 +57,7 @@ final class PrefixAbstractClassRule implements Rule, DocumentedRuleInterface
         }
 
         $shortClassName = $classLike->name->toString();
-        if (\str_starts_with($shortClassName, 'Abstract')) {
+        if (strncmp($shortClassName, 'Abstract', strlen('Abstract')) === 0) {
             return [];
         }
 

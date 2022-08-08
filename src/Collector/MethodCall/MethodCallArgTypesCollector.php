@@ -17,12 +17,19 @@ use Symplify\PHPStanRules\ValueObject\MethodCallReference;
  */
 final class MethodCallArgTypesCollector implements Collector
 {
-    public function __construct(
-        private ClassMethodCallReferenceResolver $classMethodCallReferenceResolver,
-        private CollectorMetadataPrinter $collectorMetadataPrinter,
-    ) {
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ClassMethodCallReferenceResolver
+     */
+    private $classMethodCallReferenceResolver;
+    /**
+     * @var \Symplify\PHPStanRules\Printer\CollectorMetadataPrinter
+     */
+    private $collectorMetadataPrinter;
+    public function __construct(ClassMethodCallReferenceResolver $classMethodCallReferenceResolver, CollectorMetadataPrinter $collectorMetadataPrinter)
+    {
+        $this->classMethodCallReferenceResolver = $classMethodCallReferenceResolver;
+        $this->collectorMetadataPrinter = $collectorMetadataPrinter;
     }
-
     public function getNodeType(): string
     {
         return MethodCall::class;

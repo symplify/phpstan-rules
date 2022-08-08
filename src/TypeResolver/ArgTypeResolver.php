@@ -13,8 +13,9 @@ final class ArgTypeResolver
 {
     /**
      * @return Type[]
+     * @param \PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\MethodCall $funcCall
      */
-    public function resolveArgTypesWithoutFirst(FuncCall|MethodCall $funcCall, Scope $scope): array
+    public function resolveArgTypesWithoutFirst($funcCall, Scope $scope): array
     {
         $args = $funcCall->getArgs();
         unset($args[0]);

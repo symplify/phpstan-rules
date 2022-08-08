@@ -15,12 +15,19 @@ use Symplify\PHPStanRules\ValueObject\Spotter\IfAndCondExpr;
 
 final class IfResemblingMatchAnalyzer
 {
-    public function __construct(
-        private Standard $printerStandard,
-        private NodeFinder $nodeFinder,
-    ) {
+    /**
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $printerStandard;
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    public function __construct(Standard $printerStandard, NodeFinder $nodeFinder)
+    {
+        $this->printerStandard = $printerStandard;
+        $this->nodeFinder = $nodeFinder;
     }
-
     /**
      * @param IfAndCondExpr[] $ifsAndCondExprs
      */

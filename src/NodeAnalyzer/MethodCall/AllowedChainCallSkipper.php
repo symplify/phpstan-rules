@@ -52,10 +52,14 @@ final class AllowedChainCallSkipper
         'React\Promise\Promise',
         'Nette\Loaders\RobotLoader',
     ];
+    /**
+     * @var \Symplify\PHPStanRules\Matcher\ObjectTypeMatcher
+     */
+    private $objectTypeMatcher;
 
-    public function __construct(
-        private ObjectTypeMatcher $objectTypeMatcher
-    ) {
+    public function __construct(ObjectTypeMatcher $objectTypeMatcher)
+    {
+        $this->objectTypeMatcher = $objectTypeMatcher;
     }
 
     /**

@@ -29,10 +29,14 @@ final class NoProtectedElementInFinalClassRule implements Rule, DocumentedRuleIn
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of protected element in final class use private element or contract method';
+    /**
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
+     */
+    private $parentClassMethodGuard;
 
-    public function __construct(
-        private ParentClassMethodGuard $parentClassMethodGuard
-    ) {
+    public function __construct(ParentClassMethodGuard $parentClassMethodGuard)
+    {
+        $this->parentClassMethodGuard = $parentClassMethodGuard;
     }
 
     public function getNodeType(): string

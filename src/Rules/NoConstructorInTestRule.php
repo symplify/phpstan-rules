@@ -41,7 +41,7 @@ final class NoConstructorInTestRule implements Rule, DocumentedRuleInterface
     public function processNode(Node $node, Scope $scope): array
     {
         $classReflection = $node->getClassReflection();
-        if (! \str_ends_with($classReflection->getName(), 'Test')) {
+        if (substr_compare($classReflection->getName(), 'Test', -strlen('Test')) !== 0) {
             return [];
         }
 

@@ -43,10 +43,14 @@ final class NoNestedFuncCallRule implements Rule, DocumentedRuleInterface
         'in_array',
         'str_starts_with',
     ];
+    /**
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
 
-    public function __construct(
-        private NodeFinder $nodeFinder
-    ) {
+    public function __construct(NodeFinder $nodeFinder)
+    {
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**

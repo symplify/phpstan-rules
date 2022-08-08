@@ -117,7 +117,7 @@ CODE_SAMPLE
             return false;
         }
 
-        if (str_contains($pathInfo['filename'], '*')) {
+        if (strpos($pathInfo['filename'], '*') !== false) {
             return false;
         }
 
