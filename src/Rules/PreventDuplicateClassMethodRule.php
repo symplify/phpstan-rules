@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreventDuplicateClassMethodRule\PreventDuplicateClassMethodRuleTest
  */
-final class PreventDuplicateClassMethodRule implements Rule, ConfigurableRuleInterface
+final class PreventDuplicateClassMethodRule implements Rule
 {
     /**
      * @var string

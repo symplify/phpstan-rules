@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Privatization\NoPublicPropertyByTypeRule\NoPublicPropertyByTypeRuleTest
  */
-final class NoPublicPropertyByTypeRule implements Rule, ConfigurableRuleInterface
+final class NoPublicPropertyByTypeRule implements Rule
 {
     /**
      * @var string

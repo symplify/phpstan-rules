@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireConstantInMethodCallPositionRule\RequireConstantInMethodCallPositionRuleTest
  */
-final class RequireConstantInMethodCallPositionRule implements Rule, ConfigurableRuleInterface
+final class RequireConstantInMethodCallPositionRule implements Rule
 {
     /**
      * @var string

@@ -31,7 +31,7 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
  *
  * @see \Symplify\PHPStanRules\Tests\CognitiveComplexity\Rules\FunctionLikeCognitiveComplexityRule\FunctionLikeCognitiveComplexityRuleTest
  */
-final class FunctionLikeCognitiveComplexityRule implements Rule, ConfigurableRuleInterface
+final class FunctionLikeCognitiveComplexityRule implements Rule
 {
     /**
      * @var string

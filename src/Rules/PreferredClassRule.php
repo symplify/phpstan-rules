@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
  */
-final class PreferredClassRule extends AbstractSymplifyRule implements ConfigurableRuleInterface
+final class PreferredClassRule extends AbstractSymplifyRule
 {
     /**
      * @var string
@@ -32,7 +32,6 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
      * @var string[]
      */
     private $oldToPreferredClasses;
-
     /**
      * @param string[] $oldToPreferredClasses
      */
@@ -40,7 +39,6 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
     {
         $this->oldToPreferredClasses = $oldToPreferredClasses;
     }
-
     /**
      * @return array<class-string<Node>>
      */
@@ -48,7 +46,6 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
     {
         return [New_::class, Name::class, InClassNode::class, StaticCall::class, Instanceof_::class];
     }
-
     /**
      * @param New_|Name|InClassNode|StaticCall|Instanceof_ $node
      * @return string[]
@@ -69,7 +66,6 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
 
         return $this->processClassName($node->toString());
     }
-
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
@@ -102,7 +98,6 @@ CODE_SAMPLE
             ),
         ]);
     }
-
     /**
      * @return string[]
      */
@@ -115,7 +110,6 @@ CODE_SAMPLE
         $className = $new->class->toString();
         return $this->processClassName($className);
     }
-
     /**
      * @return string[]
      */
@@ -147,7 +141,6 @@ CODE_SAMPLE
 
         return [];
     }
-
     /**
      * @return string[]
      */
@@ -164,7 +157,6 @@ CODE_SAMPLE
 
         return [];
     }
-
     /**
      * @return string[]
      * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\Instanceof_ $node

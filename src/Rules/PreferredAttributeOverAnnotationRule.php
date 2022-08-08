@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredAttributeOverAnnotationRule\PreferredAttributeOverAnnotationRuleTest
  */
-final class PreferredAttributeOverAnnotationRule implements Rule, ConfigurableRuleInterface
+final class PreferredAttributeOverAnnotationRule implements Rule
 {
     /**
      * @var string

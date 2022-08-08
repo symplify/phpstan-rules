@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDuplicatedShortClassNameRule\NoDuplicatedShortClassNameRuleTest
  */
-final class NoDuplicatedShortClassNameRule implements Rule, ConfigurableRuleInterface
+final class NoDuplicatedShortClassNameRule implements Rule
 {
     /**
      * @var string
