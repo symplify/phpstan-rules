@@ -17,10 +17,7 @@ final class IfAndCondExpr
      * @var \PhpParser\Node\Expr|null
      */
     private $condExpr;
-    /**
-     * @param \PhpParser\Node\Expr|null $condExpr
-     */
-    public function __construct(Stmt $stmt, $condExpr)
+    public function __construct(Stmt $stmt, ?\PhpParser\Node\Expr $condExpr)
     {
         $this->stmt = $stmt;
         $this->condExpr = $condExpr;

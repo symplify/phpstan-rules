@@ -23,10 +23,7 @@ final class ReturnNodeFinder
         $this->simpleCallableNodeTraverser = $simpleCallableNodeTraverser;
     }
 
-    /**
-     * @return \PhpParser\Node\Expr|null
-     */
-    public function findOnlyReturnsExpr(ClassMethod $classMethod)
+    public function findOnlyReturnsExpr(ClassMethod $classMethod): ?\PhpParser\Node\Expr
     {
         $returns = $this->findReturnsWithValues($classMethod);
         if (count($returns) !== 1) {

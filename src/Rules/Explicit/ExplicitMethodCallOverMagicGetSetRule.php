@@ -140,10 +140,7 @@ CODE_SAMPLE
         return $this->processGetterMethodCall($node, $callerClassReflection, $propertyName);
     }
 
-    /**
-     * @return \PHPStan\Reflection\ClassReflection|null
-     */
-    private function resolveClassReflection(Scope $scope, Expr $expr)
+    private function resolveClassReflection(Scope $scope, Expr $expr): ?\PHPStan\Reflection\ClassReflection
     {
         $callerType = $scope->getType($expr);
         if (! $callerType instanceof TypeWithClassName) {

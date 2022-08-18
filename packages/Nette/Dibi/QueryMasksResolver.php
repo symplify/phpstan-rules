@@ -41,10 +41,7 @@ final class QueryMasksResolver
         return $this->resolveMasksFromString($queryStringValue);
     }
 
-    /**
-     * @param \PhpParser\Node\Expr|null $expr
-     */
-    public function resolveSingleQueryMask($expr, Scope $scope): ?string
+    public function resolveSingleQueryMask(?\PhpParser\Node\Expr $expr, Scope $scope): ?string
     {
         if ($expr === null) {
             return null;
