@@ -69,12 +69,7 @@ final class ClassLikeCognitiveComplexityRule implements Rule
             return [];
         }
 
-        if ($this->scoreCompositionOverInheritance) {
-            $measuredCognitiveComplexity = $this->compositionOverInheritanceAnalyzer->analyzeClassLike($classLike);
-        } else {
-            $measuredCognitiveComplexity = $this->astCognitiveComplexityAnalyzer->analyzeClassLike($classLike);
-        }
-
+        $measuredCognitiveComplexity = $this->resolveMeasuredCognitiveComplexity($classLike);
         if ($measuredCognitiveComplexity <= $this->maxClassCognitiveComplexity) {
             return [];
         }
@@ -135,5 +130,14 @@ CODE_SAMPLE
                 ]
             )]
         );
+    }
+
+    private function resolveMeasuredCognitiveComplexity(Class_ $class): int
+    {
+        if ($this->scoreCompositionOverInheritance) {
+            return $this->compositionOverInheritanceAnalyzer->analyzeClassLike($class);
+        }
+
+        return $this->astCognitiveComplexityAnalyzer->analyzeClassLike($class);
     }
 }
