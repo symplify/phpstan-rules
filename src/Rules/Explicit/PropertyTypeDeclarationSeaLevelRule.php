@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Explicit;
 
-use Nette\Utils\Arrays;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
@@ -24,13 +23,13 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'The property type sea level %d %% has not passed minimal required level of %d %%. Add more propertgy types to rise above the required level';
+    public const ERROR_MESSAGE = 'Out of %d possible property types, only %d %% actually have it. Add more property types to get over %d %%';
     /**
      * @var float
      */
-    private $minimalLevel = 0.20;
+    private $minimalLevel = 0.80;
 
-    public function __construct(float $minimalLevel = 0.20)
+    public function __construct(float $minimalLevel = 0.80)
     {
         $this->minimalLevel = $minimalLevel;
     }
@@ -55,10 +54,10 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
         $propertyCount = 0;
 
         foreach ($propertySeaLevelDataByFilePath as $propertySeaLevelData) {
-            $propertySeaLevelData = Arrays::flatten($propertySeaLevelData);
-
-            $typedPropertyCount += $propertySeaLevelData[0];
-            $propertyCount += $propertySeaLevelData[1];
+            foreach ($propertySeaLevelData as $nestedPropertySeaLevelData) {
+                $typedPropertyCount += $nestedPropertySeaLevelData[0];
+                $propertyCount += $nestedPropertySeaLevelData[1];
+            }
         }
 
         if ($propertyCount === 0) {
@@ -68,11 +67,17 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
         $propertyTypeDeclarationSeaLevel = $typedPropertyCount / $propertyCount;
 
         // has the code met the minimal sea level of types?
-        if ($propertyTypeDeclarationSeaLevel > $this->minimalLevel) {
+        if ($propertyTypeDeclarationSeaLevel >= $this->minimalLevel) {
             return [];
         }
 
-        $errorMessage = sprintf(self::ERROR_MESSAGE, $propertyTypeDeclarationSeaLevel * 100, $this->minimalLevel * 100);
+        $errorMessage = sprintf(
+            self::ERROR_MESSAGE,
+            $propertyCount,
+            $propertyTypeDeclarationSeaLevel * 100,
+            $this->minimalLevel * 100
+        );
+
         return [$errorMessage];
     }
 
