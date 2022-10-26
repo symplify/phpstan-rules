@@ -53,10 +53,14 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
         $typedPropertyCount = 0;
         $propertyCount = 0;
 
+        $printedUntypedPropertiesContents = '';
+
         foreach ($propertySeaLevelDataByFilePath as $propertySeaLevelData) {
             foreach ($propertySeaLevelData as $nestedPropertySeaLevelData) {
                 $typedPropertyCount += $nestedPropertySeaLevelData[0];
                 $propertyCount += $nestedPropertySeaLevelData[1];
+
+                $printedUntypedPropertiesContents .= $nestedPropertySeaLevelData[2] . PHP_EOL . PHP_EOL;
             }
         }
 
@@ -77,6 +81,8 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
             $propertyTypeDeclarationSeaLevel * 100,
             $this->minimalLevel * 100
         );
+
+        $errorMessage .= $printedUntypedPropertiesContents;
 
         return [$errorMessage];
     }
