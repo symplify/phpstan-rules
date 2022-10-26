@@ -62,9 +62,8 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
 
                 /** @var string $printedPropertyContent */
                 $printedPropertyContent = $nestedPropertySeaLevelData[2];
-
                 if ($printedPropertyContent !== '') {
-                    $printedUntypedPropertiesContents .= $printedPropertyContent . PHP_EOL . PHP_EOL;
+                    $printedUntypedPropertiesContents .= PHP_EOL . PHP_EOL . trim($printedPropertyContent);
                 }
             }
         }
@@ -87,7 +86,7 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
             $this->minimalLevel * 100
         );
 
-        $errorMessage .= $printedUntypedPropertiesContents;
+        $errorMessage .= $printedUntypedPropertiesContents . PHP_EOL;
 
         return [$errorMessage];
     }
