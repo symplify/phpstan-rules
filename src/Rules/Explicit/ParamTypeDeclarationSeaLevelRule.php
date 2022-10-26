@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Explicit;
 
+use Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
@@ -87,6 +88,9 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
         );
 
         $errorMessage .= $printedClassMethods . PHP_EOL;
+
+        // keep error printable
+        $errorMessage = Strings::truncate($errorMessage, 8000);
 
         return [$errorMessage];
     }
