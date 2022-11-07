@@ -66,8 +66,8 @@ final class ExclusiveDependencyRule implements Rule
             return [];
         }
 
-        $methodReflection = $node->getMethodReflection();
-        $declaringClassReflection = $methodReflection->getDeclaringClass();
+        $extendedMethodReflection = $node->getMethodReflection();
+        $declaringClassReflection = $extendedMethodReflection->getDeclaringClass();
 
         $className = $declaringClassReflection->getName();
         $paramTypes = $this->resolveParamTypes($classMethod);
