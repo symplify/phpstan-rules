@@ -25,10 +25,12 @@ final class ReturnTypeDeclarationSeaLevelRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Out of %d possible return types, only %d %% actually have it. Add more return types to get over %d %%';
+
     /**
      * @var float
      */
     private $minimalLevel = 0.80;
+
     /**
      * @var bool
      */
@@ -37,7 +39,6 @@ final class ReturnTypeDeclarationSeaLevelRule implements Rule
      * @var \Symplify\PHPStanRules\Formatter\SeaLevelRuleErrorFormatter
      */
     private $seaLevelRuleErrorFormatter;
-
 
     public function __construct(
         SeaLevelRuleErrorFormatter $seaLevelRuleErrorFormatter,
