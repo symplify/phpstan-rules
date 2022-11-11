@@ -25,26 +25,21 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Out of %d possible param types, only %d %% actually have it. Add more param types to get over %d %%';
-
-    /**
-     * @var float
-     */
-    private $minimalLevel = 0.80;
-
-    /**
-     * @var bool
-     */
-    private $printSuggestions = true;
     /**
      * @var \Symplify\PHPStanRules\Formatter\SeaLevelRuleErrorFormatter
      */
     private $seaLevelRuleErrorFormatter;
+    /**
+     * @var float
+     */
+    private $minimalLevel = 0.80;
+    /**
+     * @var bool
+     */
+    private $printSuggestions = true;
 
-    public function __construct(
-        SeaLevelRuleErrorFormatter $seaLevelRuleErrorFormatter,
-        float $minimalLevel = 0.80,
-        bool $printSuggestions = true
-    ) {
+    public function __construct(SeaLevelRuleErrorFormatter $seaLevelRuleErrorFormatter, float $minimalLevel = 0.80, bool $printSuggestions = true)
+    {
         $this->seaLevelRuleErrorFormatter = $seaLevelRuleErrorFormatter;
         $this->minimalLevel = $minimalLevel;
         $this->printSuggestions = $printSuggestions;
@@ -76,7 +71,7 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
                 $typedParamCount += $nestedParamSeaLevelData[0];
                 $paramCount += $nestedParamSeaLevelData[1];
 
-                if ($this->printSuggestions === false) {
+                if (! $this->printSuggestions) {
                     continue;
                 }
 
