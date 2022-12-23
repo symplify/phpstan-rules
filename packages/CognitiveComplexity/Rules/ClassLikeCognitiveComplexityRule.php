@@ -10,7 +10,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use Symplify\PHPStanRules\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
-use Symplify\PHPStanRules\CognitiveComplexity\CompositionOverInheritanceAnalyzer;
 use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
@@ -30,24 +29,13 @@ final class ClassLikeCognitiveComplexityRule implements Rule
      */
     private $astCognitiveComplexityAnalyzer;
     /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\CompositionOverInheritanceAnalyzer
-     */
-    private $compositionOverInheritanceAnalyzer;
-    /**
      * @var int
      */
     private $maxClassCognitiveComplexity = 50;
-    /**
-     * @var bool
-     */
-    private $scoreCompositionOverInheritance = false;
-
-    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, CompositionOverInheritanceAnalyzer $compositionOverInheritanceAnalyzer, int $maxClassCognitiveComplexity = 50, bool $scoreCompositionOverInheritance = false)
+    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, int $maxClassCognitiveComplexity = 50)
     {
         $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
-        $this->compositionOverInheritanceAnalyzer = $compositionOverInheritanceAnalyzer;
         $this->maxClassCognitiveComplexity = $maxClassCognitiveComplexity;
-        $this->scoreCompositionOverInheritance = $scoreCompositionOverInheritance;
     }
 
     /**
@@ -69,7 +57,7 @@ final class ClassLikeCognitiveComplexityRule implements Rule
             return [];
         }
 
-        $measuredCognitiveComplexity = $this->resolveMeasuredCognitiveComplexity($classLike);
+        $measuredCognitiveComplexity = $this->astCognitiveComplexityAnalyzer->analyzeClassLike($classLike);
         if ($measuredCognitiveComplexity <= $this->maxClassCognitiveComplexity) {
             return [];
         }
@@ -126,18 +114,8 @@ CODE_SAMPLE
                 ,
                 [
                     'maxClassCognitiveComplexity' => 10,
-                    'scoreCompositionOverInheritance' => true,
                 ]
             )]
         );
-    }
-
-    private function resolveMeasuredCognitiveComplexity(Class_ $class): int
-    {
-        if ($this->scoreCompositionOverInheritance) {
-            return $this->compositionOverInheritanceAnalyzer->analyzeClassLike($class);
-        }
-
-        return $this->astCognitiveComplexityAnalyzer->analyzeClassLike($class);
     }
 }
