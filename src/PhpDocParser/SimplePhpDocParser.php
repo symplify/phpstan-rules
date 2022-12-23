@@ -37,7 +37,7 @@ final class SimplePhpDocParser
         return $this->parseDocBlock($docComment->getText());
     }
 
-    public function parseDocBlock(string $docBlock): PhpDocNode
+    private function parseDocBlock(string $docBlock): PhpDocNode
     {
         $tokens = $this->lexer->tokenize($docBlock);
         $tokenIterator = new TokenIterator($tokens);
