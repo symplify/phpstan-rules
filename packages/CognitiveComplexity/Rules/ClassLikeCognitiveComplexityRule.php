@@ -10,7 +10,6 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
 
 /**
  * @deprecated
@@ -18,16 +17,11 @@ use Symplify\PHPStanRules\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
 final class ClassLikeCognitiveComplexityRule implements Rule
 {
     /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\AstCognitiveComplexityAnalyzer
-     */
-    private $astCognitiveComplexityAnalyzer;
-    /**
      * @var int
      */
     private $maxClassCognitiveComplexity = 50;
-    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, int $maxClassCognitiveComplexity = 50)
+    public function __construct(int $maxClassCognitiveComplexity = 50)
     {
-        $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
         $this->maxClassCognitiveComplexity = $maxClassCognitiveComplexity;
     }
     /**
