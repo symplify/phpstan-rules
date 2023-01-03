@@ -40,7 +40,7 @@ abstract class AbstractSymplifyRule implements Rule, ManyNodeRuleInterface
     {
         $nodeTypes = $this->getNodeTypes();
         foreach ($nodeTypes as $nodeType) {
-            if (is_a($node, $nodeType, true)) {
+            if ($node instanceof $nodeType) {
                 return false;
             }
         }

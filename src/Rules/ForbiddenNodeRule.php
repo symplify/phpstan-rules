@@ -62,7 +62,7 @@ final class ForbiddenNodeRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         foreach ($this->forbiddenNodes as $forbiddenNode) {
-            if (! is_a($node, $forbiddenNode, true)) {
+            if (! $node instanceof $forbiddenNode) {
                 continue;
             }
 
