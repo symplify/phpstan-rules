@@ -16,11 +16,6 @@ use PHPStan\Rules\RuleErrorBuilder;
  */
 final class ClassLikeCognitiveComplexityRule implements Rule
 {
-    public function __construct(
-        private int $maxClassCognitiveComplexity = 50,
-    ) {
-    }
-
     /**
      * @return class-string<Node>
      */

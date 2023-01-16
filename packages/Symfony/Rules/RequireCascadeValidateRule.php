@@ -22,6 +22,7 @@ use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
+use Symfony\Component\Form\AbstractType;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 use Symplify\PHPStanRules\Symfony\Finder\ArrayKeyFinder;
 use Symplify\PHPStanRules\Symfony\PropertyMetadataResolver;
@@ -61,7 +62,7 @@ final class RequireCascadeValidateRule implements Rule, DocumentedRuleInterface
     public function processNode(Node $node, Scope $scope): array
     {
         $classReflection = $node->getClassReflection();
-        if (! $classReflection->isSubclassOf('Symfony\Component\Form\AbstractType')) {
+        if (! $classReflection->isSubclassOf(AbstractType::class)) {
             return [];
         }
 

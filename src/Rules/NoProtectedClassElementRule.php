@@ -14,6 +14,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -188,6 +189,6 @@ CODE_SAMPLE
             return false;
         }
 
-        return $classReflection->isSubclassOf('PHPUnit\Framework\TestCase');
+        return $classReflection->isSubclassOf(TestCase::class);
     }
 }
