@@ -33,7 +33,7 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
      * @param string[] $oldToPreferredClasses
      */
     public function __construct(
-        private array $oldToPreferredClasses
+        private readonly array $oldToPreferredClasses
     ) {
     }
 

@@ -32,9 +32,9 @@ final class IfElseToMatchSpotterRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'If/else construction can be replace with more robust match()';
 
     public function __construct(
-        private IfElseBranchAnalyzer $ifElseBranchAnalyzer,
-        private IfResemblingMatchAnalyzer $ifResemblingMatchAnalyzer,
-        private CacheIfAnalyzer $cacheIfAnalyzer,
+        private readonly IfElseBranchAnalyzer $ifElseBranchAnalyzer,
+        private readonly IfResemblingMatchAnalyzer $ifResemblingMatchAnalyzer,
+        private readonly CacheIfAnalyzer $cacheIfAnalyzer,
     ) {
     }
 

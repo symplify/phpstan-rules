@@ -26,7 +26,7 @@ final class RequireUniqueEnumConstantRule implements Rule, DocumentedRuleInterfa
     public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
 
     public function __construct(
-        private EnumAnalyzer $enumAnalyzer
+        private readonly EnumAnalyzer $enumAnalyzer
     ) {
     }
 

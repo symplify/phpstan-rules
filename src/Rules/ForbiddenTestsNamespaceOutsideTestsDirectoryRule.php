@@ -32,7 +32,7 @@ final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule, Do
     private const DESCRIPTION = '"Tests" namespace can be only in "/tests" directory';
 
     public function __construct(
-        private DirectoryChecker $directoryChecker,
+        private readonly DirectoryChecker $directoryChecker,
     ) {
     }
 

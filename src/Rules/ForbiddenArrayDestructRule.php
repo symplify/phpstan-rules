@@ -38,7 +38,7 @@ final class ForbiddenArrayDestructRule implements Rule, DocumentedRuleInterface
     private const VENDOR_DIRECTORY_REGEX = '#/vendor/#';
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider
+        private readonly ReflectionProvider $reflectionProvider
     ) {
     }
 

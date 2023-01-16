@@ -39,8 +39,8 @@ final class PreventDoubleSetParameterRule implements Rule, DocumentedRuleInterfa
     private array $setParametersNamesByFile = [];
 
     public function __construct(
-        private SymfonyPhpConfigClosureAnalyzer $symfonyPhpConfigClosureAnalyzer,
-        private NodeFinder $nodeFinder,
+        private readonly SymfonyPhpConfigClosureAnalyzer $symfonyPhpConfigClosureAnalyzer,
+        private readonly NodeFinder $nodeFinder,
     ) {
     }
 

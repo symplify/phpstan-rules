@@ -15,7 +15,7 @@ use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
 final class ReturnNodeFinder
 {
     public function __construct(
-        private SimpleCallableNodeTraverser $simpleCallableNodeTraverser
+        private readonly SimpleCallableNodeTraverser $simpleCallableNodeTraverser
     ) {
     }
 

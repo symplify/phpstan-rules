@@ -30,7 +30,7 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
     private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement'];
 
     public function __construct(
-        private ArrayStringAndFnMatcher $arrayStringAndFnMatcher
+        private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher
     ) {
     }
 

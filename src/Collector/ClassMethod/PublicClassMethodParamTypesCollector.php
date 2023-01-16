@@ -19,9 +19,9 @@ use Symplify\PHPStanRules\Printer\CollectorMetadataPrinter;
 final class PublicClassMethodParamTypesCollector implements Collector
 {
     public function __construct(
-        private ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
-        private PublicClassMethodMatcher $publicClassMethodMatcher,
-        private CollectorMetadataPrinter $collectorMetadataPrinter
+        private readonly ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
+        private readonly PublicClassMethodMatcher $publicClassMethodMatcher,
+        private readonly CollectorMetadataPrinter $collectorMetadataPrinter
     ) {
     }
 

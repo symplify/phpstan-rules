@@ -34,7 +34,7 @@ final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
     private const ALLOWED_TYPES = [ContainerInterface::class, Container::class, KernelInterface::class];
 
     public function __construct(
-        private ContainsTypeAnalyser $containsTypeAnalyser
+        private readonly ContainsTypeAnalyser $containsTypeAnalyser
     ) {
     }
 

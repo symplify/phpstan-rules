@@ -21,7 +21,7 @@ use PHPStan\Type\Constant\ConstantStringType;
 final class FormTypeClassCollector implements Collector
 {
     public function __construct(
-        private NodeFinder $nodeFinder,
+        private readonly NodeFinder $nodeFinder,
     ) {
     }
 

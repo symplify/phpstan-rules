@@ -18,8 +18,8 @@ use Symplify\PHPStanRules\ValueObject\MethodCallReference;
 final class MethodCallArgTypesCollector implements Collector
 {
     public function __construct(
-        private ClassMethodCallReferenceResolver $classMethodCallReferenceResolver,
-        private CollectorMetadataPrinter $collectorMetadataPrinter,
+        private readonly ClassMethodCallReferenceResolver $classMethodCallReferenceResolver,
+        private readonly CollectorMetadataPrinter $collectorMetadataPrinter,
     ) {
     }
 

@@ -40,7 +40,7 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
      * @param string[] $namespaceParts
      */
     public function __construct(
-        private array $namespaceParts
+        private readonly array $namespaceParts
     ) {
     }
 

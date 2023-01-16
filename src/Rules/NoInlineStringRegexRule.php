@@ -30,8 +30,8 @@ final class NoInlineStringRegexRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
 
     public function __construct(
-        private RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private RegexStaticCallAnalyzer $regexStaticCallAnalyzer
+        private readonly RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
+        private readonly RegexStaticCallAnalyzer $regexStaticCallAnalyzer
     ) {
     }
 

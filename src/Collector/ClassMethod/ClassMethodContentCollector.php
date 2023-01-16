@@ -31,7 +31,7 @@ final class ClassMethodContentCollector implements Collector
     private const EXCLUDED_METHOD_NAMES = ['getNodeType', 'getNodeTypes'];
 
     public function __construct(
-        private DuplicatedClassMethodPrinter $duplicatedClassMethodPrinter,
+        private readonly DuplicatedClassMethodPrinter $duplicatedClassMethodPrinter,
     ) {
     }
 

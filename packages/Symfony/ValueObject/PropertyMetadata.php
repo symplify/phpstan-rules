@@ -12,9 +12,9 @@ use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 final class PropertyMetadata
 {
     public function __construct(
-        private PhpPropertyReflection $phpPropertyReflection,
-        private ReflectionProperty $nativeReflectionProperty,
-        private int $propertyLine
+        private readonly PhpPropertyReflection $phpPropertyReflection,
+        private readonly ReflectionProperty $nativeReflectionProperty,
+        private readonly int $propertyLine
     ) {
     }
 

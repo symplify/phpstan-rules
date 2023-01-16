@@ -27,7 +27,7 @@ final class ForbiddenParamTypeRemovalRule implements Rule, DocumentedRuleInterfa
     public const ERROR_MESSAGE = 'Removing parent param type is forbidden';
 
     public function __construct(
-        private MethodNodeAnalyser $methodNodeAnalyser
+        private readonly MethodNodeAnalyser $methodNodeAnalyser
     ) {
     }
 

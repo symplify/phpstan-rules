@@ -25,7 +25,7 @@ final class NoMixedPropertyFetcherRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'Anonymous variables in a "%s->..." property fetch can lead to false dead property. Make sure the variable type is known';
 
     public function __construct(
-        private Standard $standard,
+        private readonly Standard $standard,
     ) {
     }
 

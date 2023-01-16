@@ -31,8 +31,8 @@ final class RequireSpecificReturnTypeOverAbstractRule implements Rule, Documente
     public const ERROR_MESSAGE = 'Provide more specific return type "%s" over abstract one';
 
     public function __construct(
-        private ReturnNodeFinder $returnNodeFinder,
-        private MethodNodeAnalyser $methodNodeAnalyser,
+        private readonly ReturnNodeFinder $returnNodeFinder,
+        private readonly MethodNodeAnalyser $methodNodeAnalyser,
     ) {
     }
 

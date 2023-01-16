@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\NodeAnalyzer;
 
+use Nette\Utils\Strings;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
@@ -21,7 +22,7 @@ final class RegexStaticCallAnalyzer
             return false;
         }
 
-        if ($staticCall->class->toString() !== 'Nette\Utils\Strings') {
+        if ($staticCall->class->toString() !== Strings::class) {
             return false;
         }
 

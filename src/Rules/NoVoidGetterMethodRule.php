@@ -40,7 +40,7 @@ final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
     ];
 
     public function __construct(
-        private TypeAwareNodeFinder $typeAwareNodeFinder
+        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
     }
 

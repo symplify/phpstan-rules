@@ -17,7 +17,7 @@ use PHPStan\Reflection\ReflectionProvider;
 final class TraitMethodNameCollector implements Collector
 {
     public function __construct(
-        private ReflectionProvider $reflectionProvider
+        private readonly ReflectionProvider $reflectionProvider
     ) {
     }
 

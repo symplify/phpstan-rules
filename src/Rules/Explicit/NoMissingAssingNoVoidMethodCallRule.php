@@ -55,7 +55,7 @@ final class NoMissingAssingNoVoidMethodCallRule implements Rule, DocumentedRuleI
     ];
 
     public function __construct(
-        private AllowedChainCallSkipper $allowedChainCallSkipper,
+        private readonly AllowedChainCallSkipper $allowedChainCallSkipper,
     ) {
     }
 

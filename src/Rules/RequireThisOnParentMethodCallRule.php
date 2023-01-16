@@ -32,7 +32,7 @@ final class RequireThisOnParentMethodCallRule implements Rule, DocumentedRuleInt
     public const ERROR_MESSAGE = 'Use "$this-><method>()" instead of "parent::<method>()" unless in the same named method';
 
     public function __construct(
-        private NodeFinder $nodeFinder
+        private readonly NodeFinder $nodeFinder
     ) {
     }
 

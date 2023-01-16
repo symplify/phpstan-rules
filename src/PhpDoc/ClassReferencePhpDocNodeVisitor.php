@@ -16,7 +16,7 @@ final class ClassReferencePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
     private ?string $className = null;
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider
+        private readonly ReflectionProvider $reflectionProvider
     ) {
     }
 

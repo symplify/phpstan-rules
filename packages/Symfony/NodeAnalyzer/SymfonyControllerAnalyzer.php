@@ -16,7 +16,7 @@ final class SymfonyControllerAnalyzer
     private const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
 
     public function __construct(
-        private AttributeFinder $attributeFinder
+        private readonly AttributeFinder $attributeFinder
     ) {
     }
 

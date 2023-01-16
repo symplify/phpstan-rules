@@ -25,7 +25,7 @@ final class ForbiddenNestedCallInAssertMethodCallRule implements Rule, Documente
     public const ERROR_MESSAGE = 'Decouple method call in assert to standalone line to make test core more readable';
 
     public function __construct(
-        private NodeFinder $nodeFinder
+        private readonly NodeFinder $nodeFinder
     ) {
     }
 

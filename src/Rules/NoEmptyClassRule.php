@@ -29,7 +29,7 @@ final class NoEmptyClassRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'There should be no empty class';
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider
+        private readonly ReflectionProvider $reflectionProvider
     ) {
     }
 

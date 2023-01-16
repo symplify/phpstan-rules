@@ -35,9 +35,9 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
      * @param string[] $requiredSeeTypes
      */
     public function __construct(
-        private PhpDocResolver $phpDocResolver,
-        private SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
-        private array $requiredSeeTypes
+        private readonly PhpDocResolver $phpDocResolver,
+        private readonly SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
+        private readonly array $requiredSeeTypes
     ) {
     }
 

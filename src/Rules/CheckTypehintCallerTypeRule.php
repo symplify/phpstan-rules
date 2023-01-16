@@ -38,8 +38,8 @@ final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'Parameter %d should use "%s" type as the only type passed to this method';
 
     public function __construct(
-        private MethodCallNodeFinder $methodCallNodeFinder,
-        private ClassMethodNodeFinder $classMethodNodeFinder
+        private readonly MethodCallNodeFinder $methodCallNodeFinder,
+        private readonly ClassMethodNodeFinder $classMethodNodeFinder
     ) {
     }
 

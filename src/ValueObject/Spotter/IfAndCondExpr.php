@@ -10,8 +10,8 @@ use PhpParser\Node\Stmt;
 final class IfAndCondExpr
 {
     public function __construct(
-        private Stmt $stmt,
-        private Expr|null $condExpr
+        private readonly Stmt $stmt,
+        private readonly Expr|null $condExpr
     ) {
     }
 

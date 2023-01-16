@@ -30,8 +30,8 @@ final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterf
     public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
 
     public function __construct(
-        private RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private RegexStaticCallAnalyzer $regexStaticCallAnalyzer
+        private readonly RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
+        private readonly RegexStaticCallAnalyzer $regexStaticCallAnalyzer
     ) {
     }
 

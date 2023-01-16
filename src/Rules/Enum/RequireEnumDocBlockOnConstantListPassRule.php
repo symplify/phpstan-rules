@@ -46,8 +46,8 @@ final class RequireEnumDocBlockOnConstantListPassRule implements Rule, Documente
     ];
 
     public function __construct(
-        private MethodCallNodeAnalyzer $methodCallNodeAnalyzer,
-        private MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver,
+        private readonly MethodCallNodeAnalyzer $methodCallNodeAnalyzer,
+        private readonly MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver,
     ) {
     }
 

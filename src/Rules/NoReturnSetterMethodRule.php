@@ -35,7 +35,7 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
     private const SETTER_START_REGEX = '#^set[A-Z]#';
 
     public function __construct(
-        private TypeAwareNodeFinder $typeAwareNodeFinder
+        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
     }
 

@@ -7,8 +7,8 @@ namespace Symplify\PHPStanRules\ValueObject\Configuration;
 final class RequiredWithMessage
 {
     public function __construct(
-        private string $required,
-        private ?string $message
+        private readonly string $required,
+        private readonly ?string $message
     ) {
     }
 

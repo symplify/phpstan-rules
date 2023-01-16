@@ -32,7 +32,7 @@ final class NoProtectedClassElementRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'Instead of protected element in use private element or contract method';
 
     public function __construct(
-        private ParentClassMethodGuard $parentClassMethodGuard
+        private readonly ParentClassMethodGuard $parentClassMethodGuard
     ) {
     }
 

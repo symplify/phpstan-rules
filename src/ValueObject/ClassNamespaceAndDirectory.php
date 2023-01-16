@@ -7,9 +7,9 @@ namespace Symplify\PHPStanRules\ValueObject;
 final class ClassNamespaceAndDirectory
 {
     public function __construct(
-        private string $namespace,
-        private string $directory,
-        private string $namespaceBeforeClass
+        private readonly string $namespace,
+        private readonly string $directory,
+        private readonly string $namespaceBeforeClass
     ) {
     }
 

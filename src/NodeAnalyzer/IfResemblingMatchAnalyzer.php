@@ -16,8 +16,8 @@ use Symplify\PHPStanRules\ValueObject\Spotter\IfAndCondExpr;
 final class IfResemblingMatchAnalyzer
 {
     public function __construct(
-        private Standard $printerStandard,
-        private NodeFinder $nodeFinder,
+        private readonly Standard $printerStandard,
+        private readonly NodeFinder $nodeFinder,
     ) {
     }
 

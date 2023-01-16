@@ -28,7 +28,7 @@ use Symplify\PHPStanRules\Enum\Types\ResolvedTypes;
 
 final class CollectorMetadataPrinter
 {
-    private Standard $printerStandard;
+    private readonly Standard $printerStandard;
 
     public function __construct()
     {

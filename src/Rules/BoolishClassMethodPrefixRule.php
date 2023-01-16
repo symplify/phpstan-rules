@@ -30,9 +30,9 @@ final class BoolishClassMethodPrefixRule implements Rule, DocumentedRuleInterfac
     public const ERROR_MESSAGE = 'Method "%s()" returns bool type, so the name should start with is/has/was...';
 
     public function __construct(
-        private BoolishNameAnalyser $boolishNameAnalyser,
-        private ReturnNodeFinder $returnNodeFinder,
-        private ParentClassMethodGuard $parentClassMethodGuard
+        private readonly BoolishNameAnalyser $boolishNameAnalyser,
+        private readonly ReturnNodeFinder $returnNodeFinder,
+        private readonly ParentClassMethodGuard $parentClassMethodGuard
     ) {
     }
 

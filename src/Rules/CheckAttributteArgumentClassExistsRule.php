@@ -30,7 +30,7 @@ final class CheckAttributteArgumentClassExistsRule implements Rule, DocumentedRu
     public const ERROR_MESSAGE = 'Class was not found';
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider,
+        private readonly ReflectionProvider $reflectionProvider,
     ) {
     }
 

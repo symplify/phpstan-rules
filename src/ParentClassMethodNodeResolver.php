@@ -13,8 +13,8 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 final class ParentClassMethodNodeResolver
 {
     public function __construct(
-        private ReflectionParser $reflectionParser,
-        private ReflectionProvider $reflectionProvider
+        private readonly ReflectionParser $reflectionParser,
+        private readonly ReflectionProvider $reflectionProvider
     ) {
     }
 

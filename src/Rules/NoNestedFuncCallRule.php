@@ -47,7 +47,7 @@ final class NoNestedFuncCallRule implements Rule, DocumentedRuleInterface
     ];
 
     public function __construct(
-        private NodeFinder $nodeFinder
+        private readonly NodeFinder $nodeFinder
     ) {
     }
 

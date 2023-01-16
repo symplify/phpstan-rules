@@ -31,7 +31,7 @@ final class ForbiddenInlineClassMethodRule implements Rule, DocumentedRuleInterf
     public const ERROR_MESSAGE = 'Method "%s()" only calling another method call and has no added value. Use the inlined call instead';
 
     public function __construct(
-        private NodeFinder $nodeFinder,
+        private readonly NodeFinder $nodeFinder,
     ) {
     }
 

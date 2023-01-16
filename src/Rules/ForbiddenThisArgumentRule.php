@@ -40,7 +40,7 @@ final class ForbiddenThisArgumentRule implements Rule, DocumentedRuleInterface
     ];
 
     public function __construct(
-        private ContainsTypeAnalyser $containsTypeAnalyser
+        private readonly ContainsTypeAnalyser $containsTypeAnalyser
     ) {
     }
 

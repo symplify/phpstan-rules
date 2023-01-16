@@ -58,7 +58,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
      * @param class-string[] $parentClasses
      */
     public function __construct(
-        private ClassToSuffixResolver $classToSuffixResolver,
+        private readonly ClassToSuffixResolver $classToSuffixResolver,
         array $parentClasses = [],
     ) {
         $this->parentClasses = array_merge($parentClasses, self::DEFAULT_PARENT_CLASSES);

@@ -37,9 +37,9 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
     private const SPECIFIERS = '[bcdeEfFgGosuxX%s]';
 
     public function __construct(
-        private SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver,
-        private MatchingTypeAnalyzer $matchingTypeAnalyzer,
-        private ArgTypeResolver $argTypeResolver,
+        private readonly SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver,
+        private readonly MatchingTypeAnalyzer $matchingTypeAnalyzer,
+        private readonly ArgTypeResolver $argTypeResolver,
     ) {
     }
 

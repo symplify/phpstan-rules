@@ -30,7 +30,7 @@ final class NoPublicPropertyByTypeRule implements Rule, DocumentedRuleInterface,
      * @param string[] $classTypes
      */
     public function __construct(
-        private array $classTypes,
+        private readonly array $classTypes,
     ) {
     }
 

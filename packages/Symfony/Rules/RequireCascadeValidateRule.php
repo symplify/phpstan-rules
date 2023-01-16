@@ -44,9 +44,9 @@ final class RequireCascadeValidateRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'Property "$%s" is missing @Valid annotation';
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider,
-        private ArrayKeyFinder $arrayKeyFinder,
-        private PropertyMetadataResolver $propertyMetadataResolver,
+        private readonly ReflectionProvider $reflectionProvider,
+        private readonly ArrayKeyFinder $arrayKeyFinder,
+        private readonly PropertyMetadataResolver $propertyMetadataResolver,
     ) {
     }
 

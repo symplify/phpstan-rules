@@ -14,8 +14,8 @@ use Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser;
 final class ClassAnnotationResolver
 {
     public function __construct(
-        private SimplePhpDocParser $simplePhpDocParser,
-        private ClassReferencePhpDocNodeTraverser $classReferencePhpDocNodeTraverser
+        private readonly SimplePhpDocParser $simplePhpDocParser,
+        private readonly ClassReferencePhpDocNodeTraverser $classReferencePhpDocNodeTraverser
     ) {
     }
 

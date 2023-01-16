@@ -30,10 +30,10 @@ final class ReflectionParser
      */
     private array $classesByFilename = [];
 
-    private Parser $parser;
+    private readonly Parser $parser;
 
     public function __construct(
-        private TypeAwareNodeFinder $typeAwareNodeFinder
+        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
         $parserFactory = new ParserFactory();
         $this->parser = $parserFactory->create(ParserFactory::PREFER_PHP7);

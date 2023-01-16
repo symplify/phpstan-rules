@@ -33,8 +33,8 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
 
     public function __construct(
         ComposerAutoloadResolver $composerAutoloadResolver,
-        private Psr4PathValidator $psr4PathValidator,
-        private ClassNamespaceMatcher $classNamespaceMatcher
+        private readonly Psr4PathValidator $psr4PathValidator,
+        private readonly ClassNamespaceMatcher $classNamespaceMatcher
     ) {
         $this->autoloadPsr4Paths = $composerAutoloadResolver->getPsr4Autoload();
     }

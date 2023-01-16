@@ -32,8 +32,8 @@ final class PreferredAttributeOverAnnotationRule implements Rule, DocumentedRule
      * @param string[] $annotations
      */
     public function __construct(
-        private ClassAnnotationResolver $classAnnotationResolver,
-        private array $annotations
+        private readonly ClassAnnotationResolver $classAnnotationResolver,
+        private readonly array $annotations
     ) {
     }
 

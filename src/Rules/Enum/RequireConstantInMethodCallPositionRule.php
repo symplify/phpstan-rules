@@ -32,8 +32,8 @@ final class RequireConstantInMethodCallPositionRule implements Rule, DocumentedR
      * @param array<class-string, array<string, int[]>> $requiredConstantInMethodCall
      */
     public function __construct(
-        private PositionMatcher $positionMatcher,
-        private array $requiredConstantInMethodCall
+        private readonly PositionMatcher $positionMatcher,
+        private readonly array $requiredConstantInMethodCall
     ) {
     }
 

@@ -35,9 +35,9 @@ final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, Conf
      * @param string[]|array<string|int, string> $forbiddenFunctions
      */
     public function __construct(
-        private array $forbiddenFunctions,
-        private ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
-        private RequiredWithMessageFormatter $requiredWithMessageFormatter,
+        private readonly array $forbiddenFunctions,
+        private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
+        private readonly RequiredWithMessageFormatter $requiredWithMessageFormatter,
     ) {
     }
 

@@ -17,7 +17,7 @@ final class DuplicatedClassMethodPrinter
     private const VARIABLE_REGEX = '#\$\w+[^\s]#';
 
     public function __construct(
-        private Standard $standard
+        private readonly Standard $standard
     ) {
     }
 

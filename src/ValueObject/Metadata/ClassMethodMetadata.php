@@ -7,10 +7,10 @@ namespace Symplify\PHPStanRules\ValueObject\Metadata;
 final class ClassMethodMetadata
 {
     public function __construct(
-        private string $methodName,
-        private int $lineCount,
-        private string $fileName,
-        private int $line,
+        private readonly string $methodName,
+        private readonly int $lineCount,
+        private readonly string $fileName,
+        private readonly int $line,
     ) {
     }
 

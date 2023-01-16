@@ -28,7 +28,7 @@ final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterf
     public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
 
     public function __construct(
-        private SymfonyControllerAnalyzer $symfonyControllerAnalyzer
+        private readonly SymfonyControllerAnalyzer $symfonyControllerAnalyzer
     ) {
     }
 

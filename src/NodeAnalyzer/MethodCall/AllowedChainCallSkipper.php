@@ -62,7 +62,7 @@ final class AllowedChainCallSkipper
     ];
 
     public function __construct(
-        private ObjectTypeMatcher $objectTypeMatcher
+        private readonly ObjectTypeMatcher $objectTypeMatcher
     ) {
     }
 

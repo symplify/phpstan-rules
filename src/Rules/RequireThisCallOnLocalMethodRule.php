@@ -32,7 +32,7 @@ final class RequireThisCallOnLocalMethodRule implements Rule, DocumentedRuleInte
     public const ERROR_MESSAGE = 'Use "$this-><method>()" instead of "self::<method>()" to call local method';
 
     public function __construct(
-        private NodeFinder $nodeFinder
+        private readonly NodeFinder $nodeFinder
     ) {
     }
 

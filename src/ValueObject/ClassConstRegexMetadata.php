@@ -7,10 +7,10 @@ namespace Symplify\PHPStanRules\ValueObject;
 final class ClassConstRegexMetadata
 {
     public function __construct(
-        private string $constantName,
-        private string $regexValue,
-        private string $filePath,
-        private int $line
+        private readonly string $constantName,
+        private readonly string $regexValue,
+        private readonly string $filePath,
+        private readonly int $line
     ) {
     }
 

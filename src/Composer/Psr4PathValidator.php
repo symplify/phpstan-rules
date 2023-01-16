@@ -23,7 +23,7 @@ final class Psr4PathValidator
             return false;
         }
 
-        $directoryInNamespacedRoot = dirname($splitPaths[1]);
+        $directoryInNamespacedRoot = dirname((string) $splitPaths[1]);
         $normalizedDirectoryInNamespacedRoot = $this->normalizePath($directoryInNamespacedRoot);
 
         $namespaceSuffixByDirectoryClass = ltrim($normalizedDirectoryInNamespacedRoot, '\\');

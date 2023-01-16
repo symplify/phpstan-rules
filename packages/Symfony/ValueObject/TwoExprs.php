@@ -9,8 +9,8 @@ use PhpParser\Node\Expr;
 final class TwoExprs
 {
     public function __construct(
-        private Expr $firstExpr,
-        private Expr $secondExpr
+        private readonly Expr $firstExpr,
+        private readonly Expr $secondExpr
     ) {
     }
 

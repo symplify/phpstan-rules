@@ -11,7 +11,7 @@ use Symplify\PHPStanRules\ValueObject\ClassNamespaceAndDirectory;
 final class ClassNamespaceMatcher
 {
     public function __construct(
-        private DirectoryChecker $directoryChecker
+        private readonly DirectoryChecker $directoryChecker
     ) {
     }
 

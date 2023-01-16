@@ -15,7 +15,7 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 final class ClassMethodNodeFinder
 {
     public function __construct(
-        private ReflectionParser $reflectionParser,
+        private readonly ReflectionParser $reflectionParser,
     ) {
     }
 

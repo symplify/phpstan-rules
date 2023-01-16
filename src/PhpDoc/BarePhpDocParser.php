@@ -15,8 +15,8 @@ use PHPStan\PhpDocParser\Parser\TokenIterator;
 final class BarePhpDocParser
 {
     public function __construct(
-        private PhpDocParser $phpDocParser,
-        private Lexer $lexer
+        private readonly PhpDocParser $phpDocParser,
+        private readonly Lexer $lexer
     ) {
     }
 

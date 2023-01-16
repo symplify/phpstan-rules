@@ -28,7 +28,7 @@ final class NoParentMethodCallOnNoOverrideProcessRule implements Rule, Documente
     public const ERROR_MESSAGE = 'Do not call parent method if no override process';
 
     public function __construct(
-        private NodeComparator $nodeComparator
+        private readonly NodeComparator $nodeComparator
     ) {
     }
 

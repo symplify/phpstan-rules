@@ -18,7 +18,7 @@ final class FlatConcatFindingNodeVisitor extends NodeVisitorAbstract
     private array $foundNodes = [];
 
     public function __construct(
-        private FileCheckingFuncCallAnalyzer $fileCheckingFuncCallAnalyzer
+        private readonly FileCheckingFuncCallAnalyzer $fileCheckingFuncCallAnalyzer
     ) {
     }
 

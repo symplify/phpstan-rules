@@ -39,8 +39,8 @@ final class RequireNamedCommandRule implements Rule, DocumentedRuleInterface
     private const COMMAND_ATTRIBUTE = 'Symfony\Component\Console\Attribute\AsCommand';
 
     public function __construct(
-        private AttributeFinder $attributeFinder,
-        private NodeFinder $nodeFinder
+        private readonly AttributeFinder $attributeFinder,
+        private readonly NodeFinder $nodeFinder
     ) {
     }
 

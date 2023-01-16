@@ -39,8 +39,8 @@ final class ForbiddenArrayWithStringKeysRule implements Rule, DocumentedRuleInte
     private const TEST_FILE_REGEX = '#(Test|TestCase)\.php$#';
 
     public function __construct(
-        private ParentMethodReturnTypeResolver $parentMethodReturnTypeResolver,
-        private ArrayAnalyzer $arrayAnalyzer,
+        private readonly ParentMethodReturnTypeResolver $parentMethodReturnTypeResolver,
+        private readonly ArrayAnalyzer $arrayAnalyzer,
     ) {
     }
 

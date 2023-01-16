@@ -13,7 +13,7 @@ use Symplify\PHPStanRules\Enum\AttributeKey;
 final class NodeComparator
 {
     public function __construct(
-        private Standard $standard
+        private readonly Standard $standard
     ) {
     }
 

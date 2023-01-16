@@ -32,8 +32,8 @@ final class NoChainMethodCallRule implements Rule, DocumentedRuleinterface, Conf
      * @param class-string[] $allowedChainTypes
      */
     public function __construct(
-        private AllowedChainCallSkipper $allowedChainCallSkipper,
-        private array $allowedChainTypes = [],
+        private readonly AllowedChainCallSkipper $allowedChainCallSkipper,
+        private readonly array $allowedChainTypes = [],
     ) {
     }
 

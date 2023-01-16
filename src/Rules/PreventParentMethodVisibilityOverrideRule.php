@@ -25,7 +25,7 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule, Documente
     public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider
+        private readonly ReflectionProvider $reflectionProvider
     ) {
     }
 

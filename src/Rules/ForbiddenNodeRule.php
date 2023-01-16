@@ -35,7 +35,7 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        private Standard $standard,
+        private readonly Standard $standard,
         array $forbiddenNodes
     ) {
         Assert::allIsAOf($forbiddenNodes, Node::class);

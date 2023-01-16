@@ -37,7 +37,7 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
     private const TESTS_DIRECTORY_REGEX = '#\/Tests\/#i';
 
     public function __construct(
-        private ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
+        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
     ) {
     }
 

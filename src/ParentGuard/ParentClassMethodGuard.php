@@ -12,7 +12,7 @@ use Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
 final class ParentClassMethodGuard
 {
     public function __construct(
-        private ParentMethodResolver $parentMethodResolver
+        private readonly ParentMethodResolver $parentMethodResolver
     ) {
     }
 

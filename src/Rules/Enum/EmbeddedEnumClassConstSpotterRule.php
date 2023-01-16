@@ -31,10 +31,10 @@ final class EmbeddedEnumClassConstSpotterRule implements Rule, DocumentedRuleInt
      * @param array<class-string> $parentTypes
      */
     public function __construct(
-        private ClassAnalyzer $classAnalyzer,
-        private SharedNamePrefixMatcher $sharedNamePrefixMatcher,
-        private EnumConstantAnalyzer $enumConstantAnalyzer,
-        private array $parentTypes
+        private readonly ClassAnalyzer $classAnalyzer,
+        private readonly SharedNamePrefixMatcher $sharedNamePrefixMatcher,
+        private readonly EnumConstantAnalyzer $enumConstantAnalyzer,
+        private readonly array $parentTypes
     ) {
     }
 
