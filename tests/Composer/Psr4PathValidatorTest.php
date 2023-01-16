@@ -49,7 +49,7 @@ final class Psr4PathValidatorTest extends TestCase
 
     public function provideFailingData(): Iterator
     {
-        yield ['Symplify\\PHPStanRules\\Tests\\', 'tests/'];
+        yield ['Symplify\\PHPStanRules\\Tests\\', 'test/'];
         yield ['Symplify\\PHPStanRules\\Tests\\', '/'];
         yield ['PHPStanRules\\Tests', '/'];
     }
