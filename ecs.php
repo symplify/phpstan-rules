@@ -22,4 +22,9 @@ return static function (ECSConfig $ecsConfig): void {
         SetList::COMMON,
         SetList::PSR_12,
     ]);
+
+    $ecsConfig->skip([
+        '*/Source/*',
+        '*/Fixture/*',
+    ]);
 };
