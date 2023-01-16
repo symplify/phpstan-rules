@@ -9,18 +9,10 @@ use PhpParser\Node\Stmt;
 
 final class IfAndCondExpr
 {
-    /**
-     * @var \PhpParser\Node\Stmt
-     */
-    private $stmt;
-    /**
-     * @var \PhpParser\Node\Expr|null
-     */
-    private $condExpr;
-    public function __construct(Stmt $stmt, ?\PhpParser\Node\Expr $condExpr)
-    {
-        $this->stmt = $stmt;
-        $this->condExpr = $condExpr;
+    public function __construct(
+        private Stmt $stmt,
+        private Expr|null $condExpr
+    ) {
     }
 
     public function getStmt(): Stmt

@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoAbstractMethodRule\NoAbstractMethodRuleTest
  */
-final class NoAbstractMethodRule implements Rule
+final class NoAbstractMethodRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

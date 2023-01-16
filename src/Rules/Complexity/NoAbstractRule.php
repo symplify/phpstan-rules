@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\NoAbstractRule\NoAbstractRuleTest
  */
-final class NoAbstractRule implements Rule
+final class NoAbstractRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

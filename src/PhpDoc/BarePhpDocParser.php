@@ -14,18 +14,10 @@ use PHPStan\PhpDocParser\Parser\TokenIterator;
 
 final class BarePhpDocParser
 {
-    /**
-     * @var \PHPStan\PhpDocParser\Parser\PhpDocParser
-     */
-    private $phpDocParser;
-    /**
-     * @var \PHPStan\PhpDocParser\Lexer\Lexer
-     */
-    private $lexer;
-    public function __construct(PhpDocParser $phpDocParser, Lexer $lexer)
-    {
-        $this->phpDocParser = $phpDocParser;
-        $this->lexer = $lexer;
+    public function __construct(
+        private PhpDocParser $phpDocParser,
+        private Lexer $lexer
+    ) {
     }
 
     /**

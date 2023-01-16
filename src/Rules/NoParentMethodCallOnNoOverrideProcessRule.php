@@ -20,20 +20,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoParentMethodCallOnNoOverrideProcessRule\NoParentMethodCallOnNoOverrideProcessRuleTest
  */
-final class NoParentMethodCallOnNoOverrideProcessRule implements Rule
+final class NoParentMethodCallOnNoOverrideProcessRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not call parent method if no override process';
-    /**
-     * @var \Symplify\PHPStanRules\Printer\NodeComparator
-     */
-    private $nodeComparator;
 
-    public function __construct(NodeComparator $nodeComparator)
-    {
-        $this->nodeComparator = $nodeComparator;
+    public function __construct(
+        private NodeComparator $nodeComparator
+    ) {
     }
 
     /**

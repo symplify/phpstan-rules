@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\SuffixTraitRule\SuffixTraitRuleTest
  */
-final class SuffixTraitRule implements Rule
+final class SuffixTraitRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -38,7 +38,7 @@ final class SuffixTraitRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $traitName = (string) $node->name;
-        if (substr_compare($traitName, 'Trait', -strlen('Trait')) === 0) {
+        if (\str_ends_with($traitName, 'Trait')) {
             if ($node instanceof Trait_) {
                 return [];
             }

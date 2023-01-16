@@ -21,28 +21,20 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredAttributeOverAnnotationRule\PreferredAttributeOverAnnotationRuleTest
  */
-final class PreferredAttributeOverAnnotationRule implements Rule
+final class PreferredAttributeOverAnnotationRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use attribute instead of "%s" annotation';
-    /**
-     * @var \Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
-     */
-    private $classAnnotationResolver;
-    /**
-     * @var string[]
-     */
-    private $annotations;
 
     /**
      * @param string[] $annotations
      */
-    public function __construct(ClassAnnotationResolver $classAnnotationResolver, array $annotations)
-    {
-        $this->classAnnotationResolver = $classAnnotationResolver;
-        $this->annotations = $annotations;
+    public function __construct(
+        private ClassAnnotationResolver $classAnnotationResolver,
+        private array $annotations
+    ) {
     }
 
     public function getNodeType(): string

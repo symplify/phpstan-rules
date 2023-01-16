@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoConstructorInTestRule\NoConstructorInTestRuleTest
  */
-final class NoConstructorInTestRule implements Rule
+final class NoConstructorInTestRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -41,7 +41,7 @@ final class NoConstructorInTestRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $classReflection = $node->getClassReflection();
-        if (substr_compare($classReflection->getName(), 'Test', -strlen('Test')) !== 0) {
+        if (! \str_ends_with($classReflection->getName(), 'Test')) {
             return [];
         }
 

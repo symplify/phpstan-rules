@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PrefixAbstractClassRule\PrefixAbstractClassRuleTest
  */
-final class PrefixAbstractClassRule implements Rule
+final class PrefixAbstractClassRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -57,7 +57,7 @@ final class PrefixAbstractClassRule implements Rule
         }
 
         $shortClassName = $classLike->name->toString();
-        if (strncmp($shortClassName, 'Abstract', strlen('Abstract')) === 0) {
+        if (\str_starts_with($shortClassName, 'Abstract')) {
             return [];
         }
 

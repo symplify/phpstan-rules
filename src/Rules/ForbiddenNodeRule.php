@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final class ForbiddenNodeRule implements Rule
+final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
@@ -29,20 +29,15 @@ final class ForbiddenNodeRule implements Rule
     /**
      * @var array<class-string<Node>>
      */
-    private $forbiddenNodes = [];
-    /**
-     * @var \PhpParser\PrettyPrinter\Standard
-     */
-    private $standard;
+    private array $forbiddenNodes = [];
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        Standard $standard,
+        private Standard $standard,
         array $forbiddenNodes
     ) {
-        $this->standard = $standard;
         Assert::allIsAOf($forbiddenNodes, Node::class);
 
         $this->forbiddenNodes = $forbiddenNodes;

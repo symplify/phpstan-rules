@@ -12,10 +12,7 @@ use PhpParser\NodeFinder;
 
 final class ArrayKeyFinder
 {
-    /**
-     * @var \PhpParser\NodeFinder
-     */
-    private $nodeFinder;
+    private NodeFinder $nodeFinder;
 
     public function __construct()
     {

@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<CollectedDataNode>
  */
-final class NoDuplicatedTraitMethodNameRule implements Rule
+final class NoDuplicatedTraitMethodNameRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

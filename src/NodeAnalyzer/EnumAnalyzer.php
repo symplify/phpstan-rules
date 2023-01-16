@@ -14,13 +14,9 @@ use Symplify\PHPStanRules\PhpDoc\BarePhpDocParser;
 
 final class EnumAnalyzer
 {
-    /**
-     * @var \Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
-     */
-    private $barePhpDocParser;
-    public function __construct(BarePhpDocParser $barePhpDocParser)
-    {
-        $this->barePhpDocParser = $barePhpDocParser;
+    public function __construct(
+        private BarePhpDocParser $barePhpDocParser
+    ) {
     }
 
     public function detect(Scope $scope, ClassLike $classLike): bool
@@ -43,7 +39,7 @@ final class EnumAnalyzer
         }
 
         // is in /Enum/ namespace
-        return strpos($classReflection->getName(), '\\Enum\\') !== false;
+        return str_contains($classReflection->getName(), '\\Enum\\');
     }
 
     private function hasEnumAnnotation(Class_ $class): bool

@@ -17,20 +17,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNestedCallInAssertMethodCallRule\ForbiddenNestedCallInAssertMethodCallRuleTest
  */
-final class ForbiddenNestedCallInAssertMethodCallRule implements Rule
+final class ForbiddenNestedCallInAssertMethodCallRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Decouple method call in assert to standalone line to make test core more readable';
-    /**
-     * @var \PhpParser\NodeFinder
-     */
-    private $nodeFinder;
 
-    public function __construct(NodeFinder $nodeFinder)
-    {
-        $this->nodeFinder = $nodeFinder;
+    public function __construct(
+        private NodeFinder $nodeFinder
+    ) {
     }
 
     /**
@@ -102,7 +98,7 @@ CODE_SAMPLE
 
     private function shouldSkipMethodName(string $methodName, MethodCall $methodCall): bool
     {
-        if (strncmp($methodName, 'assert', strlen('assert')) !== 0) {
+        if (! \str_starts_with($methodName, 'assert')) {
             return true;
         }
 

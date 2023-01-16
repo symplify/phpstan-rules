@@ -35,29 +35,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireCascadeValidateRule\RequireCascadeValidateRuleTest
  */
-final class RequireCascadeValidateRule implements Rule
+final class RequireCascadeValidateRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Property "$%s" is missing @Valid annotation';
-    /**
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
-    /**
-     * @var \Symplify\PHPStanRules\Symfony\Finder\ArrayKeyFinder
-     */
-    private $arrayKeyFinder;
-    /**
-     * @var \Symplify\PHPStanRules\Symfony\PropertyMetadataResolver
-     */
-    private $propertyMetadataResolver;
-    public function __construct(ReflectionProvider $reflectionProvider, ArrayKeyFinder $arrayKeyFinder, PropertyMetadataResolver $propertyMetadataResolver)
-    {
-        $this->reflectionProvider = $reflectionProvider;
-        $this->arrayKeyFinder = $arrayKeyFinder;
-        $this->propertyMetadataResolver = $propertyMetadataResolver;
+
+    public function __construct(
+        private ReflectionProvider $reflectionProvider,
+        private ArrayKeyFinder $arrayKeyFinder,
+        private PropertyMetadataResolver $propertyMetadataResolver,
+    ) {
     }
 
     public function getNodeType(): string
@@ -229,11 +218,11 @@ CODE_SAMPLE
 
     private function hasValidAnnotation(PropertyMetadata $propertyMetadata): bool
     {
-        if (strpos($propertyMetadata->getDocComment(), '@Valid') !== false) {
+        if (str_contains($propertyMetadata->getDocComment(), '@Valid')) {
             return true;
         }
 
-        return strpos($propertyMetadata->getDocComment(), '@Assert\Valid') !== false;
+        return str_contains($propertyMetadata->getDocComment(), '@Assert\Valid');
     }
 
     private function unwrapType(Type $type): Type

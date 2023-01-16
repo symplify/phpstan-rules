@@ -60,14 +60,10 @@ final class AllowedChainCallSkipper
         // mocks
         'PHPUnit\Framework\MockObject\Builder\InvocationMocker',
     ];
-    /**
-     * @var \Symplify\PHPStanRules\Matcher\ObjectTypeMatcher
-     */
-    private $objectTypeMatcher;
 
-    public function __construct(ObjectTypeMatcher $objectTypeMatcher)
-    {
-        $this->objectTypeMatcher = $objectTypeMatcher;
+    public function __construct(
+        private ObjectTypeMatcher $objectTypeMatcher
+    ) {
     }
 
     /**

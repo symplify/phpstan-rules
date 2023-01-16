@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\NoDuplicatedRegexRule\NoDuplicatedRegexRuleTest
  */
-final class NoDuplicatedRegexRule implements Rule
+final class NoDuplicatedRegexRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

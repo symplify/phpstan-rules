@@ -16,13 +16,9 @@ use PHPStan\Rules\RuleErrorBuilder;
  */
 final class FunctionLikeCognitiveComplexityRule implements Rule
 {
-    /**
-     * @var int
-     */
-    private $maxMethodCognitiveComplexity = 8;
-    public function __construct(int $maxMethodCognitiveComplexity = 8)
-    {
-        $this->maxMethodCognitiveComplexity = $maxMethodCognitiveComplexity;
+    public function __construct(
+        private int $maxMethodCognitiveComplexity = 8
+    ) {
     }
 
     /**

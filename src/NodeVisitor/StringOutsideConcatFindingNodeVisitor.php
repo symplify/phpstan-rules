@@ -19,15 +19,11 @@ final class StringOutsideConcatFindingNodeVisitor extends NodeVisitorAbstract
     /**
      * @var String_[]
      */
-    private $foundNodes = [];
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\FileCheckingFuncCallAnalyzer
-     */
-    private $fileCheckingFuncCallAnalyzer;
+    private array $foundNodes = [];
 
-    public function __construct(FileCheckingFuncCallAnalyzer $fileCheckingFuncCallAnalyzer)
-    {
-        $this->fileCheckingFuncCallAnalyzer = $fileCheckingFuncCallAnalyzer;
+    public function __construct(
+        private FileCheckingFuncCallAnalyzer $fileCheckingFuncCallAnalyzer
+    ) {
     }
 
     /**

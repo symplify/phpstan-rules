@@ -24,29 +24,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Spotter\IfElseToMatchSpotterRule\IfElseToMatchSpotterRuleTest
  */
-final class IfElseToMatchSpotterRule implements Rule
+final class IfElseToMatchSpotterRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'If/else construction can be replace with more robust match()';
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\IfElseBranchAnalyzer
-     */
-    private $ifElseBranchAnalyzer;
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\IfResemblingMatchAnalyzer
-     */
-    private $ifResemblingMatchAnalyzer;
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\CacheIfAnalyzer
-     */
-    private $cacheIfAnalyzer;
-    public function __construct(IfElseBranchAnalyzer $ifElseBranchAnalyzer, IfResemblingMatchAnalyzer $ifResemblingMatchAnalyzer, CacheIfAnalyzer $cacheIfAnalyzer)
-    {
-        $this->ifElseBranchAnalyzer = $ifElseBranchAnalyzer;
-        $this->ifResemblingMatchAnalyzer = $ifResemblingMatchAnalyzer;
-        $this->cacheIfAnalyzer = $cacheIfAnalyzer;
+
+    public function __construct(
+        private IfElseBranchAnalyzer $ifElseBranchAnalyzer,
+        private IfResemblingMatchAnalyzer $ifResemblingMatchAnalyzer,
+        private CacheIfAnalyzer $cacheIfAnalyzer,
+    ) {
     }
 
     /**

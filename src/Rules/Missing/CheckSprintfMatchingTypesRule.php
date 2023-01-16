@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @inspiration by https://github.com/phpstan/phpstan-src/blob/master/src/Rules/Functions/PrintfParametersRule.php
  */
-final class CheckSprintfMatchingTypesRule implements Rule
+final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -35,23 +35,12 @@ final class CheckSprintfMatchingTypesRule implements Rule
      * @var string
      */
     private const SPECIFIERS = '[bcdeEfFgGosuxX%s]';
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\SprintfSpecifierTypeResolver
-     */
-    private $sprintfSpecifierTypeResolver;
-    /**
-     * @var \Symplify\PHPStanRules\TypeAnalyzer\MatchingTypeAnalyzer
-     */
-    private $matchingTypeAnalyzer;
-    /**
-     * @var \Symplify\PHPStanRules\TypeResolver\ArgTypeResolver
-     */
-    private $argTypeResolver;
-    public function __construct(SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver, MatchingTypeAnalyzer $matchingTypeAnalyzer, ArgTypeResolver $argTypeResolver)
-    {
-        $this->sprintfSpecifierTypeResolver = $sprintfSpecifierTypeResolver;
-        $this->matchingTypeAnalyzer = $matchingTypeAnalyzer;
-        $this->argTypeResolver = $argTypeResolver;
+
+    public function __construct(
+        private SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver,
+        private MatchingTypeAnalyzer $matchingTypeAnalyzer,
+        private ArgTypeResolver $argTypeResolver,
+    ) {
     }
 
     /**

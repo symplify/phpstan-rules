@@ -13,19 +13,12 @@ use PhpParser\NodeVisitorAbstract;
 
 final class HasScopedReturnNodeVisitor extends NodeVisitorAbstract
 {
-    /**
-     * @var bool
-     */
-    private $hasReturn = false;
-    public function __construct(bool $hasReturn = false)
-    {
-        $this->hasReturn = $hasReturn;
+    public function __construct(
+        private bool $hasReturn = false
+    ) {
     }
 
-    /**
-     * @return int|\PhpParser\Node|null
-     */
-    public function enterNode(Node $node)
+    public function enterNode(Node $node): int|Node|null
     {
         if ($node instanceof Closure) {
             return NodeTraverser::DONT_TRAVERSE_CURRENT_AND_CHILDREN;

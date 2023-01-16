@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\UppercaseConstantRule\UppercaseConstantRuleTest
  */
-final class UppercaseConstantRule implements Rule
+final class UppercaseConstantRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

@@ -21,23 +21,11 @@ use Symplify\PHPStanRules\Exception\DeprecatedException;
  */
 final class AstCognitiveComplexityAnalyzer
 {
-    /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeTraverser\ComplexityNodeTraverserFactory
-     */
-    private $complexityNodeTraverserFactory;
-    /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
-     */
-    private $cognitiveComplexityDataCollector;
-    /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor\NestingNodeVisitor
-     */
-    private $nestingNodeVisitor;
-    public function __construct(ComplexityNodeTraverserFactory $complexityNodeTraverserFactory, CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, NestingNodeVisitor $nestingNodeVisitor)
-    {
-        $this->complexityNodeTraverserFactory = $complexityNodeTraverserFactory;
-        $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
-        $this->nestingNodeVisitor = $nestingNodeVisitor;
+    public function __construct(
+        private ComplexityNodeTraverserFactory $complexityNodeTraverserFactory,
+        private CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
+        private NestingNodeVisitor $nestingNodeVisitor
+    ) {
     }
 
     public function analyzeClassLike(Class_ $class): int
@@ -52,9 +40,8 @@ final class AstCognitiveComplexityAnalyzer
 
     /**
      * @api
-     * @param \PhpParser\Node\Stmt\Function_|\PhpParser\Node\Stmt\ClassMethod $functionLike
      */
-    public function analyzeFunctionLike($functionLike): int
+    public function analyzeFunctionLike(Function_ | ClassMethod $functionLike): int
     {
         $deprecatedMessage = sprintf(
             'The "%s" service was deprecated and moved to "%s" package that has much simpler configuration. Use it instead.',

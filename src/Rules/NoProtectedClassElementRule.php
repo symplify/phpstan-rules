@@ -23,20 +23,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoProtectedClassElementRule\NoProtectedClassElementRuleTest
  */
-final class NoProtectedClassElementRule implements Rule
+final class NoProtectedClassElementRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of protected element in use private element or contract method';
-    /**
-     * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
-     */
-    private $parentClassMethodGuard;
 
-    public function __construct(ParentClassMethodGuard $parentClassMethodGuard)
-    {
-        $this->parentClassMethodGuard = $parentClassMethodGuard;
+    public function __construct(
+        private ParentClassMethodGuard $parentClassMethodGuard
+    ) {
     }
 
     public function getNodeType(): string
