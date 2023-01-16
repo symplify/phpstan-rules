@@ -35,7 +35,7 @@ final class AstCognitiveComplexityAnalyzerTest extends TestCase
     /**
      * @dataProvider provideTokensAndExpectedCognitiveComplexity()
      */
-    public function test(SmartFileInfo $fixtureFileInfo): void
+    public function test(SmartFileInfo $fixtureFileInfo): never
     {
         $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fixtureFileInfo);
 
