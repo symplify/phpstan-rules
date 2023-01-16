@@ -57,6 +57,20 @@
             ]
         }
     },
+    "config": {
+        "platform-check": false,
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "check-cs": "vendor/bin/ecs check --ansi",
+        "fix-cs": "vendor/bin/ecs check --fix --ansi",
+        "phpstan": "vendor/bin/phpstan analyse --ansi  --error-format symplify",
+        "rector": "vendor/bin/rector process --dry-run --ansi",
+        "release": "vendor/bin/monorepo-builder release patch --ansi"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
