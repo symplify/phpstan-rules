@@ -20,3 +20,4 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->skip(['*/Tests/*', '*/tests/*', __DIR__ . '/../../tests']);
 };
+
