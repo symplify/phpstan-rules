@@ -1,4 +1,3 @@
-
 parameters:
     level: 8
 
@@ -6,3 +5,27 @@ parameters:
         - src
         - config
         - tests
+
+    excludePaths:
+        # deprecated, to be removed
+        - packages/CognitiveComplexity
+
+        # parallel
+        - packages/*-phpstan-printer/tests/*ToPhpCompiler/Fixture*
+
+        # PHP 8 only
+        - tests/Rules/ForbiddenArrayWithStringKeysRule/FixturePhp80/SkipAttributeArrayKey.php
+
+        # tests
+
+        - '*/tests/**/Source/*'
+        - '*/tests/**/Fixture/*'
+        - */stubs/*
+        - */packages-tests/**/Fixture/*
+        - */packages-tests/**/Source/*
+
+    ignoreErrors:
+        -
+            message: '#Generator expects value type array<int, array<int, int\|string>\|string>, array<int, array<int, array<int, int\|string>>\|string> given#'
+            paths:
+                -  tests/Rules
