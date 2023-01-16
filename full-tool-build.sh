@@ -13,6 +13,3 @@ rm -rf tests
 mkdir rector-local
 composer require rector/rector --working-dir rector-local
 rector-local/vendor/bin/rector process bin src packages vendor --config build/rector-downgrade-php-72.php --ansi
-
-# prefix
-sh prefix-code.sh
