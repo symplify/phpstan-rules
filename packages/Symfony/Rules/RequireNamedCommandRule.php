@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<InClassNode>
  */
-final class RequireNamedCommandRule implements Rule, DocumentedRuleInterface
+final class RequireNamedCommandRule implements Rule
 {
     /**
      * @var string
@@ -37,11 +37,21 @@ final class RequireNamedCommandRule implements Rule, DocumentedRuleInterface
      * @var string
      */
     private const COMMAND_ATTRIBUTE = 'Symfony\Component\Console\Attribute\AsCommand';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
+     */
+    private $attributeFinder;
+    /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
 
-    public function __construct(
-        private readonly AttributeFinder $attributeFinder,
-        private readonly NodeFinder $nodeFinder
-    ) {
+    public function __construct(AttributeFinder $attributeFinder, NodeFinder $nodeFinder)
+    {
+        $this->attributeFinder = $attributeFinder;
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**
