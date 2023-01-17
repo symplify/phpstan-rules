@@ -19,20 +19,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenParamTypeRemovalRule\ForbiddenParamTypeRemovalRuleTest
  */
-final class ForbiddenParamTypeRemovalRule implements Rule
+final class ForbiddenParamTypeRemovalRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Removing parent param type is forbidden';
-    /**
-     * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
-     */
-    private $methodNodeAnalyser;
 
-    public function __construct(MethodNodeAnalyser $methodNodeAnalyser)
-    {
-        $this->methodNodeAnalyser = $methodNodeAnalyser;
+    public function __construct(
+        private readonly MethodNodeAnalyser $methodNodeAnalyser
+    ) {
     }
 
     /**

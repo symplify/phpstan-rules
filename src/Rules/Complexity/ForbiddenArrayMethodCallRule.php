@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenArrayMethodCallRule\ForbiddenArrayMethodCallRuleTest
  */
-final class ForbiddenArrayMethodCallRule implements Rule
+final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

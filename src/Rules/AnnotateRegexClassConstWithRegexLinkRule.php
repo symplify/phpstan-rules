@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\AnnotateRegexClassConstWithRegexLinkRule\AnnotateRegexClassConstWithRegexLinkRuleTest
  */
-final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
+final class AnnotateRegexClassConstWithRegexLinkRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -126,11 +126,11 @@ CODE_SAMPLE
         }
 
         $docCommentText = $docComment->getText();
-        return strpos($docCommentText, '@see https://regex101.com/r') !== false;
+        return \str_contains($docCommentText, '@see https://regex101.com/r');
     }
 
     private function isRegexPatternConstantName(string $constantName): bool
     {
-        return substr_compare($constantName, '_REGEX', -strlen('_REGEX')) === 0;
+        return \str_ends_with($constantName, '_REGEX');
     }
 }

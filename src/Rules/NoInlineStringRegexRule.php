@@ -22,25 +22,17 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoInlineStringRegexRule\NoInlineStringRegexRuleTest
  */
-final class NoInlineStringRegexRule implements Rule
+final class NoInlineStringRegexRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
-     */
-    private $regexFuncCallAnalyzer;
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
-     */
-    private $regexStaticCallAnalyzer;
 
-    public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
-    {
-        $this->regexFuncCallAnalyzer = $regexFuncCallAnalyzer;
-        $this->regexStaticCallAnalyzer = $regexStaticCallAnalyzer;
+    public function __construct(
+        private readonly RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
+        private readonly RegexStaticCallAnalyzer $regexStaticCallAnalyzer
+    ) {
     }
 
     /**

@@ -25,20 +25,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\NoConstructorSymfonyFormObjectRule\NoConstructorSymfonyFormObjectRuleTest
  */
-final class NoConstructorSymfonyFormObjectRule implements Rule
+final class NoConstructorSymfonyFormObjectRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'This object is used in a Symfony form, that uses magic setters/getters, so it cannot have required constructor';
-    /**
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
 
-    public function __construct(ReflectionProvider $reflectionProvider)
-    {
-        $this->reflectionProvider = $reflectionProvider;
+    public function __construct(
+        private readonly ReflectionProvider $reflectionProvider
+    ) {
     }
 
     public function getNodeType(): string

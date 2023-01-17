@@ -21,28 +21,20 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireConstantInMethodCallPositionRule\RequireConstantInMethodCallPositionRuleTest
  */
-final class RequireConstantInMethodCallPositionRule implements Rule
+final class RequireConstantInMethodCallPositionRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Parameter argument on position %d must use constant';
-    /**
-     * @var \Symplify\PHPStanRules\Matcher\PositionMatcher
-     */
-    private $positionMatcher;
-    /**
-     * @var array<class-string, array<string, int[]>>
-     */
-    private $requiredConstantInMethodCall;
 
     /**
      * @param array<class-string, array<string, int[]>> $requiredConstantInMethodCall
      */
-    public function __construct(PositionMatcher $positionMatcher, array $requiredConstantInMethodCall)
-    {
-        $this->positionMatcher = $positionMatcher;
-        $this->requiredConstantInMethodCall = $requiredConstantInMethodCall;
+    public function __construct(
+        private readonly PositionMatcher $positionMatcher,
+        private readonly array $requiredConstantInMethodCall
+    ) {
     }
 
     /**

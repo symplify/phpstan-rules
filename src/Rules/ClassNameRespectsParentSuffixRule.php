@@ -27,7 +27,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ClassNameRespectsParentSuffixRule\ClassNameRespectsParentSuffixRuleTest
  */
-final class ClassNameRespectsParentSuffixRule implements Rule
+final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
@@ -52,17 +52,15 @@ final class ClassNameRespectsParentSuffixRule implements Rule
     /**
      * @var class-string[]
      */
-    private $parentClasses = [];
-    /**
-     * @var \Symplify\PHPStanRules\Naming\ClassToSuffixResolver
-     */
-    private $classToSuffixResolver;
+    private array $parentClasses = [];
+
     /**
      * @param class-string[] $parentClasses
      */
-    public function __construct(ClassToSuffixResolver $classToSuffixResolver, array $parentClasses = [])
-    {
-        $this->classToSuffixResolver = $classToSuffixResolver;
+    public function __construct(
+        private readonly ClassToSuffixResolver $classToSuffixResolver,
+        array $parentClasses = [],
+    ) {
         $this->parentClasses = array_merge($parentClasses, self::DEFAULT_PARENT_CLASSES);
     }
 
@@ -131,7 +129,7 @@ CODE_SAMPLE
             }
 
             $expectedSuffix = $this->classToSuffixResolver->resolveFromClass($parentClass);
-            if (substr_compare($classReflection->getName(), $expectedSuffix, -strlen($expectedSuffix)) === 0) {
+            if (\str_ends_with($classReflection->getName(), $expectedSuffix)) {
                 return [];
             }
 

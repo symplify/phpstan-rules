@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoVoidGetterMethodRule\NoVoidGetterMethodRuleTest
  */
-final class NoVoidGetterMethodRule implements Rule
+final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -38,14 +38,10 @@ final class NoVoidGetterMethodRule implements Rule
         Throw_::class,
         Node\Stmt\Throw_::class,
     ];
-    /**
-     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
-     */
-    private $typeAwareNodeFinder;
 
-    public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
-    {
-        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
+    public function __construct(
+        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
+    ) {
     }
 
     /**
@@ -75,7 +71,7 @@ final class NoVoidGetterMethodRule implements Rule
             return [];
         }
 
-        if (strncmp($node->name->toString(), 'get', strlen('get')) !== 0) {
+        if (! str_starts_with($node->name->toString(), 'get')) {
             return [];
         }
 

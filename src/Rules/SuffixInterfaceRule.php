@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\SuffixInterfaceRule\SuffixInterfaceRuleTest
  */
-final class SuffixInterfaceRule implements Rule
+final class SuffixInterfaceRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -37,7 +37,7 @@ final class SuffixInterfaceRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (substr_compare((string) $node->name, 'Interface', -strlen('Interface')) === 0) {
+        if (\str_ends_with((string) $node->name, 'Interface')) {
             if (! $node instanceof Interface_) {
                 return [self::ERROR_MESSAGE];
             }

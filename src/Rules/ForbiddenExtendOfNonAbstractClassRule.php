@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenExtendOfNonAbstractClassRule\ForbiddenExtendOfNonAbstractClassRuleTest
  */
-final class ForbiddenExtendOfNonAbstractClassRule implements Rule
+final class ForbiddenExtendOfNonAbstractClassRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -55,7 +55,7 @@ final class ForbiddenExtendOfNonAbstractClassRule implements Rule
 
         // skip vendor based classes, as designed for extension
         $fileName = $parentClassReflection->getFileName();
-        if (is_string($fileName) && strpos($fileName, 'vendor') !== false) {
+        if (is_string($fileName) && str_contains($fileName, 'vendor')) {
             return [];
         }
 

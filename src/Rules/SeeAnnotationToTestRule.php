@@ -24,33 +24,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
-final class SeeAnnotationToTestRule implements Rule
+final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
-    /**
-     * @var \Symplify\PHPStanRules\PhpDoc\PhpDocResolver
-     */
-    private $phpDocResolver;
-    /**
-     * @var \Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder
-     */
-    private $seePhpDocTagNodesFinder;
-    /**
-     * @var string[]
-     */
-    private $requiredSeeTypes;
 
     /**
      * @param string[] $requiredSeeTypes
      */
-    public function __construct(PhpDocResolver $phpDocResolver, SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder, array $requiredSeeTypes)
-    {
-        $this->phpDocResolver = $phpDocResolver;
-        $this->seePhpDocTagNodesFinder = $seePhpDocTagNodesFinder;
-        $this->requiredSeeTypes = $requiredSeeTypes;
+    public function __construct(
+        private readonly PhpDocResolver $phpDocResolver,
+        private readonly SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
+        private readonly array $requiredSeeTypes
+    ) {
     }
 
     /**

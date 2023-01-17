@@ -23,24 +23,17 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\RequireSpecificReturnTypeOverAbstractRule\RequireSpecificReturnTypeOverAbstractRuleTest
  */
-final class RequireSpecificReturnTypeOverAbstractRule implements Rule
+final class RequireSpecificReturnTypeOverAbstractRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Provide more specific return type "%s" over abstract one';
-    /**
-     * @var \Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
-     */
-    private $returnNodeFinder;
-    /**
-     * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
-     */
-    private $methodNodeAnalyser;
-    public function __construct(ReturnNodeFinder $returnNodeFinder, MethodNodeAnalyser $methodNodeAnalyser)
-    {
-        $this->returnNodeFinder = $returnNodeFinder;
-        $this->methodNodeAnalyser = $methodNodeAnalyser;
+
+    public function __construct(
+        private readonly ReturnNodeFinder $returnNodeFinder,
+        private readonly MethodNodeAnalyser $methodNodeAnalyser,
+    ) {
     }
 
     public function getRuleDefinition(): RuleDefinition

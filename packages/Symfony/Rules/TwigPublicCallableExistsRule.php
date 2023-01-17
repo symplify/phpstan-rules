@@ -22,7 +22,7 @@ use Twig\Extension\AbstractExtension;
 /**
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\TwigPublicCallableExistsRule\TwigPublicCallableExistsRuleTest
  */
-final class TwigPublicCallableExistsRule implements Rule
+final class TwigPublicCallableExistsRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

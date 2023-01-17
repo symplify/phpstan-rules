@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckClassNamespaceFollowPsr4Rule\CheckClassNamespaceFollowPsr4RuleTest
  */
-final class CheckClassNamespaceFollowPsr4Rule implements Rule
+final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -29,23 +29,13 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule
     /**
      * @var array<string, string|string[]>
      */
-    private $autoloadPsr4Paths = [];
-    /**
-     * @var \Symplify\PHPStanRules\Composer\Psr4PathValidator
-     */
-    private $psr4PathValidator;
-    /**
-     * @var \Symplify\PHPStanRules\Composer\ClassNamespaceMatcher
-     */
-    private $classNamespaceMatcher;
+    private array $autoloadPsr4Paths = [];
 
     public function __construct(
         ComposerAutoloadResolver $composerAutoloadResolver,
-        Psr4PathValidator $psr4PathValidator,
-        ClassNamespaceMatcher $classNamespaceMatcher
+        private readonly Psr4PathValidator $psr4PathValidator,
+        private readonly ClassNamespaceMatcher $classNamespaceMatcher
     ) {
-        $this->psr4PathValidator = $psr4PathValidator;
-        $this->classNamespaceMatcher = $classNamespaceMatcher;
         $this->autoloadPsr4Paths = $composerAutoloadResolver->getPsr4Autoload();
     }
 

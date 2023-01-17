@@ -8,18 +8,10 @@ use PhpParser\Node\Expr;
 
 final class TwoExprs
 {
-    /**
-     * @var \PhpParser\Node\Expr
-     */
-    private $firstExpr;
-    /**
-     * @var \PhpParser\Node\Expr
-     */
-    private $secondExpr;
-    public function __construct(Expr $firstExpr, Expr $secondExpr)
-    {
-        $this->firstExpr = $firstExpr;
-        $this->secondExpr = $secondExpr;
+    public function __construct(
+        private readonly Expr $firstExpr,
+        private readonly Expr $secondExpr
+    ) {
     }
 
     public function getFirstExpr(): Expr

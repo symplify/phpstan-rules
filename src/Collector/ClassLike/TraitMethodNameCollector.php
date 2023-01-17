@@ -16,13 +16,9 @@ use PHPStan\Reflection\ReflectionProvider;
  */
 final class TraitMethodNameCollector implements Collector
 {
-    /**
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
-    public function __construct(ReflectionProvider $reflectionProvider)
-    {
-        $this->reflectionProvider = $reflectionProvider;
+    public function __construct(
+        private readonly ReflectionProvider $reflectionProvider
+    ) {
     }
 
     public function getNodeType(): string

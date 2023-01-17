@@ -9,7 +9,7 @@ final class EnumConstantAnalyzer
     public function isNonEnumConstantPrefix(string $prefix): bool
     {
         // constant prefix is needed
-        if (substr_compare($prefix, '_', -strlen('_')) !== 0) {
+        if (! \str_ends_with($prefix, '_')) {
             return true;
         }
 
@@ -19,18 +19,18 @@ final class EnumConstantAnalyzer
     private function isNonEnumConstantName(string $name): bool
     {
         // not enum, but rather validation limit
-        if (strncmp($name, 'MIN_', strlen('MIN_')) === 0) {
+        if (\str_starts_with($name, 'MIN_')) {
             return true;
         }
 
-        if (substr_compare($name, '_MIN', -strlen('_MIN')) === 0) {
+        if (\str_ends_with($name, '_MIN')) {
             return true;
         }
 
-        if (strncmp($name, 'MAX_', strlen('MAX_')) === 0) {
+        if (\str_starts_with($name, 'MAX_')) {
             return true;
         }
 
-        return substr_compare($name, '_MAX', -strlen('_MAX')) === 0;
+        return \str_ends_with($name, '_MAX');
     }
 }

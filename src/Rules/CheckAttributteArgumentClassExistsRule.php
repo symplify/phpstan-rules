@@ -22,19 +22,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<AttributeGroup>
  */
-final class CheckAttributteArgumentClassExistsRule implements Rule
+final class CheckAttributteArgumentClassExistsRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Class was not found';
-    /**
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
-    public function __construct(ReflectionProvider $reflectionProvider)
-    {
-        $this->reflectionProvider = $reflectionProvider;
+
+    public function __construct(
+        private readonly ReflectionProvider $reflectionProvider,
+    ) {
     }
 
     public function getNodeType(): string

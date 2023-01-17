@@ -18,23 +18,11 @@ use Symplify\PHPStanRules\Printer\CollectorMetadataPrinter;
  */
 final class PublicClassMethodParamTypesCollector implements Collector
 {
-    /**
-     * @var \Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
-     */
-    private $apiDocStmtAnalyzer;
-    /**
-     * @var \Symplify\PHPStanRules\Matcher\Collector\PublicClassMethodMatcher
-     */
-    private $publicClassMethodMatcher;
-    /**
-     * @var \Symplify\PHPStanRules\Printer\CollectorMetadataPrinter
-     */
-    private $collectorMetadataPrinter;
-    public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, PublicClassMethodMatcher $publicClassMethodMatcher, CollectorMetadataPrinter $collectorMetadataPrinter)
-    {
-        $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
-        $this->publicClassMethodMatcher = $publicClassMethodMatcher;
-        $this->collectorMetadataPrinter = $collectorMetadataPrinter;
+    public function __construct(
+        private readonly ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
+        private readonly PublicClassMethodMatcher $publicClassMethodMatcher,
+        private readonly CollectorMetadataPrinter $collectorMetadataPrinter
+    ) {
     }
 
     public function getNodeType(): string

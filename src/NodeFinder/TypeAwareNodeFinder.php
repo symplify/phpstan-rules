@@ -13,23 +13,19 @@ use PhpParser\NodeFinder;
  */
 final class TypeAwareNodeFinder
 {
-    /**
-     * @var \PhpParser\NodeFinder
-     */
-    private $nodeFinder;
-    public function __construct(NodeFinder $nodeFinder)
-    {
-        $this->nodeFinder = $nodeFinder;
+    public function __construct(
+        private readonly NodeFinder $nodeFinder
+    ) {
     }
 
     /**
      * @template TNode as Node
      *
-     * @param mixed[]|\PhpParser\Node $nodes
+     * @param Node[]|Node $nodes
      * @param class-string<TNode> $type
      * @return TNode|null
      */
-    public function findFirstInstanceOf($nodes, string $type): ?Node
+    public function findFirstInstanceOf(array|Node $nodes, string $type): ?Node
     {
         return $this->nodeFinder->findFirstInstanceOf($nodes, $type);
     }

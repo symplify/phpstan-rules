@@ -24,13 +24,9 @@ use PHPStan\Reflection\ReflectionProvider;
  */
 final class NewAndSetterCallsCollector implements Collector
 {
-    /**
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
-    public function __construct(ReflectionProvider $reflectionProvider)
-    {
-        $this->reflectionProvider = $reflectionProvider;
+    public function __construct(
+        private readonly ReflectionProvider $reflectionProvider
+    ) {
     }
 
     public function getNodeType(): string
@@ -168,6 +164,6 @@ final class NewAndSetterCallsCollector implements Collector
             return true;
         }
 
-        return strpos($fileName, 'vendor') !== false;
+        return str_contains($fileName, 'vendor');
     }
 }

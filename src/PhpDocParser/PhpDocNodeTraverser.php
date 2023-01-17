@@ -65,12 +65,12 @@ final class PhpDocNodeTraverser
     /**
      * @var bool Whether traversal should be stopped
      */
-    private $stopTraversal = false;
+    private bool $stopTraversal = false;
 
     /**
      * @var PhpDocNodeVisitorInterface[]
      */
-    private $phpDocNodeVisitors = [];
+    private array $phpDocNodeVisitors = [];
 
     public function addPhpDocNodeVisitor(PhpDocNodeVisitorInterface $phpDocNodeVisitor): void
     {

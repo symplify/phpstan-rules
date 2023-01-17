@@ -25,7 +25,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenSameNamedNewInstanceRule\ForbiddenSameNamedNewInstanceRuleTest
  * @implements Rule<Expression>
  */
-final class ForbiddenSameNamedNewInstanceRule implements Rule
+final class ForbiddenSameNamedNewInstanceRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

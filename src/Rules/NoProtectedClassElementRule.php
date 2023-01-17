@@ -14,6 +14,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -23,20 +24,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoProtectedClassElementRule\NoProtectedClassElementRuleTest
  */
-final class NoProtectedClassElementRule implements Rule
+final class NoProtectedClassElementRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of protected element in use private element or contract method';
-    /**
-     * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
-     */
-    private $parentClassMethodGuard;
 
-    public function __construct(ParentClassMethodGuard $parentClassMethodGuard)
-    {
-        $this->parentClassMethodGuard = $parentClassMethodGuard;
+    public function __construct(
+        private readonly ParentClassMethodGuard $parentClassMethodGuard
+    ) {
     }
 
     public function getNodeType(): string
@@ -192,6 +189,6 @@ CODE_SAMPLE
             return false;
         }
 
-        return $classReflection->isSubclassOf('PHPUnit\Framework\TestCase');
+        return $classReflection->isSubclassOf(TestCase::class);
     }
 }

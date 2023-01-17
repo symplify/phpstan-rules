@@ -23,19 +23,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenInlineClassMethodRule\ForbiddenInlineClassMethodRuleTest
  */
-final class ForbiddenInlineClassMethodRule implements Rule
+final class ForbiddenInlineClassMethodRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Method "%s()" only calling another method call and has no added value. Use the inlined call instead';
-    /**
-     * @var \PhpParser\NodeFinder
-     */
-    private $nodeFinder;
-    public function __construct(NodeFinder $nodeFinder)
-    {
-        $this->nodeFinder = $nodeFinder;
+
+    public function __construct(
+        private readonly NodeFinder $nodeFinder,
+    ) {
     }
 
     /**

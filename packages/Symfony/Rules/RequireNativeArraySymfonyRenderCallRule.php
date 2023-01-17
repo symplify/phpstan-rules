@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireNativeArraySymfonyRenderCallRule\RequireNativeArraySymfonyRenderCallRuleTest
  */
-final class RequireNativeArraySymfonyRenderCallRule implements Rule
+final class RequireNativeArraySymfonyRenderCallRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

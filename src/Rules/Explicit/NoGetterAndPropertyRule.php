@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoGetterAndPropertyRule\NoGetterAndPropertyRuleTest
  */
-final class NoGetterAndPropertyRule implements Rule
+final class NoGetterAndPropertyRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string

@@ -11,13 +11,9 @@ use Symplify\PHPStanRules\PhpDocParser\PhpDocNodeTraverser;
 
 final class ClassReferencePhpDocNodeTraverser
 {
-    /**
-     * @var \Symplify\PHPStanRules\PhpDoc\ClassReferencePhpDocNodeVisitor
-     */
-    private $classReferencePhpDocNodeVisitor;
-    public function __construct(ClassReferencePhpDocNodeVisitor $classReferencePhpDocNodeVisitor)
-    {
-        $this->classReferencePhpDocNodeVisitor = $classReferencePhpDocNodeVisitor;
+    public function __construct(
+        private readonly ClassReferencePhpDocNodeVisitor $classReferencePhpDocNodeVisitor
+    ) {
     }
 
     public function decoratePhpDocNode(PhpDocNode $simplePhpDocNode, ClassReflection $classReflection): void

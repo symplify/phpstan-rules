@@ -22,6 +22,7 @@ use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
+use Symfony\Component\Form\AbstractType;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 use Symplify\PHPStanRules\Symfony\Finder\ArrayKeyFinder;
 use Symplify\PHPStanRules\Symfony\PropertyMetadataResolver;
@@ -35,29 +36,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireCascadeValidateRule\RequireCascadeValidateRuleTest
  */
-final class RequireCascadeValidateRule implements Rule
+final class RequireCascadeValidateRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Property "$%s" is missing @Valid annotation';
-    /**
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
-    /**
-     * @var \Symplify\PHPStanRules\Symfony\Finder\ArrayKeyFinder
-     */
-    private $arrayKeyFinder;
-    /**
-     * @var \Symplify\PHPStanRules\Symfony\PropertyMetadataResolver
-     */
-    private $propertyMetadataResolver;
-    public function __construct(ReflectionProvider $reflectionProvider, ArrayKeyFinder $arrayKeyFinder, PropertyMetadataResolver $propertyMetadataResolver)
-    {
-        $this->reflectionProvider = $reflectionProvider;
-        $this->arrayKeyFinder = $arrayKeyFinder;
-        $this->propertyMetadataResolver = $propertyMetadataResolver;
+
+    public function __construct(
+        private readonly ReflectionProvider $reflectionProvider,
+        private readonly ArrayKeyFinder $arrayKeyFinder,
+        private readonly PropertyMetadataResolver $propertyMetadataResolver,
+    ) {
     }
 
     public function getNodeType(): string
@@ -72,7 +62,7 @@ final class RequireCascadeValidateRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $classReflection = $node->getClassReflection();
-        if (! $classReflection->isSubclassOf('Symfony\Component\Form\AbstractType')) {
+        if (! $classReflection->isSubclassOf(AbstractType::class)) {
             return [];
         }
 
@@ -229,11 +219,11 @@ CODE_SAMPLE
 
     private function hasValidAnnotation(PropertyMetadata $propertyMetadata): bool
     {
-        if (strpos($propertyMetadata->getDocComment(), '@Valid') !== false) {
+        if (str_contains($propertyMetadata->getDocComment(), '@Valid')) {
             return true;
         }
 
-        return strpos($propertyMetadata->getDocComment(), '@Assert\Valid') !== false;
+        return str_contains($propertyMetadata->getDocComment(), '@Assert\Valid');
     }
 
     private function unwrapType(Type $type): Type

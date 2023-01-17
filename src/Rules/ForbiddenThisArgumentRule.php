@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenThisArgumentRule\ForbiddenThisArgumentRuleTest
  */
-final class ForbiddenThisArgumentRule implements Rule
+final class ForbiddenThisArgumentRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -38,14 +38,10 @@ final class ForbiddenThisArgumentRule implements Rule
         // workaround type
         'Symplify\PackageBuilder\Reflection\PrivatesCaller',
     ];
-    /**
-     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
-     */
-    private $containsTypeAnalyser;
 
-    public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
-    {
-        $this->containsTypeAnalyser = $containsTypeAnalyser;
+    public function __construct(
+        private readonly ContainsTypeAnalyser $containsTypeAnalyser
+    ) {
     }
 
     /**
@@ -111,10 +107,7 @@ CODE_SAMPLE
         return $classReflection->isSubclassOf(Kernel::class);
     }
 
-    /**
-     * @param \PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\StaticCall $node
-     */
-    private function shouldSkip($node, Scope $scope): bool
+    private function shouldSkip(MethodCall | FuncCall | StaticCall $node, Scope $scope): bool
     {
         if ($node instanceof MethodCall) {
             return $this->containsTypeAnalyser->containsExprTypes($node->var, $scope, self::ALLOWED_CALLER_CLASSES);

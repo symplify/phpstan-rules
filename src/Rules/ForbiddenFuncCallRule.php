@@ -24,32 +24,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule\ForbiddenFuncCallRuleTest
  */
-final class ForbiddenFuncCallRule implements Rule
+final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
-    /**
-     * @var string[]|array<(string | int), string>
-     */
-    private $forbiddenFunctions;
-    /**
-     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
-     */
-    private $arrayStringAndFnMatcher;
-    /**
-     * @var \Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter
-     */
-    private $requiredWithMessageFormatter;
+
     /**
      * @param string[]|array<string|int, string> $forbiddenFunctions
      */
-    public function __construct(array $forbiddenFunctions, ArrayStringAndFnMatcher $arrayStringAndFnMatcher, RequiredWithMessageFormatter $requiredWithMessageFormatter)
-    {
-        $this->forbiddenFunctions = $forbiddenFunctions;
-        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
-        $this->requiredWithMessageFormatter = $requiredWithMessageFormatter;
+    public function __construct(
+        private readonly array $forbiddenFunctions,
+        private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
+        private readonly RequiredWithMessageFormatter $requiredWithMessageFormatter,
+    ) {
     }
 
     /**

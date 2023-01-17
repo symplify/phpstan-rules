@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoFuncCallInMethodCallRule\NoFuncCallInMethodCallRuleTest
  */
-final class NoFuncCallInMethodCallRule implements Rule
+final class NoFuncCallInMethodCallRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -57,7 +57,7 @@ final class NoFuncCallInMethodCallRule implements Rule
 
             $funcCallName = $this->resolveFuncCallName($arg);
 
-            if (strpos($funcCallName, '\\') !== false) {
+            if (\str_contains($funcCallName, '\\')) {
                 continue;
             }
 

@@ -15,14 +15,11 @@ use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 
 final class CacheIfAnalyzer
 {
-    /**
-     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
-     */
-    private $typeAwareNodeFinder;
-    public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
-    {
-        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
+    public function __construct(
+        private readonly TypeAwareNodeFinder $typeAwareNodeFinder,
+    ) {
     }
+
     public function isDefaultNullAssign(If_ $if): bool
     {
         if ($if->else !== null) {

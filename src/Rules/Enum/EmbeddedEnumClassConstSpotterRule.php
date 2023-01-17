@@ -20,38 +20,22 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\EmbeddedEnumClassConstSpotterRule\EmbeddedEnumClassConstSpotterRuleTest
  */
-final class EmbeddedEnumClassConstSpotterRule implements Rule
+final class EmbeddedEnumClassConstSpotterRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Constants "%s" should be extract to standalone enum class';
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\ClassAnalyzer
-     */
-    private $classAnalyzer;
-    /**
-     * @var \Symplify\PHPStanRules\Matcher\SharedNamePrefixMatcher
-     */
-    private $sharedNamePrefixMatcher;
-    /**
-     * @var \Symplify\PHPStanRules\Enum\EnumConstantAnalyzer
-     */
-    private $enumConstantAnalyzer;
-    /**
-     * @var array<class-string>
-     */
-    private $parentTypes;
 
     /**
      * @param array<class-string> $parentTypes
      */
-    public function __construct(ClassAnalyzer $classAnalyzer, SharedNamePrefixMatcher $sharedNamePrefixMatcher, EnumConstantAnalyzer $enumConstantAnalyzer, array $parentTypes)
-    {
-        $this->classAnalyzer = $classAnalyzer;
-        $this->sharedNamePrefixMatcher = $sharedNamePrefixMatcher;
-        $this->enumConstantAnalyzer = $enumConstantAnalyzer;
-        $this->parentTypes = $parentTypes;
+    public function __construct(
+        private readonly ClassAnalyzer $classAnalyzer,
+        private readonly SharedNamePrefixMatcher $sharedNamePrefixMatcher,
+        private readonly EnumConstantAnalyzer $enumConstantAnalyzer,
+        private readonly array $parentTypes
+    ) {
     }
 
     /**
@@ -134,7 +118,10 @@ CODE_SAMPLE
         $classReflection = $inClassNode->getClassReflection();
 
         // already enum
-        if (strpos($classReflection->getName(), '\\Enum\\') !== false && strpos($classReflection->getName(), '\\Rules\\Enum\\') === false) {
+        if (\str_contains($classReflection->getName(), '\\Enum\\') && ! \str_contains(
+            $classReflection->getName(),
+            '\\Rules\\Enum\\'
+        )) {
             return true;
         }
 

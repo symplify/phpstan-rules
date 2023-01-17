@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireExceptionNamespaceRule\RequireExceptionNamespaceRuleTest
  */
-final class RequireExceptionNamespaceRule implements Rule
+final class RequireExceptionNamespaceRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -73,7 +73,7 @@ CODE_SAMPLE
 
         // is class in "Exception" namespace?
         $className = $classReflection->getName();
-        if (strpos($className, '\\Exception\\') !== false) {
+        if (str_contains($className, '\\Exception\\')) {
             return [];
         }
 

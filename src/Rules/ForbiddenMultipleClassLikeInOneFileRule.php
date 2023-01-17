@@ -17,20 +17,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenMultipleClassLikeInOneFileRule\ForbiddenMultipleClassLikeInOneFileRuleTest
  */
-final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
+final class ForbiddenMultipleClassLikeInOneFileRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
-    /**
-     * @var \PhpParser\NodeFinder
-     */
-    private $nodeFinder;
 
-    public function __construct(NodeFinder $nodeFinder)
-    {
-        $this->nodeFinder = $nodeFinder;
+    public function __construct(
+        private readonly NodeFinder $nodeFinder
+    ) {
     }
 
     /**

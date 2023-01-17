@@ -13,15 +13,12 @@ interface PhpDocNodeVisitorInterface
 {
     public function beforeTraverse(Node $node): void;
 
-    /**
-     * @return int|\PHPStan\PhpDocParser\Ast\Node|null
-     */
-    public function enterNode(Node $node);
+    public function enterNode(Node $node): int|Node|null;
 
     /**
      * @return null|int|\PhpParser\Node|Node[] Replacement node (or special return)
      */
-    public function leaveNode(Node $node);
+    public function leaveNode(Node $node): int|\PhpParser\Node|array|null;
 
     public function afterTraverse(Node $node): void;
 }

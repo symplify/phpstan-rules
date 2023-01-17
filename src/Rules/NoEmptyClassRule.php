@@ -21,20 +21,16 @@ use Throwable;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoEmptyClassRule\NoEmptyClassRuleTest
  */
-final class NoEmptyClassRule implements Rule
+final class NoEmptyClassRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'There should be no empty class';
-    /**
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
 
-    public function __construct(ReflectionProvider $reflectionProvider)
-    {
-        $this->reflectionProvider = $reflectionProvider;
+    public function __construct(
+        private readonly ReflectionProvider $reflectionProvider
+    ) {
     }
 
     /**
@@ -108,10 +104,7 @@ CODE_SAMPLE
         return $this->isFinalClassWithAbstractOrInterfaceParent($classLike);
     }
 
-    /**
-     * @param \PhpParser\Node\Stmt\Class_|\PhpParser\Node\Stmt\Trait_ $classLike
-     */
-    private function isFinalClassWithAbstractOrInterfaceParent($classLike): bool
+    private function isFinalClassWithAbstractOrInterfaceParent(Class_ | Trait_ $classLike): bool
     {
         if (! $classLike instanceof Class_) {
             return false;

@@ -18,20 +18,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireUniqueEnumConstantRule\RequireUniqueEnumConstantRuleTest
  */
-final class RequireUniqueEnumConstantRule implements Rule
+final class RequireUniqueEnumConstantRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
-     */
-    private $enumAnalyzer;
 
-    public function __construct(EnumAnalyzer $enumAnalyzer)
-    {
-        $this->enumAnalyzer = $enumAnalyzer;
+    public function __construct(
+        private readonly EnumAnalyzer $enumAnalyzer
+    ) {
     }
 
     /**

@@ -27,7 +27,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<MethodCall>
  */
-final class RequireEnumDocBlockOnConstantListPassRule implements Rule
+final class RequireEnumDocBlockOnConstantListPassRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -44,18 +44,11 @@ final class RequireEnumDocBlockOnConstantListPassRule implements Rule
         AbstractConfigurator::class,
         ParameterBagInterface::class,
     ];
-    /**
-     * @var \Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
-     */
-    private $methodCallNodeAnalyzer;
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\MethodCallClassConstFetchPositionResolver
-     */
-    private $methodCallClassConstFetchPositionResolver;
-    public function __construct(MethodCallNodeAnalyzer $methodCallNodeAnalyzer, MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver)
-    {
-        $this->methodCallNodeAnalyzer = $methodCallNodeAnalyzer;
-        $this->methodCallClassConstFetchPositionResolver = $methodCallClassConstFetchPositionResolver;
+
+    public function __construct(
+        private readonly MethodCallNodeAnalyzer $methodCallNodeAnalyzer,
+        private readonly MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver,
+    ) {
     }
 
     /**
@@ -180,7 +173,7 @@ CODE_SAMPLE
         }
 
         // skip vendor classes, as we cannot change them
-        if (strpos($fileName, '/vendor/') !== false) {
+        if (str_contains($fileName, '/vendor/')) {
             return true;
         }
 

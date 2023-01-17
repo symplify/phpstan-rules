@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<Expression>
  */
-final class NoMissingAssingNoVoidMethodCallRule implements Rule
+final class NoMissingAssingNoVoidMethodCallRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
@@ -53,13 +53,10 @@ final class NoMissingAssingNoVoidMethodCallRule implements Rule
         'React\Promise\Promise',
         'React\Promise\PromiseInterface',
     ];
-    /**
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\AllowedChainCallSkipper
-     */
-    private $allowedChainCallSkipper;
-    public function __construct(AllowedChainCallSkipper $allowedChainCallSkipper)
-    {
-        $this->allowedChainCallSkipper = $allowedChainCallSkipper;
+
+    public function __construct(
+        private readonly AllowedChainCallSkipper $allowedChainCallSkipper,
+    ) {
     }
 
     /**

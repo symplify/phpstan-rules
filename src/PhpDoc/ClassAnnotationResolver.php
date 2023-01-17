@@ -13,18 +13,10 @@ use Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser;
 
 final class ClassAnnotationResolver
 {
-    /**
-     * @var \Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser
-     */
-    private $simplePhpDocParser;
-    /**
-     * @var \Symplify\PHPStanRules\PhpDoc\PhpDocNodeTraverser\ClassReferencePhpDocNodeTraverser
-     */
-    private $classReferencePhpDocNodeTraverser;
-    public function __construct(SimplePhpDocParser $simplePhpDocParser, ClassReferencePhpDocNodeTraverser $classReferencePhpDocNodeTraverser)
-    {
-        $this->simplePhpDocParser = $simplePhpDocParser;
-        $this->classReferencePhpDocNodeTraverser = $classReferencePhpDocNodeTraverser;
+    public function __construct(
+        private readonly SimplePhpDocParser $simplePhpDocParser,
+        private readonly ClassReferencePhpDocNodeTraverser $classReferencePhpDocNodeTraverser
+    ) {
     }
 
     /**
