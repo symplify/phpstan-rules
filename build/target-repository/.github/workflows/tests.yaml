@@ -18,8 +18,8 @@ jobs:
 
             -   run: composer require phpstan/phpstan phpstan/extension-installer --dev
 
-            # get current dev-main version
-            -   run: composer require symplify/phpstan-rules:^11.1.26 --dev
+            # get current *.27 version
+            -   run: composer require symplify/phpstan-rules:^11.1.27 --dev
 
             # prepare local files
             -   run: wget https://raw.githubusercontent.com/symplify/phpstan-rules/main/phpstan-for-tests.neon
