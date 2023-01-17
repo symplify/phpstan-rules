@@ -20,11 +20,15 @@ use PHPStan\Type\Constant\ConstantStringType;
  */
 final class FormTypeClassCollector implements Collector
 {
-    public function __construct(
-        private readonly NodeFinder $nodeFinder,
-    ) {
+    /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    public function __construct(NodeFinder $nodeFinder)
+    {
+        $this->nodeFinder = $nodeFinder;
     }
-
     public function getNodeType(): string
     {
         return ClassMethod::class;

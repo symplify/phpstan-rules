@@ -24,16 +24,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireThisOnParentMethodCallRule\RequireThisOnParentMethodCallRuleTest
  * @implements Rule<InClassNode>
  */
-final class RequireThisOnParentMethodCallRule implements Rule, DocumentedRuleInterface
+final class RequireThisOnParentMethodCallRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use "$this-><method>()" instead of "parent::<method>()" unless in the same named method';
+    /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
 
-    public function __construct(
-        private readonly NodeFinder $nodeFinder
-    ) {
+    public function __construct(NodeFinder $nodeFinder)
+    {
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**
