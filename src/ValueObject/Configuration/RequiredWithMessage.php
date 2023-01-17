@@ -6,10 +6,20 @@ namespace Symplify\PHPStanRules\ValueObject\Configuration;
 
 final class RequiredWithMessage
 {
-    public function __construct(
-        private readonly string $required,
-        private readonly ?string $message
-    ) {
+    /**
+     * @readonly
+     * @var string
+     */
+    private $required;
+    /**
+     * @readonly
+     * @var string|null
+     */
+    private $message;
+    public function __construct(string $required, ?string $message)
+    {
+        $this->required = $required;
+        $this->message = $message;
     }
 
     public function getRequired(): string

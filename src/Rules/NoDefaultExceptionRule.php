@@ -18,7 +18,7 @@ use Throwable;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDefaultExceptionRule\NoDefaultExceptionRuleTest
  */
-final class NoDefaultExceptionRule implements Rule, DocumentedRuleInterface
+final class NoDefaultExceptionRule implements Rule
 {
     /**
      * @var string
@@ -54,7 +54,7 @@ final class NoDefaultExceptionRule implements Rule, DocumentedRuleInterface
         }
 
         // fast way to detect native exceptions
-        if (\str_contains($exceptionClassName, '\\')) {
+        if (strpos($exceptionClassName, '\\') !== false) {
             return [];
         }
 
