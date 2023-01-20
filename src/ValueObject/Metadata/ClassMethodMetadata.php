@@ -6,14 +6,33 @@ namespace Symplify\PHPStanRules\ValueObject\Metadata;
 
 final class ClassMethodMetadata
 {
-    public function __construct(
-        private readonly string $methodName,
-        private readonly int $lineCount,
-        private readonly string $fileName,
-        private readonly int $line,
-    ) {
+    /**
+     * @readonly
+     * @var string
+     */
+    private $methodName;
+    /**
+     * @readonly
+     * @var int
+     */
+    private $lineCount;
+    /**
+     * @readonly
+     * @var string
+     */
+    private $fileName;
+    /**
+     * @readonly
+     * @var int
+     */
+    private $line;
+    public function __construct(string $methodName, int $lineCount, string $fileName, int $line)
+    {
+        $this->methodName = $methodName;
+        $this->lineCount = $lineCount;
+        $this->fileName = $fileName;
+        $this->line = $line;
     }
-
     public function getFileName(): string
     {
         return $this->fileName;

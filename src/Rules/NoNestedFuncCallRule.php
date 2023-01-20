@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoNestedFuncCallRule\NoNestedFuncCallRuleTest
  */
-final class NoNestedFuncCallRule implements Rule, DocumentedRuleInterface
+final class NoNestedFuncCallRule implements Rule
 {
     /**
      * @var string
@@ -45,10 +45,15 @@ final class NoNestedFuncCallRule implements Rule, DocumentedRuleInterface
         'str_starts_with',
         'str_ends_with',
     ];
+    /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
 
-    public function __construct(
-        private readonly NodeFinder $nodeFinder
-    ) {
+    public function __construct(NodeFinder $nodeFinder)
+    {
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**
