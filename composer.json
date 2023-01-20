@@ -9,7 +9,7 @@
         "nette/utils": "^3.2",
         "phpstan/phpdoc-parser": "^1.15.0",
         "webmozart/assert": "^1.11",
-        "symplify/rule-doc-generator-contracts": "*"
+        "symplify/rule-doc-generator-contracts": "^11.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.9.11",
@@ -73,7 +73,5 @@
         "docs": [
             "vendor/bin/rule-doc-generator generate src packages --output-file docs/rules_overview.md --ansi"
         ]
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
