@@ -24,6 +24,7 @@
         "rector/rector": "*",
         "symplify/easy-coding-standard": "^11.2",
         "symplify/easy-ci": "^11.1",
+        "symplify/monorepo-builder": "^11.1",
         "phpstan/extension-installer": "^1.2",
         "php-parallel-lint/php-parallel-lint": "^1.3"
     },
