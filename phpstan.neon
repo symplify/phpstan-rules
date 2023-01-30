@@ -7,9 +7,6 @@ parameters:
         - tests
 
     excludePaths:
-        # deprecated, to be removed
-        - packages/CognitiveComplexity
-
         # parallel
         - packages/*-phpstan-printer/tests/*ToPhpCompiler/Fixture*
 
@@ -17,7 +14,6 @@ parameters:
         - tests/Rules/ForbiddenArrayWithStringKeysRule/FixturePhp80/SkipAttributeArrayKey.php
 
         # tests
-
         - '*/tests/**/Source/*'
         - '*/tests/**/Fixture/*'
         - */stubs/*
