@@ -22,13 +22,13 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule, Docum
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Interface must be located in "Contract" namespace';
+    public const ERROR_MESSAGE = 'Interface must be located in "Contract" or "Contracts" namespace';
 
     /**
      * @var string
-     * @see https://regex101.com/r/kmrIG1/1
+     * @see https://regex101.com/r/kmrIG1/2
      */
-    private const A_CONTRACT_NAMESPACE_REGEX = '#\bContract\b#';
+    private const A_CONTRACT_NAMESPACE_REGEX = '#\bContracts?\b#';
 
     /**
      * @return class-string<Node>
@@ -70,6 +70,12 @@ CODE_SAMPLE
                 ,
                 <<<'CODE_SAMPLE'
 namespace App\Contract\Repository;
+
+interface ProductRepositoryInterface
+{
+}
+
+namespace App\Contracts\Repository;
 
 interface ProductRepositoryInterface
 {
