@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnArrayVariableListRule\NoReturnArrayVariableListRuleTest
  */
-final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterface
+final class NoReturnArrayVariableListRule implements Rule
 {
     /**
      * @var string
@@ -35,10 +35,14 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
      * @see https://regex101.com/r/C5d1zH/1
      */
     private const TESTS_DIRECTORY_REGEX = '#\/Tests\/#i';
-
-    public function __construct(
-        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
+     */
+    private $parentClassMethodNodeResolver;
+    public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
+    {
+        $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;
     }
 
     /**
@@ -117,11 +121,11 @@ CODE_SAMPLE
             return true;
         }
 
-        if (str_contains($namespace, 'Enum')) {
+        if (strpos($namespace, 'Enum') !== false) {
             return true;
         }
 
-        if (str_contains($namespace, 'ValueObject')) {
+        if (strpos($namespace, 'ValueObject') !== false) {
             return true;
         }
 

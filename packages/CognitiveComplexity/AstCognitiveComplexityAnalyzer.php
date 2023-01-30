@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Exception\DeprecatedException;
  */
 final class AstCognitiveComplexityAnalyzer
 {
-    public function analyzeClassLike(Class_ $class): never
+    /**
+     * @return never
+     */
+    public function analyzeClassLike(Class_ $class)
     {
         $deprecatedMessage = sprintf(
             'The "%s" service was deprecated and moved to "%s" package that has much simpler configuration. Use it instead.',
@@ -30,8 +33,10 @@ final class AstCognitiveComplexityAnalyzer
 
     /**
      * @api
+     * @return never
+     * @param \PhpParser\Node\Stmt\Function_|\PhpParser\Node\Stmt\ClassMethod $functionLike
      */
-    public function analyzeFunctionLike(Function_ | ClassMethod $functionLike): never
+    public function analyzeFunctionLike($functionLike)
     {
         $deprecatedMessage = sprintf(
             'The "%s" service was deprecated and moved to "%s" package that has much simpler configuration. Use it instead.',

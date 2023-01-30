@@ -30,17 +30,27 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckTypehintCallerTypeRule\CheckTypehintCallerTypeRuleTest
  */
-final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
+final class CheckTypehintCallerTypeRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Parameter %d should use "%s" type as the only type passed to this method';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\MethodCallNodeFinder
+     */
+    private $methodCallNodeFinder;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\ClassMethodNodeFinder
+     */
+    private $classMethodNodeFinder;
 
-    public function __construct(
-        private readonly MethodCallNodeFinder $methodCallNodeFinder,
-        private readonly ClassMethodNodeFinder $classMethodNodeFinder
-    ) {
+    public function __construct(MethodCallNodeFinder $methodCallNodeFinder, ClassMethodNodeFinder $classMethodNodeFinder)
+    {
+        $this->methodCallNodeFinder = $methodCallNodeFinder;
+        $this->classMethodNodeFinder = $classMethodNodeFinder;
     }
 
     /**
