@@ -7,23 +7,21 @@ namespace Symplify\PHPStanRules\Tests\Rules\Enum\RequireEnumDocBlockOnConstantLi
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Enum\RequireEnumDocBlockOnConstantListPassRule;
 
-/**
- * @extends RuleTestCase<RequireEnumDocBlockOnConstantListPassRule>
- */
 final class RequireEnumDocBlockOnConstantListPassRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipWithEnumLikeType.php', []];
         yield [__DIR__ . '/Fixture/SkipMoreStrings.php', []];

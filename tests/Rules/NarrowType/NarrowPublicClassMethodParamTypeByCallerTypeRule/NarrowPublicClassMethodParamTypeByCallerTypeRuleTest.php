@@ -9,26 +9,23 @@ use PhpParser\Node\Param;
 use PHPStan\Collectors\Collector;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NarrowType\NarrowPublicClassMethodParamTypeByCallerTypeRule;
 use Symplify\PHPStanRules\Tests\Rules\NarrowType\NarrowPublicClassMethodParamTypeByCallerTypeRule\Source\ExpectedThisType\CallByThisFromInterface;
 
-/**
- * @extends RuleTestCase<NarrowPublicClassMethodParamTypeByCallerTypeRule>
- */
 final class NarrowPublicClassMethodParamTypeByCallerTypeRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
-     *
      * @param string[] $filePaths
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorsWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [[__DIR__ . '/Fixture/SkipNonPublicClassMethod.php'], []];
 

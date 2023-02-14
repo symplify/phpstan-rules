@@ -7,24 +7,22 @@ namespace Symplify\PHPStanRules\Tests\Rules\PreferredAttributeOverAnnotationRule
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Routing\Annotation\Route;
 use Symplify\PHPStanRules\Rules\PreferredAttributeOverAnnotationRule;
 
-/**
- * @extends RuleTestCase<PreferredAttributeOverAnnotationRule>
- */
 final class PreferredAttributeOverAnnotationRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipAttributeRoute.php', []];
 

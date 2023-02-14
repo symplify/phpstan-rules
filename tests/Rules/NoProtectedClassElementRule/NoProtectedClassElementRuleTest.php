@@ -7,24 +7,22 @@ namespace Symplify\PHPStanRules\Tests\Rules\NoProtectedClassElementRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoProtectedClassElementRule;
 
-/**
- * @extends RuleTestCase<NoProtectedClassElementRule>
- */
 final class NoProtectedClassElementRuleTest extends RuleTestCase
 {
     /**
      * @param string[] $filePaths
      * @param mixed[] $expectedErrorMessagesWithLines
-     * @dataProvider provideData()
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [[__DIR__ . '/Fixture/SkipAbstractTestCase.php'], []];
         yield [[__DIR__ . '/Fixture/SkipInterface.php'], []];

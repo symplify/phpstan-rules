@@ -12,16 +12,15 @@
         "symplify/rule-doc-generator-contracts": "^11.1"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.9.14",
-        "symplify/phpstan-extensions": "^11.1",
-        "symplify/rule-doc-generator": "^11.1",
-        "phpunit/phpunit": "^9.5.26",
+        "phpstan/phpstan": "^1.9.17",
+        "symplify/phpstan-extensions": "^11.2",
+        "symplify/rule-doc-generator": "^11.2",
+        "phpunit/phpunit": "^10.0",
         "symfony/framework-bundle": "6.1.*",
         "cweagans/composer-patches": "^1.7",
-        "rector/rector": "^0.15.10",
+        "rector/rector": "^0.15.14",
         "symplify/easy-coding-standard": "^11.2",
-        "symplify/easy-ci": "^11.1",
-        "symplify/monorepo-builder": "^11.1",
+        "symplify/easy-ci": "^11.2",
         "phpstan/extension-installer": "^1.2",
         "php-parallel-lint/php-parallel-lint": "^1.3"
     },

@@ -8,20 +8,17 @@ use Iterator;
 use PHPStan\Collectors\Collector;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Collector\ClassLike\TraitMethodNameCollector;
 use Symplify\PHPStanRules\Rules\Complexity\NoDuplicatedTraitMethodNameRule;
 
-/**
- * @extends RuleTestCase<NoDuplicatedTraitMethodNameRule>
- */
 final class NoDuplicatedTraitMethodNameRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
-     *
      * @param string[] $filePaths
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorMessagesWithLines);
@@ -30,7 +27,7 @@ final class NoDuplicatedTraitMethodNameRuleTest extends RuleTestCase
     /**
      * @return Iterator<int, mixed[]>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $errorMessage = sprintf(NoDuplicatedTraitMethodNameRule::ERROR_MESSAGE, 'run');
         yield [

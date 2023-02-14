@@ -7,17 +7,15 @@ namespace Symplify\PHPStanRules\Tests\Rules\Privatization\NoPublicPropertyByType
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Privatization\NoPublicPropertyByTypeRule;
 
-/**
- * @extends RuleTestCase<NoPublicPropertyByTypeRule>
- */
 final class NoPublicPropertyByTypeRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
@@ -26,7 +24,7 @@ final class NoPublicPropertyByTypeRuleTest extends RuleTestCase
     /**
      * @return Iterator<array<string|int[]|string[]>>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipNoPublicProperties.php', []];
         yield [__DIR__ . '/Fixture/SkipNoTypeMatch.php', []];

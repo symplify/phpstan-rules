@@ -7,18 +7,16 @@ namespace Symplify\PHPStanRules\Tests\Rules\NoDefaultExceptionRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use RuntimeException;
 use Symplify\PHPStanRules\Rules\NoDefaultExceptionRule;
 
-/**
- * @extends RuleTestCase<NoDefaultExceptionRule>
- */
 final class NoDefaultExceptionRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
@@ -27,7 +25,7 @@ final class NoDefaultExceptionRuleTest extends RuleTestCase
     /**
      * @return Iterator<array<string|int[]|string[]>>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $errorMessage = sprintf(NoDefaultExceptionRule::ERROR_MESSAGE, RuntimeException::class);
         yield [__DIR__ . '/Fixture/ThrowGenericException.php', [[$errorMessage, 13]]];

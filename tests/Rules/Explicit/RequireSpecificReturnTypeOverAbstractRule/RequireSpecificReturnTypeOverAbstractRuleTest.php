@@ -7,24 +7,22 @@ namespace Symplify\PHPStanRules\Tests\Rules\Explicit\RequireSpecificReturnTypeOv
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Explicit\RequireSpecificReturnTypeOverAbstractRule;
 use Symplify\PHPStanRules\Tests\Rules\Explicit\RequireSpecificReturnTypeOverAbstractRule\Source\SpecificControl;
 
-/**
- * @extends RuleTestCase<RequireSpecificReturnTypeOverAbstractRule>
- */
 final class RequireSpecificReturnTypeOverAbstractRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipSpecificReturnType.php', []];
         yield [__DIR__ . '/Fixture/SkipSomeContract.php', []];

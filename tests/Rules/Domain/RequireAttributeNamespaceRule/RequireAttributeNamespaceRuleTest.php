@@ -7,23 +7,21 @@ namespace Symplify\PHPStanRules\Tests\Rules\Domain\RequireAttributeNamespaceRule
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule;
 
-/**
- * @extends RuleTestCase<RequireAttributeNamespaceRule>
- */
 final class RequireAttributeNamespaceRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/MisslocatedAttribute.php', [[RequireAttributeNamespaceRule::ERROR_MESSAGE, 7]]];
         yield [__DIR__ . '/Fixture/Attribute/SkipCorrectAttribute.php', []];

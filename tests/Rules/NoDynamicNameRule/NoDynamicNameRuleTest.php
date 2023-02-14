@@ -7,23 +7,21 @@ namespace Symplify\PHPStanRules\Tests\Rules\NoDynamicNameRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoDynamicNameRule;
 
-/**
- * @extends RuleTestCase<NoDynamicNameRule>
- */
 final class NoDynamicNameRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/DynamicConstantName.php', [[NoDynamicNameRule::ERROR_MESSAGE, 10]]];
         yield [__DIR__ . '/Fixture/DynamicMethodCallName.php', [[NoDynamicNameRule::ERROR_MESSAGE, 11]]];

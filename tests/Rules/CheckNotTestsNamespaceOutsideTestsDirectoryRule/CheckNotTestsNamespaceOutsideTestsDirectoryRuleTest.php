@@ -7,17 +7,15 @@ namespace Symplify\PHPStanRules\Tests\Rules\CheckNotTestsNamespaceOutsideTestsDi
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\CheckNotTestsNamespaceOutsideTestsDirectoryRule;
 
-/**
- * @extends RuleTestCase<CheckNotTestsNamespaceOutsideTestsDirectoryRule>
- */
 final class CheckNotTestsNamespaceOutsideTestsDirectoryRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
@@ -26,7 +24,7 @@ final class CheckNotTestsNamespaceOutsideTestsDirectoryRuleTest extends RuleTest
     /**
      * @return Iterator<array<int, mixed[]|string>>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         // expect error
         yield [

@@ -7,17 +7,15 @@ namespace Symplify\PHPStanRules\Tests\Rules\UppercaseConstantRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\UppercaseConstantRule;
 
-/**
- * @extends RuleTestCase<UppercaseConstantRule>
- */
 final class UppercaseConstantRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
@@ -26,7 +24,7 @@ final class UppercaseConstantRuleTest extends RuleTestCase
     /**
      * @return Iterator<int, array<int, array<int, int|string>|string>>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $errorMessage = sprintf(UppercaseConstantRule::ERROR_MESSAGE, 'SMall');
         yield [__DIR__ . '/Fixture/ConstantLower.php', [[$errorMessage, 9]]];

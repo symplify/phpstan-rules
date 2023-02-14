@@ -8,28 +8,25 @@ use Iterator;
 use PHPStan\Collectors\Collector;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Collector\ClassMethod\FormTypeClassCollector;
 use Symplify\PHPStanRules\Collector\ClassMethod\NewAndSetterCallsCollector;
 use Symplify\PHPStanRules\Rules\Domain\ForbiddenAlwaysSetterCallRule;
 use Symplify\PHPStanRules\Tests\Rules\Domain\ForbiddenAlwaysSetterCallRule\Source\FirstClassIdea;
 
-/**
- * @extends RuleTestCase<ForbiddenAlwaysSetterCallRule>
- */
 final class ForbiddenAlwaysSetterCallRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
-     *
      * @param string[] $filePaths
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $errorMessage = sprintf(
             ForbiddenAlwaysSetterCallRule::ERROR_MESSAGE,

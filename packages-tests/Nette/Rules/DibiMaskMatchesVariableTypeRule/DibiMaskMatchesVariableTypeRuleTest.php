@@ -7,23 +7,21 @@ namespace Symplify\PHPStanRules\Tests\Nette\Rules\DibiMaskMatchesVariableTypeRul
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Nette\Rules\DibiMaskMatchesVariableTypeRule;
 
-/**
- * @extends RuleTestCase<DibiMaskMatchesVariableTypeRule>
- */
 final class DibiMaskMatchesVariableTypeRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $errorMessage = sprintf(DibiMaskMatchesVariableTypeRule::ERROR_MESSAGE, '%v', 'string', 'array');
         yield [__DIR__ . '/Fixture/InvalidType.php', [[$errorMessage, 13]]];

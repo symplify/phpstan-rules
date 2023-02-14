@@ -7,23 +7,21 @@ namespace Symplify\PHPStanRules\Tests\Rules\NoReferenceRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoReferenceRule;
 
-/**
- * @extends RuleTestCase<NoReferenceRule>
- */
 final class NoReferenceRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/MethodWithReference.php', [[NoReferenceRule::ERROR_MESSAGE, 9]]];
         yield [__DIR__ . '/Fixture/FunctionWithReference.php', [[NoReferenceRule::ERROR_MESSAGE, 7]]];

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Composer;
 
 use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symplify\PHPStanRules\Composer\Psr4PathValidator;
 use Symplify\PHPStanRules\ValueObject\ClassNamespaceAndDirectory;
@@ -18,9 +19,7 @@ final class Psr4PathValidatorTest extends TestCase
         $this->psr4PathValidator = new Psr4PathValidator();
     }
 
-    /**
-     * @dataProvider provideCorrectData()
-     */
+    #[DataProvider('provideCorrectData')]
     public function testCorrectCase(string $namespace, string $directory): void
     {
         $isClassNamespaceCorrect = $this->isNamespaceAndDirectoryCorrect($namespace, $directory);
@@ -28,9 +27,7 @@ final class Psr4PathValidatorTest extends TestCase
         $this->assertTrue($isClassNamespaceCorrect);
     }
 
-    /**
-     * @dataProvider provideFailingData()
-     */
+    #[DataProvider('provideFailingData')]
     public function testFailingCase(string $namespace, string $directory): void
     {
         $isClassNamespaceCorrect = $this->isNamespaceAndDirectoryCorrect($namespace, $directory);
@@ -41,13 +38,13 @@ final class Psr4PathValidatorTest extends TestCase
     /**
      * @return Iterator<string[]>
      */
-    public function provideCorrectData(): Iterator
+    public static function provideCorrectData(): Iterator
     {
         yield ['Symplify\\PHPStanRules\\Tests\\', 'tests'];
         yield ['Symplify\\PHPStanRules\\Tests\\', 'tests/'];
     }
 
-    public function provideFailingData(): Iterator
+    public static function provideFailingData(): Iterator
     {
         yield ['Symplify\\PHPStanRules\\Tests\\', 'test/'];
         yield ['Symplify\\PHPStanRules\\Tests\\', '/'];

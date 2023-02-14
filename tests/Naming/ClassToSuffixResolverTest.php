@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Naming;
 
 use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,9 +20,7 @@ final class ClassToSuffixResolverTest extends TestCase
         $this->classToSuffixResolver = new ClassToSuffixResolver();
     }
 
-    /**
-     * @dataProvider provideData()
-     */
+    #[DataProvider('provideData')]
     public function test(string $className, string $expectedSuffix): void
     {
         $resolvedSuffix = $this->classToSuffixResolver->resolveFromClass($className);
@@ -31,7 +30,7 @@ final class ClassToSuffixResolverTest extends TestCase
     /**
      * @return Iterator<string[]>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield ['Exception', 'Exception'];
         yield [Command::class, 'Command'];
