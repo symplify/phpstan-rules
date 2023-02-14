@@ -6,23 +6,23 @@
     "require": {
         "php": ">=8.1",
         "nikic/php-parser": "^4.15.3",
-        "nette/utils": "^3.2",
-        "phpstan/phpdoc-parser": "^1.15.0",
+        "nette/utils": "^3.2.9",
+        "phpstan/phpdoc-parser": "^1.16.1",
         "webmozart/assert": "^1.11",
-        "symplify/rule-doc-generator-contracts": "^11.1"
+        "symplify/rule-doc-generator-contracts": "^11.1.26"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.9.17",
         "symplify/phpstan-extensions": "^11.2",
         "symplify/rule-doc-generator": "^11.2",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^10.0.7",
         "symfony/framework-bundle": "6.1.*",
-        "cweagans/composer-patches": "^1.7",
+        "cweagans/composer-patches": "^1.7.3",
         "rector/rector": "^0.15.14",
-        "symplify/easy-coding-standard": "^11.2",
+        "symplify/easy-coding-standard": "^11.2.8",
         "symplify/easy-ci": "^11.2",
         "phpstan/extension-installer": "^1.2",
-        "php-parallel-lint/php-parallel-lint": "^1.3"
+        "php-parallel-lint/php-parallel-lint": "^1.3.2"
     },
     "autoload": {
         "psr-4": {
