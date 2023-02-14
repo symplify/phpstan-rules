@@ -13,10 +13,20 @@ use PHPStan\PhpDocParser\Parser\TokenIterator;
 
 final class SimplePhpDocParser
 {
-    public function __construct(
-        private readonly PhpDocParser $phpDocParser,
-        private readonly Lexer $lexer
-    ) {
+    /**
+     * @readonly
+     * @var \PHPStan\PhpDocParser\Parser\PhpDocParser
+     */
+    private $phpDocParser;
+    /**
+     * @readonly
+     * @var \PHPStan\PhpDocParser\Lexer\Lexer
+     */
+    private $lexer;
+    public function __construct(PhpDocParser $phpDocParser, Lexer $lexer)
+    {
+        $this->phpDocParser = $phpDocParser;
+        $this->lexer = $lexer;
     }
 
     public function parseNode(Node $node): ?PhpDocNode

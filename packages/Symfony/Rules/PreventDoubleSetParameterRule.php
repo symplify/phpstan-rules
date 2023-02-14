@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<Closure>
  */
-final class PreventDoubleSetParameterRule implements Rule, DocumentedRuleInterface
+final class PreventDoubleSetParameterRule implements Rule
 {
     /**
      * @var string
@@ -36,12 +36,21 @@ final class PreventDoubleSetParameterRule implements Rule, DocumentedRuleInterfa
     /**
      * @var array<string, string[]>
      */
-    private array $setParametersNamesByFile = [];
-
-    public function __construct(
-        private readonly SymfonyPhpConfigClosureAnalyzer $symfonyPhpConfigClosureAnalyzer,
-        private readonly NodeFinder $nodeFinder,
-    ) {
+    private $setParametersNamesByFile = [];
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyPhpConfigClosureAnalyzer
+     */
+    private $symfonyPhpConfigClosureAnalyzer;
+    /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    public function __construct(SymfonyPhpConfigClosureAnalyzer $symfonyPhpConfigClosureAnalyzer, NodeFinder $nodeFinder)
+    {
+        $this->symfonyPhpConfigClosureAnalyzer = $symfonyPhpConfigClosureAnalyzer;
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**
