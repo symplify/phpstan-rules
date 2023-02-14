@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Spotter\SwitchToMatchSpotterRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Spotter\SwitchToMatchSpotterRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\Spotter\SwitchToMatchSpotterRule;
 final class SwitchToMatchSpotterRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipNoDefault.php', []];
         yield [__DIR__ . '/Fixture/SimpleSwitch.php', [[SwitchToMatchSpotterRule::ERROR_MESSAGE, 11]]];

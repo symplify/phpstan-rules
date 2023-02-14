@@ -8,6 +8,7 @@ use Iterator;
 use PHPStan\Collectors\Collector;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Collector\ClassConst\RegexClassConstCollector;
 use Symplify\PHPStanRules\Rules\Domain\NoDuplicatedRegexRule;
 
@@ -17,16 +18,16 @@ use Symplify\PHPStanRules\Rules\Domain\NoDuplicatedRegexRule;
 final class NoDuplicatedRegexRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param string[] $filePaths
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $firstErrorMessage = sprintf(NoDuplicatedRegexRule::ERROR_MESSAGE, 'FIRST_REGEX', "#\d+#");
         $secondErrorMessage = sprintf(NoDuplicatedRegexRule::ERROR_MESSAGE, 'SECOND_REGEX', "#\d+#");

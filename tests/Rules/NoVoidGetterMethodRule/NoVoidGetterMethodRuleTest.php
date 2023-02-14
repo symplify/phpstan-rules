@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\NoVoidGetterMethodRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoVoidGetterMethodRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\NoVoidGetterMethodRule;
 final class NoVoidGetterMethodRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SomeGetterVoid.php', [[NoVoidGetterMethodRule::ERROR_MESSAGE, 9]]];
         yield [__DIR__ . '/Fixture/SomeGetterWithNoReturn.php', [[NoVoidGetterMethodRule::ERROR_MESSAGE, 9]]];

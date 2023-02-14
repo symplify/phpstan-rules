@@ -8,6 +8,7 @@ use Iterator;
 use PHPStan\Collectors\Collector;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Collector\ClassMethod\ClassMethodContentCollector;
 use Symplify\PHPStanRules\Rules\PreventDuplicateClassMethodRule;
 
@@ -19,14 +20,14 @@ final class PreventDuplicateClassMethodRuleTest extends RuleTestCase
     /**
      * @param string[] $filePaths
      * @param mixed[] $expectedErrorMessagesWithLines
-     * @dataProvider provideData()
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [[__DIR__ . '/Fixture/ValueObject/SkipChair.php', __DIR__ . '/Fixture/ValueObject/SkipTable.php'], []];
         yield [[__DIR__ . '/Fixture/Entity/SkipApple.php', __DIR__ . '/Fixture/Entity/SkipCar.php'], []];

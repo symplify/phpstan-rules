@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\CheckRequiredInterfaceInContractName
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule;
 final class CheckRequiredInterfaceInContractNamespaceRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/Contract/SkipInterfaceInContract.php', []];
         yield [__DIR__ . '/Fixture/Illuminate/Contracts/View/View.php', []];

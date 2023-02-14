@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Symfony\Rules\RequireInvokableControllerRu
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule;
 
 /**
@@ -15,9 +16,9 @@ use Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule;
 final class RequireInvokableControllerRulePhp80Test extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
@@ -26,7 +27,7 @@ final class RequireInvokableControllerRulePhp80Test extends RuleTestCase
     /**
      * @return Iterator<array<string|int[]|string[]>>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [
             __DIR__ . '/Fixture/MissnamedRouteAttributeController.php',

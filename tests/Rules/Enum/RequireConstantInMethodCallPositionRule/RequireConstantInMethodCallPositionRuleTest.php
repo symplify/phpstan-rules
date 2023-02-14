@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Enum\RequireConstantInMethodCallPosi
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Enum\RequireConstantInMethodCallPositionRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\Enum\RequireConstantInMethodCallPositionRule;
 final class RequireConstantInMethodCallPositionRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipWithConstantLocal.php', []];
         yield [__DIR__ . '/Fixture/SkipWithConstantExternal.php', []];

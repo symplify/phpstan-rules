@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\NoDuplicatedShortClassNameRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoDuplicatedShortClassNameRule;
 use Symplify\PHPStanRules\Tests\Rules\NoDuplicatedShortClassNameRule\Fixture\Nested\SameShortName;
 
@@ -17,9 +18,9 @@ final class NoDuplicatedShortClassNameRuleTest extends RuleTestCase
 {
     /**
      * @param string[] $filePaths
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorMessagesWithLines);
@@ -28,7 +29,7 @@ final class NoDuplicatedShortClassNameRuleTest extends RuleTestCase
     /**
      * @return Iterator<int, mixed[]>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         // might be same, but skipped for shallow nesting - see config file
         yield [

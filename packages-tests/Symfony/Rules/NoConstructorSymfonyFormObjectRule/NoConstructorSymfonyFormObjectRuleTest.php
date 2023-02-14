@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Symfony\Rules\NoConstructorSymfonyFormObjectRule;
 
 use Iterator;
-use PHPStan\Collectors\Collector;
-use PHPStan\Rules\Rule;
-use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\TestRunner\TestResult\Collector;
 use Symplify\PHPStanRules\Collector\ClassMethod\FormTypeClassCollector;
 use Symplify\PHPStanRules\Symfony\Rules\NoConstructorSymfonyFormObjectRule;
 
@@ -17,17 +16,16 @@ use Symplify\PHPStanRules\Symfony\Rules\NoConstructorSymfonyFormObjectRule;
 final class NoConstructorSymfonyFormObjectRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
-     *
      * @param string[] $filePaths
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse($filePaths, $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [
             [

@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Nette\Rules\NoInjectOnFinalRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Nette\Rules\NoInjectOnFinalRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Nette\Rules\NoInjectOnFinalRule;
 final class NoInjectOnFinalRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipInjectOnNonAbstract.php', []];
         yield [__DIR__ . '/Fixture/SkipAbstractClass.php', []];

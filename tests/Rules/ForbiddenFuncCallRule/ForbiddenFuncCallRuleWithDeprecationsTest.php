@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule;
 final class ForbiddenFuncCallRuleWithDeprecationsTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         // custom messages are defined in the config file
 

@@ -10,6 +10,7 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\NodeFinder;
 use PhpParser\ParserFactory;
 use PHPStan\DependencyInjection\ContainerFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
@@ -31,9 +32,7 @@ final class CompositionOverInheritanceAnalyzerTest extends TestCase
         $this->compositionOverInheritanceAnalyzer = $container->getByType(CompositionOverInheritanceAnalyzer::class);
     }
 
-    /**
-     * @dataProvider provideTokensAndExpectedCognitiveComplexity()
-     */
+    #[DataProvider('provideTokensAndExpectedCognitiveComplexity')]
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
         $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fixtureFileInfo);
@@ -49,7 +48,7 @@ final class CompositionOverInheritanceAnalyzerTest extends TestCase
      *
      * @return Iterator<mixed, SmartFileInfo[]>
      */
-    public function provideTokensAndExpectedCognitiveComplexity(): Iterator
+    public static function provideTokensAndExpectedCognitiveComplexity(): Iterator
     {
         return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Source');
     }

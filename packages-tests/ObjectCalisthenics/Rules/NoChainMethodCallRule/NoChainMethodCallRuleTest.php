@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\ObjectCalisthenics\Rules\NoChainMethodCall
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoChainMethodCallRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoChainMethodCallRule;
 final class NoChainMethodCallRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/ChainMethodCall.php', [[NoChainMethodCallRule::ERROR_MESSAGE, 11]]];
         yield [__DIR__ . '/Fixture/SkipSymfonyConfig.php', []];

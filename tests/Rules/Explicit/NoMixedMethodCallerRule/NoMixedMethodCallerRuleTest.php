@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Explicit\NoMixedMethodCallerRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule;
 final class NoMixedMethodCallerRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[]|array<int, array<int|string>> $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipKnownCallerType.php', []];
         yield [__DIR__ . '/Fixture/SkipMockObject.php', []];

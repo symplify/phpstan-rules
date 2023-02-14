@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Complexity\NoAbstractRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Complexity\NoAbstractRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\Complexity\NoAbstractRule;
 final class NoAbstractRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipAbstractCommand.php', []];
         yield [__DIR__ . '/Fixture/SkipNonAbstractClass.php', []];

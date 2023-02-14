@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\RequireAttributeNameRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\RequireAttributeNameRule;
 final class RequireAttributeNameRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/MissingName.php', [[RequireAttributeNameRule::ERROR_MESSAGE, 11]]];
         yield [__DIR__ . '/Fixture/SkipCorrectName.php', []];

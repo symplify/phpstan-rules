@@ -9,6 +9,7 @@ use Iterator;
 use Nette\Utils\DateTime;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\PreferredClassRule;
 use Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\Fixture\SkipPreferredExtendingTheOldOne;
 use Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\Source\AbstractNotWhatYouWant;
@@ -19,15 +20,15 @@ use Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\Source\AbstractNotWhatY
 final class PreferredClassRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $errorMessage = sprintf(PreferredClassRule::ERROR_MESSAGE, NativeDateTime::class, DateTime::class);
         yield [__DIR__ . '/Fixture/ClassUsingOld.php', [[$errorMessage, 13]]];

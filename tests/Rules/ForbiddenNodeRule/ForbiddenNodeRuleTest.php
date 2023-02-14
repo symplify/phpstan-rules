@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenNodeRule;
 
 /**
@@ -15,9 +16,9 @@ use Symplify\PHPStanRules\Rules\ForbiddenNodeRule;
 final class ForbiddenNodeRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
@@ -26,7 +27,7 @@ final class ForbiddenNodeRuleTest extends RuleTestCase
     /**
      * @return \Iterator<array<int, array<int[]|string[]>>|string[]>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $errorMessage = sprintf(ForbiddenNodeRule::ERROR_MESSAGE, 'empty($value)');
         yield [__DIR__ . '/Fixture/EmptyCall.php', [[$errorMessage, 11]]];

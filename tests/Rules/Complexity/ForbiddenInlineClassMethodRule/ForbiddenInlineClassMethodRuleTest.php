@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenInlineClassMetho
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Complexity\ForbiddenInlineClassMethodRule;
 
 /**
@@ -15,9 +16,9 @@ use Symplify\PHPStanRules\Rules\Complexity\ForbiddenInlineClassMethodRule;
 final class ForbiddenInlineClassMethodRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorMessagesWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
@@ -26,7 +27,7 @@ final class ForbiddenInlineClassMethodRuleTest extends RuleTestCase
     /**
      * @return Iterator<string[]|array<int, array<int[]|string[]>>>
      */
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         yield [
             __DIR__ . '/Fixture/SomeClassWithInlinedMethod.php', [

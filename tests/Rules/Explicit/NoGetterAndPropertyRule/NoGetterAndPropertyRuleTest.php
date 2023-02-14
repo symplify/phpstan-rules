@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Explicit\NoGetterAndPropertyRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Explicit\NoGetterAndPropertyRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\Explicit\NoGetterAndPropertyRule;
 final class NoGetterAndPropertyRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[] $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         $boolGetterErrorMessage = \sprintf(NoGetterAndPropertyRule::ERROR_MESSAGE, 'enabled');
         yield [__DIR__ . '/Fixture/PublicAndIsser.php', [[$boolGetterErrorMessage, 7]]];

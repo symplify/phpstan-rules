@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Explicit\NoMixedCallableRule;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Explicit\NoMixedCallableRule;
 
 /**
@@ -15,15 +16,15 @@ use Symplify\PHPStanRules\Rules\Explicit\NoMixedCallableRule;
 final class NoMixedCallableRuleTest extends RuleTestCase
 {
     /**
-     * @dataProvider provideData()
      * @param mixed[]|array<int, array<int|string>> $expectedErrorsWithLines
      */
+    #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
-    public function provideData(): Iterator
+    public static function provideData(): Iterator
     {
         // variable
         yield [__DIR__ . '/Fixture/MixedCallable.php', [[NoMixedCallableRule::ERROR_MESSAGE, 11]]];
