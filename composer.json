@@ -17,7 +17,6 @@
         "symplify/rule-doc-generator": "^11.2",
         "phpunit/phpunit": "^10.0.7",
         "symfony/framework-bundle": "6.1.*",
-        "cweagans/composer-patches": "^1.7.3",
         "rector/rector": "^0.15.14",
         "symplify/easy-coding-standard": "^11.2.8",
         "symplify/easy-ci": "^11.2",
@@ -54,7 +53,6 @@
     "config": {
         "platform-check": false,
         "allow-plugins": {
-            "cweagans/composer-patches": true,
             "phpstan/extension-installer": true
         }
     },
