@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Nette\Rules\NoNetteInjectAndConstructorRule;
 
-/**
- * @extends RuleTestCase<NoNetteInjectAndConstructorRule>
- */
 final class NoNetteInjectAndConstructorRuleTest extends RuleTestCase
 {
     /**

@@ -13,9 +13,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NarrowType\NarrowPublicClassMethodParamTypeByCallerTypeRule;
 use Symplify\PHPStanRules\Tests\Rules\NarrowType\NarrowPublicClassMethodParamTypeByCallerTypeRule\Source\ExpectedThisType\CallByThisFromInterface;
 
-/**
- * @extends RuleTestCase<NarrowPublicClassMethodParamTypeByCallerTypeRule>
- */
 final class NarrowPublicClassMethodParamTypeByCallerTypeRuleTest extends RuleTestCase
 {
     /**

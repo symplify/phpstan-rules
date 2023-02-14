@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\RequireThisCallOnLocalMethodRule;
 
-/**
- * @extends RuleTestCase<RequireThisCallOnLocalMethodRule>
- */
 final class RequireThisCallOnLocalMethodRuleTest extends RuleTestCase
 {
     /**

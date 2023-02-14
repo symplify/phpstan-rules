@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\RequiredAbstractClassKeywordRule;
 
-/**
- * @extends RuleTestCase<RequiredAbstractClassKeywordRule>
- */
 final class RequiredAbstractClassKeywordRuleTest extends RuleTestCase
 {
     /**

@@ -12,9 +12,6 @@ use Symplify\PHPStanRules\CognitiveComplexity\Rules\FunctionLikeCognitiveComplex
 use Symplify\PHPStanRules\Tests\CognitiveComplexity\Rules\FunctionLikeCognitiveComplexityRule\Fixture\ClassMethodOverComplicated;
 use Symplify\PHPStanRules\Tests\CognitiveComplexity\Rules\FunctionLikeCognitiveComplexityRule\Fixture\VideoRepository;
 
-/**
- * @extends RuleTestCase<FunctionLikeCognitiveComplexityRule>
- */
 final class FunctionLikeCognitiveComplexityRuleTest extends RuleTestCase
 {
     /**

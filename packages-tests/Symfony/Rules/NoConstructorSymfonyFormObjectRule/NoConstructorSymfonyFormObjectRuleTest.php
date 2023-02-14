@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Symfony\Rules\NoConstructorSymfonyFormObjectRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
+use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\TestRunner\TestResult\Collector;
 use Symplify\PHPStanRules\Collector\ClassMethod\FormTypeClassCollector;
 use Symplify\PHPStanRules\Symfony\Rules\NoConstructorSymfonyFormObjectRule;
 
-/**
- * @extends RuleTestCase<NoConstructorSymfonyFormObjectRule>
- */
 final class NoConstructorSymfonyFormObjectRuleTest extends RuleTestCase
 {
     /**

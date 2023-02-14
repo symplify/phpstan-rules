@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Nette\Rules\NoNetteDoubleTemplateAssignRule;
 
-/**
- * @extends RuleTestCase<NoNetteDoubleTemplateAssignRule>
- */
 final class NoNetteDoubleTemplateAssignRuleTest extends RuleTestCase
 {
     /**

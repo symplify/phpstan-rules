@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Spotter\SwitchToMatchSpotterRule;
 
-/**
- * @extends RuleTestCase<SwitchToMatchSpotterRule>
- */
 final class SwitchToMatchSpotterRuleTest extends RuleTestCase
 {
     /**

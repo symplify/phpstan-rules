@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenSpreadOperatorRule;
 
-/**
- * @extends RuleTestCase<ForbiddenSpreadOperatorRule>
- */
 final class ForbiddenSpreadOperatorRuleTest extends RuleTestCase
 {
     /**

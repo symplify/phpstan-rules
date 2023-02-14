@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Explicit\RequireSpecificReturnTypeOverAbstractRule;
 use Symplify\PHPStanRules\Tests\Rules\Explicit\RequireSpecificReturnTypeOverAbstractRule\Source\SpecificControl;
 
-/**
- * @extends RuleTestCase<RequireSpecificReturnTypeOverAbstractRule>
- */
 final class RequireSpecificReturnTypeOverAbstractRuleTest extends RuleTestCase
 {
     /**

@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoVoidGetterMethodRule;
 
-/**
- * @extends RuleTestCase<NoVoidGetterMethodRule>
- */
 final class NoVoidGetterMethodRuleTest extends RuleTestCase
 {
     /**

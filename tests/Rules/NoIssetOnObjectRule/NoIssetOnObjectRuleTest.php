@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoIssetOnObjectRule;
 
-/**
- * @extends RuleTestCase<NoIssetOnObjectRule>
- */
 final class NoIssetOnObjectRuleTest extends RuleTestCase
 {
     /**

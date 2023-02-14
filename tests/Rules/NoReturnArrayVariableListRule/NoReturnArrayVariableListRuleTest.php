@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule;
 
-/**
- * @extends RuleTestCase<NoReturnArrayVariableListRule>
- */
 final class NoReturnArrayVariableListRuleTest extends RuleTestCase
 {
     /**

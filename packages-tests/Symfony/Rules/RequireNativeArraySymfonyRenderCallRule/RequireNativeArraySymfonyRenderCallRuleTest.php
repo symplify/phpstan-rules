@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Symfony\Rules\RequireNativeArraySymfonyRenderCallRule;
 
-/**
- * @extends RuleTestCase<RequireNativeArraySymfonyRenderCallRule>
- */
 final class RequireNativeArraySymfonyRenderCallRuleTest extends RuleTestCase
 {
     /**

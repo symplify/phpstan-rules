@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule;
 
-/**
- * @extends RuleTestCase<ForbiddenFuncCallRule>
- */
 final class ForbiddenFuncCallRuleWithDeprecationsTest extends RuleTestCase
 {
     /**

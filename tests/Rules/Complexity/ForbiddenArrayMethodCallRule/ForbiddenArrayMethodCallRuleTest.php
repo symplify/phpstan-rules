@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule;
 
-/**
- * @extends RuleTestCase<ForbiddenArrayMethodCallRule>
- */
 final class ForbiddenArrayMethodCallRuleTest extends RuleTestCase
 {
     /**

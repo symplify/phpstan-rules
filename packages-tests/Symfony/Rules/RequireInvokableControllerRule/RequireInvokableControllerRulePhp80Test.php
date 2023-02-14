@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule;
 
-/**
- * @extends RuleTestCase<RequireInvokableControllerRule>
- */
 final class RequireInvokableControllerRulePhp80Test extends RuleTestCase
 {
     /**

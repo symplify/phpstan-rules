@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule;
 
-/**
- * @extends RuleTestCase<CheckRequiredInterfaceInContractNamespaceRule>
- */
 final class CheckRequiredInterfaceInContractNamespaceRuleTest extends RuleTestCase
 {
     /**

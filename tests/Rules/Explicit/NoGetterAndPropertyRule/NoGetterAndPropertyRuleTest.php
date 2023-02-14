@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Explicit\NoGetterAndPropertyRule;
 
-/**
- * @extends RuleTestCase<NoGetterAndPropertyRule>
- */
 final class NoGetterAndPropertyRuleTest extends RuleTestCase
 {
     /**

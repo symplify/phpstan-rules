@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule;
 
-/**
- * @extends RuleTestCase<ForbiddenSameNamedNewInstanceRule>
- */
 final class ForbiddenSameNamedNewInstanceRuleTest extends RuleTestCase
 {
     /**

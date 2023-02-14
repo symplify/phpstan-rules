@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoStaticPropertyRule;
 
-/**
- * @extends RuleTestCase<NoStaticPropertyRule>
- */
 final class NoStaticPropertyRuleTest extends RuleTestCase
 {
     /**

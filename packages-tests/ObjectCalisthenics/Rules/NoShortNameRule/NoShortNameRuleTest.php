@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoShortNameRule;
 
-/**
- * @extends RuleTestCase<NoShortNameRule>
- */
 final class NoShortNameRuleTest extends RuleTestCase
 {
     /**

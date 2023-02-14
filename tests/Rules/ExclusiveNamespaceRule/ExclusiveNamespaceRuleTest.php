@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ExclusiveNamespaceRule;
 
-/**
- * @extends RuleTestCase<ExclusiveNamespaceRule>
- */
 final class ExclusiveNamespaceRuleTest extends RuleTestCase
 {
     /**

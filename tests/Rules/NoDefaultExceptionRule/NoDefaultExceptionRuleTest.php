@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use RuntimeException;
 use Symplify\PHPStanRules\Rules\NoDefaultExceptionRule;
 
-/**
- * @extends RuleTestCase<NoDefaultExceptionRule>
- */
 final class NoDefaultExceptionRuleTest extends RuleTestCase
 {
     /**

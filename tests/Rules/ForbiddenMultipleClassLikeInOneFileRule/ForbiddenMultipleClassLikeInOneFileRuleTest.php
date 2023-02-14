@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule;
 
-/**
- * @extends RuleTestCase<ForbiddenMultipleClassLikeInOneFileRule>
- */
 final class ForbiddenMultipleClassLikeInOneFileRuleTest extends RuleTestCase
 {
     /**

@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenNodeRule;
 
-/**
- * @extends RuleTestCase<ForbiddenNodeRule>
- */
 final class ForbiddenNodeRuleTest extends RuleTestCase
 {
     /**

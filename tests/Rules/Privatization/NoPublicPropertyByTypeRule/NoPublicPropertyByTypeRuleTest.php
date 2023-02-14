@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Privatization\NoPublicPropertyByTypeRule;
 
-/**
- * @extends RuleTestCase<NoPublicPropertyByTypeRule>
- */
 final class NoPublicPropertyByTypeRuleTest extends RuleTestCase
 {
     /**

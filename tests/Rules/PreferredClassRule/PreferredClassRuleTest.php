@@ -14,9 +14,6 @@ use Symplify\PHPStanRules\Rules\PreferredClassRule;
 use Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\Fixture\SkipPreferredExtendingTheOldOne;
 use Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\Source\AbstractNotWhatYouWant;
 
-/**
- * @extends RuleTestCase<PreferredClassRule>
- */
 final class PreferredClassRuleTest extends RuleTestCase
 {
     /**

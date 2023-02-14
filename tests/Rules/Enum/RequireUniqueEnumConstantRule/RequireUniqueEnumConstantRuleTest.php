@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule;
 
-/**
- * @extends RuleTestCase<RequireUniqueEnumConstantRule>
- */
 final class RequireUniqueEnumConstantRuleTest extends RuleTestCase
 {
     /**

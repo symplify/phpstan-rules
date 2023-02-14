@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Symfony\Rules\PreventDoubleSetParameterRule;
 
-/**
- * @extends RuleTestCase<PreventDoubleSetParameterRule>
- */
 final class PreventDoubleSetParameterRuleTest extends RuleTestCase
 {
     /**

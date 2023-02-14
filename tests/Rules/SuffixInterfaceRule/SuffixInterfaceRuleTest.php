@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\SuffixInterfaceRule;
 
-/**
- * @extends RuleTestCase<SuffixInterfaceRule>
- */
 final class SuffixInterfaceRuleTest extends RuleTestCase
 {
     /**

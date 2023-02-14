@@ -13,9 +13,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\CheckTypehintCallerTypeRule;
 
-/**
- * @extends RuleTestCase<CheckTypehintCallerTypeRule>
- */
 final class CheckTypehintCallerTypeRuleTest extends RuleTestCase
 {
     /**

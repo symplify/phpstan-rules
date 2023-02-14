@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoInlineStringRegexRule;
 
-/**
- * @extends RuleTestCase<NoInlineStringRegexRule>
- */
 final class NoInlineStringRegexRuleTest extends RuleTestCase
 {
     /**

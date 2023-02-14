@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenThisArgumentRule;
 
-/**
- * @extends RuleTestCase<ForbiddenThisArgumentRule>
- */
 final class ForbiddenThisArgumentRuleTest extends RuleTestCase
 {
     /**

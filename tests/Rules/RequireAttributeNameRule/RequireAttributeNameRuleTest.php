@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\RequireAttributeNameRule;
 
-/**
- * @extends RuleTestCase<RequireAttributeNameRule>
- */
 final class RequireAttributeNameRuleTest extends RuleTestCase
 {
     /**

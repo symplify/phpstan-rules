@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenArrayWithStringKeysRule;
 
-/**
- * @extends RuleTestCase<ForbiddenArrayWithStringKeysRule>
- */
 final class ForbiddenArrayWithStringKeysRuleTest extends RuleTestCase
 {
     /**

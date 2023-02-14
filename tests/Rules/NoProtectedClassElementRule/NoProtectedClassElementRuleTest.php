@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoProtectedClassElementRule;
 
-/**
- * @extends RuleTestCase<NoProtectedClassElementRule>
- */
 final class NoProtectedClassElementRuleTest extends RuleTestCase
 {
     /**

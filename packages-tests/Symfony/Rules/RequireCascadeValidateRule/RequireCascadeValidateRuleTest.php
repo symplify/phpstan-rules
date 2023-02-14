@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Symfony\Rules\RequireCascadeValidateRule;
 
-/**
- * @extends RuleTestCase<RequireCascadeValidateRule>
- */
 final class RequireCascadeValidateRuleTest extends RuleTestCase
 {
     /**

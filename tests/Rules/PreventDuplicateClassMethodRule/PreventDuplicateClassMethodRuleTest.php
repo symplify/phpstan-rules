@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Collector\ClassMethod\ClassMethodContentCollector;
 use Symplify\PHPStanRules\Rules\PreventDuplicateClassMethodRule;
 
-/**
- * @extends RuleTestCase<PreventDuplicateClassMethodRule>
- */
 final class PreventDuplicateClassMethodRuleTest extends RuleTestCase
 {
     /**

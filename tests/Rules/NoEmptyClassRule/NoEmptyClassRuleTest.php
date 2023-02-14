@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoEmptyClassRule;
 
-/**
- * @extends RuleTestCase<NoEmptyClassRule>
- */
 final class NoEmptyClassRuleTest extends RuleTestCase
 {
     /**

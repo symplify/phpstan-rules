@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenParamTypeRemovalRule;
 
-/**
- * @extends RuleTestCase<ForbiddenParamTypeRemovalRule>
- */
 final class ForbiddenParamTypeRemovalRuleTest extends RuleTestCase
 {
     /**

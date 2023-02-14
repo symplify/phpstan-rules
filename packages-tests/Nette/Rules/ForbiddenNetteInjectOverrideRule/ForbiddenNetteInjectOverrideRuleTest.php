@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Nette\Rules\ForbiddenNetteInjectOverrideRule;
 
-/**
- * @extends RuleTestCase<ForbiddenNetteInjectOverrideRule>
- */
 final class ForbiddenNetteInjectOverrideRuleTest extends RuleTestCase
 {
     /**

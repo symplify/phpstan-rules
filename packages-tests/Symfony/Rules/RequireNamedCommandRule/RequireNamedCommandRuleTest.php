@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Symfony\Rules\RequireNamedCommandRule;
 
-/**
- * @extends RuleTestCase<RequireNamedCommandRule>
- */
 final class RequireNamedCommandRuleTest extends RuleTestCase
 {
     /**

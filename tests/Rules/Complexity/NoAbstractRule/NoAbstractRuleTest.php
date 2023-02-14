@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Complexity\NoAbstractRule;
 
-/**
- * @extends RuleTestCase<NoAbstractRule>
- */
 final class NoAbstractRuleTest extends RuleTestCase
 {
     /**

@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoNestedFuncCallRule;
 
-/**
- * @extends RuleTestCase<NoNestedFuncCallRule>
- */
 final class NoNestedFuncCallRuleTest extends RuleTestCase
 {
     /**

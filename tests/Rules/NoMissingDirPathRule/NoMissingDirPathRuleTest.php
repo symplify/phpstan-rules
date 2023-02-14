@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoMissingDirPathRule;
 
-/**
- * @extends RuleTestCase<NoMissingDirPathRule>
- */
 final class NoMissingDirPathRuleTest extends RuleTestCase
 {
     /**

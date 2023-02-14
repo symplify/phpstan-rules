@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoDuplicatedShortClassNameRule;
 use Symplify\PHPStanRules\Tests\Rules\NoDuplicatedShortClassNameRule\Fixture\Nested\SameShortName;
 
-/**
- * @extends RuleTestCase<NoDuplicatedShortClassNameRule>
- */
 final class NoDuplicatedShortClassNameRuleTest extends RuleTestCase
 {
     /**

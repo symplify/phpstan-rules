@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Enum\RequireConstantInMethodCallPositionRule;
 
-/**
- * @extends RuleTestCase<RequireConstantInMethodCallPositionRule>
- */
 final class RequireConstantInMethodCallPositionRuleTest extends RuleTestCase
 {
     /**

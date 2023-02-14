@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Enum\RequireEnumDocBlockOnConstantListPassRule;
 
-/**
- * @extends RuleTestCase<RequireEnumDocBlockOnConstantListPassRule>
- */
 final class RequireEnumDocBlockOnConstantListPassRuleTest extends RuleTestCase
 {
     /**

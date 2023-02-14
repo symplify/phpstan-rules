@@ -11,9 +11,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Routing\Annotation\Route;
 use Symplify\PHPStanRules\Rules\PreferredAttributeOverAnnotationRule;
 
-/**
- * @extends RuleTestCase<PreferredAttributeOverAnnotationRule>
- */
 final class PreferredAttributeOverAnnotationRuleTest extends RuleTestCase
 {
     /**

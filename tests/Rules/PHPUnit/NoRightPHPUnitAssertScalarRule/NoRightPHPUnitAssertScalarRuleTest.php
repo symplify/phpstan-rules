@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\PHPUnit\NoRightPHPUnitAssertScalarRule;
 
-/**
- * @extends RuleTestCase<NoRightPHPUnitAssertScalarRule>
- */
 final class NoRightPHPUnitAssertScalarRuleTest extends RuleTestCase
 {
     /**

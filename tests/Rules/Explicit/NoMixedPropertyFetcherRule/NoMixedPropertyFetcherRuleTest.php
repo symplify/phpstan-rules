@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Explicit\NoMixedPropertyFetcherRule;
 
-/**
- * @extends RuleTestCase<NoMixedPropertyFetcherRule>
- */
 final class NoMixedPropertyFetcherRuleTest extends RuleTestCase
 {
     /**

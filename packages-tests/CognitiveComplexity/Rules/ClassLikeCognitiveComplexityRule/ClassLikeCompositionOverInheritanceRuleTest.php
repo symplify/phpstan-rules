@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\CognitiveComplexity\Rules\ClassLikeCognitiveComplexityRule;
 
-/**
- * @extends RuleTestCase<ClassLikeCognitiveComplexityRule>
- */
 final class ClassLikeCompositionOverInheritanceRuleTest extends RuleTestCase
 {
     /**

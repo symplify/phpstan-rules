@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Missing\CheckSprintfMatchingTypesRule;
 
-/**
- * @extends RuleTestCase<CheckSprintfMatchingTypesRule>
- */
 final class CheckSprintfMatchingTypesRuleTest extends RuleTestCase
 {
     /**

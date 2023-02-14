@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Complexity\ForbiddenInlineClassMethodRule;
 
-/**
- * @extends RuleTestCase<ForbiddenInlineClassMethodRule>
- */
 final class ForbiddenInlineClassMethodRuleTest extends RuleTestCase
 {
     /**

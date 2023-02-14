@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\RequireThisOnParentMethodCallRule;
 
-/**
- * @extends RuleTestCase<RequireThisOnParentMethodCallRule>
- */
 final class RequireThisOnParentMethodCallRuleTest extends RuleTestCase
 {
     /**

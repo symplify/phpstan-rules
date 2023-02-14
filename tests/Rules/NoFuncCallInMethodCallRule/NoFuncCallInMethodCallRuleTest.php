@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoFuncCallInMethodCallRule;
 
-/**
- * @extends RuleTestCase<NoFuncCallInMethodCallRule>
- */
 final class NoFuncCallInMethodCallRuleTest extends RuleTestCase
 {
     /**

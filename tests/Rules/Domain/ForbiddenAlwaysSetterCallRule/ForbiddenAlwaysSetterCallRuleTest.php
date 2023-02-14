@@ -14,9 +14,6 @@ use Symplify\PHPStanRules\Collector\ClassMethod\NewAndSetterCallsCollector;
 use Symplify\PHPStanRules\Rules\Domain\ForbiddenAlwaysSetterCallRule;
 use Symplify\PHPStanRules\Tests\Rules\Domain\ForbiddenAlwaysSetterCallRule\Source\FirstClassIdea;
 
-/**
- * @extends RuleTestCase<ForbiddenAlwaysSetterCallRule>
- */
 final class ForbiddenAlwaysSetterCallRuleTest extends RuleTestCase
 {
     /**

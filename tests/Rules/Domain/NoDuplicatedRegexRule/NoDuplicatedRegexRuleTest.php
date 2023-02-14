@@ -12,9 +12,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Collector\ClassConst\RegexClassConstCollector;
 use Symplify\PHPStanRules\Rules\Domain\NoDuplicatedRegexRule;
 
-/**
- * @extends RuleTestCase<NoDuplicatedRegexRule>
- */
 final class NoDuplicatedRegexRuleTest extends RuleTestCase
 {
     /**

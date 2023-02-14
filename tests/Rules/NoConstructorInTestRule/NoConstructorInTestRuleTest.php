@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoConstructorInTestRule;
 
-/**
- * @extends RuleTestCase<NoConstructorInTestRule>
- */
 final class NoConstructorInTestRuleTest extends RuleTestCase
 {
     /**

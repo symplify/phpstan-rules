@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule;
 
-/**
- * @extends RuleTestCase<ForbiddenExtendOfNonAbstractClassRule>
- */
 final class ForbiddenExtendOfNonAbstractClassRuleTest extends RuleTestCase
 {
     /**

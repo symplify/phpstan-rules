@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoChainMethodCallRule;
 
-/**
- * @extends RuleTestCase<NoChainMethodCallRule>
- */
 final class NoChainMethodCallRuleTest extends RuleTestCase
 {
     /**

@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\ClassNameRespectsParentSuffixRule;
 
-/**
- * @extends RuleTestCase<ClassNameRespectsParentSuffixRule>
- */
 final class ClassNameRespectsParentSuffixRuleTest extends RuleTestCase
 {
     /**

@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule;
 
-/**
- * @extends RuleTestCase<RequireExceptionNamespaceRule>
- */
 final class RequireExceptionNamespaceRuleTest extends RuleTestCase
 {
     /**

@@ -10,9 +10,6 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Spotter\IfElseToMatchSpotterRule;
 
-/**
- * @extends RuleTestCase<IfElseToMatchSpotterRule>
- */
 final class IfElseToMatchSpotterRuleTest extends RuleTestCase
 {
     /**
