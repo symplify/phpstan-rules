@@ -3,6 +3,7 @@
     "type": "phpstan-extension",
     "description": "Set of Symplify rules for PHPStan",
     "license": "MIT",
+    "keywords": ["dev"],
     "require": {
         "php": ">=8.1",
         "nikic/php-parser": "^4.15.3",
