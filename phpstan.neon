@@ -43,8 +43,6 @@ parameters:
             message: '#Callable callable\(PHPStan\\Type\\Type\)\: PHPStan\\Type\\Type invoked with 2 parameters, 1 required#'
             path: src/Rules/Explicit/NoMixedCallableRule.php
 
-        - '#Calling PHPStan\\Reflection\\ParameterReflectionWithPhpDocs\:\:getNativeType\(\) is not covered by backward compatibility promise#'
-
         - '#Parameter \#1 \$values of method Symplify\\PHPStanRules\\Rules\\Enum\\RequireUniqueEnumConstantRule\:\:filterDuplicatedValues\(\) expects array<int\|string>, array<bool\|float\|int\|string> given#'
 
         - '#Class PHP_CodeSniffer\\Sniffs\\Sniff not found#'
