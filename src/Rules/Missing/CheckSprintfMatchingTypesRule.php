@@ -97,9 +97,7 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
                 continue;
             }
 
-            $expectedTypeDescription = implode('|', array_map(function (Type $type): string {
-                return $type->describe(VerbosityLevel::typeOnly());
-            }, $expectedTypes));
+            $expectedTypeDescription = implode('|', array_map(static fn (Type $type): string => $type->describe(VerbosityLevel::typeOnly()), $expectedTypes));
 
             $errors[] = sprintf(self::ERROR_MESSAGE, $key, $expectedTypeDescription, $argType->describe(VerbosityLevel::typeOnly()));
         }
