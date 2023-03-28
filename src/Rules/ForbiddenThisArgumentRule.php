@@ -58,7 +58,7 @@ final class ForbiddenThisArgumentRule implements Rule, DocumentedRuleInterface
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node instanceof MethodCall && ! $node instanceof FuncCall && ! $node instanceof StaticCall) {
+        if (! $node instanceof MethodCall && ! $node instanceof StaticCall) {
             return [];
         }
 
@@ -111,14 +111,6 @@ CODE_SAMPLE
     {
         if ($node instanceof MethodCall) {
             return $this->containsTypeAnalyser->containsExprTypes($node->var, $scope, self::ALLOWED_CALLER_CLASSES);
-        }
-
-        if ($node instanceof FuncCall) {
-            if (! $node->name instanceof Name) {
-                return false;
-            }
-
-            return $node->name->toString() === 'method_exists';
         }
 
         return false;
