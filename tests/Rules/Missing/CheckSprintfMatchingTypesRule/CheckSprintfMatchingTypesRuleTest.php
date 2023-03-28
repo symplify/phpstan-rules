@@ -23,7 +23,10 @@ final class CheckSprintfMatchingTypesRuleTest extends RuleTestCase
 
     public static function provideData(): Iterator
     {
-        yield [__DIR__ . '/Fixture/MissMatchSprintf.php', [[CheckSprintfMatchingTypesRule::ERROR_MESSAGE, 11]]];
+        yield [__DIR__ . '/Fixture/MissMatchSprintf.php', [
+            ['sprintf() call mask type at index [0] expects type "string", but "int" given', 11],
+            ['sprintf() call mask type at index [1] expects type "int|float", but "string" given', 11],
+        ]];
 
         yield [__DIR__ . '/Fixture/SkipCorrectSprintf.php', []];
         yield [__DIR__ . '/Fixture/SkipCorrectForeachKey.php', []];
