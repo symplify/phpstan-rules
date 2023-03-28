@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
  * @implements Rule<AttributeGroup>
  */
-final class RequireAttributeNameRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNameRule implements Rule
 {
     /**
      * @var string

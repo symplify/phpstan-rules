@@ -6,12 +6,32 @@ namespace Symplify\PHPStanRules\ValueObject;
 
 final class ClassConstRegexMetadata
 {
-    public function __construct(
-        private readonly string $constantName,
-        private readonly string $regexValue,
-        private readonly string $filePath,
-        private readonly int $line
-    ) {
+    /**
+     * @readonly
+     * @var string
+     */
+    private $constantName;
+    /**
+     * @readonly
+     * @var string
+     */
+    private $regexValue;
+    /**
+     * @readonly
+     * @var string
+     */
+    private $filePath;
+    /**
+     * @readonly
+     * @var int
+     */
+    private $line;
+    public function __construct(string $constantName, string $regexValue, string $filePath, int $line)
+    {
+        $this->constantName = $constantName;
+        $this->regexValue = $regexValue;
+        $this->filePath = $filePath;
+        $this->line = $line;
     }
 
     public function getConstantName(): string

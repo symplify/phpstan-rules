@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoArrayAccessOnObjectRule\NoArrayAccessOnObjectRuleTest
  */
-final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
+final class NoArrayAccessOnObjectRule implements Rule
 {
     /**
      * @var string
@@ -28,10 +28,15 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
      * @var array<class-string>
      */
     private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement'];
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
+     */
+    private $arrayStringAndFnMatcher;
 
-    public function __construct(
-        private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher
-    ) {
+    public function __construct(ArrayStringAndFnMatcher $arrayStringAndFnMatcher)
+    {
+        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
     }
 
     /**
