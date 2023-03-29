@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Rules\ForbiddenThisArgumentRule\Fixture;
 
-final class ArgInFuncCall
+final class SkipCustomFunctionCalls
 {
     public function run()
     {
-        return strlen($this);
+        my_custom_function($this);
     }
+}
+
+function my_custom_function(object $object): void
+{
 }
