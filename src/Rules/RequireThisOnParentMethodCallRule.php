@@ -6,6 +6,7 @@ namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\StaticCall;
+use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
@@ -62,6 +63,10 @@ final class RequireThisOnParentMethodCallRule implements Rule, DocumentedRuleInt
             $staticCalls = $this->nodeFinder->findInstanceOf($classMethod, StaticCall::class);
 
             foreach ($staticCalls as $staticCall) {
+                if ($staticCall->class instanceof Variable) {
+                    continue;
+                }
+
                 if ($this->isParentCallInSameClassMethod($staticCall, $classMethod)) {
                     continue;
                 }
