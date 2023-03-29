@@ -6,6 +6,8 @@ parameters:
         - config
         - tests
 
+    reportUnmatchedIgnoredErrors: false
+
     excludePaths:
         # parallel
         - packages/*-phpstan-printer/tests/*ToPhpCompiler/Fixture*

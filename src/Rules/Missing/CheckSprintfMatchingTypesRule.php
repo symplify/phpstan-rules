@@ -12,6 +12,8 @@ use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Type\Constant\ConstantStringType;
+use PHPStan\Type\Type;
+use PHPStan\Type\VerbosityLevel;
 use Symplify\PHPStanRules\NodeAnalyzer\SprintfSpecifierTypeResolver;
 use Symplify\PHPStanRules\TypeAnalyzer\MatchingTypeAnalyzer;
 use Symplify\PHPStanRules\TypeResolver\ArgTypeResolver;
@@ -29,7 +31,7 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'sprintf() call mask types does not match provided arguments types';
+    public const ERROR_MESSAGE = 'sprintf() call mask type at index [%d] expects type "%s", but "%s" given';
 
     /**
      * @var string
@@ -83,6 +85,11 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
             return [];
         }
 
+        $errors = [];
+
+        /**
+         * @var int $key
+         */
         foreach ($argTypes as $key => $argType) {
             $expectedTypes = $expectedTypesByPosition[$key];
 
@@ -90,10 +97,12 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
                 continue;
             }
 
-            return [self::ERROR_MESSAGE];
+            $expectedTypeDescription = implode('|', array_map(static fn (Type $type): string => $type->describe(VerbosityLevel::typeOnly()), $expectedTypes));
+
+            $errors[] = sprintf(self::ERROR_MESSAGE, $key, $expectedTypeDescription, $argType->describe(VerbosityLevel::typeOnly()));
         }
 
-        return [];
+        return $errors;
     }
 
     public function getRuleDefinition(): RuleDefinition
