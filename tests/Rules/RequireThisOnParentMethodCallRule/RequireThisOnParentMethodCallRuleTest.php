@@ -25,6 +25,7 @@ final class RequireThisOnParentMethodCallRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/SkipCallParentMethodStaticallySameMethod.php', []];
         yield [__DIR__ . '/Fixture/SkipCallParentMethodStaticallyWhenMethodOverriden.php', []];
+        yield [__DIR__ . '/Fixture/SkipDynamicStaticCallsOnClassStrings.php', []];
 
         yield [
             __DIR__ . '/Fixture/CallParentMethodStatically.php',
