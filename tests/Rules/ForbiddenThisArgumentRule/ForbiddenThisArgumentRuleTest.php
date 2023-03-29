@@ -23,16 +23,16 @@ final class ForbiddenThisArgumentRuleTest extends RuleTestCase
 
     public static function provideData(): Iterator
     {
-        yield 'SkipNativeFunctionCalls' => [__DIR__ . '/Fixture/SkipNativeFunctionCalls.php', []];
-        yield 'SkipCustomFunctionCalls' => [__DIR__ . '/Fixture/SkipCustomFunctionCalls.php', []];
-        yield 'SkipReflectionCalling' => [__DIR__ . '/Fixture/SkipReflectionCalling.php', []];
-        yield 'SkipNotVariable' => [__DIR__ . '/Fixture/SkipNotVariable.php', []];
-        yield 'SkipNotThis' => [__DIR__ . '/Fixture/SkipNotThis.php', []];
-        yield 'SkipExtendsKernel' => [__DIR__ . '/Fixture/SkipExtendsKernel.php', []];
+        yield [__DIR__ . '/Fixture/SkipNativeFunctionCalls.php', []];
+        yield [__DIR__ . '/Fixture/SkipCustomFunctionCalls.php', []];
+        yield [__DIR__ . '/Fixture/SkipReflectionCalling.php', []];
+        yield [__DIR__ . '/Fixture/SkipNotVariable.php', []];
+        yield [__DIR__ . '/Fixture/SkipNotThis.php', []];
+        yield [__DIR__ . '/Fixture/SkipExtendsKernel.php', []];
 
-        yield 'StaticCall' => [__DIR__ . '/Fixture/StaticCall.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 13]]];
-        yield 'ThisArgument' => [__DIR__ . '/Fixture/ThisArgument.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 11]]];
-        yield 'ThisArgumentCopy' => [__DIR__ . '/Fixture/ThisArgumentCopy.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 12]]];
+        yield [__DIR__ . '/Fixture/StaticCall.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 13]]];
+        yield [__DIR__ . '/Fixture/ThisArgument.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 11]]];
+        yield [__DIR__ . '/Fixture/ThisArgumentCopy.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 12]]];
     }
 
     /**
