@@ -8,7 +8,6 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Type\TypeWithClassName;
 use Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -50,12 +49,15 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
     {
         $varStaticType = $scope->getType($node->var);
 
-        if (! $varStaticType instanceof TypeWithClassName) {
+        $classNames = $varStaticType->getObjectClassNames();
+        if ($classNames === []) {
             return [];
         }
 
-        if ($this->arrayStringAndFnMatcher->isMatchWithIsA($varStaticType->getClassName(), self::ALLOWED_CLASSES)) {
-            return [];
+        foreach ($classNames as $className) {
+            if ($this->arrayStringAndFnMatcher->isMatchWithIsA($className, self::ALLOWED_CLASSES)) {
+                return [];
+            }
         }
 
         return [self::ERROR_MESSAGE];

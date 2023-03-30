@@ -9,7 +9,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\IntersectionType;
 use PHPStan\Type\Type;
-use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\UnionType;
 
 /**
@@ -70,12 +69,10 @@ final class ContainsTypeAnalyser
 
         $unionedTypes = $type->getTypes();
         foreach ($unionedTypes as $unionedType) {
-            if (! $unionedType instanceof TypeWithClassName) {
-                continue;
-            }
-
-            if (is_a($unionedType->getClassName(), $class, true)) {
-                return true;
+            foreach ($unionedType->getObjectClassNames() as $className) {
+                if (is_a($className, $class, true)) {
+                    return true;
+                }
             }
         }
 
@@ -92,11 +89,13 @@ final class ContainsTypeAnalyser
         }
 
         $arrayItemType = $propertyType->getItemType();
-        if (! $arrayItemType instanceof TypeWithClassName) {
-            return false;
+        foreach ($arrayItemType->getObjectClassNames() as $className) {
+            if (is_a($className, $type, true)) {
+                return true;
+            }
         }
 
-        return is_a($arrayItemType->getClassName(), $type, true);
+        return false;
     }
 
     /**
@@ -104,8 +103,10 @@ final class ContainsTypeAnalyser
      */
     private function isExprTypeOfType(Type $exprType, string $type): bool
     {
-        if ($exprType instanceof TypeWithClassName) {
-            return is_a($exprType->getClassName(), $type, true);
+        foreach ($exprType->getObjectClassNames() as $className) {
+            if (is_a($className, $type, true)) {
+                return true;
+            }
         }
 
         if ($this->isUnionTypeWithClass($exprType, $type)) {
