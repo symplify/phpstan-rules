@@ -10,7 +10,6 @@ use PhpParser\Node\Expr\ArrayDimFetch;
 use PhpParser\Node\Expr\Empty_;
 use PhpParser\Node\Expr\Isset_;
 use PHPStan\Analyser\Scope;
-use PHPStan\Type\TypeWithClassName;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -123,6 +122,6 @@ CODE_SAMPLE
 
         $varType = $scope->getType($expr);
 
-        return ! $varType instanceof TypeWithClassName;
+        return $varType->getObjectClassNames() === [];
     }
 }
