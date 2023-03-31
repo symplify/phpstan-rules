@@ -143,8 +143,10 @@ CODE_SAMPLE
             }
 
             $argType = $scope->getType($arg->value);
-
-            if ($argType instanceof MixedType || $argType instanceof TemplateType) {
+            if ($argType instanceof MixedType) {
+                continue;
+            }
+            if ($argType instanceof TemplateType) {
                 continue;
             }
 
