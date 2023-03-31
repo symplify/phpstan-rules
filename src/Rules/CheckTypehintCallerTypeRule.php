@@ -146,6 +146,7 @@ CODE_SAMPLE
             if ($argType instanceof MixedType) {
                 continue;
             }
+
             if ($argType instanceof TemplateType) {
                 continue;
             }
