@@ -14,6 +14,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\Generic\TemplateType;
 use PHPStan\Type\IntersectionType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
@@ -143,7 +144,7 @@ CODE_SAMPLE
 
             $argType = $scope->getType($arg->value);
 
-            if ($argType instanceof MixedType) {
+            if ($argType instanceof MixedType || $argType instanceof TemplateType) {
                 continue;
             }
 

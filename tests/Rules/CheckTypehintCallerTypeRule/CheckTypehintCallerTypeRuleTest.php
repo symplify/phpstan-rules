@@ -48,6 +48,7 @@ final class CheckTypehintCallerTypeRuleTest extends RuleTestCase
         $argErrorMessage = sprintf(CheckTypehintCallerTypeRule::ERROR_MESSAGE, 1, Arg::class);
         $paramErrorMessage = sprintf(CheckTypehintCallerTypeRule::ERROR_MESSAGE, 2, Param::class);
         yield [__DIR__ . '/Fixture/DoubleShot.php', [[$argErrorMessage, 15], [$paramErrorMessage, 15]]];
+        yield [__DIR__ . '/Fixture/SkipGenericType.php', []];
     }
 
     /**
