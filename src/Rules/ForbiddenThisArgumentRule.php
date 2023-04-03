@@ -102,21 +102,17 @@ CODE_SAMPLE
         return $classReflection->isSubclassOf(Kernel::class);
     }
 
-    private function shouldSkip(MethodCall | FuncCall | StaticCall $node, Scope $scope): bool
+    private function shouldSkip(MethodCall | StaticCall $node, Scope $scope): bool
     {
         if ($node instanceof MethodCall) {
             return $this->containsTypeAnalyser->containsExprTypes($node->var, $scope, $this->allowedCallerClasses);
         }
 
-        if ($node instanceof StaticCall) {
-            $class = $node->class;
-            if ($class instanceof Expr) {
-                return $this->containsTypeAnalyser->containsExprTypes($class, $scope, $this->allowedCallerClasses);
-            }
-
-            return in_array($class->toString(), $this->allowedCallerClasses, true);
+        $class = $node->class;
+        if ($class instanceof Expr) {
+            return $this->containsTypeAnalyser->containsExprTypes($class, $scope, $this->allowedCallerClasses);
         }
 
-        return false;
+        return in_array($class->toString(), $this->allowedCallerClasses, true);
     }
 }
