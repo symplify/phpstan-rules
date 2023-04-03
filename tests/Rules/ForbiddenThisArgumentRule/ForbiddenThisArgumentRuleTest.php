@@ -29,6 +29,7 @@ final class ForbiddenThisArgumentRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipNotVariable.php', []];
         yield [__DIR__ . '/Fixture/SkipNotThis.php', []];
         yield [__DIR__ . '/Fixture/SkipExtendsKernel.php', []];
+        yield [__DIR__ . '/Fixture/SkipAllowedStaticCall.php', []];
 
         yield [__DIR__ . '/Fixture/StaticCall.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 13]]];
         yield [__DIR__ . '/Fixture/ThisArgument.php', [[ForbiddenThisArgumentRule::ERROR_MESSAGE, 11]]];

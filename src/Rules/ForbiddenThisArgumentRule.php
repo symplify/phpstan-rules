@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
@@ -14,7 +15,6 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Type\ThisType;
 use Symfony\Component\HttpKernel\Kernel;
-use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -31,15 +31,11 @@ final class ForbiddenThisArgumentRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = '$this as argument is not allowed. Refactor method to service composition';
 
     /**
-     * @var array<class-string<PrivatesCaller>>
+     * @param list<class-string> $allowedCallerClasses
      */
-    private const ALLOWED_CALLER_CLASSES = [
-        // workaround type
-        'Symplify\PackageBuilder\Reflection\PrivatesCaller',
-    ];
-
     public function __construct(
-        private readonly ContainsTypeAnalyser $containsTypeAnalyser
+        private readonly ContainsTypeAnalyser $containsTypeAnalyser,
+        private readonly array $allowedCallerClasses = [],
     ) {
     }
 
@@ -109,7 +105,16 @@ CODE_SAMPLE
     private function shouldSkip(MethodCall | FuncCall | StaticCall $node, Scope $scope): bool
     {
         if ($node instanceof MethodCall) {
-            return $this->containsTypeAnalyser->containsExprTypes($node->var, $scope, self::ALLOWED_CALLER_CLASSES);
+            return $this->containsTypeAnalyser->containsExprTypes($node->var, $scope, $this->allowedCallerClasses);
+        }
+
+        if ($node instanceof StaticCall) {
+            $class = $node->class;
+            if ($class instanceof Expr) {
+                return $this->containsTypeAnalyser->containsExprTypes($class, $scope, $this->allowedCallerClasses);
+            }
+
+            return in_array($class->toString(), $this->allowedCallerClasses, true);
         }
 
         return false;

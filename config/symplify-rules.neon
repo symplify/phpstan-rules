@@ -30,3 +30,10 @@ services:
                 PhpParser\Node:
                     getAttribute: [0]
                     setAttribute: [0]
+
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenThisArgumentRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            allowedCallerClasses:
+                - Symplify\PackageBuilder\Reflection\PrivatesCaller
