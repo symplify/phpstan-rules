@@ -99,9 +99,9 @@ CODE_SAMPLE
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route()]
 final class SomeController extends AbstractController
 {
-    #[Route()]
     public function __invoke()
     {
     }
