@@ -31,7 +31,7 @@ final class RequireNamedCommandRule implements Rule, DocumentedRuleInterface
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'The command is missing $this->setName("...") or [#AsCommand] attribute to set the name';
+    public const ERROR_MESSAGE = 'The command is missing [#AsCommand] attribute or $this->setName("...") to set the name';
 
     /**
      * @var string
@@ -96,12 +96,9 @@ CODE_SAMPLE
                 <<<'CODE_SAMPLE'
 use Symfony\Component\Console\Command\Command;
 
+#[AsCommand(name: 'some')]
 final class SomeCommand extends Command
 {
-    public function configure()
-    {
-        $this->setName('some');
-    }
 }
 CODE_SAMPLE
             ),
