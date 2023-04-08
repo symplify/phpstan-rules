@@ -41,7 +41,6 @@ Do you know prepared sets from ECS or Rector? Bunch of rules in single set. We u
 includes:
     - vendor/symplify/phpstan-rules/config/array-rules.neon
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
-    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
     - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
