@@ -91,7 +91,7 @@ class SomeParentClass
     }
 }
 
-class SomeClass
+class SomeClass extends SomeParentClass
 {
     protected function run()
     {
@@ -107,7 +107,7 @@ class SomeParentClass
     }
 }
 
-class SomeClass
+class SomeClass extends SomeParentClass
 {
     public function run()
     {
