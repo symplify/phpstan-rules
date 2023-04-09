@@ -22,11 +22,11 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMissingAssingNoVoidMethodCallRule\NoMissingAssingNoVoidMethodCallRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMissingAssignNoVoidMethodCallRule\NoMissingAssignNoVoidMethodCallRuleTest
  *
  * @implements Rule<Expression>
  */
-final class NoMissingAssingNoVoidMethodCallRule implements Rule, DocumentedRuleInterface
+final class NoMissingAssignNoVoidMethodCallRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
