@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\Rules\Explicit\NoMissingAssingNoVoidMethodCallRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Explicit\NoMissingAssignNoVoidMethodCallRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\Rules\Explicit\NoMissingAssingNoVoidMethodCallRule;
+use Symplify\PHPStanRules\Rules\Explicit\NoMissingAssignNoVoidMethodCallRule;
 
-final class NoMissingAssingNoVoidMethodCallRuleTest extends RuleTestCase
+final class NoMissingAssignNoVoidMethodCallRuleTest extends RuleTestCase
 {
     /**
      * @param mixed[] $expectedErrorsWithLines
@@ -23,7 +23,7 @@ final class NoMissingAssingNoVoidMethodCallRuleTest extends RuleTestCase
 
     public static function provideData(): Iterator
     {
-        yield [__DIR__ . '/Fixture/ReturnedNoVoid.php', [[NoMissingAssingNoVoidMethodCallRule::ERROR_MESSAGE, 11]]];
+        yield [__DIR__ . '/Fixture/ReturnedNoVoid.php', [[NoMissingAssignNoVoidMethodCallRule::ERROR_MESSAGE, 11]]];
 
         yield [__DIR__ . '/Fixture/SkipTokens.php', []];
         yield [__DIR__ . '/Fixture/SkipReturnedNoVoid.php', []];
