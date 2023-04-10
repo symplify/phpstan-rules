@@ -44,6 +44,6 @@ final class NoMissingAssignNoVoidMethodCallRuleTest extends RuleTestCase
 
     protected function getRule(): Rule
     {
-        return self::getContainer()->getByType(NoMissingAssingNoVoidMethodCallRule::class);
+        return self::getContainer()->getByType(NoMissingAssignNoVoidMethodCallRule::class);
     }
 }
