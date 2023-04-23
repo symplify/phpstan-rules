@@ -49,6 +49,10 @@ final class StringOutsideConcatFindingNodeVisitor extends NodeVisitorAbstract
             return NodeTraverser::DONT_TRAVERSE_CHILDREN;
         }
 
+        if ($node instanceof Node\Stmt\ClassConst) {
+            return NodeTraverser::DONT_TRAVERSE_CHILDREN;
+        }
+
         if (! $node instanceof String_) {
             return null;
         }
