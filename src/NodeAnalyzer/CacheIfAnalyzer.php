@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\NodeAnalyzer;
 
+use PhpParser\Node\Stmt\Else_;
 use PhpParser\Node\Expr\BinaryOp;
 use PhpParser\Node\Expr\BinaryOp\Identical;
 use PhpParser\Node\Expr\BinaryOp\NotIdentical;
@@ -22,7 +23,7 @@ final class CacheIfAnalyzer
 
     public function isDefaultNullAssign(If_ $if): bool
     {
-        if ($if->else !== null) {
+        if ($if->else instanceof Else_) {
             return false;
         }
 

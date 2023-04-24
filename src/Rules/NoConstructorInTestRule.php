@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PHPStan\Reflection\ClassReflection;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
@@ -46,7 +47,7 @@ final class NoConstructorInTestRule implements Rule, DocumentedRuleInterface
         }
 
         // no parent class, probably not a test case
-        if ($classReflection->getParentClass() === null) {
+        if (!$classReflection->getParentClass() instanceof ClassReflection) {
             return [];
         }
 

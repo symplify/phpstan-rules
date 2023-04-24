@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PHPStan\PhpDoc\Tag\DeprecatedTag;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -75,7 +76,7 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
 
         // skip deprectaed
         $deprecatedTags = $resolvedPhpDocBlock->getDeprecatedTag();
-        if ($deprecatedTags !== null) {
+        if ($deprecatedTags instanceof DeprecatedTag) {
             return [];
         }
 
