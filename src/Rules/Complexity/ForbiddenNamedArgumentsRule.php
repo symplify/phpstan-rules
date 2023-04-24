@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Complexity;
 
+use PhpParser\Node\Identifier;
 use PhpParser\Node;
 use PhpParser\Node\Expr\CallLike;
 use PHPStan\Analyser\Scope;
@@ -54,7 +55,7 @@ CODE_SAMPLE
     public function processNode(Node $node, Scope $scope): array
     {
         foreach ($node->getArgs() as $arg) {
-            if ($arg->name === null) {
+            if (!$arg->name instanceof Identifier) {
                 continue;
             }
 

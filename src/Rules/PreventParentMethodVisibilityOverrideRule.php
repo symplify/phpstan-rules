@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PHPStan\Reflection\ClassReflection;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
@@ -43,7 +44,7 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule, Documente
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if ($scope->getClassReflection() === null) {
+        if (!$scope->getClassReflection() instanceof ClassReflection) {
             return [];
         }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PhpParser\Node\Identifier;
 use Attribute;
 use PhpParser\Node;
 use PhpParser\Node\AttributeGroup;
@@ -77,7 +78,7 @@ CODE_SAMPLE
             }
 
             foreach ($attribute->args as $arg) {
-                if ($arg->name !== null) {
+                if ($arg->name instanceof Identifier) {
                     continue;
                 }
 
