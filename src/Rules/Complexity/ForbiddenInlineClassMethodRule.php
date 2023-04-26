@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Complexity;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
-use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\NodeFinder;
