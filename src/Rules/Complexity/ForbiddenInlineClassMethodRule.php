@@ -65,11 +65,6 @@ final class ForbiddenInlineClassMethodRule implements Rule, DocumentedRuleInterf
             }
 
             $onlyStmt = $classMethod->stmts[0] ?? null;
-
-            if ($onlyStmt !== null && $onlyStmt->getAttribute('startLine') !== $onlyStmt->getAttribute('endLine')) {
-                continue;
-            }
-
             if (! $onlyStmt instanceof Return_) {
                 continue;
             }

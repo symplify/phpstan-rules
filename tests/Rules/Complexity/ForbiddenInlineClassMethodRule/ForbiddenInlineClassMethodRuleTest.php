@@ -33,7 +33,7 @@ final class ForbiddenInlineClassMethodRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/SkipUsedTwice.php', []];
         yield [__DIR__ . '/Fixture/SkipNoMethodCall.php', []];
-        yield [__DIR__ . '/Fixture/SkipMultipleLines.php', []];
+        yield [__DIR__ . '/Fixture/BuilderCall/SkipBuilderCall.php', []];
     }
 
     /**
