@@ -14,7 +14,7 @@ use PhpParser\NodeVisitorAbstract;
 final class HasScopedReturnNodeVisitor extends NodeVisitorAbstract
 {
     public function __construct(
-        private bool $hasReturn = false
+        private ?Expr $returnExpr = null
     ) {
     }
 
@@ -32,12 +32,17 @@ final class HasScopedReturnNodeVisitor extends NodeVisitorAbstract
             return null;
         }
 
-        $this->hasReturn = true;
+        $this->returnExpr = $node->expr;
         return $node;
     }
 
     public function hasReturn(): bool
     {
-        return $this->hasReturn;
+        return $this->returnExpr !== null;
+    }
+
+    public function getReturnExpr(): ?Expr
+    {
+        return $this->returnExpr;
     }
 }

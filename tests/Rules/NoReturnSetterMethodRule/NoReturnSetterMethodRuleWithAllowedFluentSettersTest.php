@@ -10,7 +10,7 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule;
 
-final class NoReturnSetterMethodRuleTest extends RuleTestCase
+final class NoReturnSetterMethodRuleWithAllowedFluentSettersTest extends RuleTestCase
 {
     /**
      * @param mixed[] $expectedErrorsWithLines
@@ -24,7 +24,8 @@ final class NoReturnSetterMethodRuleTest extends RuleTestCase
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SomeSetterClass.php', [[NoReturnSetterMethodRule::ERROR_MESSAGE, 9]]];
-        yield [__DIR__ . '/Fixture/FluentSetterClass.php', [[NoReturnSetterMethodRule::ERROR_MESSAGE, 9]]];
+
+        yield [__DIR__ . '/Fixture/FluentSetterClass.php', []];
 
         yield [__DIR__ . '/Fixture/SkipEmptyReturn.php', []];
         yield [__DIR__ . '/Fixture/SkipVoidSetter.php', []];
@@ -37,7 +38,7 @@ final class NoReturnSetterMethodRuleTest extends RuleTestCase
      */
     public static function getAdditionalConfigFiles(): array
     {
-        return [__DIR__ . '/config/configured_rule.neon'];
+        return [__DIR__ . '/config/configured_rule_with_fluent_setters_allowed.neon'];
     }
 
     protected function getRule(): Rule

@@ -1,0 +1,9 @@
+includes:
+    - ../../../config/included_services.neon
+
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            allowFluentSetter: true

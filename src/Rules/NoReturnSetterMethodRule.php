@@ -12,16 +12,19 @@ use PhpParser\NodeTraverser;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
+use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
-final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
+final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
 {
     /**
      * @var string
@@ -35,7 +38,8 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
     private const SETTER_START_REGEX = '#^set[A-Z]#';
 
     public function __construct(
-        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
+        private readonly TypeAwareNodeFinder $typeAwareNodeFinder,
+        private readonly bool $allowFluentSetter = false
     ) {
     }
 
@@ -63,7 +67,7 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
         }
 
         $classMethodName = $node->name->toString();
-        if ($classMethodName === 'setUp') {
+        if (strpos($classMethodName, 'setUp') === 0) {
             return [];
         }
 
@@ -71,7 +75,7 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
             return [];
         }
 
-        if (! $this->hasReturnReturnFunctionLike($node)) {
+        if (! $this->hasReturnReturnFunctionLike($node, $scope)) {
             return [];
         }
 
@@ -106,10 +110,53 @@ final class SomeClass
 }
 CODE_SAMPLE
             ),
+            new ConfiguredCodeSample(
+                <<<'CODE_SAMPLE'
+final class SomeClass
+{
+    private $name;
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setAge(int $age): int
+    {
+        $this->age = $age;
+
+        return $age;
+    }
+}
+CODE_SAMPLE
+                ,
+                <<<'CODE_SAMPLE'
+final class SomeClass
+{
+    private $name;
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setAge(int $age): void
+    {
+        $this->age = $age;
+    }
+}
+CODE_SAMPLE
+                ,
+                [ 'allowFluentSetter' => true ]
+            ),
         ]);
     }
 
-    private function hasReturnReturnFunctionLike(ClassMethod $classMethod): bool
+    private function hasReturnReturnFunctionLike(ClassMethod $classMethod, Scope $scope): bool
     {
         $hasScopedReturnNodeVisitor = new HasScopedReturnNodeVisitor();
 
@@ -118,7 +165,14 @@ CODE_SAMPLE
         $nodeTraverser->traverse([$classMethod]);
 
         if ($hasScopedReturnNodeVisitor->hasReturn()) {
-            return true;
+            if (! $this->allowFluentSetter) {
+                return true;
+            }
+
+            $returnType = $scope->getType($hasScopedReturnNodeVisitor->getReturnExpr());
+            $declaringType = new ObjectType($scope->getClassReflection()->getName());
+
+            return $declaringType->accepts($returnType, true)->no();
         }
 
         $yield = $this->typeAwareNodeFinder->findFirstInstanceOf($classMethod, Yield_::class);

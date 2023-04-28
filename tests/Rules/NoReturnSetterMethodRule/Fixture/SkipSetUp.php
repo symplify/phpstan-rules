@@ -10,4 +10,9 @@ final class SkipSetUp
     {
         return 100;
     }
+
+    protected function setUpMyObject()
+    {
+        return 100;
+    }
 }
