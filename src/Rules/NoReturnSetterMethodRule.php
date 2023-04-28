@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PhpParser\Node\Expr;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Yield_;
@@ -67,7 +68,7 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface, C
         }
 
         $classMethodName = $node->name->toString();
-        if (strpos($classMethodName, 'setUp') === 0) {
+        if (str_starts_with($classMethodName, 'setUp')) {
             return [];
         }
 
@@ -75,7 +76,7 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface, C
             return [];
         }
 
-        if (! $this->hasReturnReturnFunctionLike($node, $scope)) {
+        if (! $this->hasReturnReturnFunctionLike($node, $classReflection, $scope)) {
             return [];
         }
 
@@ -156,7 +157,7 @@ CODE_SAMPLE
         ]);
     }
 
-    private function hasReturnReturnFunctionLike(ClassMethod $classMethod, Scope $scope): bool
+    private function hasReturnReturnFunctionLike(ClassMethod $classMethod, ClassReflection $classReflection, Scope $scope): bool
     {
         $hasScopedReturnNodeVisitor = new HasScopedReturnNodeVisitor();
 
@@ -164,15 +165,15 @@ CODE_SAMPLE
         $nodeTraverser->addVisitor($hasScopedReturnNodeVisitor);
         $nodeTraverser->traverse([$classMethod]);
 
-        if ($hasScopedReturnNodeVisitor->hasReturn()) {
+        if ($hasScopedReturnNodeVisitor->getReturnExpr() instanceof Expr) {
             if (! $this->allowFluentSetter) {
                 return true;
             }
 
             $returnType = $scope->getType($hasScopedReturnNodeVisitor->getReturnExpr());
-            $declaringType = new ObjectType($scope->getClassReflection()->getName());
+            $objectType = new ObjectType($classReflection->getName());
 
-            return $declaringType->accepts($returnType, true)->no();
+            return $objectType->accepts($returnType, true)->no();
         }
 
         $yield = $this->typeAwareNodeFinder->findFirstInstanceOf($classMethod, Yield_::class);

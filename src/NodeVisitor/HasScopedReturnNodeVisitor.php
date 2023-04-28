@@ -38,7 +38,7 @@ final class HasScopedReturnNodeVisitor extends NodeVisitorAbstract
 
     public function hasReturn(): bool
     {
-        return $this->returnExpr !== null;
+        return $this->returnExpr instanceof Expr;
     }
 
     public function getReturnExpr(): ?Expr
