@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PHPStan\Reflection\ClassReflection;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
@@ -188,7 +189,7 @@ CODE_SAMPLE
         }
 
         $classReflection = $objectType->getClassReflection();
-        if ($classReflection !== null && $classReflection->isAbstract()) {
+        if ($classReflection instanceof ClassReflection && $classReflection->isAbstract()) {
             return null;
         }
 
