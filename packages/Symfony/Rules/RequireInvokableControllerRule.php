@@ -20,16 +20,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireInvokableControllerRule\RequireInvokableControllerRuleTest
  */
-final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterface
+final class RequireInvokableControllerRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer
+     */
+    private $symfonyControllerAnalyzer;
 
-    public function __construct(
-        private readonly SymfonyControllerAnalyzer $symfonyControllerAnalyzer
-    ) {
+    public function __construct(SymfonyControllerAnalyzer $symfonyControllerAnalyzer)
+    {
+        $this->symfonyControllerAnalyzer = $symfonyControllerAnalyzer;
     }
 
     /**

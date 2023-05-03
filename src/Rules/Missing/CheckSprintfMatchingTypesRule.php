@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @inspiration by https://github.com/phpstan/phpstan-src/blob/master/src/Rules/Functions/PrintfParametersRule.php
  */
-final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterface
+final class CheckSprintfMatchingTypesRule implements Rule
 {
     /**
      * @var string
@@ -37,12 +37,26 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
      * @var string
      */
     private const SPECIFIERS = '[bcdeEfFgGosuxX%s]';
-
-    public function __construct(
-        private readonly SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver,
-        private readonly MatchingTypeAnalyzer $matchingTypeAnalyzer,
-        private readonly ArgTypeResolver $argTypeResolver,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\SprintfSpecifierTypeResolver
+     */
+    private $sprintfSpecifierTypeResolver;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\MatchingTypeAnalyzer
+     */
+    private $matchingTypeAnalyzer;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeResolver\ArgTypeResolver
+     */
+    private $argTypeResolver;
+    public function __construct(SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver, MatchingTypeAnalyzer $matchingTypeAnalyzer, ArgTypeResolver $argTypeResolver)
+    {
+        $this->sprintfSpecifierTypeResolver = $sprintfSpecifierTypeResolver;
+        $this->matchingTypeAnalyzer = $matchingTypeAnalyzer;
+        $this->argTypeResolver = $argTypeResolver;
     }
 
     /**
@@ -97,7 +111,9 @@ final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterfa
                 continue;
             }
 
-            $expectedTypeDescription = implode('|', array_map(static fn (Type $type): string => $type->describe(VerbosityLevel::typeOnly()), $expectedTypes));
+            $expectedTypeDescription = implode('|', array_map(static function (Type $type) : string {
+                return $type->describe(VerbosityLevel::typeOnly());
+            }, $expectedTypes));
 
             $errors[] = sprintf(self::ERROR_MESSAGE, $key, $expectedTypeDescription, $argType->describe(VerbosityLevel::typeOnly()));
         }
