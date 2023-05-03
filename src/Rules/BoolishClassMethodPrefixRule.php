@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use PhpParser\Node\Expr;
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
 use PHPStan\Analyser\Scope;
@@ -127,7 +127,7 @@ CODE_SAMPLE
     private function areOnlyBoolReturnNodes(array $returns, Scope $scope): bool
     {
         foreach ($returns as $return) {
-            if (!$return->expr instanceof Expr) {
+            if (! $return->expr instanceof Expr) {
                 continue;
             }
 

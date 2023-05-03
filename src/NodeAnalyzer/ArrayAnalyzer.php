@@ -14,12 +14,12 @@ final class ArrayAnalyzer
     public function isArrayWithStringKey(Array_ $array): bool
     {
         foreach ($array->items as $arrayItem) {
-            if (!$arrayItem instanceof ArrayItem) {
+            if (! $arrayItem instanceof ArrayItem) {
                 continue;
             }
 
             /** @var ArrayItem $arrayItem */
-            if (!$arrayItem->key instanceof Expr) {
+            if (! $arrayItem->key instanceof Expr) {
                 continue;
             }
 

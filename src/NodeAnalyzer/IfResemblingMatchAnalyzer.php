@@ -29,7 +29,7 @@ final class IfResemblingMatchAnalyzer
         $comparedExprContent = [];
 
         foreach ($ifsAndCondExprs as $ifAndCondExpr) {
-            if (!$ifAndCondExpr->getCondExpr() instanceof Expr) {
+            if (! $ifAndCondExpr->getCondExpr() instanceof Expr) {
                 continue;
             }
 

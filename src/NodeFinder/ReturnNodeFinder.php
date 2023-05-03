@@ -49,7 +49,7 @@ final class ReturnNodeFinder
                 return null;
             }
 
-            if (!$node->expr instanceof Expr) {
+            if (! $node->expr instanceof Expr) {
                 return null;
             }
 
