@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -46,7 +47,7 @@ final class NoConstructorInTestRule implements Rule, DocumentedRuleInterface
         }
 
         // no parent class, probably not a test case
-        if ($classReflection->getParentClass() === null) {
+        if (! $classReflection->getParentClass() instanceof ClassReflection) {
             return [];
         }
 

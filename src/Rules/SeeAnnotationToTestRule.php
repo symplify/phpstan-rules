@@ -9,6 +9,7 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
+use PHPStan\PhpDoc\Tag\DeprecatedTag;
 use PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 use PHPStan\Reflection\ClassReflection;
@@ -75,7 +76,7 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
 
         // skip deprectaed
         $deprecatedTags = $resolvedPhpDocBlock->getDeprecatedTag();
-        if ($deprecatedTags !== null) {
+        if ($deprecatedTags instanceof DeprecatedTag) {
             return [];
         }
 
