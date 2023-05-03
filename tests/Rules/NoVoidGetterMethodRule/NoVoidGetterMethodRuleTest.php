@@ -31,6 +31,7 @@ final class NoVoidGetterMethodRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipGetterWithReturn.php', []];
         yield [__DIR__ . '/Fixture/SkipSetter.php', []];
         yield [__DIR__ . '/Fixture/SkipYielder.php', []];
+        yield [__DIR__ . '/Fixture/SkipYieldFrom.php', []];
         yield [__DIR__ . '/Fixture/SkipInterfaceContractGetter.php', []];
         yield [__DIR__ . '/Fixture/SkipNoThrows.php', []];
     }

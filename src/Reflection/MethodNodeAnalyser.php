@@ -12,7 +12,7 @@ final class MethodNodeAnalyser
 {
     public function hasParentVendorLock(Scope $scope, string $methodName): bool
     {
-        return $this->matchFirstParentClassMethod($scope, $methodName) !== null;
+        return $this->matchFirstParentClassMethod($scope, $methodName) instanceof MethodReflection;
     }
 
     public function matchFirstParentClassMethod(Scope $scope, string $methodName): ?MethodReflection

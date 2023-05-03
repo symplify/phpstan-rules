@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Spotter;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\Node\Stmt\Switch_;
 use PhpParser\Node\Stmt\Throw_;
@@ -80,7 +81,7 @@ CODE_SAMPLE
     private function hasDefaultCase(Switch_ $switch): bool
     {
         foreach ($switch->cases as $case) {
-            if ($case->cond === null) {
+            if (! $case->cond instanceof Expr) {
                 return true;
             }
         }
@@ -91,7 +92,7 @@ CODE_SAMPLE
     private function isMatchingSwitch(Switch_ $switch): bool
     {
         foreach ($switch->cases as $case) {
-            if ($case->cond === null) {
+            if (! $case->cond instanceof Expr) {
                 continue;
             }
 
@@ -106,7 +107,7 @@ CODE_SAMPLE
             }
 
             $onlyStmt = $case->stmts[0];
-            if ($onlyStmt instanceof Return_ && $onlyStmt->expr !== null) {
+            if ($onlyStmt instanceof Return_ && $onlyStmt->expr instanceof Expr) {
                 continue;
             }
 

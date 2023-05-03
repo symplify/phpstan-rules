@@ -65,7 +65,12 @@ final class ForbiddenInlineClassMethodRule implements Rule, DocumentedRuleInterf
             }
 
             $onlyStmt = $classMethod->stmts[0] ?? null;
+
             if (! $onlyStmt instanceof Return_) {
+                continue;
+            }
+
+            if ($onlyStmt->expr instanceof MethodCall && $onlyStmt->expr->var instanceof MethodCall) {
                 continue;
             }
 

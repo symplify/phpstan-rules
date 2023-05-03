@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Rules;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Throw_;
 use PhpParser\Node\Expr\Yield_;
+use PhpParser\Node\Expr\YieldFrom;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
@@ -34,7 +35,8 @@ final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
     private const STOPPING_TYPES = [
         Return_::class,
         Yield_::class,
-        // possibly unneded contract override
+        YieldFrom::class,
+        // possibly unneeded contract override
         Throw_::class,
         Node\Stmt\Throw_::class,
     ];
