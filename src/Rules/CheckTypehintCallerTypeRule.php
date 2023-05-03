@@ -187,6 +187,11 @@ CODE_SAMPLE
             return null;
         }
 
+        $classReflection = $objectType->getClassReflection();
+        if ($classReflection !== null && $classReflection->isAbstract()) {
+            return null;
+        }
+
         // handle weird type substration cases
         $paramTypeAsString = $objectType->describe(VerbosityLevel::typeOnly());
         $argTypeAsString = $argType->describe(VerbosityLevel::typeOnly());
