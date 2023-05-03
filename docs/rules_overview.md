@@ -1,4 +1,4 @@
-# 91 Rules Overview
+# 90 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -173,7 +173,7 @@ class SomeOtherTest
 
 ## CheckRequiredInterfaceInContractNamespaceRule
 
-Interface must be located in "Contract" namespace
+Interface must be located in "Contract" or "Contracts" namespace
 
 - class: [`Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule`](../src/Rules/CheckRequiredInterfaceInContractNamespaceRule.php)
 
@@ -195,6 +195,12 @@ namespace App\Contract\Repository;
 interface ProductRepositoryInterface
 {
 }
+
+namespace App\Contracts\Repository;
+
+interface ProductRepositoryInterface
+{
+}
 ```
 
 :+1:
@@ -203,7 +209,7 @@ interface ProductRepositoryInterface
 
 ## CheckSprintfMatchingTypesRule
 
-`sprintf()` call mask types does not match provided arguments types
+`sprintf()` call mask type at index [%d] expects type "%s", but "%s" given
 
 - class: [`Symplify\PHPStanRules\Rules\Missing\CheckSprintfMatchingTypesRule`](../src/Rules/Missing/CheckSprintfMatchingTypesRule.php)
 
@@ -1945,7 +1951,7 @@ class SomeClass extends Printer
 
 ## NoProtectedClassElementRule
 
-Instead of protected element in use private element or contract method
+Instead of protected element, use private element or contract method
 
 - class: [`Symplify\PHPStanRules\Rules\NoProtectedClassElementRule`](../src/Rules/NoProtectedClassElementRule.php)
 
@@ -2526,7 +2532,7 @@ class SomeParentClass
     }
 }
 
-class SomeClass
+class SomeClass extends SomeParentClass
 {
     protected function run()
     {
@@ -2546,7 +2552,7 @@ class SomeParentClass
     }
 }
 
-class SomeClass
+class SomeClass extends SomeParentClass
 {
     public function run()
     {
@@ -2898,43 +2904,6 @@ final class SomeController extends AbstractController
     #[Route()]
     public function __invoke()
     {
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## RequireNamedCommandRule
-
-The command is missing `$this->setName("...")` or [#AsCommand] attribute to set the name
-
-- class: [`Symplify\PHPStanRules\Symfony\Rules\RequireNamedCommandRule`](../packages/Symfony/Rules/RequireNamedCommandRule.php)
-
-```php
-use Symfony\Component\Console\Command\Command;
-
-final class SomeCommand extends Command
-{
-    public function configure()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\Console\Command\Command;
-
-final class SomeCommand extends Command
-{
-    public function configure()
-    {
-        $this->setName('some');
     }
 }
 ```
