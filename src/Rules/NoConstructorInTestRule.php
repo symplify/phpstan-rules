@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use PHPStan\Reflection\ClassReflection;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -47,7 +47,7 @@ final class NoConstructorInTestRule implements Rule, DocumentedRuleInterface
         }
 
         // no parent class, probably not a test case
-        if (!$classReflection->getParentClass() instanceof ClassReflection) {
+        if (! $classReflection->getParentClass() instanceof ClassReflection) {
             return [];
         }
 

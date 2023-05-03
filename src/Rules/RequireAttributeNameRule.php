@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use PhpParser\Node\Identifier;
 use Attribute;
 use PhpParser\Node;
 use PhpParser\Node\AttributeGroup;
+use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
@@ -74,6 +74,11 @@ CODE_SAMPLE
         foreach ($node->attrs as $attribute) {
             $attributeName = $attribute->name->toString();
             if ($attributeName === Attribute::class) {
+                continue;
+            }
+
+            // skip PHPUnit
+            if (str_starts_with($attributeName, 'PHPUnit\Framework\Attributes\\')) {
                 continue;
             }
 
