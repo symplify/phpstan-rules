@@ -18,16 +18,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreventParentMethodVisibilityOverrideRule\PreventParentMethodVisibilityOverrideRuleTest
  */
-final class PreventParentMethodVisibilityOverrideRule implements Rule, DocumentedRuleInterface
+final class PreventParentMethodVisibilityOverrideRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
 
-    public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     /**

@@ -24,16 +24,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireThisCallOnLocalMethodRule\RequireThisCallOnLocalMethodRuleTest
  * @implements Rule<InClassNode>
  */
-final class RequireThisCallOnLocalMethodRule implements Rule, DocumentedRuleInterface
+final class RequireThisCallOnLocalMethodRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use "$this-><method>()" instead of "self::<method>()" to call local method';
+    /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
 
-    public function __construct(
-        private readonly NodeFinder $nodeFinder
-    ) {
+    public function __construct(NodeFinder $nodeFinder)
+    {
+        $this->nodeFinder = $nodeFinder;
     }
 
     /**

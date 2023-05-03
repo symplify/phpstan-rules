@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenArrayDestructRule\ForbiddenArrayDestructRuleTest
  */
-final class ForbiddenArrayDestructRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayDestructRule implements Rule
 {
     /**
      * @var string
@@ -36,10 +36,15 @@ final class ForbiddenArrayDestructRule implements Rule, DocumentedRuleInterface
      * @see https://regex101.com/r/dhGhYp/1
      */
     private const VENDOR_DIRECTORY_REGEX = '#/vendor/#';
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
 
-    public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     /**

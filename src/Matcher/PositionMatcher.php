@@ -10,9 +10,14 @@ use Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser;
 
 final class PositionMatcher
 {
-    public function __construct(
-        private readonly ContainsTypeAnalyser $containsTypeAnalyser
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
+    public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
+    {
+        $this->containsTypeAnalyser = $containsTypeAnalyser;
     }
 
     /**
