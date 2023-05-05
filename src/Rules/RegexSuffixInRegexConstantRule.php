@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\ClassConstFetch;
@@ -122,12 +121,8 @@ CODE_SAMPLE
             return [];
         }
 
-        $argOrVariadicPlaceholder = $staticCall->args[1];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        return $this->processConstantName($argOrVariadicPlaceholder->value);
+        $secondArg = $staticCall->getArgs()[1];
+        return $this->processConstantName($secondArg->value);
     }
 
     /**
@@ -139,12 +134,7 @@ CODE_SAMPLE
             return [];
         }
 
-        $argOrVariadicPlaceholder = $funcCall->args[0];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        $firstArgValue = $argOrVariadicPlaceholder->value;
-        return $this->processConstantName($firstArgValue);
+        $firstArg = $funcCall->getArgs()[0];
+        return $this->processConstantName($firstArg->value);
     }
 }

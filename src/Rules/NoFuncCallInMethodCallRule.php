@@ -10,6 +10,7 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -46,22 +47,17 @@ final class NoFuncCallInMethodCallRule implements Rule, DocumentedRuleInterface
     {
         $messages = [];
 
-        foreach ($node->args as $arg) {
-            if (! $arg instanceof Arg) {
-                continue;
-            }
-
+        foreach ($node->getArgs() as $arg) {
             if (! $arg->value instanceof FuncCall) {
                 continue;
             }
 
             $funcCallName = $this->resolveFuncCallName($arg);
-
-            if (\str_contains($funcCallName, '\\')) {
+            if ($this->shouldSkipFuncCallName($funcCallName)) {
                 continue;
             }
 
-            if (in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, true)) {
+            if ($this->isSprintfInConsoleCommand($funcCallName, $scope)) {
                 continue;
             }
 
@@ -112,5 +108,28 @@ CODE_SAMPLE
         }
 
         return (string) $funcCall->name;
+    }
+
+    private function shouldSkipFuncCallName(string $funcCallName): bool
+    {
+        if (\str_contains($funcCallName, '\\')) {
+            return true;
+        }
+
+        return in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, true);
+    }
+
+    private function isSprintfInConsoleCommand(string $funcCallName, Scope $scope): bool
+    {
+        if ($funcCallName !== 'sprintf') {
+            return false;
+        }
+
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        return $classReflection->isSubclassOf('Symfony\Component\Console\Command\Command');
     }
 }

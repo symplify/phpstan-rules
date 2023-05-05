@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
@@ -120,14 +119,10 @@ CODE_SAMPLE
             return false;
         }
 
-        $argOrVariadicPlaceholder = $funcCall->args[0];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return false;
-        }
+        $arg = $funcCall->getArgs()[0];
 
-        $firstArgValue = $argOrVariadicPlaceholder->value;
+        $firstArgType = $scope->getType($arg->value);
 
-        $firstArgType = $scope->getType($firstArgValue);
         // non nullable
         $firstArgType = TypeCombinator::removeNull($firstArgType);
 

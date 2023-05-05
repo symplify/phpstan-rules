@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Symfony\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
@@ -64,17 +63,13 @@ final class RequireNativeArraySymfonyRenderCallRule implements Rule, DocumentedR
             return [];
         }
 
-        if (count($node->args) !== 2) {
+        if (count($node->getArgs()) !== 2) {
             return [];
         }
 
-        $argOrVariadicPlaceholder = $node->args[1];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
+        $arg = $node->getArgs()[1];
 
-        $secondArgValue = $argOrVariadicPlaceholder->value;
-        if ($secondArgValue instanceof Array_) {
+        if ($arg->value instanceof Array_) {
             return [];
         }
 

@@ -35,4 +35,8 @@ return static function (RectorConfig $rectorConfig): void {
         '*/Source/*',
         '*/Fixture/*',
     ]);
+
+    $rectorConfig->ruleWithConfiguration(\Rector\Php55\Rector\String_\StringClassNameToClassConstantRector::class, [
+        'Symfony\Component\Console\Command\Command',
+    ]);
 };

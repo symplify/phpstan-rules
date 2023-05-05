@@ -73,7 +73,7 @@ final class FormTypeClassCollector implements Collector
     private function resolveDataClassFromSetDefaults(MethodCall $methodCall, Scope $scope): ?array
     {
         /** @var ArrayItem[] $arrayItems */
-        $arrayItems = $this->nodeFinder->findInstanceOf($methodCall->args, ArrayItem::class);
+        $arrayItems = $this->nodeFinder->findInstanceOf($methodCall->getArgs(), ArrayItem::class);
 
         foreach ($arrayItems as $arrayItem) {
             if (! $arrayItem->key instanceof String_) {
