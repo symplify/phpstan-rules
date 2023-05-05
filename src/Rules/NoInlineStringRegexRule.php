@@ -6,7 +6,6 @@ namespace Symplify\PHPStanRules\Rules;
 
 use Nette\Utils\Strings;
 use PhpParser\Node;
-use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
