@@ -136,6 +136,10 @@ CODE_SAMPLE
             if ($objectClassReflection->isSubclassOf('Symfony\Component\Console\Output\OutputInterface')) {
                 return true;
             }
+
+            if ($objectClassReflection->isSubclassOf('Illuminate\Console\Command')) {
+                return true;
+            }
         }
 
         return false;
