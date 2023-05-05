@@ -21,20 +21,29 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\ObjectCalisthenics\Rules\NoChainMethodCallRule\NoChainMethodCallRuleTest
  * @implements Rule<MethodCall>
  */
-final class NoChainMethodCallRule implements Rule, DocumentedRuleinterface, ConfigurableRuleInterface
+final class NoChainMethodCallRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not use chained method calls. Put each on separated lines.';
-
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\AllowedChainCallSkipper
+     */
+    private $allowedChainCallSkipper;
+    /**
+     * @var class-string[]
+     * @readonly
+     */
+    private $allowedChainTypes = [];
     /**
      * @param class-string[] $allowedChainTypes
      */
-    public function __construct(
-        private readonly AllowedChainCallSkipper $allowedChainCallSkipper,
-        private readonly array $allowedChainTypes = [],
-    ) {
+    public function __construct(AllowedChainCallSkipper $allowedChainCallSkipper, array $allowedChainTypes = [])
+    {
+        $this->allowedChainCallSkipper = $allowedChainCallSkipper;
+        $this->allowedChainTypes = $allowedChainTypes;
     }
 
     /**

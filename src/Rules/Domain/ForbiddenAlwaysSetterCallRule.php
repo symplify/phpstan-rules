@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\ForbiddenAlwaysSetterCallRule\ForbiddenAlwaysSetterCallRuleTest
  */
-final class ForbiddenAlwaysSetterCallRule implements Rule, DocumentedRuleInterface
+final class ForbiddenAlwaysSetterCallRule implements Rule
 {
     /**
      * @var string

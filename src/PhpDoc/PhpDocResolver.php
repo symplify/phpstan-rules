@@ -12,9 +12,14 @@ use PHPStan\Type\FileTypeMapper;
 
 final class PhpDocResolver
 {
-    public function __construct(
-        private readonly FileTypeMapper $fileTypeMapper
-    ) {
+    /**
+     * @readonly
+     * @var \PHPStan\Type\FileTypeMapper
+     */
+    private $fileTypeMapper;
+    public function __construct(FileTypeMapper $fileTypeMapper)
+    {
+        $this->fileTypeMapper = $fileTypeMapper;
     }
 
     public function resolve(Scope $scope, ClassReflection $classReflection, Doc $doc): ResolvedPhpDocBlock

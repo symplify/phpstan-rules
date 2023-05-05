@@ -19,19 +19,23 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Privatization\NoPublicPropertyByTypeRule\NoPublicPropertyByTypeRuleTest
  */
-final class NoPublicPropertyByTypeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class NoPublicPropertyByTypeRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Class cannot have public properties. Use getter/setters instead';
-
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $classTypes;
     /**
      * @param string[] $classTypes
      */
-    public function __construct(
-        private readonly array $classTypes,
-    ) {
+    public function __construct(array $classTypes)
+    {
+        $this->classTypes = $classTypes;
     }
 
     public function getNodeType(): string
