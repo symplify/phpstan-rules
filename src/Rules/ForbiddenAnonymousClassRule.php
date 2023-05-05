@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenAnonymousClassRule\ForbiddenAnonymousClassRuleTest
  */
-final class ForbiddenAnonymousClassRule implements Rule, DocumentedRuleInterface
+final class ForbiddenAnonymousClassRule implements Rule
 {
     /**
      * @var string
