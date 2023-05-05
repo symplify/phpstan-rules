@@ -57,7 +57,7 @@ final class NoFuncCallInMethodCallRule implements Rule, DocumentedRuleInterface
                 continue;
             }
 
-            if ($this->isSprintfInConsoleCommand($funcCallName, $scope)) {
+            if ($this->isSprintfInConsoleOutput($funcCallName, $scope, $node)) {
                 continue;
             }
 
@@ -119,17 +119,25 @@ CODE_SAMPLE
         return in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, true);
     }
 
-    private function isSprintfInConsoleCommand(string $funcCallName, Scope $scope): bool
+    private function isSprintfInConsoleOutput(string $funcCallName, Scope $scope, MethodCall $methodCall): bool
     {
         if ($funcCallName !== 'sprintf') {
             return false;
         }
 
-        $classReflection = $scope->getClassReflection();
-        if (! $classReflection instanceof ClassReflection) {
-            return false;
+        $callerType = $scope->getType($methodCall->var);
+
+        foreach ($callerType->getObjectClassReflections() as $objectClassReflection) {
+            /** @var ClassReflection $objectClassReflection */
+            if ($objectClassReflection->getName() === 'Symfony\Component\Console\Output\OutputInterface') {
+                return true;
+            }
+
+            if ($objectClassReflection->isSubclassOf('Symfony\Component\Console\Output\OutputInterface')) {
+                return true;
+            }
         }
 
-        return $classReflection->isSubclassOf('Symfony\Component\Console\Command\Command');
+        return false;
     }
 }

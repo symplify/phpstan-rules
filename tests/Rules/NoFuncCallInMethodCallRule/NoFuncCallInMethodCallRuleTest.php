@@ -29,6 +29,7 @@ final class NoFuncCallInMethodCallRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipGetCwd.php', []];
         yield [__DIR__ . '/Fixture/SkipNamespacedFunction.php', []];
         yield [__DIR__ . '/Fixture/SkipSprintfInCommand.php', []];
+        yield [__DIR__ . '/Fixture/SkipSymfonyStyleCommand.php', []];
     }
 
     /**
