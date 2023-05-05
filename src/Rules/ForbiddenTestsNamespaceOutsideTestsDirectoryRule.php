@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenTestsNamespaceOutsideTestsDirectoryRule\ForbiddenTestsNamespaceOutsideTestsDirectoryRuleTest
  */
-final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule, DocumentedRuleInterface
+final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule
 {
     /**
      * @var string
@@ -30,10 +30,14 @@ final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule, Do
      * @var string
      */
     private const DESCRIPTION = '"Tests" namespace can be only in "/tests" directory';
-
-    public function __construct(
-        private readonly DirectoryChecker $directoryChecker,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Location\DirectoryChecker
+     */
+    private $directoryChecker;
+    public function __construct(DirectoryChecker $directoryChecker)
+    {
+        $this->directoryChecker = $directoryChecker;
     }
 
     /**
