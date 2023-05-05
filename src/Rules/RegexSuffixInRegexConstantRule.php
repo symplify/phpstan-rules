@@ -122,12 +122,8 @@ CODE_SAMPLE
             return [];
         }
 
-        $argOrVariadicPlaceholder = $staticCall->args[1];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        return $this->processConstantName($argOrVariadicPlaceholder->value);
+        $secondArg = $staticCall->getArgs()[1];
+        return $this->processConstantName($secondArg->value);
     }
 
     /**
@@ -139,12 +135,7 @@ CODE_SAMPLE
             return [];
         }
 
-        $argOrVariadicPlaceholder = $funcCall->args[0];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        $firstArgValue = $argOrVariadicPlaceholder->value;
-        return $this->processConstantName($firstArgValue);
+        $firstArg = $funcCall->getArgs()[0];
+        return $this->processConstantName($firstArg->value);
     }
 }

@@ -120,14 +120,10 @@ CODE_SAMPLE
             return false;
         }
 
-        $argOrVariadicPlaceholder = $funcCall->args[0];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return false;
-        }
+        $arg = $funcCall->getArgs()[0];
 
-        $firstArgValue = $argOrVariadicPlaceholder->value;
+        $firstArgType = $scope->getType($arg->value);
 
-        $firstArgType = $scope->getType($firstArgValue);
         // non nullable
         $firstArgType = TypeCombinator::removeNull($firstArgType);
 

@@ -46,22 +46,13 @@ final class NoFuncCallInMethodCallRule implements Rule, DocumentedRuleInterface
     {
         $messages = [];
 
-        foreach ($node->args as $arg) {
-            if (! $arg instanceof Arg) {
-                continue;
-            }
-
+        foreach ($node->getArgs() as $arg) {
             if (! $arg->value instanceof FuncCall) {
                 continue;
             }
 
             $funcCallName = $this->resolveFuncCallName($arg);
-
-            if (\str_contains($funcCallName, '\\')) {
-                continue;
-            }
-
-            if (in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, true)) {
+            if ($this->shouldSkipFuncCallName($funcCallName)) {
                 continue;
             }
 
@@ -112,5 +103,14 @@ CODE_SAMPLE
         }
 
         return (string) $funcCall->name;
+    }
+
+    private function shouldSkipFuncCallName(string $funcCallName): bool
+    {
+        if (\str_contains($funcCallName, '\\')) {
+            return true;
+        }
+
+        return in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, true);
     }
 }

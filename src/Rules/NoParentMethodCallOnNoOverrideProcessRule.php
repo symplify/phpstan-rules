@@ -55,7 +55,7 @@ final class NoParentMethodCallOnNoOverrideProcessRule implements Rule, Documente
             return [];
         }
 
-        $methodCallArgs = $onlyNode->args;
+        $methodCallArgs = $onlyNode->getArgs();
         $classMethodParams = $node->params;
 
         if (! $this->nodeComparator->areArgsAndParamsSame($methodCallArgs, $classMethodParams)) {

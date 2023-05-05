@@ -64,17 +64,13 @@ final class RequireNativeArraySymfonyRenderCallRule implements Rule, DocumentedR
             return [];
         }
 
-        if (count($node->args) !== 2) {
+        if (count($node->getArgs()) !== 2) {
             return [];
         }
 
-        $argOrVariadicPlaceholder = $node->args[1];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
+        $arg = $node->getArgs()[1];
 
-        $secondArgValue = $argOrVariadicPlaceholder->value;
-        if ($secondArgValue instanceof Array_) {
+        if ($arg->value instanceof Array_) {
             return [];
         }
 

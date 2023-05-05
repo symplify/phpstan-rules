@@ -101,13 +101,10 @@ CODE_SAMPLE
             return [];
         }
 
-        $firstArgOrVariadicPlaceholder = $funcCall->args[0];
-        if (! $firstArgOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
+        $firstArg = $funcCall->getArgs()[0];
 
         // it's not string → good
-        if (! $firstArgOrVariadicPlaceholder->value instanceof String_) {
+        if (! $firstArg->value instanceof String_) {
             return [];
         }
 
@@ -123,12 +120,8 @@ CODE_SAMPLE
             return [];
         }
 
-        $argOrVariadicPlaceholder = $staticCall->args[1];
-        if (! $argOrVariadicPlaceholder instanceof Arg) {
-            return [];
-        }
-
-        $secondArgValue = $argOrVariadicPlaceholder->value;
+        $secondArg = $staticCall->getArgs()[1];
+        $secondArgValue = $secondArg->value;
 
         // it's not string → good
         if (! $secondArgValue instanceof String_) {

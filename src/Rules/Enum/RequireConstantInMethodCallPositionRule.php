@@ -118,11 +118,7 @@ CODE_SAMPLE
                 continue;
             }
 
-            foreach ($methodCall->args as $key => $arg) {
-                if (! $arg instanceof Arg) {
-                    continue;
-                }
-
+            foreach ($methodCall->getArgs() as $key => $arg) {
                 if ($this->shouldSkipArg($key, $positions, $arg)) {
                     continue;
                 }
