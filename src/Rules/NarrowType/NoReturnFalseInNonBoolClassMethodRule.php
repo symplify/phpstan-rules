@@ -27,7 +27,7 @@ final class NoReturnFalseInNonBoolClassMethodRule implements Rule, DocumentedRul
      */
     public const ERROR_MESSAGE = 'Returning false in non return bool class method. Use null instead';
 
-    private NodeFinder $nodeFinder;
+    private readonly NodeFinder $nodeFinder;
 
     public function __construct(
     ) {

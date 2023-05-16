@@ -9,5 +9,6 @@ return static function (EasyCIConfig $easyCIConfig): void {
         \Symplify\PHPStanRules\Exception\DeprecatedException::class,
         \Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder::class,
         \Symplify\PHPStanRules\NodeVisitor\AssignedToPropertyNodeVisitor::class,
+        \Symplify\PHPStanRules\ObjectCalisthenics\NodeVisitor\NullsafeCheckedNodeVisitor::class,
     ]);
 };

@@ -1,4 +1,4 @@
-# 90 Rules Overview
+# 89 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1668,50 +1668,6 @@ class SomeClass
         if ($object !== null) {
             return $object;
         }
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## NoMissingAssingNoVoidMethodCallRule
-
-Method call return value that should be used, but is not
-
-- class: [`Symplify\PHPStanRules\Rules\Explicit\NoMissingAssingNoVoidMethodCallRule`](../src/Rules/Explicit/NoMissingAssingNoVoidMethodCallRule.php)
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        $this->getResult();
-    }
-
-    private function getResult()
-    {
-        return [];
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    public function run()
-    {
-        return $this->getResult();
-    }
-
-    private function getResult()
-    {
-        return [];
     }
 }
 ```
