@@ -14,12 +14,17 @@ use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
 
 final class ReturnNodeFinder
 {
-    public function __construct(
-        private readonly SimpleCallableNodeTraverser $simpleCallableNodeTraverser
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser
+     */
+    private $simpleCallableNodeTraverser;
+    public function __construct(SimpleCallableNodeTraverser $simpleCallableNodeTraverser)
+    {
+        $this->simpleCallableNodeTraverser = $simpleCallableNodeTraverser;
     }
 
-    public function findOnlyReturnsExpr(ClassMethod $classMethod): Expr|null
+    public function findOnlyReturnsExpr(ClassMethod $classMethod): ?\PhpParser\Node\Expr
     {
         $returns = $this->findReturnsWithValues($classMethod);
         if (count($returns) !== 1) {

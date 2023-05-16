@@ -9,10 +9,20 @@ use PhpParser\Node\Stmt;
 
 final class IfAndCondExpr
 {
-    public function __construct(
-        private readonly Stmt $stmt,
-        private readonly Expr|null $condExpr
-    ) {
+    /**
+     * @readonly
+     * @var \PhpParser\Node\Stmt
+     */
+    private $stmt;
+    /**
+     * @readonly
+     * @var \PhpParser\Node\Expr|null
+     */
+    private $condExpr;
+    public function __construct(Stmt $stmt, ?\PhpParser\Node\Expr $condExpr)
+    {
+        $this->stmt = $stmt;
+        $this->condExpr = $condExpr;
     }
 
     public function getStmt(): Stmt
