@@ -39,7 +39,7 @@ final class RegexClassConstCollector implements Collector
             $constConst = $classConst->consts[0];
             $constantName = $constConst->name->toString();
 
-            if (! str_ends_with($constantName, '_REGEX')) {
+            if (substr_compare($constantName, '_REGEX', -strlen('_REGEX')) !== 0) {
                 continue;
             }
 

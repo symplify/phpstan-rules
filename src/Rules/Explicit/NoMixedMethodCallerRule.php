@@ -18,16 +18,20 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMixedMethodCallerRule\NoMixedMethodCallerRuleTest
  */
-final class NoMixedMethodCallerRule implements Rule, DocumentedRuleInterface
+final class NoMixedMethodCallerRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Anonymous variable in a `%s->...()` method call can lead to false dead methods. Make sure the variable type is known';
-
-    public function __construct(
-        private readonly Standard $printerStandard,
-    ) {
+    /**
+     * @readonly
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $printerStandard;
+    public function __construct(Standard $printerStandard)
+    {
+        $this->printerStandard = $printerStandard;
     }
 
     /**
