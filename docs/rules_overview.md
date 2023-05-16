@@ -1,4 +1,4 @@
-# 90 Rules Overview
+# 89 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -655,45 +655,6 @@ echo $value;
 
 ```php
 echo $value;
-```
-
-:+1:
-
-<br>
-
-## ForbiddenInlineClassMethodRule
-
-Method `"%s()"` only calling another method call and has no added value. Use the inlined call instead
-
-- class: [`Symplify\PHPStanRules\Rules\Complexity\ForbiddenInlineClassMethodRule`](../src/Rules/Complexity/ForbiddenInlineClassMethodRule.php)
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        return $this->away();
-    }
-
-    private function away()
-    {
-        return mt_rand(0, 100);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        return mt_rand(0, 100);
-    }
-}
 ```
 
 :+1:
