@@ -12,4 +12,3 @@ rules:
     - Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoChainMethodCallRule
     - Symplify\PHPStanRules\Rules\ForbiddenNestedCallInAssertMethodCallRule
     - Symplify\PHPStanRules\Rules\Explicit\NoRelativeFilePathRule
-    - Symplify\PHPStanRules\Rules\Explicit\NoMissingAssingNoVoidMethodCallRule
