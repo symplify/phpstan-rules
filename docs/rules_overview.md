@@ -1,4 +1,4 @@
-# 89 Rules Overview
+# 90 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2070,6 +2070,58 @@ final class ReturnVariables
     public function run($value, $value2): ValueObject
     {
         return new ValueObject($value, $value2);
+    }
+}
+```
+
+:+1:
+
+<br>
+
+## NoReturnFalseInNonBoolClassMethodRule
+
+Returning false in non return bool class method. Use null instead
+
+- class: [`Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule`](../src/Rules/NarrowType/NoReturnFalseInNonBoolClassMethodRule.php)
+
+```php
+class SomeClass
+{
+    /**
+     * @var Item[]
+     */
+    private $items = [];
+
+    public function getItem($key)
+    {
+        if (isset($this->items[$key])) {
+            return $this->items[$key];
+        }
+
+        return false;
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+class SomeClass
+{
+    /**
+     * @var Item[]
+     */
+    private $items = [];
+
+    public function getItem($key): ?Item
+    {
+        if (isset($this->items[$key])) {
+            return $this->items[$key];
+        }
+
+        return null;
     }
 }
 ```
