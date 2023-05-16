@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# 89 Rules Overview
-=======
-# 91 Rules Overview
->>>>>>> e3a48c64 (Add NoReturnFalseInNonBoolClassMethodRule)
+# 90 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 

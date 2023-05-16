@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\NarrowType;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Return_;
 use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
@@ -24,6 +26,13 @@ final class NoReturnFalseInNonBoolClassMethodRule implements Rule, DocumentedRul
      * @var string
      */
     public const ERROR_MESSAGE = 'Returning false in non return bool class method. Use null instead';
+
+    private NodeFinder $nodeFinder;
+
+    public function __construct(
+    ) {
+        $this->nodeFinder = new NodeFinder();
+    }
 
     /**
      * @return class-string<Node>
@@ -47,13 +56,11 @@ final class NoReturnFalseInNonBoolClassMethodRule implements Rule, DocumentedRul
             return [];
         }
 
-        $nodeFinder = new NodeFinder();
-
-        /** @var Node\Stmt\Return_[] $returns */
-        $returns = $nodeFinder->findInstanceOf($node->stmts, Node\Stmt\Return_::class);
+        /** @var Return_[] $returns */
+        $returns = $this->nodeFinder->findInstanceOf($node->stmts, Return_::class);
 
         foreach ($returns as $return) {
-            if (! $return->expr instanceof Node\Expr) {
+            if (! $return->expr instanceof Expr) {
                 continue;
             }
 
@@ -62,7 +69,7 @@ final class NoReturnFalseInNonBoolClassMethodRule implements Rule, DocumentedRul
                 continue;
             }
 
-            if ($exprType->getValue() !== false) {
+            if ($exprType->getValue()) {
                 continue;
             }
 
