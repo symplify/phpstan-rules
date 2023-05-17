@@ -59,8 +59,6 @@ parameters:
 
         - '#Method Symplify\\PHPStanRules\\NodeFinder\\MethodCallNodeFinder\:\:findUsages\(\) should return array<PhpParser\\Node\\Expr\\MethodCall> but returns array<PhpParser\\Node>#'
 
-        - '#Parameter \#3 \$types of method Symplify\\PHPStanRules\\Matcher\\ObjectTypeMatcher\:\:isExprTypes\(\) expects array<class\-string>, array<string> given#'
-
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\Tests\\Rules\\(.*?) extends generic class PHPStan\\Testing\\RuleTestCase but does not specify its types\: TRule#'
         - '#Method Symplify\\PHPStanRules\\Tests\\Rules\\(.*?)\:\:getRule\(\) return type with generic interface PHPStan\\Rules\\Rule does not specify its types\: TNodeType#'
