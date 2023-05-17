@@ -1,4 +1,4 @@
-# 89 Rules Overview
+# 88 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1137,49 +1137,6 @@ class SomeClass
         return $magicArrayObject->getExplicitValue();
     }
 }
-```
-
-:+1:
-
-<br>
-
-## NoChainMethodCallRule
-
-Do not use chained method calls. Put each on separated lines.
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoChainMethodCallRule`](../packages/ObjectCalisthenics/Rules/NoChainMethodCallRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoChainMethodCallRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            allowedChainTypes:
-                - AllowedFluent
-```
-
-↓
-
-```php
-$this->runThis()->runThat();
-
-$fluentClass = new AllowedFluent();
-$fluentClass->one()->two();
-```
-
-:x:
-
-<br>
-
-```php
-$this->runThis();
-$this->runThat();
-
-$fluentClass = new AllowedFluent();
-$fluentClass->one()->two();
 ```
 
 :+1:

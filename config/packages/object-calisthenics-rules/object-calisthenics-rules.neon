@@ -5,6 +5,3 @@ services:
         arguments:
             minNameLength: 3
             allowedShortNames: ['id', 'to', 'up']
-
-rules:
-    - Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoChainMethodCallRule
