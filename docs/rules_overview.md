@@ -1,4 +1,4 @@
-# 87 Rules Overview
+# 86 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2915,48 +2915,6 @@ final class IssueControlFactory
 
 final class IssueControl extends Control
 {
-}
-```
-
-:+1:
-
-<br>
-
-## RequireThisCallOnLocalMethodRule
-
-Use "$this-><method>()" instead of "self::<method>()" to call local method
-
-- class: [`Symplify\PHPStanRules\Rules\RequireThisCallOnLocalMethodRule`](../src/Rules/RequireThisCallOnLocalMethodRule.php)
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        self::execute();
-    }
-
-    private function execute()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        $this->execute();
-    }
-
-    private function execute()
-    {
-    }
 }
 ```
 
