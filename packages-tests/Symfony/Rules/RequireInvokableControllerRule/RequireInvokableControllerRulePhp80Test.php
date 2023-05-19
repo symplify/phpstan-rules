@@ -21,9 +21,6 @@ final class RequireInvokableControllerRulePhp80Test extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    /**
-     * @return Iterator<array<string|int[]|string[]>>
-     */
     public static function provideData(): Iterator
     {
         yield [

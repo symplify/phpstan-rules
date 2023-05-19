@@ -29,6 +29,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class CheckSprintfMatchingTypesRule implements Rule, DocumentedRuleInterface
 {
     /**
+     * @api
      * @var string
      */
     public const ERROR_MESSAGE = 'sprintf() call mask type at index [%d] expects type "%s", but "%s" given';
