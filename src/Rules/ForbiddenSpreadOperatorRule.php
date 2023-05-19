@@ -94,7 +94,10 @@ CODE_SAMPLE
         ]);
     }
 
-    private function hasVariadicParam(Closure | ArrowFunction | ClassMethod | Function_ $node): bool
+    /**
+     * @param \PhpParser\Node\Expr\Closure|\PhpParser\Node\Expr\ArrowFunction|\PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\Function_ $node
+     */
+    private function hasVariadicParam($node): bool
     {
         foreach ($node->params as $param) {
             if ($param->variadic) {

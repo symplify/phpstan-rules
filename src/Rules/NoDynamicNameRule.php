@@ -27,10 +27,14 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
      * @var string
      */
     public const ERROR_MESSAGE = 'Use explicit names over dynamic ones';
-
-    public function __construct(
-        private readonly CallableTypeAnalyzer $callableTypeAnalyzer,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer
+     */
+    private $callableTypeAnalyzer;
+    public function __construct(CallableTypeAnalyzer $callableTypeAnalyzer)
+    {
+        $this->callableTypeAnalyzer = $callableTypeAnalyzer;
     }
 
     /**
