@@ -1,4 +1,4 @@
-# 84 Rules Overview
+# 83 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -714,45 +714,6 @@ return strlen(string: 'name');
 
 ```php
 return strlen('name');
-```
-
-:+1:
-
-<br>
-
-## ForbiddenNestedCallInAssertMethodCallRule
-
-Decouple method call in assert to standalone line to make test core more readable
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenNestedCallInAssertMethodCallRule`](../src/Rules/ForbiddenNestedCallInAssertMethodCallRule.php)
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeClass extends TestCase
-{
-    public function test()
-    {
-        $this->assertSame('oooo', $this->someMethodCall());
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeClass extends TestCase
-{
-    public function test()
-    {
-        $result = $this->someMethodCall();
-        $this->assertSame('oooo', $result);
-    }
-}
 ```
 
 :+1:
