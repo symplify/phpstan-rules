@@ -1,4 +1,4 @@
-# 83 Rules Overview
+# 82 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -843,40 +843,6 @@ $message = sprintf('%s', ...$args);
 
 ```php
 $message = sprintf('%s', $firstValue, $secondValue);
-```
-
-:+1:
-
-<br>
-
-## ForbiddenTestsNamespaceOutsideTestsDirectoryRule
-
-"Tests" namespace can be only in "/tests" directory
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenTestsNamespaceOutsideTestsDirectoryRule`](../src/Rules/ForbiddenTestsNamespaceOutsideTestsDirectoryRule.php)
-
-```php
-// file path: "src/SomeClass.php"
-
-namespace App\Tests;
-
-class SomeClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-// file path: "tests/SomeClass.php"
-
-namespace App\Tests;
-
-class SomeClass
-{
-}
 ```
 
 :+1:
