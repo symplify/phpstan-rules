@@ -11,9 +11,14 @@ use Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
 
 final class ParentClassMethodGuard
 {
-    public function __construct(
-        private readonly ParentMethodResolver $parentMethodResolver
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
+     */
+    private $parentMethodResolver;
+    public function __construct(ParentMethodResolver $parentMethodResolver)
+    {
+        $this->parentMethodResolver = $parentMethodResolver;
     }
 
     public function isClassMethodGuardedByParentClassMethod(ClassMethod $classMethod, Scope $scope): bool

@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoRightPHPUnitAssertScalarRule\NoRightPHPUnitAssertScalarRuleTest
  */
-final class NoRightPHPUnitAssertScalarRule implements Rule, DocumentedRuleInterface
+final class NoRightPHPUnitAssertScalarRule implements Rule
 {
     /**
      * @var string
