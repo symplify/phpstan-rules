@@ -8,5 +8,4 @@ rules:
     - Symplify\PHPStanRules\Rules\Complexity\NoAbstractRule
     - Symplify\PHPStanRules\Rules\Enum\RequireEnumDocBlockOnConstantListPassRule
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
-    - Symplify\PHPStanRules\Rules\ForbiddenNestedCallInAssertMethodCallRule
     - Symplify\PHPStanRules\Rules\Explicit\NoRelativeFilePathRule
