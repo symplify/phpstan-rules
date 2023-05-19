@@ -1,4 +1,4 @@
-# 88 Rules Overview
+# 87 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2956,54 +2956,6 @@ class SomeClass
 
     private function execute()
     {
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## RequireThisOnParentMethodCallRule
-
-Use "$this-><method>()" instead of "parent::<method>()" unless in the same named method
-
-- class: [`Symplify\PHPStanRules\Rules\RequireThisOnParentMethodCallRule`](../src/Rules/RequireThisOnParentMethodCallRule.php)
-
-```php
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-
-class SomeClass extends SomeParentClass
-{
-    public function go()
-    {
-        parent::run();
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-
-class SomeClass extends SomeParentClass
-{
-    public function go()
-    {
-        $this->run();
     }
 }
 ```
