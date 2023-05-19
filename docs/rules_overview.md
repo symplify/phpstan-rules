@@ -1,4 +1,4 @@
-# 85 Rules Overview
+# 84 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1463,45 +1463,6 @@ class SomeClass
     public function getSome()
     {
     }
-}
-```
-
-:+1:
-
-<br>
-
-## NoFuncCallInMethodCallRule
-
-Separate function `"%s()"` in method call to standalone row to improve readability
-
-- class: [`Symplify\PHPStanRules\Rules\NoFuncCallInMethodCallRule`](../src/Rules/NoFuncCallInMethodCallRule.php)
-
-```php
-final class SomeClass
-{
-    public function run($value): void
-    {
-        $this->someMethod(strlen('fooo'));
-    }
-
-    // ...
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    public function run($value): void
-    {
-        $fooLength = strlen('fooo');
-        $this->someMethod($fooLength);
-    }
-
-    // ...
 }
 ```
 
