@@ -1,4 +1,4 @@
-# 86 Rules Overview
+# 85 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2344,41 +2344,6 @@ abstract class SomeClass
 abstract class AbstractSomeClass
 {
 }
-```
-
-:+1:
-
-<br>
-
-## PreventDoubleSetParameterRule
-
-Set param value is overridden. Merge it to previous set above
-
-- class: [`Symplify\PHPStanRules\Symfony\Rules\PreventDoubleSetParameterRule`](../packages/Symfony/Rules/PreventDoubleSetParameterRule.php)
-
-```php
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
-
-    $parameters->set('some_param', [1]);
-    $parameters->set('some_param', [2]);
-};
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
-
-    $parameters->set('some_param', [1, 2]);
-};
 ```
 
 :+1:
