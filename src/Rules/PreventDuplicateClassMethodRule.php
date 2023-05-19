@@ -22,16 +22,20 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<CollectedDataNode>
  */
-final class PreventDuplicateClassMethodRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class PreventDuplicateClassMethodRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Content of method "%s()" is duplicated. Use unique content or service instead';
-
-    public function __construct(
-        private readonly int $minimumLineCount = 3,
-    ) {
+    /**
+     * @readonly
+     * @var int
+     */
+    private $minimumLineCount = 3;
+    public function __construct(int $minimumLineCount = 3)
+    {
+        $this->minimumLineCount = $minimumLineCount;
     }
 
     /**
@@ -59,7 +63,9 @@ final class PreventDuplicateClassMethodRule implements Rule, DocumentedRuleInter
             // keep only long enough methods
             $classMethodMetadatas = array_filter(
                 $classMethodMetadatas,
-                fn (ClassMethodMetadata $classMethodMetadata): bool => $classMethodMetadata->getLineCount() >= $this->minimumLineCount
+                function (ClassMethodMetadata $classMethodMetadata) : bool {
+                    return $classMethodMetadata->getLineCount() >= $this->minimumLineCount;
+                }
             );
 
             // method is unique, we can skip it
@@ -139,12 +145,7 @@ CODE_SAMPLE
 
                 $methodLineCount = substr_count((string) $methodContents, "\n");
 
-                $methodsNamesAndFilesByMethodContents[$methodContentsHash][] = new ClassMethodMetadata(
-                    $methodName,
-                    $methodLineCount,
-                    $fileName,
-                    $methodLine,
-                );
+                $methodsNamesAndFilesByMethodContents[$methodContentsHash][] = new ClassMethodMetadata($methodName, $methodLineCount, $fileName, $methodLine);
             }
         }
 

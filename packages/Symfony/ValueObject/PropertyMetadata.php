@@ -11,11 +11,26 @@ use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 
 final class PropertyMetadata
 {
-    public function __construct(
-        private readonly PhpPropertyReflection $phpPropertyReflection,
-        private readonly ReflectionProperty $nativeReflectionProperty,
-        private readonly int $propertyLine
-    ) {
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\Php\PhpPropertyReflection
+     */
+    private $phpPropertyReflection;
+    /**
+     * @readonly
+     * @var \PHPStan\BetterReflection\Reflection\Adapter\ReflectionProperty
+     */
+    private $nativeReflectionProperty;
+    /**
+     * @readonly
+     * @var int
+     */
+    private $propertyLine;
+    public function __construct(PhpPropertyReflection $phpPropertyReflection, ReflectionProperty $nativeReflectionProperty, int $propertyLine)
+    {
+        $this->phpPropertyReflection = $phpPropertyReflection;
+        $this->nativeReflectionProperty = $nativeReflectionProperty;
+        $this->propertyLine = $propertyLine;
     }
 
     public function getPropertyType(): Type
