@@ -1,3 +1,2 @@
 services:
-    - Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyPhpConfigClosureAnalyzer
     - Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer
