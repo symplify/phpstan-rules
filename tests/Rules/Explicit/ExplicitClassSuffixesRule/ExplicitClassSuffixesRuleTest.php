@@ -25,6 +25,13 @@ final class ExplicitClassSuffixesRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/CorrectInterface.php', []];
         yield [__DIR__ . '/Fixture/CorrectTrait.php', []];
+
+        yield [__DIR__ . '/Fixture/WrongTraitSuffix.php', [
+            [ExplicitClassSuffixesRule::TRAIT_ERROR_MESSAGE, 5],
+        ]];
+        yield [__DIR__ . '/Fixture/WrongInterfaceSuffix.php', [
+            [ExplicitClassSuffixesRule::INTERFACE_ERROR_MESSAGE, 5],
+        ]];
     }
 
     /**
