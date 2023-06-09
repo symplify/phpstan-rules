@@ -1,4 +1,4 @@
-# 80 Rules Overview
+# 79 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2824,32 +2824,6 @@ class SomeClass extends Enum
     private const YES = 'yes';
 
     private const NO = 'no';
-}
-```
-
-:+1:
-
-<br>
-
-## RequiredAbstractClassKeywordRule
-
-Class name starting with "Abstract" must have an `abstract` keyword
-
-- class: [`Symplify\PHPStanRules\Rules\RequiredAbstractClassKeywordRule`](../src/Rules/RequiredAbstractClassKeywordRule.php)
-
-```php
-class AbstractClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-abstract class AbstractClass
-{
 }
 ```
 
