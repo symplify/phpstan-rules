@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoAbstractMethodRule\NoAbstractMethodRuleTest
  */
-final class NoAbstractMethodRule implements Rule, DocumentedRuleInterface
+final class NoAbstractMethodRule implements Rule
 {
     /**
      * @var string
@@ -46,15 +46,12 @@ final class NoAbstractMethodRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 abstract class SomeClass
 {
     abstract public function run();
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 abstract class SomeClass implements RunnableInterface
 {
 }
@@ -63,8 +60,7 @@ interface RunnableInterface
 {
     public function run();
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

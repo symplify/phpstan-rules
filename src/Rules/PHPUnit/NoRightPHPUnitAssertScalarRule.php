@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoRightPHPUnitAssertScalarRule\NoRightPHPUnitAssertScalarRuleTest
  */
-final class NoRightPHPUnitAssertScalarRule implements Rule, DocumentedRuleInterface
+final class NoRightPHPUnitAssertScalarRule implements Rule
 {
     /**
      * @var string
@@ -61,8 +61,7 @@ final class NoRightPHPUnitAssertScalarRule implements Rule, DocumentedRuleInterf
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 use PHPUnit\Framework\TestCase;
 
 final class SomeFlippedAssert extends TestCase
@@ -73,9 +72,7 @@ final class SomeFlippedAssert extends TestCase
         $this->assertSame($value, 10);
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use PHPUnit\Framework\TestCase;
 
 final class SomeFlippedAssert extends TestCase
@@ -86,8 +83,7 @@ final class SomeFlippedAssert extends TestCase
         $this->assertSame(10, $value);
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<CollectedDataNode>
  */
-final class NoDuplicatedTraitMethodNameRule implements Rule, DocumentedRuleInterface
+final class NoDuplicatedTraitMethodNameRule implements Rule
 {
     /**
      * @var string
@@ -58,10 +58,7 @@ final class NoDuplicatedTraitMethodNameRule implements Rule, DocumentedRuleInter
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition(
-            self::ERROR_MESSAGE,
-            [new CodeSample(
-                <<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 trait FirstTrait
 {
     public function run()
@@ -75,9 +72,7 @@ trait SecondTrait
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 trait FirstTrait
 {
     public function run()
@@ -91,9 +86,7 @@ trait SecondTrait
     {
     }
 }
-CODE_SAMPLE
-            )]
-        );
+CODE_SAMPLE)]);
     }
 
     /**

@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDuplicatedShortClassNameRule\NoDuplicatedShortClassNameRuleTest
  */
-final class NoDuplicatedShortClassNameRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class NoDuplicatedShortClassNameRule implements Rule
 {
     /**
      * @var string
@@ -42,11 +42,16 @@ final class NoDuplicatedShortClassNameRule implements Rule, DocumentedRuleInterf
     /**
      * @var array<string, string[]>
      */
-    private array $declaredClassesByShortName = [];
+    private $declaredClassesByShortName = [];
+    /**
+     * @readonly
+     * @var int
+     */
+    private $toleratedNestingLevel;
 
-    public function __construct(
-        private readonly int $toleratedNestingLevel
-    ) {
+    public function __construct(int $toleratedNestingLevel)
+    {
+        $this->toleratedNestingLevel = $toleratedNestingLevel;
     }
 
     /**
@@ -110,8 +115,7 @@ final class NoDuplicatedShortClassNameRule implements Rule, DocumentedRuleInterf
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
+            new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 namespace App;
 
 class SomeClass
@@ -123,9 +127,7 @@ namespace App\Nested;
 class SomeClass
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 namespace App;
 
 class SomeClass
@@ -137,12 +139,9 @@ namespace App\Nested;
 class AnotherClass
 {
 }
-CODE_SAMPLE
-                ,
-                [
-                    'toleratedNestingLevel' => 1,
-                ]
-            ),
+CODE_SAMPLE, [
+                'toleratedNestingLevel' => 1,
+            ]),
         ]);
     }
 

@@ -22,16 +22,20 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<AttributeGroup>
  */
-final class CheckAttributteArgumentClassExistsRule implements Rule, DocumentedRuleInterface
+final class CheckAttributteArgumentClassExistsRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Class was not found';
-
-    public function __construct(
-        private readonly ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -74,21 +78,17 @@ final class CheckAttributteArgumentClassExistsRule implements Rule, DocumentedRu
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 #[SomeAttribute(firstName: 'MissingClass::class')]
 class SomeClass
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 #[SomeAttribute(firstName: ExistingClass::class)]
 class SomeClass
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

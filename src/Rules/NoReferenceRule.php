@@ -28,10 +28,14 @@ final class NoReferenceRule extends AbstractSymplifyRule
      * @var string
      */
     public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
-
-    public function __construct(
-        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
+     */
+    private $parentClassMethodNodeResolver;
+    public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
+    {
+        $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;
     }
 
     /**
@@ -74,17 +78,14 @@ final class NoReferenceRule extends AbstractSymplifyRule
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     public function run(&$value)
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     public function run($value)
@@ -92,8 +93,7 @@ class SomeClass
         return $value;
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ForbiddenNodeRule implements Rule
 {
     /**
      * @var string
@@ -29,15 +29,21 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
     /**
      * @var array<class-string<Node>>
      */
-    private array $forbiddenNodes = [];
+    private $forbiddenNodes = [];
+    /**
+     * @readonly
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        private readonly Standard $standard,
+        Standard $standard,
         array $forbiddenNodes
     ) {
+        $this->standard = $standard;
         Assert::allIsAOf($forbiddenNodes, Node::class);
 
         $this->forbiddenNodes = $forbiddenNodes;
@@ -73,19 +79,13 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
+            new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 return @strlen('...');
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 return strlen('...');
-CODE_SAMPLE
-                ,
-                [
-                    'forbiddenNodes' => [ErrorSuppress::class],
-                ]
-            ),
+CODE_SAMPLE, [
+                'forbiddenNodes' => [ErrorSuppress::class],
+            ]),
         ]);
     }
 }

@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckRequiredInterfaceInContractNamespaceRule\CheckRequiredInterfaceInContractNamespaceRuleTest
  * @implements Rule<Interface_>
  */
-final class CheckRequiredInterfaceInContractNamespaceRule implements Rule, DocumentedRuleInterface
+final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
 {
     /**
      * @var string
@@ -59,16 +59,13 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule, Docum
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 namespace App\Repository;
 
 interface ProductRepositoryInterface
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 namespace App\Contract\Repository;
 
 interface ProductRepositoryInterface
@@ -80,8 +77,7 @@ namespace App\Contracts\Repository;
 interface ProductRepositoryInterface
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

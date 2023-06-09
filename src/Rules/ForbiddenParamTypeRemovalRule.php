@@ -19,16 +19,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenParamTypeRemovalRule\ForbiddenParamTypeRemovalRuleTest
  */
-final class ForbiddenParamTypeRemovalRule implements Rule, DocumentedRuleInterface
+final class ForbiddenParamTypeRemovalRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Removing parent param type is forbidden';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
+     */
+    private $methodNodeAnalyser;
 
-    public function __construct(
-        private readonly MethodNodeAnalyser $methodNodeAnalyser
-    ) {
+    public function __construct(MethodNodeAnalyser $methodNodeAnalyser)
+    {
+        $this->methodNodeAnalyser = $methodNodeAnalyser;
     }
 
     /**
@@ -75,8 +80,7 @@ final class ForbiddenParamTypeRemovalRule implements Rule, DocumentedRuleInterfa
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 interface RectorInterface
 {
     public function refactor(Node $node);
@@ -88,9 +92,7 @@ final class SomeRector implements RectorInterface
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 interface RectorInterface
 {
     public function refactor(Node $node);
@@ -102,8 +104,7 @@ final class SomeRector implements RectorInterface
     {
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

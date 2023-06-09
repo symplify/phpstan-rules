@@ -22,7 +22,7 @@ use Twig\Extension\AbstractExtension;
 /**
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\TwigPublicCallableExistsRule\TwigPublicCallableExistsRuleTest
  */
-final class TwigPublicCallableExistsRule implements Rule, DocumentedRuleInterface
+final class TwigPublicCallableExistsRule implements Rule
 {
     /**
      * @var string
@@ -75,8 +75,7 @@ final class TwigPublicCallableExistsRule implements Rule, DocumentedRuleInterfac
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 use Twig\Extension\AbstractExtension;
 use Twig_SimpleFunction;
 
@@ -89,9 +88,7 @@ final class TwigExtensionWithMissingCallable extends AbstractExtension
         ];
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use Twig\Extension\AbstractExtension;
 use Twig_SimpleFunction;
 
@@ -109,8 +106,7 @@ final class TwigExtensionWithMissingCallable extends AbstractExtension
         // ...
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

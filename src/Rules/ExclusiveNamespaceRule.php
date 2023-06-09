@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ExclusiveNamespaceRule\ExclusiveNamespaceRuleTest
  */
-final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ExclusiveNamespaceRule implements Rule
 {
     /**
      * @var string
@@ -35,13 +35,18 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
      * @var string
      */
     private const EXCLUDED_NAMESPACE_REGEX = '#\\\\(Exception|Contract)\\\\#';
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $namespaceParts;
 
     /**
      * @param string[] $namespaceParts
      */
-    public function __construct(
-        private readonly array $namespaceParts
-    ) {
+    public function __construct(array $namespaceParts)
+    {
+        $this->namespaceParts = $namespaceParts;
     }
 
     /**
@@ -72,7 +77,7 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
         }
 
         foreach ($this->namespaceParts as $namespacePart) {
-            if (! \str_ends_with($namespace, $namespacePart)) {
+            if (substr_compare($namespace, $namespacePart, -strlen($namespacePart)) !== 0) {
                 continue;
             }
 
@@ -80,7 +85,7 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
                 continue;
             }
 
-            if (\str_ends_with($className, $namespacePart)) {
+            if (substr_compare($className, $namespacePart, -strlen($namespacePart)) === 0) {
                 continue;
             }
 
@@ -94,27 +99,21 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition('Exclusive namespace can only contain classes of specific type, nothing else', [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
+            new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 namespace App\Presenter;
 
 class SomeRepository
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 namespace App\Presenter;
 
 class SomePresenter
 {
 }
-CODE_SAMPLE
-                ,
-                [
-                    'namespaceParts' => ['Presenter'],
-                ]
-            ),
+CODE_SAMPLE, [
+                'namespaceParts' => ['Presenter'],
+            ]),
         ]);
     }
 }

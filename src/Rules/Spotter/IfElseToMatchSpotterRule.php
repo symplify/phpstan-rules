@@ -24,18 +24,32 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Spotter\IfElseToMatchSpotterRule\IfElseToMatchSpotterRuleTest
  */
-final class IfElseToMatchSpotterRule implements Rule, DocumentedRuleInterface
+final class IfElseToMatchSpotterRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'If/else construction can be replace with more robust match()';
-
-    public function __construct(
-        private readonly IfElseBranchAnalyzer $ifElseBranchAnalyzer,
-        private readonly IfResemblingMatchAnalyzer $ifResemblingMatchAnalyzer,
-        private readonly CacheIfAnalyzer $cacheIfAnalyzer,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\IfElseBranchAnalyzer
+     */
+    private $ifElseBranchAnalyzer;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\IfResemblingMatchAnalyzer
+     */
+    private $ifResemblingMatchAnalyzer;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\CacheIfAnalyzer
+     */
+    private $cacheIfAnalyzer;
+    public function __construct(IfElseBranchAnalyzer $ifElseBranchAnalyzer, IfResemblingMatchAnalyzer $ifResemblingMatchAnalyzer, CacheIfAnalyzer $cacheIfAnalyzer)
+    {
+        $this->ifElseBranchAnalyzer = $ifElseBranchAnalyzer;
+        $this->ifResemblingMatchAnalyzer = $ifResemblingMatchAnalyzer;
+        $this->cacheIfAnalyzer = $cacheIfAnalyzer;
     }
 
     /**
@@ -99,8 +113,7 @@ final class IfElseToMatchSpotterRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     public function spot($value)
@@ -114,9 +127,7 @@ class SomeClass
         return $items;
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     public function spot($value)
@@ -127,8 +138,7 @@ class SomeClass
         };
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

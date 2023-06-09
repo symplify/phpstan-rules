@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @implements Rule<ClassMethod>
  */
-final class NoReturnFalseInNonBoolClassMethodRule implements Rule, DocumentedRuleInterface
+final class NoReturnFalseInNonBoolClassMethodRule implements Rule
 {
     /**
      * @api
@@ -27,7 +27,11 @@ final class NoReturnFalseInNonBoolClassMethodRule implements Rule, DocumentedRul
      */
     public const ERROR_MESSAGE = 'Returning false in non return bool class method. Use null instead';
 
-    private readonly NodeFinder $nodeFinder;
+    /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
 
     public function __construct(
     ) {
@@ -82,8 +86,7 @@ final class NoReturnFalseInNonBoolClassMethodRule implements Rule, DocumentedRul
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     /**
@@ -100,9 +103,7 @@ class SomeClass
         return false;
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     /**
@@ -119,8 +120,7 @@ class SomeClass
         return null;
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

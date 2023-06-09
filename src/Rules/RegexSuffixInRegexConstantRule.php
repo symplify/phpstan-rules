@@ -21,17 +21,27 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\RegexSuffixInRegexConstantRule\RegexSuffixInRegexConstantRuleTest
  */
-final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterface
+final class RegexSuffixInRegexConstantRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
+     */
+    private $regexFuncCallAnalyzer;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
+     */
+    private $regexStaticCallAnalyzer;
 
-    public function __construct(
-        private readonly RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private readonly RegexStaticCallAnalyzer $regexStaticCallAnalyzer
-    ) {
+    public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
+    {
+        $this->regexFuncCallAnalyzer = $regexFuncCallAnalyzer;
+        $this->regexStaticCallAnalyzer = $regexStaticCallAnalyzer;
     }
 
     /**
@@ -62,8 +72,7 @@ final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterf
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     public const SOME_NAME = '#some\s+name#';
@@ -73,9 +82,7 @@ class SomeClass
         $somePath = preg_match(self::SOME_NAME, $value);
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     public const SOME_NAME_REGEX = '#some\s+name#';
@@ -85,8 +92,7 @@ class SomeClass
         $somePath = preg_match(self::SOME_NAME_REGEX, $value);
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -104,7 +110,7 @@ CODE_SAMPLE
         }
 
         $constantName = (string) $expr->name;
-        if (\str_ends_with($constantName, '_REGEX')) {
+        if (substr_compare($constantName, '_REGEX', -strlen('_REGEX')) === 0) {
             return [];
         }
 

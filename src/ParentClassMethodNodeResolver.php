@@ -12,10 +12,20 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 
 final class ParentClassMethodNodeResolver
 {
-    public function __construct(
-        private readonly ReflectionParser $reflectionParser,
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
+     */
+    private $reflectionParser;
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    public function __construct(ReflectionParser $reflectionParser, ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionParser = $reflectionParser;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function resolveParentClassMethod(Scope $scope, string $methodName): ?ClassMethod
@@ -46,9 +56,8 @@ final class ParentClassMethodNodeResolver
         }
 
         // all parent classes and interfaces
-        return array_filter(
-            $mainClassReflection->getAncestors(),
-            static fn (ClassReflection $classReflection): bool => $classReflection !== $mainClassReflection
-        );
+        return array_filter($mainClassReflection->getAncestors(), static function (ClassReflection $classReflection) use ($mainClassReflection) : bool {
+            return $classReflection !== $mainClassReflection;
+        });
     }
 }

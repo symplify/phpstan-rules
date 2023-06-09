@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoRelativeFilePathRule\NoRelativeFilePathRuleTest
  */
-final class NoRelativeFilePathRule implements Rule, DocumentedRuleInterface
+final class NoRelativeFilePathRule implements Rule
 {
     /**
      * @var string
@@ -74,15 +74,11 @@ final class NoRelativeFilePathRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 $filePath = 'some_file.txt';
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 $filePath = __DIR__ . '/some_file.txt';
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -112,7 +108,7 @@ CODE_SAMPLE
         }
 
         // probably an email
-        if (str_contains($string->value, '@')) {
+        if (strpos($string->value, '@') !== false) {
             return false;
         }
 
@@ -135,7 +131,7 @@ CODE_SAMPLE
             return false;
         }
 
-        if (str_contains($pathInfo['filename'], '*')) {
+        if (strpos($pathInfo['filename'], '*') !== false) {
             return false;
         }
 

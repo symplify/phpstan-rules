@@ -27,7 +27,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ClassNameRespectsParentSuffixRule\ClassNameRespectsParentSuffixRuleTest
  */
-final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ClassNameRespectsParentSuffixRule implements Rule
 {
     /**
      * @var string
@@ -52,15 +52,18 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
     /**
      * @var class-string[]
      */
-    private array $parentClasses = [];
-
+    private $parentClasses = [];
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Naming\ClassToSuffixResolver
+     */
+    private $classToSuffixResolver;
     /**
      * @param class-string[] $parentClasses
      */
-    public function __construct(
-        private readonly ClassToSuffixResolver $classToSuffixResolver,
-        array $parentClasses = [],
-    ) {
+    public function __construct(ClassToSuffixResolver $classToSuffixResolver, array $parentClasses = [])
+    {
+        $this->classToSuffixResolver = $classToSuffixResolver;
         $this->parentClasses = array_merge($parentClasses, self::DEFAULT_PARENT_CLASSES);
     }
 
@@ -98,23 +101,17 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
+            new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 class Some extends Command
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeCommand extends Command
 {
 }
-CODE_SAMPLE
-                ,
-                [
-                    'parentClasses' => [Command::class],
-                ]
-            ),
+CODE_SAMPLE, [
+                'parentClasses' => [Command::class],
+            ]),
         ]);
     }
 
@@ -129,7 +126,7 @@ CODE_SAMPLE
             }
 
             $expectedSuffix = $this->classToSuffixResolver->resolveFromClass($parentClass);
-            if (\str_ends_with($classReflection->getName(), $expectedSuffix)) {
+            if (substr_compare($classReflection->getName(), $expectedSuffix, -strlen($expectedSuffix)) === 0) {
                 return [];
             }
 

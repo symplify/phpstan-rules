@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\NoAbstractRule\NoAbstractRuleTest
  */
-final class NoAbstractRule implements Rule, DocumentedRuleInterface
+final class NoAbstractRule implements Rule
 {
     /**
      * @var string
@@ -34,8 +34,7 @@ final class NoAbstractRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class NormalHelper extends AbstractHelper
 {
 }
@@ -43,9 +42,7 @@ final class NormalHelper extends AbstractHelper
 abstract class AbstractHelper
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class NormalHelper
 {
     public function __construct(
@@ -57,8 +54,7 @@ final class NormalHelper
 final class SpecificHelper
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenArrayDestructRule\ForbiddenArrayDestructRuleTest
  */
-final class ForbiddenArrayDestructRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayDestructRule implements Rule
 {
     /**
      * @var string
@@ -36,10 +36,15 @@ final class ForbiddenArrayDestructRule implements Rule, DocumentedRuleInterface
      * @see https://regex101.com/r/dhGhYp/1
      */
     private const VENDOR_DIRECTORY_REGEX = '#/vendor/#';
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
 
-    public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     /**
@@ -80,8 +85,7 @@ final class ForbiddenArrayDestructRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class SomeClass
 {
     public function run(): void
@@ -89,9 +93,7 @@ final class SomeClass
         [$firstValue, $secondValue] = $this->getRandomData();
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class SomeClass
 {
     public function run(): void
@@ -101,8 +103,7 @@ final class SomeClass
         $secondValue = $valueObject->getSecondValue();
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireNativeArraySymfonyRenderCallRule\RequireNativeArraySymfonyRenderCallRuleTest
  */
-final class RequireNativeArraySymfonyRenderCallRule implements Rule, DocumentedRuleInterface
+final class RequireNativeArraySymfonyRenderCallRule implements Rule
 {
     /**
      * @var string
@@ -78,8 +78,7 @@ final class RequireNativeArraySymfonyRenderCallRule implements Rule, DocumentedR
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(
-            <<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SomeController extends AbstractController
@@ -91,9 +90,7 @@ class SomeController extends AbstractController
         return $this->render('...', $parameters);
     }
 }
-CODE_SAMPLE
-            ,
-            <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SomeController extends AbstractController
@@ -105,7 +102,6 @@ class SomeController extends AbstractController
         ]);
     }
 }
-CODE_SAMPLE
-        )]);
+CODE_SAMPLE)]);
     }
 }

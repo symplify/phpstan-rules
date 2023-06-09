@@ -81,20 +81,19 @@ final class ForbiddenSpreadOperatorRule extends AbstractSymplifyRule
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 $args = [$firstValue, $secondValue];
 $message = sprintf('%s', ...$args);
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 $message = sprintf('%s', $firstValue, $secondValue);
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
-    private function hasVariadicParam(Closure | ArrowFunction | ClassMethod | Function_ $node): bool
+    /**
+     * @param \PhpParser\Node\Expr\Closure|\PhpParser\Node\Expr\ArrowFunction|\PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\Function_ $node
+     */
+    private function hasVariadicParam($node): bool
     {
         foreach ($node->params as $param) {
             if ($param->variadic) {

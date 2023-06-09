@@ -25,7 +25,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenSameNamedNewInstanceRule\ForbiddenSameNamedNewInstanceRuleTest
  * @implements Rule<Expression>
  */
-final class ForbiddenSameNamedNewInstanceRule implements Rule, DocumentedRuleInterface
+final class ForbiddenSameNamedNewInstanceRule implements Rule
 {
     /**
      * @var string
@@ -35,21 +35,17 @@ final class ForbiddenSameNamedNewInstanceRule implements Rule, DocumentedRuleInt
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 $product = new Product();
 $product = new Product();
 
 $this->productRepository->save($product);
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 $firstProduct = new Product();
 $secondProduct = new Product();
 
 $this->productRepository->save($firstProduct);
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

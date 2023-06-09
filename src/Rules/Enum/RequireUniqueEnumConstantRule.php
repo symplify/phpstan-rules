@@ -18,16 +18,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireUniqueEnumConstantRule\RequireUniqueEnumConstantRuleTest
  */
-final class RequireUniqueEnumConstantRule implements Rule, DocumentedRuleInterface
+final class RequireUniqueEnumConstantRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
+     */
+    private $enumAnalyzer;
 
-    public function __construct(
-        private readonly EnumAnalyzer $enumAnalyzer
-    ) {
+    public function __construct(EnumAnalyzer $enumAnalyzer)
+    {
+        $this->enumAnalyzer = $enumAnalyzer;
     }
 
     /**
@@ -66,8 +71,7 @@ final class RequireUniqueEnumConstantRule implements Rule, DocumentedRuleInterfa
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 use MyCLabs\Enum\Enum;
 
 class SomeClass extends Enum
@@ -76,9 +80,7 @@ class SomeClass extends Enum
 
     private const NO = 'yes';
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use MyCLabs\Enum\Enum;
 
 class SomeClass extends Enum
@@ -87,8 +89,7 @@ class SomeClass extends Enum
 
     private const NO = 'no';
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

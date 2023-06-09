@@ -23,25 +23,33 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\RequireSpecificReturnTypeOverAbstractRule\RequireSpecificReturnTypeOverAbstractRuleTest
  */
-final class RequireSpecificReturnTypeOverAbstractRule implements Rule, DocumentedRuleInterface
+final class RequireSpecificReturnTypeOverAbstractRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Provide more specific return type "%s" over abstract one';
-
-    public function __construct(
-        private readonly ReturnNodeFinder $returnNodeFinder,
-        private readonly MethodNodeAnalyser $methodNodeAnalyser,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
+     */
+    private $returnNodeFinder;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
+     */
+    private $methodNodeAnalyser;
+    public function __construct(ReturnNodeFinder $returnNodeFinder, MethodNodeAnalyser $methodNodeAnalyser)
+    {
+        $this->returnNodeFinder = $returnNodeFinder;
+        $this->methodNodeAnalyser = $methodNodeAnalyser;
     }
 
     public function getRuleDefinition(): RuleDefinition
     {
         // @see https://stitcher.io/blog/php-8-named-arguments#named-arguments-in-depth
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class IssueControlFactory
 {
     public function create(): Control
@@ -53,9 +61,7 @@ final class IssueControlFactory
 final class IssueControl extends Control
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class IssueControlFactory
 {
     public function create(): IssueControl
@@ -67,8 +73,7 @@ final class IssueControlFactory
 final class IssueControl extends Control
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

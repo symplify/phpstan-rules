@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenArrayMethodCallRule\ForbiddenArrayMethodCallRuleTest
  */
-final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayMethodCallRule implements Rule
 {
     /**
      * @var string
@@ -64,17 +64,13 @@ final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterfac
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 usort($items, [$this, "method"]);
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 usort($items, function (array $apples) {
     return $this->method($apples);
 };
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoStaticPropertyRule\NoStaticPropertyRuleTest
  */
-final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
+final class NoStaticPropertyRule implements Rule
 {
     /**
      * @var string
@@ -32,10 +32,15 @@ final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
      * @var array<class-string>
      */
     private const ALLOWED_TYPES = [ContainerInterface::class, Container::class, KernelInterface::class];
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
 
-    public function __construct(
-        private readonly ContainsTypeAnalyser $containsTypeAnalyser
-    ) {
+    public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
+    {
+        $this->containsTypeAnalyser = $containsTypeAnalyser;
     }
 
     /**
@@ -66,21 +71,17 @@ final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class SomeClass
 {
     private static $customFileNames = [];
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class SomeClass
 {
     private $customFileNames = [];
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

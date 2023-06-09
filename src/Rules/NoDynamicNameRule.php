@@ -27,10 +27,14 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
      * @var string
      */
     public const ERROR_MESSAGE = 'Use explicit names over dynamic ones';
-
-    public function __construct(
-        private readonly CallableTypeAnalyzer $callableTypeAnalyzer,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer
+     */
+    private $callableTypeAnalyzer;
+    public function __construct(CallableTypeAnalyzer $callableTypeAnalyzer)
+    {
+        $this->callableTypeAnalyzer = $callableTypeAnalyzer;
     }
 
     /**
@@ -84,8 +88,7 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     public function old(): bool
@@ -93,9 +96,7 @@ class SomeClass
         return $this->${variable};
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     public function old(): bool
@@ -103,8 +104,7 @@ class SomeClass
         return $this->specificMethodName();
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

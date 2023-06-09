@@ -23,7 +23,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnArrayVariableListRule\NoReturnArrayVariableListRuleTest
  */
-final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterface
+final class NoReturnArrayVariableListRule implements Rule
 {
     /**
      * @var string
@@ -35,10 +35,14 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
      * @see https://regex101.com/r/C5d1zH/1
      */
     private const TESTS_DIRECTORY_REGEX = '#\/Tests\/#i';
-
-    public function __construct(
-        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
+     */
+    private $parentClassMethodNodeResolver;
+    public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
+    {
+        $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;
     }
 
     /**
@@ -78,8 +82,7 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class ReturnVariables
 {
     public function run($value, $value2): array
@@ -87,9 +90,7 @@ class ReturnVariables
         return [$value, $value2];
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class ReturnVariables
 {
     public function run($value, $value2): ValueObject
@@ -97,18 +98,14 @@ final class ReturnVariables
         return new ValueObject($value, $value2);
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
     private function shouldSkip(Scope $scope, Return_ $return): bool
     {
         // skip tests
-        if (Strings::match(
-            $scope->getFile(),
-            self::TESTS_DIRECTORY_REGEX
-        ) && ! StaticPHPUnitEnvironment::isPHPUnitRun()) {
+        if (Strings::match($scope->getFile(), self::TESTS_DIRECTORY_REGEX) && ! StaticPHPUnitEnvironment::isPHPUnitRun()) {
             return true;
         }
 
@@ -117,11 +114,11 @@ CODE_SAMPLE
             return true;
         }
 
-        if (str_contains($namespace, 'Enum')) {
+        if (strpos($namespace, 'Enum') !== false) {
             return true;
         }
 
-        if (str_contains($namespace, 'ValueObject')) {
+        if (strpos($namespace, 'ValueObject') !== false) {
             return true;
         }
 
@@ -133,10 +130,7 @@ CODE_SAMPLE
 
         $functionLike = $scope->getFunction();
         if ($functionLike instanceof MethodReflection) {
-            $parentClassMethod = $this->parentClassMethodNodeResolver->resolveParentClassMethod(
-                $scope,
-                $functionLike->getName()
-            );
+            $parentClassMethod = $this->parentClassMethodNodeResolver->resolveParentClassMethod($scope, $functionLike->getName());
 
             return $parentClassMethod instanceof ClassMethod;
         }

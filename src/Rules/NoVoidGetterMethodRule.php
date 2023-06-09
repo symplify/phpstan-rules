@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoVoidGetterMethodRule\NoVoidGetterMethodRuleTest
  */
-final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
+final class NoVoidGetterMethodRule implements Rule
 {
     /**
      * @var string
@@ -40,10 +40,15 @@ final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
         Throw_::class,
         Node\Stmt\Throw_::class,
     ];
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
+     */
+    private $typeAwareNodeFinder;
 
-    public function __construct(
-        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
-    ) {
+    public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
+    {
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
     }
 
     /**
@@ -73,7 +78,7 @@ final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
             return [];
         }
 
-        if (! str_starts_with($node->name->toString(), 'get')) {
+        if (strncmp($node->name->toString(), 'get', strlen('get')) !== 0) {
             return [];
         }
 
@@ -87,8 +92,7 @@ final class NoVoidGetterMethodRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class SomeClass
 {
     public function getData(): void
@@ -96,9 +100,7 @@ final class SomeClass
         // ...
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class SomeClass
 {
     public function getData(): array
@@ -106,8 +108,7 @@ final class SomeClass
         // ...
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

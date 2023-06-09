@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
-final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
+final class NoReturnSetterMethodRule implements Rule
 {
     /**
      * @var string
@@ -33,10 +33,15 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
      * @see https://regex101.com/r/IIvg8L/1
      */
     private const SETTER_START_REGEX = '#^set[A-Z]#';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
+     */
+    private $typeAwareNodeFinder;
 
-    public function __construct(
-        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
-    ) {
+    public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
+    {
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
     }
 
     /**
@@ -81,8 +86,7 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class SomeClass
 {
     private $name;
@@ -92,9 +96,7 @@ final class SomeClass
         return 1000;
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class SomeClass
 {
     private $name;
@@ -104,8 +106,7 @@ final class SomeClass
         $this->name = $name;
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

@@ -20,22 +20,42 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\EmbeddedEnumClassConstSpotterRule\EmbeddedEnumClassConstSpotterRuleTest
  */
-final class EmbeddedEnumClassConstSpotterRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class EmbeddedEnumClassConstSpotterRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Constants "%s" should be extract to standalone enum class';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\ClassAnalyzer
+     */
+    private $classAnalyzer;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Matcher\SharedNamePrefixMatcher
+     */
+    private $sharedNamePrefixMatcher;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Enum\EnumConstantAnalyzer
+     */
+    private $enumConstantAnalyzer;
+    /**
+     * @var array<class-string>
+     * @readonly
+     */
+    private $parentTypes;
 
     /**
      * @param array<class-string> $parentTypes
      */
-    public function __construct(
-        private readonly ClassAnalyzer $classAnalyzer,
-        private readonly SharedNamePrefixMatcher $sharedNamePrefixMatcher,
-        private readonly EnumConstantAnalyzer $enumConstantAnalyzer,
-        private readonly array $parentTypes
-    ) {
+    public function __construct(ClassAnalyzer $classAnalyzer, SharedNamePrefixMatcher $sharedNamePrefixMatcher, EnumConstantAnalyzer $enumConstantAnalyzer, array $parentTypes)
+    {
+        $this->classAnalyzer = $classAnalyzer;
+        $this->sharedNamePrefixMatcher = $sharedNamePrefixMatcher;
+        $this->enumConstantAnalyzer = $enumConstantAnalyzer;
+        $this->parentTypes = $parentTypes;
     }
 
     /**
@@ -84,17 +104,14 @@ final class EmbeddedEnumClassConstSpotterRule implements Rule, DocumentedRuleInt
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition(self::ERROR_MESSAGE, [new ConfiguredCodeSample(
-            <<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 class SomeProduct extends AbstractObject
 {
     public const STATUS_ENABLED = 1;
 
     public const STATUS_DISABLED = 0;
 }
-CODE_SAMPLE
-            ,
-            <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeProduct extends AbstractObject
 {
 }
@@ -105,12 +122,9 @@ class SomeStatus
 
     public const DISABLED = 0;
 }
-CODE_SAMPLE
-            ,
-            [
-                'parentTypes' => ['AbstractObject'],
-            ]
-        )]);
+CODE_SAMPLE, [
+            'parentTypes' => ['AbstractObject'],
+        ])]);
     }
 
     private function shouldSkip(InClassNode $inClassNode): bool
@@ -118,10 +132,7 @@ CODE_SAMPLE
         $classReflection = $inClassNode->getClassReflection();
 
         // already enum
-        if (\str_contains($classReflection->getName(), '\\Enum\\') && ! \str_contains(
-            $classReflection->getName(),
-            '\\Rules\\Enum\\'
-        )) {
+        if (strpos($classReflection->getName(), '\\Enum\\') !== false && strpos($classReflection->getName(), '\\Rules\\Enum\\') === false) {
             return true;
         }
 

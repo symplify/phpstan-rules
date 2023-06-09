@@ -29,13 +29,7 @@ final class Psr4PathValidator
         $namespaceSuffixByDirectoryClass = ltrim($normalizedDirectoryInNamespacedRoot, '\\');
 
         // @todo put into value object
-        $namespaceSuffixByNamespaceBeforeClass = rtrim(
-            Strings::substring(
-                $classNamespaceAndDirectory->getNamespaceBeforeClass(),
-                strlen($classNamespaceAndDirectory->getNamespace())
-            ),
-            '\\'
-        );
+        $namespaceSuffixByNamespaceBeforeClass = rtrim(Strings::substring($classNamespaceAndDirectory->getNamespaceBeforeClass(), strlen($classNamespaceAndDirectory->getNamespace())), '\\');
 
         return $namespaceSuffixByDirectoryClass === $namespaceSuffixByNamespaceBeforeClass;
     }

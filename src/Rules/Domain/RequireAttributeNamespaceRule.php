@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireAttributeNamespaceRule\RequireAttributeNamespaceRuleTest
  */
-final class RequireAttributeNamespaceRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNamespaceRule implements Rule
 {
     /**
      * @var string
@@ -25,8 +25,7 @@ final class RequireAttributeNamespaceRule implements Rule, DocumentedRuleInterfa
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 // app/Entity/SomeAttribute.php
 namespace App\Controller;
 
@@ -34,9 +33,7 @@ namespace App\Controller;
 final class SomeAttribute
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 // app/Attribute/SomeAttribute.php
 namespace App\Attribute;
 
@@ -44,8 +41,7 @@ namespace App\Attribute;
 final class SomeAttribute
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -70,7 +66,7 @@ CODE_SAMPLE
 
         // is class in "Attribute" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Attribute\\')) {
+        if (strpos($className, '\\Attribute\\') !== false) {
             return [];
         }
 

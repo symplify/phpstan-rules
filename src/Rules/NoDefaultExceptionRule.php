@@ -18,7 +18,7 @@ use Throwable;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDefaultExceptionRule\NoDefaultExceptionRuleTest
  */
-final class NoDefaultExceptionRule implements Rule, DocumentedRuleInterface
+final class NoDefaultExceptionRule implements Rule
 {
     /**
      * @var string
@@ -54,7 +54,7 @@ final class NoDefaultExceptionRule implements Rule, DocumentedRuleInterface
         }
 
         // fast way to detect native exceptions
-        if (\str_contains($exceptionClassName, '\\')) {
+        if (strpos($exceptionClassName, '\\') !== false) {
             return [];
         }
 
@@ -64,17 +64,13 @@ final class NoDefaultExceptionRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 throw new RuntimeException('...');
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use App\Exception\FileNotFoundException;
 
 throw new FileNotFoundException('...');
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

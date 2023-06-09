@@ -20,16 +20,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoParentMethodCallOnNoOverrideProcessRule\NoParentMethodCallOnNoOverrideProcessRuleTest
  */
-final class NoParentMethodCallOnNoOverrideProcessRule implements Rule, DocumentedRuleInterface
+final class NoParentMethodCallOnNoOverrideProcessRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not call parent method if no override process';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Printer\NodeComparator
+     */
+    private $nodeComparator;
 
-    public function __construct(
-        private readonly NodeComparator $nodeComparator
-    ) {
+    public function __construct(NodeComparator $nodeComparator)
+    {
+        $this->nodeComparator = $nodeComparator;
     }
 
     /**
@@ -68,8 +73,7 @@ final class NoParentMethodCallOnNoOverrideProcessRule implements Rule, Documente
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass extends Printer
 {
     public function print($nodes)
@@ -77,14 +81,11 @@ class SomeClass extends Printer
         return parent::print($nodes);
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass extends Printer
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

@@ -21,16 +21,21 @@ use Throwable;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoEmptyClassRule\NoEmptyClassRuleTest
  */
-final class NoEmptyClassRule implements Rule, DocumentedRuleInterface
+final class NoEmptyClassRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'There should be no empty class';
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
 
-    public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     /**
@@ -67,22 +72,18 @@ final class NoEmptyClassRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     public function getSome()
     {
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -104,7 +105,10 @@ CODE_SAMPLE
         return $this->isFinalClassWithAbstractOrInterfaceParent($classLike);
     }
 
-    private function isFinalClassWithAbstractOrInterfaceParent(Class_ | Trait_ $classLike): bool
+    /**
+     * @param \PhpParser\Node\Stmt\Class_|\PhpParser\Node\Stmt\Trait_ $classLike
+     */
+    private function isFinalClassWithAbstractOrInterfaceParent($classLike): bool
     {
         if (! $classLike instanceof Class_) {
             return false;

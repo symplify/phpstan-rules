@@ -31,11 +31,7 @@ final class PropertyMetadataResolver
             $propertyLine = $this->resolvePropertyLine($phpstanPropertyReflection, $propertyName);
 
             /** @var PhpPropertyReflection $phpstanPropertyReflection */
-            $propertyMetadatas[] = new PropertyMetadata(
-                $phpstanPropertyReflection,
-                $nativeReflectionProperty,
-                $propertyLine
-            );
+            $propertyMetadatas[] = new PropertyMetadata($phpstanPropertyReflection, $nativeReflectionProperty, $propertyLine);
         }
 
         return $propertyMetadatas;

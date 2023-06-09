@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\AnnotateRegexClassConstWithRegexLinkRule\AnnotateRegexClassConstWithRegexLinkRuleTest
  */
-final class AnnotateRegexClassConstWithRegexLinkRule implements Rule, DocumentedRuleInterface
+final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
 {
     /**
      * @var string
@@ -74,15 +74,12 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule, Documented
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(
-            <<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     private const COMPLICATED_REGEX = '#some_complicated_stu|ff#';
 }
-CODE_SAMPLE
-            ,
-            <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     /**
@@ -90,8 +87,7 @@ class SomeClass
      */
     private const COMPLICATED_REGEX = '#some_complicated_stu|ff#';
 }
-CODE_SAMPLE
-        )]);
+CODE_SAMPLE)]);
     }
 
     private function isNonSingleCharRegexPattern(string $value): bool
@@ -126,11 +122,11 @@ CODE_SAMPLE
         }
 
         $docCommentText = $docComment->getText();
-        return \str_contains($docCommentText, '@see https://regex101.com/r');
+        return strpos($docCommentText, '@see https://regex101.com/r') !== false;
     }
 
     private function isRegexPatternConstantName(string $constantName): bool
     {
-        return \str_ends_with($constantName, '_REGEX');
+        return substr_compare($constantName, '_REGEX', -strlen('_REGEX')) === 0;
     }
 }

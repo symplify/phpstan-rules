@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenNamedArgumentsRule\ForbiddenNamedArgumentsRuleTest
  */
-final class ForbiddenNamedArgumentsRule implements Rule, DocumentedRuleInterface
+final class ForbiddenNamedArgumentsRule implements Rule
 {
     /**
      * @todo exception for attributes!
@@ -27,16 +27,12 @@ final class ForbiddenNamedArgumentsRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 return strlen(string: 'name');
 
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 return strlen('name');
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

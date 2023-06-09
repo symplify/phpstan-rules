@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Spotter\SwitchToMatchSpotterRule\SwitchToMatchSpotterRuleTest
  */
-final class SwitchToMatchSpotterRule implements Rule, DocumentedRuleInterface
+final class SwitchToMatchSpotterRule implements Rule
 {
     /**
      * @var string
@@ -55,8 +55,7 @@ final class SwitchToMatchSpotterRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 switch ($key) {
     case 1:
         return 100;
@@ -65,16 +64,13 @@ switch ($key) {
     default:
         return 300;
 };
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 return match($key) {
     1 => 100,
     2 => 200,
     default => 300,
 };
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

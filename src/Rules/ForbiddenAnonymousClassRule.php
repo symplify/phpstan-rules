@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenAnonymousClassRule\ForbiddenAnonymousClassRuleTest
  */
-final class ForbiddenAnonymousClassRule implements Rule, DocumentedRuleInterface
+final class ForbiddenAnonymousClassRule implements Rule
 {
     /**
      * @var string
@@ -47,20 +47,16 @@ final class ForbiddenAnonymousClassRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 new class {};
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
 
 }
 
 new SomeClass;
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

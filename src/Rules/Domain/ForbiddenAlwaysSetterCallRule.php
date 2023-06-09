@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\ForbiddenAlwaysSetterCallRule\ForbiddenAlwaysSetterCallRuleTest
  */
-final class ForbiddenAlwaysSetterCallRule implements Rule, DocumentedRuleInterface
+final class ForbiddenAlwaysSetterCallRule implements Rule
 {
     /**
      * @var string
@@ -71,21 +71,17 @@ final class ForbiddenAlwaysSetterCallRule implements Rule, DocumentedRuleInterfa
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 $firstPerson = new Person();
 $firstPerson->setName('John');
 
 $secondPerson = new Person();
 $secondPerson->setName('Van');
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 $firstPerson = new Person('John');
 
 $secondPerson = new Person('Van');
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

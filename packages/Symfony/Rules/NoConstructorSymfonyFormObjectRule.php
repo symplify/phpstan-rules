@@ -25,16 +25,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\NoConstructorSymfonyFormObjectRule\NoConstructorSymfonyFormObjectRuleTest
  */
-final class NoConstructorSymfonyFormObjectRule implements Rule, DocumentedRuleInterface
+final class NoConstructorSymfonyFormObjectRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'This object is used in a Symfony form, that uses magic setters/getters, so it cannot have required constructor';
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
 
-    public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -90,11 +95,8 @@ final class NoConstructorSymfonyFormObjectRule implements Rule, DocumentedRuleIn
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition(
-            self::ERROR_MESSAGE,
-            [
-                new CodeSample(
-                    <<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [
+            new CodeSample(<<<'CODE_SAMPLE'
 final class Ticket
 {
     public function __construct(private int $price)
@@ -117,9 +119,7 @@ final class TicketFormType extends AbstractType
         ]);
     }
 }
-CODE_SAMPLE
-                    ,
-                    <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class Ticket
 {
     private ?int $price = null;
@@ -150,10 +150,8 @@ final class TicketFormType extends AbstractType
         ]);
     }
 }
-CODE_SAMPLE
-                ),
-            ]
-        );
+CODE_SAMPLE),
+        ]);
     }
 
     private function hasClassMethodRequiredParameter(PhpMethodReflection $phpMethodReflection): bool

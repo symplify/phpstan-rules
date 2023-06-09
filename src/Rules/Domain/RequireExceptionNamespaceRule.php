@@ -15,7 +15,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireExceptionNamespaceRule\RequireExceptionNamespaceRuleTest
  */
-final class RequireExceptionNamespaceRule implements Rule, DocumentedRuleInterface
+final class RequireExceptionNamespaceRule implements Rule
 {
     /**
      * @var string
@@ -25,8 +25,7 @@ final class RequireExceptionNamespaceRule implements Rule, DocumentedRuleInterfa
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 // app/Controller/SomeException.php
 namespace App\Controller;
 
@@ -34,17 +33,14 @@ final class SomeException extends Exception
 {
 
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 // app/Exception/SomeException.php
 namespace App\Exception;
 
 final class SomeException extends Exception
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -73,7 +69,7 @@ CODE_SAMPLE
 
         // is class in "Exception" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Exception\\')) {
+        if (strpos($className, '\\Exception\\') !== false) {
             return [];
         }
 

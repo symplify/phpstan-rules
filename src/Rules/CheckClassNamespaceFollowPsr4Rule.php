@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckClassNamespaceFollowPsr4Rule\CheckClassNamespaceFollowPsr4RuleTest
  */
-final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInterface
+final class CheckClassNamespaceFollowPsr4Rule implements Rule
 {
     /**
      * @var string
@@ -29,13 +29,25 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
     /**
      * @var array<string, string|string[]>
      */
-    private array $autoloadPsr4Paths = [];
+    private $autoloadPsr4Paths = [];
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Composer\Psr4PathValidator
+     */
+    private $psr4PathValidator;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Composer\ClassNamespaceMatcher
+     */
+    private $classNamespaceMatcher;
 
     public function __construct(
         ComposerAutoloadResolver $composerAutoloadResolver,
-        private readonly Psr4PathValidator $psr4PathValidator,
-        private readonly ClassNamespaceMatcher $classNamespaceMatcher
+        Psr4PathValidator $psr4PathValidator,
+        ClassNamespaceMatcher $classNamespaceMatcher
     ) {
+        $this->psr4PathValidator = $psr4PathValidator;
+        $this->classNamespaceMatcher = $classNamespaceMatcher;
         $this->autoloadPsr4Paths = $composerAutoloadResolver->getPsr4Autoload();
     }
 
@@ -64,11 +76,7 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
 
         $filePath = str_replace('\\', '/', $scope->getFile());
 
-        $possibleNamespacesToDirectories = $this->classNamespaceMatcher->matchPossibleDirectoriesForClass(
-            $namespaceBeforeClass,
-            $this->autoloadPsr4Paths,
-            $scope
-        );
+        $possibleNamespacesToDirectories = $this->classNamespaceMatcher->matchPossibleDirectoriesForClass($namespaceBeforeClass, $this->autoloadPsr4Paths, $scope);
 
         if ($possibleNamespacesToDirectories === []) {
             return [];
@@ -93,25 +101,21 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 // defined "Foo\Bar" namespace in composer.json > autoload > psr-4
 namespace Foo;
 
 class Baz
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 // defined "Foo\Bar" namespace in composer.json > autoload > psr-4
 namespace Foo\Bar;
 
 class Baz
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

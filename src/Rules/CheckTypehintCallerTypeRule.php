@@ -32,17 +32,27 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckTypehintCallerTypeRule\CheckTypehintCallerTypeRuleTest
  */
-final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
+final class CheckTypehintCallerTypeRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Parameter %d should use "%s" type as the only type passed to this method';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\MethodCallNodeFinder
+     */
+    private $methodCallNodeFinder;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\ClassMethodNodeFinder
+     */
+    private $classMethodNodeFinder;
 
-    public function __construct(
-        private readonly MethodCallNodeFinder $methodCallNodeFinder,
-        private readonly ClassMethodNodeFinder $classMethodNodeFinder
-    ) {
+    public function __construct(MethodCallNodeFinder $methodCallNodeFinder, ClassMethodNodeFinder $classMethodNodeFinder)
+    {
+        $this->methodCallNodeFinder = $methodCallNodeFinder;
+        $this->classMethodNodeFinder = $classMethodNodeFinder;
     }
 
     /**
@@ -75,8 +85,7 @@ final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 
@@ -91,9 +100,7 @@ class SomeClass
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use PhpParser\Node\Expr\MethodCall;
 
 class SomeClass
@@ -107,8 +114,7 @@ class SomeClass
     {
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

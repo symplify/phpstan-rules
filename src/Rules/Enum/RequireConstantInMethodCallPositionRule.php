@@ -21,20 +21,30 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireConstantInMethodCallPositionRule\RequireConstantInMethodCallPositionRuleTest
  */
-final class RequireConstantInMethodCallPositionRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class RequireConstantInMethodCallPositionRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Parameter argument on position %d must use constant';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Matcher\PositionMatcher
+     */
+    private $positionMatcher;
+    /**
+     * @var array<class-string, array<string, int[]>>
+     * @readonly
+     */
+    private $requiredConstantInMethodCall;
 
     /**
      * @param array<class-string, array<string, int[]>> $requiredConstantInMethodCall
      */
-    public function __construct(
-        private readonly PositionMatcher $positionMatcher,
-        private readonly array $requiredConstantInMethodCall
-    ) {
+    public function __construct(PositionMatcher $positionMatcher, array $requiredConstantInMethodCall)
+    {
+        $this->positionMatcher = $positionMatcher;
+        $this->requiredConstantInMethodCall = $requiredConstantInMethodCall;
     }
 
     /**
@@ -61,8 +71,7 @@ final class RequireConstantInMethodCallPositionRule implements Rule, DocumentedR
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
+            new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     public function someMethod(SomeType $someType)
@@ -70,9 +79,7 @@ class SomeClass
         $someType->someMethod('hey');
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     private const HEY = 'hey'
@@ -82,16 +89,13 @@ class SomeClass
         $someType->someMethod(self::HEY);
     }
 }
-CODE_SAMPLE
-                ,
-                [
-                    'requiredLocalConstantInMethodCall' => [
-                        'SomeType' => [
-                            'someMethod' => [0],
-                        ],
+CODE_SAMPLE, [
+                'requiredLocalConstantInMethodCall' => [
+                    'SomeType' => [
+                        'someMethod' => [0],
                     ],
-                ]
-            ),
+                ],
+            ]),
         ]);
     }
 
@@ -107,13 +111,7 @@ CODE_SAMPLE
         $errorMessages = [];
 
         foreach ($config as $type => $positionsByMethods) {
-            $positions = $this->positionMatcher->matchPositions(
-                $methodCall,
-                $scope,
-                $type,
-                $positionsByMethods,
-                $methodName
-            );
+            $positions = $this->positionMatcher->matchPositions($methodCall, $scope, $type, $positionsByMethods, $methodName);
             if ($positions === null) {
                 continue;
             }

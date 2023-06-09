@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<CollectedDataNode>
  */
-final class NarrowPublicClassMethodParamTypeByCallerTypeRule implements Rule, DocumentedRuleInterface
+final class NarrowPublicClassMethodParamTypeByCallerTypeRule implements Rule
 {
     /**
      * @var string
@@ -51,11 +51,7 @@ final class NarrowPublicClassMethodParamTypeByCallerTypeRule implements Rule, Do
 
         foreach ($publicClassMethodCollector as $filePath => $declarations) {
             foreach ($declarations as [$className, $methodName, $paramTypesString, $line]) {
-                $uniqueCollectedArgTypesString = $this->resolveUniqueArgTypesString(
-                    $classMethodReferenceToArgTypes,
-                    $className,
-                    $methodName
-                );
+                $uniqueCollectedArgTypesString = $this->resolveUniqueArgTypesString($classMethodReferenceToArgTypes, $className, $methodName);
 
                 if ($uniqueCollectedArgTypesString === null) {
                     continue;
@@ -79,8 +75,7 @@ final class NarrowPublicClassMethodParamTypeByCallerTypeRule implements Rule, Do
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 use PhpParser\Node\Expr\MethodCall;
 
 final class SomeClass
@@ -97,9 +92,7 @@ final class SomeService
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use PhpParser\Node\Expr\MethodCall;
 
 final class SomeClass
@@ -116,8 +109,7 @@ final class SomeService
     {
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

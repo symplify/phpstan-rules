@@ -23,18 +23,33 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\BoolishClassMethodPrefixRule\BoolishClassMethodPrefixRuleTest
  */
-final class BoolishClassMethodPrefixRule implements Rule, DocumentedRuleInterface
+final class BoolishClassMethodPrefixRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Method "%s()" returns bool type, so the name should start with is/has/was...';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Naming\BoolishNameAnalyser
+     */
+    private $boolishNameAnalyser;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
+     */
+    private $returnNodeFinder;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
+     */
+    private $parentClassMethodGuard;
 
-    public function __construct(
-        private readonly BoolishNameAnalyser $boolishNameAnalyser,
-        private readonly ReturnNodeFinder $returnNodeFinder,
-        private readonly ParentClassMethodGuard $parentClassMethodGuard
-    ) {
+    public function __construct(BoolishNameAnalyser $boolishNameAnalyser, ReturnNodeFinder $returnNodeFinder, ParentClassMethodGuard $parentClassMethodGuard)
+    {
+        $this->boolishNameAnalyser = $boolishNameAnalyser;
+        $this->returnNodeFinder = $returnNodeFinder;
+        $this->parentClassMethodGuard = $parentClassMethodGuard;
     }
 
     /**
@@ -67,8 +82,7 @@ final class BoolishClassMethodPrefixRule implements Rule, DocumentedRuleInterfac
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     public function old(): bool
@@ -76,9 +90,7 @@ class SomeClass
         return $this->age > 100;
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class SomeClass
 {
     public function isOld(): bool
@@ -86,8 +98,7 @@ class SomeClass
         return $this->age > 100;
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

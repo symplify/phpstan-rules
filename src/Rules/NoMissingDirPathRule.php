@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoMissingDirPathRule\NoMissingDirPathRuleTest
  */
-final class NoMissingDirPathRule implements Rule, DocumentedRuleInterface
+final class NoMissingDirPathRule implements Rule
 {
     /**
      * @var string
@@ -115,15 +115,11 @@ final class NoMissingDirPathRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 $filePath = __DIR__ . '/missing_location.txt';
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 $filePath = __DIR__ . '/existing_location.txt';
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -134,7 +130,7 @@ CODE_SAMPLE
             return true;
         }
 
-        if (\str_contains($relativeDirPath, '*')) {
+        if (strpos($relativeDirPath, '*') !== false) {
             return true;
         }
 

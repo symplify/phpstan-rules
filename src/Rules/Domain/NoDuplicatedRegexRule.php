@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\NoDuplicatedRegexRule\NoDuplicatedRegexRuleTest
  */
-final class NoDuplicatedRegexRule implements Rule, DocumentedRuleInterface
+final class NoDuplicatedRegexRule implements Rule
 {
     /**
      * @var string
@@ -29,8 +29,7 @@ final class NoDuplicatedRegexRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class SomeClass
 {
     private const CLASS_NAME_REGEX = '#[\w\\]+#';
@@ -40,15 +39,12 @@ class AnotherClass
 {
     private const DIFFERENT_NAME_REGEX = '#[\w\\]+#';
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 class ClassRegexRecipies
 {
     private const NAME_REGEX = '#[\w\\]+#';
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -83,12 +79,7 @@ CODE_SAMPLE
         foreach ($regexClassConsts as $filePath => $collectedDatas) {
             foreach ($collectedDatas as $collectedData) {
                 foreach ($collectedData as [$constName, $regexValue, $line]) {
-                    $regexConstMetadataBySharedRegex[$regexValue][] = new ClassConstRegexMetadata(
-                        $constName,
-                        $regexValue,
-                        $filePath,
-                        $line
-                    );
+                    $regexConstMetadataBySharedRegex[$regexValue][] = new ClassConstRegexMetadata($constName, $regexValue, $filePath, $line);
                 }
             }
         }
@@ -110,11 +101,7 @@ CODE_SAMPLE
             }
 
             foreach ($regexConstMetadatas as $regexConstMetadata) {
-                $errorMessage = sprintf(
-                    self::ERROR_MESSAGE,
-                    $regexConstMetadata->getConstantName(),
-                    $regexConstMetadata->getRegexValue()
-                );
+                $errorMessage = sprintf(self::ERROR_MESSAGE, $regexConstMetadata->getConstantName(), $regexConstMetadata->getRegexValue());
 
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
                     ->line($regexConstMetadata->getLine())

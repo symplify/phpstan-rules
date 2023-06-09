@@ -24,16 +24,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoProtectedClassElementRule\NoProtectedClassElementRuleTest
  */
-final class NoProtectedClassElementRule implements Rule, DocumentedRuleInterface
+final class NoProtectedClassElementRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of protected element, use private element or contract method';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
+     */
+    private $parentClassMethodGuard;
 
-    public function __construct(
-        private readonly ParentClassMethodGuard $parentClassMethodGuard
-    ) {
+    public function __construct(ParentClassMethodGuard $parentClassMethodGuard)
+    {
+        $this->parentClassMethodGuard = $parentClassMethodGuard;
     }
 
     public function getNodeType(): string
@@ -65,25 +70,21 @@ final class NoProtectedClassElementRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class SomeClass
 {
     protected function run()
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class SomeClass
 {
     private function run()
     {
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 

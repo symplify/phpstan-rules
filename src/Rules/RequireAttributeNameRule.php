@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
  * @implements Rule<AttributeGroup>
  */
-final class RequireAttributeNameRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNameRule implements Rule
 {
     /**
      * @var string
@@ -35,8 +35,7 @@ final class RequireAttributeNameRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 use Symfony\Component\Routing\Annotation\Route;
 
 class SomeController
@@ -46,9 +45,7 @@ class SomeController
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use Symfony\Component\Routing\Annotation\Route;
 
 class SomeController
@@ -58,8 +55,7 @@ class SomeController
     {
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -78,7 +74,7 @@ CODE_SAMPLE
             }
 
             // skip PHPUnit
-            if (str_starts_with($attributeName, 'PHPUnit\Framework\Attributes\\')) {
+            if (strncmp($attributeName, 'PHPUnit\Framework\Attributes\\', strlen('PHPUnit\Framework\Attributes\\')) === 0) {
                 continue;
             }
 

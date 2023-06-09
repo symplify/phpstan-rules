@@ -20,16 +20,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireInvokableControllerRule\RequireInvokableControllerRuleTest
  */
-final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterface
+final class RequireInvokableControllerRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer
+     */
+    private $symfonyControllerAnalyzer;
 
-    public function __construct(
-        private readonly SymfonyControllerAnalyzer $symfonyControllerAnalyzer
-    ) {
+    public function __construct(SymfonyControllerAnalyzer $symfonyControllerAnalyzer)
+    {
+        $this->symfonyControllerAnalyzer = $symfonyControllerAnalyzer;
     }
 
     /**
@@ -81,8 +86,7 @@ final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterf
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -93,9 +97,7 @@ final class SomeController extends AbstractController
     {
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -106,8 +108,7 @@ final class SomeController extends AbstractController
     {
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

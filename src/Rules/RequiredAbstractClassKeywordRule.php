@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\RequiredAbstractClassKeywordRule\RequiredAbstractClassKeywordRuleTest
  */
-final class RequiredAbstractClassKeywordRule implements Rule, DocumentedRuleInterface
+final class RequiredAbstractClassKeywordRule implements Rule
 {
     /**
      * @var string
@@ -47,7 +47,7 @@ final class RequiredAbstractClassKeywordRule implements Rule, DocumentedRuleInte
         }
 
         $shortClassName = $node->name->toString();
-        if (! \str_starts_with($shortClassName, 'Abstract')) {
+        if (strncmp($shortClassName, 'Abstract', strlen('Abstract')) !== 0) {
             return [];
         }
 
@@ -57,19 +57,15 @@ final class RequiredAbstractClassKeywordRule implements Rule, DocumentedRuleInte
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 class AbstractClass
 {
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 abstract class AbstractClass
 {
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

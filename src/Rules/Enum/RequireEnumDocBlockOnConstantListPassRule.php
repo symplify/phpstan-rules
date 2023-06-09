@@ -27,7 +27,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<MethodCall>
  */
-final class RequireEnumDocBlockOnConstantListPassRule implements Rule, DocumentedRuleInterface
+final class RequireEnumDocBlockOnConstantListPassRule implements Rule
 {
     /**
      * @var string
@@ -44,11 +44,20 @@ final class RequireEnumDocBlockOnConstantListPassRule implements Rule, Documente
         AbstractConfigurator::class,
         ParameterBagInterface::class,
     ];
-
-    public function __construct(
-        private readonly MethodCallNodeAnalyzer $methodCallNodeAnalyzer,
-        private readonly MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
+     */
+    private $methodCallNodeAnalyzer;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\MethodCallClassConstFetchPositionResolver
+     */
+    private $methodCallClassConstFetchPositionResolver;
+    public function __construct(MethodCallNodeAnalyzer $methodCallNodeAnalyzer, MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver)
+    {
+        $this->methodCallNodeAnalyzer = $methodCallNodeAnalyzer;
+        $this->methodCallClassConstFetchPositionResolver = $methodCallClassConstFetchPositionResolver;
     }
 
     /**
@@ -91,8 +100,7 @@ final class RequireEnumDocBlockOnConstantListPassRule implements Rule, Documente
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class Direction
 {
     public const LEFT = 'left';
@@ -112,9 +120,7 @@ final class Driver
         // ...
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class Direction
 {
     public const LEFT = 'left';
@@ -137,8 +143,7 @@ final class Driver
         // ...
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
@@ -173,7 +178,7 @@ CODE_SAMPLE
         }
 
         // skip vendor classes, as we cannot change them
-        if (str_contains($fileName, '/vendor/')) {
+        if (strpos($fileName, '/vendor/') !== false) {
             return true;
         }
 

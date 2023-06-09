@@ -17,16 +17,20 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoMixedPropertyFetcherRule\NoMixedPropertyFetcherRuleTest
  */
-final class NoMixedPropertyFetcherRule implements Rule, DocumentedRuleInterface
+final class NoMixedPropertyFetcherRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Anonymous variables in a "%s->..." property fetch can lead to false dead property. Make sure the variable type is known';
-
-    public function __construct(
-        private readonly Standard $standard,
-    ) {
+    /**
+     * @readonly
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $standard;
+    public function __construct(Standard $standard)
+    {
+        $this->standard = $standard;
     }
 
     /**
@@ -56,21 +60,17 @@ final class NoMixedPropertyFetcherRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 function run($unknownType)
 {
     return $unknownType->name;
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 function run(KnownType $knownType)
 {
     return $knownType->name;
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 }

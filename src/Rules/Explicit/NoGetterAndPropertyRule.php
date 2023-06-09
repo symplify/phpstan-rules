@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\NoGetterAndPropertyRule\NoGetterAndPropertyRuleTest
  */
-final class NoGetterAndPropertyRule implements Rule, DocumentedRuleInterface
+final class NoGetterAndPropertyRule implements Rule
 {
     /**
      * @var string
@@ -26,8 +26,7 @@ final class NoGetterAndPropertyRule implements Rule, DocumentedRuleInterface
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
+            new CodeSample(<<<'CODE_SAMPLE'
 final class SomeProduct
 {
     public $name;
@@ -37,9 +36,7 @@ final class SomeProduct
         return $this->name;
     }
 }
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
+CODE_SAMPLE, <<<'CODE_SAMPLE'
 final class SomeProduct
 {
     private $name;
@@ -49,8 +46,7 @@ final class SomeProduct
         return $this->name;
     }
 }
-CODE_SAMPLE
-            ),
+CODE_SAMPLE),
         ]);
     }
 
