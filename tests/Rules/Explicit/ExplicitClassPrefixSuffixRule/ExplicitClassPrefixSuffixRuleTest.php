@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\Rules\Explicit\ExplicitClassSuffixesRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Explicit\ExplicitClassPrefixSuffixRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\Rules\Explicit\ExplicitClassSuffixesRule;
+use Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule;
 
-final class ExplicitClassSuffixesRuleTest extends RuleTestCase
+final class ExplicitClassPrefixSuffixRuleTest extends RuleTestCase
 {
     /**
      * @param mixed[] $expectedErrorsWithLines
@@ -26,11 +26,25 @@ final class ExplicitClassSuffixesRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/CorrectInterface.php', []];
         yield [__DIR__ . '/Fixture/CorrectTrait.php', []];
 
-        yield [__DIR__ . '/Fixture/WrongTraitSuffix.php', [
-            [ExplicitClassSuffixesRule::TRAIT_ERROR_MESSAGE, 5],
+        yield [__DIR__ . '/Fixture/AbstractCorrectClass.php', []];
+        yield [__DIR__ . '/Fixture/AbstractIncorrectClass.php', [
+            [ExplicitClassPrefixSuffixRule::ABSTRACT_ERROR_MESSAGE, 5],
         ]];
+
+        yield [__DIR__ . '/Fixture/WrongTraitSuffix.php', [
+            [ExplicitClassPrefixSuffixRule::TRAIT_ERROR_MESSAGE, 5],
+        ]];
+
+        yield [__DIR__ . '/Fixture/WrongSuffixTrait.php', [
+            [ExplicitClassPrefixSuffixRule::TRAIT_ERROR_MESSAGE, 5],
+        ]];
+
         yield [__DIR__ . '/Fixture/WrongInterfaceSuffix.php', [
-            [ExplicitClassSuffixesRule::INTERFACE_ERROR_MESSAGE, 5],
+            [ExplicitClassPrefixSuffixRule::INTERFACE_ERROR_MESSAGE, 5],
+        ]];
+
+        yield [__DIR__ . '/Fixture/IncorrectClassInterface.php', [
+            [ExplicitClassPrefixSuffixRule::INTERFACE_ERROR_MESSAGE, 5],
         ]];
     }
 
@@ -44,6 +58,6 @@ final class ExplicitClassSuffixesRuleTest extends RuleTestCase
 
     protected function getRule(): Rule
     {
-        return self::getContainer()->getByType(ExplicitClassSuffixesRule::class);
+        return self::getContainer()->getByType(ExplicitClassPrefixSuffixRule::class);
     }
 }

@@ -1,4 +1,4 @@
-# 82 Rules Overview
+# 80 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -402,6 +402,52 @@ class SomeRepository
 namespace App\Presenter;
 
 class SomePresenter
+{
+}
+```
+
+:+1:
+
+<br>
+
+## ExplicitClassPrefixSuffixRule
+
+Interface have suffix of "Interface", trait have "Trait" suffix exclusively
+
+- class: [`Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule`](../src/Rules/Explicit/ExplicitClassPrefixSuffixRule.php)
+
+```php
+<?php
+
+interface NotSuffixed
+{
+}
+
+trait NotSuffixed
+{
+}
+
+abstract class NotPrefixedClass
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+<?php
+
+interface SuffixedInterface
+{
+}
+
+trait SuffixedTrait
+{
+}
+
+abstract class AbstractClass
 {
 }
 ```
@@ -2212,32 +2258,6 @@ class SomeClass
 
 <br>
 
-## PrefixAbstractClassRule
-
-Abstract class name "%s" must be prefixed with "Abstract"
-
-- class: [`Symplify\PHPStanRules\Rules\PrefixAbstractClassRule`](../src/Rules/PrefixAbstractClassRule.php)
-
-```php
-abstract class SomeClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-abstract class AbstractSomeClass
-{
-}
-```
-
-:+1:
-
-<br>
-
 ## PreventDuplicateClassMethodRule
 
 Content of method `"%s()"` is duplicated. Use unique content or service instead
@@ -2872,58 +2892,6 @@ class SomeClass extends Rule
  * @see SomeClassTest
  */
 class SomeClass extends Rule
-{
-}
-```
-
-:+1:
-
-<br>
-
-## SuffixInterfaceRule
-
-Interface must be suffixed with "Interface" exclusively
-
-- class: [`Symplify\PHPStanRules\Rules\SuffixInterfaceRule`](../src/Rules/SuffixInterfaceRule.php)
-
-```php
-interface SomeClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-interface SomeInterface
-{
-}
-```
-
-:+1:
-
-<br>
-
-## SuffixTraitRule
-
-Trait must be suffixed by "Trait" exclusively
-
-- class: [`Symplify\PHPStanRules\Rules\SuffixTraitRule`](../src/Rules/SuffixTraitRule.php)
-
-```php
-trait SomeClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-trait SomeTrait
 {
 }
 ```
