@@ -16,7 +16,7 @@
         "symplify/rule-doc-generator": "^11.2",
         "phpunit/phpunit": "^10.1",
         "symfony/framework-bundle": "6.1.*",
-        "rector/rector": "^0.16",
+        "rector/rector": "^0.17.1",
         "symplify/easy-coding-standard": "^11.3",
         "symplify/easy-ci": "^11.2",
         "phpstan/extension-installer": "^1.3",
