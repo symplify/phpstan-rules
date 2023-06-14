@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenNamedArgumentsRule\ForbiddenNamedArgumentsRuleTest
  */
-final class ForbiddenNamedArgumentsRule implements Rule, DocumentedRuleInterface
+final class ForbiddenNamedArgumentsRule implements Rule
 {
     /**
      * @todo exception for attributes!

@@ -6,10 +6,20 @@ namespace Symplify\PHPStanRules\ValueObject\Spotter;
 
 final class ReturnAndAssignBranchCounts
 {
-    public function __construct(
-        private readonly int $returnTypeCount,
-        private readonly int $assignTypeCount
-    ) {
+    /**
+     * @readonly
+     * @var int
+     */
+    private $returnTypeCount;
+    /**
+     * @readonly
+     * @var int
+     */
+    private $assignTypeCount;
+    public function __construct(int $returnTypeCount, int $assignTypeCount)
+    {
+        $this->returnTypeCount = $returnTypeCount;
+        $this->assignTypeCount = $assignTypeCount;
     }
 
     public function getReturnTypeCount(): int

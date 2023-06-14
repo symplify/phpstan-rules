@@ -26,7 +26,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoMissingDirPathRule\NoMissingDirPathRuleTest
  */
-final class NoMissingDirPathRule implements Rule, DocumentedRuleInterface
+final class NoMissingDirPathRule implements Rule
 {
     /**
      * @var string
@@ -134,7 +134,7 @@ CODE_SAMPLE
             return true;
         }
 
-        if (\str_contains($relativeDirPath, '*')) {
+        if (strpos($relativeDirPath, '*') !== false) {
             return true;
         }
 

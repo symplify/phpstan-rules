@@ -25,8 +25,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<Return_>
  */
-final class ForbiddenArrayWithStringKeysRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayWithStringKeysRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodReturnTypeResolver
+     */
+    private $parentMethodReturnTypeResolver;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\ArrayAnalyzer
+     */
+    private $arrayAnalyzer;
     /**
      * @var string
      */
@@ -38,10 +48,10 @@ final class ForbiddenArrayWithStringKeysRule implements Rule, DocumentedRuleInte
      */
     private const TEST_FILE_REGEX = '#(Test|TestCase)\.php$#';
 
-    public function __construct(
-        private readonly ParentMethodReturnTypeResolver $parentMethodReturnTypeResolver,
-        private readonly ArrayAnalyzer $arrayAnalyzer,
-    ) {
+    public function __construct(ParentMethodReturnTypeResolver $parentMethodReturnTypeResolver, ArrayAnalyzer $arrayAnalyzer)
+    {
+        $this->parentMethodReturnTypeResolver = $parentMethodReturnTypeResolver;
+        $this->arrayAnalyzer = $arrayAnalyzer;
     }
 
     /**
@@ -131,11 +141,11 @@ CODE_SAMPLE
                 return true;
             }
 
-            if (str_contains($classReflection->getName(), 'json')) {
+            if (strpos($classReflection->getName(), 'json') !== false) {
                 return true;
             }
 
-            if (str_contains($classReflection->getName(), 'Json')) {
+            if (strpos($classReflection->getName(), 'Json') !== false) {
                 return true;
             }
         }
@@ -143,11 +153,11 @@ CODE_SAMPLE
         $filePath = $scope->getFile();
 
         // php-scoper config, it return magic array by design
-        if (\str_contains($filePath, 'scoper')) {
+        if (strpos($filePath, 'scoper') !== false) {
             return true;
         }
 
         // skip Symfony bundles.php
-        return \str_ends_with($filePath, 'bundles.php');
+        return substr_compare($filePath, 'bundles.php', -strlen('bundles.php')) === 0;
     }
 }

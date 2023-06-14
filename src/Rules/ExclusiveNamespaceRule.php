@@ -17,8 +17,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ExclusiveNamespaceRule\ExclusiveNamespaceRuleTest
  */
-final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ExclusiveNamespaceRule implements Rule
 {
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $namespaceParts;
     /**
      * @var string
      */
@@ -39,9 +44,9 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
     /**
      * @param string[] $namespaceParts
      */
-    public function __construct(
-        private readonly array $namespaceParts
-    ) {
+    public function __construct(array $namespaceParts)
+    {
+        $this->namespaceParts = $namespaceParts;
     }
 
     /**
@@ -72,7 +77,7 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
         }
 
         foreach ($this->namespaceParts as $namespacePart) {
-            if (! \str_ends_with($namespace, $namespacePart)) {
+            if (substr_compare($namespace, $namespacePart, -strlen($namespacePart)) !== 0) {
                 continue;
             }
 
@@ -80,7 +85,7 @@ final class ExclusiveNamespaceRule implements Rule, DocumentedRuleInterface, Con
                 continue;
             }
 
-            if (\str_ends_with($className, $namespacePart)) {
+            if (substr_compare($className, $namespacePart, -strlen($namespacePart)) === 0) {
                 continue;
             }
 
