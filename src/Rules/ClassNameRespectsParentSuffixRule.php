@@ -6,7 +6,6 @@ namespace Symplify\PHPStanRules\Rules;
 
 use Exception;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use PhpCsFixer\Fixer\FixerInterface;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
@@ -44,7 +43,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
         Sniff::class,
         TestCase::class,
         Exception::class,
-        FixerInterface::class,
+        'PhpCsFixer\Fixer\FixerInterface',
         Rule::class,
         AbstractRector::class,
     ];

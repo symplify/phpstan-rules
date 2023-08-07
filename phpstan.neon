@@ -59,8 +59,3 @@ parameters:
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\(.*?) extends generic class PHPStan\\Testing\\RuleTestCase but does not specify its types\: TRule#'
         - '#Method Symplify\\PHPStanRules\\(.*?)\:\:getRule\(\) return type with generic interface PHPStan\\Rules\\Rule does not specify its types\: TNodeType#'
-        - '#Calling PHPStan\\Reflection\\Php\\PhpParameterReflection\:\:isOptional\(\) is not covered by backward compatibility promise\. The method might change in a minor PHPStan version#'
-        - '#Method Symplify\\PHPStanRules\\(.*?) should return array<PHPUnit\\TestRunner\\TestResult\\Collector> but returns array<int, Symplify\\PHPStanRules\\Collector\\(.*?)>#'
-        - '#PHPStan\\Testing\\RuleTestCase<PHPStan\\Rules\\Rule>\:\:getCollectors\(\)#'
-
-        - '#Parameter (.*?) expects non\-empty\-string, string given#'

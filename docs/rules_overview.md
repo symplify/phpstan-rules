@@ -1,4 +1,4 @@
-# 72 Rules Overview
+# 71 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1987,65 +1987,6 @@ class SomeClass
     {
         return new CustomFileInfo('...');
     }
-}
-```
-
-:+1:
-
-<br>
-
-## PreventDuplicateClassMethodRule
-
-Content of method `"%s()"` is duplicated. Use unique content or service instead
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\PreventDuplicateClassMethodRule`](../src/Rules/PreventDuplicateClassMethodRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\PreventDuplicateClassMethodRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            minimumLineCount: 3
-```
-
-↓
-
-```php
-class SomeClass
-{
-    public function someMethod()
-    {
-        echo 'statement';
-        $value = new SmartFinder();
-    }
-}
-
-class AnotherClass
-{
-    public function someMethod()
-    {
-        echo 'statement';
-        $differentValue = new SmartFinder();
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function someMethod()
-    {
-        echo 'statement';
-        $value = new SmartFinder();
-    }
-}
 }
 ```
 
