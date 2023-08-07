@@ -1152,39 +1152,6 @@ throw new FileNotFoundException('...');
 
 <br>
 
-## NoDuplicatedRegexRule
-
-The "%s" constant contains duplicated regex "%s". Instead of duplicated regexes, extract domain regexes together to save maintenance
-
-- class: [`Symplify\PHPStanRules\Rules\Domain\NoDuplicatedRegexRule`](../src/Rules/Domain/NoDuplicatedRegexRule.php)
-
-```php
-class SomeClass
-{
-    private const CLASS_NAME_REGEX = '#[\w\\]+#';
-}
-
-class AnotherClass
-{
-    private const DIFFERENT_NAME_REGEX = '#[\w\\]+#';
-}
-```
-
-:x:
-
-<br>
-
-```php
-class ClassRegexRecipies
-{
-    private const NAME_REGEX = '#[\w\\]+#';
-}
-```
-
-:+1:
-
-<br>
-
 ## NoDuplicatedShortClassNameRule
 
 Class with base "%s" name is already used in "%s". Use unique name to make classes easy to recognize
