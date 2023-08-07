@@ -21,8 +21,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoStaticPropertyRule\NoStaticPropertyRuleTest
  */
-final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
+final class NoStaticPropertyRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
     /**
      * @var string
      */
@@ -33,9 +38,9 @@ final class NoStaticPropertyRule implements Rule, DocumentedRuleInterface
      */
     private const ALLOWED_TYPES = [ContainerInterface::class, Container::class, KernelInterface::class];
 
-    public function __construct(
-        private readonly ContainsTypeAnalyser $containsTypeAnalyser
-    ) {
+    public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
+    {
+        $this->containsTypeAnalyser = $containsTypeAnalyser;
     }
 
     /**
