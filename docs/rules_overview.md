@@ -1,4 +1,4 @@
-# 71 Rules Overview
+# 69 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1135,44 +1135,6 @@ class SomeClass
 {
     public function getSome()
     {
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## NoGetterAndPropertyRule
-
-There are 2 way to get "%s" value: public property and getter now - pick one to avoid variant behavior.
-
-- class: [`Symplify\PHPStanRules\Rules\Explicit\NoGetterAndPropertyRule`](../src/Rules/Explicit/NoGetterAndPropertyRule.php)
-
-```php
-final class SomeProduct
-{
-    public $name;
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeProduct
-{
-    private $name;
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 }
 ```
