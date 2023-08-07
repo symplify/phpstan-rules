@@ -51,12 +51,12 @@ final class ReflectionParser
 
     public function parsePropertyReflection(ReflectionProperty $reflectionProperty): ?Property
     {
-        $class = $this->parseNativeClassReflection($reflectionProperty->getDeclaringClass());
-        if (! $class instanceof ClassLike) {
+        $classLike = $this->parseNativeClassReflection($reflectionProperty->getDeclaringClass());
+        if (! $classLike instanceof ClassLike) {
             return null;
         }
 
-        return $class->getProperty($reflectionProperty->getName());
+        return $classLike->getProperty($reflectionProperty->getName());
     }
 
     public function parseClassReflection(ClassReflection $classReflection): ?ClassLike

@@ -1,4 +1,4 @@
-# 79 Rules Overview
+# 78 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2466,58 +2466,6 @@ namespace App\Attribute;
 #[\Attribute]
 final class SomeAttribute
 {
-}
-```
-
-:+1:
-
-<br>
-
-## RequireCascadeValidateRule
-
-Property "$%s" is missing `@Valid` annotation
-
-- class: [`Symplify\PHPStanRules\Symfony\Rules\RequireCascadeValidateRule`](../packages/Symfony/Rules/RequireCascadeValidateRule.php)
-
-```php
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Valid;
-
-final class NullablePropertyFormType extends AbstractType
-{
-    public function configureOptions(OptionsResolver $optionsResolver): void
-    {
-        $optionsResolver->setDefaults([
-            'data_class' => SomeEntity::class,
-            'constraints' => new Valid(),
-        ]);
-    }
-}
-
-class SomeEntity
-{
-    /**
-     * @var NestedEntity
-     */
-    private $nestedEntity;
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\Validator\Constraints as Assert;
-
-class SomeEntity
-{
-    /**
-     * @Assert\Valid
-     * @var NestedEntity
-     */
-    private $nestedEntity;
 }
 ```
 
