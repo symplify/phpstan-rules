@@ -23,13 +23,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoMixedCallableRule extends AbstractSymplifyRule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeResolver\ClassMethodReturnTypeResolver
+     */
+    private $classMethodReturnTypeResolver;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Make callable type explicit. Here is how: https://phpstan.org/writing-php-code/phpdoc-types#callables';
 
-    public function __construct(
-        private readonly ClassMethodReturnTypeResolver $classMethodReturnTypeResolver,
-    ) {
+    public function __construct(ClassMethodReturnTypeResolver $classMethodReturnTypeResolver)
+    {
+        $this->classMethodReturnTypeResolver = $classMethodReturnTypeResolver;
     }
 
     /**
