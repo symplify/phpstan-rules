@@ -1,4 +1,4 @@
-# 78 Rules Overview
+# 77 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -309,56 +309,6 @@ class Some extends Command
 ```php
 class SomeCommand extends Command
 {
-}
-```
-
-:+1:
-
-<br>
-
-## EmbeddedEnumClassConstSpotterRule
-
-Constants "%s" should be extract to standalone enum class
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\Enum\EmbeddedEnumClassConstSpotterRule`](../src/Rules/Enum/EmbeddedEnumClassConstSpotterRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\Enum\EmbeddedEnumClassConstSpotterRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            parentTypes:
-                - AbstractObject
-```
-
-↓
-
-```php
-class SomeProduct extends AbstractObject
-{
-    public const STATUS_ENABLED = 1;
-
-    public const STATUS_DISABLED = 0;
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeProduct extends AbstractObject
-{
-}
-
-class SomeStatus
-{
-    public const ENABLED = 1;
-
-    public const DISABLED = 0;
 }
 ```
 
