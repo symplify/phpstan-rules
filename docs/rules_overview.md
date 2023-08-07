@@ -1,4 +1,4 @@
-# 77 Rules Overview
+# 76 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -308,50 +308,6 @@ class Some extends Command
 
 ```php
 class SomeCommand extends Command
-{
-}
-```
-
-:+1:
-
-<br>
-
-## ExclusiveNamespaceRule
-
-Exclusive namespace can only contain classes of specific type, nothing else
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\ExclusiveNamespaceRule`](../src/Rules/ExclusiveNamespaceRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\ExclusiveNamespaceRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            namespaceParts:
-                - Presenter
-```
-
-↓
-
-```php
-namespace App\Presenter;
-
-class SomeRepository
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-namespace App\Presenter;
-
-class SomePresenter
 {
 }
 ```

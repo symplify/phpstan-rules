@@ -3,7 +3,6 @@
     <testsuite name="all">
         <directory>tests</directory>
         <directory>packages-tests</directory>
-        <exclude>tests/Rules/ExclusiveNamespaceRule/Fixture</exclude>
         <exclude>tests/Rules/NoConstructorInTestRule/Fixture</exclude>
         <exclude>tests/Rules/PreventDuplicateClassMethodRule/Fixture</exclude>
         <exclude>tests/Rules/ForbiddenArrayWithStringKeysRule/Fixture</exclude>
