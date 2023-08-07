@@ -316,6 +316,7 @@ class SomeCommand extends Command
 
 <br>
 
+<<<<<<< HEAD
 ## ExclusiveNamespaceRule
 
 Exclusive namespace can only contain classes of specific type, nothing else
@@ -323,24 +324,49 @@ Exclusive namespace can only contain classes of specific type, nothing else
 :wrench: **configure it!**
 
 - class: [`Symplify\PHPStanRules\Rules\ExclusiveNamespaceRule`](../src/Rules/ExclusiveNamespaceRule.php)
+=======
+## EmbeddedEnumClassConstSpotterRule
+
+Constants "%s" should be extract to standalone enum class
+
+:wrench: **configure it!**
+
+- class: [`Symplify\PHPStanRules\Rules\Enum\EmbeddedEnumClassConstSpotterRule`](../src/Rules/Enum/EmbeddedEnumClassConstSpotterRule.php)
+>>>>>>> eda568e4 (Remove ExclusiveNamespaceRule, as requires lot of configuration and rather architecture rule)
 
 ```yaml
 services:
     -
+<<<<<<< HEAD
         class: Symplify\PHPStanRules\Rules\ExclusiveNamespaceRule
         tags: [phpstan.rules.rule]
         arguments:
             namespaceParts:
                 - Presenter
+=======
+        class: Symplify\PHPStanRules\Rules\Enum\EmbeddedEnumClassConstSpotterRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            parentTypes:
+                - AbstractObject
+>>>>>>> eda568e4 (Remove ExclusiveNamespaceRule, as requires lot of configuration and rather architecture rule)
 ```
 
 ↓
 
 ```php
+<<<<<<< HEAD
 namespace App\Presenter;
 
 class SomeRepository
 {
+=======
+class SomeProduct extends AbstractObject
+{
+    public const STATUS_ENABLED = 1;
+
+    public const STATUS_DISABLED = 0;
+>>>>>>> eda568e4 (Remove ExclusiveNamespaceRule, as requires lot of configuration and rather architecture rule)
 }
 ```
 
@@ -349,11 +375,24 @@ class SomeRepository
 <br>
 
 ```php
+<<<<<<< HEAD
 namespace App\Presenter;
 
 class SomePresenter
 {
 }
+=======
+class SomeProduct extends AbstractObject
+{
+}
+
+class SomeStatus
+{
+    public const ENABLED = 1;
+
+    public const DISABLED = 0;
+}
+>>>>>>> eda568e4 (Remove ExclusiveNamespaceRule, as requires lot of configuration and rather architecture rule)
 ```
 
 :+1:
