@@ -389,42 +389,6 @@ new SomeClass;
 
 <br>
 
-## ForbiddenArrayDestructRule
-
-Array destruct is not allowed. Use value object to pass data instead
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenArrayDestructRule`](../src/Rules/ForbiddenArrayDestructRule.php)
-
-```php
-final class SomeClass
-{
-    public function run(): void
-    {
-        [$firstValue, $secondValue] = $this->getRandomData();
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    public function run(): void
-    {
-        $valueObject = $this->getValueObject();
-        $firstValue = $valueObject->getFirstValue();
-        $secondValue = $valueObject->getSecondValue();
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ## ForbiddenArrayMethodCallRule
 
 Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code
