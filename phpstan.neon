@@ -14,9 +14,6 @@ parameters:
         # parallel
         - packages/*-phpstan-printer/tests/*ToPhpCompiler/Fixture*
 
-        # PHP 8 only
-        - tests/Rules/ForbiddenArrayWithStringKeysRule/FixturePhp80/SkipAttributeArrayKey.php
-
         # tests
         - '*/tests/**/Source/*'
         - '*/tests/**/Fixture/*'

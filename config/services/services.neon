@@ -18,7 +18,6 @@ services:
     - Symplify\PHPStanRules\Matcher\PositionMatcher
     - Symplify\PHPStanRules\Naming\BoolishNameAnalyser
     - Symplify\PHPStanRules\Naming\ClassToSuffixResolver
-    - Symplify\PHPStanRules\NodeAnalyzer\ArrayAnalyzer
     - Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
     - Symplify\PHPStanRules\NodeAnalyzer\CacheIfAnalyzer
     - Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
@@ -34,7 +33,6 @@ services:
     - Symplify\PHPStanRules\ParentClassMethodNodeResolver
     - Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
     - Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
-    - Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodReturnTypeResolver
     - Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
     - Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
