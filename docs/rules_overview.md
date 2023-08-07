@@ -1,4 +1,4 @@
-# 76 Rules Overview
+# 72 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -356,34 +356,6 @@ trait SuffixedTrait
 abstract class AbstractClass
 {
 }
-```
-
-:+1:
-
-<br>
-
-## ForbiddenAlwaysSetterCallRule
-
-The "%s" class always calls `"%s()"` setters, better move it to constructor
-
-- class: [`Symplify\PHPStanRules\Rules\Domain\ForbiddenAlwaysSetterCallRule`](../src/Rules/Domain/ForbiddenAlwaysSetterCallRule.php)
-
-```php
-$firstPerson = new Person();
-$firstPerson->setName('John');
-
-$secondPerson = new Person();
-$secondPerson->setName('Van');
-```
-
-:x:
-
-<br>
-
-```php
-$firstPerson = new Person('John');
-
-$secondPerson = new Person('Van');
 ```
 
 :+1:
@@ -1011,78 +983,6 @@ final class SomeTest
     public function setUp()
     {
         // ...
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## NoConstructorSymfonyFormObjectRule
-
-This object is used in a Symfony form, that uses magic setters/getters, so it cannot have required constructor
-
-- class: [`Symplify\PHPStanRules\Symfony\Rules\NoConstructorSymfonyFormObjectRule`](../packages/Symfony/Rules/NoConstructorSymfonyFormObjectRule.php)
-
-```php
-final class Ticket
-{
-    public function __construct(private int $price)
-    {
-    }
-}
-
----
-
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\Ticket;
-
-final class TicketFormType extends AbstractType
-{
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Ticket::class,
-        ]);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class Ticket
-{
-    private ?int $price = null;
-
-    public function setPrice(int $price): void
-    {
-        $this->price = $price;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-}
-
----
-
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\Ticket;
-
-final class TicketFormType extends AbstractType
-{
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Ticket::class,
-        ]);
     }
 }
 ```

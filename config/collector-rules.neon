@@ -2,18 +2,8 @@
 rules:
     - Symplify\PHPStanRules\Rules\NarrowType\NarrowPublicClassMethodParamTypeByCallerTypeRule
     - Symplify\PHPStanRules\Rules\Complexity\NoDuplicatedTraitMethodNameRule
-    - Symplify\PHPStanRules\Rules\Domain\ForbiddenAlwaysSetterCallRule
 
 services:
-    # for ForbiddenAlwaysSetterCallRule
-    -
-        class: Symplify\PHPStanRules\Collector\ClassMethod\FormTypeClassCollector
-        tags: [phpstan.collector]
-
-    -
-        class: Symplify\PHPStanRules\Collector\ClassMethod\NewAndSetterCallsCollector
-        tags: [phpstan.collector]
-
     # for NarrowPublicClassMethodParamTypeByCallerTypeRule
     -
         class: Symplify\PHPStanRules\Collector\ClassMethod\PublicClassMethodParamTypesCollector
