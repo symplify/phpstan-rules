@@ -477,43 +477,6 @@ usort($items, function (array $apples) {
 
 <br>
 
-## ForbiddenArrayWithStringKeysRule
-
-Array with keys is not allowed. Use value object to pass data instead
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenArrayWithStringKeysRule`](../src/Rules/ForbiddenArrayWithStringKeysRule.php)
-
-```php
-final class SomeClass
-{
-    public function run()
-    {
-        return [
-            'name' => 'John',
-            'surname' => 'Dope',
-        ];
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    public function run()
-    {
-        return new Person('John', 'Dope');
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ## ForbiddenExtendOfNonAbstractClassRule
 
 Only abstract classes can be extended

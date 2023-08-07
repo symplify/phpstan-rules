@@ -5,7 +5,6 @@
         <directory>packages-tests</directory>
         <exclude>tests/Rules/NoConstructorInTestRule/Fixture</exclude>
         <exclude>tests/Rules/PreventDuplicateClassMethodRule/Fixture</exclude>
-        <exclude>tests/Rules/ForbiddenArrayWithStringKeysRule/Fixture</exclude>
         <exclude>tests/Rules/ClassNameRespectsParentSuffixRule/Fixture/</exclude>
         <exclude>tests/Rules/CheckNotTestsNamespaceOutsideTestsDirectoryRule/Fixture</exclude>
     </testsuite>
