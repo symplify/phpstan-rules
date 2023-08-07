@@ -25,8 +25,23 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
-final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class SeeAnnotationToTestRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\PhpDoc\PhpDocResolver
+     */
+    private $phpDocResolver;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder
+     */
+    private $seePhpDocTagNodesFinder;
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $requiredSeeTypes;
     /**
      * @var string
      */
@@ -35,11 +50,11 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
     /**
      * @param string[] $requiredSeeTypes
      */
-    public function __construct(
-        private readonly PhpDocResolver $phpDocResolver,
-        private readonly SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
-        private readonly array $requiredSeeTypes
-    ) {
+    public function __construct(PhpDocResolver $phpDocResolver, SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder, array $requiredSeeTypes)
+    {
+        $this->phpDocResolver = $phpDocResolver;
+        $this->seePhpDocTagNodesFinder = $seePhpDocTagNodesFinder;
+        $this->requiredSeeTypes = $requiredSeeTypes;
     }
 
     /**
