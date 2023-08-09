@@ -1,4 +1,4 @@
-# 69 Rules Overview
+# 68 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1332,29 +1332,6 @@ function run(KnownType $knownType)
 {
     return $knownType->name;
 }
-```
-
-:+1:
-
-<br>
-
-## NoNestedFuncCallRule
-
-Use separate function calls with readable variable names
-
-- class: [`Symplify\PHPStanRules\Rules\NoNestedFuncCallRule`](../src/Rules/NoNestedFuncCallRule.php)
-
-```php
-$filteredValues = array_filter(array_map($callback, $items));
-```
-
-:x:
-
-<br>
-
-```php
-$mappedItems = array_map($callback, $items);
-$filteredValues = array_filter($mappedItems);
 ```
 
 :+1:
