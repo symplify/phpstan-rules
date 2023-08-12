@@ -1,4 +1,4 @@
-# 68 Rules Overview
+# 67 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -694,28 +694,6 @@ $message = sprintf('%s', ...$args);
 
 ```php
 $message = sprintf('%s', $firstValue, $secondValue);
-```
-
-:+1:
-
-<br>
-
-## ForbiddenThisArgumentRule
-
-`$this` as argument is not allowed. Refactor method to service composition
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenThisArgumentRule`](../src/Rules/ForbiddenThisArgumentRule.php)
-
-```php
-$this->someService->process($this, ...);
-```
-
-:x:
-
-<br>
-
-```php
-$this->someService->process($value, ...);
 ```
 
 :+1:
