@@ -36,7 +36,6 @@ rules:
     - Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
-    - Symplify\PHPStanRules\Rules\ForbiddenThisArgumentRule
     - Symplify\PHPStanRules\Rules\ForbiddenSpreadOperatorRule
     - Symplify\PHPStanRules\Rules\ForbiddenAnonymousClassRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
