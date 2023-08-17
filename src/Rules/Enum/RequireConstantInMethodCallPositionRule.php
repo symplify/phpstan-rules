@@ -21,8 +21,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireConstantInMethodCallPositionRule\RequireConstantInMethodCallPositionRuleTest
  */
-final class RequireConstantInMethodCallPositionRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class RequireConstantInMethodCallPositionRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Matcher\PositionMatcher
+     */
+    private $positionMatcher;
+    /**
+     * @var array<class-string, array<string, int[]>>
+     * @readonly
+     */
+    private $requiredConstantInMethodCall;
     /**
      * @var string
      */
@@ -31,10 +41,10 @@ final class RequireConstantInMethodCallPositionRule implements Rule, DocumentedR
     /**
      * @param array<class-string, array<string, int[]>> $requiredConstantInMethodCall
      */
-    public function __construct(
-        private readonly PositionMatcher $positionMatcher,
-        private readonly array $requiredConstantInMethodCall
-    ) {
+    public function __construct(PositionMatcher $positionMatcher, array $requiredConstantInMethodCall)
+    {
+        $this->positionMatcher = $positionMatcher;
+        $this->requiredConstantInMethodCall = $requiredConstantInMethodCall;
     }
 
     /**
