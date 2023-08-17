@@ -37,6 +37,12 @@ final class NoRelativeFilePathRule implements Rule, DocumentedRuleInterface
     private const URL_START_REGEX = '#^(https|http|git|ssh|ftp|file)://#';
 
     /**
+     * @var string
+     * @see https://regex101.com/r/7T6lJS/1
+     */
+    private const DOMAIN_END_REGEX = '#\w+(\\\\)?\.(com|org|de)#s';
+
+    /**
      * @return class-string<Node>
      */
     public function getNodeType(): string
@@ -108,6 +114,10 @@ CODE_SAMPLE
     {
         // probably an url
         if (Strings::match($string->value, self::URL_START_REGEX)) {
+            return false;
+        }
+
+        if (Strings::match($string->value, self::DOMAIN_END_REGEX)) {
             return false;
         }
 

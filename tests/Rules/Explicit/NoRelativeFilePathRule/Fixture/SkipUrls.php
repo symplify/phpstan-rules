@@ -8,6 +8,10 @@ final class SkipUrls
 {
     public function run()
     {
-        return 'https://someurl.com';
+        $partialDomain = 'mearie\.org';
+
+        $partialDomain = 'mearie.org';
+
+        return 'https://someurl.com' ;
     }
 }
