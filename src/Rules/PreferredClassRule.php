@@ -22,21 +22,24 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
  */
-final class PreferredClassRule extends AbstractSymplifyRule implements ConfigurableRuleInterface
+final class PreferredClassRule extends AbstractSymplifyRule
 {
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $oldToPreferredClasses;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
-
     /**
      * @param string[] $oldToPreferredClasses
      */
-    public function __construct(
-        private readonly array $oldToPreferredClasses
-    ) {
+    public function __construct(array $oldToPreferredClasses)
+    {
+        $this->oldToPreferredClasses = $oldToPreferredClasses;
     }
-
     /**
      * @return array<class-string<Node>>
      */
@@ -44,7 +47,6 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
     {
         return [New_::class, Name::class, InClassNode::class, StaticCall::class, Instanceof_::class];
     }
-
     /**
      * @param New_|Name|InClassNode|StaticCall|Instanceof_ $node
      * @return string[]
@@ -65,7 +67,6 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
 
         return $this->processClassName($node->toString());
     }
-
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
@@ -98,7 +99,6 @@ CODE_SAMPLE
             ),
         ]);
     }
-
     /**
      * @return string[]
      */
@@ -111,7 +111,6 @@ CODE_SAMPLE
         $className = $new->class->toString();
         return $this->processClassName($className);
     }
-
     /**
      * @return string[]
      */
@@ -143,7 +142,6 @@ CODE_SAMPLE
 
         return [];
     }
-
     /**
      * @return string[]
      */
@@ -160,11 +158,11 @@ CODE_SAMPLE
 
         return [];
     }
-
     /**
      * @return string[]
+     * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\Instanceof_ $node
      */
-    private function processExprWithClass(StaticCall|Instanceof_ $node): array
+    private function processExprWithClass($node): array
     {
         if ($node->class instanceof Expr) {
             return [];

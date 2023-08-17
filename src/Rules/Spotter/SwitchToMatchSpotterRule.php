@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Spotter\SwitchToMatchSpotterRule\SwitchToMatchSpotterRuleTest
  */
-final class SwitchToMatchSpotterRule implements Rule, DocumentedRuleInterface
+final class SwitchToMatchSpotterRule implements Rule
 {
     /**
      * @var string
