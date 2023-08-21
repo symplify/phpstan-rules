@@ -29,13 +29,13 @@ final class StringOutsideConcatFindingNodeVisitor extends NodeVisitorAbstract
     /**
      * @param Node[] $nodes
      */
-    public function beforeTraverse(array $nodes)
+    public function beforeTraverse(array $nodes): ?array
     {
         $this->foundNodes = [];
         return null;
     }
 
-    public function enterNode(Node $node)
+    public function enterNode(Node $node): int|Node|null
     {
         if ($this->fileCheckingFuncCallAnalyzer->isFileExistCheck($node)) {
             return NodeTraverser::DONT_TRAVERSE_CHILDREN;
