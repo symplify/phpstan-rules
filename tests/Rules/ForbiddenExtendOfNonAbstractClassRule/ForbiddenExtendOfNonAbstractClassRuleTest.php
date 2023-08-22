@@ -30,6 +30,7 @@ final class ForbiddenExtendOfNonAbstractClassRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipVendorBasedClasses.php', []];
         yield [__DIR__ . '/Fixture/SkipClassExtendingAbstractClass.php', []];
         yield [__DIR__ . '/Fixture/SkipException.php', []];
+        yield [__DIR__ . '/Fixture/SkipAnonymousExtend.php', []];
     }
 
     /**

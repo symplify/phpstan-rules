@@ -39,6 +39,10 @@ final class ForbiddenExtendOfNonAbstractClassRule implements Rule, DocumentedRul
     {
         $classReflection = $node->getClassReflection();
 
+        if ($classReflection->isAnonymous()) {
+            return [];
+        }
+
         $parentClassReflection = $classReflection->getParentClass();
         if (! $parentClassReflection instanceof ClassReflection) {
             return [];
