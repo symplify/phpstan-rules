@@ -36,11 +36,6 @@ parameters:
         - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
         - '#Method (.*?)::getCollectors\(\) return type with generic interface PHPStan\\Collectors\\Collector does not specify its types\: TNodeType, TValue#'
 
-        # invalid PHPStan type - it alwasy requires 2 types to traverse with callable
-        -
-            message: '#Callable callable\(PHPStan\\Type\\Type\)\: PHPStan\\Type\\Type invoked with 2 parameters, 1 required#'
-            path: src/Rules/Explicit/NoMixedCallableRule.php
-
         - '#Parameter \#1 \$values of method Symplify\\PHPStanRules\\Rules\\Enum\\RequireUniqueEnumConstantRule\:\:filterDuplicatedValues\(\) expects array<int\|string>, array<bool\|float\|int\|string> given#'
 
         - '#Class PHP_CodeSniffer\\Sniffs\\Sniff not found#'

@@ -6,7 +6,6 @@ services:
     - Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser
     - Symplify\PHPStanRules\Reflection\ReflectionParser
     - Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
-    - Symplify\PHPStanRules\TypeResolver\ClassMethodReturnTypeResolver
     - Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
     - Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder
     - Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
