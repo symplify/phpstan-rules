@@ -25,7 +25,6 @@ rules:
     - Symplify\PHPStanRules\Rules\NoIssetOnObjectRule
 
     # explicit naming
-    - Symplify\PHPStanRules\Rules\NoDefaultExceptionRule
     - Symplify\PHPStanRules\Rules\NoParentMethodCallOnNoOverrideProcessRule
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
