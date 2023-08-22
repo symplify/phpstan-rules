@@ -9,7 +9,6 @@ use PhpParser\Node\Expr\ArrayDimFetch;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -28,11 +27,6 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
      * @var array<class-string>
      */
     private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement', 'Iterator'];
-
-    public function __construct(
-        private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher
-    ) {
-    }
 
     /**
      * @return class-string<Node>
