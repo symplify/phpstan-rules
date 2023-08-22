@@ -21,8 +21,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredAttributeOverAnnotationRule\PreferredAttributeOverAnnotationRuleTest
  */
-final class PreferredAttributeOverAnnotationRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class PreferredAttributeOverAnnotationRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
+     */
+    private $classAnnotationResolver;
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $annotations;
     /**
      * @var string
      */
@@ -31,10 +41,10 @@ final class PreferredAttributeOverAnnotationRule implements Rule, DocumentedRule
     /**
      * @param string[] $annotations
      */
-    public function __construct(
-        private readonly ClassAnnotationResolver $classAnnotationResolver,
-        private readonly array $annotations
-    ) {
+    public function __construct(ClassAnnotationResolver $classAnnotationResolver, array $annotations)
+    {
+        $this->classAnnotationResolver = $classAnnotationResolver;
+        $this->annotations = $annotations;
     }
 
     public function getNodeType(): string

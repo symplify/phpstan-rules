@@ -19,8 +19,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Privatization\NoPublicPropertyByTypeRule\NoPublicPropertyByTypeRuleTest
  */
-final class NoPublicPropertyByTypeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class NoPublicPropertyByTypeRule implements Rule
 {
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $classTypes;
     /**
      * @var string
      */
@@ -29,9 +34,9 @@ final class NoPublicPropertyByTypeRule implements Rule, DocumentedRuleInterface,
     /**
      * @param string[] $classTypes
      */
-    public function __construct(
-        private readonly array $classTypes,
-    ) {
+    public function __construct(array $classTypes)
+    {
+        $this->classTypes = $classTypes;
     }
 
     public function getNodeType(): string
