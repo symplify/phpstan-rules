@@ -1,4 +1,4 @@
-# 60 Rules Overview
+# 59 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2176,39 +2176,6 @@ class SomeClass extends Rule
 class SomeClass extends Rule
 {
 }
-```
-
-:+1:
-
-<br>
-
-## SwitchToMatchSpotterRule
-
-Switch construction can be replace with more robust `match()`
-
-- class: [`Symplify\PHPStanRules\Rules\Spotter\SwitchToMatchSpotterRule`](../src/Rules/Spotter/SwitchToMatchSpotterRule.php)
-
-```php
-switch ($key) {
-    case 1:
-        return 100;
-    case 2:
-        return 200;
-    default:
-        return 300;
-};
-```
-
-:x:
-
-<br>
-
-```php
-return match($key) {
-    1 => 100,
-    2 => 200,
-    default => 300,
-};
 ```
 
 :+1:
