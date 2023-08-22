@@ -1,4 +1,4 @@
-# 64 Rules Overview
+# 61 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -600,29 +600,6 @@ $this->productRepository->save($firstProduct);
 
 <br>
 
-## ForbiddenSpreadOperatorRule
-
-Spread operator is not allowed.
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenSpreadOperatorRule`](../src/Rules/ForbiddenSpreadOperatorRule.php)
-
-```php
-$args = [$firstValue, $secondValue];
-$message = sprintf('%s', ...$args);
-```
-
-:x:
-
-<br>
-
-```php
-$message = sprintf('%s', $firstValue, $secondValue);
-```
-
-:+1:
-
-<br>
-
 ## IfElseToMatchSpotterRule
 
 If/else construction can be replace with more robust `match()`
@@ -850,30 +827,6 @@ final class SomeTest
         // ...
     }
 }
-```
-
-:+1:
-
-<br>
-
-## NoDefaultExceptionRule
-
-Use custom exceptions instead of native "%s"
-
-- class: [`Symplify\PHPStanRules\Rules\NoDefaultExceptionRule`](../src/Rules/NoDefaultExceptionRule.php)
-
-```php
-throw new RuntimeException('...');
-```
-
-:x:
-
-<br>
-
-```php
-use App\Exception\FileNotFoundException;
-
-throw new FileNotFoundException('...');
 ```
 
 :+1:
@@ -1146,37 +1099,6 @@ $filePath = __DIR__ . '/missing_location.txt';
 
 ```php
 $filePath = __DIR__ . '/existing_location.txt';
-```
-
-:+1:
-
-<br>
-
-## NoMixedCallableRule
-
-Make callable type explicit. Here is how: https://phpstan.org/writing-php-code/phpdoc-types#callables
-
-- class: [`Symplify\PHPStanRules\Rules\Explicit\NoMixedCallableRule`](../src/Rules/Explicit/NoMixedCallableRule.php)
-
-```php
-function run(callable $callable)
-{
-    return $callable(100);
-}
-```
-
-:x:
-
-<br>
-
-```php
-/**
- * @param callable(): int $callable
- */
-function run(callable $callable): int
-{
-    return $callable(100);
-}
 ```
 
 :+1:
