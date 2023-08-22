@@ -1,4 +1,4 @@
-# 59 Rules Overview
+# 58 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -2011,48 +2011,6 @@ final class SomeController extends AbstractController
     #[Route()]
     public function __invoke()
     {
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## RequireNativeArraySymfonyRenderCallRule
-
-Second argument of `$this->render("template.twig",` [...]) method should be explicit array, to avoid accidental variable override, see https://tomasvotruba.com/blog/2021/02/15/how-dangerous-is-your-nette-template-assign/
-
-- class: [`Symplify\PHPStanRules\Symfony\Rules\RequireNativeArraySymfonyRenderCallRule`](../packages/Symfony/Rules/RequireNativeArraySymfonyRenderCallRule.php)
-
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-class SomeController extends AbstractController
-{
-    public function default()
-    {
-        $parameters['name'] = 'John';
-        $parameters['name'] = 'Doe';
-        return $this->render('...', $parameters);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-class SomeController extends AbstractController
-{
-    public function default()
-    {
-        return $this->render('...', [
-            'name' => 'John'
-        ]);
     }
 }
 ```
