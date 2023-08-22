@@ -1,4 +1,4 @@
-# 67 Rules Overview
+# 66 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -356,33 +356,6 @@ trait SuffixedTrait
 abstract class AbstractClass
 {
 }
-```
-
-:+1:
-
-<br>
-
-## ForbiddenAnonymousClassRule
-
-Anonymous class is not allowed.
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenAnonymousClassRule`](../src/Rules/ForbiddenAnonymousClassRule.php)
-
-```php
-new class {};
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-
-}
-
-new SomeClass;
 ```
 
 :+1:
