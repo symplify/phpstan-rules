@@ -65,34 +65,6 @@ class SomeClass
 
 <br>
 
-## CheckAttributteArgumentClassExistsRule
-
-Class was not found
-
-- class: [`Symplify\PHPStanRules\Rules\CheckAttributteArgumentClassExistsRule`](../src/Rules/CheckAttributteArgumentClassExistsRule.php)
-
-```php
-#[SomeAttribute(firstName: 'MissingClass::class')]
-class SomeClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-#[SomeAttribute(firstName: ExistingClass::class)]
-class SomeClass
-{
-}
-```
-
-:+1:
-
-<br>
-
 ## CheckClassNamespaceFollowPsr4Rule
 
 Class like namespace "%s" does not follow PSR-4 configuration in `composer.json`
