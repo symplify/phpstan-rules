@@ -26,7 +26,7 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
     /**
      * @var array<class-string>
      */
-    private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement', 'Iterator'];
+    private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement', 'Iterator', 'Aws\ResultInterface'];
 
     /**
      * @return class-string<Node>
