@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayDimFetch;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -47,15 +48,13 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $varStaticType = $scope->getType($node->var);
-
-        $classNames = $varStaticType->getObjectClassNames();
-        if ($classNames === []) {
+        $varType = $scope->getType($node->var);
+        if (! $varType instanceof ObjectType) {
             return [];
         }
 
-        foreach ($classNames as $className) {
-            if ($this->arrayStringAndFnMatcher->isMatchWithIsA($className, self::ALLOWED_CLASSES)) {
+        foreach (self::ALLOWED_CLASSES as $allowedClass) {
+            if ($varType->isInstanceOf($allowedClass)->yes()) {
                 return [];
             }
         }
