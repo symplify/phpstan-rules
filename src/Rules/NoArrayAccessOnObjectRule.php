@@ -26,7 +26,7 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
     /**
      * @var array<class-string>
      */
-    private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement'];
+    private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement', 'Iterator'];
 
     public function __construct(
         private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher
