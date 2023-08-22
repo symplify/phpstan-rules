@@ -1,7 +1,5 @@
 rules:
     - Symplify\PHPStanRules\Rules\NoProtectedClassElementRule
-
-    - Symplify\PHPStanRules\Rules\Missing\CheckSprintfMatchingTypesRule
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
 
     # domain
