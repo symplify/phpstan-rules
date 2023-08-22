@@ -24,9 +24,9 @@ final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
     public const ERROR_MESSAGE = 'Use explicit methods over array access on object';
 
     /**
-     * @var array<class-string>
+     * @var string[]
      */
-    private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement', 'Iterator', 'Aws\ResultInterface'];
+    private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement', 'Iterator', 'Aws\ResultInterface', 'Symfony\Component\Form\FormInterface'];
 
     /**
      * @return class-string<Node>
