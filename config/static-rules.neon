@@ -8,7 +8,6 @@ rules:
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
     - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
-    - Symplify\PHPStanRules\Rules\CheckAttributteArgumentClassExistsRule
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
     - Symplify\PHPStanRules\Rules\ForbiddenParamTypeRemovalRule
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
