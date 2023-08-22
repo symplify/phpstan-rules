@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\NodeFinder;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr;
 use PhpParser\NodeFinder;
 
 /**
@@ -28,16 +27,5 @@ final class TypeAwareNodeFinder
     public function findFirstInstanceOf(array|Node $nodes, string $type): ?Node
     {
         return $this->nodeFinder->findFirstInstanceOf($nodes, $type);
-    }
-
-    /**
-     * @template TNode as Node
-     *
-     * @param class-string<TNode> $type
-     * @return TNode[]
-     */
-    public function findInstanceOf(Expr $expr, string $type): array
-    {
-        return $this->nodeFinder->findInstanceOf($expr, $type);
     }
 }

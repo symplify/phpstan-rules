@@ -1,4 +1,4 @@
-# 61 Rules Overview
+# 60 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -594,49 +594,6 @@ $firstProduct = new Product();
 $secondProduct = new Product();
 
 $this->productRepository->save($firstProduct);
-```
-
-:+1:
-
-<br>
-
-## IfElseToMatchSpotterRule
-
-If/else construction can be replace with more robust `match()`
-
-- class: [`Symplify\PHPStanRules\Rules\Spotter\IfElseToMatchSpotterRule`](../src/Rules/Spotter/IfElseToMatchSpotterRule.php)
-
-```php
-class SomeClass
-{
-    public function spot($value)
-    {
-        if ($value === 100) {
-            $items = ['yes'];
-        } else {
-            $items = ['no'];
-        }
-
-        return $items;
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function spot($value)
-    {
-        return match($value) {
-            100 => ['yes'],
-            default => ['no'],
-        };
-    }
-}
 ```
 
 :+1:
