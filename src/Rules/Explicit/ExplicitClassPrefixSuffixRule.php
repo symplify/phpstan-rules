@@ -20,7 +20,7 @@ use function str_ends_with;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\ExplicitClassPrefixSuffixRule\ExplicitClassPrefixSuffixRuleTest
  */
-final class ExplicitClassPrefixSuffixRule implements Rule, DocumentedRuleInterface
+final class ExplicitClassPrefixSuffixRule implements Rule
 {
     /**
      * @var string
@@ -114,11 +114,11 @@ CODE_SAMPLE
      */
     private function processInterfaceSuffix(Identifier $identifier): array
     {
-        if (str_ends_with($identifier->toString(), 'Interface')) {
+        if (substr_compare($identifier->toString(), 'Interface', -strlen('Interface')) === 0) {
             return [];
         }
 
-        if (str_ends_with($identifier->toString(), 'Trait')) {
+        if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [self::TRAIT_ERROR_MESSAGE];
         }
 
@@ -130,7 +130,7 @@ CODE_SAMPLE
      */
     private function processTraitSuffix(Identifier $identifier): array
     {
-        if (str_ends_with($identifier->toString(), 'Trait')) {
+        if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [];
         }
 
@@ -142,19 +142,19 @@ CODE_SAMPLE
      */
     private function processClassSuffix(Identifier $identifier, bool $isAbstract): array
     {
-        if ($isAbstract && ! str_starts_with($identifier->toString(), 'Abstract')) {
+        if ($isAbstract && strncmp($identifier->toString(), 'Abstract', strlen('Abstract')) !== 0) {
             return [self::ABSTRACT_ERROR_MESSAGE];
         }
 
-        if (! $isAbstract && str_starts_with($identifier->toString(), 'Abstract')) {
+        if (! $isAbstract && strncmp($identifier->toString(), 'Abstract', strlen('Abstract')) === 0) {
             return [self::ABSTRACT_ERROR_MESSAGE];
         }
 
-        if (str_ends_with($identifier->toString(), 'Interface')) {
+        if (substr_compare($identifier->toString(), 'Interface', -strlen('Interface')) === 0) {
             return [self::INTERFACE_ERROR_MESSAGE];
         }
 
-        if (str_ends_with($identifier->toString(), 'Trait')) {
+        if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [self::TRAIT_ERROR_MESSAGE];
         }
 
