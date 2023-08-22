@@ -1,4 +1,4 @@
-# 58 Rules Overview
+# 56 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -173,28 +173,6 @@ namespace App\Contracts\Repository;
 interface ProductRepositoryInterface
 {
 }
-```
-
-:+1:
-
-<br>
-
-## CheckSprintfMatchingTypesRule
-
-`sprintf()` call mask type at index [%d] expects type "%s", but "%s" given
-
-- class: [`Symplify\PHPStanRules\Rules\Missing\CheckSprintfMatchingTypesRule`](../src/Rules/Missing/CheckSprintfMatchingTypesRule.php)
-
-```php
-echo sprintf('My name is %s and I have %d children', 10, 'Tomas');
-```
-
-:x:
-
-<br>
-
-```php
-echo sprintf('My name is %s and I have %d children', 'Tomas', 10);
 ```
 
 :+1:
@@ -2133,55 +2111,6 @@ class SomeClass extends Rule
  */
 class SomeClass extends Rule
 {
-}
-```
-
-:+1:
-
-<br>
-
-## TwigPublicCallableExistsRule
-
-The callable method [$this, "%s"] was not found
-
-- class: [`Symplify\PHPStanRules\Symfony\Rules\TwigPublicCallableExistsRule`](../packages/Symfony/Rules/TwigPublicCallableExistsRule.php)
-
-```php
-use Twig\Extension\AbstractExtension;
-use Twig_SimpleFunction;
-
-final class TwigExtensionWithMissingCallable extends AbstractExtension
-{
-    public function getFunctions()
-    {
-        return [
-            new Twig_SimpleFunction('someFunctionName', [$this, 'someMethod']),
-        ];
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Twig\Extension\AbstractExtension;
-use Twig_SimpleFunction;
-
-final class TwigExtensionWithMissingCallable extends AbstractExtension
-{
-    public function getFunctions()
-    {
-        return [
-            new Twig_SimpleFunction('someFunctionName', [$this, 'someMethod']),
-        ];
-    }
-
-    public function someMethod()
-    {
-        // ...
-    }
 }
 ```
 
