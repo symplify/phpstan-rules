@@ -2,7 +2,6 @@ rules:
     - Symplify\PHPStanRules\Rules\Explicit\NoMixedCallableRule
     - Symplify\PHPStanRules\Rules\Explicit\NoMixedPropertyFetcherRule
     - Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule
-    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenNamedArgumentsRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoRightPHPUnitAssertScalarRule
     - Symplify\PHPStanRules\Rules\Complexity\NoAbstractRule
     - Symplify\PHPStanRules\Rules\Enum\RequireEnumDocBlockOnConstantListPassRule
