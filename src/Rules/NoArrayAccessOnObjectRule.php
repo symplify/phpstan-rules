@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoArrayAccessOnObjectRule\NoArrayAccessOnObjectRuleTest
  */
-final class NoArrayAccessOnObjectRule implements Rule, DocumentedRuleInterface
+final class NoArrayAccessOnObjectRule implements Rule
 {
     /**
      * @var string
