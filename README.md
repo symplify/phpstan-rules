@@ -50,9 +50,7 @@ Pick what you need, drop the rest.
 
 ## 3. How we use Configurable Rules
 
-Last but not least, configurable rules with *saints defaults*. That's just polite wording for *opinionated*, like [`AllowedExclusiveDependencyRule`](https://github.com/symplify/phpstan-rules/blob/main/docs/rules_overview.md#allowedexclusivedependencyrule).
-
-You might not like them, but maybe you do:
+Last but not least, configurable rules with *saints defaults*:
 
 ```yaml
 # phpstan.neon
@@ -60,11 +58,10 @@ includes:
     - vendor/symplify/phpstan-rules/config/configurable-rules.neon
 ```
 
-Give it a trial run... so many erros and unclear feedback.... Would you like to **configure them yourself?**
-That's good! We use one rule by another in other projects too, instead of one big import.
+Would you like to **configure them yourself?**
 
 - **Pick one and put it to your `phpstan.neon` manually**.
-- Configure it to your specific needs and re-run PHPStan. It's easier to be responsible, when you're in control.
+- Configure it to your specific needs and re-run PHPStan.
 
 E.g. `ForbiddenNodeRule`:
 
@@ -80,16 +77,6 @@ services:
                 - PhpParser\Node\Expr\ErrorSuppress
 ```
 
-You'll find them all in [rules overview](docs/rules_overview.md).
-
-Happy coding!
-
 <br>
 
-## Report Issues
-
-In case you are experiencing a bug or want to request a new feature head over to the [Symplify monorepo issue tracker](https://github.com/symplify/symplify/issues)
-
-## Contribute
-
-The sources of this package are contained in the Symplify monorepo. We welcome contributions for this package on [symplify/symplify](https://github.com/symplify/symplify).
+Happy coding!
