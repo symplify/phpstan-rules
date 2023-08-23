@@ -6,6 +6,8 @@ namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\ErrorSuppress;
+use PhpParser\Node\Scalar\Encapsed;
+use PhpParser\Node\Scalar\EncapsedStringPart;
 use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
@@ -61,8 +63,14 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
                 continue;
             }
 
-            $name = $this->standard->prettyPrint([$node]);
-            $errorMessage = sprintf(self::ERROR_MESSAGE, $name);
+            // this node can't be printed as standalone
+            if ($node instanceof EncapsedStringPart) {
+                $contents = $this->standard->prettyPrintExpr(new Encapsed([$node]));
+            } else {
+                $contents = $this->standard->prettyPrint([$node]);
+            }
+
+            $errorMessage = sprintf(self::ERROR_MESSAGE, $contents);
 
             return [$errorMessage];
         }
