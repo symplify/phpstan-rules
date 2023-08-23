@@ -23,18 +23,33 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\BoolishClassMethodPrefixRule\BoolishClassMethodPrefixRuleTest
  */
-final class BoolishClassMethodPrefixRule implements Rule, DocumentedRuleInterface
+final class BoolishClassMethodPrefixRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Naming\BoolishNameAnalyser
+     */
+    private $boolishNameAnalyser;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
+     */
+    private $returnNodeFinder;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
+     */
+    private $parentClassMethodGuard;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Method "%s()" returns bool type, so the name should start with is/has/was...';
 
-    public function __construct(
-        private readonly BoolishNameAnalyser $boolishNameAnalyser,
-        private readonly ReturnNodeFinder $returnNodeFinder,
-        private readonly ParentClassMethodGuard $parentClassMethodGuard
-    ) {
+    public function __construct(BoolishNameAnalyser $boolishNameAnalyser, ReturnNodeFinder $returnNodeFinder, ParentClassMethodGuard $parentClassMethodGuard)
+    {
+        $this->boolishNameAnalyser = $boolishNameAnalyser;
+        $this->returnNodeFinder = $returnNodeFinder;
+        $this->parentClassMethodGuard = $parentClassMethodGuard;
     }
 
     /**
