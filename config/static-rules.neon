@@ -11,7 +11,7 @@ rules:
 
     # paths
     - Symplify\PHPStanRules\Rules\NoMissingDirPathRule
-j    - Symplify\PHPStanRules\Rules\NoAbstractMethodRule
+    - Symplify\PHPStanRules\Rules\NoAbstractMethodRule
     - Symplify\PHPStanRules\Rules\NoReferenceRule
     - Symplify\PHPStanRules\Rules\NoArrayAccessOnObjectRule
 
