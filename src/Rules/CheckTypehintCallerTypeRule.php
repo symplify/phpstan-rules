@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Expr;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
@@ -64,8 +66,10 @@ final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
             return [];
         }
 
-        $type = $scope->getType($node->var);
-        if (! $type instanceof ThisType) {
+        if (!$node->var instanceof Variable
+            || !is_string($node->var->name)
+            || $node->var->name !== 'this'
+        ) {
             return [];
         }
 
@@ -143,16 +147,7 @@ CODE_SAMPLE
                 continue;
             }
 
-            $argType = $scope->getType($arg->value);
-            if ($argType instanceof MixedType) {
-                continue;
-            }
-
-            if ($argType instanceof TemplateType) {
-                continue;
-            }
-
-            $paramErrorMessage = $this->validateParam($param, $position, $argType);
+            $paramErrorMessage = $this->validateParam($param, $position, $arg->value, $scope);
             if (! $paramErrorMessage instanceof RuleError) {
                 continue;
             }
@@ -164,12 +159,21 @@ CODE_SAMPLE
         return $errorMessages;
     }
 
-    private function validateParam(Param $param, int $position, Type $argType): ?RuleError
+    private function validateParam(Param $param, int $position, Expr $expr, Scope $scope): ?RuleError
     {
         $type = $param->type;
 
         // @todo some static type mapper from php-parser to PHPStan?
         if (! $type instanceof FullyQualified) {
+            return null;
+        }
+
+        $argType = $scope->getType($expr);
+        if ($argType instanceof MixedType) {
+            return null;
+        }
+
+        if ($argType instanceof TemplateType) {
             return null;
         }
 
