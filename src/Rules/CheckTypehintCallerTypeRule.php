@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Expr;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
@@ -64,7 +66,7 @@ final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
             return [];
         }
 
-        if (!$node->var instanceof Node\Expr\Variable
+        if (!$node->var instanceof Variable
             || !is_string($node->var->name)
             || $node->var->name !== 'this'
         ) {
@@ -157,7 +159,7 @@ CODE_SAMPLE
         return $errorMessages;
     }
 
-    private function validateParam(Param $param, int $position, Node\Expr $argValue, Scope $scope): ?RuleError
+    private function validateParam(Param $param, int $position, Expr $expr, Scope $scope): ?RuleError
     {
         $type = $param->type;
 
@@ -166,7 +168,7 @@ CODE_SAMPLE
             return null;
         }
 
-        $argType = $scope->getType($argValue);
+        $argType = $scope->getType($expr);
         if ($argType instanceof MixedType) {
             return null;
         }
