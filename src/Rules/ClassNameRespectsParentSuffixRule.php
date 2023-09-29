@@ -34,7 +34,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
     public const ERROR_MESSAGE = 'Class should have suffix "%s" to respect parent type';
 
     /**
-     * @var class-string[]
+     * @var string[]
      */
     private const DEFAULT_PARENT_CLASSES = [
         Command::class,

@@ -8,11 +8,11 @@
         "nikic/php-parser": "^4.16",
         "nette/utils": "^3.2.9 || ^4.0",
         "webmozart/assert": "^1.11",
-        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan": "^1.10.35",
         "symplify/rule-doc-generator-contracts": "^11.1.26"
     },
     "require-dev": {
-        "symplify/phpstan-extensions": "^11.2",
+        "symplify/phpstan-extensions": "^11.4",
         "symplify/rule-doc-generator": "^12.0",
         "phpunit/phpunit": "^10.3",
         "symfony/framework-bundle": "6.1.*",
@@ -21,10 +21,10 @@
         "symplify/easy-ci": "^11.3",
         "phpstan/extension-installer": "^1.3",
         "php-parallel-lint/php-parallel-lint": "^1.3",
-        "illuminate/console": "^10.9",
-        "tomasvotruba/unused-public": "^0.1.10",
-        "tomasvotruba/type-coverage": "^0.2.0",
-        "tomasvotruba/class-leak": "0.1.1.72"
+        "illuminate/console": "^10.25",
+        "tomasvotruba/unused-public": "^0.3",
+        "tomasvotruba/type-coverage": "^0.2",
+        "tomasvotruba/class-leak": "^0.1"
     },
     "autoload": {
         "psr-4": {
