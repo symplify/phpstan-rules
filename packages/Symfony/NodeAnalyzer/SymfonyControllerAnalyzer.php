@@ -11,13 +11,18 @@ use Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder;
 final class SymfonyControllerAnalyzer
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
+     */
+    private $attributeFinder;
+    /**
      * @var string
      */
     private const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
 
-    public function __construct(
-        private readonly AttributeFinder $attributeFinder
-    ) {
+    public function __construct(AttributeFinder $attributeFinder)
+    {
+        $this->attributeFinder = $attributeFinder;
     }
 
     public function isControllerActionMethod(ClassMethod $classMethod): bool
@@ -35,6 +40,6 @@ final class SymfonyControllerAnalyzer
             return false;
         }
 
-        return \str_contains($docComment->getText(), '@Route');
+        return strpos($docComment->getText(), '@Route') !== false;
     }
 }
