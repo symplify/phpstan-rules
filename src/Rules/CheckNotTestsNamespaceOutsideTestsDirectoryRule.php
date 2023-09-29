@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckNotTestsNamespaceOutsideTestsDirectoryRule\CheckNotTestsNamespaceOutsideTestsDirectoryRuleTest
  */
-final class CheckNotTestsNamespaceOutsideTestsDirectoryRule implements Rule, DocumentedRuleInterface
+final class CheckNotTestsNamespaceOutsideTestsDirectoryRule implements Rule
 {
     /**
      * @var string
@@ -48,7 +48,7 @@ final class CheckNotTestsNamespaceOutsideTestsDirectoryRule implements Rule, Doc
             return [];
         }
 
-        if (! \str_ends_with($scope->getFile(), 'Test.php')) {
+        if (substr_compare($scope->getFile(), 'Test.php', -strlen('Test.php')) !== 0) {
             return [];
         }
 
