@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ares\PHPStan\Tests\Rule\NoReturnFalseInNonBoolClassMethodRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rule\NoReturnFalseInNonBoolClassMethodRule\Fixture;
 
 final class ReturnFalseOnly
 {

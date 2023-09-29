@@ -1,4 +1,4 @@
-# 56 Rules Overview
+# 57 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1512,6 +1512,44 @@ final class SomeClass
 final class SomeClass
 {
     private $customFileNames = [];
+}
+```
+
+:+1:
+
+<br>
+
+## NoTestMocksRule
+
+Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis
+
+- class: [`Symplify\PHPStanRules\Rules\PHPUnit\NoTestMocksRule`](../src/Rules/PHPUnit/NoTestMocksRule.php)
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SkipApiMock extends TestCase
+{
+    public function test()
+    {
+        $someTypeMock = $this->createMock(SomeType::class);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SkipApiMock extends TestCase
+{
+    public function test()
+    {
+        $someTypeMock = new class() implements SomeType {};
+    }
 }
 ```
 
