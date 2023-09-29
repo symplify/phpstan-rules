@@ -34,7 +34,7 @@ final class NoTestMocksRule implements Rule, DocumentedRuleInterface
      * @param string[] $allowedTypes
      */
     public function __construct(
-        private array $allowedTypes = []
+        private readonly array $allowedTypes = []
     ) {
     }
 
@@ -112,8 +112,8 @@ CODE_SAMPLE
         $mockedArgValue = $args[0]->value;
         $variableType = $scope->getType($mockedArgValue);
 
-        foreach ($variableType->getConstantStrings() as $constantString) {
-            return new ObjectType($constantString->getValue());
+        foreach ($variableType->getConstantStrings() as $constantStringType) {
+            return new ObjectType($constantStringType->getValue());
         }
 
         return null;
