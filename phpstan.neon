@@ -1,3 +1,7 @@
+includes:
+    - config/services/services.neon
+    - config/naming-rules.neon
+
 parameters:
     level: 8
 
@@ -49,3 +53,6 @@ parameters:
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\(.*?) extends generic class PHPStan\\Testing\\RuleTestCase but does not specify its types\: TRule#'
         - '#Method Symplify\\PHPStanRules\\(.*?)\:\:getRule\(\) return type with generic interface PHPStan\\Rules\\Rule does not specify its types\: TNodeType#'
+
+        # part of public contract
+        - '#Public constant "Symplify\\PHPStanRules\\(.*?)\:\:ERROR_MESSAGE" is never used#'

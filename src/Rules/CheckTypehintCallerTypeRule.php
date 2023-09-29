@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Expr;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -21,7 +21,6 @@ use PHPStan\Type\Generic\TemplateType;
 use PHPStan\Type\IntersectionType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
-use PHPStan\Type\ThisType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
 use PHPStan\Type\VerbosityLevel;
@@ -66,8 +65,8 @@ final class CheckTypehintCallerTypeRule implements Rule, DocumentedRuleInterface
             return [];
         }
 
-        if (!$node->var instanceof Variable
-            || !is_string($node->var->name)
+        if (! $node->var instanceof Variable
+            || ! is_string($node->var->name)
             || $node->var->name !== 'this'
         ) {
             return [];
