@@ -14,7 +14,6 @@ services:
     - Symplify\PHPStanRules\Composer\Psr4PathValidator
     - Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter
     - Symplify\PHPStanRules\Location\DirectoryChecker
-    - Symplify\PHPStanRules\Matcher\PositionMatcher
     - Symplify\PHPStanRules\Naming\BoolishNameAnalyser
     - Symplify\PHPStanRules\Naming\ClassToSuffixResolver
     - Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
