@@ -1,4 +1,4 @@
-# 57 Rules Overview
+# 56 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1842,58 +1842,6 @@ namespace App\Attribute;
 #[\Attribute]
 final class SomeAttribute
 {
-}
-```
-
-:+1:
-
-<br>
-
-## RequireConstantInMethodCallPositionRule
-
-Parameter argument on position %d must use constant
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\Enum\RequireConstantInMethodCallPositionRule`](../src/Rules/Enum/RequireConstantInMethodCallPositionRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\Enum\RequireConstantInMethodCallPositionRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            requiredLocalConstantInMethodCall:
-                SomeType:
-                    someMethod:
-                        - 0
-```
-
-↓
-
-```php
-class SomeClass
-{
-    public function someMethod(SomeType $someType)
-    {
-        $someType->someMethod('hey');
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    private const HEY = 'hey'
-
-    public function someMethod(SomeType $someType)
-    {
-        $someType->someMethod(self::HEY);
-    }
 }
 ```
 
