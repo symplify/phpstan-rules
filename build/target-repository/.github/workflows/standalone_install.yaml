@@ -1,9 +1,9 @@
-name: Tests
+name: Standalone Install
 
 on: [pull_request, push]
 
 jobs:
-    tests:
+    standalone_install:
         runs-on: ubuntu-latest
 
         strategy:
@@ -17,15 +17,6 @@ jobs:
             -   run: composer config --no-plugins allow-plugins.phpstan/extension-installer true
 
             -   run: composer require phpstan/phpstan phpstan/extension-installer --dev
-
-            # get current *.27 version
-            -   run: composer require symplify/phpstan-rules:^11.1.27 --dev
-
-            # prepare local files
-            -   run: wget https://raw.githubusercontent.com/symplify/phpstan-rules/main/phpstan-for-tests.neon
-            -   run: wget https://raw.githubusercontent.com/symplify/phpstan-rules/main/tests/SomeClass.php.inc
-
-            -   run: vendor/bin/phpstan analyze SomeClass.php.inc --configuration phpstan-for-tests.neon
-
+            -   run: composer require symplify/phpstan-rules:dev-main --dev
 
 

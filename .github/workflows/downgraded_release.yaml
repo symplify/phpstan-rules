@@ -43,7 +43,7 @@ jobs:
             -   run: cp -r build/target-repository/. .
 
             # clear the dev files
-            -   run: rm -rf build monorepo-builder.php full-tool-build.sh rector.php phpstan-for-tests.neon tests src-for-tests
+            -   run: rm -rf build monorepo-builder.php full-tool-build.sh rector.php phpstan-for-tests.neon tests
 
             # setup git user
             -
