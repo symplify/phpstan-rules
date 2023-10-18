@@ -1110,53 +1110,6 @@ final class SomeClass
 
 <br>
 
-## NoPublicPropertyByTypeRule
-
-Class cannot have public properties. Use getter/setters instead
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\Privatization\NoPublicPropertyByTypeRule`](../src/Rules/Privatization/NoPublicPropertyByTypeRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\Privatization\NoPublicPropertyByTypeRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            classTypes:
-                - Entity
-```
-
-↓
-
-```php
-final class Person extends Entity
-{
-    public $name;
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class Person extends Entity
-{
-    private $name;
-
-    public function getName()
-    {
-        return $this->name;
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ## NoReferenceRule
 
 Use explicit return value over magic &reference
