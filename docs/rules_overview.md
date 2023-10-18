@@ -1,4 +1,4 @@
-# 55 Rules Overview
+# 54 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1071,36 +1071,6 @@ final class SomeClass
 final class SomeClass
 {
     private array $property = [];
-}
-```
-
-:+1:
-
-<br>
-
-## NoParentMethodCallOnNoOverrideProcessRule
-
-Do not call parent method if no override process
-
-- class: [`Symplify\PHPStanRules\Rules\NoParentMethodCallOnNoOverrideProcessRule`](../src/Rules/NoParentMethodCallOnNoOverrideProcessRule.php)
-
-```php
-class SomeClass extends Printer
-{
-    public function print($nodes)
-    {
-        return parent::print($nodes);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass extends Printer
-{
 }
 ```
 
