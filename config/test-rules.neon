@@ -1,3 +1,2 @@
 rules:
     - Symplify\PHPStanRules\Rules\NoConstructorInTestRule
-    - Symplify\PHPStanRules\Rules\CheckNotTestsNamespaceOutsideTestsDirectoryRule
