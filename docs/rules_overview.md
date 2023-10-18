@@ -1,4 +1,4 @@
-# 56 Rules Overview
+# 55 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -89,52 +89,6 @@ class Baz
 namespace Foo\Bar;
 
 class Baz
-{
-}
-```
-
-:+1:
-
-<br>
-
-## CheckNotTestsNamespaceOutsideTestsDirectoryRule
-
-"*Test.php" file cannot be located outside "Tests" namespace
-
-- class: [`Symplify\PHPStanRules\Rules\CheckNotTestsNamespaceOutsideTestsDirectoryRule`](../src/Rules/CheckNotTestsNamespaceOutsideTestsDirectoryRule.php)
-
-```php
-// file: "SomeTest.php
-namespace App;
-
-class SomeTest
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-// file: "SomeTest.php
-namespace App\Tests;
-
-class SomeTest
-{
-}
-
-// file: "AnotherTest.php
-namespace App\Tests\Features;
-
-class AnotherTest
-{
-}
-
-// file: "SomeOtherTest.php
-namespace Tests\Features;
-
-class SomeOtherTest
 {
 }
 ```
@@ -1458,7 +1412,7 @@ Do not name "%s", shorter than %d chars
 
 :wrench: **configure it!**
 
-- class: [`Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoShortNameRule`](../packages/ObjectCalisthenics/Rules/NoShortNameRule.php)
+- class: [`Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoShortNameRule`](../src/ObjectCalisthenics/Rules/NoShortNameRule.php)
 
 ```yaml
 services:
@@ -1947,7 +1901,7 @@ final class SomeException extends Exception
 
 Use invokable controller with `__invoke()` method instead of named action method
 
-- class: [`Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule`](../packages/Symfony/Rules/RequireInvokableControllerRule.php)
+- class: [`Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule`](../src/Symfony/Rules/RequireInvokableControllerRule.php)
 
 ```php
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
