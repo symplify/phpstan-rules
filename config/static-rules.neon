@@ -1,6 +1,8 @@
 rules:
     - Symplify\PHPStanRules\Rules\NoProtectedClassElementRule
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
+    - Symplify\PHPStanRules\Rules\NoStaticPropertyRule
+    - Symplify\PHPStanRules\Rules\NoConstructorInTestRule
 
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule

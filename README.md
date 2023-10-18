@@ -40,10 +40,10 @@ Do you know prepared sets from ECS or Rector? Bunch of rules in single set. We u
 ```yaml
 includes:
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
+    - vendor/symplify/phpstan-rules/config/collector-rules.neon
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
-    - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
-    - vendor/symplify/phpstan-rules/config/test-rules.neon
+    - vendor/symplify/phpstan-rules/config/static-rules.neon
 ```
 
 Pick what you need, drop the rest.
