@@ -24,8 +24,6 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
         __DIR__ . '/config',
         __DIR__ . '/src',
-        __DIR__ . '/packages',
-        __DIR__ . '/packages-tests',
         __DIR__ . '/tests',
     ]);
 

@@ -9,10 +9,8 @@ parameters:
         - src
         - config
         - tests
-        - packages
-        - packages-tests
 
-    # reportUnmatchedIgnoredErrors: false
+    reportUnmatchedIgnoredErrors: false
 
     excludePaths:
         # parallel
@@ -22,8 +20,6 @@ parameters:
         - '*/tests/**/Source/*'
         - '*/tests/**/Fixture/*'
         - */stubs/*
-        - */packages-tests/**/Fixture/*
-        - */packages-tests/**/Source/*
 
     ignoreErrors:
         -

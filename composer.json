@@ -36,10 +36,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Symplify\\PHPStanRules\\Tests\\": [
-                "tests",
-                "packages-tests"
-            ]
+            "Symplify\\PHPStanRules\\Tests\\": "tests"
         },
         "classmap": [
             "stubs"
