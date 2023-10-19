@@ -58,7 +58,6 @@ services:
             forbiddenNodes:
                 - PhpParser\Node\Expr\Empty_
                 - PhpParser\Node\Stmt\Switch_
-                - PhpParser\Node\Expr\ErrorSuppress
 ```
 
 <br>
