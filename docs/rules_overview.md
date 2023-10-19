@@ -1,4 +1,4 @@
-# 50 Rules Overview
+# 49 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1275,34 +1275,6 @@ function is()
 ```php
 function isClass()
 {
-}
-```
-
-:+1:
-
-<br>
-
-## NoStaticPropertyRule
-
-Do not use static property
-
-- class: [`Symplify\PHPStanRules\Rules\NoStaticPropertyRule`](../src/Rules/NoStaticPropertyRule.php)
-
-```php
-final class SomeClass
-{
-    private static $customFileNames = [];
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    private $customFileNames = [];
 }
 ```
 
