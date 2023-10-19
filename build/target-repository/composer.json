@@ -19,9 +19,6 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-main": "11.1-dev"
-        },
         "phpstan": {
             "includes": [
                 "config/services/services.neon"
