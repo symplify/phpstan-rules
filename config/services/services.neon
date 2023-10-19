@@ -29,7 +29,6 @@ services:
     - Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
     - Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
-    - Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
     - Symplify\PHPStanRules\PhpDoc\ClassReferencePhpDocNodeVisitor
     - Symplify\PHPStanRules\PhpDoc\PhpDocNodeTraverser\ClassReferencePhpDocNodeTraverser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver
