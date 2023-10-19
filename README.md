@@ -18,23 +18,9 @@ composer require symplify/phpstan-rules --dev
 
 <br>
 
-## 1. Add Static Rules to `phpstan.neon`
+## 1. Add Prepared Sets
 
-We recommend to start with rules that do not require any configuration, because there is exactly 1 way to use them:
-
-```yaml
-# phpstan.neon
-includes:
-    - vendor/symplify/phpstan-rules/config/static-rules.neon
-```
-
-Give it couple of days, before extending.
-
-<br>
-
-## 2. Pick from Prepared Sets
-
-Do you know prepared sets from ECS or Rector? Bunch of rules in single set. We use the same approach here:
+Sets are bunch of rules grouped by a common area, e.g. improve naming. You can pick from 5 sets:
 
 ```yaml
 includes:
@@ -45,13 +31,13 @@ includes:
     - vendor/symplify/phpstan-rules/config/static-rules.neon
 ```
 
-Pick what you need, drop the rest.
+Add sets one by one, fix what you find useful and ignore the rest.
 
 <br>
 
-## 3. How we use Configurable Rules
+## 2. Cherry-pick Configurable Rules
 
-The configurable set contains rules with *saints defaults*.
+There is one set with pre-configured configurable rules. Include it and see what is errors are found:
 
 ```yaml
 # phpstan.neon
@@ -59,7 +45,9 @@ includes:
     - vendor/symplify/phpstan-rules/config/configurable-rules.neon
 ```
 
-Would you like to **tailor it to fit your taste**? Pick one and put it to your `phpstan.neon` manually ↓
+<br>
+
+Would you like to **tailor it to fit your taste**? Pick one PHPStan rule and configure it manually ↓
 
 ```yaml
 services:
