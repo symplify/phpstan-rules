@@ -7,15 +7,12 @@
         "php": "^7.2|^8.0",
         "nikic/php-parser": "^4.17.1",
         "nette/utils": "^3.2 || ^4.0",
-        "phpstan/phpstan": "^1.10",
-        "webmozart/assert": "^1.10.30"
+        "phpstan/phpstan": "^1.10.30",
+        "webmozart/assert": "^1.11"
     },
     "autoload": {
         "psr-4": {
-            "Symplify\\PHPStanRules\\": [
-                "src",
-                "packages"
-            ]
+            "Symplify\\PHPStanRules\\": "src"
         }
     },
     "extra": {
@@ -24,7 +21,5 @@
                 "config/services/services.neon"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
