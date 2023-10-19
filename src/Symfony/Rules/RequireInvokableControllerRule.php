@@ -27,11 +27,6 @@ final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterf
      */
     public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
 
-    public function __construct(
-        private readonly SymfonyControllerAnalyzer $symfonyControllerAnalyzer
-    ) {
-    }
-
     /**
      * @return class-string<Node>
      */
@@ -58,7 +53,7 @@ final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterf
 
         $classLike = $node->getOriginalNode();
         foreach ($classLike->getMethods() as $classMethod) {
-            if (! $this->symfonyControllerAnalyzer->isControllerActionMethod($classMethod)) {
+            if (! SymfonyControllerAnalyzer::isControllerActionMethod($classMethod)) {
                 continue;
             }
 

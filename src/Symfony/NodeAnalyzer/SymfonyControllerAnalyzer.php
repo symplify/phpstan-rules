@@ -15,18 +15,15 @@ final class SymfonyControllerAnalyzer
      */
     private const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
 
-    public function __construct(
-        private readonly AttributeFinder $attributeFinder
-    ) {
-    }
-
-    public function isControllerActionMethod(ClassMethod $classMethod): bool
+    public static function isControllerActionMethod(ClassMethod $classMethod): bool
     {
+        $attributeFinder = new AttributeFinder();
+
         if (! $classMethod->isPublic()) {
             return false;
         }
 
-        if ($this->attributeFinder->hasAttribute($classMethod, self::ROUTE_ATTRIBUTE)) {
+        if ($attributeFinder->hasAttribute($classMethod, self::ROUTE_ATTRIBUTE)) {
             return true;
         }
 
