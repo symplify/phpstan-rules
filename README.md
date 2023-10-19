@@ -14,7 +14,7 @@ Set of rules for PHPStan used by Symplify projects
 composer require symplify/phpstan-rules --dev
 ```
 
-*Note: Make sure you use [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer) to load necessary service configs.*
+*Note: Make sure you use [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer#usage) to load necessary service configs.*
 
 <br>
 
