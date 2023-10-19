@@ -1,7 +1,6 @@
 rules:
     - Symplify\PHPStanRules\Rules\NoProtectedClassElementRule
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
-    - Symplify\PHPStanRules\Rules\NoConstructorInTestRule
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
 
     # domain

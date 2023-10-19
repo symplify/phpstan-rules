@@ -1,4 +1,4 @@
-# 49 Rules Overview
+# 48 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -680,40 +680,6 @@ class SomeClass
     public function run(MagicArrayObject $magicArrayObject)
     {
         return $magicArrayObject->getExplicitValue();
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## NoConstructorInTestRule
-
-Do not use constructor in tests. Move to `setUp()` method
-
-- class: [`Symplify\PHPStanRules\Rules\NoConstructorInTestRule`](../src/Rules/NoConstructorInTestRule.php)
-
-```php
-final class SomeTest
-{
-    public function __construct()
-    {
-        // ...
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeTest
-{
-    public function setUp()
-    {
-        // ...
     }
 }
 ```

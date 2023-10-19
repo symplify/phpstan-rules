@@ -49,7 +49,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
     ];
 
     /**
-     * @var class-string[]
+     * @var string[]
      */
     private array $parentClasses = [];
 
