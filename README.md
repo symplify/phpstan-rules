@@ -6,6 +6,8 @@ Set of rules for PHPStan used by Symplify projects
 
 - See [Rules Overview](docs/rules_overview.md)
 
+<br>
+
 ## Install
 
 ```bash
