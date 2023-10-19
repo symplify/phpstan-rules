@@ -3,6 +3,7 @@ rules:
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
     - Symplify\PHPStanRules\Rules\NoStaticPropertyRule
     - Symplify\PHPStanRules\Rules\NoConstructorInTestRule
+    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
 
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule

@@ -32,11 +32,6 @@ final class AttributeKey
     public const PHPSTAN_CACHE_PRINTER = 'phpstan_cache_printer';
 
     /**
-     * @var string
-     */
-    public const ASSIGNED_TO = 'assigned_to';
-
-    /**
      * PHPStan @api
      *
      * @var string

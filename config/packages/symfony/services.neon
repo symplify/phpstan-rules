@@ -1,2 +1,0 @@
-services:
-    - Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer

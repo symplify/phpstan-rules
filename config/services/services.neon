@@ -40,8 +40,3 @@ services:
     - Symplify\PHPStanRules\Matcher\Collector\PublicClassMethodMatcher
     - Symplify\PHPStanRules\Matcher\ClassMethodCallReferenceResolver
     - Symplify\PHPStanRules\Printer\CollectorMetadataPrinter
-
-    -
-        class: Symplify\PHPStanRules\NodeVisitor\AssignedToPropertyNodeVisitor
-        tags:
-            - phpstan.parser.richParserNodeVisitor

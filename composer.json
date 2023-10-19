@@ -45,8 +45,7 @@
     "extra": {
         "phpstan": {
             "includes": [
-                "config/services/services.neon",
-                "config/packages/symfony/services.neon"
+                "config/services/services.neon"
             ]
         }
     },

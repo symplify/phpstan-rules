@@ -1,15 +1,7 @@
 includes:
-    # 1. basic static sets
-    - static-rules.neon
-
-    # 2. prepared sets
     - code-complexity-rules.neon
-    - forbidden-static-rules.neon
-    - regex-rules.neon
-    - packages/symfony/symfony-rules.neon
-    - test-rules.neon
-    - naming-rules.neon
     - collector-rules.neon
-
-    # 3. custom symplify configuratoin
     - configurable-rules.neon
+    - naming-rules.neon
+    - regex-rules.neon
+    - static-rules.neon
