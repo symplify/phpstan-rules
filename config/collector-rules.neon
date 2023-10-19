@@ -1,7 +1,6 @@
 # these rule focus on the whole-project analysis, see https://phpstan.org/developing-extensions/collectors
 rules:
     - Symplify\PHPStanRules\Rules\NarrowType\NarrowPublicClassMethodParamTypeByCallerTypeRule
-    - Symplify\PHPStanRules\Rules\Complexity\NoDuplicatedTraitMethodNameRule
 
 services:
     # for NarrowPublicClassMethodParamTypeByCallerTypeRule
@@ -11,8 +10,4 @@ services:
 
     -
         class: Symplify\PHPStanRules\Collector\MethodCall\MethodCallArgTypesCollector
-        tags: [phpstan.collector]
-
-    -
-        class: Symplify\PHPStanRules\Collector\ClassLike\TraitMethodNameCollector
         tags: [phpstan.collector]
