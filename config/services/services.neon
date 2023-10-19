@@ -3,7 +3,6 @@ services:
 
     - Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser
     - Symplify\PHPStanRules\PhpDocParser\PhpDocNodeTraverser
-    - Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser
     - Symplify\PHPStanRules\Reflection\ReflectionParser
     - Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
     - Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
@@ -29,9 +28,6 @@ services:
     - Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
     - Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
-    - Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
-    - Symplify\PHPStanRules\PhpDoc\ClassReferencePhpDocNodeVisitor
-    - Symplify\PHPStanRules\PhpDoc\PhpDocNodeTraverser\ClassReferencePhpDocNodeTraverser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver
     - Symplify\PHPStanRules\Printer\NodeComparator
     - Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
