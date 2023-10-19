@@ -1,4 +1,4 @@
-# 51 Rules Overview
+# 50 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -770,52 +770,6 @@ namespace App\Nested;
 
 class AnotherClass
 {
-}
-```
-
-:+1:
-
-<br>
-
-## NoDuplicatedTraitMethodNameRule
-
-Method name `"%s()"` is used in multiple traits. Make it unique to avoid conflicts
-
-- class: [`Symplify\PHPStanRules\Rules\Complexity\NoDuplicatedTraitMethodNameRule`](../src/Rules/Complexity/NoDuplicatedTraitMethodNameRule.php)
-
-```php
-trait FirstTrait
-{
-    public function run()
-    {
-    }
-}
-
-trait SecondTrait
-{
-    public function run()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-trait FirstTrait
-{
-    public function run()
-    {
-    }
-}
-
-trait SecondTrait
-{
-    public function fly()
-    {
-    }
 }
 ```
 
