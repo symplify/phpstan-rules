@@ -12,9 +12,13 @@ Set of rules for PHPStan used by Symplify projects
 composer require symplify/phpstan-rules --dev
 ```
 
+*Note: Make sure you use [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer) to load necessary service configs.*
+
+<br>
+
 ## 1. Add Static Rules to `phpstan.neon`
 
-Some of rules here require configuration, some not. We recommend to start with rules that do not require any configuration, because there is just one way to use them:
+We recommend to start with rules that do not require any configuration, because there is exactly 1 way to use them:
 
 ```yaml
 # phpstan.neon
@@ -25,13 +29,6 @@ includes:
 Give it couple of days, before extending.
 
 <br>
-
-Some rules require extra services. To avoid service duplications, they're in the separate config that you can easily include:
-
-```yaml
-includes:
-    - vendor/symplify/phpstan-rules/config/services/services.neon
-```
 
 ## 2. Pick from Prepared Sets
 
@@ -48,9 +45,11 @@ includes:
 
 Pick what you need, drop the rest.
 
+<br>
+
 ## 3. How we use Configurable Rules
 
-Last but not least, configurable rules with *saints defaults*:
+The configurable set contains rules with *saints defaults*.
 
 ```yaml
 # phpstan.neon
@@ -58,12 +57,7 @@ includes:
     - vendor/symplify/phpstan-rules/config/configurable-rules.neon
 ```
 
-Would you like to **configure them yourself?**
-
-- **Pick one and put it to your `phpstan.neon` manually**.
-- Configure it to your specific needs and re-run PHPStan.
-
-E.g. `ForbiddenNodeRule`:
+Would you like to **tailor it to fit your taste**? Pick one and put it to your `phpstan.neon` manually ↓
 
 ```yaml
 services:
