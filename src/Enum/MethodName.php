@@ -9,10 +9,5 @@ final class MethodName
     /**
      * @var string
      */
-    public const CONSTRUCTOR = '__construct';
-
-    /**
-     * @var string
-     */
     public const INVOKE = '__invoke';
 }
