@@ -1,4 +1,4 @@
-# 52 Rules Overview
+# 51 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1420,60 +1420,6 @@ final class SomeClass
     public function getData(): array
     {
         // ...
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## PreferredAttributeOverAnnotationRule
-
-Use attribute instead of "%s" annotation
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\PreferredAttributeOverAnnotationRule`](../src/Rules/PreferredAttributeOverAnnotationRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\PreferredAttributeOverAnnotationRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            annotations:
-                - Symfony\Component\Routing\Annotation\Route
-```
-
-↓
-
-```php
-use Symfony\Component\Routing\Annotation\Route;
-
-class SomeController
-{
-    /**
-     * @Route()
-     */
-    public function action()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\Routing\Annotation\Route;
-
-class SomeController
-{
-    #[Route]
-    public function action()
-    {
     }
 }
 ```
