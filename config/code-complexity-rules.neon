@@ -1,7 +1,6 @@
 rules:
     - Symplify\PHPStanRules\Rules\Explicit\NoMixedPropertyFetcherRule
     - Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule
-    - Symplify\PHPStanRules\Rules\Complexity\NoAbstractRule
     - Symplify\PHPStanRules\Rules\Enum\RequireEnumDocBlockOnConstantListPassRule
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
     - Symplify\PHPStanRules\Rules\Explicit\NoRelativeFilePathRule
