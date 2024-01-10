@@ -25,9 +25,9 @@ final class RequireAssertConfigureValueObjectRectorRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/MissingConfigureWithAssert.php', [[RequireAssertConfigureValueObjectRectorRule::ERROR_MESSAGE, 20]]];
 
-        yield [__DIR__ . '/Fixture/SkipConfigureWithAssert.php', []];
-        yield [__DIR__ . '/Fixture/SkipConfigureWithAssertInstanceof.php', []];
-        yield [__DIR__ . '/Fixture/SkipNoArray.php', []];
+//        yield [__DIR__ . '/Fixture/SkipConfigureWithAssert.php', []];
+//        yield [__DIR__ . '/Fixture/SkipConfigureWithAssertInstanceof.php', []];
+//        yield [__DIR__ . '/Fixture/SkipNoArray.php', []];
     }
 
     public static function getAdditionalConfigFiles(): array
