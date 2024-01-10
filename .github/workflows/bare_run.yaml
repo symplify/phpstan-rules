@@ -1,19 +1,18 @@
-
 name: Bare Run on various PHP versions
 
-on: [pull_request, push]
 on:
     push:
-        tags:
-            - '*.72'
+        branches:
+            - main
 
 jobs:
     bare_run:
         runs-on: ubuntu-latest
+
         strategy:
             fail-fast: false
             matrix:
-                php_version: ['7.2', '7.3', '7.4', '8.0']
+                php_version: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
 
         steps:
             -   uses: actions/checkout@v3
@@ -23,4 +22,11 @@ jobs:
                 with:
                     php-version: ${{ matrix.php_version }}
                     coverage: none
-            -   run: php bin/monorepo-builder list --ansi
+
+            -   run: mkdir nested-dir
+
+            -   run: composer require symplify/phpstan-rules --dev --ansi
+                working-directory: nested-dir
+
+            -   run: vendor/bin/ecs list --ansi
+                working-directory: nested-dir
