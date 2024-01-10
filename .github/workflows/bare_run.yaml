@@ -27,6 +27,3 @@ jobs:
 
             -   run: composer require symplify/phpstan-rules --dev --ansi
                 working-directory: nested-dir
-
-            -   run: vendor/bin/ecs list --ansi
-                working-directory: nested-dir
