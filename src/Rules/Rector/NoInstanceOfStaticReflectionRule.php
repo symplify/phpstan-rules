@@ -10,10 +10,8 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\Instanceof_;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Type\Constant\ConstantStringType;
-use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
 
@@ -79,15 +77,14 @@ final class NoInstanceOfStaticReflectionRule implements Rule
         return $scope->getType($typeArgValue);
     }
 
-    private function resolveInstanceOfType(Instanceof_ $instanceof, Scope $scope): Type
+    private function resolveInstanceOfType(Instanceof_ $instanceof, Scope $scope): ?Type
     {
         if ($instanceof->class instanceof Name) {
             $className = $instanceof->class->toString();
+
+            // skip self as allowed
             if ($className === 'self') {
-                $classReflection = $scope->getClassReflection();
-                if ($classReflection instanceof ClassReflection) {
-                    return new ObjectType($classReflection->getName(), null, $classReflection);
-                }
+                return null;
             }
 
             return new ConstantStringType($instanceof->class->toString());

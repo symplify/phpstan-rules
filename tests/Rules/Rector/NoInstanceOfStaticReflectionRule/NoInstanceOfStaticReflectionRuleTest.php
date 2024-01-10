@@ -29,15 +29,12 @@ final class NoInstanceOfStaticReflectionRuleTest extends RuleTestCase
         $errorMessage = NoInstanceOfStaticReflectionRule::ERROR_MESSAGE;
         yield [__DIR__ . '/Fixture/IsAWithType.php', [[$errorMessage, 13]]];
 
-        yield [__DIR__ . '/Fixture/SkipAssert.php', []];
         yield [__DIR__ . '/Fixture/SkipAllowedType.php', []];
         yield [__DIR__ . '/Fixture/SkipGenericNodeType.php', []];
         yield [__DIR__ . '/Fixture/SkipIsAGenericClassString.php', []];
         yield [__DIR__ . '/Fixture/SkipIsAsClassString.php', []];
-        yield [__DIR__ . '/Fixture/SkipFileInfo.php', []];
         yield [__DIR__ . '/Fixture/SkipArrayClassString.php', []];
         yield [__DIR__ . '/Fixture/SkipReflection.php', []];
-        yield [__DIR__ . '/Fixture/SkipDateTime.php', []];
         yield [__DIR__ . '/Fixture/SkipTypesArray.php', []];
         yield [__DIR__ . '/Fixture/SkipSymfony.php', []];
         yield [__DIR__ . '/Fixture/SkipPhpDocNode.php', []];

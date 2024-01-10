@@ -20,7 +20,7 @@ use PHPStan\Type\TypeWithClassName;
 use Webmozart\Assert\Assert;
 
 /**
- * @see \Rector\PHPStanRules\Tests\Rule\RequireAssertConfigureValueObjectRectorRule\RequireAssertConfigureValueObjectRectorRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Rector\RequireAssertConfigureValueObjectRectorRule\RequireAssertConfigureValueObjectRectorRuleTest
  *
  * @implements Rule<ClassMethod>
  */
@@ -31,7 +31,7 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
      */
     public const ERROR_MESSAGE = 'Method configure() with passed value object must contain assert to verify passed type';
 
-    private NodeFinder $nodeFinder;
+    private readonly NodeFinder $nodeFinder;
 
     public function __construct(
     ) {

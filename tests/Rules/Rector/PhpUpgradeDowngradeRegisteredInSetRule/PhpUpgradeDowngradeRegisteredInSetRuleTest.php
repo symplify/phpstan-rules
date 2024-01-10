@@ -40,7 +40,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
             SomePhpFeature2Rector::class,
             'downgrade-php80.php'
         );
-        yield [__DIR__ . '/Fixture/DowngradePhp80/SomePhpFeature2Rector.php', [[$errorMessage, 10]]];
+        yield [__DIR__ . '/Fixture/DowngradePhp80/SomePhpFeature2Rector.php', [[$errorMessage, 12]]];
     }
 
     public static function getAdditionalConfigFiles(): array

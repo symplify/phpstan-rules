@@ -1,4 +1,4 @@
-c# PHPStan Rules
+# PHPStan Rules
 
 [![Downloads](https://img.shields.io/packagist/dt/symplify/phpstan-rules.svg?style=flat-square)](https://packagist.org/packages/symplify/phpstan-rules/stats)
 

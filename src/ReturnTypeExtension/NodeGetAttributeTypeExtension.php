@@ -6,7 +6,10 @@ namespace Symplify\PHPStanRules\ReturnTypeExtension;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -16,6 +19,7 @@ use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
+use Rector\NodeTypeResolver\Node\AttributeKey;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\ReturnTypeExtension\NodeGetAttributeTypeExtension\NodeGetAttributeTypeExtensionTest
@@ -27,9 +31,9 @@ final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExte
      */
     private const ARGUMENT_KEY_TO_RETURN_TYPE = [
         'scope' => Scope::class,
-        'Rector\NodeTypeResolver\Node\AttributeKey::SCOPE' => Scope::class,
+        AttributeKey::class . '::SCOPE' => Scope::class,
         'originalNode' => Node::class,
-        'Rector\NodeTypeResolver\Node\AttributeKey::ORIGINAL_NODE' => Node::class,
+        AttributeKey::class . '::ORIGINAL_NODE' => Node::class,
     ];
 
     public function getClass(): string
@@ -51,7 +55,7 @@ final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExte
 
         $firstArg = $methodCall->getArgs()[0];
 
-        $argumentValue = $this->resolveArgumentValue($firstArg->value, $scope);
+        $argumentValue = $this->resolveArgumentValue($firstArg->value);
         if ($argumentValue === null) {
             return $returnType;
         }
@@ -64,18 +68,18 @@ final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExte
         return new UnionType([new ObjectType($knownReturnType), new NullType()]);
     }
 
-    private function resolveArgumentValue(Expr $expr, Scope $scope): ?string
+    private function resolveArgumentValue(Expr $expr): ?string
     {
         if ($expr instanceof String_) {
             return $expr->value;
         }
 
-        if ($expr instanceof Expr\ClassConstFetch) {
-            if (! $expr->class instanceof Node\Name\FullyQualified) {
+        if ($expr instanceof ClassConstFetch) {
+            if (! $expr->class instanceof FullyQualified) {
                 return null;
             }
 
-            if (! $expr->name instanceof Node\Identifier) {
+            if (! $expr->name instanceof Identifier) {
                 return null;
             }
 

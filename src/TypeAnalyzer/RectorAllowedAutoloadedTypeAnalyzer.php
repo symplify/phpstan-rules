@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\TypeAnalyzer;
 
-use DateTimeInterface;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\PhpDocParser\Ast\Node as PhpDocNode;
@@ -26,7 +25,6 @@ final class RectorAllowedAutoloadedTypeAnalyzer
      * @var array<string>
      */
     private const ALLOWED_CLASSES = [
-        DateTimeInterface::class,
         Node::class,
         PhpDocNode::class,
     ];

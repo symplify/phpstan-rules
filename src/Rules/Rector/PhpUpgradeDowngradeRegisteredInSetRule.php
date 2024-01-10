@@ -11,6 +11,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
+use Rector\Contract\Rector\ConfigurableRectorInterface;
+use Rector\Contract\Rector\RectorInterface;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Set\ValueObject\SetList;
 use SplFileInfo;
@@ -106,12 +108,12 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return null;
         }
 
-        if (! $classReflection->implementsInterface('Rector\Contract\Rector\RectorInterface')) {
+        if (! $classReflection->isSubclassOf(RectorInterface::class)) {
             return null;
         }
 
         // configurable Rector can be registered optionally
-        if ($classReflection->implementsInterface('Rector\Contract\Rector\ConfigurableRectorInterface')) {
+        if ($classReflection->isSubclassOf(ConfigurableRectorInterface::class)) {
             return null;
         }
 

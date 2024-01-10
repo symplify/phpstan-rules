@@ -32,6 +32,12 @@
         },
         "classmap": [
             "stubs"
+        ],
+        "files": [
+            "tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/Fixture/SomePhpFeatureRector.php",
+            "vendor/rector/rector/src/Contract/Rector/RectorInterface.php",
+            "vendor/rector/rector/src/Contract/Rector/ConfigurableRectorInterface.php",
+            "vendor/rector/rector/vendor/rector/rector-downgrade-php/src/Set/ValueObject/DowngradeSetList.php"
         ]
     },
     "extra": {
