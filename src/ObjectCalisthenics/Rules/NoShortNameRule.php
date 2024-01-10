@@ -24,22 +24,30 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\PHPStanRules\Tests\ObjectCalisthenics\Rules\NoShortNameRule\NoShortNameRuleTest
  */
-final class NoShortNameRule extends AbstractSymplifyRule implements ConfigurableRuleInterface
+final class NoShortNameRule extends AbstractSymplifyRule
 {
+    /**
+     * @readonly
+     * @var int
+     */
+    private $minNameLength;
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private $allowedShortNames = ['i', 'j', 'y', 'z'];
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not name "%s", shorter than %d chars';
-
     /**
      * @param string[] $allowedShortNames
      */
-    public function __construct(
-        private readonly int $minNameLength,
-        private readonly array $allowedShortNames = ['i', 'j', 'y', 'z']
-    ) {
+    public function __construct(int $minNameLength, array $allowedShortNames = ['i', 'j', 'y', 'z'])
+    {
+        $this->minNameLength = $minNameLength;
+        $this->allowedShortNames = $allowedShortNames;
     }
-
     /**
      * @return array<class-string<Node>>
      */
@@ -55,7 +63,6 @@ final class NoShortNameRule extends AbstractSymplifyRule implements Configurable
             Param::class,
         ];
     }
-
     /**
      * @param ClassLike|Function_|ClassMethod|Const_|PropertyProperty|Variable|Param $node
      * @return array<int, string>
@@ -82,7 +89,6 @@ final class NoShortNameRule extends AbstractSymplifyRule implements Configurable
         $errorMessage = sprintf(self::ERROR_MESSAGE, $name, $this->minNameLength);
         return [$errorMessage];
     }
-
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [
@@ -105,7 +111,6 @@ CODE_SAMPLE
             ),
         ]);
     }
-
     /**
      * @return string[]
      */
@@ -123,7 +128,6 @@ CODE_SAMPLE
         $errorMessage = sprintf(self::ERROR_MESSAGE, $variableName, $this->minNameLength);
         return [$errorMessage];
     }
-
     private function isNameValid(string $name): bool
     {
         if (Strings::length($name) >= $this->minNameLength) {
