@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\Rule\NoReturnFalseInNonBoolClassMethodRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\Rector\NoReturnFalseInNonBoolClassMethodRule\Fixture;
 
 final class SkipReturnBool
 {

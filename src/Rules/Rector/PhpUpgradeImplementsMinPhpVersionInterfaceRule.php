@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\PHPStanRules\Rule;
+namespace Symplify\PHPStanRules\Rules\Rector;
 
 use Nette\Utils\Strings;
 use PhpParser\Node;

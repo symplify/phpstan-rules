@@ -1,15 +1,17 @@
-includes:
-    - services.neon
-
 rules:
-    - Rector\PHPStanRules\Rule\PhpUpgradeDowngradeRegisteredInSetRule
-    - Rector\PHPStanRules\Rule\PhpUpgradeImplementsMinPhpVersionInterfaceRule
-    - Rector\PHPStanRules\Rule\RequireAssertConfigureValueObjectRectorRule
-    - Rector\PHPStanRules\Rule\NoInstanceOfStaticReflectionRule
-    - Rector\PHPStanRules\Rule\NoLeadingBackslashInNameRule
-    - Rector\PHPStanRules\Rule\NoClassReflectionStaticReflectionRule
+    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule
+    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule
+    - Symplify\PHPStanRules\Rules\Rector\RequireAssertConfigureValueObjectRectorRule
+    - Symplify\PHPStanRules\Rules\Rector\NoInstanceOfStaticReflectionRule
+    - Symplify\PHPStanRules\Rules\Rector\NoLeadingBackslashInNameRule
+    - Symplify\PHPStanRules\Rules\Rector\NoClassReflectionStaticReflectionRule
 
 services:
+    # $node->getAttribute($1) => Type|null by $1
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\NodeGetAttributeTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
         tags: [phpstan.rules.rule]
@@ -25,7 +27,6 @@ services:
         tags: [phpstan.rules.rule]
         arguments:
             requiredSeeTypes:
-                - PHPStan\Rules\Rule
                 - Rector\Rector\AbstractRector
 
     -
@@ -36,7 +37,6 @@ services:
                 - Rector\Contract\Rector\RectorInterface
                 - Rector\Rector\AbstractRector
                 - Rector\PostRector\Contract\Rector\PostRectorInterface
-                - Rector\Composer\Contract\Rector\ComposerRectorInterface
 
     -
         class: Symplify\PHPStanRules\Rules\PreferredClassRule

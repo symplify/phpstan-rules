@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Rector\PHPStanRules\Rule;
+namespace Symplify\PHPStanRules\Rules\Rector;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use Rector\PHPStanRules\TypeAnalyzer\AllowedAutoloadedTypeAnalyzer;
 use ReflectionClass;
+use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
 
 /**
  * @see \Rector\PHPStanRules\Tests\Rule\NoClassReflectionStaticReflectionRule\NoClassReflectionStaticReflectionRuleTest
@@ -23,11 +23,6 @@ final class NoClassReflectionStaticReflectionRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of "new ClassReflection()" use ReflectionProvider service or "(new PHPStan\Reflection\ClassReflection(<desired_type>))" for static reflection to work';
-
-    public function __construct(
-        private readonly AllowedAutoloadedTypeAnalyzer $allowedAutoloadedTypeAnalyzer
-    ) {
-    }
 
     public function getNodeType(): string
     {
@@ -55,7 +50,7 @@ final class NoClassReflectionStaticReflectionRule implements Rule
         $argValue = $node->getArgs()[0]->value;
         $exprStaticType = $scope->getType($argValue);
 
-        if ($this->allowedAutoloadedTypeAnalyzer->isAllowedType($exprStaticType)) {
+        if (RectorAllowedAutoloadedTypeAnalyzer::isAllowedType($exprStaticType)) {
             return [];
         }
 

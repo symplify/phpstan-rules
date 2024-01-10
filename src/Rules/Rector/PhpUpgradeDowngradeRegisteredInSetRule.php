@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\PHPStanRules\Rule;
+namespace Symplify\PHPStanRules\Rules\Rector;
 
 use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
@@ -11,15 +11,13 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
-use Rector\Contract\Rector\ConfigurableRectorInterface;
-use Rector\Contract\Rector\RectorInterface;
-use Rector\PHPStanRules\Exception\ShouldNotHappenException;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Set\ValueObject\SetList;
 use SplFileInfo;
+use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 
 /**
- * @see \Rector\PHPStanRules\Tests\Rule\PhpUpgradeDowngradeRegisteredInSetRule\PhpUpgradeDowngradeRegisteredInSetRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\PhpUpgradeDowngradeRegisteredInSetRuleTest
  *
  * @implements Rule<InClassNode>
  */
@@ -68,9 +66,6 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         return [$errorMessage];
     }
 
-    /**
-     * @param class-string<RectorInterface> $className
-     */
     private function resolveRelatedConfigFilePath(string $className): ?string
     {
         $match = Strings::match($className, self::DOWNGRADE_PREFIX_REGEX);
@@ -96,9 +91,6 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         return $resolvedValue;
     }
 
-    /**
-     * @param class-string<RectorInterface> $rectorClass
-     */
     private function createErrorMessage(string $configFilePath, string $rectorClass): string
     {
         $configFileInfo = new SplFileInfo($configFilePath);
@@ -107,9 +99,6 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         return sprintf(self::ERROR_MESSAGE, $rectorClass, $configFilename);
     }
 
-    /**
-     * @return class-string<RectorInterface>|null
-     */
     private function matchRectorClassName(Scope $scope): ?string
     {
         $classReflection = $scope->getClassReflection();
@@ -117,12 +106,12 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return null;
         }
 
-        if (! $classReflection->implementsInterface(RectorInterface::class)) {
+        if (! $classReflection->implementsInterface('Rector\Contract\Rector\RectorInterface')) {
             return null;
         }
 
         // configurable Rector can be registered optionally
-        if ($classReflection->implementsInterface(ConfigurableRectorInterface::class)) {
+        if ($classReflection->implementsInterface('Rector\Contract\Rector\ConfigurableRectorInterface')) {
             return null;
         }
 

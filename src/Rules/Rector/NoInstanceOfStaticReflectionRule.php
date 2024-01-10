@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\PHPStanRules\Rule;
+namespace Symplify\PHPStanRules\Rules\Rector;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr;
@@ -15,12 +15,12 @@ use PHPStan\Rules\Rule;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
-use Rector\PHPStanRules\TypeAnalyzer\AllowedAutoloadedTypeAnalyzer;
+use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
 
 /**
  * @see https://github.com/rectorphp/rector/issues/5906
  *
- * @see \Rector\PHPStanRules\Tests\Rule\NoInstanceOfStaticReflectionRule\NoInstanceOfStaticReflectionRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Rector\NoInstanceOfStaticReflectionRule\NoInstanceOfStaticReflectionRuleTest
  *
  * @implements Rule<Expr>
  */
@@ -30,11 +30,6 @@ final class NoInstanceOfStaticReflectionRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of "instanceof/is_a()" use ReflectionProvider service or "(new ObjectType(<desired_type>))->isSuperTypeOf(<element_type>)" for static reflection to work';
-
-    public function __construct(
-        private readonly AllowedAutoloadedTypeAnalyzer $allowedAutoloadedTypeAnalyzer
-    ) {
-    }
 
     /**
      * @return class-string<Node>
@@ -59,7 +54,7 @@ final class NoInstanceOfStaticReflectionRule implements Rule
             return [];
         }
 
-        if ($this->allowedAutoloadedTypeAnalyzer->isAllowedType($exprStaticType)) {
+        if (RectorAllowedAutoloadedTypeAnalyzer::isAllowedType($exprStaticType)) {
             return [];
         }
 

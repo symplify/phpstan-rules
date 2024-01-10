@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\PHPStanRules\TypeAnalyzer;
+namespace Symplify\PHPStanRules\TypeAnalyzer;
 
 use DateTimeInterface;
 use Nette\Utils\Strings;
@@ -14,7 +14,7 @@ use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
 
-final class AllowedAutoloadedTypeAnalyzer
+final class RectorAllowedAutoloadedTypeAnalyzer
 {
     /**
      * @see https://regex101.com/r/BBm9bf/1
@@ -31,11 +31,11 @@ final class AllowedAutoloadedTypeAnalyzer
         PhpDocNode::class,
     ];
 
-    public function isAllowedType(Type $type): bool
+    public static function isAllowedType(Type $type): bool
     {
         if ($type instanceof UnionType) {
             foreach ($type->getTypes() as $unionedType) {
-                if (! $this->isAllowedType($unionedType)) {
+                if (! self::isAllowedType($unionedType)) {
                     return false;
                 }
             }
@@ -44,21 +44,21 @@ final class AllowedAutoloadedTypeAnalyzer
         }
 
         if ($type instanceof ConstantStringType) {
-            return $this->isAllowedClassString($type->getValue());
+            return self::isAllowedClassString($type->getValue());
         }
 
         if ($type instanceof ObjectType) {
-            return $this->isAllowedClassString($type->getClassName());
+            return self::isAllowedClassString($type->getClassName());
         }
 
         if ($type instanceof GenericClassStringType) {
-            return $this->isAllowedType($type->getGenericType());
+            return self::isAllowedType($type->getGenericType());
         }
 
         return false;
     }
 
-    private function isAllowedClassString(string $value): bool
+    private static function isAllowedClassString(string $value): bool
     {
         // autoloaded allowed type
         if (Strings::match($value, self::AUTOLOADED_CLASS_PREFIX_REGEX) !== null) {

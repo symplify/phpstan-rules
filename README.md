@@ -1,4 +1,4 @@
-# PHPStan Rules
+c# PHPStan Rules
 
 [![Downloads](https://img.shields.io/packagist/dt/symplify/phpstan-rules.svg?style=flat-square)](https://packagist.org/packages/symplify/phpstan-rules/stats)
 
@@ -34,6 +34,13 @@ includes:
 Add sets one by one, fix what you find useful and ignore the rest.
 
 <br>
+
+Do you write custom [Rector](http://github.com/rectorphp/rector-src) rules? Add rules for them too:
+
+```yaml
+includes:
+    - vendor/symplify/phpstan-rules/config/rector-rules.neon
+```
 
 ## 2. Cherry-pick Configurable Rules
 

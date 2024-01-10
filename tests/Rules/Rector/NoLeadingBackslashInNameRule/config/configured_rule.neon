@@ -1,0 +1,5 @@
+includes:
+    - ../../../config/shared_services.neon
+
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\NoLeadingBackslashInNameRule

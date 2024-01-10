@@ -1,5 +1,0 @@
-includes:
-    - ../../../config/shared_services.neon
-
-rules:
-    - Rector\PHPStanRules\Rule\RequireAssertConfigureValueObjectRectorRule

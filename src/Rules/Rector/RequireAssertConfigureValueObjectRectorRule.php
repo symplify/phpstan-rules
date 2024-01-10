@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rector\PHPStanRules\Rule;
+namespace Symplify\PHPStanRules\Rules\Rector;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\StaticCall;
@@ -31,9 +31,11 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
      */
     public const ERROR_MESSAGE = 'Method configure() with passed value object must contain assert to verify passed type';
 
+    private NodeFinder $nodeFinder;
+
     public function __construct(
-        private readonly NodeFinder $nodeFinder
     ) {
+        $this->nodeFinder = new NodeFinder();
     }
 
     public function getNodeType(): string

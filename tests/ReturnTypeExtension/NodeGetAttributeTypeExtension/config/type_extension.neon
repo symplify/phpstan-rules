@@ -1,0 +1,5 @@
+services:
+    # $node->getAttribute($1) => Type|null by $1
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\NodeGetAttributeTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
