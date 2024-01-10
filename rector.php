@@ -36,6 +36,6 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->ruleWithConfiguration(\Rector\Php55\Rector\String_\StringClassNameToClassConstantRector::class, [
         'Symfony\Component\Console\*',
-        'Illuminate\Console\Command',
+        'Rector\Contract\Rector\ConfigurableRectorInterface',
     ]);
 };

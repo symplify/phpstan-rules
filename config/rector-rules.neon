@@ -1,0 +1,90 @@
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule
+    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule
+    - Symplify\PHPStanRules\Rules\Rector\RequireAssertConfigureValueObjectRectorRule
+    - Symplify\PHPStanRules\Rules\Rector\NoInstanceOfStaticReflectionRule
+    - Symplify\PHPStanRules\Rules\Rector\NoLeadingBackslashInNameRule
+    - Symplify\PHPStanRules\Rules\Rector\NoClassReflectionStaticReflectionRule
+
+services:
+    # $node->getAttribute($1) => Type|null by $1
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\NodeGetAttributeTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            forbiddenNodes:
+                - PhpParser\Node\Expr\ErrorSuppress
+                - PhpParser\Node\Stmt\Switch_
+                - PhpParser\Node\Expr\Empty_
+                - PhpParser\Node\Stmt\Trait_
+
+    -
+        class: Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            requiredSeeTypes:
+                - Rector\Rector\AbstractRector
+
+    -
+        class: Symplify\PHPStanRules\Rules\ClassNameRespectsParentSuffixRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            parentClasses:
+                - Rector\Contract\Rector\RectorInterface
+                - Rector\Rector\AbstractRector
+                - Rector\PostRector\Contract\Rector\PostRectorInterface
+
+    -
+        class: Symplify\PHPStanRules\Rules\PreferredClassRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            oldToPreferredClasses:
+                # prevent PHPStorm autocomplete mess
+                'PHPStan\Node\ClassMethod': 'PhpParser\Node\Stmt\ClassMethod'
+                'Symfony\Component\DependencyInjection\Variable': 'PhpParser\Node\Expr\Variable'
+                'phpDocumentor\Reflection\Types\Expression': 'PhpParser\Node\Stmt\Expression'
+                'phpDocumentor\Reflection\DocBlock\Tags\Param': 'PhpParser\Node\Param'
+                'phpDocumentor\Reflection\DocBlock\Tags\Return_': 'PhpParser\Node\Stmt\Return_'
+                'Closure': 'PhpParser\Node\Expr\Closure'
+                'PHPUnit\TextUI\Configuration\Variable': 'PhpParser\Node\Expr\Variable'
+                'SebastianBergmann\Type\MixedType': 'PHPStan\Type\MixedType'
+                'Hoa\Protocol\Node\Node': 'PhpParser\Node'
+
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            forbiddenFunctions:
+                'dump_node': ''
+
+                'preg_match': 'use "Nette\Utils\Strings::match()" instead'
+                'preg_match_all': 'use "Nette\Utils\Strings::matchAll()" instead'
+                'preg_replace': 'use "Nette\Utils\Strings::replace()" instead'
+
+                # forbid debug
+                'd': ''
+                'dd': ''
+                'dump': ''
+                'var_dump': ''
+                'curl_*': ''
+                'extract': ''
+                'compact': ''
+
+                # autoload magic
+                'spl_autoload_register': ''
+                'spl_autoload_unregister': ''
+
+                # static reflection
+                'class_exists': 'use ReflectionProvider->has*() instead'
+                'interface_exists': 'use ReflectionProvider->has*() instead'
+                'method_exists': 'use ReflectionProvider->has*() instead'
+                'property_exists': 'use ReflectionProvider->has*() instead'
+                'function_exists': 'use ReflectionProvider->has*() instead'
+                'class_parents': 'use ReflectionProvider->has*() instead'
+                'class_implements': 'use ReflectionProvider->has*() instead'
+                'get_parent_class': 'use ReflectionProvider->has*() instead'
+                'get_declared_classes': 'use ReflectionProvider->has*() instead'

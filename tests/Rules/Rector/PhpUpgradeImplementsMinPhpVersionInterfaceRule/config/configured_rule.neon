@@ -1,0 +1,3 @@
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule
+

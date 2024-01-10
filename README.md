@@ -35,6 +35,13 @@ Add sets one by one, fix what you find useful and ignore the rest.
 
 <br>
 
+Do you write custom [Rector](http://github.com/rectorphp/rector-src) rules? Add rules for them too:
+
+```yaml
+includes:
+    - vendor/symplify/phpstan-rules/config/rector-rules.neon
+```
+
 ## 2. Cherry-pick Configurable Rules
 
 There is one set with pre-configured configurable rules. Include it and see what is errors are found:

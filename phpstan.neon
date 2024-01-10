@@ -20,6 +20,7 @@ parameters:
         - '*/tests/**/Source/*'
         - '*/tests/**/Fixture/*'
         - */stubs/*
+        - */Fixture/*
 
     ignoreErrors:
         -
