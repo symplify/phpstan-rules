@@ -24,13 +24,18 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoDynamicNameRule extends AbstractSymplifyRule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer
+     */
+    private $callableTypeAnalyzer;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use explicit names over dynamic ones';
 
-    public function __construct(
-        private readonly CallableTypeAnalyzer $callableTypeAnalyzer,
-    ) {
+    public function __construct(CallableTypeAnalyzer $callableTypeAnalyzer)
+    {
+        $this->callableTypeAnalyzer = $callableTypeAnalyzer;
     }
 
     /**
