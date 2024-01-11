@@ -61,10 +61,6 @@ services:
             forbiddenFunctions:
                 'dump_node': ''
 
-                'preg_match': 'use "Nette\Utils\Strings::match()" instead'
-                'preg_match_all': 'use "Nette\Utils\Strings::matchAll()" instead'
-                'preg_replace': 'use "Nette\Utils\Strings::replace()" instead'
-
                 # forbid debug
                 'd': ''
                 'dd': ''
