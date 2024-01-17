@@ -51,15 +51,6 @@ services:
                 - 'spl_autoload_register'
                 - 'spl_autoload_unregister'
                 - array_walk
-                preg_match: "Use Nette\\Utils\\Strings::match() instead"
-                preg_match_all: "Use Nette\\Utils\\Strings::matchAll() instead"
-                preg_replace: "Use Nette\\Utils\\Strings::replace() instead"
-                preg_replace_callback: "Use Nette\\Utils\\Strings::replace() instead"
-                preg_split: "Use Nette\\Utils\\Strings::split() instead"
-                file_get_contents: "Use Symplify\\SmartFileSystem\\SmartFileSystem::readFile() instead"
-                file_put_contents: "Use Symplify\\SmartFileSystem\\SmartFileSystem::dumpFile() instead"
-                json_encode: "Use Nette\\Utils\\Json::encode() instead"
-                json_decode: "Use Nette\\Utils\\Json::decode() instead"
 
     -
         class: Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule
