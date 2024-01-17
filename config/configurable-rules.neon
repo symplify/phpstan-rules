@@ -31,6 +31,7 @@ services:
         tags: [phpstan.rules.rule]
         arguments:
             oldToPreferredClasses:
+                # prevents typos
                 PHPStan\Node\ClassMethod: 'PhpParser\Node\Stmt\ClassMethod'
                 'PhpCsFixer\Finder': 'Symfony\Component\Finder\Finder'
 
