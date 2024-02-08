@@ -167,7 +167,7 @@ CODE_SAMPLE
             return null;
         }
 
-        $argType = $scope->getType($expr);
+        $argType = $scope->getNativeType($expr);
         if ($argType instanceof MixedType) {
             return null;
         }

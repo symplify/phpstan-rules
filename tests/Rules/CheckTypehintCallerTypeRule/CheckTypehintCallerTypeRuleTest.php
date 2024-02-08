@@ -40,6 +40,7 @@ final class CheckTypehintCallerTypeRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipMayOverrideArg.php', []];
         yield [__DIR__ . '/Fixture/SkipMultipleUsed.php', []];
         yield [__DIR__ . '/Fixture/SkipNotPrivate.php', []];
+        yield [__DIR__ . '/Fixture/SkipPhpdoc.php', []];
 
         $errorMessage = sprintf(CheckTypehintCallerTypeRule::ERROR_MESSAGE, 1, MethodCall::class);
         yield [__DIR__ . '/Fixture/Fixture.php', [[$errorMessage, 19]]];
