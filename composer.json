@@ -5,7 +5,6 @@
     "license": "MIT",
     "require": {
         "php": ">=8.1",
-        "nikic/php-parser": "^4.17.1",
         "nette/utils": "^3.2.9 || ^4.0",
         "webmozart/assert": "^1.11",
         "phpstan/phpstan": "^1.10.30",
@@ -13,6 +12,7 @@
     },
     "require-dev": {
         "symplify/phpstan-extensions": "^11.4",
+        "nikic/php-parser": "^4.17.1 || ^5.0.0",
         "symplify/rule-doc-generator": "^12.0",
         "phpunit/phpunit": "^10.5",
         "symfony/framework-bundle": "6.1.*",
