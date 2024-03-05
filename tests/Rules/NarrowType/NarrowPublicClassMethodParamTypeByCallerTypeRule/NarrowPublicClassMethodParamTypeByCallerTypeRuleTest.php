@@ -29,6 +29,12 @@ final class NarrowPublicClassMethodParamTypeByCallerTypeRuleTest extends RuleTes
     {
         yield [[__DIR__ . '/Fixture/SkipNonPublicClassMethod.php'], []];
 
+        // skip first class callables as anything can be passed there
+        yield [[
+            __DIR__ . '/Fixture/FirstClassCallables/CallVariadics.php',
+            __DIR__ . '/Fixture/FirstClassCallables/SomeCalledMethod.php',
+        ], []];
+
         // skip expected scalar type
         yield [[
             __DIR__ . '/Fixture/SkipProperlyFilledParamType.php',

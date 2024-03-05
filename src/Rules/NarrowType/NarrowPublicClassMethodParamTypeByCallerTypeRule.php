@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\NarrowType;
 
+use Nette\Utils\Arrays;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
@@ -12,6 +13,7 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Collector\ClassMethod\PublicClassMethodParamTypesCollector;
 use Symplify\PHPStanRules\Collector\MethodCall\MethodCallArgTypesCollector;
+use Symplify\PHPStanRules\Collector\MethodCallableNode\MethodCallableCollector;
 use Symplify\PHPStanRules\Enum\Types\ResolvedTypes;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -128,11 +130,20 @@ CODE_SAMPLE
     {
         $methodCallArgTypesByFilePath = $collectedDataNode->get(MethodCallArgTypesCollector::class);
 
+        // these should be skipped completely, as we have no idea what is being passed there
+        $methodCallablesByFilePath = $collectedDataNode->get(MethodCallableCollector::class);
+        $methodFirstClassCallables = Arrays::flatten($methodCallablesByFilePath);
+
         // group call references and types
         $classMethodReferenceToTypes = [];
 
         foreach ($methodCallArgTypesByFilePath as $methodCallArgTypes) {
             foreach ($methodCallArgTypes as [$classMethodReference, $argTypesString]) {
+                // skip it
+                if (in_array($classMethodReference, $methodFirstClassCallables, true)) {
+                    continue;
+                }
+
                 $classMethodReferenceToTypes[$classMethodReference][] = $argTypesString;
             }
         }

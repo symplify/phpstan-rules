@@ -11,3 +11,8 @@ services:
     -
         class: Symplify\PHPStanRules\Collector\MethodCall\MethodCallArgTypesCollector
         tags: [phpstan.collector]
+
+    -
+        class: Symplify\PHPStanRules\Collector\MethodCallableNode\MethodCallableCollector
+        tags:
+            - phpstan.collector
