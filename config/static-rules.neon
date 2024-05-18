@@ -17,7 +17,6 @@ rules:
     - Symplify\PHPStanRules\Rules\NoArrayAccessOnObjectRule
 
     - Symplify\PHPStanRules\Rules\NoNullableArrayPropertyRule
-    - Symplify\PHPStanRules\Rules\BoolishClassMethodPrefixRule
 
     # dead-code
     - Symplify\PHPStanRules\Rules\NoIssetOnObjectRule
