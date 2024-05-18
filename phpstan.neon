@@ -10,7 +10,7 @@ parameters:
         - config
         - tests
 
-    reportUnmatchedIgnoredErrors: false
+    # reportUnmatchedIgnoredErrors: false
 
     excludePaths:
         # parallel
@@ -52,5 +52,4 @@ parameters:
         - '#Method Symplify\\PHPStanRules\\(.*?)\:\:getRule\(\) return type with generic interface PHPStan\\Rules\\Rule does not specify its types\: TNodeType#'
 
         # part of public contract
-        - '#Public constant "Symplify\\PHPStanRules\\(.*?)\:\:ERROR_MESSAGE" is never used#'
         - '#Method Symplify\\PHPStanRules\\Tests\\Rules\\PHPUnit\\(.*?)\\(.*?)Test\:\:testRule\(\) has parameter \$expectedErrorMessagesWithLines with no value type specified in iterable type array#'

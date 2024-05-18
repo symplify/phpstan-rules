@@ -7,7 +7,6 @@ namespace Symplify\PHPStanRules\Tests\Naming;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
 
@@ -33,7 +32,7 @@ final class ClassToSuffixResolverTest extends TestCase
     public static function provideData(): Iterator
     {
         yield ['Exception', 'Exception'];
-        yield [Command::class, 'Command'];
+        yield ['Symfony\Component\Console\Command\Command', 'Command'];
         yield [TestCase::class, 'Test'];
         yield [EventSubscriberInterface::class, 'EventSubscriber'];
     }
