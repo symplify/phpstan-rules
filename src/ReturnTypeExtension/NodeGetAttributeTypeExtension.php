@@ -22,6 +22,7 @@ use PHPStan\Type\UnionType;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 
 /**
+ * @api used in rector rules
  * @see \Symplify\PHPStanRules\Tests\ReturnTypeExtension\NodeGetAttributeTypeExtension\NodeGetAttributeTypeExtensionTest
  */
 final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExtension
