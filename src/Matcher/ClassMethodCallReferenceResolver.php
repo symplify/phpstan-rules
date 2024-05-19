@@ -15,7 +15,10 @@ use Symplify\PHPStanRules\ValueObject\MethodCallReference;
 
 final class ClassMethodCallReferenceResolver
 {
-    public function resolve(MethodCall|MethodCallableNode $methodCallOrMethodCallable, Scope $scope, bool $allowThisType): ?MethodCallReference
+    /**
+     * @param \PhpParser\Node\Expr\MethodCall|\PHPStan\Node\MethodCallableNode $methodCallOrMethodCallable
+     */
+    public function resolve($methodCallOrMethodCallable, Scope $scope, bool $allowThisType): ?MethodCallReference
     {
         if ($methodCallOrMethodCallable instanceof MethodCallableNode) {
             $methodName = $methodCallOrMethodCallable->getName();
