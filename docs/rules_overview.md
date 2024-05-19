@@ -1,4 +1,4 @@
-# 44 Rules Overview
+# 43 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1391,67 +1391,6 @@ namespace App\Attribute;
 #[\Attribute]
 final class SomeAttribute
 {
-}
-```
-
-:+1:
-
-<br>
-
-## RequireEnumDocBlockOnConstantListPassRule
-
-On passing a constant, the method should have an enum type. See https://phpstan.org/writing-php-code/phpdoc-types#literals-and-constants
-
-- class: [`Symplify\PHPStanRules\Rules\Enum\RequireEnumDocBlockOnConstantListPassRule`](../src/Rules/Enum/RequireEnumDocBlockOnConstantListPassRule.php)
-
-```php
-final class Direction
-{
-    public const LEFT = 'left';
-
-    public const RIGHT = 'right';
-}
-
-final class Driver
-{
-    public function goToWork()
-    {
-        $this->turn(Direction::LEFT);
-    }
-
-    private function turn(string $direction)
-    {
-        // ...
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class Direction
-{
-    public const LEFT = 'left';
-
-    public const RIGHT = 'right';
-}
-
-final class Driver
-{
-    public function goToWork()
-    {
-        $this->turn(Direction::LEFT);
-    }
-
-    /**
-     * @param Direction::*
-     */
-    private function turn(string $direction)
-    {
-        // ...
-    }
 }
 ```
 
