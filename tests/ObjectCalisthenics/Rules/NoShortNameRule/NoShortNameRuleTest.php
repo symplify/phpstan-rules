@@ -26,12 +26,14 @@ final class NoShortNameRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipId.php', []];
 
         $errorMessage = sprintf(NoShortNameRule::ERROR_MESSAGE, 'em', 3);
-        $yeErrorMEssage = sprintf(NoShortNameRule::ERROR_MESSAGE, 'YE', 3);
-        yield [__DIR__ . '/Fixture/ShortNamingClass.php', [[$errorMessage, 9], [$yeErrorMEssage, 11]]];
+        $yeErrorMessage = sprintf(NoShortNameRule::ERROR_MESSAGE, 'YE', 3);
+        yield [__DIR__ . '/Fixture/ShortNamingClass.php', [[$errorMessage, 9], [$yeErrorMessage, 11]]];
 
         $errorMessage = sprintf(NoShortNameRule::ERROR_MESSAGE, 'n', 3);
         yield [__DIR__ . '/Fixture/ShortClosureParam.php', [[$errorMessage, 11]]];
         yield [__DIR__ . '/Fixture/ShortParam.php', [[$errorMessage, 9]]];
+
+        yield [__DIR__ . '/Fixture/AllowD.php', []];
 
         $errorMessage = sprintf(NoShortNameRule::ERROR_MESSAGE, 'n', 3);
         yield [

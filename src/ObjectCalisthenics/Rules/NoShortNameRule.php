@@ -36,7 +36,7 @@ final class NoShortNameRule extends AbstractSymplifyRule implements Configurable
      */
     public function __construct(
         private readonly int $minNameLength,
-        private readonly array $allowedShortNames = ['i', 'j', 'y', 'z']
+        private readonly array $allowedShortNames = ['i', 'j', 'y', 'z', 'd', 'dd']
     ) {
     }
 
@@ -129,6 +129,9 @@ CODE_SAMPLE
         if (Strings::length($name) >= $this->minNameLength) {
             return true;
         }
+
+        dump($name);
+        dump(in_array($name, $this->allowedShortNames, true));
 
         return in_array($name, $this->allowedShortNames, true);
     }

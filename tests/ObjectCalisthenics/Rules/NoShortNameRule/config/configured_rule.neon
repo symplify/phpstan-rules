@@ -9,3 +9,4 @@ services:
             minNameLength: 3
             allowedShortNames:
                 - id
+                - d
