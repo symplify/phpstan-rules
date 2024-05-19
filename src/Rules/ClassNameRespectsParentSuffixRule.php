@@ -15,7 +15,6 @@ use PHPStan\Rules\Rule;
 use PHPUnit\Framework\TestCase;
 use Rector\Rector\AbstractRector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
 use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
@@ -37,7 +36,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
      * @var string[]
      */
     private const DEFAULT_PARENT_CLASSES = [
-        Command::class,
+        'Symfony\Component\Console\Command\Command',
         EventSubscriberInterface::class,
         AbstractController::class,
         Sniff::class,
@@ -111,7 +110,7 @@ class SomeCommand extends Command
 CODE_SAMPLE
                 ,
                 [
-                    'parentClasses' => [Command::class],
+                    'parentClasses' => ['Symfony\Component\Console\Command\Command'],
                 ]
             ),
         ]);

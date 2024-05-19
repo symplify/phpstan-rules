@@ -1,4 +1,4 @@
-# 48 Rules Overview
+# 46 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -24,40 +24,6 @@ class SomeClass
      * @see https://regex101.com/r/SZr0X5/12
      */
     private const COMPLICATED_REGEX = '#some_complicated_stu|ff#';
-}
-```
-
-:+1:
-
-<br>
-
-## BoolishClassMethodPrefixRule
-
-Method `"%s()"` returns bool type, so the name should start with is/has/was...
-
-- class: [`Symplify\PHPStanRules\Rules\BoolishClassMethodPrefixRule`](../src/Rules/BoolishClassMethodPrefixRule.php)
-
-```php
-class SomeClass
-{
-    public function old(): bool
-    {
-        return $this->age > 100;
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function isOld(): bool
-    {
-        return $this->age > 100;
-    }
 }
 ```
 
@@ -609,44 +575,6 @@ abstract class SomeClass implements RunnableInterface
 interface RunnableInterface
 {
     public function run();
-}
-```
-
-:+1:
-
-<br>
-
-## NoAbstractRule
-
-Instead of abstract class, use specific service with composition
-
-- class: [`Symplify\PHPStanRules\Rules\Complexity\NoAbstractRule`](../src/Rules/Complexity/NoAbstractRule.php)
-
-```php
-final class NormalHelper extends AbstractHelper
-{
-}
-
-abstract class AbstractHelper
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class NormalHelper
-{
-    public function __construct(
-        private SpecificHelper $specificHelper
-    ) {
-    }
-}
-
-final class SpecificHelper
-{
 }
 ```
 
