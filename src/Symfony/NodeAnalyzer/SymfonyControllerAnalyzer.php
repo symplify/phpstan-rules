@@ -32,6 +32,6 @@ final class SymfonyControllerAnalyzer
             return false;
         }
 
-        return \str_contains($docComment->getText(), '@Route');
+        return strpos($docComment->getText(), '@Route') !== false;
     }
 }

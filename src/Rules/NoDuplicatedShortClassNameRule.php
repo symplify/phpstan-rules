@@ -18,8 +18,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDuplicatedShortClassNameRule\NoDuplicatedShortClassNameRuleTest
  */
-final class NoDuplicatedShortClassNameRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class NoDuplicatedShortClassNameRule implements Rule
 {
+    /**
+     * @readonly
+     * @var int
+     */
+    private $toleratedNestingLevel;
     /**
      * @var string
      */
@@ -42,11 +47,11 @@ final class NoDuplicatedShortClassNameRule implements Rule, DocumentedRuleInterf
     /**
      * @var array<string, string[]>
      */
-    private array $declaredClassesByShortName = [];
+    private $declaredClassesByShortName = [];
 
-    public function __construct(
-        private readonly int $toleratedNestingLevel
-    ) {
+    public function __construct(int $toleratedNestingLevel)
+    {
+        $this->toleratedNestingLevel = $toleratedNestingLevel;
     }
 
     /**
