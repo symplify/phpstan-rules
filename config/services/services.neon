@@ -22,8 +22,6 @@ services:
     - Symplify\PHPStanRules\NodeFinder\MethodCallNodeFinder
     - Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
     - Symplify\PHPStanRules\ParentClassMethodNodeResolver
-    - Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
-    - Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
     - Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver
