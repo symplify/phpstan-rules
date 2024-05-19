@@ -21,11 +21,15 @@ use Symplify\PHPStanRules\ValueObject\MethodCallReference;
  */
 final class MethodCallableCollector implements Collector
 {
-    public function __construct(
-        private readonly ClassMethodCallReferenceResolver $classMethodCallReferenceResolver,
-    ) {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Matcher\ClassMethodCallReferenceResolver
+     */
+    private $classMethodCallReferenceResolver;
+    public function __construct(ClassMethodCallReferenceResolver $classMethodCallReferenceResolver)
+    {
+        $this->classMethodCallReferenceResolver = $classMethodCallReferenceResolver;
     }
-
     public function getNodeType(): string
     {
         return MethodCallableNode::class;

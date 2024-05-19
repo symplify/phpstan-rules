@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoNullableArrayPropertyRule\NoNullableArrayPropertyRuleTest
  */
-final class NoNullableArrayPropertyRule implements Rule, DocumentedRuleInterface
+final class NoNullableArrayPropertyRule implements Rule
 {
     /**
      * @var string
