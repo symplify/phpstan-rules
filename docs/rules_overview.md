@@ -1,4 +1,4 @@
-# 46 Rules Overview
+# 45 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -919,38 +919,6 @@ final class SomeClass
 final class SomeClass
 {
     private array $property = [];
-}
-```
-
-:+1:
-
-<br>
-
-## NoProtectedClassElementRule
-
-Instead of protected element, use private element or contract method
-
-- class: [`Symplify\PHPStanRules\Rules\NoProtectedClassElementRule`](../src/Rules/NoProtectedClassElementRule.php)
-
-```php
-final class SomeClass
-{
-    protected function run()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    private function run()
-    {
-    }
 }
 ```
 
