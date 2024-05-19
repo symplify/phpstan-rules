@@ -15,7 +15,6 @@ services:
     - Symplify\PHPStanRules\Naming\ClassToSuffixResolver
     - Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
     - Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
-    - Symplify\PHPStanRules\NodeAnalyzer\MethodCall\MethodCallClassConstFetchPositionResolver
     - Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
     - Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
     - Symplify\PHPStanRules\NodeFinder\ClassMethodNodeFinder
@@ -26,7 +25,6 @@ services:
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver
     - Symplify\PHPStanRules\Printer\NodeComparator
-    - Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
     - Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
     - Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer
     - Symplify\PHPStanRules\Matcher\Collector\PublicClassMethodMatcher
