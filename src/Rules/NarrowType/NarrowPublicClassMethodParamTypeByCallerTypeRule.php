@@ -24,7 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @implements Rule<CollectedDataNode>
  */
-final class NarrowPublicClassMethodParamTypeByCallerTypeRule implements Rule, DocumentedRuleInterface
+final class NarrowPublicClassMethodParamTypeByCallerTypeRule implements Rule
 {
     /**
      * @var string

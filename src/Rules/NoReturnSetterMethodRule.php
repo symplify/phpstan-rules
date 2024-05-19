@@ -21,8 +21,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
-final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
+final class NoReturnSetterMethodRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
+     */
+    private $typeAwareNodeFinder;
     /**
      * @var string
      */
@@ -34,9 +39,9 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
      */
     private const SETTER_START_REGEX = '#^set[A-Z]#';
 
-    public function __construct(
-        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
-    ) {
+    public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
+    {
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
     }
 
     /**
