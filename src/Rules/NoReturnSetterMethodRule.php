@@ -10,7 +10,6 @@ use PhpParser\Node\Expr\Yield_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeTraverser;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
@@ -53,6 +52,11 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        // possibly some important logic
+        if ($node->attrGroups !== []) {
+            return [];
+        }
+
         $classReflection = $scope->getClassReflection();
         if (! $classReflection->isClass()) {
             return [];
