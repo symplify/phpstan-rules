@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
  * @implements Rule<AttributeGroup>
  */
-final class RequireAttributeNameRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNameRule implements Rule
 {
     /**
      * @var string
@@ -78,7 +78,7 @@ CODE_SAMPLE
             }
 
             // skip PHPUnit
-            if (str_starts_with($attributeName, 'PHPUnit\Framework\Attributes\\')) {
+            if (strncmp($attributeName, 'PHPUnit\Framework\Attributes\\', strlen('PHPUnit\Framework\Attributes\\')) === 0) {
                 continue;
             }
 
