@@ -10,6 +10,7 @@ use PhpParser\Node\Expr\Yield_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeTraverser;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
@@ -57,8 +58,7 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
             return [];
         }
 
-        $classReflection = $scope->getClassReflection();
-        if (! $classReflection->isClass()) {
+        if (! $this->isInsideClassReflection($scope)) {
             return [];
         }
 
@@ -123,5 +123,15 @@ CODE_SAMPLE
 
         $yield = $this->typeAwareNodeFinder->findFirstInstanceOf($classMethod, Yield_::class);
         return $yield instanceof Yield_;
+    }
+
+    private function isInsideClassReflection(Scope $scope): bool
+    {
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        return $classReflection->isClass();
     }
 }
