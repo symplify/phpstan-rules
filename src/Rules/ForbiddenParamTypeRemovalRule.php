@@ -50,6 +50,12 @@ final class ForbiddenParamTypeRemovalRule implements Rule, DocumentedRuleInterfa
         }
 
         $classMethodName = (string) $node->name;
+
+        // allow constructor override, can be used for mocking or other purposes
+        if ($classMethodName === '__construct') {
+            return [];
+        }
+
         $parentClassMethodReflection = $this->methodNodeAnalyser->matchFirstParentClassMethod($scope, $classMethodName);
         if (! $parentClassMethodReflection instanceof PhpMethodReflection) {
             return [];
