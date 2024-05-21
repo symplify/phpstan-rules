@@ -54,10 +54,6 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
     public function processNode(Node $node, Scope $scope): array
     {
         $classReflection = $scope->getClassReflection();
-        if (! $classReflection instanceof ClassReflection) {
-            return [];
-        }
-
         if (! $classReflection->isClass()) {
             return [];
         }
