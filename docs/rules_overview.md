@@ -1,4 +1,4 @@
-# 43 Rules Overview
+# 42 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -543,38 +543,6 @@ final class SomeService
     public function isCheck(MethodCall $methodCall)
     {
     }
-}
-```
-
-:+1:
-
-<br>
-
-## NoAbstractMethodRule
-
-Use explicit interface contract or a service over unclear abstract methods
-
-- class: [`Symplify\PHPStanRules\Rules\NoAbstractMethodRule`](../src/Rules/NoAbstractMethodRule.php)
-
-```php
-abstract class SomeClass
-{
-    abstract public function run();
-}
-```
-
-:x:
-
-<br>
-
-```php
-abstract class SomeClass implements RunnableInterface
-{
-}
-
-interface RunnableInterface
-{
-    public function run();
 }
 ```
 
