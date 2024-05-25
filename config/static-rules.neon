@@ -27,7 +27,6 @@ rules:
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
-    - Symplify\PHPStanRules\Rules\NoEmptyClassRule
 
     # naming
     - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
