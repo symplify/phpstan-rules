@@ -1,4 +1,4 @@
-# 42 Rules Overview
+# 41 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -464,34 +464,6 @@ final class SomeRector implements RectorInterface
     {
     }
 }
-```
-
-:+1:
-
-<br>
-
-## ForbiddenSameNamedNewInstanceRule
-
-New objects with "%s" name are overridden. This can lead to unwanted bugs, please pick a different name to avoid it.
-
-- class: [`Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule`](../src/Rules/Complexity/ForbiddenSameNamedNewInstanceRule.php)
-
-```php
-$product = new Product();
-$product = new Product();
-
-$this->productRepository->save($product);
-```
-
-:x:
-
-<br>
-
-```php
-$firstProduct = new Product();
-$secondProduct = new Product();
-
-$this->productRepository->save($firstProduct);
 ```
 
 :+1:
