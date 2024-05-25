@@ -23,7 +23,6 @@ rules:
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
     # comlexity
-    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
     - Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
