@@ -1,6 +1,5 @@
 rules:
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
-    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
 
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
