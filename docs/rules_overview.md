@@ -645,35 +645,6 @@ class SomeClass
 
 <br>
 
-## NoEmptyClassRule
-
-There should be no empty class
-
-- class: [`Symplify\PHPStanRules\Rules\NoEmptyClassRule`](../src/Rules/NoEmptyClassRule.php)
-
-```php
-class SomeClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function getSome()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ## NoInlineStringRegexRule
 
 Use local named constant instead of inline string for regex to explain meaning by constant name
