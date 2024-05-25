@@ -1,4 +1,4 @@
-# 41 Rules Overview
+# 40 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -1092,40 +1092,6 @@ final class SkipApiMock extends TestCase
     public function test()
     {
         $someTypeMock = new class() implements SomeType {};
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## NoVoidGetterMethodRule
-
-Getter method must return something, not void
-
-- class: [`Symplify\PHPStanRules\Rules\NoVoidGetterMethodRule`](../src/Rules/NoVoidGetterMethodRule.php)
-
-```php
-final class SomeClass
-{
-    public function getData(): void
-    {
-        // ...
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    public function getData(): array
-    {
-        // ...
     }
 }
 ```
