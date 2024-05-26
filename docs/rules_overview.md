@@ -1,4 +1,4 @@
-# 40 Rules Overview
+# 38 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -987,45 +987,6 @@ final class SomeClass
     {
         $this->name = $name;
     }
-}
-```
-
-:+1:
-
-<br>
-
-## NoShortNameRule
-
-Do not name "%s", shorter than %d chars
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoShortNameRule`](../src/ObjectCalisthenics/Rules/NoShortNameRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoShortNameRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            minNameLength: 3
-```
-
-↓
-
-```php
-function is()
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-function isClass()
-{
 }
 ```
 
