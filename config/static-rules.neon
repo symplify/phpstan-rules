@@ -14,9 +14,6 @@ rules:
 
     - Symplify\PHPStanRules\Rules\NoNullableArrayPropertyRule
 
-    # dead-code
-    - Symplify\PHPStanRules\Rules\NoIssetOnObjectRule
-
     # explicit naming
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
