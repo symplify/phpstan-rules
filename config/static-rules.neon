@@ -5,24 +5,17 @@ rules:
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
     - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
-    - Symplify\PHPStanRules\Rules\ForbiddenParamTypeRemovalRule
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
     # paths
     - Symplify\PHPStanRules\Rules\NoMissingDirPathRule
     - Symplify\PHPStanRules\Rules\NoReferenceRule
-    - Symplify\PHPStanRules\Rules\NoArrayAccessOnObjectRule
 
     - Symplify\PHPStanRules\Rules\NoNullableArrayPropertyRule
-
-    # dead-code
-    - Symplify\PHPStanRules\Rules\NoIssetOnObjectRule
 
     # explicit naming
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
-    # comlexity
-    - Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule

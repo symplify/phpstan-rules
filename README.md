@@ -25,7 +25,6 @@ Sets are bunch of rules grouped by a common area, e.g. improve naming. You can p
 ```yaml
 includes:
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
-    - vendor/symplify/phpstan-rules/config/collector-rules.neon
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon

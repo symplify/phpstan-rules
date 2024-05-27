@@ -1,6 +1,5 @@
 includes:
     - code-complexity-rules.neon
-    - collector-rules.neon
     - configurable-rules.neon
     - naming-rules.neon
     - regex-rules.neon

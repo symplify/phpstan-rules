@@ -1,5 +1,3 @@
 rules:
-    - Symplify\PHPStanRules\Rules\Explicit\NoMixedPropertyFetcherRule
-    - Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
     - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule

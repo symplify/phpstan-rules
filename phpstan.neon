@@ -34,7 +34,6 @@ parameters:
 
         # needless generics
         - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
-        - '#Method (.*?)::getCollectors\(\) return type with generic interface PHPStan\\Collectors\\Collector does not specify its types\: TNodeType, TValue#'
 
         - '#Parameter \#1 \$values of method Symplify\\PHPStanRules\\Rules\\Enum\\RequireUniqueEnumConstantRule\:\:filterDuplicatedValues\(\) expects array<int\|string>, array<bool\|float\|int\|string> given#'
 
@@ -43,8 +42,6 @@ parameters:
         - '#Method Symplify\\PHPStanRules\\Reflection\\ReflectionParser\:\:parseNativeClassReflection\(\) has parameter \$reflectionClass with generic class ReflectionClass but does not specify its types\: T#'
 
         - '#Method Symplify\\PHPStanRules\\NodeFinder\\TypeAwareNodeFinder\:\:findFirstInstanceOf\(\) should return \(TNode of PhpParser\\Node\)\|null but returns PhpParser\\Node\|null#'
-
-        - '#Method Symplify\\PHPStanRules\\NodeFinder\\MethodCallNodeFinder\:\:findUsages\(\) should return array<PhpParser\\Node\\Expr\\MethodCall> but returns array<PhpParser\\Node>#'
 
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\(.*?) extends generic class PHPStan\\Testing\\RuleTestCase but does not specify its types\: TRule#'
