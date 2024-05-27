@@ -34,7 +34,6 @@ parameters:
 
         # needless generics
         - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
-        - '#Method (.*?)::getCollectors\(\) return type with generic interface PHPStan\\Collectors\\Collector does not specify its types\: TNodeType, TValue#'
 
         - '#Parameter \#1 \$values of method Symplify\\PHPStanRules\\Rules\\Enum\\RequireUniqueEnumConstantRule\:\:filterDuplicatedValues\(\) expects array<int\|string>, array<bool\|float\|int\|string> given#'
 
