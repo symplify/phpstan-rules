@@ -18,7 +18,6 @@ services:
     - Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
     - Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
     - Symplify\PHPStanRules\NodeFinder\ClassMethodNodeFinder
-    - Symplify\PHPStanRules\NodeFinder\MethodCallNodeFinder
     - Symplify\PHPStanRules\ParentClassMethodNodeResolver
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver

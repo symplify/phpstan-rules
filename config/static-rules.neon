@@ -16,8 +16,6 @@ rules:
     # explicit naming
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
-    # comlexity
-    - Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule

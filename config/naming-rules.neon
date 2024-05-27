@@ -3,5 +3,4 @@ rules:
     - Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule
     - Symplify\PHPStanRules\Rules\UppercaseConstantRule
     - Symplify\PHPStanRules\Rules\ClassNameRespectsParentSuffixRule
-    - Symplify\PHPStanRules\Rules\CheckTypehintCallerTypeRule
     - Symplify\PHPStanRules\Rules\CheckClassNamespaceFollowPsr4Rule

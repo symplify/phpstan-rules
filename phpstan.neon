@@ -43,8 +43,6 @@ parameters:
 
         - '#Method Symplify\\PHPStanRules\\NodeFinder\\TypeAwareNodeFinder\:\:findFirstInstanceOf\(\) should return \(TNode of PhpParser\\Node\)\|null but returns PhpParser\\Node\|null#'
 
-        - '#Method Symplify\\PHPStanRules\\NodeFinder\\MethodCallNodeFinder\:\:findUsages\(\) should return array<PhpParser\\Node\\Expr\\MethodCall> but returns array<PhpParser\\Node>#'
-
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\(.*?) extends generic class PHPStan\\Testing\\RuleTestCase but does not specify its types\: TRule#'
         - '#Method Symplify\\PHPStanRules\\(.*?)\:\:getRule\(\) return type with generic interface PHPStan\\Rules\\Rule does not specify its types\: TNodeType#'
