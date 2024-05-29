@@ -8,7 +8,6 @@ rules:
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
     # paths
-    - Symplify\PHPStanRules\Rules\NoMissingDirPathRule
     - Symplify\PHPStanRules\Rules\NoReferenceRule
 
     - Symplify\PHPStanRules\Rules\NoNullableArrayPropertyRule
