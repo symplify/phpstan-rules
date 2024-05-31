@@ -15,7 +15,7 @@ rules:
     # explicit naming
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
-
+    - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
 
