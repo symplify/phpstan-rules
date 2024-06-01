@@ -49,3 +49,6 @@ parameters:
 
         # part of public contract
         - '#Method Symplify\\PHPStanRules\\Tests\\Rules\\PHPUnit\\(.*?)\\(.*?)Test\:\:testRule\(\) has parameter \$expectedErrorMessagesWithLines with no value type specified in iterable type array#'
+
+        # overly detailed
+        - '#Class Symplify\\PHPStanRules\\Collector\\(.*?) implements generic interface PHPStan\\Collectors\\Collector but does not specify its types\: TNodeType, TValue#'

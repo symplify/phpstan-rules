@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\ClassConstFetch;
-use PhpParser\Node\Name;
+use PhpParser\Node\Stmt\Const_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -14,37 +13,26 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenStaticClassConstFetchRule\ForbiddenStaticClassConstFetchRuleTest
+ * @implements Rule<Const_>
+ * @see \Symplify\PHPStanRules\Tests\Rules\NoGlobalConstRule\NoGlobalConstRuleTest
  */
-final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleInterface
+final class NoGlobalConstRule implements Rule, DocumentedRuleInterface
 {
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Avoid static access of constants, as they can change value. Use interface and contract method instead';
+    public const ERROR_MESSAGE = 'Global constants are forbidden. Use enum-like class list instead';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
-        return ClassConstFetch::class;
+        return Const_::class;
     }
 
     /**
-     * @param ClassConstFetch $node
-     * @return string[]
+     * @param Const_ $node
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->class instanceof Name) {
-            return [];
-        }
-
-        if ($node->class->toString() !== 'static') {
-            return [];
-        }
-
         return [self::ERROR_MESSAGE];
     }
 
@@ -53,13 +41,7 @@ final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleIn
         return new RuleDefinition(self::ERROR_MESSAGE, [
             new CodeSample(
                 <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return static::SOME_CONST;
-    }
-}
+const SOME_GLOBAL_CONST = 'value';
 CODE_SAMPLE
                 ,
                 <<<'CODE_SAMPLE'

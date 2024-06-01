@@ -1,5 +1,6 @@
 rules:
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
+    - Symplify\PHPStanRules\Rules\NoGlobalConstRule
 
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule

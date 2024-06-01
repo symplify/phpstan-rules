@@ -1,4 +1,4 @@
-# 28 Rules Overview
+# 30 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -381,6 +381,40 @@ return strlen('...');
 
 <br>
 
+## ForbiddenStaticClassConstFetchRule
+
+Avoid static access of constants, as they can change value. Use interface and contract method instead
+
+- class: [`Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule`](../src/Rules/ForbiddenStaticClassConstFetchRule.php)
+
+```php
+class SomeClass
+{
+    public function run()
+    {
+        return static::SOME_CONST;
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+class SomeClass
+{
+    public function run()
+    {
+        return self::SOME_CONST;
+    }
+}
+```
+
+:+1:
+
+<br>
+
 ## NoDuplicatedShortClassNameRule
 
 Class with base "%s" name is already used in "%s". Use unique name to make classes easy to recognize
@@ -462,6 +496,34 @@ class SomeClass
     public function old(): bool
     {
         return $this->specificMethodName();
+    }
+}
+```
+
+:+1:
+
+<br>
+
+## NoGlobalConstRule
+
+Global constants are forbidden. Use enum-like class list instead
+
+- class: [`Symplify\PHPStanRules\Rules\NoGlobalConstRule`](../src/Rules/NoGlobalConstRule.php)
+
+```php
+const SOME_GLOBAL_CONST = 'value';
+```
+
+:x:
+
+<br>
+
+```php
+class SomeClass
+{
+    public function run()
+    {
+        return self::SOME_CONST;
     }
 }
 ```
