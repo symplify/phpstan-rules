@@ -8,16 +8,16 @@
         "nette/utils": "^3.2.9 || ^4.0",
         "webmozart/assert": "^1.11",
         "phpstan/phpstan": "^1.11",
-        "symplify/rule-doc-generator-contracts": "^11.1.26"
+        "symplify/rule-doc-generator-contracts": "^11.2"
     },
     "require-dev": {
         "nikic/php-parser": "^4.19",
         "symplify/phpstan-extensions": "^11.4",
-        "symplify/rule-doc-generator": "^12.0",
+        "symplify/rule-doc-generator": "^12.1",
         "phpunit/phpunit": "^10.5",
         "symfony/framework-bundle": "6.1.*",
         "rector/rector": "^1.1",
-        "symplify/easy-coding-standard": "^12.1",
+        "symplify/easy-coding-standard": "^12.2",
         "phpstan/extension-installer": "^1.3",
         "tomasvotruba/class-leak": "^0.2"
     },
