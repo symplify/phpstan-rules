@@ -74,12 +74,6 @@ namespace App\Contract\Repository;
 interface ProductRepositoryInterface
 {
 }
-
-namespace App\Contracts\Repository;
-
-interface ProductRepositoryInterface
-{
-}
 CODE_SAMPLE
             ),
         ]);
