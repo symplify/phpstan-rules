@@ -18,11 +18,16 @@ final class ImplementedInterfaceCollector implements Collector
 
     /**
      * @param Class_ $node
-     * @return string[]
+     * @return string[]|null
      */
-    public function processNode(Node $node, Scope $scope): array
+    public function processNode(Node $node, Scope $scope): ?array
     {
         $implementedInterfaceNames = [];
+
+        // skip abstract classes, as they can enforce child implementations
+        if ($node->isAbstract()) {
+            return null;
+        }
 
         foreach ($node->implements as $implement) {
             $implementedInterfaceNames[] = $implement->toString();
