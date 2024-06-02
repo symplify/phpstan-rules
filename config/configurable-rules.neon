@@ -1,11 +1,5 @@
 services:
     -
-        class: Symplify\PHPStanRules\Rules\NoDuplicatedShortClassNameRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            toleratedNestingLevel: 2
-
-    -
         class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
         tags: [phpstan.rules.rule]
         arguments:
