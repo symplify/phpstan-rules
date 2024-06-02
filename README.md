@@ -1186,6 +1186,4 @@ final class SomeClass
 
 [ruledoc-end]
 
-<br>
-
 Happy coding!
