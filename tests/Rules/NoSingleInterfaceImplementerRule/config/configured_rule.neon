@@ -1,6 +1,4 @@
 rules:
-    - Symplify\PHPStanRules\Rules\NoDynamicNameRule
-    - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
     - Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule
 
 services:
