@@ -41,6 +41,8 @@ includes:
     - vendor/symplify/phpstan-rules/config/rector-rules.neon
 ```
 
+<br>
+
 ## 2. Cherry-pick Configurable Rules
 
 There is one set with pre-configured configurable rules. Include it and see what is errors are found:
