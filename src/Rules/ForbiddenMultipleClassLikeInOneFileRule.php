@@ -25,9 +25,11 @@ final class ForbiddenMultipleClassLikeInOneFileRule implements Rule, DocumentedR
      */
     public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
 
+    private readonly NodeFinder $nodeFinder;
+
     public function __construct(
-        private readonly NodeFinder $nodeFinder
     ) {
+        $this->nodeFinder = new NodeFinder();
     }
 
     /**

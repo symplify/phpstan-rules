@@ -13,6 +13,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceCollector;
+use Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -45,10 +46,14 @@ final class NoSingleInterfaceImplementerRule implements Rule, DocumentedRuleInte
     {
         $implementedInterfaces = Arrays::flatten($node->get(ImplementedInterfaceCollector::class));
         $interfaces = Arrays::flatten($node->get(InterfaceCollector::class));
+        $interfacesOfAbstractClass = Arrays::flatten($node->get(InterfaceOfAbstractClassCollector::class));
 
         $onceUsedInterfaces = $this->resolveOnceUsedInterfaces($implementedInterfaces);
-
         $onceImplementedInterfaces = array_intersect($onceUsedInterfaces, $interfaces);
+
+        // remove the abstract class implemented, as required transitionally
+        $onceImplementedInterfaces = array_diff($onceImplementedInterfaces, $interfacesOfAbstractClass);
+
         if ($onceImplementedInterfaces === []) {
             return [];
         }

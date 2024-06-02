@@ -10,6 +10,7 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceCollector;
+use Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector;
 use Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule;
 use Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\Fixture\SimpleInterface;
 
@@ -32,6 +33,9 @@ final class NoSingleInterfaceImplementerRuleTest extends RuleTestCase
     {
         yield [[__DIR__ . '/Fixture/SimpleInterface.php'], []];
         yield [[__DIR__ . '/Fixture/AllowAbstract.php', __DIR__ . '/Fixture/SimpleInterface.php'], []];
+
+        // already counted in abstract class
+        yield [[__DIR__ . '/Fixture/AllowAbstract.php', __DIR__ . '/Fixture/SimpleInterface.php', __DIR__ . '/Fixture/ImplementsSimpleInterface.php'], []];
 
         yield [
             [
@@ -58,6 +62,7 @@ final class NoSingleInterfaceImplementerRuleTest extends RuleTestCase
         return [
             self::getContainer()->getByType(ImplementedInterfaceCollector::class),
             self::getContainer()->getByType(InterfaceCollector::class),
+            self::getContainer()->getByType(InterfaceOfAbstractClassCollector::class),
         ];
     }
 
