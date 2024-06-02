@@ -12,9 +12,11 @@ use PhpParser\NodeFinder;
  */
 final class TypeAwareNodeFinder
 {
-    public function __construct(
-        private readonly NodeFinder $nodeFinder
-    ) {
+    private readonly NodeFinder $nodeFinder;
+
+    public function __construct()
+    {
+        $this->nodeFinder = new NodeFinder();
     }
 
     /**

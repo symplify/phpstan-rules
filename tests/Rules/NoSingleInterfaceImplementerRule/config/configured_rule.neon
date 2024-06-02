@@ -1,13 +1,3 @@
-rules:
-    - Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule
-
-services:
-    -
-        class: Symplify\PHPStanRules\Collector\InterfaceCollector
-        tags:
-            - phpstan.collector
-
-    -
-        class: Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector
-        tags:
-            - phpstan.collector
+includes:
+    - ../../../../config/code-complexity-rules.neon
+    - ../../../../config/services/services.neon
