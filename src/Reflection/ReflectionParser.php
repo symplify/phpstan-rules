@@ -7,7 +7,6 @@ namespace Symplify\PHPStanRules\Reflection;
 use Nette\Utils\FileSystem;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Property;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\Parser;
@@ -16,13 +15,9 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
-use ReflectionProperty;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Throwable;
 
-/**
- * @api
- */
 final class ReflectionParser
 {
     /**
@@ -47,26 +42,6 @@ final class ReflectionParser
         }
 
         return $classLike->getMethod($reflectionMethod->getName());
-    }
-
-    public function parsePropertyReflection(ReflectionProperty $reflectionProperty): ?Property
-    {
-        $classLike = $this->parseNativeClassReflection($reflectionProperty->getDeclaringClass());
-        if (! $classLike instanceof ClassLike) {
-            return null;
-        }
-
-        return $classLike->getProperty($reflectionProperty->getName());
-    }
-
-    public function parseClassReflection(ClassReflection $classReflection): ?ClassLike
-    {
-        $fileName = $classReflection->getFileName();
-        if ($fileName === null) {
-            return null;
-        }
-
-        return $this->parseFilenameToClass($fileName);
     }
 
     private function parseNativeClassReflection(ReflectionClass|ClassReflection $reflectionClass): ?ClassLike

@@ -93,8 +93,8 @@ CODE_SAMPLE
     }
 
     /**
-     * @param array<string|int> $values
-     * @return array<string|int>
+     * @param array<int|float|bool|string> $values
+     * @return array<int|float|bool|string>
      */
     private function filterDuplicatedValues(array $values): array
     {
