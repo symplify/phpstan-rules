@@ -44,6 +44,19 @@ final class ReflectionParser
         return $classLike->getMethod($reflectionMethod->getName());
     }
 
+    /**
+     * @api used by extensions
+     */
+    public function parseClassReflection(ClassReflection $classReflection): ?ClassLike
+    {
+        $fileName = $classReflection->getFileName();
+        if ($fileName === null) {
+            return null;
+        }
+
+        return $this->parseFilenameToClass($fileName);
+    }
+
     private function parseNativeClassReflection(ReflectionClass|ClassReflection $reflectionClass): ?ClassLike
     {
         $fileName = $reflectionClass->getFileName();
