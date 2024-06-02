@@ -1,4 +1,4 @@
-# 32 Rules Overview
+# 31 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -408,61 +408,6 @@ class SomeClass
     {
         return self::SOME_CONST;
     }
-}
-```
-
-:+1:
-
-<br>
-
-## NoDuplicatedShortClassNameRule
-
-Class with base "%s" name is already used in "%s". Use unique name to make classes easy to recognize
-
-:wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\NoDuplicatedShortClassNameRule`](../src/Rules/NoDuplicatedShortClassNameRule.php)
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\NoDuplicatedShortClassNameRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            toleratedNestingLevel: 1
-```
-
-↓
-
-```php
-namespace App;
-
-class SomeClass
-{
-}
-
-namespace App\Nested;
-
-class SomeClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-namespace App;
-
-class SomeClass
-{
-}
-
-namespace App\Nested;
-
-class AnotherClass
-{
 }
 ```
 
