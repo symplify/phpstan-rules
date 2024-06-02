@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Collector;
 
-use PhpParser\Node\Name;
 use PhpParser\Node;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Interface_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;

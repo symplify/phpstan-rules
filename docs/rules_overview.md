@@ -1,4 +1,4 @@
-# 30 Rules Overview
+# 32 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -504,6 +504,42 @@ class SomeClass
 
 <br>
 
+## NoEntityOutsideEntityNamespaceRule
+
+Class with #[Entity] attribute must be located in "Entity" namespace to be loaded by Doctrine
+
+- class: [`Symplify\PHPStanRules\Rules\NoEntityOutsideEntityNamespaceRule`](../src/Rules/NoEntityOutsideEntityNamespaceRule.php)
+
+```php
+namespace App\ValueObject;
+
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+class Product
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+class Product
+{
+}
+```
+
+:+1:
+
+<br>
+
 ## NoGlobalConstRule
 
 Global constants are forbidden. Use enum-like class list instead
@@ -697,6 +733,44 @@ final class SomeClass
     {
         $this->name = $name;
     }
+}
+```
+
+:+1:
+
+<br>
+
+## NoSingleInterfaceImplementerRule
+
+Interface "%s" has only single implementer. Consider using the class directly as there is no point in using the interface.
+
+- class: [`Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule`](../src/Rules/NoSingleInterfaceImplementerRule.php)
+
+```php
+class SomeClass implements SomeInterface
+{
+}
+
+interface SomeInterface
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+class SomeClass implements SomeInterface
+{
+}
+
+class AnotherClass implements SomeInterface
+{
+}
+
+interface SomeInterface
+{
 }
 ```
 
