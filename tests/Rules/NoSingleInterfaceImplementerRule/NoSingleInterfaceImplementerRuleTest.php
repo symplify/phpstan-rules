@@ -31,6 +31,7 @@ final class NoSingleInterfaceImplementerRuleTest extends RuleTestCase
     public static function provideData(): Iterator
     {
         yield [[__DIR__ . '/Fixture/SimpleInterface.php'], []];
+        yield [[__DIR__ . '/Fixture/AllowAbstract.php', __DIR__ . '/Fixture/SimpleInterface.php'], []];
 
         yield [
             [
