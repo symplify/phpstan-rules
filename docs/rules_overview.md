@@ -1,4 +1,4 @@
-# 31 Rules Overview
+# 30 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
@@ -539,34 +539,6 @@ class SomeClass
     {
         return preg_match(self::SOME_STUFF_REGEX, $value);
     }
-}
-```
-
-:+1:
-
-<br>
-
-## NoNullableArrayPropertyRule
-
-Use required typed property over of nullable array property
-
-- class: [`Symplify\PHPStanRules\Rules\NoNullableArrayPropertyRule`](../src/Rules/NoNullableArrayPropertyRule.php)
-
-```php
-final class SomeClass
-{
-    private ?array $property = null;
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    private array $property = [];
 }
 ```
 
