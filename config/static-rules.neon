@@ -5,20 +5,13 @@ rules:
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
     - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
+    - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
+    - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
+
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
-    # paths
-    - Symplify\PHPStanRules\Rules\NoReferenceRule
-
-    - Symplify\PHPStanRules\Rules\NoNullableArrayPropertyRule
-
-    # explicit naming
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
-
+    - Symplify\PHPStanRules\Rules\NoReferenceRule
     - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
-    - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
-
-    # naming
-    - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
