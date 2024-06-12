@@ -9,6 +9,11 @@ use PHPStan\PhpDocParser\Ast\Node;
 final class CallablePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
 {
     /**
+     * @readonly
+     * @var string|null
+     */
+    private $docContent;
+    /**
      * @var callable(Node, string|null): (int|null|Node)
      */
     private $callable;
@@ -18,12 +23,16 @@ final class CallablePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
      */
     public function __construct(
         callable $callable,
-        private readonly ?string $docContent
+        ?string $docContent
     ) {
+        $this->docContent = $docContent;
         $this->callable = $callable;
     }
 
-    public function enterNode(Node $node): int|Node|null
+    /**
+     * @return int|\PHPStan\PhpDocParser\Ast\Node|null
+     */
+    public function enterNode(Node $node)
     {
         $callable = $this->callable;
         return $callable($node, $this->docContent);
