@@ -13,12 +13,12 @@
     "require-dev": {
         "nikic/php-parser": "^4.19",
         "symplify/phpstan-extensions": "^11.4",
-        "symplify/rule-doc-generator": "^12.1",
+        "symplify/rule-doc-generator": "^12.2",
         "phpunit/phpunit": "^10.5",
         "symfony/framework-bundle": "6.1.*",
         "rector/rector": "^1.1",
-        "symplify/easy-coding-standard": "^12.2",
-        "phpstan/extension-installer": "^1.3",
+        "symplify/easy-coding-standard": "^12.3",
+        "phpstan/extension-installer": "^1.4",
         "tomasvotruba/class-leak": "^0.2"
     },
     "autoload": {
@@ -58,6 +58,6 @@
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
         "phpstan": "vendor/bin/phpstan analyse --ansi  --error-format symplify",
         "rector": "vendor/bin/rector process --dry-run --ansi",
-        "docs": "vendor/bin/rule-doc-generator generate src --output-file docs/rules_overview.md --ansi"
+        "docs": "vendor/bin/rule-doc-generator generate src --readme --ansi"
     }
 }

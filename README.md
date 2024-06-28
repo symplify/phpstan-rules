@@ -72,7 +72,9 @@ services:
 
 ## 3. Register Particular Rules
 
-[ruledoc-start]
+<!-- ruledoc-start -->
+# 30 Rules Overview
+
 ## AnnotateRegexClassConstWithRegexLinkRule
 
 Add regex101.com link to that shows the regex in practise, so it will be easier to maintain in case of bug/extension in the future
@@ -1184,6 +1186,8 @@ final class SomeClass
 
 <br>
 
-[ruledoc-end]
+<!-- ruledoc-end -->
+
+<br>
 
 Happy coding!
