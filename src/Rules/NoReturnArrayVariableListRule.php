@@ -156,6 +156,10 @@ CODE_SAMPLE
                 continue;
             }
 
+            if ($item->unpack === true) {
+                continue;
+            }
+
             ++$exprCount;
         }
 

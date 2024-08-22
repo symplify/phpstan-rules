@@ -30,6 +30,7 @@ final class NoReturnArrayVariableListRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipNews.php', []];
         yield [__DIR__ . '/Fixture/ValueObject/SkipValueObject.php', []];
         yield [__DIR__ . '/Fixture/SkipParentMethod.php', []];
+        yield [__DIR__ . '/Fixture/SkipArraySpreads.php', []];
     }
 
     /**
