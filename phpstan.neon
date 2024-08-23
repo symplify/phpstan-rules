@@ -25,6 +25,11 @@ parameters:
         properties: true
         constants: true
 
+    type_coverage:
+        return: 99
+        param: 99
+        property: 99
+
     ignoreErrors:
         -
             message: '#Generator expects value type (.*?) given#'
