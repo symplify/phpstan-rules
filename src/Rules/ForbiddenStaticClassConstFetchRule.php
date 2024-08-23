@@ -16,7 +16,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenStaticClassConstFetchRule\ForbiddenStaticClassConstFetchRuleTest
  */
-final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleInterface
+final class ForbiddenStaticClassConstFetchRule implements Rule
 {
     /**
      * @var string

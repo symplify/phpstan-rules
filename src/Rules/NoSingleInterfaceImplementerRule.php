@@ -21,17 +21,22 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\NoSingleInterfaceImplementerRuleTest
  */
-final class NoSingleInterfaceImplementerRule implements Rule, DocumentedRuleInterface
+final class NoSingleInterfaceImplementerRule implements Rule
 {
+    /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
     /**
      * @api used in test
      * @var string
      */
     public const ERROR_MESSAGE = 'Interface "%s" has only single implementer. Consider using the class directly as there is no point in using the interface.';
 
-    public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
