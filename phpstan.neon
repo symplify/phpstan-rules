@@ -19,12 +19,18 @@ parameters:
         - */stubs/*
         - */Fixture/*
 
-    ignoreErrors:
-        -
-            message: '#Generator expects value type (.*?) given#'
-            paths:
-                -  tests/Rules
+    # https://github.com/TomasVotruba/unused-public
+    unused_public:
+        methods: true
+        properties: true
+        constants: true
 
+    type_coverage:
+        return: 99
+        param: 99
+        property: 99
+
+    ignoreErrors:
         # needless generics
         - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
 
@@ -43,3 +49,6 @@ parameters:
 
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\Collector\\(.*?) implements generic interface PHPStan\\Collectors\\Collector but does not specify its types\: TNodeType, TValue#'
+
+        # used in tests
+        - '#Public constant "(.*?)\:\:ERROR_MESSAGE" is never used#'

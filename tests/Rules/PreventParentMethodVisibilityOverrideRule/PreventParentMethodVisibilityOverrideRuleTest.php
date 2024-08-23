@@ -21,9 +21,6 @@ final class PreventParentMethodVisibilityOverrideRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    /**
-     * @return Iterator<array<string|int[]|string[]>>
-     */
     public static function provideData(): Iterator
     {
         $errorMessage = sprintf(PreventParentMethodVisibilityOverrideRule::ERROR_MESSAGE, 'run', 'protected');

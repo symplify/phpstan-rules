@@ -21,9 +21,6 @@ final class RegexSuffixInRegexConstantRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    /**
-     * @return Iterator<array<string|int[]|string[]>>
-     */
     public static function provideData(): Iterator
     {
         $errorMessage = sprintf(RegexSuffixInRegexConstantRule::ERROR_MESSAGE, 'SOME_NAME');
