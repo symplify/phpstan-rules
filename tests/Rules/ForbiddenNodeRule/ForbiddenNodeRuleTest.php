@@ -21,9 +21,6 @@ final class ForbiddenNodeRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    /**
-     * @return \Iterator<array<int, array<int[]|string[]>>|string[]>
-     */
     public static function provideData(): Iterator
     {
         $errorMessage = sprintf(ForbiddenNodeRule::ERROR_MESSAGE, 'empty($value)');

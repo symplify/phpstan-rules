@@ -43,7 +43,7 @@ final class NoInlineStringRegexRule implements Rule, DocumentedRuleInterface
     }
 
     /**
-     * @param Node\Expr\CallLike $node
+     * @param CallLike $node
      * @return mixed[]|string[]
      */
     public function processNode(Node $node, Scope $scope): array

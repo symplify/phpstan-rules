@@ -31,11 +31,6 @@ parameters:
         property: 99
 
     ignoreErrors:
-        -
-            message: '#Generator expects value type (.*?) given#'
-            paths:
-                -  tests/Rules
-
         # needless generics
         - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
 
