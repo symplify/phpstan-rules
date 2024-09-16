@@ -18,7 +18,7 @@ final class InterfaceOfAbstractClassCollector implements Collector
 
     /**
      * @param Class_ $node
-     * @return string[]|null
+     * @return non-empty-array<string>|null
      */
     public function processNode(Node $node, Scope $scope): ?array
     {
@@ -30,6 +30,10 @@ final class InterfaceOfAbstractClassCollector implements Collector
 
         foreach ($node->implements as $implement) {
             $interfaceNames[] = $implement->toString();
+        }
+
+        if ($interfaceNames === []) {
+            return null;
         }
 
         return $interfaceNames;
