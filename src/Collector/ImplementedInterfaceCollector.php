@@ -18,7 +18,7 @@ final class ImplementedInterfaceCollector implements Collector
 
     /**
      * @param Class_ $node
-     * @return string[]|null
+     * @return non-empty-array<string>|null
      */
     public function processNode(Node $node, Scope $scope): ?array
     {
@@ -31,6 +31,10 @@ final class ImplementedInterfaceCollector implements Collector
 
         foreach ($node->implements as $implement) {
             $implementedInterfaceNames[] = $implement->toString();
+        }
+
+        if ($implementedInterfaceNames === []) {
+            return null;
         }
 
         return $implementedInterfaceNames;
