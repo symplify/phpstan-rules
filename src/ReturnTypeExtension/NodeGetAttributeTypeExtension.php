@@ -51,18 +51,16 @@ final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExte
         MethodReflection $methodReflection,
         MethodCall $methodCall,
         Scope $scope
-    ): Type {
-        $returnType = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
-
+    ): ?Type {
         $firstArg = $methodCall->getArgs()[0];
 
         $argumentValue = $this->resolveArgumentValue($firstArg->value);
         if ($argumentValue === null) {
-            return $returnType;
+            return null;
         }
 
         if (! isset(self::ARGUMENT_KEY_TO_RETURN_TYPE[$argumentValue])) {
-            return $returnType;
+            return null;
         }
 
         $knownReturnType = self::ARGUMENT_KEY_TO_RETURN_TYPE[$argumentValue];
