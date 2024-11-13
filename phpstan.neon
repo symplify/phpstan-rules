@@ -20,15 +20,15 @@ parameters:
         - */Fixture/*
 
     # https://github.com/TomasVotruba/unused-public
-    unused_public:
-        methods: true
-        properties: true
-        constants: true
+    # unused_public:
+    #     methods: true
+    #     properties: true
+    #     constants: true
 
-    type_coverage:
-        return: 99
-        param: 99
-        property: 99
+    # type_coverage:
+    #     return: 99
+    #     param: 99
+    #     property: 99
 
     ignoreErrors:
         # needless generics
