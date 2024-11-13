@@ -7,21 +7,17 @@
         "php": ">=8.1",
         "nette/utils": "^3.2.9 || ^4.0",
         "webmozart/assert": "^1.11",
-        "phpstan/phpstan": "^1.11",
+        "phpstan/phpstan": "^2.0",
         "symplify/rule-doc-generator-contracts": "^11.2"
     },
     "require-dev": {
         "nikic/php-parser": "^4.19",
-        "symplify/phpstan-extensions": "^11.4",
         "symplify/rule-doc-generator": "^12.2",
         "phpunit/phpunit": "^10.5",
         "symfony/framework-bundle": "6.1.*",
-        "rector/rector": "^1.2.3",
         "symplify/easy-coding-standard": "^12.3",
-        "phpstan/extension-installer": "^1.4",
-        "tomasvotruba/class-leak": "^0.2",
-        "tomasvotruba/unused-public": "^0.3.10",
-        "tomasvotruba/type-coverage": "^0.3.1"
+        "rector/rector": "dev-main as 1.2.10",
+        "phpstan/extension-installer": "^1.4"
     },
     "autoload": {
         "psr-4": {
@@ -36,10 +32,6 @@
             "stubs"
         ],
         "files": [
-            "tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/Fixture/SomePhpFeatureRector.php",
-            "vendor/rector/rector/src/Contract/Rector/RectorInterface.php",
-            "vendor/rector/rector/src/Contract/Rector/ConfigurableRectorInterface.php",
-            "vendor/rector/rector/vendor/rector/rector-downgrade-php/src/Set/ValueObject/DowngradeSetList.php"
         ]
     },
     "extra": {
