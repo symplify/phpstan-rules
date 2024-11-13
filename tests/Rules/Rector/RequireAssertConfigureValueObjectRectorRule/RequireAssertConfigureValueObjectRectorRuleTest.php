@@ -9,6 +9,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Rector\RequireAssertConfigureValueObjectRectorRule;
+use function class_exists;
 
 final class RequireAssertConfigureValueObjectRectorRuleTest extends RuleTestCase
 {
@@ -18,6 +19,10 @@ final class RequireAssertConfigureValueObjectRectorRuleTest extends RuleTestCase
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
+        if (! class_exists('Rector\Contract\Rector\ConfigurableRectorInterface')) {
+            $this->markTestIncomplete('Skip this test because Rector is not installed');
+        }
+
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 

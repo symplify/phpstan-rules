@@ -20,6 +20,10 @@ final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
+        if (! class_exists('Rector\Contract\Rector\RectorInterface')) {
+            $this->markTestIncomplete('Skip this test because Rector is not installed');
+        }
+
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
