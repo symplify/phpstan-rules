@@ -11,6 +11,7 @@ use PhpParser\Node\Expr\Instanceof_;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Type;
 use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
@@ -29,17 +30,13 @@ final class NoInstanceOfStaticReflectionRule implements Rule
      */
     public const ERROR_MESSAGE = 'Instead of "instanceof/is_a()" use ReflectionProvider service or "(new ObjectType(<desired_type>))->isSuperTypeOf(<element_type>)" for static reflection to work';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return Expr::class;
     }
 
     /**
-     * @param Node\Expr $node
-     * @return string[]
+     * @param Expr $node
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -56,7 +53,7 @@ final class NoInstanceOfStaticReflectionRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     private function resolveExprStaticType(FuncCall|Instanceof_ $node, Scope $scope): ?Type

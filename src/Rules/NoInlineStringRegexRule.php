@@ -12,6 +12,8 @@ use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleError;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -19,6 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoInlineStringRegexRule\NoInlineStringRegexRuleTest
  */
 final class NoInlineStringRegexRule implements Rule, DocumentedRuleInterface
@@ -34,9 +37,6 @@ final class NoInlineStringRegexRule implements Rule, DocumentedRuleInterface
     ) {
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return CallLike::class;
@@ -44,7 +44,6 @@ final class NoInlineStringRegexRule implements Rule, DocumentedRuleInterface
 
     /**
      * @param CallLike $node
-     * @return mixed[]|string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -92,7 +91,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processRegexFuncCall(FuncCall $funcCall): array
     {
@@ -107,11 +106,11 @@ CODE_SAMPLE
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processRegexStaticCall(StaticCall $staticCall): array
     {
@@ -133,6 +132,6 @@ CODE_SAMPLE
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 }

@@ -14,6 +14,7 @@ use PhpParser\Node\Stmt\Return_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
 use Symplify\PHPStanRules\Testing\StaticPHPUnitEnvironment;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -21,6 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<Return_>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnArrayVariableListRule\NoReturnArrayVariableListRuleTest
  */
 final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterface
@@ -41,9 +43,6 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
     ) {
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return Return_::class;
@@ -51,7 +50,6 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
 
     /**
      * @param Return_ $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -72,7 +70,7 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

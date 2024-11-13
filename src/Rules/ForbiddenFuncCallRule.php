@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeCombinator;
 use SimpleXMLElement;
@@ -21,6 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<FuncCall>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule\ForbiddenFuncCallRuleTest
  */
 final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
@@ -31,7 +33,7 @@ final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, Conf
     public const ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
 
     /**
-     * @param string[]|array<string|int, string> $forbiddenFunctions
+     * @param array<string> $forbiddenFunctions
      */
     public function __construct(
         private readonly array $forbiddenFunctions,
@@ -40,9 +42,6 @@ final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, Conf
     ) {
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return FuncCall::class;
@@ -50,7 +49,6 @@ final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, Conf
 
     /**
      * @param FuncCall $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -72,7 +70,7 @@ final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, Conf
             }
 
             $errorMessage = $this->createErrorMessage($requiredWithMessage, $funcName);
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];

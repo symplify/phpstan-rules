@@ -9,6 +9,7 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\ClassLike;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Composer\ClassNamespaceMatcher;
 use Symplify\PHPStanRules\Composer\ComposerAutoloadResolver;
 use Symplify\PHPStanRules\Composer\Psr4PathValidator;
@@ -17,6 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<ClassLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckClassNamespaceFollowPsr4Rule\CheckClassNamespaceFollowPsr4RuleTest
  */
 final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInterface
@@ -49,7 +51,6 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
 
     /**
      * @param ClassLike $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -87,7 +88,7 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
         $namespacePart = substr($namespaceBeforeClass, 0, -1);
         $errorMessage = sprintf(self::ERROR_MESSAGE, $namespacePart);
 
-        return [$errorMessage];
+        return [RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

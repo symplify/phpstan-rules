@@ -8,11 +8,13 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireAttributeNamespaceRule\RequireAttributeNamespaceRuleTest
  */
 final class RequireAttributeNamespaceRule implements Rule, DocumentedRuleInterface
@@ -59,7 +61,6 @@ CODE_SAMPLE
 
     /**
      * @param InClassNode $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -74,6 +75,6 @@ CODE_SAMPLE
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 }

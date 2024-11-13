@@ -11,6 +11,7 @@ use PhpParser\Node\Scalar\EncapsedStringPart;
 use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
@@ -45,17 +46,11 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
         $this->forbiddenNodes = $forbiddenNodes;
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return Node::class;
     }
 
-    /**
-     * @return string[]
-     */
     public function processNode(Node $node, Scope $scope): array
     {
         foreach ($this->forbiddenNodes as $forbiddenNode) {
@@ -72,7 +67,7 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $contents);
 
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];

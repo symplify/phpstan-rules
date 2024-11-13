@@ -14,6 +14,7 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPUnit\Framework\TestCase;
 use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
@@ -23,6 +24,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
 final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
@@ -42,9 +44,6 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
     ) {
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return InClassNode::class;
@@ -52,7 +51,6 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
 
     /**
      * @param InClassNode $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -69,7 +67,7 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
         $docComment = $node->getDocComment();
         $errorMessage = sprintf(self::ERROR_MESSAGE, $classReflection->getName());
         if (! $docComment instanceof Doc) {
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         $resolvedPhpDocBlock = $this->phpDocResolver->resolve($scope, $classReflection, $docComment);
@@ -85,7 +83,7 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
             return [];
         }
 
-        return [$errorMessage];
+        return [RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

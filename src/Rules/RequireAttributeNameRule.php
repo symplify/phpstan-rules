@@ -10,7 +10,6 @@ use PhpParser\Node\AttributeGroup;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -65,7 +64,6 @@ CODE_SAMPLE
 
     /**
      * @param AttributeGroup $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {

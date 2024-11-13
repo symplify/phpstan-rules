@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -38,9 +39,6 @@ final class NoTestMocksRule implements Rule, DocumentedRuleInterface
     ) {
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return MethodCall::class;
@@ -71,7 +69,7 @@ final class NoTestMocksRule implements Rule, DocumentedRuleInterface
 
         $errorMessage = sprintf(self::ERROR_MESSAGE, $mockedObjectType->getClassName());
 
-        return [$errorMessage];
+        return [RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

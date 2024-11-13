@@ -14,6 +14,7 @@ use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Expr\StaticPropertyFetch;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -50,7 +51,6 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
 
     /**
      * @param MethodCall|StaticCall|FuncCall|StaticPropertyFetch|PropertyFetch|ClassConstFetch $node
-     * @return string[]
      */
     public function process(Node $node, Scope $scope): array
     {
@@ -67,7 +67,7 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
                 return [];
             }
 
-            return [self::ERROR_MESSAGE];
+            return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
         }
 
         if (! $node->name instanceof Expr) {
@@ -78,7 +78,7 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

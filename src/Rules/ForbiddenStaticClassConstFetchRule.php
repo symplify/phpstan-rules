@@ -9,11 +9,13 @@ use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<ClassConstFetch>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenStaticClassConstFetchRule\ForbiddenStaticClassConstFetchRuleTest
  */
 final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleInterface
@@ -23,9 +25,6 @@ final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleIn
      */
     public const ERROR_MESSAGE = 'Avoid static access of constants, as they can change value. Use interface and contract method instead';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return ClassConstFetch::class;
@@ -33,7 +32,6 @@ final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleIn
 
     /**
      * @param ClassConstFetch $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -45,7 +43,7 @@ final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleIn
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

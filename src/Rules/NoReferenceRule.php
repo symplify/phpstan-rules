@@ -15,9 +15,11 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\Function_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use function array_map;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReferenceRule\NoReferenceRuleTest
@@ -34,9 +36,6 @@ final class NoReferenceRule extends AbstractSymplifyRule
     ) {
     }
 
-    /**
-     * @return array<class-string<Node>>
-     */
     public function getNodeTypes(): array
     {
         return [
@@ -53,7 +52,6 @@ final class NoReferenceRule extends AbstractSymplifyRule
 
     /**
      * @param ClassMethod|Function_|AssignRef|Arg|Foreach_|ArrayItem|ArrowFunction|Closure $node
-     * @return string[]
      */
     public function process(Node $node, Scope $scope): array
     {
@@ -68,7 +66,10 @@ final class NoReferenceRule extends AbstractSymplifyRule
         $paramErrorMessage = $this->collectParamErrorMessages($node, $scope);
         $errorMessages = array_merge($errorMessages, $paramErrorMessage);
 
-        return array_unique($errorMessages);
+        return array_map(
+            static fn ($message) => RuleErrorBuilder::message($message)->build(),
+            array_unique($errorMessages),
+        );
     }
 
     public function getRuleDefinition(): RuleDefinition
