@@ -22,6 +22,7 @@ jobs:
 
                     -
                         name: 'Rector'
+                        if: ${{ false }} # Temporarily disabled as it is not compatible with PHPStan 2.0
                         run: composer rector --ansi
 
                     -
@@ -34,6 +35,7 @@ jobs:
 
                     -
                         name: 'Check Active Classes'
+                        if: ${{ false }} # Temporarily disabled as it is not compatible with PHPStan 2.0
                         run: vendor/bin/class-leak check src --ansi
 
         name: ${{ matrix.actions.name }}
