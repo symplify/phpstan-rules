@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use PHPStan\Rules\RuleError;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\ArrayItem;
@@ -67,7 +68,7 @@ final class NoReferenceRule extends AbstractSymplifyRule
         $errorMessages = array_merge($errorMessages, $paramErrorMessage);
 
         return array_map(
-            static fn ($message) => RuleErrorBuilder::message($message)->build(),
+            static fn ($message): RuleError => RuleErrorBuilder::message($message)->build(),
             array_unique($errorMessages),
         );
     }

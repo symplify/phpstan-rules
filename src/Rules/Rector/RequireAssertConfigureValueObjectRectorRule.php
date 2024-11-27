@@ -102,16 +102,16 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
             return false;
         }
 
-        foreach ($extendedMethodReflection->getVariants() as $parametersAcceptorWithPhpDoc) {
-            if (! $parametersAcceptorWithPhpDoc instanceof FunctionVariantWithPhpDocs) {
+        foreach ($extendedMethodReflection->getVariants() as $variant) {
+            if (! $variant instanceof FunctionVariantWithPhpDocs) {
                 continue;
             }
 
-            if ($parametersAcceptorWithPhpDoc->getParameters() === []) {
+            if ($variant->getParameters() === []) {
                 continue;
             }
 
-            $configurationParameterReflection = $parametersAcceptorWithPhpDoc->getParameters()[0];
+            $configurationParameterReflection = $variant->getParameters()[0];
             $phpDocType = $configurationParameterReflection->getPhpDocType();
             if (! $phpDocType instanceof ArrayType) {
                 continue;

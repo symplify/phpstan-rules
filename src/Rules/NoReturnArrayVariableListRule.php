@@ -154,7 +154,7 @@ CODE_SAMPLE
                 continue;
             }
 
-            if ($item->unpack === true) {
+            if ($item->unpack) {
                 continue;
             }
 
