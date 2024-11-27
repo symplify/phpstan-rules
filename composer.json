@@ -16,6 +16,7 @@
         "phpunit/phpunit": "^10.5",
         "symfony/framework-bundle": "6.1.*",
         "symplify/easy-coding-standard": "^12.3",
+        "tomasvotruba/class-leak": "^1.2",
         "rector/rector": "dev-main as 1.2.10",
         "phpstan/extension-installer": "^1.4"
     },
