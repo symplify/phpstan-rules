@@ -88,7 +88,7 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
         $namespacePart = substr($namespaceBeforeClass, 0, -1);
         $errorMessage = sprintf(self::ERROR_MESSAGE, $namespacePart);
 
-        return [RuleErrorBuilder::message($errorMessage)->build()];
+        return [RuleErrorBuilder::message($errorMessage)->identifier('check.classnamespacepsr4')->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition
