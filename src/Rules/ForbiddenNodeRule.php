@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ForbiddenNodeRule implements Rule
 {
     /**
      * @var string
@@ -34,7 +34,10 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
      */
     private array $forbiddenNodes = [];
 
-    private readonly Standard $standard;
+    /**
+     * @readonly
+     */
+    private Standard $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes

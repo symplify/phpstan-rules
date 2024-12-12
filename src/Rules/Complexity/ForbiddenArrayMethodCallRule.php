@@ -20,7 +20,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<Array_>
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenArrayMethodCallRule\ForbiddenArrayMethodCallRuleTest
  */
-final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayMethodCallRule implements Rule
 {
     /**
      * @var string

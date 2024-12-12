@@ -27,8 +27,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
-final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class SeeAnnotationToTestRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private PhpDocResolver $phpDocResolver;
+    /**
+     * @readonly
+     */
+    private SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder;
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private array $requiredSeeTypes;
     /**
      * @var string
      */
@@ -37,11 +50,11 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
     /**
      * @param string[] $requiredSeeTypes
      */
-    public function __construct(
-        private readonly PhpDocResolver $phpDocResolver,
-        private readonly SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
-        private readonly array $requiredSeeTypes
-    ) {
+    public function __construct(PhpDocResolver $phpDocResolver, SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder, array $requiredSeeTypes)
+    {
+        $this->phpDocResolver = $phpDocResolver;
+        $this->seePhpDocTagNodesFinder = $seePhpDocTagNodesFinder;
+        $this->requiredSeeTypes = $requiredSeeTypes;
     }
 
     public function getNodeType(): string

@@ -25,8 +25,12 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<Return_>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnArrayVariableListRule\NoReturnArrayVariableListRuleTest
  */
-final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterface
+final class NoReturnArrayVariableListRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private ParentClassMethodNodeResolver $parentClassMethodNodeResolver;
     /**
      * @var string
      */
@@ -38,9 +42,9 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
      */
     private const TESTS_DIRECTORY_REGEX = '#\/Tests\/#i';
 
-    public function __construct(
-        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
-    ) {
+    public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
+    {
+        $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;
     }
 
     public function getNodeType(): string
@@ -115,11 +119,11 @@ CODE_SAMPLE
             return true;
         }
 
-        if (str_contains($namespace, 'Enum')) {
+        if (strpos($namespace, 'Enum') !== false) {
             return true;
         }
 
-        if (str_contains($namespace, 'ValueObject')) {
+        if (strpos($namespace, 'ValueObject') !== false) {
             return true;
         }
 

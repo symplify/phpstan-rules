@@ -10,9 +10,13 @@ use Symplify\PHPStanRules\ValueObject\ClassNamespaceAndDirectory;
 
 final class ClassNamespaceMatcher
 {
-    public function __construct(
-        private readonly DirectoryChecker $directoryChecker
-    ) {
+    /**
+     * @readonly
+     */
+    private DirectoryChecker $directoryChecker;
+    public function __construct(DirectoryChecker $directoryChecker)
+    {
+        $this->directoryChecker = $directoryChecker;
     }
 
     /**
@@ -54,7 +58,7 @@ final class ClassNamespaceMatcher
      * @param string|string[] $items
      * @return string[]
      */
-    private function standardizeToArray(string | array $items): array
+    private function standardizeToArray($items): array
     {
         if (! is_array($items)) {
             return [$items];

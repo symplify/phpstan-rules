@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckRequiredInterfaceInContractNamespaceRule\CheckRequiredInterfaceInContractNamespaceRuleTest
  * @implements Rule<Interface_>
  */
-final class CheckRequiredInterfaceInContractNamespaceRule implements Rule, DocumentedRuleInterface
+final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
 {
     /**
      * @var string

@@ -25,8 +25,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<FuncCall>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule\ForbiddenFuncCallRuleTest
  */
-final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ForbiddenFuncCallRule implements Rule
 {
+    /**
+     * @var array<string>
+     * @readonly
+     */
+    private array $forbiddenFunctions;
+    /**
+     * @readonly
+     */
+    private ArrayStringAndFnMatcher $arrayStringAndFnMatcher;
+    /**
+     * @readonly
+     */
+    private RequiredWithMessageFormatter $requiredWithMessageFormatter;
     /**
      * @var string
      */
@@ -35,11 +48,11 @@ final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, Conf
     /**
      * @param array<string> $forbiddenFunctions
      */
-    public function __construct(
-        private readonly array $forbiddenFunctions,
-        private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
-        private readonly RequiredWithMessageFormatter $requiredWithMessageFormatter,
-    ) {
+    public function __construct(array $forbiddenFunctions, ArrayStringAndFnMatcher $arrayStringAndFnMatcher, RequiredWithMessageFormatter $requiredWithMessageFormatter)
+    {
+        $this->forbiddenFunctions = $forbiddenFunctions;
+        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
+        $this->requiredWithMessageFormatter = $requiredWithMessageFormatter;
     }
 
     public function getNodeType(): string
