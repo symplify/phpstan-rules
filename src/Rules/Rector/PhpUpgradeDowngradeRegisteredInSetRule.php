@@ -11,6 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Rector\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Contract\Rector\RectorInterface;
 use Rector\Set\ValueObject\DowngradeSetList;
@@ -64,7 +65,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         }
 
         $errorMessage = $this->createErrorMessage($configFilePath, $className);
-        return [\PHPStan\Rules\RuleErrorBuilder::message($errorMessage)->build()];
+        return [RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     private function resolveRelatedConfigFilePath(string $className): ?string
