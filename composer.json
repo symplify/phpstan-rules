@@ -11,13 +11,13 @@
         "symplify/rule-doc-generator-contracts": "^11.2"
     },
     "require-dev": {
-        "nikic/php-parser": "^4.19",
+        "nikic/php-parser": "^5.0",
         "symplify/rule-doc-generator": "^12.2",
         "phpunit/phpunit": "^10.5",
         "symfony/framework-bundle": "6.1.*",
         "symplify/easy-coding-standard": "^12.3",
         "tomasvotruba/class-leak": "^1.2",
-        "rector/rector": "dev-main as 1.2.10",
+        "rector/rector": "^2.0",
         "phpstan/extension-installer": "^1.4"
     },
     "autoload": {
