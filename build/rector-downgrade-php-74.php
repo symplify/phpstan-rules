@@ -11,7 +11,7 @@ use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->parallel();
 
-    $rectorConfig->sets([DowngradeLevelSetList::DOWN_TO_PHP_72]);
+    $rectorConfig->sets([DowngradeLevelSetList::DOWN_TO_PHP_74]);
 
     $rectorConfig->ruleWithConfiguration(RemoveInterfacesRector::class, [
         DocumentedRuleInterface::class,

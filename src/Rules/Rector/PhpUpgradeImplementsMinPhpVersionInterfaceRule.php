@@ -10,6 +10,7 @@ use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Rector\VersionBonding\Contract\MinPhpVersionInterface;
 
 /**
@@ -37,7 +38,6 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
 
     /**
      * @param Class_ $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -64,6 +64,6 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
             return [];
         }
 
-        return [sprintf(self::ERROR_MESSAGE, $className)];
+        return [RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className))->build()];
     }
 }

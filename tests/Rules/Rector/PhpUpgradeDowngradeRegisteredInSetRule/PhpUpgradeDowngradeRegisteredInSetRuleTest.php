@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule;
 
+use Rector\Contract\Rector\RectorInterface;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
@@ -20,6 +21,10 @@ final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
+        if (! class_exists(RectorInterface::class)) {
+            $this->markTestIncomplete('Skip this test because Rector is not installed');
+        }
+
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 

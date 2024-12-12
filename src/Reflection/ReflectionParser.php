@@ -31,7 +31,7 @@ final class ReflectionParser
         private readonly TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
         $parserFactory = new ParserFactory();
-        $this->parser = $parserFactory->create(ParserFactory::PREFER_PHP7);
+        $this->parser = $parserFactory->createForNewestSupportedVersion();
     }
 
     public function parseMethodReflection(ReflectionMethod|MethodReflection $reflectionMethod): ?ClassMethod

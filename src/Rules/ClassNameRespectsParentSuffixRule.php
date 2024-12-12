@@ -12,6 +12,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleError;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPUnit\Framework\TestCase;
 use Rector\Rector\AbstractRector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +25,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\ClassNameRespectsParentSuffixRule\ClassNameRespectsParentSuffixRuleTest
  */
 final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
@@ -62,9 +65,6 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
         $this->parentClasses = array_merge($parentClasses, self::DEFAULT_PARENT_CLASSES);
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return InClassNode::class;
@@ -72,7 +72,6 @@ final class ClassNameRespectsParentSuffixRule implements Rule, DocumentedRuleInt
 
     /**
      * @param InClassNode $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -117,7 +116,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return array<int, string>
+     * @return list<RuleError>
      */
     private function processClassNameAndShort(ClassReflection $classReflection): array
     {
@@ -132,7 +131,7 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $expectedSuffix);
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];

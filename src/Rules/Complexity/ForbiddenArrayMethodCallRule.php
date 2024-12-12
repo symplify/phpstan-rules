@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\TypeWithClassName;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -16,6 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<Array_>
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenArrayMethodCallRule\ForbiddenArrayMethodCallRuleTest
  */
 final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterface
@@ -25,9 +27,6 @@ final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterfac
      */
     public const ERROR_MESSAGE = 'Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return Array_::class;
@@ -35,7 +34,6 @@ final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterfac
 
     /**
      * @param Array_ $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -58,7 +56,7 @@ final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterfac
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

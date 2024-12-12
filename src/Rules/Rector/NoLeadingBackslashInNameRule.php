@@ -11,6 +11,7 @@ use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Name\Relative;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 
 /**
@@ -32,7 +33,6 @@ final class NoLeadingBackslashInNameRule implements Rule
 
     /**
      * @param New_ $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -60,6 +60,6 @@ final class NoLeadingBackslashInNameRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 }

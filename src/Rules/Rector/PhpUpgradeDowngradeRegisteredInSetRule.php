@@ -43,7 +43,6 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
 
     /**
      * @param InClassNode $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -65,7 +64,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         }
 
         $errorMessage = $this->createErrorMessage($configFilePath, $className);
-        return [$errorMessage];
+        return [RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     private function resolveRelatedConfigFilePath(string $className): ?string

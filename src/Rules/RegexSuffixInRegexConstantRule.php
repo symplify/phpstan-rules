@@ -12,6 +12,8 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleError;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -19,6 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\RegexSuffixInRegexConstantRule\RegexSuffixInRegexConstantRuleTest
  */
 final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterface
@@ -34,17 +37,13 @@ final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterf
     ) {
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return CallLike::class;
     }
 
     /**
-     * @param Expr\CallLike $node
-     * @return mixed[]|string[]
+     * @param CallLike $node
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -91,7 +90,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processConstantName(Expr $expr): array
     {
@@ -109,11 +108,11 @@ CODE_SAMPLE
         }
 
         $errorMessage = sprintf(self::ERROR_MESSAGE, $constantName);
-        return [$errorMessage];
+        return [RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processStaticCall(StaticCall $staticCall): array
     {
@@ -126,7 +125,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processFuncCall(FuncCall $funcCall): array
     {

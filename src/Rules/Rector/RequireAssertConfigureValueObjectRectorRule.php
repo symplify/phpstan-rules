@@ -15,6 +15,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\FunctionVariantWithPhpDocs;
 use PHPStan\Reflection\Php\PhpMethodReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\TypeWithClassName;
 use Webmozart\Assert\Assert;
@@ -45,7 +46,6 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
 
     /**
      * @param ClassMethod $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -66,7 +66,7 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     private function hasAssertAllIsAOfStaticCall(ClassMethod $classMethod): bool
@@ -102,16 +102,16 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
             return false;
         }
 
-        foreach ($extendedMethodReflection->getVariants() as $parametersAcceptorWithPhpDoc) {
-            if (! $parametersAcceptorWithPhpDoc instanceof FunctionVariantWithPhpDocs) {
+        foreach ($extendedMethodReflection->getVariants() as $variant) {
+            if (! $variant instanceof FunctionVariantWithPhpDocs) {
                 continue;
             }
 
-            if ($parametersAcceptorWithPhpDoc->getParameters() === []) {
+            if ($variant->getParameters() === []) {
                 continue;
             }
 
-            $configurationParameterReflection = $parametersAcceptorWithPhpDoc->getParameters()[0];
+            $configurationParameterReflection = $variant->getParameters()[0];
             $phpDocType = $configurationParameterReflection->getPhpDocType();
             if (! $phpDocType instanceof ArrayType) {
                 continue;

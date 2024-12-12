@@ -11,11 +11,13 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\ClassConst;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<ClassConst>
  * @see \Symplify\PHPStanRules\Tests\Rules\AnnotateRegexClassConstWithRegexLinkRule\AnnotateRegexClassConstWithRegexLinkRuleTest
  */
 final class AnnotateRegexClassConstWithRegexLinkRule implements Rule, DocumentedRuleInterface
@@ -31,9 +33,6 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule, Documented
      */
     private const ALL_MODIFIERS = 'imsxeADSUXJu';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return ClassConst::class;
@@ -41,7 +40,6 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule, Documented
 
     /**
      * @param ClassConst $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -69,7 +67,7 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule, Documented
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

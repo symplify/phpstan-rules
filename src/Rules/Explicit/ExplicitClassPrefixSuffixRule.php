@@ -12,12 +12,14 @@ use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Trait_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use function str_ends_with;
 
 /**
+ * @implements Rule<ClassLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\ExplicitClassPrefixSuffixRule\ExplicitClassPrefixSuffixRuleTest
  */
 final class ExplicitClassPrefixSuffixRule implements Rule, DocumentedRuleInterface
@@ -40,9 +42,6 @@ final class ExplicitClassPrefixSuffixRule implements Rule, DocumentedRuleInterfa
      */
     public const ABSTRACT_ERROR_MESSAGE = 'Abstract class must be prefixed by "Abstract" exclusively';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return ClassLike::class;
@@ -89,7 +88,6 @@ CODE_SAMPLE
 
     /**
      * @param ClassLike $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -113,7 +111,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processInterfaceSuffix(Identifier $identifier): array
     {
@@ -122,14 +120,14 @@ CODE_SAMPLE
         }
 
         if (str_ends_with($identifier->toString(), 'Trait')) {
-            return [self::TRAIT_ERROR_MESSAGE];
+            return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)->build()];
         }
 
-        return [self::INTERFACE_ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)->build()];
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processTraitSuffix(Identifier $identifier): array
     {
@@ -137,28 +135,28 @@ CODE_SAMPLE
             return [];
         }
 
-        return [self::TRAIT_ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)->build()];
     }
 
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processClassSuffix(Identifier $identifier, bool $isAbstract): array
     {
         if ($isAbstract && ! str_starts_with($identifier->toString(), 'Abstract')) {
-            return [self::ABSTRACT_ERROR_MESSAGE];
+            return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)->build()];
         }
 
         if (! $isAbstract && str_starts_with($identifier->toString(), 'Abstract')) {
-            return [self::ABSTRACT_ERROR_MESSAGE];
+            return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)->build()];
         }
 
         if (str_ends_with($identifier->toString(), 'Interface')) {
-            return [self::INTERFACE_ERROR_MESSAGE];
+            return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)->build()];
         }
 
         if (str_ends_with($identifier->toString(), 'Trait')) {
-            return [self::TRAIT_ERROR_MESSAGE];
+            return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)->build()];
         }
 
         return [];

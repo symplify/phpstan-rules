@@ -8,11 +8,13 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassConst;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<ClassConst>
  * @see \Symplify\PHPStanRules\Tests\Rules\UppercaseConstantRule\UppercaseConstantRuleTest
  */
 final class UppercaseConstantRule implements Rule, DocumentedRuleInterface
@@ -22,9 +24,6 @@ final class UppercaseConstantRule implements Rule, DocumentedRuleInterface
      */
     public const ERROR_MESSAGE = 'Constant "%s" must be uppercase';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return ClassConst::class;
@@ -32,7 +31,6 @@ final class UppercaseConstantRule implements Rule, DocumentedRuleInterface
 
     /**
      * @param ClassConst $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -43,7 +41,7 @@ final class UppercaseConstantRule implements Rule, DocumentedRuleInterface
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $constantName);
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];

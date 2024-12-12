@@ -4,9 +4,9 @@
     "description": "Set of Symplify rules for PHPStan",
     "license": "MIT",
     "require": {
-        "php": "^7.2|^8.0",
+        "php": "^7.4|^8.0",
         "nette/utils": "^3.2.9 || ^4.0",
-        "phpstan/phpstan": "^1.10.30",
+        "phpstan/phpstan": "^2.0",
         "webmozart/assert": "^1.11"
     },
     "autoload": {
