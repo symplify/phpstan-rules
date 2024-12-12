@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule;
 
-use Rector\Contract\Rector\RectorInterface;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Rector\Contract\Rector\RectorInterface;
 use Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule;
 use Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\Fixture\DowngradePhp80\SomePhpFeature2Rector;
 use Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\Fixture\Php80\SomePhpFeatureRector;
