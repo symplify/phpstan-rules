@@ -24,17 +24,25 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoInlineStringRegexRule\NoInlineStringRegexRuleTest
  */
-final class NoInlineStringRegexRule implements Rule, DocumentedRuleInterface
+final class NoInlineStringRegexRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private RegexFuncCallAnalyzer $regexFuncCallAnalyzer;
+    /**
+     * @readonly
+     */
+    private RegexStaticCallAnalyzer $regexStaticCallAnalyzer;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
 
-    public function __construct(
-        private readonly RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private readonly RegexStaticCallAnalyzer $regexStaticCallAnalyzer
-    ) {
+    public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
+    {
+        $this->regexFuncCallAnalyzer = $regexFuncCallAnalyzer;
+        $this->regexStaticCallAnalyzer = $regexStaticCallAnalyzer;
     }
 
     public function getNodeType(): string

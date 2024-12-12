@@ -18,8 +18,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @implements Rule<MethodCall>
  */
-final class NoTestMocksRule implements Rule, DocumentedRuleInterface
+final class NoTestMocksRule implements Rule
 {
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private array $allowedTypes = [];
     /**
      * @api
      * @var string
@@ -34,9 +39,9 @@ final class NoTestMocksRule implements Rule, DocumentedRuleInterface
     /**
      * @param string[] $allowedTypes
      */
-    public function __construct(
-        private readonly array $allowedTypes = []
-    ) {
+    public function __construct(array $allowedTypes = [])
+    {
+        $this->allowedTypes = $allowedTypes;
     }
 
     public function getNodeType(): string

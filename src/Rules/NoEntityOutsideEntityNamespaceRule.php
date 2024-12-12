@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @implements Rule<Class_>
  */
-final class NoEntityOutsideEntityNamespaceRule implements Rule, DocumentedRuleInterface
+final class NoEntityOutsideEntityNamespaceRule implements Rule
 {
     /**
      * @var string

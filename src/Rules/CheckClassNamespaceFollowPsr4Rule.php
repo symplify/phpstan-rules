@@ -21,8 +21,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<ClassLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckClassNamespaceFollowPsr4Rule\CheckClassNamespaceFollowPsr4RuleTest
  */
-final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInterface
+final class CheckClassNamespaceFollowPsr4Rule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private Psr4PathValidator $psr4PathValidator;
+    /**
+     * @readonly
+     */
+    private ClassNamespaceMatcher $classNamespaceMatcher;
     /**
      * @var string
      */
@@ -35,9 +43,11 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
 
     public function __construct(
         ComposerAutoloadResolver $composerAutoloadResolver,
-        private readonly Psr4PathValidator $psr4PathValidator,
-        private readonly ClassNamespaceMatcher $classNamespaceMatcher
+        Psr4PathValidator $psr4PathValidator,
+        ClassNamespaceMatcher $classNamespaceMatcher
     ) {
+        $this->psr4PathValidator = $psr4PathValidator;
+        $this->classNamespaceMatcher = $classNamespaceMatcher;
         $this->autoloadPsr4Paths = $composerAutoloadResolver->getPsr4Autoload();
     }
 
