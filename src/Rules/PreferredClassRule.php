@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @implements Rule<>
+ * @implements Rule<Node>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
  */
 final class PreferredClassRule extends AbstractSymplifyRule implements ConfigurableRuleInterface

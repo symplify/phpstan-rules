@@ -3,6 +3,8 @@ includes:
     - config/naming-rules.neon
 
 parameters:
+    treatPhpDocTypesAsCertain: false
+
     level: 8
 
     paths:
@@ -38,8 +40,6 @@ parameters:
 
         - '#Method Symplify\\PHPStanRules\\Reflection\\ReflectionParser\:\:parseNativeClassReflection\(\) has parameter \$reflectionClass with generic class ReflectionClass but does not specify its types\: T#'
 
-        - '#Method Symplify\\PHPStanRules\\NodeFinder\\TypeAwareNodeFinder\:\:findFirstInstanceOf\(\) should return \(TNode of PhpParser\\Node\)\|null but returns PhpParser\\Node\|null#'
-
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\(.*?) extends generic class PHPStan\\Testing\\RuleTestCase but does not specify its types\: TRule#'
         - '#Method Symplify\\PHPStanRules\\(.*?)\:\:getRule\(\) return type with generic interface PHPStan\\Rules\\Rule does not specify its types\: TNodeType#'
@@ -50,5 +50,26 @@ parameters:
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\Collector\\(.*?) implements generic interface PHPStan\\Collectors\\Collector but does not specify its types\: TNodeType, TValue#'
 
-        # used in tests
-        - '#Public constant "(.*?)\:\:ERROR_MESSAGE" is never used#'
+        -
+            identifier: argument.type
+
+        -
+            identifier: phpstanApi.instanceofType
+
+        -
+            identifier: return.type
+
+        -
+            identifier: class.notFound
+
+        -
+            identifier: phpstanApi.runtimeReflection
+
+        -
+            identifier: phpstanApi.instanceofAssumption
+
+        -
+            identifier: generics.wrongParent
+
+        -
+            identifier: method.childReturnType

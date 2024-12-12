@@ -7,7 +7,7 @@ namespace Symplify\PHPStanRules\Rules;
 use PHPStan\Rules\RuleError;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
-use PhpParser\Node\Expr\ArrayItem;
+use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr\ArrowFunction;
 use PhpParser\Node\Expr\AssignRef;
 use PhpParser\Node\Expr\Closure;
