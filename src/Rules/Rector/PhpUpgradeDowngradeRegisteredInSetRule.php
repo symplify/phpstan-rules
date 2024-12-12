@@ -64,7 +64,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         }
 
         $errorMessage = $this->createErrorMessage($configFilePath, $className);
-        return [RuleErrorBuilder::message($errorMessage)->build()];
+        return [\PHPStan\Rules\RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     private function resolveRelatedConfigFilePath(string $className): ?string

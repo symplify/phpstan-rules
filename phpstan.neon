@@ -61,6 +61,7 @@ parameters:
 
         -
             identifier: class.notFound
+            path: tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest.php
 
         -
             identifier: phpstanApi.runtimeReflection

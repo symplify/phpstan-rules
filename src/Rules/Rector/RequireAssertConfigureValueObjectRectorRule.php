@@ -12,7 +12,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
-use PHPStan\Reflection\FunctionVariantWithPhpDocs;
+use PHPStan\Reflection\ExtendedFunctionVariant;
 use PHPStan\Reflection\Php\PhpMethodReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -103,7 +103,7 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
         }
 
         foreach ($extendedMethodReflection->getVariants() as $variant) {
-            if (! $variant instanceof FunctionVariantWithPhpDocs) {
+            if (! $variant instanceof ExtendedFunctionVariant) {
                 continue;
             }
 
