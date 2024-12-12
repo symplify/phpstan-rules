@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireAttributeNamespaceRule\RequireAttributeNamespaceRuleTest
  */
-final class RequireAttributeNamespaceRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNamespaceRule implements Rule
 {
     /**
      * @var string
@@ -71,7 +71,7 @@ CODE_SAMPLE
 
         // is class in "Attribute" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Attribute\\')) {
+        if (strpos($className, '\\Attribute\\') !== false) {
             return [];
         }
 

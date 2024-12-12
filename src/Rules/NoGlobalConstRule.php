@@ -17,7 +17,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @implements Rule<Const_>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoGlobalConstRule\NoGlobalConstRuleTest
  */
-final class NoGlobalConstRule implements Rule, DocumentedRuleInterface
+final class NoGlobalConstRule implements Rule
 {
     /**
      * @var string

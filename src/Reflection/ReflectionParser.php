@@ -21,20 +21,31 @@ use Throwable;
 final class ReflectionParser
 {
     /**
+     * @readonly
+     */
+    private TypeAwareNodeFinder $typeAwareNodeFinder;
+    /**
      * @var array<string, ClassLike>
      */
     private array $classesByFilename = [];
 
-    private readonly Parser $parser;
+    /**
+     * @readonly
+     */
+    private Parser $parser;
 
     public function __construct(
-        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
+        TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
         $parserFactory = new ParserFactory();
         $this->parser = $parserFactory->createForNewestSupportedVersion();
     }
 
-    public function parseMethodReflection(ReflectionMethod|MethodReflection $reflectionMethod): ?ClassMethod
+    /**
+     * @param \ReflectionMethod|\PHPStan\Reflection\MethodReflection $reflectionMethod
+     */
+    public function parseMethodReflection($reflectionMethod): ?ClassMethod
     {
         $classLike = $this->parseNativeClassReflection($reflectionMethod->getDeclaringClass());
         if (! $classLike instanceof ClassLike) {
@@ -57,7 +68,10 @@ final class ReflectionParser
         return $this->parseFilenameToClass($fileName);
     }
 
-    private function parseNativeClassReflection(ReflectionClass|ClassReflection $reflectionClass): ?ClassLike
+    /**
+     * @param \ReflectionClass|\PHPStan\Reflection\ClassReflection $reflectionClass
+     */
+    private function parseNativeClassReflection($reflectionClass): ?ClassLike
     {
         $fileName = $reflectionClass->getFileName();
         if ($fileName === false) {
@@ -71,7 +85,7 @@ final class ReflectionParser
         return $this->parseFilenameToClass($fileName);
     }
 
-    private function parseFilenameToClass(string $fileName): ClassLike|null
+    private function parseFilenameToClass(string $fileName): ?\PhpParser\Node\Stmt\ClassLike
     {
         if (isset($this->classesByFilename[$fileName])) {
             return $this->classesByFilename[$fileName];
@@ -87,7 +101,7 @@ final class ReflectionParser
             $nodeTraverser = new NodeTraverser();
             $nodeTraverser->addVisitor(new NameResolver());
             $nodeTraverser->traverse($stmts);
-        } catch (Throwable) {
+        } catch (Throwable $exception) {
             // not reachable
             return null;
         }

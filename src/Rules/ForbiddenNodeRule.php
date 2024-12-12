@@ -22,8 +22,12 @@ use Webmozart\Assert\Assert;
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ForbiddenNodeRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private Standard $standard;
     /**
      * @var string
      */
@@ -38,9 +42,10 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        private readonly Standard $standard,
+        Standard $standard,
         array $forbiddenNodes
     ) {
+        $this->standard = $standard;
         Assert::allIsAOf($forbiddenNodes, Node::class);
 
         $this->forbiddenNodes = $forbiddenNodes;

@@ -12,10 +12,18 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 
 final class ParentClassMethodNodeResolver
 {
-    public function __construct(
-        private readonly ReflectionParser $reflectionParser,
-        private readonly ReflectionProvider $reflectionProvider
-    ) {
+    /**
+     * @readonly
+     */
+    private ReflectionParser $reflectionParser;
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+    public function __construct(ReflectionParser $reflectionParser, ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionParser = $reflectionParser;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function resolveParentClassMethod(Scope $scope, string $methodName): ?ClassMethod
