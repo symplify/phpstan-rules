@@ -15,6 +15,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
 use Symplify\PHPStanRules\Testing\StaticPHPUnitEnvironment;
 
@@ -67,7 +68,11 @@ final class NoReturnArrayVariableListRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_RETURN_ARRAY_VARIABLE_LIST)
+            ->build();
+
+        return [$ruleError];
     }
 
     private function shouldSkip(Scope $scope, Return_ $return): bool

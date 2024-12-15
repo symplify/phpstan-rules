@@ -12,6 +12,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Rector\VersionBonding\Contract\MinPhpVersionInterface;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Rector\PHPStanRules\Tests\Rule\PhpUpgradeImplementsMinPhpVersionInterfaceRule\PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest
@@ -64,6 +65,10 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className))->build()];
+        $ruleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className))
+            ->identifier(RuleIdentifier::RECTOR_PHP_RULE_IMPLEMENTS_MIN_VERSION)
+            ->build();
+
+        return [$ruleError];
     }
 }

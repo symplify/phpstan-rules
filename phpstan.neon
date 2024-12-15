@@ -76,3 +76,8 @@ parameters:
         -
             message: '#Parameter \#2 \$expectedErrors of method PHPStan\\Testing\\RuleTestCase<(.*?)>::analyse\(\) expects list<array\{0: string, 1: int, 2\?: string\|null\}>, (.*?) given#'
             path: tests
+
+        # fast effective check
+        -
+            message: '#Function is_a\(\) is a runtime reflection concept that might not work in PHPStan because it uses fully static reflection engine#'
+            path: src/Rules/SeeAnnotationToTestRule.php

@@ -18,6 +18,8 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\TypeWithClassName;
+use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Webmozart\Assert\Assert;
 
 /**
@@ -54,7 +56,7 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
             return [];
         }
 
-        if (! $classReflection->isSubclassOf('Rector\Contract\Rector\ConfigurableRectorInterface')) {
+        if (! $classReflection->isSubclassOf(ClassName::CONFIGURABLE_RECTOR_INTERFACE)) {
             return [];
         }
 
@@ -66,7 +68,9 @@ final class RequireAssertConfigureValueObjectRectorRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::)
+            ->build()];
     }
 
     private function hasAssertAllIsAOfStaticCall(ClassMethod $classMethod): bool

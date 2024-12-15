@@ -14,6 +14,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\NoSingleInterfaceImplementerRuleTest
@@ -55,7 +56,7 @@ final class NoSingleInterfaceImplementerRule implements Rule
             return [];
         }
 
-        $errorMessages = [];
+        $ruleErrors = [];
         foreach ($onceImplementedInterfaces as $onceImplementedInterface) {
             $interfaceReflection = $this->reflectionProvider->getClass($onceImplementedInterface);
 
@@ -64,12 +65,13 @@ final class NoSingleInterfaceImplementerRule implements Rule
                 continue;
             }
 
-            $errorMessages[] = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $onceImplementedInterface))
+            $ruleErrors[] = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $onceImplementedInterface))
                 ->file($interfaceReflection->getFileName())
+                ->identifier(RuleIdentifier::NO_SINGLE_INTERFACE_IMPLEMENTER)
                 ->build();
         }
 
-        return $errorMessages;
+        return $ruleErrors;
     }
 
     /**

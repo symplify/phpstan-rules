@@ -9,6 +9,7 @@ use PhpParser\Node\Stmt\ClassConst;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassConst>
@@ -38,7 +39,9 @@ final class UppercaseConstantRule implements Rule
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $constantName);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::UPPERCASE_CONSTANT)
+                ->build()];
         }
 
         return [];

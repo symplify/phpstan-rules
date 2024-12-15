@@ -16,6 +16,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPUnit\Framework\TestCase;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
 
@@ -62,13 +63,16 @@ final class SeeAnnotationToTestRule implements Rule
 
         $docComment = $node->getDocComment();
         $errorMessage = sprintf(self::ERROR_MESSAGE, $classReflection->getName());
+
         if (! $docComment instanceof Doc) {
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::SEE_ANNOTATION_TO_TEST)
+                ->build()];
         }
 
         $resolvedPhpDocBlock = $this->phpDocResolver->resolve($scope, $classReflection, $docComment);
 
-        // skip deprectaed
+        // skip deprecated
         $deprecatedTags = $resolvedPhpDocBlock->getDeprecatedTag();
         if ($deprecatedTags instanceof DeprecatedTag) {
             return [];
@@ -79,7 +83,9 @@ final class SeeAnnotationToTestRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message($errorMessage)->build()];
+        return [RuleErrorBuilder::message($errorMessage)
+            ->identifier(RuleIdentifier::SEE_ANNOTATION_TO_TEST)
+            ->build()];
     }
 
     private function shouldSkipClassReflection(ClassReflection $classReflection): bool
