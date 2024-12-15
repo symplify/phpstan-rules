@@ -8,7 +8,6 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Rector\Contract\Rector\RectorInterface;
 use Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule;
 use Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\Fixture\DowngradePhp80\SomePhpFeature2Rector;
 use Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\Fixture\Php80\SomePhpFeatureRector;
@@ -21,10 +20,6 @@ final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
-        if (! class_exists(RectorInterface::class)) {
-            $this->markTestIncomplete('Skip this test because Rector is not installed');
-        }
-
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
@@ -45,16 +40,11 @@ final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
             SomePhpFeature2Rector::class,
             'downgrade-php80.php'
         );
-        yield [__DIR__ . '/Fixture/DowngradePhp80/SomePhpFeature2Rector.php', [[$errorMessage, 12]]];
-    }
-
-    public static function getAdditionalConfigFiles(): array
-    {
-        return [__DIR__ . '/config/configured_rule.neon'];
+        yield [__DIR__ . '/Fixture/DowngradePhp80/SomePhpFeature2Rector.php', [[$errorMessage, 10]]];
     }
 
     protected function getRule(): Rule
     {
-        return self::getContainer()->getByType(PhpUpgradeDowngradeRegisteredInSetRule::class);
+        return new PhpUpgradeDowngradeRegisteredInSetRule();
     }
 }

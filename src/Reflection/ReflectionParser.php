@@ -14,6 +14,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
+use Symplify\PHPStanRules\FileSystem\FileSystem;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Throwable;
 
@@ -77,7 +78,7 @@ final class ReflectionParser
         }
 
         try {
-            $stmts = $this->parser->parse(\Symplify\PHPStanRules\FileSystem\FileSystem::read($fileName));
+            $stmts = $this->parser->parse(FileSystem::read($fileName));
             if (! is_array($stmts)) {
                 return null;
             }

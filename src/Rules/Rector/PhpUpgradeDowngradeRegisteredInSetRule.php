@@ -11,13 +11,13 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Rector\Contract\Rector\ConfigurableRectorInterface;
-use Rector\Contract\Rector\RectorInterface;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Set\ValueObject\SetList;
 use SplFileInfo;
+use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
+use Symplify\PHPStanRules\FileSystem\FileSystem;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\PhpUpgradeDowngradeRegisteredInSetRuleTest
@@ -57,7 +57,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return [];
         }
 
-        $configContent = \Symplify\PHPStanRules\FileSystem\FileSystem::read($configFilePath);
+        $configContent = FileSystem::read($configFilePath);
 
         // is rule registered?
         if (str_contains($configContent, $className)) {
@@ -110,12 +110,12 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return null;
         }
 
-        if (! $classReflection->isSubclassOf(RectorInterface::class)) {
+        if (! $classReflection->isSubclassOf(ClassName::RECTOR)) {
             return null;
         }
 
         // configurable Rector can be registered optionally
-        if ($classReflection->isSubclassOf(ConfigurableRectorInterface::class)) {
+        if ($classReflection->isSubclassOf(ClassName::CONFIGURABLE_RECTOR)) {
             return null;
         }
 

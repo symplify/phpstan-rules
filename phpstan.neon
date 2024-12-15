@@ -28,16 +28,14 @@ parameters:
         properties: true
         constants: true
 
-    # type_coverage:
-    #     return: 99
-    #     param: 99
-    #     property: 99
+    type_coverage:
+        return: 99
+        param: 99
+        property: 99
 
     ignoreErrors:
         # needless generics
         - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
-
-        - '#Class PHP_CodeSniffer\\Sniffs\\Sniff not found#'
 
         - '#Method Symplify\\PHPStanRules\\Reflection\\ReflectionParser\:\:parseNativeClassReflection\(\) has parameter \$reflectionClass with generic class ReflectionClass but does not specify its types\: T#'
 
@@ -53,10 +51,6 @@ parameters:
 
         # useful to have IDE know the types
         - identifier: phpstanApi.instanceofType
-
-        -
-            identifier: class.notFound
-            path: tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest.php
 
         # overly detailed
         -

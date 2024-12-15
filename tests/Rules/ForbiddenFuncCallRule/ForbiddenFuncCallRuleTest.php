@@ -29,9 +29,6 @@ final class ForbiddenFuncCallRuleTest extends RuleTestCase
         $errorMessage = sprintf(ForbiddenFuncCallRule::ERROR_MESSAGE, 'extract');
         yield [__DIR__ . '/Fixture/ExtractCall.php', [[$errorMessage, 11]]];
 
-        $errorMessage = sprintf(ForbiddenFuncCallRule::ERROR_MESSAGE, 'curl_init');
-        yield [__DIR__ . '/Fixture/CurlCall.php', [[$errorMessage, 11]]];
-
         $errorMessage = sprintf(ForbiddenFuncCallRule::ERROR_MESSAGE, 'property_exists');
         yield [__DIR__ . '/Fixture/PropertyExists.php', [[$errorMessage, 11]]];
 

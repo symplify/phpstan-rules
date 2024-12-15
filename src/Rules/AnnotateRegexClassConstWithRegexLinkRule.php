@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use Nette\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
@@ -89,7 +88,8 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
             return false;
         }
 
-        $lastChar = Strings::substring($patternWithoutModifiers, -1, 1);
+        $lastChar = substr($patternWithoutModifiers, -1, 1);
+
         // this is probably a regex
         return $firstChar === $lastChar;
     }

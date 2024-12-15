@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Composer;
 
+use Symplify\PHPStanRules\FileSystem\FileSystem;
+
 final class ComposerAutoloadResolver
 {
     /**
@@ -20,7 +22,7 @@ final class ComposerAutoloadResolver
             return [];
         }
 
-        $fileContent = \Symplify\PHPStanRules\FileSystem\FileSystem::read(self::COMPOSER_JSON_FILE);
+        $fileContent = FileSystem::read(self::COMPOSER_JSON_FILE);
         $composerJsonContent = json_decode($fileContent, true, 512, JSON_THROW_ON_ERROR);
 
         $autoloadPsr4 = $composerJsonContent['autoload']['psr-4'] ?? [];

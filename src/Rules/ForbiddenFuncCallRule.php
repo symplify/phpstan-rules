@@ -92,7 +92,6 @@ final class ForbiddenFuncCallRule implements Rule
         $firstArgType = TypeCombinator::removeNull($firstArgType);
 
         $simpleXmlElementObjectType = new ObjectType(SimpleXMLElement::class);
-
         return $simpleXmlElementObjectType->isSuperTypeOf($firstArgType)
             ->yes();
     }

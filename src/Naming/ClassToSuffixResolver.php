@@ -40,7 +40,7 @@ final class ClassToSuffixResolver
         }
 
         if (\str_starts_with($parentType, 'Abstract')) {
-            return substr($parentType, (int) strlen('Abstract'));
+            return substr($parentType, strlen('Abstract'));
         }
 
         return $parentType;

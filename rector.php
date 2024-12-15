@@ -32,6 +32,11 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         '*/Source/*',
         '*/Fixture/*',
+
+        \Rector\Php55\Rector\String_\StringClassNameToClassConstantRector::class => [
+            __DIR__ . '/tests/Naming/ClassToSuffixResolverTest.php',
+            __DIR__ . '/tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest.php',
+        ],
     ]);
 
     $rectorConfig->ruleWithConfiguration(\Rector\Php55\Rector\String_\StringClassNameToClassConstantRector::class, [
