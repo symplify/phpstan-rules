@@ -17,7 +17,8 @@
         "tomasvotruba/class-leak": "^2.0",
         "rector/rector": "^2.0",
         "phpstan/extension-installer": "^1.4",
-        "symplify/phpstan-extensions": "^12.0"
+        "symplify/phpstan-extensions": "^12.0",
+        "tomasvotruba/unused-public": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -30,16 +31,7 @@
         },
         "classmap": [
             "stubs"
-        ],
-        "files": [
         ]
-    },
-    "extra": {
-        "phpstan": {
-            "includes": [
-                "config/services/services.neon"
-            ]
-        }
     },
     "config": {
         "platform-check": false,
@@ -52,5 +44,12 @@
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
         "phpstan": "vendor/bin/phpstan analyse --ansi",
         "rector": "vendor/bin/rector process --dry-run --ansi"
+    },
+    "extra": {
+        "phpstan": {
+            "includes": [
+                "config/services/services.neon"
+            ]
+        }
     }
 }

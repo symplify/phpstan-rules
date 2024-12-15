@@ -170,4 +170,9 @@ final class RuleIdentifier
      * @var string
      */
     public const REQUIRED_INTERFACE_CONTRACT_NAMESPACE = 'symplify.requiredInterfaceContractNamespace';
+
+    /**
+     * @var string
+     */
+    public const SYMFONY_REQUIRE_INVOKABLE_CONTROLLER = 'symfony.requireInvokableController';
 }

@@ -8,10 +8,10 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symplify\PHPStanRules\Enum\MethodName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 
 /**
@@ -34,7 +34,6 @@ final class RequireInvokableControllerRule implements Rule
 
     /**
      * @param InClassNode $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -63,6 +62,7 @@ final class RequireInvokableControllerRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::SYMFONY_REQUIRE_INVOKABLE_CONTROLLER)
                 ->line($classMethod->getLine())
                 ->build();
         }

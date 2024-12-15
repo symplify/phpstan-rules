@@ -30,7 +30,7 @@ final class Psr4PathValidator
 
         // @todo put into value object
         $namespaceSuffixByNamespaceBeforeClass = rtrim(
-            Strings::substring(
+            substr(
                 $classNamespaceAndDirectory->getNamespaceBeforeClass(),
                 strlen($classNamespaceAndDirectory->getNamespace())
             ),

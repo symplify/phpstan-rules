@@ -23,10 +23,10 @@ parameters:
         - */Fixture/*
 
     # https://github.com/TomasVotruba/unused-public
-    # unused_public:
-    #     methods: true
-    #     properties: true
-    #     constants: true
+    unused_public:
+        methods: true
+        properties: true
+        constants: true
 
     # type_coverage:
     #     return: 99
@@ -70,3 +70,6 @@ parameters:
 
         # handle next
         - '#Method Symplify\\PHPStanRules\\Rules\\AbstractSymplifyRule\:\:processNode\(\) should return list<PHPStan\\Rules\\IdentifierRuleError> but returns array<PHPStan\\Rules\\RuleError\|string>#'
+
+        # used in tests
+        - '#Public constant "Symplify\\PHPStanRules\\(.*?)Rule\:\:ERROR_MESSAGE" is never used#'

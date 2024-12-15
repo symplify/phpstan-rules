@@ -73,7 +73,7 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
     private function isNonSingleCharRegexPattern(string $value): bool
     {
         // skip 1-char regexs
-        if (Strings::length($value) < 4) {
+        if (strlen($value) < 4) {
             return false;
         }
 
@@ -85,7 +85,7 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
 
         $patternWithoutModifiers = rtrim($value, self::ALL_MODIFIERS);
 
-        if (Strings::length($patternWithoutModifiers) < 1) {
+        if (strlen($patternWithoutModifiers) < 1) {
             return false;
         }
 
