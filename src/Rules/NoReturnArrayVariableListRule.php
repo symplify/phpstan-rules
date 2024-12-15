@@ -17,15 +17,12 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
 use Symplify\PHPStanRules\Testing\StaticPHPUnitEnvironment;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<Return_>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnArrayVariableListRule\NoReturnArrayVariableListRuleTest
  */
-final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterface
+final class NoReturnArrayVariableListRule implements Rule
 {
     /**
      * @var string
@@ -71,33 +68,6 @@ final class NoReturnArrayVariableListRule implements Rule, DocumentedRuleInterfa
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class ReturnVariables
-{
-    public function run($value, $value2): array
-    {
-        return [$value, $value2];
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-final class ReturnVariables
-{
-    public function run($value, $value2): ValueObject
-    {
-        return new ValueObject($value, $value2);
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     private function shouldSkip(Scope $scope, Return_ $return): bool

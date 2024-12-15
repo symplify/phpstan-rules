@@ -18,16 +18,12 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPUnit\Framework\TestCase;
 use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
-final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class SeeAnnotationToTestRule implements Rule
 {
     /**
      * @var string
@@ -84,32 +80,6 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
         }
 
         return [RuleErrorBuilder::message($errorMessage)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass extends Rule
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-/**
- * @see SomeClassTest
- */
-class SomeClass extends Rule
-{
-}
-CODE_SAMPLE
-                ,
-                [
-                    'requiredSeeTypes' => ['Rule'],
-                ]
-            ),
-        ]);
     }
 
     private function shouldSkipClassReflection(ClassReflection $classReflection): bool

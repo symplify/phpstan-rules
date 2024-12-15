@@ -14,14 +14,11 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\NoSingleInterfaceImplementerRuleTest
  */
-final class NoSingleInterfaceImplementerRule implements Rule, DocumentedRuleInterface
+final class NoSingleInterfaceImplementerRule implements Rule
 {
     /**
      * @api used in test
@@ -73,37 +70,6 @@ final class NoSingleInterfaceImplementerRule implements Rule, DocumentedRuleInte
         }
 
         return $errorMessages;
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass implements SomeInterface
-{
-}
-
-interface SomeInterface
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass implements SomeInterface
-{
-}
-
-class AnotherClass implements SomeInterface
-{
-}
-
-interface SomeInterface
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     /**

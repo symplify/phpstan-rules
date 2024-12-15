@@ -12,15 +12,12 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\TypeWithClassName;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<Array_>
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenArrayMethodCallRule\ForbiddenArrayMethodCallRuleTest
  */
-final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterface
+final class ForbiddenArrayMethodCallRule implements Rule
 {
     /**
      * @var string
@@ -57,23 +54,6 @@ final class ForbiddenArrayMethodCallRule implements Rule, DocumentedRuleInterfac
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-usort($items, [$this, "method"]);
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-usort($items, function (array $apples) {
-    return $this->method($apples);
-};
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     private function resolveFirstArrayItemClassType(Array_ $array, Scope $scope): ?TypeWithClassName

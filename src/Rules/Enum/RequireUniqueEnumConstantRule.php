@@ -12,15 +12,12 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireUniqueEnumConstantRule\RequireUniqueEnumConstantRuleTest
  */
-final class RequireUniqueEnumConstantRule implements Rule, DocumentedRuleInterface
+final class RequireUniqueEnumConstantRule implements Rule
 {
     /**
      * @var string
@@ -59,35 +56,6 @@ final class RequireUniqueEnumConstantRule implements Rule, DocumentedRuleInterfa
 
         $errorMessage = sprintf(self::ERROR_MESSAGE, implode('", "', $duplicatedConstantValues));
         return [RuleErrorBuilder::message($errorMessage)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-use MyCLabs\Enum\Enum;
-
-class SomeClass extends Enum
-{
-    private const YES = 'yes';
-
-    private const NO = 'yes';
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-use MyCLabs\Enum\Enum;
-
-class SomeClass extends Enum
-{
-    private const YES = 'yes';
-
-    private const NO = 'no';
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     /**

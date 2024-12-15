@@ -11,15 +11,12 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
  * @implements Rule<AttributeGroup>
  */
-final class RequireAttributeNameRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNameRule implements Rule
 {
     /**
      * @var string
@@ -29,37 +26,6 @@ final class RequireAttributeNameRule implements Rule, DocumentedRuleInterface
     public function getNodeType(): string
     {
         return AttributeGroup::class;
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-use Symfony\Component\Routing\Annotation\Route;
-
-class SomeController
-{
-    #[Route("/path")]
-    public function someAction()
-    {
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-use Symfony\Component\Routing\Annotation\Route;
-
-class SomeController
-{
-    #[Route(path: "/path")]
-    public function someAction()
-    {
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     /**

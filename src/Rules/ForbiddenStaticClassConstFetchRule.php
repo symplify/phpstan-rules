@@ -10,15 +10,12 @@ use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<ClassConstFetch>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenStaticClassConstFetchRule\ForbiddenStaticClassConstFetchRuleTest
  */
-final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleInterface
+final class ForbiddenStaticClassConstFetchRule implements Rule
 {
     /**
      * @var string
@@ -44,32 +41,5 @@ final class ForbiddenStaticClassConstFetchRule implements Rule, DocumentedRuleIn
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return static::SOME_CONST;
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return self::SOME_CONST;
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 }

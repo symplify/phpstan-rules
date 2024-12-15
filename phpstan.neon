@@ -50,27 +50,29 @@ parameters:
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\Collector\\(.*?) implements generic interface PHPStan\\Collectors\\Collector but does not specify its types\: TNodeType, TValue#'
 
-        -
-            identifier: argument.type
-
-        -
-            identifier: phpstanApi.instanceofType
-
-        -
-            identifier: return.type
+#        -
+#            identifier: argument.type
+#
+        # useful to have IDE know the types
+        - identifier: phpstanApi.instanceofType
+#
+#        -
+#            identifier: return.type
 
         -
             identifier: class.notFound
             path: tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest.php
 
-        -
-            identifier: phpstanApi.runtimeReflection
+#        -
+#            identifier: phpstanApi.runtimeReflection
+#
+#        -
+#            identifier: phpstanApi.instanceofAssumption
+#
+#        -
+#            identifier: method.childReturnType
 
+        # overly detailed
         -
-            identifier: phpstanApi.instanceofAssumption
-
-        -
-            identifier: generics.wrongParent
-
-        -
-            identifier: method.childReturnType
+            message: '#Parameter \#2 \$expectedErrors of method PHPStan\\Testing\\RuleTestCase<(.*?)>::analyse\(\) expects list<array\{0: string, 1: int, 2\?: string\|null\}>, (.*?) given#'
+            path: tests

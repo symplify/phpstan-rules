@@ -11,14 +11,11 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<MethodCall>
  */
-final class NoTestMocksRule implements Rule, DocumentedRuleInterface
+final class NoTestMocksRule implements Rule
 {
     /**
      * @api
@@ -70,37 +67,6 @@ final class NoTestMocksRule implements Rule, DocumentedRuleInterface
         $errorMessage = sprintf(self::ERROR_MESSAGE, $mockedObjectType->getClassName());
 
         return [RuleErrorBuilder::message($errorMessage)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-use PHPUnit\Framework\TestCase;
-
-final class SkipApiMock extends TestCase
-{
-    public function test()
-    {
-        $someTypeMock = $this->createMock(SomeType::class);
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-use PHPUnit\Framework\TestCase;
-
-final class SkipApiMock extends TestCase
-{
-    public function test()
-    {
-        $someTypeMock = new class() implements SomeType {};
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     private function resolveMockedObjectType(MethodCall $methodCall, Scope $scope): ?ObjectType

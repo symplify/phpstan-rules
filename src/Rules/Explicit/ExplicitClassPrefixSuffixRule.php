@@ -14,16 +14,13 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use function str_ends_with;
 
 /**
  * @implements Rule<ClassLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\ExplicitClassPrefixSuffixRule\ExplicitClassPrefixSuffixRuleTest
  */
-final class ExplicitClassPrefixSuffixRule implements Rule, DocumentedRuleInterface
+final class ExplicitClassPrefixSuffixRule implements Rule
 {
     /**
      * @api
@@ -46,45 +43,6 @@ final class ExplicitClassPrefixSuffixRule implements Rule, DocumentedRuleInterfa
     public function getNodeType(): string
     {
         return ClassLike::class;
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition('Interface have suffix of "Interface", trait have "Trait" suffix exclusively', [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-<?php
-
-interface NotSuffixed
-{
-}
-
-trait NotSuffixed
-{
-}
-
-abstract class NotPrefixedClass
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-<?php
-
-interface SuffixedInterface
-{
-}
-
-trait SuffixedTrait
-{
-}
-
-abstract class AbstractClass
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     /**

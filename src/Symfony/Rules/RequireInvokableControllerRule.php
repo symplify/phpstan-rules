@@ -13,14 +13,11 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symplify\PHPStanRules\Enum\MethodName;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireInvokableControllerRule\RequireInvokableControllerRuleTest
  */
-final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterface
+final class RequireInvokableControllerRule implements Rule
 {
     /**
      * @var string
@@ -71,38 +68,5 @@ final class RequireInvokableControllerRule implements Rule, DocumentedRuleInterf
         }
 
         return $ruleErrors;
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function someMethod()
-    {
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function __invoke()
-    {
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 }

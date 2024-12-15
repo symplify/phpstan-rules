@@ -10,14 +10,11 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<Class_>
  */
-final class NoEntityOutsideEntityNamespaceRule implements Rule, DocumentedRuleInterface
+final class NoEntityOutsideEntityNamespaceRule implements Rule
 {
     /**
      * @var string
@@ -50,37 +47,6 @@ final class NoEntityOutsideEntityNamespaceRule implements Rule, DocumentedRuleIn
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(
-            self::ERROR_MESSAGE,
-            [
-                new CodeSample(
-                    <<<'CODE_SAMPLE'
-namespace App\ValueObject;
-
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity]
-class Product
-{
-}
-CODE_SAMPLE
-                    ,
-                    <<<'CODE_SAMPLE'
-namespace App\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity]
-class Product
-{
-}
-CODE_SAMPLE
-                )]
-        );
     }
 
     private function hasEntityAttribute(Class_ $class): bool

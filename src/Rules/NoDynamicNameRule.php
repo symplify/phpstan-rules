@@ -16,8 +16,6 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDynamicNameRule\NoDynamicNameRuleTest
@@ -79,32 +77,5 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function old(): bool
-    {
-        return $this->${variable};
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function old(): bool
-    {
-        return $this->specificMethodName();
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 }

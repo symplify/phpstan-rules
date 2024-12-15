@@ -5,24 +5,19 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\ErrorSuppress;
 use PhpParser\Node\Scalar\Encapsed;
 use PhpParser\Node\Scalar\EncapsedStringPart;
 use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ForbiddenNodeRule implements Rule
 {
     /**
      * @var string
@@ -73,24 +68,5 @@ final class ForbiddenNodeRule implements Rule, DocumentedRuleInterface, Configur
         }
 
         return [];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-return @strlen('...');
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-return strlen('...');
-CODE_SAMPLE
-                ,
-                [
-                    'forbiddenNodes' => [ErrorSuppress::class],
-                ]
-            ),
-        ]);
     }
 }

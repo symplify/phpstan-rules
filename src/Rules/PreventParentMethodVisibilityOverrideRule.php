@@ -12,15 +12,12 @@ use PHPStan\Reflection\ExtendedMethodReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreventParentMethodVisibilityOverrideRule\PreventParentMethodVisibilityOverrideRuleTest
  */
-final class PreventParentMethodVisibilityOverrideRule implements Rule, DocumentedRuleInterface
+final class PreventParentMethodVisibilityOverrideRule implements Rule
 {
     /**
      * @var string
@@ -76,45 +73,6 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule, Documente
         }
 
         return [];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-
-class SomeClass extends SomeParentClass
-{
-    protected function run()
-    {
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-
-class SomeClass extends SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     private function isClassMethodCompatibleWithParentReflectionMethod(

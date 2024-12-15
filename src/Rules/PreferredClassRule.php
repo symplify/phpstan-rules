@@ -16,16 +16,11 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use SplFileInfo;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @implements Rule<Node>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
  */
-final class PreferredClassRule extends AbstractSymplifyRule implements ConfigurableRuleInterface
+final class PreferredClassRule extends AbstractSymplifyRule
 {
     /**
      * @var string
@@ -63,39 +58,6 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
         }
 
         return $this->processClassName($node->toString());
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return new SplFileInfo('...');
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return new CustomFileInfo('...');
-    }
-}
-CODE_SAMPLE
-                ,
-                [
-                    'oldToPreferredClasses' => [
-                        SplFileInfo::class => 'CustomFileInfo',
-                    ],
-                ]
-            ),
-        ]);
     }
 
     /**

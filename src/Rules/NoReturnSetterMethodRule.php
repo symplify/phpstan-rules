@@ -15,15 +15,12 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
-final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
+final class NoReturnSetterMethodRule implements Rule
 {
     /**
      * @var string
@@ -78,37 +75,6 @@ final class NoReturnSetterMethodRule implements Rule, DocumentedRuleInterface
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-final class SomeClass
-{
-    private $name;
-
-    public function setName(string $name): int
-    {
-        return 1000;
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-final class SomeClass
-{
-    private $name;
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     private function hasReturnReturnFunctionLike(ClassMethod $classMethod): bool
