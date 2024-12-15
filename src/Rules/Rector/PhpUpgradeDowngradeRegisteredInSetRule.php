@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Rector;
 
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
@@ -58,7 +57,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return [];
         }
 
-        $configContent = FileSystem::read($configFilePath);
+        $configContent = \Symplify\PHPStanRules\FileSystem\FileSystem::read($configFilePath);
 
         // is rule registered?
         if (str_contains($configContent, $className)) {

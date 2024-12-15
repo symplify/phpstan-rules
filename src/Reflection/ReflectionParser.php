@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Reflection;
 
-use Nette\Utils\FileSystem;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeTraverser;
@@ -78,7 +77,7 @@ final class ReflectionParser
         }
 
         try {
-            $stmts = $this->parser->parse(FileSystem::read($fileName));
+            $stmts = $this->parser->parse(\Symplify\PHPStanRules\FileSystem\FileSystem::read($fileName));
             if (! is_array($stmts)) {
                 return null;
             }
