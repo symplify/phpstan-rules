@@ -16,18 +16,15 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPUnit\Framework\TestCase;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
-final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class SeeAnnotationToTestRule implements Rule
 {
     /**
      * @var string
@@ -66,13 +63,16 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
 
         $docComment = $node->getDocComment();
         $errorMessage = sprintf(self::ERROR_MESSAGE, $classReflection->getName());
+
         if (! $docComment instanceof Doc) {
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::SEE_ANNOTATION_TO_TEST)
+                ->build()];
         }
 
         $resolvedPhpDocBlock = $this->phpDocResolver->resolve($scope, $classReflection, $docComment);
 
-        // skip deprectaed
+        // skip deprecated
         $deprecatedTags = $resolvedPhpDocBlock->getDeprecatedTag();
         if ($deprecatedTags instanceof DeprecatedTag) {
             return [];
@@ -83,33 +83,9 @@ final class SeeAnnotationToTestRule implements Rule, DocumentedRuleInterface, Co
             return [];
         }
 
-        return [RuleErrorBuilder::message($errorMessage)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass extends Rule
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-/**
- * @see SomeClassTest
- */
-class SomeClass extends Rule
-{
-}
-CODE_SAMPLE
-                ,
-                [
-                    'requiredSeeTypes' => ['Rule'],
-                ]
-            ),
-        ]);
+        return [RuleErrorBuilder::message($errorMessage)
+            ->identifier(RuleIdentifier::SEE_ANNOTATION_TO_TEST)
+            ->build()];
     }
 
     private function shouldSkipClassReflection(ClassReflection $classReflection): bool

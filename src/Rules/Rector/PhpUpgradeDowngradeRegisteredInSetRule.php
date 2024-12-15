@@ -17,6 +17,7 @@ use Rector\Contract\Rector\RectorInterface;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Set\ValueObject\SetList;
 use SplFileInfo;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 
 /**
@@ -65,7 +66,9 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         }
 
         $errorMessage = $this->createErrorMessage($configFilePath, $className);
-        return [RuleErrorBuilder::message($errorMessage)->build()];
+        return [RuleErrorBuilder::message($errorMessage)
+            ->identifier(RuleIdentifier::RECTOR_UPGRADE_DOWNGRADE_REGISTERED_IN_SET)
+            ->build()];
     }
 
     private function resolveRelatedConfigFilePath(string $className): ?string

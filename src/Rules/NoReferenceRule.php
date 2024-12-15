@@ -18,8 +18,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use function array_map;
 
 /**
@@ -71,32 +69,6 @@ final class NoReferenceRule extends AbstractSymplifyRule
             static fn ($message): RuleError => RuleErrorBuilder::message($message)->build(),
             array_unique($errorMessages),
         );
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run(&$value)
-    {
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run($value)
-    {
-        return $value;
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     /**

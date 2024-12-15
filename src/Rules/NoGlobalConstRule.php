@@ -9,15 +9,13 @@ use PhpParser\Node\Stmt\Const_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Const_>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoGlobalConstRule\NoGlobalConstRuleTest
  */
-final class NoGlobalConstRule implements Rule, DocumentedRuleInterface
+final class NoGlobalConstRule implements Rule
 {
     /**
      * @var string
@@ -34,27 +32,10 @@ final class NoGlobalConstRule implements Rule, DocumentedRuleInterface
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_GLOBAL_CONST)
+            ->build();
 
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-const SOME_GLOBAL_CONST = 'value';
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return self::SOME_CONST;
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
+        return [$identifierRuleError];
     }
 }

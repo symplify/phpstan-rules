@@ -14,14 +14,12 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceCollector;
 use Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\NoSingleInterfaceImplementerRuleTest
  */
-final class NoSingleInterfaceImplementerRule implements Rule, DocumentedRuleInterface
+final class NoSingleInterfaceImplementerRule implements Rule
 {
     /**
      * @api used in test
@@ -58,7 +56,7 @@ final class NoSingleInterfaceImplementerRule implements Rule, DocumentedRuleInte
             return [];
         }
 
-        $errorMessages = [];
+        $ruleErrors = [];
         foreach ($onceImplementedInterfaces as $onceImplementedInterface) {
             $interfaceReflection = $this->reflectionProvider->getClass($onceImplementedInterface);
 
@@ -67,43 +65,13 @@ final class NoSingleInterfaceImplementerRule implements Rule, DocumentedRuleInte
                 continue;
             }
 
-            $errorMessages[] = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $onceImplementedInterface))
+            $ruleErrors[] = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $onceImplementedInterface))
                 ->file($interfaceReflection->getFileName())
+                ->identifier(RuleIdentifier::NO_SINGLE_INTERFACE_IMPLEMENTER)
                 ->build();
         }
 
-        return $errorMessages;
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass implements SomeInterface
-{
-}
-
-interface SomeInterface
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass implements SomeInterface
-{
-}
-
-class AnotherClass implements SomeInterface
-{
-}
-
-interface SomeInterface
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
+        return $ruleErrors;
     }
 
     /**

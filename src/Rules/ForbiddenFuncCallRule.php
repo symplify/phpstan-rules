@@ -9,23 +9,21 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeCombinator;
 use SimpleXMLElement;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter;
 use Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher;
 use Symplify\PHPStanRules\ValueObject\Configuration\RequiredWithMessage;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<FuncCall>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule\ForbiddenFuncCallRuleTest
  */
-final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, ConfigurableRuleInterface
+final class ForbiddenFuncCallRule implements Rule
 {
     /**
      * @var string
@@ -70,45 +68,15 @@ final class ForbiddenFuncCallRule implements Rule, DocumentedRuleInterface, Conf
             }
 
             $errorMessage = $this->createErrorMessage($requiredWithMessage, $funcName);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+
+            $ruleError = RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::FORBIDDEN_FUNC_CALL)
+                ->build();
+
+            return [$ruleError];
         }
 
         return [];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-echo eval('...');
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-echo '...';
-CODE_SAMPLE
-                ,
-                [
-                    'forbiddenFunctions' => ['eval'],
-                ]
-            ),
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-dump($value);
-echo $value;
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-echo $value;
-CODE_SAMPLE
-                ,
-                [
-                    'forbiddenFunctions' => [
-                        'dump' => 'seems you missed some debugging function',
-                    ],
-                ]
-            ),
-        ]);
     }
 
     private function shouldAllowSpecialCase(FuncCall $funcCall, Scope $scope, string $functionName): bool

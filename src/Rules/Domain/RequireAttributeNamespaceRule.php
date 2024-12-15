@@ -9,47 +9,18 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\Domain\RequireAttributeNamespaceRule\RequireAttributeNamespaceRuleTest
  */
-final class RequireAttributeNamespaceRule implements Rule, DocumentedRuleInterface
+final class RequireAttributeNamespaceRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Attribute must be located in "Attribute" namespace';
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-// app/Entity/SomeAttribute.php
-namespace App\Controller;
-
-#[\Attribute]
-final class SomeAttribute
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-// app/Attribute/SomeAttribute.php
-namespace App\Attribute;
-
-#[\Attribute]
-final class SomeAttribute
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
-    }
 
     /**
      * @return class-string<Node>
@@ -75,6 +46,8 @@ CODE_SAMPLE
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::REQUIRE_ATTRIBUTE_NAMESPACE)
+            ->build()];
     }
 }

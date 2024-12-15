@@ -13,15 +13,12 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Composer\ClassNamespaceMatcher;
 use Symplify\PHPStanRules\Composer\ComposerAutoloadResolver;
 use Symplify\PHPStanRules\Composer\Psr4PathValidator;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<ClassLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckClassNamespaceFollowPsr4Rule\CheckClassNamespaceFollowPsr4RuleTest
  */
-final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInterface
+final class CheckClassNamespaceFollowPsr4Rule implements Rule
 {
     /**
      * @var string
@@ -89,31 +86,6 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule, DocumentedRuleInt
         $errorMessage = sprintf(self::ERROR_MESSAGE, $namespacePart);
 
         return [RuleErrorBuilder::message($errorMessage)->identifier('check.classnamespacepsr4')->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-// defined "Foo\Bar" namespace in composer.json > autoload > psr-4
-namespace Foo;
-
-class Baz
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-// defined "Foo\Bar" namespace in composer.json > autoload > psr-4
-namespace Foo\Bar;
-
-class Baz
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     private function resolveNamespaceBeforeClass(ClassLike $classLike, Scope $scope): ?string

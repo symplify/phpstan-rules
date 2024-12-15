@@ -8,12 +8,11 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use Symplify\PHPStanRules\Contract\ManyNodeRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 
 /**
  * @implements Rule<Node>
  */
-abstract class AbstractSymplifyRule implements Rule, ManyNodeRuleInterface, DocumentedRuleInterface
+abstract class AbstractSymplifyRule implements Rule, ManyNodeRuleInterface
 {
     /**
      * @return class-string<Node>

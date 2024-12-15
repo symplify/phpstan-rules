@@ -11,20 +11,18 @@ use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\RegexSuffixInRegexConstantRule\RegexSuffixInRegexConstantRuleTest
  */
-final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterface
+final class RegexSuffixInRegexConstantRule implements Rule
 {
     /**
      * @var string
@@ -58,39 +56,8 @@ final class RegexSuffixInRegexConstantRule implements Rule, DocumentedRuleInterf
         return [];
     }
 
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public const SOME_NAME = '#some\s+name#';
-
-    public function run($value)
-    {
-        $somePath = preg_match(self::SOME_NAME, $value);
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public const SOME_NAME_REGEX = '#some\s+name#';
-
-    public function run($value)
-    {
-        $somePath = preg_match(self::SOME_NAME_REGEX, $value);
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
-    }
-
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processConstantName(Expr $expr): array
     {
@@ -108,11 +75,13 @@ CODE_SAMPLE
         }
 
         $errorMessage = sprintf(self::ERROR_MESSAGE, $constantName);
-        return [RuleErrorBuilder::message($errorMessage)->build()];
+        return [RuleErrorBuilder::message($errorMessage)
+            ->identifier(RuleIdentifier::REGEX_SUFFIX_IN_REGEX_CONSTANT)
+            ->build()];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processStaticCall(StaticCall $staticCall): array
     {
@@ -125,7 +94,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processFuncCall(FuncCall $funcCall): array
     {

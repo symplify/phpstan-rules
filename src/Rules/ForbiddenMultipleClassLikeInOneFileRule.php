@@ -12,15 +12,13 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<FileNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenMultipleClassLikeInOneFileRule\ForbiddenMultipleClassLikeInOneFileRuleTest
  */
-final class ForbiddenMultipleClassLikeInOneFileRule implements Rule, DocumentedRuleInterface
+final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
 {
     /**
      * @var string
@@ -60,36 +58,8 @@ final class ForbiddenMultipleClassLikeInOneFileRule implements Rule, DocumentedR
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-// src/SomeClass.php
-class SomeClass
-{
-}
-
-interface SomeInterface
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-// src/SomeClass.php
-class SomeClass
-{
-}
-
-// src/SomeInterface.php
-interface SomeInterface
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::MULTIPLE_CLASS_LIKE_IN_FILE)
+            ->build()];
     }
 }

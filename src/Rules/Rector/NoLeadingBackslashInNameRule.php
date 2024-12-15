@@ -13,9 +13,10 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
- * @see \Rector\PHPStanRules\Tests\Rule\NoLeadingBackslashInNameRule\NoLeadingBackslashInNameRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Rector\NoLeadingBackslashInNameRule\NoLeadingBackslashInNameRuleTest
  *
  * @implements Rule<New_>
  */
@@ -60,6 +61,8 @@ final class NoLeadingBackslashInNameRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::PHP_PARSER_NO_LEADING_BACKSLASH_IN_NAME)
+            ->build()];
     }
 }

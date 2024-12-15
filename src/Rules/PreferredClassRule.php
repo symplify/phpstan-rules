@@ -14,18 +14,15 @@ use PhpParser\Node\Param;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use SplFileInfo;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
- * @implements Rule<Node>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
  */
-final class PreferredClassRule extends AbstractSymplifyRule implements ConfigurableRuleInterface
+final class PreferredClassRule extends AbstractSymplifyRule
 {
     /**
      * @var string
@@ -65,41 +62,8 @@ final class PreferredClassRule extends AbstractSymplifyRule implements Configura
         return $this->processClassName($node->toString());
     }
 
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return new SplFileInfo('...');
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return new CustomFileInfo('...');
-    }
-}
-CODE_SAMPLE
-                ,
-                [
-                    'oldToPreferredClasses' => [
-                        SplFileInfo::class => 'CustomFileInfo',
-                    ],
-                ]
-            ),
-        ]);
-    }
-
     /**
-     * @return string[]
+     * @return IdentifierRuleError[]
      */
     private function processNew(New_ $new): array
     {
@@ -112,7 +76,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClass(InClassNode $inClassNode): array
     {
@@ -137,14 +101,16 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->build()];
         }
 
         return [];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClassName(string $className): array
     {
@@ -154,14 +120,18 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            $ruleError = RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->build();
+
+            return [$ruleError];
         }
 
         return [];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processExprWithClass(StaticCall|Instanceof_ $node): array
     {

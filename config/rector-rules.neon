@@ -1,7 +1,6 @@
 rules:
     - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule
     - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule
-    - Symplify\PHPStanRules\Rules\Rector\RequireAssertConfigureValueObjectRectorRule
     - Symplify\PHPStanRules\Rules\Rector\NoInstanceOfStaticReflectionRule
     - Symplify\PHPStanRules\Rules\Rector\NoLeadingBackslashInNameRule
     - Symplify\PHPStanRules\Rules\Rector\NoClassReflectionStaticReflectionRule

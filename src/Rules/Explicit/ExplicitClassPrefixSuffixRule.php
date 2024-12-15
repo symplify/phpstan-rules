@@ -11,19 +11,18 @@ use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Trait_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use function str_ends_with;
 
 /**
  * @implements Rule<ClassLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\ExplicitClassPrefixSuffixRule\ExplicitClassPrefixSuffixRuleTest
  */
-final class ExplicitClassPrefixSuffixRule implements Rule, DocumentedRuleInterface
+final class ExplicitClassPrefixSuffixRule implements Rule
 {
     /**
      * @api
@@ -46,45 +45,6 @@ final class ExplicitClassPrefixSuffixRule implements Rule, DocumentedRuleInterfa
     public function getNodeType(): string
     {
         return ClassLike::class;
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition('Interface have suffix of "Interface", trait have "Trait" suffix exclusively', [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-<?php
-
-interface NotSuffixed
-{
-}
-
-trait NotSuffixed
-{
-}
-
-abstract class NotPrefixedClass
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-<?php
-
-interface SuffixedInterface
-{
-}
-
-trait SuffixedTrait
-{
-}
-
-abstract class AbstractClass
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     /**
@@ -112,7 +72,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processInterfaceSuffix(Identifier $identifier): array
     {
@@ -121,14 +81,18 @@ CODE_SAMPLE
         }
 
         if (str_ends_with($identifier->toString(), 'Trait')) {
-            return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)->build()];
+            return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
+                ->build()];
         }
 
-        return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::EXPLICIT_INTERFACE_SUFFIX_NAME)
+            ->build()];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processTraitSuffix(Identifier $identifier): array
     {
@@ -136,28 +100,39 @@ CODE_SAMPLE
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
+            ->build()];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClassSuffix(Identifier $identifier, bool $isAbstract): array
     {
         if ($isAbstract && ! str_starts_with($identifier->toString(), 'Abstract')) {
-            return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)->build()];
+            return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::EXPLICIT_ABSTRACT_PREFIX_NAME)
+                ->build()];
         }
 
         if (! $isAbstract && str_starts_with($identifier->toString(), 'Abstract')) {
-            return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)->build()];
+            return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::EXPLICIT_ABSTRACT_PREFIX_NAME)
+                ->build()
+            ];
         }
 
         if (str_ends_with($identifier->toString(), 'Interface')) {
-            return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)->build()];
+            return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::EXPLICIT_INTERFACE_SUFFIX_NAME)
+                ->build()];
         }
 
         if (str_ends_with($identifier->toString(), 'Trait')) {
-            return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)->build()];
+            return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
+                ->build()];
         }
 
         return [];

@@ -4,6 +4,7 @@ includes:
 
 parameters:
     treatPhpDocTypesAsCertain: false
+    errorFormat: symplify
 
     level: 8
 
@@ -50,27 +51,22 @@ parameters:
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\Collector\\(.*?) implements generic interface PHPStan\\Collectors\\Collector but does not specify its types\: TNodeType, TValue#'
 
-        -
-            identifier: argument.type
-
-        -
-            identifier: phpstanApi.instanceofType
-
-        -
-            identifier: return.type
+        # useful to have IDE know the types
+        - identifier: phpstanApi.instanceofType
 
         -
             identifier: class.notFound
             path: tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest.php
 
+        # overly detailed
         -
-            identifier: phpstanApi.runtimeReflection
+            message: '#Parameter \#2 \$expectedErrors of method PHPStan\\Testing\\RuleTestCase<(.*?)>::analyse\(\) expects list<array\{0: string, 1: int, 2\?: string\|null\}>, (.*?) given#'
+            path: tests
 
+        # fast effective check
         -
-            identifier: phpstanApi.instanceofAssumption
+            message: '#Function is_a\(\) is a runtime reflection concept that might not work in PHPStan because it uses fully static reflection engine#'
+            path: src/Rules/SeeAnnotationToTestRule.php
 
-        -
-            identifier: generics.wrongParent
-
-        -
-            identifier: method.childReturnType
+        # handle next
+        - '#Method Symplify\\PHPStanRules\\Rules\\AbstractSymplifyRule\:\:processNode\(\) should return list<PHPStan\\Rules\\IdentifierRuleError> but returns array<PHPStan\\Rules\\RuleError\|string>#'
