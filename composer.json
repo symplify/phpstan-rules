@@ -16,7 +16,8 @@
         "symplify/easy-coding-standard": "^12.5",
         "tomasvotruba/class-leak": "^1.2",
         "rector/rector": "^2.0",
-        "phpstan/extension-installer": "^1.4"
+        "phpstan/extension-installer": "^1.4",
+        "symplify/phpstan-extensions": "^12.0"
     },
     "autoload": {
         "psr-4": {

@@ -50,4 +50,124 @@ final class RuleIdentifier
      * @var string
      */
     public const NO_RETURN_ARRAY_VARIABLE_LIST = 'symplify.noReturnArrayVariableList';
+
+    /**
+     * @var string
+     */
+    public const RECTOR_NO_INSTANCE_OF_STATIC_REFLECTION = 'rector.noInstanceOfStaticReflection';
+
+    /**
+     * @var string
+     */
+    public const RECTOR_NO_CLASS_REFLECTION_STATIC_REFLECTION = 'rector.noClassReflectionStaticReflection';
+
+    /**
+     * @var string
+     */
+    public const PARENT_METHOD_VISIBILITY_OVERRIDE = 'symplify.parentMethodVisibilityOverride';
+
+    /**
+     * @var string
+     */
+    public const CLASS_CONSTANT_REGEX = 'symplify.classConstantRegex';
+
+    /**
+     * @var string
+     */
+    public const NO_RETURN_SETTER_METHOD = 'symplify.noReturnSetterMethod';
+
+    /**
+     * @var string
+     */
+    public const FORBIDDEN_STATIC_CLASS_CONST_FETCH = 'symplify.forbiddenStaticClassConstFetch';
+
+    /**
+     * @var string
+     */
+    public const PREFERRED_CLASS = 'symplify.preferredClass';
+
+    /**
+     * @var string
+     */
+    public const NO_TEST_MOCKS = 'symplify.noTestMocks';
+
+    /**
+     * @var string
+     */
+    public const NO_GLOBAL_CONST = 'symplify.noGlobalConst';
+
+    /**
+     * @var string
+     */
+    public const NO_ENTITY_OUTSIDE_ENTITY_NAMESPACE = 'symplify.noEntityOutsideEntityNamespace';
+
+    /**
+     * @var string
+     */
+    public const FORBIDDEN_NODE = 'symplify.forbiddenNode';
+
+    /**
+     * @var string
+     */
+    public const MULTIPLE_CLASS_LIKE_IN_FILE = 'symplify.multipleClassLikeInFile';
+
+    /**
+     * @var string
+     */
+    public const FORBIDDEN_FUNC_CALL = 'symplify.forbiddenFuncCall';
+
+    /**
+     * @var string
+     */
+    public const REQUIRE_ATTRIBUTE_NAMESPACE = 'symplify.requireAttributeNamespace';
+
+    /**
+     * @var string
+     */
+    public const FORBIDDEN_ARRAY_METHOD_CALL = 'symplify.forbiddenArrayMethodCall';
+
+    /**
+     * @var string
+     */
+    public const REGEX_ANNOTATE_CLASS_CONST = 'symplify.regexAnnotateClassConst';
+
+    /**
+     * @var string
+     */
+    public const FORBIDDEN_EXTEND_OF_NON_ABSTRACT_CLASS = 'symplify.forbiddenExtendOfNonAbstractClass';
+
+    /**
+     * @var string
+     */
+    public const EXPLICIT_ABSTRACT_PREFIX_NAME = 'symplify.explicitAbstractPrefixName';
+
+    /**
+     * @var string
+     */
+    public const EXPLICIT_INTERFACE_SUFFIX_NAME = 'symplify.explicitInterfaceSuffixName';
+
+    /**
+     * @var string
+     */
+    public const EXPLICIT_TRAIT_SUFFIX_NAME = 'symplify.explicitTraitSuffixName';
+
+    /**
+     * @var string
+     */
+    public const REQUIRE_UNIQUE_ENUM_CONSTANT = 'symplify.requireUniqueEnumConstant';
+
+    /**
+     * @var string
+     */
+    public const REQUIRE_EXCEPTION_NAMESPACE = 'symplify.requireExceptionNamespace';
+
+    /**
+     * @var string
+     */
+    public const CLASS_NAME_RESPECTS_PARENT_SUFFIX = 'symplify.classNameRespectsParentSuffix';
+
+    /**
+     * @var string
+     */
+    public const REQUIRED_INTERFACE_CONTRACT_NAMESPACE = 'symplify.requiredInterfaceContractNamespace';
 }

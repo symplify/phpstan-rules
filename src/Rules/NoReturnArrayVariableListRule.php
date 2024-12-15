@@ -68,11 +68,11 @@ final class NoReturnArrayVariableListRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(RuleIdentifier::NO_RETURN_ARRAY_VARIABLE_LIST)
             ->build();
 
-        return [$ruleError];
+        return [$identifierRuleError];
     }
 
     private function shouldSkip(Scope $scope, Return_ $return): bool

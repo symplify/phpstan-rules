@@ -14,8 +14,10 @@ use PhpParser\Node\Param;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
@@ -61,7 +63,7 @@ final class PreferredClassRule extends AbstractSymplifyRule
     }
 
     /**
-     * @return string[]
+     * @return IdentifierRuleError[]
      */
     private function processNew(New_ $new): array
     {
@@ -74,7 +76,7 @@ final class PreferredClassRule extends AbstractSymplifyRule
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClass(InClassNode $inClassNode): array
     {
@@ -99,14 +101,16 @@ final class PreferredClassRule extends AbstractSymplifyRule
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->build()];
         }
 
         return [];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClassName(string $className): array
     {
@@ -116,14 +120,18 @@ final class PreferredClassRule extends AbstractSymplifyRule
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            $ruleError = RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->build();
+
+            return [$ruleError];
         }
 
         return [];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processExprWithClass(StaticCall|Instanceof_ $node): array
     {

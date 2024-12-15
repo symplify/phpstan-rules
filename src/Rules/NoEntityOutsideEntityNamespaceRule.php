@@ -10,6 +10,7 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Class_>
@@ -46,7 +47,9 @@ final class NoEntityOutsideEntityNamespaceRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_ENTITY_OUTSIDE_ENTITY_NAMESPACE)
+            ->build()];
     }
 
     private function hasEntityAttribute(Class_ $class): bool

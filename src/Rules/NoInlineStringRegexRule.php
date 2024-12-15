@@ -11,9 +11,11 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
 
@@ -56,7 +58,7 @@ final class NoInlineStringRegexRule implements Rule
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processRegexFuncCall(FuncCall $funcCall): array
     {
@@ -71,11 +73,13 @@ final class NoInlineStringRegexRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::CLASS_CONSTANT_REGEX)
+            ->build()];
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processRegexStaticCall(StaticCall $staticCall): array
     {
@@ -97,6 +101,8 @@ final class NoInlineStringRegexRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::CLASS_CONSTANT_REGEX)
+            ->build()];
     }
 }

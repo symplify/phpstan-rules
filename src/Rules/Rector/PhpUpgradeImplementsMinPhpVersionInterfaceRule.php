@@ -15,7 +15,7 @@ use Rector\VersionBonding\Contract\MinPhpVersionInterface;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
- * @see \Rector\PHPStanRules\Tests\Rule\PhpUpgradeImplementsMinPhpVersionInterfaceRule\PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule\PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest
  *
  * @implements Rule<Class_>
  */
@@ -65,10 +65,10 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className))
+        $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className))
             ->identifier(RuleIdentifier::RECTOR_PHP_RULE_IMPLEMENTS_MIN_VERSION)
             ->build();
 
-        return [$ruleError];
+        return [$identifierRuleError];
     }
 }

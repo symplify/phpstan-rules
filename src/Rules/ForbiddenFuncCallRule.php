@@ -9,10 +9,12 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeCombinator;
 use SimpleXMLElement;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter;
 use Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher;
 use Symplify\PHPStanRules\ValueObject\Configuration\RequiredWithMessage;
@@ -66,7 +68,12 @@ final class ForbiddenFuncCallRule implements Rule
             }
 
             $errorMessage = $this->createErrorMessage($requiredWithMessage, $funcName);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+
+            $ruleError = RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::FORBIDDEN_FUNC_CALL)
+                ->build();
+
+            return [$ruleError];
         }
 
         return [];

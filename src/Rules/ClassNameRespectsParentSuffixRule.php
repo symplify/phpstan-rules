@@ -11,6 +11,7 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -18,6 +19,7 @@ use PHPUnit\Framework\TestCase;
 use Rector\Rector\AbstractRector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
 
 /**
@@ -89,7 +91,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
     }
 
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClassNameAndShort(ClassReflection $classReflection): array
     {
@@ -104,7 +106,9 @@ final class ClassNameRespectsParentSuffixRule implements Rule
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $expectedSuffix);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::CLASS_NAME_RESPECTS_PARENT_SUFFIX)
+                ->build()];
         }
 
         return [];

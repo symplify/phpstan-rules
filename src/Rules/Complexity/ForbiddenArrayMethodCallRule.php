@@ -12,6 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\TypeWithClassName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Array_>
@@ -53,7 +54,9 @@ final class ForbiddenArrayMethodCallRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::FORBIDDEN_ARRAY_METHOD_CALL)
+            ->build()];
     }
 
     private function resolveFirstArrayItemClassType(Array_ $array, Scope $scope): ?TypeWithClassName

@@ -11,6 +11,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer;
 
 /**
@@ -55,7 +56,12 @@ final class RequireUniqueEnumConstantRule implements Rule
         }
 
         $errorMessage = sprintf(self::ERROR_MESSAGE, implode('", "', $duplicatedConstantValues));
-        return [RuleErrorBuilder::message($errorMessage)->build()];
+
+        $identifierRuleError = RuleErrorBuilder::message($errorMessage)
+            ->identifier(RuleIdentifier::REQUIRE_UNIQUE_ENUM_CONSTANT)
+            ->build();
+
+        return [$identifierRuleError];
     }
 
     /**

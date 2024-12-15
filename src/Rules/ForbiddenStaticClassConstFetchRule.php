@@ -10,6 +10,7 @@ use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassConstFetch>
@@ -40,6 +41,8 @@ final class ForbiddenStaticClassConstFetchRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::FORBIDDEN_STATIC_CLASS_CONST_FETCH)
+            ->build()];
     }
 }

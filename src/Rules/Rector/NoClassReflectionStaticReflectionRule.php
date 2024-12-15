@@ -11,10 +11,11 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use ReflectionClass;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
 
 /**
- * @see \Rector\PHPStanRules\Tests\Rule\NoClassReflectionStaticReflectionRule\NoClassReflectionStaticReflectionRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Rector\NoClassReflectionStaticReflectionRule\NoClassReflectionStaticReflectionRuleTest
  *
  * @implements Rule<New_>
  */
@@ -54,6 +55,8 @@ final class NoClassReflectionStaticReflectionRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::RECTOR_NO_CLASS_REFLECTION_STATIC_REFLECTION)
+            ->build()];
     }
 }

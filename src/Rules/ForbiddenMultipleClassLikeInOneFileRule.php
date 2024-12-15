@@ -12,6 +12,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<FileNode>
@@ -57,6 +58,8 @@ final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::MULTIPLE_CLASS_LIKE_IN_FILE)
+            ->build()];
     }
 }

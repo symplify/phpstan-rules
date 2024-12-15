@@ -9,6 +9,7 @@ use PhpParser\Node\Stmt\Const_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Const_>
@@ -31,6 +32,10 @@ final class NoGlobalConstRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_GLOBAL_CONST)
+            ->build();
+
+        return [$identifierRuleError];
     }
 }

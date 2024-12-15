@@ -13,6 +13,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
 
@@ -48,7 +49,6 @@ final class NoReturnSetterMethodRule implements Rule
 
     /**
      * @param ClassMethod $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -74,7 +74,9 @@ final class NoReturnSetterMethodRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_RETURN_SETTER_METHOD)
+            ->build()];
     }
 
     private function hasReturnReturnFunctionLike(ClassMethod $classMethod): bool

@@ -16,7 +16,7 @@ use PHPStan\Type\Constant\ConstantStringType;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
- * @see \Rector\PHPStanRules\Tests\Rule\NoLeadingBackslashInNameRule\NoLeadingBackslashInNameRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Rector\NoLeadingBackslashInNameRule\NoLeadingBackslashInNameRuleTest
  *
  * @implements Rule<New_>
  */
