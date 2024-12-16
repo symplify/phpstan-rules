@@ -10,9 +10,9 @@ use PhpParser\NodeFinder;
 /**
  * @todo remove after https://github.com/nikic/PHP-Parser/pull/869 is released
  */
-final class TypeAwareNodeFinder
+final readonly class TypeAwareNodeFinder
 {
-    private readonly NodeFinder $nodeFinder;
+    private NodeFinder $nodeFinder;
 
     public function __construct()
     {

@@ -16,7 +16,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 /**
  * @implements Rule<MethodCall>
  */
-final class NoTestMocksRule implements Rule
+final readonly class NoTestMocksRule implements Rule
 {
     /**
      * @api
@@ -33,7 +33,7 @@ final class NoTestMocksRule implements Rule
      * @param string[] $allowedTypes
      */
     public function __construct(
-        private readonly array $allowedTypes = []
+        private array $allowedTypes = []
     ) {
     }
 

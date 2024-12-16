@@ -21,7 +21,7 @@ use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
  * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
-final class NoReturnSetterMethodRule implements Rule
+final readonly class NoReturnSetterMethodRule implements Rule
 {
     /**
      * @var string
@@ -35,7 +35,7 @@ final class NoReturnSetterMethodRule implements Rule
     private const SETTER_START_REGEX = '#^set[A-Z]#';
 
     public function __construct(
-        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
+        private TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
     }
 

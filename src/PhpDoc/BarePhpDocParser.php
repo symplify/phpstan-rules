@@ -12,11 +12,11 @@ use PHPStan\PhpDocParser\Lexer\Lexer;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 
-final class BarePhpDocParser
+final readonly class BarePhpDocParser
 {
     public function __construct(
-        private readonly PhpDocParser $phpDocParser,
-        private readonly Lexer $lexer
+        private PhpDocParser $phpDocParser,
+        private Lexer $lexer
     ) {
     }
 

@@ -108,38 +108,6 @@ class SomeClass
 
 <br>
 
-## CheckClassNamespaceFollowPsr4Rule
-
-Class like namespace "%s" does not follow PSR-4 configuration in `composer.json`
-
-- class: [`Symplify\PHPStanRules\Rules\CheckClassNamespaceFollowPsr4Rule`](../src/Rules/CheckClassNamespaceFollowPsr4Rule.php)
-
-```php
-// defined "Foo\Bar" namespace in composer.json > autoload > psr-4
-namespace Foo;
-
-class Baz
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-// defined "Foo\Bar" namespace in composer.json > autoload > psr-4
-namespace Foo\Bar;
-
-class Baz
-{
-}
-```
-
-:+1:
-
-<br>
-
 ## CheckRequiredInterfaceInContractNamespaceRule
 
 Interface must be located in "Contract" or "Contracts" namespace

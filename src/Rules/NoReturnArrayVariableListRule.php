@@ -23,7 +23,7 @@ use Symplify\PHPStanRules\Testing\StaticPHPUnitEnvironment;
  * @implements Rule<Return_>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnArrayVariableListRule\NoReturnArrayVariableListRuleTest
  */
-final class NoReturnArrayVariableListRule implements Rule
+final readonly class NoReturnArrayVariableListRule implements Rule
 {
     /**
      * @var string
@@ -37,7 +37,7 @@ final class NoReturnArrayVariableListRule implements Rule
     private const TESTS_DIRECTORY_REGEX = '#\/Tests\/#i';
 
     public function __construct(
-        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
+        private ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
     ) {
     }
 

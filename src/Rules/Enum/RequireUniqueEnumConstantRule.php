@@ -18,7 +18,7 @@ use Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer;
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireUniqueEnumConstantRule\RequireUniqueEnumConstantRuleTest
  */
-final class RequireUniqueEnumConstantRule implements Rule
+final readonly class RequireUniqueEnumConstantRule implements Rule
 {
     /**
      * @var string
@@ -26,7 +26,7 @@ final class RequireUniqueEnumConstantRule implements Rule
     public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
 
     public function __construct(
-        private readonly EnumAnalyzer $enumAnalyzer
+        private EnumAnalyzer $enumAnalyzer
     ) {
     }
 
