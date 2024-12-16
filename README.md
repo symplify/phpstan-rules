@@ -22,7 +22,7 @@ Pick from 25+ rules:
 
 <br>
 
-## CheckRequiredInterfaceInContractNamespaceRule
+### CheckRequiredInterfaceInContractNamespaceRule
 
 Interface must be located in "Contract" or "Contracts" namespace
 
@@ -55,7 +55,7 @@ interface ProductRepositoryInterface
 
 <br>
 
-## ClassNameRespectsParentSuffixRule
+### ClassNameRespectsParentSuffixRule
 
 Class should have suffix "%s" to respect parent type
 
@@ -93,7 +93,7 @@ class SomeCommand extends Command
 
 <br>
 
-## ExplicitClassPrefixSuffixRule
+### ExplicitClassPrefixSuffixRule
 
 Interface have suffix of "Interface", trait have "Trait" suffix exclusively
 
@@ -142,7 +142,7 @@ abstract class AbstractClass
 
 <br>
 
-## ForbiddenArrayMethodCallRule
+### ForbiddenArrayMethodCallRule
 
 Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code
 
@@ -169,7 +169,7 @@ usort($items, function (array $apples) {
 
 <br>
 
-## ForbiddenExtendOfNonAbstractClassRule
+### ForbiddenExtendOfNonAbstractClassRule
 
 Only abstract classes can be extended
 
@@ -206,7 +206,7 @@ abstract class ParentClass
 
 <br>
 
-## ForbiddenFuncCallRule
+### ForbiddenFuncCallRule
 
 Function `"%s()"` cannot be used/left in the code
 
@@ -269,7 +269,7 @@ echo $value;
 
 <br>
 
-## ForbiddenMultipleClassLikeInOneFileRule
+### ForbiddenMultipleClassLikeInOneFileRule
 
 Multiple class/interface/trait is not allowed in single file
 
@@ -309,7 +309,7 @@ interface SomeInterface
 
 <br>
 
-## ForbiddenNodeRule
+### ForbiddenNodeRule
 
 "%s" is forbidden to use
 
@@ -343,7 +343,7 @@ return strlen('...');
 
 <br>
 
-## ForbiddenStaticClassConstFetchRule
+### ForbiddenStaticClassConstFetchRule
 
 Avoid static access of constants, as they can change value. Use interface and contract method instead
 
@@ -380,7 +380,7 @@ class SomeClass
 
 <br>
 
-## NoDynamicNameRule
+### NoDynamicNameRule
 
 Use explicit names over dynamic ones
 
@@ -417,7 +417,7 @@ class SomeClass
 
 <br>
 
-## NoEntityOutsideEntityNamespaceRule
+### NoEntityOutsideEntityNamespaceRule
 
 Class with #[Entity] attribute must be located in "Entity" namespace to be loaded by Doctrine
 
@@ -456,7 +456,7 @@ class Product
 
 <br>
 
-## NoGlobalConstRule
+### NoGlobalConstRule
 
 Global constants are forbidden. Use enum-like class list instead
 
@@ -487,7 +487,7 @@ class SomeClass
 
 <br>
 
-## NoReferenceRule
+### NoReferenceRule
 
 Use explicit return value over magic &reference
 
@@ -523,7 +523,7 @@ class SomeClass
 
 <br>
 
-## NoReturnArrayVariableListRule
+### NoReturnArrayVariableListRule
 
 Use value object over return of values
 
@@ -560,7 +560,7 @@ final class ReturnVariables
 
 <br>
 
-## NoReturnSetterMethodRule
+### NoReturnSetterMethodRule
 
 Setter method cannot return anything, only set value
 
@@ -601,7 +601,7 @@ final class SomeClass
 
 <br>
 
-## NoSingleInterfaceImplementerRule
+### NoSingleInterfaceImplementerRule
 
 Interface "%s" has only single implementer. Consider using the class directly as there is no point in using the interface.
 
@@ -642,7 +642,7 @@ interface SomeInterface
 
 <br>
 
-## NoTestMocksRule
+### NoTestMocksRule
 
 Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis
 
@@ -683,7 +683,7 @@ final class SkipApiMock extends TestCase
 
 <br>
 
-## PreferredClassRule
+### PreferredClassRule
 
 Instead of "%s" class/interface use "%s"
 
@@ -729,7 +729,7 @@ class SomeClass
 
 <br>
 
-## PreventParentMethodVisibilityOverrideRule
+### PreventParentMethodVisibilityOverrideRule
 
 Change `"%s()"` method visibility to "%s" to respect parent method visibility.
 
@@ -778,7 +778,7 @@ class SomeClass extends SomeParentClass
 
 <br>
 
-## RequireAttributeNameRule
+### RequireAttributeNameRule
 
 Attribute must have all names explicitly defined
 
@@ -819,7 +819,7 @@ class SomeController
 
 <br>
 
-## RequireAttributeNamespaceRule
+### RequireAttributeNamespaceRule
 
 Attribute must be located in "Attribute" namespace
 
@@ -856,7 +856,7 @@ final class SomeAttribute
 
 <br>
 
-## RequireExceptionNamespaceRule
+### RequireExceptionNamespaceRule
 
 `Exception` must be located in "Exception" namespace
 
@@ -892,7 +892,7 @@ final class SomeException extends Exception
 
 <br>
 
-## RequireInvokableControllerRule
+### RequireInvokableControllerRule
 
 Use invokable controller with `__invoke()` method instead of named action method
 
@@ -935,7 +935,7 @@ final class SomeController extends AbstractController
 
 <br>
 
-## RequireUniqueEnumConstantRule
+### RequireUniqueEnumConstantRule
 
 Enum constants "%s" are duplicated. Make them unique instead
 
@@ -974,7 +974,7 @@ class SomeClass extends Enum
 
 <br>
 
-## SeeAnnotationToTestRule
+### SeeAnnotationToTestRule
 
 Class "%s" is missing `@see` annotation with test case class reference
 
@@ -1015,7 +1015,7 @@ class SomeClass extends Rule
 
 <br>
 
-## UppercaseConstantRule
+### UppercaseConstantRule
 
 Constant "%s" must be uppercase
 
