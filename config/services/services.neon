@@ -9,8 +9,6 @@ services:
     - Symplify\PHPStanRules\Naming\ClassToSuffixResolver
     - Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
     - Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
-    - Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
-    - Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
     - Symplify\PHPStanRules\ParentClassMethodNodeResolver
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver

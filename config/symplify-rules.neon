@@ -2,5 +2,4 @@ includes:
     - code-complexity-rules.neon
     - configurable-rules.neon
     - naming-rules.neon
-    - regex-rules.neon
     - static-rules.neon
