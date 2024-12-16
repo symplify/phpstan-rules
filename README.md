@@ -16,9 +16,24 @@ composer require symplify/phpstan-rules --dev
 
 <br>
 
-## Register Rules you Need
 
-Pick from 25+ rules:
+## Usage
+
+Later, once you have most rules applied, it's best practice to include whole sets:
+
+```yaml
+includes:
+    - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
+    - vendor/symplify/phpstan-rules/config/configurable-rules.neon
+    - vendor/symplify/phpstan-rules/config/naming-rules.neon
+    - vendor/symplify/phpstan-rules/config/regex-rules.neon
+    - vendor/symplify/phpstan-rules/config/static-rules.neon
+    - vendor/symplify/phpstan-rules/config/rector-rules.neon
+```
+
+<br>
+
+But at start, make baby steps with one rule at a time:
 
 <br>
 
