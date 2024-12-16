@@ -69,7 +69,7 @@ Add regex101.com link to that shows the regex in practise, so it will be easier 
 
 ```yaml
 rules:
-    - Symplify\PHPStanRules\Rules\AnnotateRegexClassConstWithRegexLinkRule.php)
+    - Symplify\PHPStanRules\Rules\AnnotateRegexClassConstWithRegexLinkRule
 ```
 
 ```php
