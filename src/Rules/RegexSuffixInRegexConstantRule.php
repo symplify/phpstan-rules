@@ -22,17 +22,25 @@ use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
  * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\RegexSuffixInRegexConstantRule\RegexSuffixInRegexConstantRuleTest
  */
-final readonly class RegexSuffixInRegexConstantRule implements Rule
+final class RegexSuffixInRegexConstantRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private RegexFuncCallAnalyzer $regexFuncCallAnalyzer;
+    /**
+     * @readonly
+     */
+    private RegexStaticCallAnalyzer $regexStaticCallAnalyzer;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
 
-    public function __construct(
-        private RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private RegexStaticCallAnalyzer $regexStaticCallAnalyzer
-    ) {
+    public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
+    {
+        $this->regexFuncCallAnalyzer = $regexFuncCallAnalyzer;
+        $this->regexStaticCallAnalyzer = $regexStaticCallAnalyzer;
     }
 
     public function getNodeType(): string
@@ -70,7 +78,7 @@ final readonly class RegexSuffixInRegexConstantRule implements Rule
         }
 
         $constantName = (string) $expr->name;
-        if (\str_ends_with($constantName, '_REGEX')) {
+        if (substr_compare($constantName, '_REGEX', -strlen('_REGEX')) === 0) {
             return [];
         }
 

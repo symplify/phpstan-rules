@@ -21,17 +21,25 @@ use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
  * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoInlineStringRegexRule\NoInlineStringRegexRuleTest
  */
-final readonly class NoInlineStringRegexRule implements Rule
+final class NoInlineStringRegexRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private RegexFuncCallAnalyzer $regexFuncCallAnalyzer;
+    /**
+     * @readonly
+     */
+    private RegexStaticCallAnalyzer $regexStaticCallAnalyzer;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
 
-    public function __construct(
-        private RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private RegexStaticCallAnalyzer $regexStaticCallAnalyzer
-    ) {
+    public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
+    {
+        $this->regexFuncCallAnalyzer = $regexFuncCallAnalyzer;
+        $this->regexStaticCallAnalyzer = $regexStaticCallAnalyzer;
     }
 
     public function getNodeType(): string

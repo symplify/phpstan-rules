@@ -26,13 +26,17 @@ use function array_map;
 final class NoReferenceRule extends AbstractSymplifyRule
 {
     /**
+     * @readonly
+     */
+    private ParentClassMethodNodeResolver $parentClassMethodNodeResolver;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
 
-    public function __construct(
-        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
-    ) {
+    public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
+    {
+        $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;
     }
 
     public function getNodeTypes(): array

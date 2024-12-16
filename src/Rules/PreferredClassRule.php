@@ -24,6 +24,11 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 final class PreferredClassRule extends AbstractSymplifyRule
 {
     /**
+     * @var string[]
+     * @readonly
+     */
+    private array $oldToPreferredClasses;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
@@ -31,9 +36,9 @@ final class PreferredClassRule extends AbstractSymplifyRule
     /**
      * @param string[] $oldToPreferredClasses
      */
-    public function __construct(
-        private readonly array $oldToPreferredClasses
-    ) {
+    public function __construct(array $oldToPreferredClasses)
+    {
+        $this->oldToPreferredClasses = $oldToPreferredClasses;
     }
 
     public function getNodeTypes(): array
@@ -131,8 +136,9 @@ final class PreferredClassRule extends AbstractSymplifyRule
 
     /**
      * @return list<IdentifierRuleError>
+     * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\Instanceof_ $node
      */
-    private function processExprWithClass(StaticCall|Instanceof_ $node): array
+    private function processExprWithClass($node): array
     {
         if ($node->class instanceof Expr) {
             return [];
