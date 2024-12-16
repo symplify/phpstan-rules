@@ -2,9 +2,7 @@
 
 [![Downloads](https://img.shields.io/packagist/dt/symplify/phpstan-rules.svg?style=flat-square)](https://packagist.org/packages/symplify/phpstan-rules/stats)
 
-Set of rules for PHPStan used by Symplify projects
-
-- See [Rules Overview](docs/rules_overview.md)
+Set of 35 custom PHPStan rules that check architecture, typos, class namespace locations, accidental visibility override and more. Useful for any type of PHP project, from legacy to modern stack.
 
 <br>
 
@@ -18,7 +16,7 @@ composer require symplify/phpstan-rules --dev
 
 <br>
 
-## 1. Add Prepared Sets
+## A. Add Prepared Sets
 
 Sets are bunch of rules grouped by a common area, e.g. improve naming. You can pick from 5 sets:
 
@@ -30,20 +28,9 @@ includes:
     - vendor/symplify/phpstan-rules/config/static-rules.neon
 ```
 
-Add sets one by one, fix what you find useful and ignore the rest.
-
 <br>
 
-Do you write custom [Rector](http://github.com/rectorphp/rector-src) rules? Add rules for them too:
-
-```yaml
-includes:
-    - vendor/symplify/phpstan-rules/config/rector-rules.neon
-```
-
-<br>
-
-## 2. Cherry-pick Configurable Rules
+## B. Cherry-pick Configurable Rules
 
 There is one set with pre-configured configurable rules. Include it and see what is errors are found:
 
@@ -55,7 +42,7 @@ includes:
 
 <br>
 
-Would you like to **tailor it to fit your taste**? Pick one PHPStan rule and configure it manually ↓
+Would you like to tailor it to fit your taste? Pick one PHPStan rule and configure it manually ↓
 
 ```yaml
 services:
@@ -74,14 +61,16 @@ services:
 
 <br>
 
-<!-- ruledoc-start -->
 # 30 Rules Overview
 
 ## AnnotateRegexClassConstWithRegexLinkRule
 
 Add regex101.com link to that shows the regex in practise, so it will be easier to maintain in case of bug/extension in the future
 
-- class: [`Symplify\PHPStanRules\Rules\AnnotateRegexClassConstWithRegexLinkRule`](../src/Rules/AnnotateRegexClassConstWithRegexLinkRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\AnnotateRegexClassConstWithRegexLinkRule.php)
+```
 
 ```php
 class SomeClass
@@ -112,7 +101,10 @@ class SomeClass
 
 Interface must be located in "Contract" or "Contracts" namespace
 
-- class: [`Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule`](../src/Rules/CheckRequiredInterfaceInContractNamespaceRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
+```
 
 ```php
 namespace App\Repository;
@@ -143,8 +135,6 @@ interface ProductRepositoryInterface
 Class should have suffix "%s" to respect parent type
 
 :wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\ClassNameRespectsParentSuffixRule`](../src/Rules/ClassNameRespectsParentSuffixRule.php)
 
 ```yaml
 services:
@@ -182,7 +172,10 @@ class SomeCommand extends Command
 
 Interface have suffix of "Interface", trait have "Trait" suffix exclusively
 
-- class: [`Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule`](../src/Rules/Explicit/ExplicitClassPrefixSuffixRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule
+```
 
 ```php
 <?php
@@ -228,7 +221,10 @@ abstract class AbstractClass
 
 Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code
 
-- class: [`Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule`](../src/Rules/Complexity/ForbiddenArrayMethodCallRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
+```
 
 ```php
 usort($items, [$this, "method"]);
@@ -252,7 +248,10 @@ usort($items, function (array $apples) {
 
 Only abstract classes can be extended
 
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule`](../src/Rules/ForbiddenExtendOfNonAbstractClassRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
+```
 
 ```php
 final class SomeClass extends ParentClass
@@ -287,8 +286,6 @@ abstract class ParentClass
 Function `"%s()"` cannot be used/left in the code
 
 :wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule`](../src/Rules/ForbiddenFuncCallRule.php)
 
 ```yaml
 services:
@@ -351,7 +348,10 @@ echo $value;
 
 Multiple class/interface/trait is not allowed in single file
 
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule`](../src/Rules/ForbiddenMultipleClassLikeInOneFileRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
+```
 
 ```php
 // src/SomeClass.php
@@ -390,8 +390,6 @@ interface SomeInterface
 
 :wrench: **configure it!**
 
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenNodeRule`](../src/Rules/ForbiddenNodeRule.php)
-
 ```yaml
 services:
     -
@@ -424,7 +422,10 @@ return strlen('...');
 
 Avoid static access of constants, as they can change value. Use interface and contract method instead
 
-- class: [`Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule`](../src/Rules/ForbiddenStaticClassConstFetchRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
+```
 
 ```php
 class SomeClass
@@ -458,7 +459,10 @@ class SomeClass
 
 Use explicit names over dynamic ones
 
-- class: [`Symplify\PHPStanRules\Rules\NoDynamicNameRule`](../src/Rules/NoDynamicNameRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoDynamicNameRule
+```
 
 ```php
 class SomeClass
@@ -492,7 +496,10 @@ class SomeClass
 
 Class with #[Entity] attribute must be located in "Entity" namespace to be loaded by Doctrine
 
-- class: [`Symplify\PHPStanRules\Rules\NoEntityOutsideEntityNamespaceRule`](../src/Rules/NoEntityOutsideEntityNamespaceRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoEntityOutsideEntityNamespaceRule
+```
 
 ```php
 namespace App\ValueObject;
@@ -528,7 +535,10 @@ class Product
 
 Global constants are forbidden. Use enum-like class list instead
 
-- class: [`Symplify\PHPStanRules\Rules\NoGlobalConstRule`](../src/Rules/NoGlobalConstRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoGlobalConstRule
+```
 
 ```php
 const SOME_GLOBAL_CONST = 'value';
@@ -556,7 +566,10 @@ class SomeClass
 
 Use local named constant instead of inline string for regex to explain meaning by constant name
 
-- class: [`Symplify\PHPStanRules\Rules\NoInlineStringRegexRule`](../src/Rules/NoInlineStringRegexRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoInlineStringRegexRule
+```
 
 ```php
 class SomeClass
@@ -595,7 +608,10 @@ class SomeClass
 
 Use explicit return value over magic &reference
 
-- class: [`Symplify\PHPStanRules\Rules\NoReferenceRule`](../src/Rules/NoReferenceRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoReferenceRule
+```
 
 ```php
 class SomeClass
@@ -628,7 +644,10 @@ class SomeClass
 
 Use value object over return of values
 
-- class: [`Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule`](../src/Rules/NoReturnArrayVariableListRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
+```
 
 ```php
 class ReturnVariables
@@ -662,7 +681,10 @@ final class ReturnVariables
 
 Setter method cannot return anything, only set value
 
-- class: [`Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule`](../src/Rules/NoReturnSetterMethodRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule
+```
 
 ```php
 final class SomeClass
@@ -700,7 +722,10 @@ final class SomeClass
 
 Interface "%s" has only single implementer. Consider using the class directly as there is no point in using the interface.
 
-- class: [`Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule`](../src/Rules/NoSingleInterfaceImplementerRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule
+```
 
 ```php
 class SomeClass implements SomeInterface
@@ -738,7 +763,10 @@ interface SomeInterface
 
 Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis
 
-- class: [`Symplify\PHPStanRules\Rules\PHPUnit\NoTestMocksRule`](../src/Rules/PHPUnit/NoTestMocksRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoTestMocksRule
+```
 
 ```php
 use PHPUnit\Framework\TestCase;
@@ -777,8 +805,6 @@ final class SkipApiMock extends TestCase
 Instead of "%s" class/interface use "%s"
 
 :wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\PreferredClassRule`](../src/Rules/PreferredClassRule.php)
 
 ```yaml
 services:
@@ -824,7 +850,10 @@ class SomeClass
 
 Change `"%s()"` method visibility to "%s" to respect parent method visibility.
 
-- class: [`Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule`](../src/Rules/PreventParentMethodVisibilityOverrideRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
+```
 
 ```php
 class SomeParentClass
@@ -870,7 +899,10 @@ class SomeClass extends SomeParentClass
 
 Name your constant with "_REGEX" suffix, instead of "%s"
 
-- class: [`Symplify\PHPStanRules\Rules\RegexSuffixInRegexConstantRule`](../src/Rules/RegexSuffixInRegexConstantRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\RegexSuffixInRegexConstantRule
+```
 
 ```php
 class SomeClass
@@ -908,7 +940,10 @@ class SomeClass
 
 Attribute must have all names explicitly defined
 
-- class: [`Symplify\PHPStanRules\Rules\RequireAttributeNameRule`](../src/Rules/RequireAttributeNameRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
+```
 
 ```php
 use Symfony\Component\Routing\Annotation\Route;
@@ -946,7 +981,10 @@ class SomeController
 
 Attribute must be located in "Attribute" namespace
 
-- class: [`Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule`](../src/Rules/Domain/RequireAttributeNamespaceRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
+```
 
 ```php
 // app/Entity/SomeAttribute.php
@@ -980,7 +1018,10 @@ final class SomeAttribute
 
 `Exception` must be located in "Exception" namespace
 
-- class: [`Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule`](../src/Rules/Domain/RequireExceptionNamespaceRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
+```
 
 ```php
 // app/Controller/SomeException.php
@@ -1013,7 +1054,10 @@ final class SomeException extends Exception
 
 Use invokable controller with `__invoke()` method instead of named action method
 
-- class: [`Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule`](../src/Symfony/Rules/RequireInvokableControllerRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule
+```
 
 ```php
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -1053,7 +1097,10 @@ final class SomeController extends AbstractController
 
 Enum constants "%s" are duplicated. Make them unique instead
 
-- class: [`Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule`](../src/Rules/Enum/RequireUniqueEnumConstantRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
+```
 
 ```php
 use MyCLabs\Enum\Enum;
@@ -1090,8 +1137,6 @@ class SomeClass extends Enum
 Class "%s" is missing `@see` annotation with test case class reference
 
 :wrench: **configure it!**
-
-- class: [`Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule`](../src/Rules/SeeAnnotationToTestRule.php)
 
 ```yaml
 services:
@@ -1132,7 +1177,10 @@ class SomeClass extends Rule
 
 Constant "%s" must be uppercase
 
-- class: [`Symplify\PHPStanRules\Rules\UppercaseConstantRule`](../src/Rules/UppercaseConstantRule.php)
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\UppercaseConstantRule
+```
 
 ```php
 final class SomeClass
