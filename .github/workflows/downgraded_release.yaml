@@ -31,7 +31,7 @@ jobs:
 
             # get rector to "rector-local" directory, to avoid downgrading itself in the /vendor
             -   run: mkdir rector-local
-            -   run: composer require rector/rector:^0.17.1 --working-dir rector-local --ansi
+            -   run: composer require rector/rector:^2.0 --working-dir rector-local --ansi
 
             # downgrade to PHP 7.4
             -   run: rector-local/vendor/bin/rector process src config --config build/rector-downgrade-php.php --ansi
