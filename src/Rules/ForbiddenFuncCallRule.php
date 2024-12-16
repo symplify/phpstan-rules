@@ -22,7 +22,7 @@ use Symplify\PHPStanRules\ValueObject\Configuration\RequiredWithMessage;
  * @implements Rule<FuncCall>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule\ForbiddenFuncCallRuleTest
  */
-final class ForbiddenFuncCallRule implements Rule
+final readonly class ForbiddenFuncCallRule implements Rule
 {
     /**
      * @var string
@@ -33,9 +33,9 @@ final class ForbiddenFuncCallRule implements Rule
      * @param array<string> $forbiddenFunctions
      */
     public function __construct(
-        private readonly array $forbiddenFunctions,
-        private readonly ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
-        private readonly RequiredWithMessageFormatter $requiredWithMessageFormatter,
+        private array $forbiddenFunctions,
+        private ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
+        private RequiredWithMessageFormatter $requiredWithMessageFormatter,
     ) {
     }
 

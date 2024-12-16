@@ -22,7 +22,7 @@ use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
  * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\RegexSuffixInRegexConstantRule\RegexSuffixInRegexConstantRuleTest
  */
-final class RegexSuffixInRegexConstantRule implements Rule
+final readonly class RegexSuffixInRegexConstantRule implements Rule
 {
     /**
      * @var string
@@ -30,8 +30,8 @@ final class RegexSuffixInRegexConstantRule implements Rule
     public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
 
     public function __construct(
-        private readonly RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private readonly RegexStaticCallAnalyzer $regexStaticCallAnalyzer
+        private RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
+        private RegexStaticCallAnalyzer $regexStaticCallAnalyzer
     ) {
     }
 

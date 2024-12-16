@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\ValueObject\Configuration;
 
-final class RequiredWithMessage
+final readonly class RequiredWithMessage
 {
     public function __construct(
-        private readonly string $required,
-        private readonly ?string $message
+        private string $required,
+        private ?string $message
     ) {
     }
 

@@ -21,7 +21,7 @@ use Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer;
  * @implements Rule<CallLike>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoInlineStringRegexRule\NoInlineStringRegexRuleTest
  */
-final class NoInlineStringRegexRule implements Rule
+final readonly class NoInlineStringRegexRule implements Rule
 {
     /**
      * @var string
@@ -29,8 +29,8 @@ final class NoInlineStringRegexRule implements Rule
     public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
 
     public function __construct(
-        private readonly RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
-        private readonly RegexStaticCallAnalyzer $regexStaticCallAnalyzer
+        private RegexFuncCallAnalyzer $regexFuncCallAnalyzer,
+        private RegexStaticCallAnalyzer $regexStaticCallAnalyzer
     ) {
     }
 

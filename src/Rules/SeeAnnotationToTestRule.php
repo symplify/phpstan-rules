@@ -24,7 +24,7 @@ use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
-final class SeeAnnotationToTestRule implements Rule
+final readonly class SeeAnnotationToTestRule implements Rule
 {
     /**
      * @var string
@@ -35,9 +35,9 @@ final class SeeAnnotationToTestRule implements Rule
      * @param string[] $requiredSeeTypes
      */
     public function __construct(
-        private readonly PhpDocResolver $phpDocResolver,
-        private readonly SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
-        private readonly array $requiredSeeTypes
+        private PhpDocResolver $phpDocResolver,
+        private SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
+        private array $requiredSeeTypes
     ) {
     }
 

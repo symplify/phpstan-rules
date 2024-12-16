@@ -12,10 +12,10 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\Reflection\ClassReflection;
 use Symplify\PHPStanRules\PhpDoc\BarePhpDocParser;
 
-final class EnumAnalyzer
+final readonly class EnumAnalyzer
 {
     public function __construct(
-        private readonly BarePhpDocParser $barePhpDocParser
+        private BarePhpDocParser $barePhpDocParser
     ) {
     }
 

@@ -10,10 +10,10 @@ use PHPStan\PhpDoc\ResolvedPhpDocBlock;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\FileTypeMapper;
 
-final class PhpDocResolver
+final readonly class PhpDocResolver
 {
     public function __construct(
-        private readonly FileTypeMapper $fileTypeMapper
+        private FileTypeMapper $fileTypeMapper
     ) {
     }
 

@@ -19,7 +19,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\NoSingleInterfaceImplementerRuleTest
  */
-final class NoSingleInterfaceImplementerRule implements Rule
+final readonly class NoSingleInterfaceImplementerRule implements Rule
 {
     /**
      * @api used in test
@@ -28,7 +28,7 @@ final class NoSingleInterfaceImplementerRule implements Rule
     public const ERROR_MESSAGE = 'Interface "%s" has only single implementer. Consider using the class directly as there is no point in using the interface.';
 
     public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
+        private ReflectionProvider $reflectionProvider
     ) {
     }
 

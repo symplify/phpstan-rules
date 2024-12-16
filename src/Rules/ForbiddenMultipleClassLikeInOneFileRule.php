@@ -18,14 +18,14 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  * @implements Rule<FileNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenMultipleClassLikeInOneFileRule\ForbiddenMultipleClassLikeInOneFileRuleTest
  */
-final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
+final readonly class ForbiddenMultipleClassLikeInOneFileRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
 
-    private readonly NodeFinder $nodeFinder;
+    private NodeFinder $nodeFinder;
 
     public function __construct(
     ) {

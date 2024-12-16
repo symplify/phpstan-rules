@@ -18,7 +18,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreventParentMethodVisibilityOverrideRule\PreventParentMethodVisibilityOverrideRuleTest
  */
-final class PreventParentMethodVisibilityOverrideRule implements Rule
+final readonly class PreventParentMethodVisibilityOverrideRule implements Rule
 {
     /**
      * @var string
@@ -26,7 +26,7 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule
     public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
 
     public function __construct(
-        private readonly ReflectionProvider $reflectionProvider
+        private ReflectionProvider $reflectionProvider
     ) {
     }
 
