@@ -23,21 +23,19 @@ parameters:
         - */Fixture/*
 
     # https://github.com/TomasVotruba/unused-public
-    # unused_public:
-    #     methods: true
-    #     properties: true
-    #     constants: true
+    unused_public:
+        methods: true
+        properties: true
+        constants: true
 
-    # type_coverage:
-    #     return: 99
-    #     param: 99
-    #     property: 99
+    type_coverage:
+        return: 99
+        param: 99
+        property: 99
 
     ignoreErrors:
         # needless generics
         - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
-
-        - '#Class PHP_CodeSniffer\\Sniffs\\Sniff not found#'
 
         - '#Method Symplify\\PHPStanRules\\Reflection\\ReflectionParser\:\:parseNativeClassReflection\(\) has parameter \$reflectionClass with generic class ReflectionClass but does not specify its types\: T#'
 
@@ -54,10 +52,6 @@ parameters:
         # useful to have IDE know the types
         - identifier: phpstanApi.instanceofType
 
-        -
-            identifier: class.notFound
-            path: tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest.php
-
         # overly detailed
         -
             message: '#Parameter \#2 \$expectedErrors of method PHPStan\\Testing\\RuleTestCase<(.*?)>::analyse\(\) expects list<array\{0: string, 1: int, 2\?: string\|null\}>, (.*?) given#'
@@ -70,3 +64,6 @@ parameters:
 
         # handle next
         - '#Method Symplify\\PHPStanRules\\Rules\\AbstractSymplifyRule\:\:processNode\(\) should return list<PHPStan\\Rules\\IdentifierRuleError> but returns array<PHPStan\\Rules\\RuleError\|string>#'
+
+        # used in tests
+        - '#Public constant "Symplify\\PHPStanRules\\(.*?)Rule\:\:ERROR_MESSAGE" is never used#'

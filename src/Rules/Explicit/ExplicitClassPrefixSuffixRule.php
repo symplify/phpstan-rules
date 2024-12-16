@@ -13,7 +13,6 @@ use PhpParser\Node\Stmt\Trait_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use function str_ends_with;
@@ -119,7 +118,7 @@ final class ExplicitClassPrefixSuffixRule implements Rule
         if (! $isAbstract && str_starts_with($identifier->toString(), 'Abstract')) {
             return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)
                 ->identifier(RuleIdentifier::EXPLICIT_ABSTRACT_PREFIX_NAME)
-                ->build()
+                ->build(),
             ];
         }
 

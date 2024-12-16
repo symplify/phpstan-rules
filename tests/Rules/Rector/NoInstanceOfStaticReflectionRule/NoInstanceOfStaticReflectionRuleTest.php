@@ -27,7 +27,7 @@ final class NoInstanceOfStaticReflectionRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/InstanceofWithType.php', [[$errorMessage, 13]]];
 
         $errorMessage = NoInstanceOfStaticReflectionRule::ERROR_MESSAGE;
-        yield [__DIR__ . '/Fixture/IsAWithType.php', [[$errorMessage, 13]]];
+        yield [__DIR__ . '/Fixture/IsAWithType.php', [[$errorMessage, 11]]];
 
         yield [__DIR__ . '/Fixture/SkipAllowedType.php', []];
         yield [__DIR__ . '/Fixture/SkipGenericNodeType.php', []];

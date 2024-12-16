@@ -5,19 +5,23 @@
     "license": "MIT",
     "require": {
         "php": ">=8.2",
-        "nette/utils": "^4.0",
         "webmozart/assert": "^1.11",
-        "phpstan/phpstan": "^2.0"
+        "phpstan/phpstan": "^2.0",
+        "nette/utils": "^3.2|^4.0",
+        "phpstan/phpdoc-parser": "^2.0"
     },
     "require-dev": {
         "nikic/php-parser": "^5.3",
         "phpunit/phpunit": "^11.5",
         "symfony/framework-bundle": "6.1.*",
         "symplify/easy-coding-standard": "^12.5",
-        "tomasvotruba/class-leak": "^1.2",
+        "tomasvotruba/class-leak": "^2.0",
         "rector/rector": "^2.0",
         "phpstan/extension-installer": "^1.4",
-        "symplify/phpstan-extensions": "^12.0"
+        "symplify/phpstan-extensions": "^12.0",
+        "tomasvotruba/unused-public": "^2.0",
+        "tomasvotruba/type-coverage": "^2.0",
+        "shipmonk/composer-dependency-analyser": "^1.8"
     },
     "autoload": {
         "psr-4": {
@@ -30,16 +34,7 @@
         },
         "classmap": [
             "stubs"
-        ],
-        "files": [
         ]
-    },
-    "extra": {
-        "phpstan": {
-            "includes": [
-                "config/services/services.neon"
-            ]
-        }
     },
     "config": {
         "platform-check": false,
@@ -52,5 +47,12 @@
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
         "phpstan": "vendor/bin/phpstan analyse --ansi",
         "rector": "vendor/bin/rector process --dry-run --ansi"
+    },
+    "extra": {
+        "phpstan": {
+            "includes": [
+                "config/services/services.neon"
+            ]
+        }
     }
 }

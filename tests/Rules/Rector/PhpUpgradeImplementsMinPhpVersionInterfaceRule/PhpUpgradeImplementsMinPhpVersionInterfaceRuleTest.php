@@ -8,7 +8,6 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Rector\Php80\Rector\Class_\SomePhpFeatureRector;
 use Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule;
 
 final class PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest extends RuleTestCase
@@ -30,7 +29,7 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest extends RuleTestC
             [
                 sprintf(
                     PhpUpgradeImplementsMinPhpVersionInterfaceRule::ERROR_MESSAGE,
-                    SomePhpFeatureRector::class
+                    'Rector\Php80\Rector\Class_\SomePhpFeatureRector',
                 ),
                 7,
             ],

@@ -13,6 +13,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassConst>
+ *
  * @see \Symplify\PHPStanRules\Tests\Rules\UppercaseConstantRule\UppercaseConstantRuleTest
  */
 final class UppercaseConstantRule implements Rule

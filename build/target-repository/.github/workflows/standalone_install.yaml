@@ -9,7 +9,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php_version: ['7.4', '8.0']
+                php_version: ['7.4', '8.0', '8.3']
 
         steps:
             # prepare empty composer.json that allows the phpstan extension plugin

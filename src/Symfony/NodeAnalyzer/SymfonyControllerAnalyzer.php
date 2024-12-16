@@ -6,15 +6,11 @@ namespace Symplify\PHPStanRules\Symfony\NodeAnalyzer;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node\Stmt\ClassMethod;
+use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder;
 
 final class SymfonyControllerAnalyzer
 {
-    /**
-     * @var string
-     */
-    private const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
-
     public static function isControllerActionMethod(ClassMethod $classMethod): bool
     {
         $attributeFinder = new AttributeFinder();
@@ -23,7 +19,7 @@ final class SymfonyControllerAnalyzer
             return false;
         }
 
-        if ($attributeFinder->hasAttribute($classMethod, self::ROUTE_ATTRIBUTE)) {
+        if ($attributeFinder->hasAttribute($classMethod, ClassName::ROUTE_ATTRIBUTE)) {
             return true;
         }
 

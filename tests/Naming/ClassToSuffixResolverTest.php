@@ -7,7 +7,6 @@ namespace Symplify\PHPStanRules\Tests\Naming;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
 
 final class ClassToSuffixResolverTest extends TestCase
@@ -34,6 +33,6 @@ final class ClassToSuffixResolverTest extends TestCase
         yield ['Exception', 'Exception'];
         yield ['Symfony\Component\Console\Command\Command', 'Command'];
         yield [TestCase::class, 'Test'];
-        yield [EventSubscriberInterface::class, 'EventSubscriber'];
+        yield ['Symfony\Component\EventDispatcher\EventSubscriberInterface', 'EventSubscriber'];
     }
 }

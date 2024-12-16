@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use Nette\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
@@ -13,8 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<ClassConst>
@@ -75,7 +72,7 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
     private function isNonSingleCharRegexPattern(string $value): bool
     {
         // skip 1-char regexs
-        if (Strings::length($value) < 4) {
+        if (strlen($value) < 4) {
             return false;
         }
 
@@ -87,11 +84,12 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
 
         $patternWithoutModifiers = rtrim($value, self::ALL_MODIFIERS);
 
-        if (Strings::length($patternWithoutModifiers) < 1) {
+        if (strlen($patternWithoutModifiers) < 1) {
             return false;
         }
 
-        $lastChar = Strings::substring($patternWithoutModifiers, -1, 1);
+        $lastChar = substr($patternWithoutModifiers, -1, 1);
+
         // this is probably a regex
         return $firstChar === $lastChar;
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\FuncCall;
@@ -13,7 +12,6 @@ use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer;
@@ -97,7 +95,7 @@ final class NoInlineStringRegexRule implements Rule
 
         $regexValue = $secondArgValue->value;
 
-        if (Strings::length($regexValue) <= 7) {
+        if (strlen($regexValue) <= 7) {
             return [];
         }
 

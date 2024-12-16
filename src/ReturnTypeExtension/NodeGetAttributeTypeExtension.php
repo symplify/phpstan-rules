@@ -18,7 +18,7 @@ use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
-use Rector\NodeTypeResolver\Node\AttributeKey;
+use Symplify\PHPStanRules\Enum\ClassName;
 
 /**
  * @api used in rector rules
@@ -31,9 +31,9 @@ final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExte
      */
     private const ARGUMENT_KEY_TO_RETURN_TYPE = [
         'scope' => Scope::class,
-        AttributeKey::class . '::SCOPE' => Scope::class,
+        ClassName::RECTOR_ATTRIBUTE_KEY . '::SCOPE' => Scope::class,
         'originalNode' => Node::class,
-        AttributeKey::class . '::ORIGINAL_NODE' => Node::class,
+        ClassName::RECTOR_ATTRIBUTE_KEY . '::ORIGINAL_NODE' => Node::class,
     ];
 
     public function getClass(): string

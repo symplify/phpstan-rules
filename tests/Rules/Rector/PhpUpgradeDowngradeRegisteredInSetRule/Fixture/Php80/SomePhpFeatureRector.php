@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\Fixture\Php80;
 
-use Rector\Contract\Rector\RectorInterface;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use PhpParser\Node;
+use Rector\Rector\AbstractRector;
 
-final class SomePhpFeatureRector implements RectorInterface
+final class SomePhpFeatureRector extends AbstractRector
 {
-    public function getRuleDefinition(): RuleDefinition
+    public function getNodeTypes(): array
+    {
+    }
+
+    public function refactor(Node $node)
     {
     }
 }
