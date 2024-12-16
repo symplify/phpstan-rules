@@ -14,11 +14,6 @@ final class ClassName
     /**
      * @var string
      */
-    public const NETTE_STRINGS = 'Nette\Utils\Strings';
-
-    /**
-     * @var string
-     */
     public const SYMFONY_ABSTRACT_CONTROLLER = 'Symfony\Bundle\FrameworkBundle\Controller\AbstractController';
 
     /**

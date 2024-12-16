@@ -19,11 +19,6 @@ final class RuleIdentifier
     /**
      * @var string
      */
-    public const REGEX_SUFFIX_IN_REGEX_CONSTANT = 'symplify.regexSuffixInRegexConstant';
-
-    /**
-     * @var string
-     */
     public const REQUIRE_ATTRIBUTE_NAME = 'symplify.requireAttributeName';
 
     /**
@@ -65,11 +60,6 @@ final class RuleIdentifier
      * @var string
      */
     public const PARENT_METHOD_VISIBILITY_OVERRIDE = 'symplify.parentMethodVisibilityOverride';
-
-    /**
-     * @var string
-     */
-    public const CLASS_CONSTANT_REGEX = 'symplify.classConstantRegex';
 
     /**
      * @var string
@@ -125,11 +115,6 @@ final class RuleIdentifier
      * @var string
      */
     public const FORBIDDEN_ARRAY_METHOD_CALL = 'symplify.forbiddenArrayMethodCall';
-
-    /**
-     * @var string
-     */
-    public const REGEX_ANNOTATE_CLASS_CONST = 'symplify.regexAnnotateClassConst';
 
     /**
      * @var string

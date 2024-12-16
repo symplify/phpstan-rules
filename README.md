@@ -16,84 +16,9 @@ composer require symplify/phpstan-rules --dev
 
 <br>
 
-## A. Add Prepared Sets
+## Register Rules you Need
 
-Sets are bunch of rules grouped by a common area, e.g. improve naming. You can pick from 5 sets:
-
-```yaml
-includes:
-    - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
-    - vendor/symplify/phpstan-rules/config/naming-rules.neon
-    - vendor/symplify/phpstan-rules/config/regex-rules.neon
-    - vendor/symplify/phpstan-rules/config/static-rules.neon
-```
-
-<br>
-
-## B. Cherry-pick Configurable Rules
-
-There is one set with pre-configured configurable rules. Include it and see what is errors are found:
-
-```yaml
-# phpstan.neon
-includes:
-    - vendor/symplify/phpstan-rules/config/configurable-rules.neon
-```
-
-<br>
-
-Would you like to tailor it to fit your taste? Pick one PHPStan rule and configure it manually ↓
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            forbiddenNodes:
-                - PhpParser\Node\Expr\Empty_
-                - PhpParser\Node\Stmt\Switch_
-```
-
-<br>
-
-## 3. Register Particular Rules
-
-<br>
-
-# 30 Rules Overview
-
-## AnnotateRegexClassConstWithRegexLinkRule
-
-Add regex101.com link to that shows the regex in practise, so it will be easier to maintain in case of bug/extension in the future
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\AnnotateRegexClassConstWithRegexLinkRule
-```
-
-```php
-class SomeClass
-{
-    private const COMPLICATED_REGEX = '#some_complicated_stu|ff#';
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    /**
-     * @see https://regex101.com/r/SZr0X5/12
-     */
-    private const COMPLICATED_REGEX = '#some_complicated_stu|ff#';
-}
-```
-
-:+1:
+Pick from 25+ rules:
 
 <br>
 
@@ -562,48 +487,6 @@ class SomeClass
 
 <br>
 
-## NoInlineStringRegexRule
-
-Use local named constant instead of inline string for regex to explain meaning by constant name
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\NoInlineStringRegexRule
-```
-
-```php
-class SomeClass
-{
-    public function run($value)
-    {
-        return preg_match('#some_stu|ff#', $value);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    /**
-     * @var string
-     */
-    public const SOME_STUFF_REGEX = '#some_stu|ff#';
-
-    public function run($value)
-    {
-        return preg_match(self::SOME_STUFF_REGEX, $value);
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ## NoReferenceRule
 
 Use explicit return value over magic &reference
@@ -887,47 +770,6 @@ class SomeClass extends SomeParentClass
 {
     public function run()
     {
-    }
-}
-```
-
-:+1:
-
-<br>
-
-## RegexSuffixInRegexConstantRule
-
-Name your constant with "_REGEX" suffix, instead of "%s"
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\RegexSuffixInRegexConstantRule
-```
-
-```php
-class SomeClass
-{
-    public const SOME_NAME = '#some\s+name#';
-
-    public function run($value)
-    {
-        $somePath = preg_match(self::SOME_NAME, $value);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public const SOME_NAME_REGEX = '#some\s+name#';
-
-    public function run($value)
-    {
-        $somePath = preg_match(self::SOME_NAME_REGEX, $value);
     }
 }
 ```
