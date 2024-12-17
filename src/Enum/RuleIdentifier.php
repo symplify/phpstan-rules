@@ -160,4 +160,9 @@ final class RuleIdentifier
      * @var string
      */
     public const SYMFONY_REQUIRE_INVOKABLE_CONTROLLER = 'symfony.requireInvokableController';
+
+    /**
+     * @var string
+     */
+    public const NO_VALUE_OBJECT_IN_SERVICE_CONSTRUCTOR = 'symplify.noValueObjectInServiceConstructor';
 }
