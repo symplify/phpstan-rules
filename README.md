@@ -255,10 +255,6 @@ class ParentClass
 <br>
 
 ```php
-final class SomeClass extends ParentClass
-{
-}
-
 abstract class ParentClass
 {
 }
