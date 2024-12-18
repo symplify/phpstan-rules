@@ -277,13 +277,16 @@ services:
         tags: [phpstan.rules.rule]
         arguments:
             forbiddenFunctions:
-                - eval
+                - dump
+
+                # or with custom error message
+                dump: 'seems you missed some debugging function'
 ```
 
 ↓
 
 ```php
-echo eval('...');
+dump('...');
 ```
 
 :x:
@@ -292,35 +295,6 @@ echo eval('...');
 
 ```php
 echo '...';
-```
-
-:+1:
-
-<br>
-
-```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            forbiddenFunctions:
-                dump: 'seems you missed some debugging function'
-```
-
-↓
-
-```php
-dump($value);
-echo $value;
-```
-
-:x:
-
-<br>
-
-```php
-echo $value;
 ```
 
 :+1:
