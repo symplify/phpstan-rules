@@ -846,49 +846,6 @@ final class SomeException extends Exception
 
 <br>
 
-### RequireInvokableControllerRule
-
-Use invokable controller with `__invoke()` method instead of named action method
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
-```
-
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function someMethod()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function __invoke()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### RequireUniqueEnumConstantRule
 
 Enum constants "%s" are duplicated. Make them unique instead
