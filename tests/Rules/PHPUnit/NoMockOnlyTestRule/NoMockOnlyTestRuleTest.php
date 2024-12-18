@@ -8,7 +8,7 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\PHPStan\Rule\NoMockOnlyTestRule;
+use Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule;
 
 final class NoMockOnlyTestRuleTest extends RuleTestCase
 {

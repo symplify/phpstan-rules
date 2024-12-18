@@ -6,7 +6,7 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\PHPStan\Rule\PublicStaticDataProviderRule;
+use Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule;
 
 final class PublicStaticDataProviderRuleTest extends RuleTestCase
 {

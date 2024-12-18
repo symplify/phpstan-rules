@@ -55,11 +55,11 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(RuleIdentifier::DOCTRINE_NO_REPOSITORY_CALL_IN_DATA_FIXTURES)
             ->build();
 
-        return [$ruleError];
+        return [$identifierRuleError];
     }
 
     private function isDataFixtureClass(Scope $scope): bool

@@ -10,15 +10,16 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\PHPStan\DoctrineEntityDocumentAnalyser;
+use Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * The ORM entities and ODM documents should never be mocked, as it leads to typeless code.
  * Use them directly instead.
  *
- * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule\NoEntityMockingRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoEntityMockingRule\NoEntityMockingRuleTest
+ *
  * @implements Rule<MethodCall>
  */
 final readonly class NoEntityMockingRule implements Rule
@@ -40,7 +41,6 @@ final readonly class NoEntityMockingRule implements Rule
 
     /**
      * @param MethodCall $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -62,6 +62,7 @@ final readonly class NoEntityMockingRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::NO_ENTITY_MOCKING)
                 ->build();
 
             return [$ruleError];

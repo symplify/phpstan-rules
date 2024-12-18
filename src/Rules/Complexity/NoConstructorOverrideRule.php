@@ -10,8 +10,8 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassMethod>
@@ -35,7 +35,6 @@ final class NoConstructorOverrideRule implements Rule
 
     /**
      * @param ClassMethod $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -69,7 +68,10 @@ final class NoConstructorOverrideRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)->build();
-        return [$ruleError];
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_CONSTRUCTOR_OVERRIDE)
+            ->build();
+
+        return [$identifierRuleError];
     }
 }

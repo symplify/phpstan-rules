@@ -9,10 +9,10 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -31,7 +31,6 @@ final class SingleArgEventDispatchRule implements Rule
 
     /**
      * @param MethodCall $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -57,7 +56,10 @@ final class SingleArgEventDispatchRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)->build();
-        return [$ruleError];
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::SINGLE_ARG_EVENT_DISPATCH)
+            ->build();
+
+        return [$identifierRuleError];
     }
 }

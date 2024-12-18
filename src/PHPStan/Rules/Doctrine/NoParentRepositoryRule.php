@@ -9,8 +9,8 @@ use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * Check if class extends repository class,
@@ -39,7 +39,6 @@ final class NoParentRepositoryRule implements Rule
 
     /**
      * @param Class_ $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -52,9 +51,10 @@ final class NoParentRepositoryRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::DOCTRINE_NO_PARENT_REPOSITORY)
             ->build();
 
-        return [$ruleError];
+        return [$identifierRuleError];
     }
 }

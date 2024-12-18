@@ -1028,6 +1028,28 @@ final class SomeClass
 
 <br>
 
+## Doctrine-specific Rules
+
+### NoGetRepositoryOutsideServiceRule
+
+Instead of getting repository from EntityManager, use constructor injection and service pattern to keep code clean
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
+```
+
+```php
+class SomeClass
+{
+    public function run(EntityManagerInterface $entityManager)
+    {
+        return $entityManager->getRepository(SomeEntity::class);
+    }
+}
+```
+
+
 <!-- ruledoc-end -->
 
 <br>

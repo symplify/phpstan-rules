@@ -24,7 +24,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  *
  * @implements Rule<Node>
  */
-final class PreferredClassRule implements Rule
+final readonly class PreferredClassRule implements Rule
 {
     /**
      * @var string
@@ -35,7 +35,7 @@ final class PreferredClassRule implements Rule
      * @param string[] $oldToPreferredClasses
      */
     public function __construct(
-        private readonly array $oldToPreferredClasses
+        private array $oldToPreferredClasses
     ) {
     }
 

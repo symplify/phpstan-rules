@@ -24,9 +24,9 @@ use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReferenceRule\NoReferenceRuleTest
  *
- * @implements Rule<\PhpParser\Node>
+ * @implements Rule<Node>
  */
-final class NoReferenceRule implements Rule
+final readonly class NoReferenceRule implements Rule
 {
     /**
      * @var string
@@ -34,7 +34,7 @@ final class NoReferenceRule implements Rule
     public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
 
     public function __construct(
-        private readonly ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
+        private ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
     ) {
     }
 

@@ -1,5 +1,5 @@
 services:
-    - Symplify\PHPStanRules\PHPStan\DoctrineEntityDocumentAnalyser
+    - Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser
 
 rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule

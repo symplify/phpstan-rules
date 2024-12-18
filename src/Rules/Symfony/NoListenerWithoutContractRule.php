@@ -9,8 +9,8 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * Based on https://tomasvotruba.com/blog/2019/07/22/how-to-convert-listeners-to-subscribers-and-reduce-your-configs
@@ -23,7 +23,7 @@ final class NoListenerWithoutContractRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'There should be no listeners defined in yaml config, use contract + PHP instead';
+    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract and PHP instead';
 
     public function getNodeType(): string
     {
@@ -32,7 +32,6 @@ final class NoListenerWithoutContractRule implements Rule
 
     /**
      * @param InClassNode $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -45,17 +44,19 @@ final class NoListenerWithoutContractRule implements Rule
             return [];
         }
 
-        $class = $node->getOriginalNode();
-        if (! $class instanceof Class_) {
+        $classLike = $node->getOriginalNode();
+        if (! $classLike instanceof Class_) {
             return [];
         }
 
-        if ($class->implements !== []) {
+        if ($classLike->implements !== []) {
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)->build();
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_LISTENER_WITHOUT_CONTRACT)
+            ->build();
 
-        return [$ruleError];
+        return [$identifierRuleError];
     }
 }

@@ -9,8 +9,8 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * Check if abstract controller has constructor, as it should use
@@ -34,7 +34,6 @@ final class NoAbstractControllerConstructorRule implements Rule
 
     /**
      * @param Class_ $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -55,7 +54,10 @@ final class NoAbstractControllerConstructorRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)->build();
-        return [$ruleError];
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR)
+            ->build();
+
+        return [$identifierRuleError];
     }
 }

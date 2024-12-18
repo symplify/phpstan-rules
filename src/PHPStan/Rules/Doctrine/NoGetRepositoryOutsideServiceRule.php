@@ -9,14 +9,11 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
- * Check if abstract controller has constructor, as it should use
- * #[Require] instead to avoid parent constructor override
- *
- * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoGetRepositoryOutsideServiceRule\NoGetRepositoryOutsideServiceRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServiceRule\NoGetRepositoryOutsideServiceRuleTest
  *
  * @implements Rule<MethodCall>
  */
@@ -34,7 +31,6 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
 
     /**
      * @param MethodCall $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -47,7 +43,10 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
         }
 
         if (! $scope->isInClass()) {
-            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)->build();
+            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+                ->build();
+
             return [$ruleError];
         }
 
@@ -57,7 +56,10 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)->build();
+        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+            ->build();
+
         return [$ruleError];
     }
 }

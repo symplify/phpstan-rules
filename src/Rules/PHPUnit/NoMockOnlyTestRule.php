@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\PHPStan\Rule;
+namespace Symplify\PHPStanRules\Rules\PHPUnit;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
@@ -10,12 +10,12 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\PHPStan\PHPUnitTestAnalyser;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule\NoMockOnlyTestRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockOnlyTestRule\NoMockOnlyTestRuleTest
  *
  * @implements Rule<InClassNode>
  */
@@ -38,7 +38,6 @@ final readonly class NoMockOnlyTestRule implements Rule
 
     /**
      * @param InClassNode $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -73,8 +72,10 @@ final readonly class NoMockOnlyTestRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::PHPUNIT_NO_MOCK_ONLY)
             ->build();
-        return [$ruleError];
+
+        return [$identifierRuleError];
     }
 }

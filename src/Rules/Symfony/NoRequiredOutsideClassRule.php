@@ -10,8 +10,8 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Trait_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRequiredOutsideClassRule\NoRequiredOutsideClassRuleTest
@@ -37,7 +37,6 @@ final class NoRequiredOutsideClassRule implements Rule
 
     /**
      * @param Trait_ $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -47,6 +46,7 @@ final class NoRequiredOutsideClassRule implements Rule
             if ($this->isAutowiredClassMethod($classMethod)) {
                 $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
                     ->file($scope->getFile())
+                    ->identifier(RuleIdentifier::SYMFONY_NO_REQUIRED_OUTSIDE_CLASS)
                     ->line($classMethod->getLine())
                     ->build();
             }

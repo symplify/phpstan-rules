@@ -26,7 +26,7 @@ final class RequireInvokableControllerRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipInvokableController.php', []];
         yield [__DIR__ . '/Fixture/SkipRandomPublicMethodController.php', []];
 
-        yield [__DIR__ . '/Fixture/MissnamedController.php', [[RequireInvokableControllerRule::ERROR_MESSAGE, 15]]];
+        yield [__DIR__ . '/Fixture/MissnamedController.php', [[RequireInvokableControllerRule::ERROR_MESSAGE, 14]]];
     }
 
     /**

@@ -13,9 +13,9 @@ use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassMethod>
@@ -39,7 +39,6 @@ final class NoStringInGetSubscribedEventsRule implements Rule
 
     /**
      * @param ClassMethod $node
-     * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -95,7 +94,10 @@ final class NoStringInGetSubscribedEventsRule implements Rule
                 continue;
             }
 
-            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)->build();
+            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::NO_STRING_IN_GET_SUBSCRIBED_EVENTS)
+                ->build();
+
             return [$ruleError];
         }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\PHPStan\Rule;
+namespace Symplify\PHPStanRules\Rules\PHPUnit;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -10,8 +10,9 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\PHPStan\DataProviderMethodResolver;
-use Symplify\PHPStanRules\PHPStan\PHPUnitTestAnalyser;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\PHPUnit\DataProviderMethodResolver;
+use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
 /**
  * PHPUnit data provider have to be public and static
@@ -50,7 +51,7 @@ final class PublicStaticDataProviderRule implements Rule
 
         $classLike = $node->getOriginalNode();
         foreach ($classLike->getMethods() as $classMethod) {
-            if (! PHPUnitTestAnalyser::isTestClassMethod($classMethod)) {
+            if (! PHPUnitTestAnalyser::class::isTestClassMethod($classMethod)) {
                 continue;
             }
 
@@ -75,7 +76,7 @@ final class PublicStaticDataProviderRule implements Rule
             if (! $dataProviderClassMethod->isStatic()) {
                 $errorMessage = sprintf(self::PUBLIC_ERROR_MESSAGE, $dataProviderMethodName);
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
-                    ->identifier('phpunit.publicDataProvider')
+                    ->identifier(RuleIdentifier::PHPUNIT_PUBLIC_STATIC_DATA_PROVIDER)
                     ->line($dataProviderClassMethod->getLine())
                     ->build();
             }

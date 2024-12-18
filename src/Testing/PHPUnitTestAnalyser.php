@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\PHPStan;
+namespace Symplify\PHPStanRules\Testing;
 
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
@@ -25,6 +25,9 @@ final class PHPUnitTestAnalyser
         return $classReflection->isSubclassOf(self::TEST_CASE_CLASS);
     }
 
+    /**
+     * @api is used
+     */
     public static function isTestClassMethod(ClassMethod $classMethod): bool
     {
         if (! $classMethod->isPublic()) {
