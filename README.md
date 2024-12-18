@@ -1472,7 +1472,7 @@ final class SomeController extends AbstractController
 
 <br>
 
-## 3. PHPUnit-specific Rules
+## 4. PHPUnit-specific Rules
 
 ### NoEntityMockingRule, NoDocumentMockingRule
 
