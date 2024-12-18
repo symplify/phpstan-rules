@@ -14,13 +14,17 @@ use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Expr\StaticPropertyFetch;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoDynamicNameRule\NoDynamicNameRuleTest
+ *
+ * @implements Rule<Node>
  */
-final class NoDynamicNameRule extends AbstractSymplifyRule
+final readonly class NoDynamicNameRule implements Rule
 {
     /**
      * @var string
@@ -28,29 +32,17 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
     public const ERROR_MESSAGE = 'Use explicit names over dynamic ones';
 
     public function __construct(
-        private readonly CallableTypeAnalyzer $callableTypeAnalyzer,
+        private CallableTypeAnalyzer $callableTypeAnalyzer,
     ) {
     }
 
-    /**
-     * @return array<class-string<Node>>
-     */
-    public function getNodeTypes(): array
+    public function getNodeType(): string
     {
-        return [
-            MethodCall::class,
-            StaticCall::class,
-            FuncCall::class,
-            StaticPropertyFetch::class,
-            PropertyFetch::class,
-            ClassConstFetch::class,
-        ];
+        // trick to allow multiple node types
+        return Node::class;
     }
 
-    /**
-     * @param MethodCall|StaticCall|FuncCall|StaticPropertyFetch|PropertyFetch|ClassConstFetch $node
-     */
-    public function process(Node $node, Scope $scope): array
+    public function processNode(Node $node, Scope $scope): array
     {
         if ($node instanceof ClassConstFetch || $node instanceof StaticPropertyFetch) {
             if (! $node->class instanceof Expr) {
@@ -65,17 +57,30 @@ final class NoDynamicNameRule extends AbstractSymplifyRule
                 return [];
             }
 
-            return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::NO_DYNAMIC_NAME)
+                ->build();
+
+            return [$ruleError];
         }
 
-        if (! $node->name instanceof Expr) {
-            return [];
+        if ($node instanceof MethodCall || $node instanceof StaticCall || $node instanceof FuncCall || $node instanceof PropertyFetch) {
+
+            if (! $node->name instanceof Expr) {
+                return [];
+            }
+
+            if ($this->callableTypeAnalyzer->isClosureOrCallableType($scope, $node->name)) {
+                return [];
+            }
+
+            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::NO_DYNAMIC_NAME)
+                ->build();
+
+            return [$ruleError];
         }
 
-        if ($this->callableTypeAnalyzer->isClosureOrCallableType($scope, $node->name)) {
-            return [];
-        }
-
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
+        return [];
     }
 }

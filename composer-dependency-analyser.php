@@ -8,7 +8,6 @@ use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 return (new Configuration())->addPathToScan(__DIR__ . '/src', false)
     ->addPathToExclude(__DIR__ . '/tests/Rules/Rector/NoInstanceOfStaticReflectionRule/Fixture')
     ->addPathToExclude(__DIR__ . '/tests/Rules/Enum/RequireUniqueEnumConstantRule/Fixture')
-    ->addPathToExclude(__DIR__ . '/tests/Rules/NoReturnArrayVariableListRule/Fixture')
     ->addPathToExclude(__DIR__ . '/tests/Rules/ForbiddenExtendOfNonAbstractClassRule/Fixture')
     ->addPathToExclude(__DIR__ . '/tests/Rules/PHPUnit/NoTestMocksRule/Fixture')
 

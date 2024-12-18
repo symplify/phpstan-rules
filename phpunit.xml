@@ -10,5 +10,6 @@
     <testsuite name="all">
         <directory>tests</directory>
         <exclude>tests/Rules/ClassNameRespectsParentSuffixRule/Fixture/</exclude>
+        <exclude>tests/Rules/PHPUnit/PublicStaticDataProviderRule</exclude>
     </testsuite>
 </phpunit>

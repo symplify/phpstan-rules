@@ -28,7 +28,11 @@ includes:
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
+
+    # project specific
     - vendor/symplify/phpstan-rules/config/rector-rules.neon
+    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
+    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
 ```
 
 <br>
@@ -876,7 +880,7 @@ Use invokable controller with `__invoke()` method instead of named action method
 
 ```yaml
 rules:
-    - Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule
+    - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
 ```
 
 ```php
@@ -1023,6 +1027,28 @@ final class SomeClass
 :+1:
 
 <br>
+
+## Doctrine-specific Rules
+
+### NoGetRepositoryOutsideServiceRule
+
+Instead of getting repository from EntityManager, use constructor injection and service pattern to keep code clean
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
+```
+
+```php
+class SomeClass
+{
+    public function run(EntityManagerInterface $entityManager)
+    {
+        return $entityManager->getRepository(SomeEntity::class);
+    }
+}
+```
+
 
 <!-- ruledoc-end -->
 

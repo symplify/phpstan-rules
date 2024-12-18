@@ -13,3 +13,6 @@ services:
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver
     - Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer
+
+    # doctrine
+    - Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser

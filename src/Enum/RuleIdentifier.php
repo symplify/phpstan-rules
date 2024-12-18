@@ -160,4 +160,43 @@ final class RuleIdentifier
      * @var string
      */
     public const NO_VALUE_OBJECT_IN_SERVICE_CONSTRUCTOR = 'symplify.noValueObjectInServiceConstructor';
+
+    /**
+     * @var string
+     */
+    public const DOCTRINE_NO_REPOSITORY_CALL_IN_DATA_FIXTURES = 'doctrine.noRepositoryCallInDataFixtures';
+
+    /**
+     * @var string
+     */
+    public const PHPUNIT_NO_DOCUMENT_MOCKING = 'phpunit.noDocumentMocking';
+
+    /**
+     * @var string
+     */
+    public const NO_DYNAMIC_NAME = 'symplify.noDynamicName';
+
+    public const NO_REFERENCE = 'symplify.noReference';
+
+    public const PHPUNIT_NO_MOCK_ONLY = 'phpunit.noMockOnly';
+
+    public const SINGLE_ARG_EVENT_DISPATCH = 'symfony.singleArgEventDispatch';
+
+    public const NO_ENTITY_MOCKING = 'doctrine.noEntityMocking';
+
+    public const NO_STRING_IN_GET_SUBSCRIBED_EVENTS = 'symfony.noStringInGetSubscribedEvents';
+
+    public const NO_LISTENER_WITHOUT_CONTRACT = 'symfony.noListenerWithoutContract';
+
+    public const DOCTRINE_NO_PARENT_REPOSITORY = 'doctrine.noParentRepository';
+
+    public const DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE = 'doctrine.noGetRepositoryOutsideService';
+
+    public const SYMFONY_NO_REQUIRED_OUTSIDE_CLASS = 'symfony.noRequiredOutsideClass';
+
+    public const NO_CONSTRUCTOR_OVERRIDE = 'symplify.noConstructorOverride';
+
+    public const SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR = 'symfony.noAbstractControllerConstructor';
+
+    public const PHPUNIT_PUBLIC_STATIC_DATA_PROVIDER = 'phpunit.publicStaticDataProvider';
 }

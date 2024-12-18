@@ -18,6 +18,8 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\NoSingleInterfaceImplementerRuleTest
+ *
+ * @implements Rule<CollectedDataNode>
  */
 final readonly class NoSingleInterfaceImplementerRule implements Rule
 {

@@ -14,14 +14,10 @@ use Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector;
 use Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule;
 use Symplify\PHPStanRules\Tests\Rules\NoSingleInterfaceImplementerRule\Fixture\SimpleInterface;
 
-/**
- * @extends RuleTestCase<NoSingleInterfaceImplementerRule>
- */
 final class NoSingleInterfaceImplementerRuleTest extends RuleTestCase
 {
     /**
      * @param string[] $filePaths
-     * @param mixed[] $expectedErrorMessagesWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorMessagesWithLines): void
