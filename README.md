@@ -26,7 +26,6 @@ includes:
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
     - vendor/symplify/phpstan-rules/config/configurable-rules.neon
     - vendor/symplify/phpstan-rules/config/naming-rules.neon
-    - vendor/symplify/phpstan-rules/config/regex-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
 
     # project specific
