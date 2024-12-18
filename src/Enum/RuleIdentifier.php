@@ -170,4 +170,11 @@ final class RuleIdentifier
      * @var string
      */
     public const PHPUNIT_NO_DOCUMENT_MOCKING = 'phpunit.noDocumentMocking';
+
+    /**
+     * @var string
+     */
+    public const NO_DYNAMIC_NAME = 'symplify.noDynamicName';
+
+    public const NO_REFERENCE = 'symplify.noReference';
 }

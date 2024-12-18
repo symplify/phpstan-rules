@@ -15,15 +15,18 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\Function_;
 use PHPStan\Analyser\Scope;
-use PHPStan\Rules\RuleError;
+use PHPStan\Rules\IdentifierRuleError;
+use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
-use function array_map;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReferenceRule\NoReferenceRuleTest
+ *
+ * @implements Rule<\PhpParser\Node>
  */
-final class NoReferenceRule extends AbstractSymplifyRule
+final class NoReferenceRule implements Rule
 {
     /**
      * @var string
@@ -35,53 +38,42 @@ final class NoReferenceRule extends AbstractSymplifyRule
     ) {
     }
 
-    public function getNodeTypes(): array
+    public function getNodeType(): string
     {
-        return [
-            ClassMethod::class,
-            Function_::class,
-            AssignRef::class,
-            Arg::class,
-            Foreach_::class,
-            ArrayItem::class,
-            ArrowFunction::class,
-            Closure::class,
-        ];
+        return Node::class;
     }
 
-    /**
-     * @param ClassMethod|Function_|AssignRef|Arg|Foreach_|ArrayItem|ArrowFunction|Closure $node
-     */
-    public function process(Node $node, Scope $scope): array
+    public function processNode(Node $node, Scope $scope): array
     {
         $errorMessages = [];
 
         if ($node instanceof AssignRef) {
-            $errorMessages[] = self::ERROR_MESSAGE;
-        } elseif ($node->byRef) {
-            $errorMessages[] = self::ERROR_MESSAGE;
+            return [$this->createRuleError()];
         }
 
-        $paramErrorMessage = $this->collectParamErrorMessages($node, $scope);
-        $errorMessages = array_merge($errorMessages, $paramErrorMessage);
-
-        return array_map(
-            static fn ($message): RuleError => RuleErrorBuilder::message($message)->build(),
-            array_unique($errorMessages),
-        );
-    }
-
-    /**
-     * @return string[]
-     */
-    private function collectParamErrorMessages(Node $node, Scope $scope): array
-    {
-        if (! $node instanceof Function_ && ! $node instanceof ClassMethod) {
+        if (! $node instanceof Closure && ! $node instanceof ArrowFunction && ! $node instanceof Function_ && ! $node instanceof ClassMethod && ! $node instanceof Arg && ! $node instanceof Foreach_ && ! $node instanceof ArrayItem) {
             return [];
         }
 
+        if ($node->byRef) {
+            $errorMessages[] = $this->createRuleError();
+        }
+
+        if ($node instanceof Function_ || $node instanceof ClassMethod) {
+            $paramErrorMessage = $this->collectParamErrorMessages($node, $scope);
+            $errorMessages = array_merge($errorMessages, $paramErrorMessage);
+        }
+
+        return $errorMessages;
+    }
+
+    /**
+     * @return list<IdentifierRuleError>
+     */
+    private function collectParamErrorMessages(Function_|ClassMethod $functionLike, Scope $scope): array
+    {
         // has parent method? → skip it as enforced by parent
-        $methodName = (string) $node->name;
+        $methodName = (string) $functionLike->name;
 
         $parentClassMethod = $this->parentClassMethodNodeResolver->resolveParentClassMethod($scope, $methodName);
         if ($parentClassMethod instanceof ClassMethod) {
@@ -89,15 +81,22 @@ final class NoReferenceRule extends AbstractSymplifyRule
         }
 
         $errorMessages = [];
-        foreach ($node->params as $param) {
+        foreach ($functionLike->params as $param) {
             /** @var Param $param */
             if (! $param->byRef) {
                 continue;
             }
 
-            $errorMessages[] = self::ERROR_MESSAGE;
+            $errorMessages[] = $this->createRuleError();
         }
 
         return $errorMessages;
+    }
+
+    private function createRuleError(): IdentifierRuleError
+    {
+        return RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::NO_REFERENCE)
+            ->build();
     }
 }

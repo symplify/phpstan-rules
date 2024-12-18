@@ -15,13 +15,16 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\IdentifierRuleError;
+use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
+ *
+ * @implements Rule<Node>
  */
-final class PreferredClassRule extends AbstractSymplifyRule
+final class PreferredClassRule implements Rule
 {
     /**
      * @var string
@@ -36,15 +39,7 @@ final class PreferredClassRule extends AbstractSymplifyRule
     ) {
     }
 
-    public function getNodeTypes(): array
-    {
-        return [New_::class, Name::class, InClassNode::class, StaticCall::class, Instanceof_::class];
-    }
-
-    /**
-     * @param New_|Name|InClassNode|StaticCall|Instanceof_ $node
-     */
-    public function process(Node $node, Scope $scope): array
+    public function processNode(Node $node, Scope $scope): array
     {
         if ($node instanceof New_) {
             return $this->processNew($node);
@@ -58,11 +53,20 @@ final class PreferredClassRule extends AbstractSymplifyRule
             return $this->processExprWithClass($node);
         }
 
-        return $this->processClassName($node->toString());
+        if ($node instanceof Name) {
+            return $this->processClassName($node->toString());
+        }
+
+        return [];
+    }
+
+    public function getNodeType(): string
+    {
+        return Node::class;
     }
 
     /**
-     * @return IdentifierRuleError[]
+     * @return list<IdentifierRuleError>
      */
     private function processNew(New_ $new): array
     {

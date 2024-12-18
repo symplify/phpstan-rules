@@ -23,9 +23,6 @@ parameters:
         - */Fixture/*
 
     ignoreErrors:
-        # needless generics
-#        - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
-
         - '#Method Symplify\\PHPStanRules\\Reflection\\ReflectionParser\:\:parseNativeClassReflection\(\) has parameter \$reflectionClass with generic class ReflectionClass but does not specify its types\: T#'
 
         # overly detailed
@@ -47,8 +44,7 @@ parameters:
             message: '#Function is_a\(\) is a runtime reflection concept that might not work in PHPStan because it uses fully static reflection engine#'
             path: src/Rules/SeeAnnotationToTestRule.php
 
-        # handle next
-        - '#Method Symplify\\PHPStanRules\\Rules\\AbstractSymplifyRule\:\:processNode\(\) should return list<PHPStan\\Rules\\IdentifierRuleError> but returns array<PHPStan\\Rules\\RuleError\|string>#'
-
         # used in tests
         - '#Public constant "Symplify\\PHPStanRules\\(.*?)Rule\:\:ERROR_MESSAGE" is never used#'
+
+        - '#Although PHPStan\\Node\\InClassNode is covered by backward compatibility promise, this instanceof assumption might break because (.*?) not guaranteed to always stay the same#'
