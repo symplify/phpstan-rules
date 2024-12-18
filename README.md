@@ -596,47 +596,6 @@ final class SomeClass
 
 <br>
 
-### NoSingleInterfaceImplementerRule
-
-Interface "%s" has only single implementer. Consider using the class directly as there is no point in using the interface.
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule
-```
-
-```php
-class SomeClass implements SomeInterface
-{
-}
-
-interface SomeInterface
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass implements SomeInterface
-{
-}
-
-class AnotherClass implements SomeInterface
-{
-}
-
-interface SomeInterface
-{
-}
-```
-
-:+1:
-
-<br>
-
 ### NoTestMocksRule
 
 Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis

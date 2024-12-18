@@ -39,11 +39,6 @@ final class RuleIdentifier
     /**
      * @var string
      */
-    public const NO_SINGLE_INTERFACE_IMPLEMENTER = 'symplify.noSingleInterfaceImplementer';
-
-    /**
-     * @var string
-     */
     public const RECTOR_NO_INSTANCE_OF_STATIC_REFLECTION = 'rector.noInstanceOfStaticReflection';
 
     /**

@@ -1,3 +1,0 @@
-includes:
-    - ../../../../config/code-complexity-rules.neon
-    - ../../../../config/services/services.neon

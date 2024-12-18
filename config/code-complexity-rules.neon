@@ -1,19 +1,2 @@
 rules:
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
-    - Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule
-
-services:
-    -
-        class: Symplify\PHPStanRules\Collector\InterfaceCollector
-        tags:
-            - phpstan.collector
-
-    -
-        class: Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector
-        tags:
-            - phpstan.collector
-
-    -
-        class: Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector
-        tags:
-            - phpstan.collector
