@@ -1,0 +1,6 @@
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
+
+    - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule

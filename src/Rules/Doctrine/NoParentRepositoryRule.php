@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\PHPStan\Rules\Doctrine;
+namespace Symplify\PHPStanRules\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
