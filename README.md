@@ -112,6 +112,50 @@ class SomeCommand extends Command
 
 <br>
 
+### NoConstructorOverrideRule
+
+Possible __construct() override, this can cause missing dependencies or setup
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoConstructorOverrideRule
+```
+
+```php
+class ParentClass
+{
+    public function __construct(private string $dependency)
+    {
+    }
+}
+
+class SomeClass extends ParentClass
+{
+    public function __construct()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class SomeClass extends ParentClass
+{
+    public function __construct(private string $dependency)
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+
+
 ### ExplicitClassPrefixSuffixRule
 
 Interface have suffix of "Interface", trait have "Trait" suffix exclusively
@@ -1380,9 +1424,149 @@ class SomeListener implements EventSubscriberInterface
 
 :+1:
 
+<br>
 
+### RequireInvokableControllerRule
 
+Use invokable controller with __invoke() method instead of named action method
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
+```
+
+```php
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+final class SomeController extends AbstractController
+{
+    #[Route()]
+    public function someMethod()
+    {
+    }
+}
+```
+
+:x:
 
 <br>
+
+```php
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+final class SomeController extends AbstractController
+{
+    #[Route()]
+    public function __invoke()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
+## 3. PHPUnit-specific Rules
+
+### NoEntityMockingRule, NoDocumentMockingRule
+
+Instead of entity or document mocking, create object directly to get better type support
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoEntityMockingRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoDocumentMockingRule
+```
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $someEntityMock = $this->createMock(SomeEntity::class);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $someEntityMock = new SomeEntity();
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoMockOnlyTestRule
+
+Test should have at least one non-mocked property, to test something
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
+```
+
+```php
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+class SomeTest extends TestCase
+{
+    private MockObject $firstMock;
+    private MockObject $secondMock;
+
+    public function setUp()
+    {
+        $this->firstMock = $this->createMock(SomeService::class);
+        $this->secondMock = $this->createMock(AnotherService::class);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+class SomeTest extends TestCase
+{
+    private SomeService $someService;
+
+    private FirstMock $firstMock;
+
+    public function setUp()
+    {
+        $this->someService = new SomeService();
+        $this->firstMock = $this->createMock(AnotherService::class);
+    }
+}
+```
+
+:+1:
+
+<br>
+
 
 Happy coding!

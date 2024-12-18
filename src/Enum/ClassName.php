@@ -70,8 +70,14 @@ final class ClassName
      * @var string
      */
     public const DOCTRINE_FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
+
     /**
      * @var string
      */
     public const ENTITY_REPOSITORY_CLASS = 'Doctrine\ORM\EntityRepository';
+
+    /**
+     * @var string
+     */
+    public const MOCK_OBJECT_CLASS = 'PHPUnit\Framework\MockObject\MockObject';
 }

@@ -11,6 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
@@ -25,11 +26,6 @@ final readonly class NoMockOnlyTestRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Test should have at least one non-mocked property, to test something';
-
-    /**
-     * @var string
-     */
-    private const MOCK_OBJECT_CLASS = 'PHPUnit\Framework\MockObject\MockObject';
 
     public function getNodeType(): string
     {
@@ -63,7 +59,7 @@ final readonly class NoMockOnlyTestRule implements Rule
 
             $propertyClassName = $property->type->toString();
 
-            if ($propertyClassName !== self::MOCK_OBJECT_CLASS) {
+            if ($propertyClassName !== ClassName::MOCK_OBJECT_CLASS) {
                 $hasExclusivelyMockedProperties = false;
             }
         }
