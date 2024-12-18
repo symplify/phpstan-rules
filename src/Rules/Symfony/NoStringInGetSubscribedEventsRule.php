@@ -25,11 +25,6 @@ final class NoStringInGetSubscribedEventsRule implements Rule
     /**
      * @var string
      */
-    private const EVENT_SUBSCRIBER_INTERFACE = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
-
-    /**
-     * @var string
-     */
     private const ERROR_MESSAGE = 'Symfony getSubscribedEvents() method must contain only event class references, no strings';
 
     public function getNodeType(): string
@@ -56,7 +51,7 @@ final class NoStringInGetSubscribedEventsRule implements Rule
         }
 
         // only handle symfony one
-        if (! $classReflection->implementsInterface(self::EVENT_SUBSCRIBER_INTERFACE)) {
+        if (! $classReflection->implementsInterface(ClassName::EVENT_SUBSCRIBER_INTERFACE)) {
             return [];
         }
 

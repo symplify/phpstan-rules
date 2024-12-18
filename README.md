@@ -1327,6 +1327,59 @@ class SomeListener implements EventSubscriberInterface
 
 :+1:
 
+<br>
+
+### NoStringInGetSubscribedEventsRule
+
+Symfony getSubscribedEvents() method must contain only event class references, no strings
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule
+```
+
+```php
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class SomeListener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            'event' => 'onEvent',
+        ];
+    }
+
+    public function onEvent()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class SomeListener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            Event::class => 'onEvent',
+        ];
+    }
+
+    public function onEvent()
+    {
+    }
+}
+```
+
+:+1:
+
 
 
 
