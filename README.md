@@ -1568,5 +1568,62 @@ class SomeTest extends TestCase
 
 <br>
 
+### PublicStaticDataProviderRule
+
+PHPUnit data provider method "%s" must be public
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule
+```
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    /**
+     * @dataProvider dataProvider
+     */
+    public function test(): array
+    {
+        return [];
+    }
+
+    protected function dataProvider(): array
+    {
+        return [];
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    /**
+     * @dataProvider dataProvider
+     */
+    public function test(): array
+    {
+        return [];
+    }
+
+    public static function dataProvider(): array
+    {
+        return [];
+    }
+}
+```
+
+:+1:
+
+<br>
+
 
 Happy coding!
