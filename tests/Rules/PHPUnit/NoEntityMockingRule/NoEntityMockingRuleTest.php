@@ -1,6 +1,6 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule;
+namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoEntityMockingRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRequiredOutsideClassRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\Symfony\NoRequiredOutsideClassRule\Fixture;
 
 final class SomeClassUsingTrait
 {

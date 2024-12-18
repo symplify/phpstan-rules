@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\PHPStan\Rule;
+namespace Symplify\PHPStanRules\Rules\Complexity;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\StaticCall;

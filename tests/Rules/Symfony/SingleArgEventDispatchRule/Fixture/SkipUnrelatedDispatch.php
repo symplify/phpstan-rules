@@ -1,8 +1,8 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\SingleArgEventDispatchRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\Symfony\SingleArgEventDispatchRule\Fixture;
 
-use Symplify\PHPStanRules\Tests\PHPStan\Rule\SingleArgEventDispatchRule\Source\NotEventDispatcher;
+use Symplify\PHPStanRules\Tests\Rules\Symfony\SingleArgEventDispatchRule\Source\NotEventDispatcher;
 
 final class SkipUnrelatedDispatch
 {

@@ -160,4 +160,14 @@ final class RuleIdentifier
      * @var string
      */
     public const NO_VALUE_OBJECT_IN_SERVICE_CONSTRUCTOR = 'symplify.noValueObjectInServiceConstructor';
+
+    /**
+     * @var string
+     */
+    public const DOCTRINE_NO_REPOSITORY_CALL_IN_DATA_FIXTURES = 'doctrine.noRepositoryCallInDataFixtures';
+
+    /**
+     * @var string
+     */
+    public const PHPUNIT_NO_DOCUMENT_MOCKING = 'phpunit.noDocumentMocking';
 }

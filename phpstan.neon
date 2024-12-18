@@ -22,40 +22,25 @@ parameters:
         - */stubs/*
         - */Fixture/*
 
-    # https://github.com/TomasVotruba/unused-public
-    unused_public:
-        methods: true
-        properties: true
-        constants: true
-
-    type_coverage:
-        return: 99
-        param: 99
-        property: 99
-
     ignoreErrors:
         # needless generics
-        - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
+#        - '#Class Symplify\\PHPStanRules\\(.*?)Rule implements generic interface PHPStan\\Rules\\Rule but does not specify its types\: TNodeType#'
 
         - '#Method Symplify\\PHPStanRules\\Reflection\\ReflectionParser\:\:parseNativeClassReflection\(\) has parameter \$reflectionClass with generic class ReflectionClass but does not specify its types\: T#'
 
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\(.*?) extends generic class PHPStan\\Testing\\RuleTestCase but does not specify its types\: TRule#'
         - '#Method Symplify\\PHPStanRules\\(.*?)\:\:getRule\(\) return type with generic interface PHPStan\\Rules\\Rule does not specify its types\: TNodeType#'
+        - '#Parameter \#2 \$expectedErrors of method PHPStan\\Testing\\RuleTestCase<PHPStan\\Rules\\Rule>\:\:analyse\(\) expects list<array\{0\: string, 1\: int, 2\?\: string\|null\}>, (.*?) given#'
 
         # part of public contract
-        - '#Method Symplify\\PHPStanRules\\Tests\\Rules\\PHPUnit\\(.*?)\\(.*?)Test\:\:testRule\(\) has parameter \$expectedErrorMessagesWithLines with no value type specified in iterable type array#'
+        - '#Method Symplify\\PHPStanRules\\Tests\\Rules\\(.*?)\\(.*?)Test\:\:testRule\(\) has parameter \$(expectedError(.*?)|expectedErrors) with no value type specified in iterable type array#'
 
         # overly detailed
         - '#Class Symplify\\PHPStanRules\\Collector\\(.*?) implements generic interface PHPStan\\Collectors\\Collector but does not specify its types\: TNodeType, TValue#'
 
         # useful to have IDE know the types
         - identifier: phpstanApi.instanceofType
-
-        # overly detailed
-        -
-            message: '#Parameter \#2 \$expectedErrors of method PHPStan\\Testing\\RuleTestCase<(.*?)>::analyse\(\) expects list<array\{0: string, 1: int, 2\?: string\|null\}>, (.*?) given#'
-            path: tests
 
         # fast effective check
         -

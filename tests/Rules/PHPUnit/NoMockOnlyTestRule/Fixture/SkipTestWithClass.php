@@ -1,10 +1,10 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockOnlyTestRule\Fixture;
 
 use PHPUnit\Framework\TestCase;
-use Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule\Source\FirstClass;
-use Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule\Source\SecondClass;
+use Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockOnlyTestRule\Source\FirstClass;
+use Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockOnlyTestRule\Source\SecondClass;
 
 final class SkipTestWithClass extends TestCase
 {

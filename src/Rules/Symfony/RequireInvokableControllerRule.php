@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Symfony\Rules;
+namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
@@ -15,7 +15,8 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\Symfony\Rules\RequireInvokableControllerRule\RequireInvokableControllerRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\RequireInvokableControllerRule\RequireInvokableControllerRuleTest
+ * @implements Rule<InClassNode>
  */
 final class RequireInvokableControllerRule implements Rule
 {
@@ -40,7 +41,7 @@ final class RequireInvokableControllerRule implements Rule
         $classReflection = $node->getClassReflection();
         if (
             ! $classReflection->isSubclassOf(ClassName::SYMFONY_ABSTRACT_CONTROLLER) &&
-            ! $classReflection->isSubclassOf('Symfony\Bundle\FrameworkBundle\Controller\Controller')
+            ! $classReflection->isSubclassOf(ClassName::SYMFONY_CONTROLLER)
         ) {
             return [];
         }

@@ -9,6 +9,8 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -27,7 +29,6 @@ final class NoDocumentMockingRule implements Rule
 
     /**
      * @param MethodCall $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -51,7 +52,11 @@ final class NoDocumentMockingRule implements Rule
                 continue;
             }
 
-            return [self::ERROR_MESSAGE];
+            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                ->identifier(RuleIdentifier::PHPUNIT_NO_DOCUMENT_MOCKING)
+                ->build();
+
+            return [$ruleError];
         }
 
         return [];

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockOnlyTestRule\Fixture;
 
 use PHPUnit\Framework\TestCase;
 

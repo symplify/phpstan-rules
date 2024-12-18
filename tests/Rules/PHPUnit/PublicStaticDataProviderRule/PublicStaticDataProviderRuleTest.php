@@ -1,6 +1,6 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\PublicStaticDataProviderRule;
+namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\PublicStaticDataProviderRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;

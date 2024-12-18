@@ -1,9 +1,9 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoEntityMockingRule\Fixture;
 
 use PHPUnit\Framework\TestCase;
-use Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule\Source\SimpleObject;
+use Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoEntityMockingRule\Source\SimpleObject;
 
 final class SkipMockingOtherObject extends TestCase
 {

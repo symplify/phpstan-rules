@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\Symfony\Rules\RequireInvokableControllerRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Symfony\RequireInvokableControllerRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule;
+use Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule;
 
 final class RequireInvokableControllerRulePhp80Test extends RuleTestCase
 {

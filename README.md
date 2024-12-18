@@ -876,7 +876,7 @@ Use invokable controller with `__invoke()` method instead of named action method
 
 ```yaml
 rules:
-    - Symplify\PHPStanRules\Symfony\Rules\RequireInvokableControllerRule
+    - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
 ```
 
 ```php

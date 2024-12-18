@@ -1,6 +1,6 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\SingleArgEventDispatchRule\Source;
+namespace Symplify\PHPStanRules\Tests\Rules\Symfony\SingleArgEventDispatchRule\Source;
 
 final class NotEventDispatcher
 {

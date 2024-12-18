@@ -50,4 +50,19 @@ final class ClassName
      * @var string
      */
     public const RECTOR_ATTRIBUTE_KEY = 'Rector\NodeTypeResolver\Node\AttributeKey';
+
+    /**
+     * @var string
+     */
+    public const FORM_EVENTS = 'Symfony\Component\Form\FormEvents';
+
+    /**
+     * @var string
+     */
+    public const SYMFONY_CONTROLLER = 'Symfony\Bundle\FrameworkBundle\Controller\Controller';
+
+    /**
+     * @var string
+     */
+    public const DOCTRINE_FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
 }

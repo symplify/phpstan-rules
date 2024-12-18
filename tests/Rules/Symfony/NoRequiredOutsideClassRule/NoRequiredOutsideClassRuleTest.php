@@ -1,12 +1,12 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRequiredOutsideClassRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Symfony\NoRequiredOutsideClassRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\PHPStan\Rule\NoRequiredOutsideClassRule;
+use Symplify\PHPStanRules\Rules\Symfony\NoRequiredOutsideClassRule;
 
 final class NoRequiredOutsideClassRuleTest extends RuleTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\PublicStaticDataProviderRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\PublicStaticDataProviderRule\Fixture;
 
 use PHPUnit\Framework\TestCase;
 

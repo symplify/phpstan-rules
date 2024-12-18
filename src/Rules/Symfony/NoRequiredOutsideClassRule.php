@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\PHPStan\Rule;
+namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node;

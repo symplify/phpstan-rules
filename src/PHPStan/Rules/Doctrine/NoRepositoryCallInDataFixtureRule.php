@@ -8,10 +8,15 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoRepositoryCallInDataFixtureRule\NoRepositoryCallInDataFixtureRuleTest;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRepositoryCallInDataFixtureRule\NoRepositoryCallInDataFixtureRuleTest
+ * @see NoRepositoryCallInDataFixtureRuleTest
  *
  * @implements Rule<MethodCall>
  */
@@ -22,11 +27,6 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
      */
     public const ERROR_MESSAGE = 'Refactor read-data fixtures to write-only, make use of references';
 
-    /**
-     * @var string
-     */
-    private const FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
-
     public function getNodeType(): string
     {
         return MethodCall::class;
@@ -34,7 +34,7 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
 
     /**
      * @param MethodCall $node
-     * @return string[]
+     * @return IdentifierRuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -55,7 +55,11 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::DOCTRINE_NO_REPOSITORY_CALL_IN_DATA_FIXTURES)
+            ->build();
+
+        return [$ruleError];
     }
 
     private function isDataFixtureClass(Scope $scope): bool
@@ -65,6 +69,6 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        return $classReflection->isSubclassOf(self::FIXTURE_INTERFACE);
+        return $classReflection->isSubclassOf(ClassName::DOCTRINE_FIXTURE_INTERFACE);
     }
 }

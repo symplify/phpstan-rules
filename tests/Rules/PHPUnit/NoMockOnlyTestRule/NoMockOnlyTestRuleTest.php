@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule;
+namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockOnlyTestRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
