@@ -1028,7 +1028,11 @@ final class SomeClass
 
 <br>
 
-## Doctrine-specific Rules
+---
+
+<br>
+
+## 2. Doctrine-specific Rules
 
 ### NoGetRepositoryOutsideServiceRule
 
@@ -1140,6 +1144,97 @@ final class SomeFixture extends AbstractFixture
 ```
 
 :+1:
+
+<br>
+
+---
+
+<br>
+
+## 3. Symfony-specific Rules
+
+### NoAbstractControllerConstructorRule
+
+Abstract controller should not have constructor, as it can lead to tight coupling. Use @required annotation instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoAbstractControllerConstructorRule
+```
+
+```php
+abstract class AbstractController extends Controller
+{
+    public function __construct(
+        private SomeService $someService
+    ) {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+abstract class AbstractController extends Controller
+{
+    private $someService;
+
+    #[Required]
+    public function autowireAbstractController(SomeService $someService)
+    {
+        $this->someService = $someService;
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoRequiredOutsideClassRule
+
+Symfony #[Require]/@required should be used only in classes to avoid misuse
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoRequiredOutsideClassRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Attribute\Required;
+
+trait SomeTrait
+{
+    #[Required]
+    public function autowireSomeTrait(SomeService $someService)
+    {
+        // ...
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+abstract class SomeClass
+{
+    #[Required]
+    public function autowireSomeClass(SomeService $someService)
+    {
+        // ...
+    }
+}
+```
+
+:+1:
+
+<br>
+
+
 
 
 <br>

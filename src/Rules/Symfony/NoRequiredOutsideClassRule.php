@@ -14,7 +14,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRequiredOutsideClassRule\NoRequiredOutsideClassRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoRequiredOutsideClassRule\NoRequiredOutsideClassRuleTest
  *
  * @implements Rule<Trait_>
  */
@@ -23,7 +23,7 @@ final class NoRequiredOutsideClassRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Symfony #[Require]/@required should be used only in classes to avoid missuse';
+    public const ERROR_MESSAGE = 'Symfony #[Require]/@required should be used only in classes to avoid misuse';
 
     /**
      * @var string
