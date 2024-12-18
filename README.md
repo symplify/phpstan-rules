@@ -112,6 +112,50 @@ class SomeCommand extends Command
 
 <br>
 
+### NoConstructorOverrideRule
+
+Possible __construct() override, this can cause missing dependencies or setup
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoConstructorOverrideRule
+```
+
+```php
+class ParentClass
+{
+    public function __construct(private string $dependency)
+    {
+    }
+}
+
+class SomeClass extends ParentClass
+{
+    public function __construct()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class SomeClass extends ParentClass
+{
+    public function __construct(private string $dependency)
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+
+
 ### ExplicitClassPrefixSuffixRule
 
 Interface have suffix of "Interface", trait have "Trait" suffix exclusively
@@ -1028,7 +1072,11 @@ final class SomeClass
 
 <br>
 
-## Doctrine-specific Rules
+---
+
+<br>
+
+## 2. Doctrine-specific Rules
 
 ### NoGetRepositoryOutsideServiceRule
 
@@ -1049,9 +1097,533 @@ class SomeClass
 }
 ```
 
-
-<!-- ruledoc-end -->
+:x:
 
 <br>
+
+```php
+class SomeClass
+{
+    public function __construct(SomeEntityRepository $someEntityRepository)
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoParentRepositoryRule
+
+Repository should not extend parent repository, as it can lead to tight coupling
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule
+```
+
+```php
+use Doctrine\ORM\EntityRepository;
+
+final class SomeRepository extends EntityRepository
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class SomeRepository
+{
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->repository = $entityManager->getRepository(SomeEntity::class);
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoRepositoryCallInDataFixtureRule
+
+Repository should not be called in data fixtures, as it can lead to tight coupling
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
+```
+
+```php
+use Doctrine\Common\DataFixtures\AbstractFixture;
+
+final class SomeFixture extends AbstractFixture
+{
+    public function load(ObjectManager $objectManager)
+    {
+        $someRepository = $objectManager->getRepository(SomeEntity::class);
+        $someEntity = $someRepository->get(1);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Doctrine\Common\DataFixtures\AbstractFixture;
+
+final class SomeFixture extends AbstractFixture
+{
+    public function load(ObjectManager $objectManager)
+    {
+        $someEntity = $this->getReference('some-entity-1');
+    }
+}
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
+## 3. Symfony-specific Rules
+
+### NoAbstractControllerConstructorRule
+
+Abstract controller should not have constructor, as it can lead to tight coupling. Use @required annotation instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoAbstractControllerConstructorRule
+```
+
+```php
+abstract class AbstractController extends Controller
+{
+    public function __construct(
+        private SomeService $someService
+    ) {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+abstract class AbstractController extends Controller
+{
+    private $someService;
+
+    #[Required]
+    public function autowireAbstractController(SomeService $someService)
+    {
+        $this->someService = $someService;
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoRequiredOutsideClassRule
+
+Symfony #[Require]/@required should be used only in classes to avoid misuse
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoRequiredOutsideClassRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Attribute\Required;
+
+trait SomeTrait
+{
+    #[Required]
+    public function autowireSomeTrait(SomeService $someService)
+    {
+        // ...
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+abstract class SomeClass
+{
+    #[Required]
+    public function autowireSomeClass(SomeService $someService)
+    {
+        // ...
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### SingleArgEventDispatchRule
+
+The event dispatch() method can have only 1 arg - the event object
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
+```
+
+```php
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+final class SomeClass
+{
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher
+    ) {
+    }
+
+    public function run()
+    {
+        $this->eventDispatcher->dispatch('event', 'another-arg');
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+final class SomeClass
+{
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher
+    ) {
+    }
+
+    public function run()
+    {
+        $this->eventDispatcher->dispatch(new EventObject());
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoListenerWithoutContractRule
+
+There should be no listeners modified in config. Use EventSubscriberInterface contract and PHP instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
+```
+
+```php
+class SomeListener
+{
+    public function onEvent()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class SomeListener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            'event' => 'onEvent',
+        ];
+    }
+
+    public function onEvent()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoStringInGetSubscribedEventsRule
+
+Symfony getSubscribedEvents() method must contain only event class references, no strings
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule
+```
+
+```php
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class SomeListener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            'event' => 'onEvent',
+        ];
+    }
+
+    public function onEvent()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class SomeListener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            Event::class => 'onEvent',
+        ];
+    }
+
+    public function onEvent()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### RequireInvokableControllerRule
+
+Use invokable controller with __invoke() method instead of named action method
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
+```
+
+```php
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+final class SomeController extends AbstractController
+{
+    #[Route()]
+    public function someMethod()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+final class SomeController extends AbstractController
+{
+    #[Route()]
+    public function __invoke()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
+## 4. PHPUnit-specific Rules
+
+### NoEntityMockingRule, NoDocumentMockingRule
+
+Instead of entity or document mocking, create object directly to get better type support
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoEntityMockingRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoDocumentMockingRule
+```
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $someEntityMock = $this->createMock(SomeEntity::class);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $someEntityMock = new SomeEntity();
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoMockOnlyTestRule
+
+Test should have at least one non-mocked property, to test something
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
+```
+
+```php
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+class SomeTest extends TestCase
+{
+    private MockObject $firstMock;
+    private MockObject $secondMock;
+
+    public function setUp()
+    {
+        $this->firstMock = $this->createMock(SomeService::class);
+        $this->secondMock = $this->createMock(AnotherService::class);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+class SomeTest extends TestCase
+{
+    private SomeService $someService;
+
+    private FirstMock $firstMock;
+
+    public function setUp()
+    {
+        $this->someService = new SomeService();
+        $this->firstMock = $this->createMock(AnotherService::class);
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### PublicStaticDataProviderRule
+
+PHPUnit data provider method "%s" must be public
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule
+```
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    /**
+     * @dataProvider dataProvider
+     */
+    public function test(): array
+    {
+        return [];
+    }
+
+    protected function dataProvider(): array
+    {
+        return [];
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    /**
+     * @dataProvider dataProvider
+     */
+    public function test(): array
+    {
+        return [];
+    }
+
+    public static function dataProvider(): array
+    {
+        return [];
+    }
+}
+```
+
+:+1:
+
+<br>
+
 
 Happy coding!

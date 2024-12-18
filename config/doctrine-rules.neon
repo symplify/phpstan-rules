@@ -1,4 +1,4 @@
 rules:
-    - Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
-    - Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoParentRepositoryRule
-    - Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule

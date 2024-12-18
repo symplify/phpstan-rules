@@ -8,13 +8,10 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoParentRepositoryRule;
+use Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule;
 
 final class NoParentRepositoryRuleTest extends RuleTestCase
 {
-    /**
-     * @param mixed[] $expectedErrorMessagesWithLines
-     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {
