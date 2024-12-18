@@ -70,4 +70,9 @@ final class ClassName
      * @var string
      */
     public const DOCTRINE_FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
+
+    /**
+     * @var string
+     */
+    public const ENTITY_REPOSITORY_CLASS = 'Doctrine\ORM\EntityRepository';
 }

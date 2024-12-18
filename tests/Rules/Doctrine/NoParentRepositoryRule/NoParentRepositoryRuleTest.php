@@ -12,9 +12,6 @@ use Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoParentRepositoryRule;
 
 final class NoParentRepositoryRuleTest extends RuleTestCase
 {
-    /**
-     * @param mixed[] $expectedErrorMessagesWithLines
-     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
     {

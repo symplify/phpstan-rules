@@ -1066,7 +1066,39 @@ class SomeClass
 
 <br>
 
-<!-- ruledoc-end -->
+### NoParentRepositoryRule
+
+Repository should not extend parent repository, as it can lead to tight coupling
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule
+```
+
+```php
+use Doctrine\ORM\EntityRepository;
+
+final class SomeRepository extends EntityRepository
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class SomeRepository
+{
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->repository = $entityManager->getRepository(SomeEntity::class);
+    }
+}
+```
+
+:+1:
+
 
 <br>
 
