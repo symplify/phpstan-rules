@@ -15,6 +15,6 @@ final class SomeSimpleTest extends TestCase
 
     protected function provideData(): array
     {
-        return [];
+        return [1, 2, 3];
     }
 }

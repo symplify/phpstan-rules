@@ -33,7 +33,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      */
     private const DEFAULT_PARENT_CLASSES = [
         'Symfony\Component\Console\Command\Command',
-        ClassName::EVENT_DISPATCHER_INTERFACE,
+        ClassName::EVENT_SUBSCRIBER_INTERFACE,
         ClassName::SYMFONY_ABSTRACT_CONTROLLER,
         ClassName::SNIFF,
         ClassName::PHPUNIT_TEST_CASE,

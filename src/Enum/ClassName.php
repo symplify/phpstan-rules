@@ -29,6 +29,11 @@ final class ClassName
     /**
      * @var string
      */
+    public const EVENT_SUBSCRIBER_INTERFACE = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
+
+    /**
+     * @var string
+     */
     public const SNIFF = 'PHP_CodeSniffer\Sniffs\Sniff';
 
     /**

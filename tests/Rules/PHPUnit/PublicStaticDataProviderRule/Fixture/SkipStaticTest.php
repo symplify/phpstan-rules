@@ -15,6 +15,6 @@ final class SkipStaticTest extends TestCase
 
     public static function provideData(): array
     {
-        return [];
+        return [1, 2, 3];
     }
 }
