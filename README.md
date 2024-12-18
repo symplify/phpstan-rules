@@ -1099,6 +1099,48 @@ final class SomeRepository
 
 :+1:
 
+<br>
+
+### NoRepositoryCallInDataFixtureRule
+
+Repository should not be called in data fixtures, as it can lead to tight coupling
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
+```
+
+```php
+use Doctrine\Common\DataFixtures\AbstractFixture;
+
+final class SomeFixture extends AbstractFixture
+{
+    public function load(ObjectManager $objectManager)
+    {
+        $someRepository = $objectManager->getRepository(SomeEntity::class);
+        $someEntity = $someRepository->get(1);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Doctrine\Common\DataFixtures\AbstractFixture;
+
+final class SomeFixture extends AbstractFixture
+{
+    public function load(ObjectManager $objectManager)
+    {
+        $someEntity = $this->getReference('some-entity-1');
+    }
+}
+```
+
+:+1:
+
 
 <br>
 
