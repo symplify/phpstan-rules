@@ -1285,6 +1285,47 @@ final class SomeClass
 
 <br>
 
+### NoListenerWithoutContractRule
+
+There should be no listeners modified in config. Use EventSubscriberInterface contract and PHP instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
+```
+
+```php
+class SomeListener
+{
+    public function onEvent()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class SomeListener implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            'event' => 'onEvent',
+        ];
+    }
+
+    public function onEvent()
+    {
+    }
+}
+```
+
+:+1:
 
 
 
