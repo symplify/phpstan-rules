@@ -33,9 +33,6 @@ parameters:
         # part of public contract
         - '#Method Symplify\\PHPStanRules\\Tests\\Rules\\(.*?)\\(.*?)Test\:\:testRule\(\) has parameter \$(expectedError(.*?)|expectedErrors) with no value type specified in iterable type array#'
 
-        # overly detailed
-        - '#Class Symplify\\PHPStanRules\\Collector\\(.*?) implements generic interface PHPStan\\Collectors\\Collector but does not specify its types\: TNodeType, TValue#'
-
         # useful to have IDE know the types
         - identifier: phpstanApi.instanceofType
 
