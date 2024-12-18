@@ -1,0 +1,5 @@
+services:
+    - TomasVotruba\Handyman\PHPStan\DoctrineEntityDocumentAnalyser
+
+rules:
+    - TomasVotruba\Handyman\PHPStan\Rule\NoEntityMockingRule
