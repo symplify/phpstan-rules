@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoParentRepositoryRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoParentRepositoryRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\NoParentRepositoryRule;
+use Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoParentRepositoryRule;
 
 final class NoParentRepositoryRuleTest extends RuleTestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan;
+namespace Symplify\PHPStanRules\PHPStan;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node\Stmt\ClassMethod;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rule;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -10,8 +10,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use TomasVotruba\Handyman\PHPStan\DataProviderMethodResolver;
-use TomasVotruba\Handyman\PHPStan\PHPUnitTestAnalyser;
+use Symplify\PHPStanRules\PHPStan\DataProviderMethodResolver;
+use Symplify\PHPStanRules\PHPStan\PHPUnitTestAnalyser;
 
 /**
  * PHPUnit data provider have to be public and static

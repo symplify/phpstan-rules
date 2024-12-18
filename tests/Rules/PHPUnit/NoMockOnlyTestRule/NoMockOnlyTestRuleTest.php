@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoMockOnlyTestRule;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\NoMockOnlyTestRule;
+use Symplify\PHPStanRules\PHPStan\Rule\NoMockOnlyTestRule;
 
 final class NoMockOnlyTestRuleTest extends RuleTestCase
 {

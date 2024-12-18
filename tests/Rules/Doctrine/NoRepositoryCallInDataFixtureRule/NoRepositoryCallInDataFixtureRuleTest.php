@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoRepositoryCallInDataFixtureRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoRepositoryCallInDataFixtureRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\NoRepositoryCallInDataFixtureRule;
+use Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoRepositoryCallInDataFixtureRule;
 
 final class NoRepositoryCallInDataFixtureRuleTest extends RuleTestCase
 {

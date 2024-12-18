@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
@@ -11,7 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 
 /**
- * @see \TomasVotruba\Handyman\Tests\PHPStan\Rule\NoRepositoryCallInDataFixtureRule\NoRepositoryCallInDataFixtureRuleTest
+ * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRepositoryCallInDataFixtureRule\NoRepositoryCallInDataFixtureRuleTest
  *
  * @implements Rule<MethodCall>
  */

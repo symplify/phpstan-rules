@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoAbstractControllerConstructorRule;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoAbstractControllerConstructorRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\NoAbstractControllerConstructorRule;
+use Symplify\PHPStanRules\PHPStan\Rule\NoAbstractControllerConstructorRule;
 
 final class NoAbstractControllerConstructorRuleTest extends RuleTestCase
 {

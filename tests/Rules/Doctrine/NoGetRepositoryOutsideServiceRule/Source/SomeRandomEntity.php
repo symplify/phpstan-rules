@@ -1,6 +1,6 @@
 <?php
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoGetRepositoryOutsideServiceRule\Source;
+namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServiceRule\Source;
 
 final class SomeRandomEntity
 {

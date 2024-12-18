@@ -1,6 +1,6 @@
 <?php
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoEntityMockingRule\Source;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule\Source;
 
 use Doctrine\ORM\Mapping as ORM;
 

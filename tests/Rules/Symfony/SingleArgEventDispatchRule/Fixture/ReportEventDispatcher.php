@@ -1,6 +1,6 @@
 <?php
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\SingleArgEventDispatchRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\SingleArgEventDispatchRule\Fixture;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

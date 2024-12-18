@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rule;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
@@ -12,7 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use TomasVotruba\Handyman\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\ClassName;
 
 /**
  * @implements Rule<MethodCall>

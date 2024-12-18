@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
@@ -16,7 +16,7 @@ use PHPStan\Rules\RuleErrorBuilder;
  * Check if class extends repository class,
  * the entity manager should be injected via constructor instead
  *
- * @see \TomasVotruba\Handyman\Tests\PHPStan\Rule\NoParentRepositoryRule\NoParentRepositoryRuleTest
+ * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoParentRepositoryRule\NoParentRepositoryRuleTest
  *
  * @implements Rule<Class_>
  */

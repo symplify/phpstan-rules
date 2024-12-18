@@ -1,12 +1,12 @@
 <?php
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\PublicStaticDataProviderRule;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\PublicStaticDataProviderRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\PublicStaticDataProviderRule;
+use Symplify\PHPStanRules\PHPStan\Rule\PublicStaticDataProviderRule;
 
 final class PublicStaticDataProviderRuleTest extends RuleTestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rule;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
@@ -12,10 +12,10 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use TomasVotruba\Handyman\PHPStan\PHPUnitTestAnalyser;
+use Symplify\PHPStanRules\PHPStan\PHPUnitTestAnalyser;
 
 /**
- * @see \TomasVotruba\Handyman\Tests\PHPStan\Rule\NoMockOnlyTestRule\NoMockOnlyTestRuleTest
+ * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoMockOnlyTestRule\NoMockOnlyTestRuleTest
  *
  * @implements Rule<InClassNode>
  */

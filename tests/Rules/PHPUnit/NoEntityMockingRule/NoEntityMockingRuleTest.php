@@ -1,12 +1,12 @@
 <?php
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoEntityMockingRule;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\NoEntityMockingRule;
+use Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule;
 
 final class NoEntityMockingRuleTest extends RuleTestCase
 {

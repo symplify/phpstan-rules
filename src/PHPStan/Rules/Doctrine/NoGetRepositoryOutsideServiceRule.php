@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
@@ -16,7 +16,7 @@ use PHPStan\Rules\RuleErrorBuilder;
  * Check if abstract controller has constructor, as it should use
  * #[Require] instead to avoid parent constructor override
  *
- * @see \TomasVotruba\Handyman\Tests\PHPStan\Rule\NoGetRepositoryOutsideServiceRule\NoGetRepositoryOutsideServiceRuleTest
+ * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoGetRepositoryOutsideServiceRule\NoGetRepositoryOutsideServiceRuleTest
  *
  * @implements Rule<MethodCall>
  */

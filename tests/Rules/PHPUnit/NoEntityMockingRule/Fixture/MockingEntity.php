@@ -1,9 +1,9 @@
 <?php
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoEntityMockingRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule\Fixture;
 
 use PHPUnit\Framework\TestCase;
-use TomasVotruba\Handyman\Tests\PHPStan\Rule\NoEntityMockingRule\Source\SomeEntity;
+use Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule\Source\SomeEntity;
 
 final class MockingEntity extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
@@ -12,13 +12,13 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use TomasVotruba\Handyman\PHPStan\DoctrineEntityDocumentAnalyser;
+use Symplify\PHPStanRules\PHPStan\DoctrineEntityDocumentAnalyser;
 
 /**
  * The ORM entities and ODM documents should never be mocked, as it leads to typeless code.
  * Use them directly instead.
  *
- * @see \TomasVotruba\Handyman\Tests\PHPStan\Rule\NoEntityMockingRule\NoEntityMockingRuleTest
+ * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoEntityMockingRule\NoEntityMockingRuleTest
  * @implements Rule<MethodCall>
  */
 final readonly class NoEntityMockingRule implements Rule

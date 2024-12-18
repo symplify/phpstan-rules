@@ -1,0 +1,4 @@
+rules:
+    - Symplify\PHPStanRules\PHPStan\Rule\NoAbstractControllerConstructorRule
+    - Symplify\PHPStanRules\PHPStan\Rule\NoRequiredOutsideClassRule
+    - Symplify\PHPStanRules\PHPStan\Rule\SingleArgEventDispatchRule

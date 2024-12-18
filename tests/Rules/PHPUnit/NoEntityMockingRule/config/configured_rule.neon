@@ -1,5 +1,5 @@
 services:
-    - TomasVotruba\Handyman\PHPStan\DoctrineEntityDocumentAnalyser
+    - Symplify\PHPStanRules\PHPStan\DoctrineEntityDocumentAnalyser
 
 rules:
-    - TomasVotruba\Handyman\PHPStan\Rule\NoEntityMockingRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule

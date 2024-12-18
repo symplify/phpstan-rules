@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoParentRepositoryRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoParentRepositoryRule\Fixture;
 
 use Doctrine\ORM\EntityRepository;
 

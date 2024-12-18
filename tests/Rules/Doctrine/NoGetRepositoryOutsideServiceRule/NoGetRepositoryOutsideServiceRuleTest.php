@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoGetRepositoryOutsideServiceRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServiceRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\NoGetRepositoryOutsideServiceRule;
+use Symplify\PHPStanRules\PHPStan\Rules\Doctrine\NoGetRepositoryOutsideServiceRule;
 
 final class NoGetRepositoryOutsideServiceRuleTest extends RuleTestCase
 {

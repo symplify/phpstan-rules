@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rule;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;

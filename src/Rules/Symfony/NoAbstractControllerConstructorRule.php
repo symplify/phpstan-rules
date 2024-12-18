@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rule;
 
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
@@ -16,7 +16,7 @@ use PHPStan\Rules\RuleErrorBuilder;
  * Check if abstract controller has constructor, as it should use
  * #[Require] instead to avoid parent constructor override
  *
- * @see \TomasVotruba\Handyman\Tests\PHPStan\Rule\NoAbstractControllerConstructorRule\NoAbstractControllerConstructorRuleTest
+ * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoAbstractControllerConstructorRule\NoAbstractControllerConstructorRuleTest
  *
  * @implements Rule<Class_>
  */

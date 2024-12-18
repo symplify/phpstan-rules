@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\SingleArgEventDispatchRule;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\SingleArgEventDispatchRule;
 
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use TomasVotruba\Handyman\PHPStan\Rule\SingleArgEventDispatchRule;
+use Symplify\PHPStanRules\PHPStan\Rule\SingleArgEventDispatchRule;
 
 final class SingleArgEventDispatchRuleTest extends RuleTestCase
 {

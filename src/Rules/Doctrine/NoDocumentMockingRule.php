@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;

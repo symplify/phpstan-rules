@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\PHPStan\Rule;
+namespace Symplify\PHPStanRules\PHPStan\Rule;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
@@ -14,7 +14,7 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 
 /**
- * @see \TomasVotruba\Handyman\Tests\PHPStan\Rule\NoRequiredOutsideClassRule\NoRequiredOutsideClassRuleTest
+ * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRequiredOutsideClassRule\NoRequiredOutsideClassRuleTest
  *
  * @implements Rule<Trait_>
  */

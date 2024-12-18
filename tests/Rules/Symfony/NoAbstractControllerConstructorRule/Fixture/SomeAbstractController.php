@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoAbstractControllerConstructorRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoAbstractControllerConstructorRule\Fixture;
 
 abstract class SomeAbstractController
 {

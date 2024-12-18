@@ -1,6 +1,6 @@
 <?php
 
-namespace TomasVotruba\Handyman\Tests\PHPStan\Rule\NoRequiredOutsideClassRule\Fixture;
+namespace Symplify\PHPStanRules\Tests\PHPStan\Rule\NoRequiredOutsideClassRule\Fixture;
 
 trait TraitWithRequire
 {
