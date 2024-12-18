@@ -1234,6 +1234,58 @@ abstract class SomeClass
 
 <br>
 
+### SingleArgEventDispatchRule
+
+The event dispatch() method can have only 1 arg - the event object
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
+```
+
+```php
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+final class SomeClass
+{
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher
+    ) {
+    }
+
+    public function run()
+    {
+        $this->eventDispatcher->dispatch('event', 'another-arg');
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+final class SomeClass
+{
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher
+    ) {
+    }
+
+    public function run()
+    {
+        $this->eventDispatcher->dispatch(new EventObject());
+    }
+}
+```
+
+:+1:
+
+<br>
+
+
 
 
 
