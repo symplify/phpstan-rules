@@ -44,11 +44,6 @@ final class RuleIdentifier
     /**
      * @var string
      */
-    public const NO_RETURN_ARRAY_VARIABLE_LIST = 'symplify.noReturnArrayVariableList';
-
-    /**
-     * @var string
-     */
     public const RECTOR_NO_INSTANCE_OF_STATIC_REFLECTION = 'rector.noInstanceOfStaticReflection';
 
     /**

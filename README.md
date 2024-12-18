@@ -538,43 +538,6 @@ class SomeClass
 
 <br>
 
-### NoReturnArrayVariableListRule
-
-Use value object over return of values
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
-```
-
-```php
-class ReturnVariables
-{
-    public function run($value, $value2): array
-    {
-        return [$value, $value2];
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class ReturnVariables
-{
-    public function run($value, $value2): ValueObject
-    {
-        return new ValueObject($value, $value2);
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### NoReturnSetterMethodRule
 
 Setter method cannot return anything, only set value
