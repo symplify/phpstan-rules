@@ -1049,6 +1049,22 @@ class SomeClass
 }
 ```
 
+:x:
+
+<br>
+
+```php
+class SomeClass
+{
+    public function __construct(SomeEntityRepository $someEntityRepository)
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
 
 <!-- ruledoc-end -->
 
