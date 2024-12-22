@@ -2,3 +2,6 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
+
+    # test fixtures
+    - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule
