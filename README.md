@@ -1082,6 +1082,29 @@ final class SomeFixture extends AbstractFixture
 
 ## 3. Symfony-specific Rules
 
+### NoGetDoctrineInControllerRule
+
+Prevents using `$this->getDoctrine()` in controllers, to promote dependency injection.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
+```
+
+<br>
+
+### NoGetInControllerRule
+
+Prevents using `$this->get(...)` in controllers, to promote dependency injection.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule
+```
+
+<br>
+
+
 ### NoAbstractControllerConstructorRule
 
 Abstract controller should not have constructor, as it can lead to tight coupling. Use @required annotation instead
