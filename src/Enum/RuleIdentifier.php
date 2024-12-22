@@ -194,4 +194,10 @@ final class RuleIdentifier
     public const SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR = 'symfony.noAbstractControllerConstructor';
 
     public const PHPUNIT_PUBLIC_STATIC_DATA_PROVIDER = 'phpunit.publicStaticDataProvider';
+
+    public const FORBIDDEN_NEW_INSTANCE = 'symplify.forbiddenNewInstance';
+
+    public const REQUIRE_QUERY_BUILDER_ON_REPOSITORY = 'doctrine.requireQueryBuilderOnRepository';
+
+    public const NO_GET_IN_CONTROLLER = 'symfony.noGetInController';
 }
