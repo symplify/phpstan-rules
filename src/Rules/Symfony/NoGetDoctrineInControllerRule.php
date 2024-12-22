@@ -16,12 +16,12 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 /**
  * @implements Rule<MethodCall>
  */
-final class NoGetInControllerRule implements Rule
+final class NoGetDoctrineInControllerRule implements Rule
 {
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Do not use $this->get(Type::class) method in controller to get services. Use __construct(Type $type) instead';
+    private const ERROR_MESSAGE = 'Do not use $this->getDoctrine() method in controller. Use __construct(EntityManagerInterface $entityManager) instead';
 
     public function getNodeType(): string
     {
@@ -33,7 +33,7 @@ final class NoGetInControllerRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! MethodCallNameAnalyzer::isThisMethodCall($node, 'get')) {
+        if (! MethodCallNameAnalyzer::isThisMethodCall($node, 'getDoctrine')) {
             return [];
         }
 
@@ -44,7 +44,7 @@ final class NoGetInControllerRule implements Rule
         $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->file($scope->getFile())
             ->line($node->getStartLine())
-            ->identifier(RuleIdentifier::NO_GET_IN_CONTROLLER)
+            ->identifier(RuleIdentifier::NO_GET_DOCTRINE_IN_CONTROLLER)
             ->build();
 
         return [$ruleError];

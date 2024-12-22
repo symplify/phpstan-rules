@@ -16,7 +16,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  * Check if abstract controller has constructor, as it should use
  * #[Require] instead to avoid parent constructor override
  *
- * @see \Symplify\PHPStanRules\Tests\PHPStan\Rule\NoAbstractControllerConstructorRule\NoAbstractControllerConstructorRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoAbstractControllerConstructorRule\NoAbstractControllerConstructorRuleTest
  *
  * @implements Rule<Class_>
  */
