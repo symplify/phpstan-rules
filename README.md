@@ -264,6 +264,55 @@ abstract class ParentClass
 
 <br>
 
+### ForbiddenNewArgumentRule
+
+Type "%s" is forbidden to be created manually with `new X()`. Use service and constructor injection instead
+
+```yaml
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenNewArgumentRule
+        tag: [phpstan.rules.rule]
+        arguments:
+            forbiddenTypes:
+                - RepositoryService
+```
+
+↓
+
+```php
+class SomeService
+{
+    public function run()
+    {
+        $repositoryService = new RepositoryService();
+        $item = $repositoryService->get(1);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+class SomeService
+{
+    public function __construct(private RepositoryService $repositoryService)
+    {
+    }
+
+    public function run()
+    {
+        $item = $this->repositoryService->get(1);
+    }
+}
+```
+
+:+1:
+
+<br>
+
 ### ForbiddenFuncCallRule
 
 Function `"%s()"` cannot be used/left in the code
@@ -963,6 +1012,17 @@ final class SomeClass
 
 ## 2. Doctrine-specific Rules
 
+### RequireQueryBuilderOnRepositoryRule
+
+Prevents using `$entityManager->createQueryBuilder('...')`,  use `$repository->createQueryBuilder()` as safer.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule
+```
+
+<br>
+
 ### NoGetRepositoryOutsideServiceRule
 
 Instead of getting repository from EntityManager, use constructor injection and service pattern to keep code clean
@@ -1081,6 +1141,29 @@ final class SomeFixture extends AbstractFixture
 <br>
 
 ## 3. Symfony-specific Rules
+
+### NoGetDoctrineInControllerRule
+
+Prevents using `$this->getDoctrine()` in controllers, to promote dependency injection.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
+```
+
+<br>
+
+### NoGetInControllerRule
+
+Prevents using `$this->get(...)` in controllers, to promote dependency injection.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule
+```
+
+<br>
+
 
 ### NoAbstractControllerConstructorRule
 
