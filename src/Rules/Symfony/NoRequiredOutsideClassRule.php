@@ -66,6 +66,6 @@ final class NoRequiredOutsideClassRule implements Rule
         }
 
         $docComment = $classMethod->getDocComment();
-        return $docComment instanceof Doc && str_contains($docComment->getText(), '@required');
+        return $docComment instanceof Doc && strpos($docComment->getText(), '@required') !== false;
     }
 }

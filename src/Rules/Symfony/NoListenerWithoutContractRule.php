@@ -40,7 +40,7 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        if (! str_ends_with($classReflection->getName(), 'Listener')) {
+        if (substr_compare($classReflection->getName(), 'Listener', -strlen('Listener')) !== 0) {
             return [];
         }
 
