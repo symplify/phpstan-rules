@@ -53,6 +53,10 @@ final class SymfonyControllerAnalyzer
             return false;
         }
 
+        if (str_contains($docComment->getText(), 'Symfony\Component\Routing\Annotation\Route')) {
+            return true;
+        }
+
         return \str_contains($docComment->getText(), '@Route');
     }
 }
