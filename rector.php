@@ -15,6 +15,7 @@ return RectorConfig::configure()
         '*/Source/*',
         '*/Fixture/*',
         StringClassNameToClassConstantRector::class => [
+            __DIR__ . '/src/Symfony/NodeAnalyzer/SymfonyControllerAnalyzer.php',
             __DIR__ . '/tests/Naming/ClassToSuffixResolverTest.php',
             __DIR__ . '/tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest.php',
         ],
