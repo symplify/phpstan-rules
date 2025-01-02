@@ -73,7 +73,7 @@ final class PublicStaticDataProviderRule implements Rule
                     ->build();
             }
 
-            if (! $dataProviderClassMethod->isStatic()) {
+            if (! $dataProviderClassMethod->isPublic()) {
                 $errorMessage = sprintf(self::PUBLIC_ERROR_MESSAGE, $dataProviderMethodName);
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
                     ->identifier(RuleIdentifier::PHPUNIT_PUBLIC_STATIC_DATA_PROVIDER)
