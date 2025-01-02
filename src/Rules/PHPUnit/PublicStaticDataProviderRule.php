@@ -51,7 +51,7 @@ final class PublicStaticDataProviderRule implements Rule
 
         $classLike = $node->getOriginalNode();
         foreach ($classLike->getMethods() as $classMethod) {
-            if (! PHPUnitTestAnalyser::class::isTestClassMethod($classMethod)) {
+            if (! PHPUnitTestAnalyser::isTestClassMethod($classMethod)) {
                 continue;
             }
 
