@@ -103,4 +103,6 @@ final class RuleIdentifier
     public const NO_GET_IN_CONTROLLER = 'symfony.noGetInController';
 
     public const NO_GET_DOCTRINE_IN_CONTROLLER = 'symfony.noGetDoctrineInController';
+
+    public const MAXIMUM_IGNORED_ERROR_COUNT = 'symplify.maximumIgnoredErrorCount';
 }

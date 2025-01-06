@@ -1,3 +1,11 @@
+parameters:
+    # related to MaximumIgnoredErrorCountRule
+    maximumIgnoredErrorCount: 0
+
+parametersSchema:
+    # related to MaximumIgnoredErrorCountRule
+    maximumIgnoredErrorCount: int()
+
 services:
     - Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser
     - Symplify\PHPStanRules\PhpDocParser\PhpDocNodeTraverser
@@ -16,3 +24,10 @@ services:
 
     # doctrine
     - Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser
+
+    # rules enabled by configuration
+    -
+        class: Symplify\PHPStanRules\Rules\MaximumIgnoredErrorCountRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            limit: %maximumIgnoredErrorCount%
