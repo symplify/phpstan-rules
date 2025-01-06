@@ -62,8 +62,11 @@ final readonly class MaximumIgnoredErrorCountRule implements Rule
             return [];
         }
 
-        $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, count($ignoreErrors), $this->limit))
+        $errorMessage = sprintf(self::ERROR_MESSAGE, count($ignoreErrors), $this->limit);
+
+        $identifierRuleError = RuleErrorBuilder::message($errorMessage)
             ->identifier(RuleIdentifier::MAXIMUM_IGNORED_ERROR_COUNT)
+            ->nonIgnorable()
             ->build();
 
         return [$identifierRuleError];
