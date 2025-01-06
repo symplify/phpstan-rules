@@ -38,6 +38,17 @@ includes:
 
 But at start, make baby steps with one rule at a time:
 
+Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific rules](#2-doctrine-specific-rules) or [PHPUnit-specific rules](#4-phpunit-specific-rules).
+
+## Special rules
+
+Tired of ever growing ignored error count in your `phpstan.neon`? Set hard limit to keep them low:
+
+```yaml
+parameters:
+    maximumIgnoredErrorCount: 50
+```
+
 <br>
 
 ### CheckRequiredInterfaceInContractNamespaceRule
