@@ -30,7 +30,10 @@ final class ForbiddenNodeRule implements Rule
      */
     private array $forbiddenNodes = [];
 
-    private readonly Standard $standard;
+    /**
+     * @readonly
+     */
+    private Standard $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes

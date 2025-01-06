@@ -15,18 +15,26 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 /**
  * @implements Rule<CollectedDataNode>
  */
-final readonly class MaximumIgnoredErrorCountRule implements Rule
+final class MaximumIgnoredErrorCountRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private int $limit = 0;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = "Ignored error count %d in phpstan.neon surpassed maximum limit %d.\nInstead of ignoring more errors, fix them to keep your codebase fit.";
 
+    /**
+     * @readonly
+     */
     private NeonAdapter $neonAdapter;
 
     public function __construct(
-        private int $limit = 0
+        int $limit = 0
     ) {
+        $this->limit = $limit;
         $this->neonAdapter = new NeonAdapter();
     }
 
