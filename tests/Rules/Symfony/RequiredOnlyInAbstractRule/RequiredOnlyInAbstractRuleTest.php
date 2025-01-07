@@ -26,6 +26,7 @@ final class RequiredOnlyInAbstractRuleTest extends RuleTestCase
         ]]];
 
         yield [__DIR__ . '/Fixture/SkipAbstractClass.php', []];
+        yield [__DIR__ . '/Fixture/SkipParentDocumentRepository.php', []];
     }
 
     protected function getRule(): Rule
