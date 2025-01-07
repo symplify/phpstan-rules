@@ -46,8 +46,8 @@ final class RequiredOnlyInAbstractRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $originalNode = $node->getOriginalNode();
-        if (! $originalNode instanceof Class_) {
+        $classLike = $node->getOriginalNode();
+        if (! $classLike instanceof Class_) {
             return [];
         }
 
@@ -55,7 +55,7 @@ final class RequiredOnlyInAbstractRule implements Rule
             return [];
         }
 
-        $class = $originalNode;
+        $class = $classLike;
         foreach ($class->getMethods() as $classMethod) {
             if (! SymfonyRequiredMethodAnalyzer::detect($classMethod)) {
                 continue;
