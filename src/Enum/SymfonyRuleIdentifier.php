@@ -23,4 +23,6 @@ final class SymfonyRuleIdentifier
     public const SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR = 'symfony.noAbstractControllerConstructor';
 
     public const SINGLE_REQUIRED_METHOD = 'symfony.singleRequiredMethod';
+
+    public const SYMFONY_REQUIRED_ONLY_IN_ABSTRACT = 'symfony.requiredOnlyInAbstract';
 }
