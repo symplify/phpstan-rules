@@ -22,8 +22,21 @@ use Symplify\PHPStanRules\ValueObject\Configuration\RequiredWithMessage;
  * @implements Rule<FuncCall>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule\ForbiddenFuncCallRuleTest
  */
-final readonly class ForbiddenFuncCallRule implements Rule
+final class ForbiddenFuncCallRule implements Rule
 {
+    /**
+     * @var array<string>
+     * @readonly
+     */
+    private array $forbiddenFunctions;
+    /**
+     * @readonly
+     */
+    private ArrayStringAndFnMatcher $arrayStringAndFnMatcher;
+    /**
+     * @readonly
+     */
+    private RequiredWithMessageFormatter $requiredWithMessageFormatter;
     /**
      * @var string
      */
@@ -32,11 +45,11 @@ final readonly class ForbiddenFuncCallRule implements Rule
     /**
      * @param array<string> $forbiddenFunctions
      */
-    public function __construct(
-        private array $forbiddenFunctions,
-        private ArrayStringAndFnMatcher $arrayStringAndFnMatcher,
-        private RequiredWithMessageFormatter $requiredWithMessageFormatter,
-    ) {
+    public function __construct(array $forbiddenFunctions, ArrayStringAndFnMatcher $arrayStringAndFnMatcher, RequiredWithMessageFormatter $requiredWithMessageFormatter)
+    {
+        $this->forbiddenFunctions = $forbiddenFunctions;
+        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
+        $this->requiredWithMessageFormatter = $requiredWithMessageFormatter;
     }
 
     public function getNodeType(): string
