@@ -794,6 +794,17 @@ class SomeClass extends SomeParentClass
 
 <br>
 
+### RequiredOnlyInAbstractRule
+
+`@required` annotation should be used only in abstract classes, to child classes can use clean `__construct()` service injection.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\RequiredOnlyInAbstractRule
+```
+
+<br>
+
 ### SingleRequiredMethodRule
 
 There must be maximum 1 @required method in the class. Merge it to one to avoid possible injection collision or duplicated injects.
