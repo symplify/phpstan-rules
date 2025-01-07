@@ -14,9 +14,6 @@ use Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetR
 
 final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
 {
-    /**
-     * @param mixed[] $expectedErrorsWithLines
-     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {

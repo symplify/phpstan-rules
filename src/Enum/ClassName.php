@@ -80,4 +80,9 @@ final class ClassName
      * @var string
      */
     public const MOCK_OBJECT_CLASS = 'PHPUnit\Framework\MockObject\MockObject';
+
+    /**
+     * @var string
+     */
+    public const REQUIRED_ATTRIBUTE = 'Symfony\Contracts\Service\Attribute\Required';
 }

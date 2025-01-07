@@ -794,6 +794,17 @@ class SomeClass extends SomeParentClass
 
 <br>
 
+### SingleRequiredMethodRule
+
+There must be maximum 1 @required method in the class. Merge it to one to avoid possible injection collision or duplicated injects.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\SingleRequiredMethodRule
+```
+
+<br>
+
 ### RequireAttributeNameRule
 
 Attribute must have all names explicitly defined

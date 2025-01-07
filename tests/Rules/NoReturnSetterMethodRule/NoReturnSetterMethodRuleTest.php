@@ -12,9 +12,6 @@ use Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule;
 
 final class NoReturnSetterMethodRuleTest extends RuleTestCase
 {
-    /**
-     * @param mixed[] $expectedErrorsWithLines
-     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
