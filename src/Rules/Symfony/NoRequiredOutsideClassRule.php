@@ -11,7 +11,7 @@ use PhpParser\Node\Stmt\Trait_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoRequiredOutsideClassRule\NoRequiredOutsideClassRuleTest
@@ -46,7 +46,7 @@ final class NoRequiredOutsideClassRule implements Rule
             if ($this->isAutowiredClassMethod($classMethod)) {
                 $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
                     ->file($scope->getFile())
-                    ->identifier(RuleIdentifier::SYMFONY_NO_REQUIRED_OUTSIDE_CLASS)
+                    ->identifier(SymfonyRuleIdentifier::SYMFONY_NO_REQUIRED_OUTSIDE_CLASS)
                     ->line($classMethod->getLine())
                     ->build();
             }

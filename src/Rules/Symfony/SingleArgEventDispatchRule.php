@@ -12,7 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -57,7 +57,7 @@ final class SingleArgEventDispatchRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::SINGLE_ARG_EVENT_DISPATCH)
+            ->identifier(SymfonyRuleIdentifier::SINGLE_ARG_EVENT_DISPATCH)
             ->build();
 
         return [$identifierRuleError];

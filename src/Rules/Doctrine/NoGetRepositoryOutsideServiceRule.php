@@ -10,7 +10,7 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServiceRule\NoGetRepositoryOutsideServiceRuleTest
@@ -44,7 +44,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
 
         if (! $scope->isInClass()) {
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+                ->identifier(DoctrineRuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
                 ->build();
 
             return [$ruleError];
@@ -57,7 +57,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
         }
 
         $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+            ->identifier(DoctrineRuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
             ->build();
 
         return [$ruleError];

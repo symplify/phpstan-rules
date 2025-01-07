@@ -10,7 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
  * Based on https://tomasvotruba.com/blog/2019/07/22/how-to-convert-listeners-to-subscribers-and-reduce-your-configs
@@ -54,7 +54,7 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::NO_LISTENER_WITHOUT_CONTRACT)
+            ->identifier(SymfonyRuleIdentifier::NO_LISTENER_WITHOUT_CONTRACT)
             ->build();
 
         return [$identifierRuleError];

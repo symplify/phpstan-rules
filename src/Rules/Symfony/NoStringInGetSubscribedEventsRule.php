@@ -15,7 +15,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
  * @implements Rule<ClassMethod>
@@ -90,7 +90,7 @@ final class NoStringInGetSubscribedEventsRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::NO_STRING_IN_GET_SUBSCRIBED_EVENTS)
+                ->identifier(SymfonyRuleIdentifier::NO_STRING_IN_GET_SUBSCRIBED_EVENTS)
                 ->build();
 
             return [$ruleError];

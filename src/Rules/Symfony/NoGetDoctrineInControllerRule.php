@@ -9,7 +9,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\MethodCallNameAnalyzer;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 
@@ -44,7 +44,7 @@ final class NoGetDoctrineInControllerRule implements Rule
         $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->file($scope->getFile())
             ->line($node->getStartLine())
-            ->identifier(RuleIdentifier::NO_GET_DOCTRINE_IN_CONTROLLER)
+            ->identifier(SymfonyRuleIdentifier::NO_GET_DOCTRINE_IN_CONTROLLER)
             ->build();
 
         return [$ruleError];
