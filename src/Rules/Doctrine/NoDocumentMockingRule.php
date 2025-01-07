@@ -10,7 +10,7 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\PHPUnitRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -53,7 +53,7 @@ final class NoDocumentMockingRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::PHPUNIT_NO_DOCUMENT_MOCKING)
+                ->identifier(PHPUnitRuleIdentifier::NO_DOCUMENT_MOCKING)
                 ->build();
 
             return [$ruleError];

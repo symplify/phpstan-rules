@@ -12,15 +12,7 @@ final class RuleIdentifier
 
     public const REQUIRE_ATTRIBUTE_NAME = 'symplify.requireAttributeName';
 
-    public const RECTOR_PHP_RULE_IMPLEMENTS_MIN_VERSION = 'rector.phpRuleImplementsMinVersion';
-
-    public const RECTOR_UPGRADE_DOWNGRADE_REGISTERED_IN_SET = 'rector.upgradeDowngradeRegisteredInSet';
-
     public const PHP_PARSER_NO_LEADING_BACKSLASH_IN_NAME = 'phpParser.noLeadingBackslashInName';
-
-    public const RECTOR_NO_INSTANCE_OF_STATIC_REFLECTION = 'rector.noInstanceOfStaticReflection';
-
-    public const RECTOR_NO_CLASS_REFLECTION_STATIC_REFLECTION = 'rector.noClassReflectionStaticReflection';
 
     public const PARENT_METHOD_VISIBILITY_OVERRIDE = 'symplify.parentMethodVisibilityOverride';
 
@@ -62,47 +54,15 @@ final class RuleIdentifier
 
     public const REQUIRED_INTERFACE_CONTRACT_NAMESPACE = 'symplify.requiredInterfaceContractNamespace';
 
-    public const SYMFONY_REQUIRE_INVOKABLE_CONTROLLER = 'symfony.requireInvokableController';
-
     public const NO_VALUE_OBJECT_IN_SERVICE_CONSTRUCTOR = 'symplify.noValueObjectInServiceConstructor';
-
-    public const DOCTRINE_NO_REPOSITORY_CALL_IN_DATA_FIXTURES = 'doctrine.noRepositoryCallInDataFixtures';
-
-    public const PHPUNIT_NO_DOCUMENT_MOCKING = 'phpunit.noDocumentMocking';
 
     public const NO_DYNAMIC_NAME = 'symplify.noDynamicName';
 
     public const NO_REFERENCE = 'symplify.noReference';
 
-    public const PHPUNIT_NO_MOCK_ONLY = 'phpunit.noMockOnly';
-
-    public const SINGLE_ARG_EVENT_DISPATCH = 'symfony.singleArgEventDispatch';
-
-    public const NO_ENTITY_MOCKING = 'doctrine.noEntityMocking';
-
-    public const NO_STRING_IN_GET_SUBSCRIBED_EVENTS = 'symfony.noStringInGetSubscribedEvents';
-
-    public const NO_LISTENER_WITHOUT_CONTRACT = 'symfony.noListenerWithoutContract';
-
-    public const DOCTRINE_NO_PARENT_REPOSITORY = 'doctrine.noParentRepository';
-
-    public const DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE = 'doctrine.noGetRepositoryOutsideService';
-
-    public const SYMFONY_NO_REQUIRED_OUTSIDE_CLASS = 'symfony.noRequiredOutsideClass';
-
     public const NO_CONSTRUCTOR_OVERRIDE = 'symplify.noConstructorOverride';
 
-    public const SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR = 'symfony.noAbstractControllerConstructor';
-
-    public const PHPUNIT_PUBLIC_STATIC_DATA_PROVIDER = 'phpunit.publicStaticDataProvider';
-
     public const FORBIDDEN_NEW_INSTANCE = 'symplify.forbiddenNewInstance';
-
-    public const REQUIRE_QUERY_BUILDER_ON_REPOSITORY = 'doctrine.requireQueryBuilderOnRepository';
-
-    public const NO_GET_IN_CONTROLLER = 'symfony.noGetInController';
-
-    public const NO_GET_DOCTRINE_IN_CONTROLLER = 'symfony.noGetDoctrineInController';
 
     public const MAXIMUM_IGNORED_ERROR_COUNT = 'symplify.maximumIgnoredErrorCount';
 }

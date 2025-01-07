@@ -12,7 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -53,7 +53,7 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::REQUIRE_QUERY_BUILDER_ON_REPOSITORY)
+            ->identifier(DoctrineRuleIdentifier::REQUIRE_QUERY_BUILDER_ON_REPOSITORY)
             ->build();
 
         return [$identifierRuleError];

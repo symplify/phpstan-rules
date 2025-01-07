@@ -11,7 +11,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\MethodName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 
 /**
@@ -63,7 +63,7 @@ final class RequireInvokableControllerRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::SYMFONY_REQUIRE_INVOKABLE_CONTROLLER)
+                ->identifier(SymfonyRuleIdentifier::SYMFONY_REQUIRE_INVOKABLE_CONTROLLER)
                 ->line($classMethod->getLine())
                 ->build();
         }

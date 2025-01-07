@@ -10,7 +10,7 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
  * Check if abstract controller has constructor, as it should use
@@ -55,7 +55,7 @@ final class NoAbstractControllerConstructorRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR)
+            ->identifier(SymfonyRuleIdentifier::SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR)
             ->build();
 
         return [$identifierRuleError];

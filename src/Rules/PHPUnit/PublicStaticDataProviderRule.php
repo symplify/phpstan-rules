@@ -10,7 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\PHPUnit\DataProviderMethodResolver;
 use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
@@ -76,7 +76,7 @@ final class PublicStaticDataProviderRule implements Rule
             if (! $dataProviderClassMethod->isPublic()) {
                 $errorMessage = sprintf(self::PUBLIC_ERROR_MESSAGE, $dataProviderMethodName);
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
-                    ->identifier(RuleIdentifier::PHPUNIT_PUBLIC_STATIC_DATA_PROVIDER)
+                    ->identifier(PHPUnitRuleIdentifier::PUBLIC_STATIC_DATA_PROVIDER)
                     ->line($dataProviderClassMethod->getLine())
                     ->build();
             }

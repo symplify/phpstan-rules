@@ -12,7 +12,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
 /**
@@ -69,7 +69,7 @@ final readonly class NoMockOnlyTestRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::PHPUNIT_NO_MOCK_ONLY)
+            ->identifier(PHPUnitRuleIdentifier::NO_MOCK_ONLY)
             ->build();
 
         return [$identifierRuleError];

@@ -12,9 +12,6 @@ use Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule;
 
 final class CheckRequiredInterfaceInContractNamespaceRuleTest extends RuleTestCase
 {
-    /**
-     * @param mixed[] $expectedErrorsWithLines
-     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {

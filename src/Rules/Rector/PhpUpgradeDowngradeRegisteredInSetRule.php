@@ -15,7 +15,7 @@ use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Set\ValueObject\SetList;
 use SplFileInfo;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\RectorRuleIdentifier;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 use Symplify\PHPStanRules\FileSystem\FileSystem;
 
@@ -66,7 +66,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
 
         $errorMessage = $this->createErrorMessage($configFilePath, $className);
         return [RuleErrorBuilder::message($errorMessage)
-            ->identifier(RuleIdentifier::RECTOR_UPGRADE_DOWNGRADE_REGISTERED_IN_SET)
+            ->identifier(RectorRuleIdentifier::UPGRADE_DOWNGRADE_REGISTERED_IN_SET)
             ->build()];
     }
 

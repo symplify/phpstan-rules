@@ -11,7 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use ReflectionClass;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\RectorRuleIdentifier;
 use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
 
 /**
@@ -56,7 +56,7 @@ final class NoClassReflectionStaticReflectionRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::RECTOR_NO_CLASS_REFLECTION_STATIC_REFLECTION)
+            ->identifier(RectorRuleIdentifier::NO_CLASS_REFLECTION_STATIC_REFLECTION)
             ->build()];
     }
 }
