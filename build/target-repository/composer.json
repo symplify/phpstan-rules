@@ -12,7 +12,10 @@
     "autoload": {
         "psr-4": {
             "Symplify\\PHPStanRules\\": "src"
-        }
+        },
+        "files": [
+            "src/functions/fast-functions.php"
+        ]
     },
     "extra": {
         "phpstan": {
