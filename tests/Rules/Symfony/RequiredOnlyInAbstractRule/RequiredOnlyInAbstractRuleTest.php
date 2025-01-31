@@ -25,6 +25,7 @@ final class RequiredOnlyInAbstractRuleTest extends RuleTestCase
             12,
         ]]];
 
+        yield [__DIR__ . '/Fixture/SkipCircularNote.php', []];
         yield [__DIR__ . '/Fixture/SkipAbstractClass.php', []];
         yield [__DIR__ . '/Fixture/SkipParentDocumentRepository.php', []];
     }
