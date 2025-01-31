@@ -10,4 +10,6 @@ final class MethodName
      * @var string
      */
     public const INVOKE = '__invoke';
+
+    public const CONSTRUCTOR = '__construct';
 }

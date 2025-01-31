@@ -1177,6 +1177,17 @@ final class SomeFixture extends AbstractFixture
 
 ## 3. Symfony-specific Rules
 
+### NoConstructorAndRequiredTogetherRule
+
+Constructor injection and `#[Required]` method should not be used together in single class. Pick one, to keep architecture clean.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoConstructorAndRequiredTogetherRule
+```
+
+<br>
+
 ### NoGetDoctrineInControllerRule
 
 Prevents using `$this->getDoctrine()` in controllers, to promote dependency injection.
