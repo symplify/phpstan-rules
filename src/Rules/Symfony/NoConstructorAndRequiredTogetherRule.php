@@ -49,12 +49,12 @@ final class NoConstructorAndRequiredTogetherRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(SymfonyRuleIdentifier::NO_CONSTRUCT_AND_REQUIRED)
             ->build();
 
         return [
-            $ruleError,
+            $identifierRuleError,
         ];
     }
 
