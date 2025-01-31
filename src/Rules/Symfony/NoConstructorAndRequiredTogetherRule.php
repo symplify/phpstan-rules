@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
-use PhpParser\Node;
-use PHPStan\Analyser\Scope;
-use PHPStan\Rules\Rule;
 use PhpParser\Comment\Doc;
+use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
+use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
+use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\MethodName;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
