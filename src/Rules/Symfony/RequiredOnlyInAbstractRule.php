@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
@@ -61,6 +62,10 @@ final class RequiredOnlyInAbstractRule implements Rule
                 continue;
             }
 
+            if ($this->hasCircularDocNote($classMethod)) {
+                continue;
+            }
+
             if ($class->isAbstract()) {
                 continue;
             }
@@ -94,5 +99,15 @@ final class RequiredOnlyInAbstractRule implements Rule
         }
 
         return false;
+    }
+
+    private function hasCircularDocNote(Node $node): bool
+    {
+        $docComment = $node->getDocComment();
+        if (! $docComment instanceof Doc) {
+            return false;
+        }
+
+        return str_contains($docComment->getText(), 'circular');
     }
 }
