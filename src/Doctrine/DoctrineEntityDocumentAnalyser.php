@@ -7,7 +7,7 @@ namespace Symplify\PHPStanRules\Doctrine;
 use PHPStan\PhpDoc\ResolvedPhpDocBlock;
 use PHPStan\Reflection\ClassReflection;
 
-final readonly class DoctrineEntityDocumentAnalyser
+final class DoctrineEntityDocumentAnalyser
 {
     /**
      * @var string[]
@@ -22,7 +22,7 @@ final readonly class DoctrineEntityDocumentAnalyser
         }
 
         foreach (self::ENTITY_DOCBLOCK_MARKERS as $entityDocBlockMarkers) {
-            if (str_contains($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarkers)) {
+            if (strpos($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarkers) !== false) {
                 return true;
             }
         }
