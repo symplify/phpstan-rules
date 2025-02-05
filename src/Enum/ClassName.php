@@ -64,6 +64,11 @@ final class ClassName
     /**
      * @var string
      */
+    public const FORM_TYPE = 'Symfony\Component\Form\AbstractType';
+
+    /**
+     * @var string
+     */
     public const SYMFONY_CONTROLLER = 'Symfony\Bundle\FrameworkBundle\Controller\Controller';
 
     /**
