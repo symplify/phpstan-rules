@@ -5,6 +5,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
     - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule
     - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
+    - Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule
 
     # dependency injection
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule

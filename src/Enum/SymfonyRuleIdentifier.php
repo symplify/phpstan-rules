@@ -27,4 +27,6 @@ final class SymfonyRuleIdentifier
     public const SYMFONY_REQUIRED_ONLY_IN_ABSTRACT = 'symfony.requiredOnlyInAbstract';
 
     public const NO_CONSTRUCT_AND_REQUIRED = 'symfony.noConstructAndRequired';
+
+    public const FORM_TYPE_CLASS_NAME = 'symfony.formTypeClassName';
 }

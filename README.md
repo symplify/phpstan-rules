@@ -1177,6 +1177,17 @@ final class SomeFixture extends AbstractFixture
 
 ## 3. Symfony-specific Rules
 
+### FormTypeClassNameRule
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule
+```
+
+Classes that extend `AbstractType` should have `*FormType` suffix, to make it clear it's a form class.
+
+<br>
+
 ### NoConstructorAndRequiredTogetherRule
 
 Constructor injection and `#[Required]` method should not be used together in single class. Pick one, to keep architecture clean.
