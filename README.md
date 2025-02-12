@@ -1499,6 +1499,17 @@ final class SomeController extends AbstractController
 
 ## 4. PHPUnit-specific Rules
 
+### NoMockObjectAndRealObjectPropertyRule
+
+Avoid using one property for both real object and mock object. Use separate properties or single type instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
+```
+
+<br>
+
 ### NoEntityMockingRule, NoDocumentMockingRule
 
 Instead of entity or document mocking, create object directly to get better type support
