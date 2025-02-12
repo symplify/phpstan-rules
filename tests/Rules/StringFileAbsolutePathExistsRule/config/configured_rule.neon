@@ -1,0 +1,10 @@
+includes:
+    - ../../../config/included_services.neon
+
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            requiredSeeTypes:
+                - PHPStan\Rules\Rule
