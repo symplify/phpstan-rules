@@ -124,6 +124,34 @@ class SomeCommand extends Command
 
 <br>
 
+### StringFileAbsolutePathExistsRule
+
+Absolute file path must exist. Checked suffixes are "yaml", "yml", "sql", "php" and "json".
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\StringFileAbsolutePathExistsRule
+```
+
+```php
+// missing file path
+return __DIR__  . '/some_file.yml';
+```
+
+:x:
+
+<br>
+
+```php
+// correct file path
+return __DIR__  . '/../fixtures/some_file.yml';
+```
+
+:+1:
+
+
+<br>
+
 ### NoConstructorOverrideRule
 
 Possible __construct() override, this can cause missing dependencies or setup

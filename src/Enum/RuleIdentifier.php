@@ -65,4 +65,6 @@ final class RuleIdentifier
     public const FORBIDDEN_NEW_INSTANCE = 'symplify.forbiddenNewInstance';
 
     public const MAXIMUM_IGNORED_ERROR_COUNT = 'symplify.maximumIgnoredErrorCount';
+
+    public const STRING_FILE_ABSOLUTE_PATH_EXISTS = 'symplify.stringFileAbsolutePathExists';
 }
