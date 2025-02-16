@@ -9,6 +9,7 @@ rules:
 
     # routing
     - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
 
     # dependency injection
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
