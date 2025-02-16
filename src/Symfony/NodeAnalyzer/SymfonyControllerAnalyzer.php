@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Symfony\NodeAnalyzer;
 
 use PhpParser\Comment\Doc;
+use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use Symplify\PHPStanRules\Enum\ClassName;
@@ -38,17 +39,22 @@ final class SymfonyControllerAnalyzer
 
     public static function isControllerActionMethod(ClassMethod $classMethod): bool
     {
-        $attributeFinder = new AttributeFinder();
+        return self::hasRouteAnnotationOrAttribute($classMethod);
+    }
 
-        if (! $classMethod->isPublic()) {
+    public static function hasRouteAnnotationOrAttribute(ClassLike | ClassMethod $node): bool
+    {
+        if ($node instanceof ClassMethod && ! $node->isPublic()) {
             return false;
         }
 
-        if ($attributeFinder->hasAttribute($classMethod, ClassName::ROUTE_ATTRIBUTE)) {
+        $attributeFinder = new AttributeFinder();
+
+        if ($attributeFinder->hasAttribute($node, ClassName::ROUTE_ATTRIBUTE)) {
             return true;
         }
 
-        $docComment = $classMethod->getDocComment();
+        $docComment = $node->getDocComment();
         if (! $docComment instanceof Doc) {
             return false;
         }

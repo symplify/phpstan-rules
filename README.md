@@ -1325,6 +1325,48 @@ return static function (RoutingConfigurator $routingConfigurator): void {
 
 <br>
 
+### NoClassLevelRouteRule
+
+Avoid class-level route prefixing. Use method route to keep single source of truth and focus
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
+```
+
+```php
+use Symfony\Component\Routing\Attribute\Route;
+
+#[Route('/some-prefix')]
+class SomeController
+{
+    #[Route('/some-action')]
+    public function someAction()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\Routing\Attribute\Route;
+
+class SomeController
+{
+    #[Route('/some-prefix/some-action')]
+    public function someAction()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
 ### NoRequiredOutsideClassRule
 
 Symfony #[Require]/@required should be used only in classes to avoid misuse

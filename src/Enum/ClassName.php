@@ -9,7 +9,13 @@ final class ClassName
     /**
      * @var string
      */
-    public const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
+    public const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Attribute\Route';
+
+    /**
+     * @api
+     * @var string
+     */
+    public const ROUTE_ANNOTATION = 'Symfony\Component\Routing\Annotation\Route';
 
     /**
      * @var string

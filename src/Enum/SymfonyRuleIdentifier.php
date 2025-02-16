@@ -31,4 +31,6 @@ final class SymfonyRuleIdentifier
     public const FORM_TYPE_CLASS_NAME = 'symfony.formTypeClassName';
 
     public const NO_ROUTING_PREFIX = 'symfony.noRoutingPrefix';
+
+    public const NO_CLASS_LEVEL_ROUTE = 'symfony.noClassLevelRoute';
 }
