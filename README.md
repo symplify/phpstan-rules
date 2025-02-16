@@ -1290,6 +1290,41 @@ abstract class AbstractController extends Controller
 
 <br>
 
+### NoRoutingPrefixRule
+
+Avoid global route prefixing. Use single place for paths in @Route/#[Route] and improve static analysis instead.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
+```
+
+
+```php
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
+return static function (RoutingConfigurator $routingConfigurator): void {
+    $routingConfigurator->import(__DIR__ . '/some-path')
+        ->prefix('/some-prefix');
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
+return static function (RoutingConfigurator $routingConfigurator): void {
+    $routingConfigurator->import(__DIR__ . '/some-path');
+};
+```
+
+:+1:
+
+<br>
+
 ### NoRequiredOutsideClassRule
 
 Symfony #[Require]/@required should be used only in classes to avoid misuse

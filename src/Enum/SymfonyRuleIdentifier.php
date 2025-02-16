@@ -29,4 +29,6 @@ final class SymfonyRuleIdentifier
     public const NO_CONSTRUCT_AND_REQUIRED = 'symfony.noConstructAndRequired';
 
     public const FORM_TYPE_CLASS_NAME = 'symfony.formTypeClassName';
+
+    public const NO_ROUTING_PREFIX = 'symfony.noRoutingPrefix';
 }

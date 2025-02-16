@@ -90,4 +90,9 @@ final class ClassName
      * @var string
      */
     public const REQUIRED_ATTRIBUTE = 'Symfony\Contracts\Service\Attribute\Required';
+
+    /**
+     * @var string
+     */
+    public const SYMFONY_ROUTE_IMPORT_CONFIGURATOR = 'Symfony\Component\Routing\Loader\Configurator\ImportConfigurator';
 }
