@@ -11,5 +11,6 @@
         <directory>tests</directory>
         <exclude>tests/Rules/ClassNameRespectsParentSuffixRule/Fixture/</exclude>
         <exclude>tests/Rules/PHPUnit/PublicStaticDataProviderRule</exclude>
+        <exclude>tests/Rules/PHPUnit/NoAssertFuncCallInTestsRule/Fixture</exclude>
     </testsuite>
 </phpunit>

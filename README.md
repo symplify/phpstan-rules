@@ -1669,6 +1669,17 @@ final class SomeTest extends TestCase
 
 <br>
 
+### NoAssertFuncCallInTestsRule
+
+Avoid using assert*() functions in tests, as they can lead to false positives
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule
+```
+
+<br>
+
 ### NoMockOnlyTestRule
 
 Test should have at least one non-mocked property, to test something
