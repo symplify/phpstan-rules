@@ -4,3 +4,5 @@ rules:
 
     - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule
+
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule
