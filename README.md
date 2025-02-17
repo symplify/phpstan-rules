@@ -272,6 +272,48 @@ usort($items, function (array $apples) {
 
 <br>
 
+### NoJustPropertyAssignRule
+
+Instead of assigning service property to a variable, use the property directly
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule
+```
+
+```php
+class SomeClass
+{
+    // ...
+
+    public function run()
+    {
+        $someService = $this->someService;
+        $someService->run();
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+class SomeClass
+{
+    // ...
+
+    public function run()
+    {
+        $this->someService->run();
+    }
+}
+```
+
+:+1:
+
+<br>
+
 ### ForbiddenExtendOfNonAbstractClassRule
 
 Only abstract classes can be extended

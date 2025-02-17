@@ -1,2 +1,3 @@
 rules:
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
+    - Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule
