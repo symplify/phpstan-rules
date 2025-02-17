@@ -1367,6 +1367,18 @@ class SomeController
 
 <br>
 
+
+### NoFindTaggedServiceIdsCallRule
+
+Instead of "$this->findTaggedServiceIds()" use more reliable registerForAutoconfiguration() and tagged iterator attribute. Those work outside any configuration and avoid missed tag errors
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoFindTaggedServiceIdsCallRule
+```
+
+<br>
+
 ### NoRequiredOutsideClassRule
 
 Symfony #[Require]/@required should be used only in classes to avoid misuse
