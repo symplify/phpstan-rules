@@ -75,7 +75,7 @@ final class NoJustPropertyAssignRule implements Rule
     private function shouldSkipCurrentClass(Scope $scope): bool
     {
         // skip entities as rather static
-        if (str_contains($scope->getFile(), '/Document/') || str_contains($scope->getFile(), '/Entity/')) {
+        if (strpos($scope->getFile(), '/Document/') !== false || strpos($scope->getFile(), '/Entity/') !== false) {
             return true;
         }
 
