@@ -4,24 +4,10 @@
     "description": "Set of Symplify rules for PHPStan",
     "license": "MIT",
     "require": {
-        "php": ">=8.2",
-        "webmozart/assert": "^1.11",
+        "php": "^7.4|^8.0",
         "phpstan/phpstan": "^2.0",
         "nette/utils": "^3.2|^4.0",
-        "phpstan/phpdoc-parser": "^2.0"
-    },
-    "require-dev": {
-        "nikic/php-parser": "^5.3",
-        "phpunit/phpunit": "^11.5",
-        "symfony/framework-bundle": "6.1.*",
-        "symplify/easy-coding-standard": "^12.5",
-        "tomasvotruba/class-leak": "^2.0",
-        "rector/rector": "^2.0.6",
-        "phpstan/extension-installer": "^1.4",
-        "symplify/phpstan-extensions": "^12.0",
-        "tomasvotruba/unused-public": "^2.0",
-        "tomasvotruba/type-coverage": "^2.0",
-        "shipmonk/composer-dependency-analyser": "^1.8"
+        "webmozart/assert": "^1.11"
     },
     "autoload": {
         "psr-4": {
@@ -30,26 +16,6 @@
         "files": [
             "src/functions/fast-functions.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Symplify\\PHPStanRules\\Tests\\": "tests"
-        },
-        "classmap": [
-            "stubs"
-        ]
-    },
-    "config": {
-        "platform-check": false,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
-    "scripts": {
-        "check-cs": "vendor/bin/ecs check --ansi",
-        "fix-cs": "vendor/bin/ecs check --fix --ansi",
-        "phpstan": "vendor/bin/phpstan analyse --ansi",
-        "rector": "vendor/bin/rector process --dry-run --ansi"
     },
     "extra": {
         "phpstan": {
