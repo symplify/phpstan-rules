@@ -33,4 +33,6 @@ final class SymfonyRuleIdentifier
     public const NO_ROUTING_PREFIX = 'symfony.noRoutingPrefix';
 
     public const NO_CLASS_LEVEL_ROUTE = 'symfony.noClassLevelRoute';
+
+    public const NO_ROUTE_TRAILING_SLASH_PATH = 'symfony.noRouteTrailingSlashPath';
 }
