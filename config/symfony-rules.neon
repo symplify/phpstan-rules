@@ -16,3 +16,8 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoFindTaggedServiceIdsCallRule
+
+    # magic required inject
+    - Symplify\PHPStanRules\Rules\Symfony\SingleRequiredMethodRule
+    - Symplify\PHPStanRules\Rules\Symfony\RequiredOnlyInAbstractRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoConstructorAndRequiredTogetherRule
