@@ -43,7 +43,7 @@ final class NoFindTaggedServiceIdsCallRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::class)
+            ->identifier(SymfonyRuleIdentifier::NO_FIND_TAGGED_SERVICE_IDS_CALL)
             ->build();
 
         return [

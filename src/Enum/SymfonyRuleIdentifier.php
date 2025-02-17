@@ -35,4 +35,6 @@ final class SymfonyRuleIdentifier
     public const NO_CLASS_LEVEL_ROUTE = 'symfony.noClassLevelRoute';
 
     public const NO_ROUTE_TRAILING_SLASH_PATH = 'symfony.noRouteTrailingSlashPath';
+
+    public const NO_FIND_TAGGED_SERVICE_IDS_CALL = 'symfony.noFindTaggedServiceIdsCall';
 }
