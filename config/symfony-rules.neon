@@ -10,6 +10,7 @@ rules:
     # routing
     - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
     - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoRouteTrailingSlashPathRule
 
     # dependency injection
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule

@@ -885,6 +885,17 @@ class SomeController
 
 <br>
 
+### NoRouteTrailingSlashPathRule
+
+Avoid trailing slash in route path, to prevent redirects and SEO issues
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoRouteTrailingSlashPathRule
+```
+
+<br>
+
 ### RequireAttributeNamespaceRule
 
 Attribute must be located in "Attribute" namespace
