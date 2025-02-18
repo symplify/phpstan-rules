@@ -2,21 +2,24 @@
 
 namespace Symplify\PHPStanRules\Rules\Complexity;
 
+use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Stmt\Expression;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Complexity\NoJustPropertyAssignRule\NoJustPropertyAssignRuleTest
  *
- * @implements Rule<Assign>
+ * @implements Rule<Expression>
  */
 final class NoJustPropertyAssignRule implements Rule
 {
@@ -25,18 +28,30 @@ final class NoJustPropertyAssignRule implements Rule
      */
     public const ERROR_MESSAGE = 'Instead of assigning service property to a variable, use the property directly';
 
+    public function __construct(
+        private readonly PhpDocResolver $phpDocResolver
+    ) {
+
+    }
+
     public function getNodeType(): string
     {
-        return Assign::class;
+        return Expression::class;
     }
 
     /**
-     * @param Assign $node
+     * @param Expression $node
      * @return RuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $this->isLocalPropertyFetchAssignToVariable($node, $scope)) {
+        $expr = $node->expr;
+
+        if (! $expr instanceof Assign) {
+            return [];
+        }
+
+        if (! $this->isLocalPropertyFetchAssignToVariable($expr, $scope)) {
             return [];
         }
 
@@ -44,9 +59,45 @@ final class NoJustPropertyAssignRule implements Rule
             return [];
         }
 
+        if ($this->shoulSkipMoreSpecificTypeByDocblock($scope, $node, $node->expr)) {
+            return [];
+        }
+
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(RuleIdentifier::NO_JUST_PROPERTY_ASSIGN)
             ->build()];
+    }
+
+    private function shoulSkipMoreSpecificTypeByDocblock(Scope $scope, Expression $node, Assign $assign): bool
+    {
+        $docComment = $node->getDocComment();
+        if (! $docComment instanceof Doc) {
+            return false;
+        }
+
+        /** @var Variable $variable */
+        $variable = $assign->var;
+        $varName = $variable->name;
+
+        if ($varName === null) {
+            return false;
+        }
+
+        $r = $this->phpDocResolver->resolve($scope, $scope->getClassReflection(), $docComment);
+        $exprType = $scope->getType($assign->expr);
+
+        foreach ($r->getVarTags() as $key => $varTag) {
+            if ($key !== $varName) {
+                continue;
+            }
+
+            // different type means more specific type on purpose
+            if (! $varTag->getType()->equals($exprType)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function isLocalPropertyFetchAssignToVariable(Assign $assign, Scope $scope): bool
