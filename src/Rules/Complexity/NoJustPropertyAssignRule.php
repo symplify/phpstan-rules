@@ -21,7 +21,7 @@ use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
  *
  * @implements Rule<Expression>
  */
-final class NoJustPropertyAssignRule implements Rule
+final readonly class NoJustPropertyAssignRule implements Rule
 {
     /**
      * @var string
@@ -29,7 +29,7 @@ final class NoJustPropertyAssignRule implements Rule
     public const ERROR_MESSAGE = 'Instead of assigning service property to a variable, use the property directly';
 
     public function __construct(
-        private readonly PhpDocResolver $phpDocResolver
+        private PhpDocResolver $phpDocResolver
     ) {
 
     }
@@ -68,9 +68,9 @@ final class NoJustPropertyAssignRule implements Rule
             ->build()];
     }
 
-    private function shoulSkipMoreSpecificTypeByDocblock(Scope $scope, Expression $node, Assign $assign): bool
+    private function shoulSkipMoreSpecificTypeByDocblock(Scope $scope, Expression $expression, Assign $assign): bool
     {
-        $docComment = $node->getDocComment();
+        $docComment = $expression->getDocComment();
         if (! $docComment instanceof Doc) {
             return false;
         }
@@ -83,10 +83,10 @@ final class NoJustPropertyAssignRule implements Rule
             return false;
         }
 
-        $r = $this->phpDocResolver->resolve($scope, $scope->getClassReflection(), $docComment);
+        $resolvedPhpDocBlock = $this->phpDocResolver->resolve($scope, $scope->getClassReflection(), $docComment);
         $exprType = $scope->getType($assign->expr);
 
-        foreach ($r->getVarTags() as $key => $varTag) {
+        foreach ($resolvedPhpDocBlock->getVarTags() as $key => $varTag) {
             if ($key !== $varName) {
                 continue;
             }
