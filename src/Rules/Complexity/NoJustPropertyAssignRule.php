@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -59,7 +60,7 @@ final readonly class NoJustPropertyAssignRule implements Rule
             return [];
         }
 
-        if ($this->shoulSkipMoreSpecificTypeByDocblock($scope, $node, $node->expr)) {
+        if ($this->shoulSkipMoreSpecificTypeByDocblock($scope, $node, $expr)) {
             return [];
         }
 
@@ -83,7 +84,12 @@ final readonly class NoJustPropertyAssignRule implements Rule
             return false;
         }
 
-        $resolvedPhpDocBlock = $this->phpDocResolver->resolve($scope, $scope->getClassReflection(), $docComment);
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        $resolvedPhpDocBlock = $this->phpDocResolver->resolve($scope, $classReflection, $docComment);
         $exprType = $scope->getType($assign->expr);
 
         foreach ($resolvedPhpDocBlock->getVarTags() as $key => $varTag) {
