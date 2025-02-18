@@ -26,6 +26,9 @@ final class NoJustPropertyAssignRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/ServiceAssign.php', [
             [NoJustPropertyAssignRule::ERROR_MESSAGE, 20],
         ]];
+        yield [__DIR__ . '/Fixture/WithEqualTypeVarDoc.php', [
+            [NoJustPropertyAssignRule::ERROR_MESSAGE, 18],
+        ]];
 
         yield [__DIR__ . '/Fixture/SkipScalarAssign.php', []];
         yield [__DIR__ . '/Fixture/SkipSpecificVarDoc.php', []];
