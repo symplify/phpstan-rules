@@ -4,6 +4,7 @@ namespace Symplify\PHPStanRules\Rules\Complexity;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
@@ -80,7 +81,7 @@ final readonly class NoJustPropertyAssignRule implements Rule
         $variable = $assign->var;
         $varName = $variable->name;
 
-        if ($varName === null) {
+        if ($varName instanceof Expr) {
             return false;
         }
 
