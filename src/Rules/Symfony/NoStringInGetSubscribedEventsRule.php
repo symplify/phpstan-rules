@@ -14,7 +14,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
@@ -51,7 +51,7 @@ final class NoStringInGetSubscribedEventsRule implements Rule
         }
 
         // only handle symfony one
-        if (! $classReflection->implementsInterface(ClassName::EVENT_SUBSCRIBER_INTERFACE)) {
+        if (! $classReflection->implementsInterface(SymfonyClass::EVENT_SUBSCRIBER_INTERFACE)) {
             return [];
         }
 
@@ -74,7 +74,7 @@ final class NoStringInGetSubscribedEventsRule implements Rule
                 }
 
                 // skip Symfony FormEvents::class
-                if ($classConstFetch->class->toString() === ClassName::FORM_EVENTS) {
+                if ($classConstFetch->class->toString() === SymfonyClass::FORM_EVENTS) {
                     continue;
                 }
 

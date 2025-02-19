@@ -12,7 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
@@ -45,14 +45,14 @@ final class FormTypeClassNameRule implements Rule
 
         $currentObjectType = new ObjectType($className);
 
-        $parentObjectType = new ObjectType(ClassName::FORM_TYPE);
+        $parentObjectType = new ObjectType(SymfonyClass::FORM_TYPE);
         if (! $parentObjectType->isSuperTypeOf($currentObjectType)->yes()) {
             return [];
         }
 
         $errorMessage = sprintf(
             'Class extends "%s" must have "FormType" suffix to make form explicit, "%s" given',
-            ClassName::FORM_TYPE,
+            SymfonyClass::FORM_TYPE,
             $className
         );
 

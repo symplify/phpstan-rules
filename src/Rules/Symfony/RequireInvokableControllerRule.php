@@ -9,8 +9,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\MethodName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 
@@ -40,8 +40,8 @@ final class RequireInvokableControllerRule implements Rule
     {
         $classReflection = $node->getClassReflection();
         if (
-            ! $classReflection->isSubclassOf(ClassName::SYMFONY_ABSTRACT_CONTROLLER) &&
-            ! $classReflection->isSubclassOf(ClassName::SYMFONY_CONTROLLER)
+            ! $classReflection->isSubclassOf(SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER) &&
+            ! $classReflection->isSubclassOf(SymfonyClass::SYMFONY_CONTROLLER)
         ) {
             return [];
         }

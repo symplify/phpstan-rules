@@ -9,7 +9,7 @@ parameters:
     level: 8
 
     # custom configuration
-    maximumIgnoredErrorCount: 10
+    maximumIgnoredErrorCount: 12
 
     paths:
         - src
@@ -49,3 +49,6 @@ parameters:
 
         - '#Although PHPStan\\Node\\InClassNode is covered by backward compatibility promise, this instanceof assumption might break because (.*?) not guaranteed to always stay the same#'
         - '#PHPStan\\DependencyInjection\\NeonAdapter#'
+
+        # not useful
+        - '#with generic class ReflectionAttribute (but )?does not specify its types#'

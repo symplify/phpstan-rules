@@ -8,7 +8,7 @@ use PhpParser\Comment\Doc;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder;
 
 final class SymfonyControllerAnalyzer
@@ -17,8 +17,8 @@ final class SymfonyControllerAnalyzer
      * @var string[]
      */
     private const CONTROLLER_TYPES = [
-        ClassName::SYMFONY_CONTROLLER,
-        ClassName::SYMFONY_ABSTRACT_CONTROLLER,
+        SymfonyClass::SYMFONY_CONTROLLER,
+        SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER,
     ];
 
     public static function isControllerScope(Scope $scope): bool
@@ -50,7 +50,7 @@ final class SymfonyControllerAnalyzer
 
         $attributeFinder = new AttributeFinder();
 
-        if ($attributeFinder->hasAttribute($node, ClassName::ROUTE_ATTRIBUTE)) {
+        if ($attributeFinder->hasAttribute($node, SymfonyClass::ROUTE_ATTRIBUTE)) {
             return true;
         }
 

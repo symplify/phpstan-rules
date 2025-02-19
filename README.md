@@ -875,6 +875,17 @@ rules:
 
 <br>
 
+### RequireRouteNameToGenerateControllerRouteRule
+
+To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule
+```
+
+<br>
+
 ### SingleRequiredMethodRule
 
 There must be maximum 1 @required method in the class. Merge it to one to avoid possible injection collision or duplicated injects.
