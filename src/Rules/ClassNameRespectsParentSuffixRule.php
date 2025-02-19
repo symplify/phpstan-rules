@@ -25,6 +25,10 @@ use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
 final class ClassNameRespectsParentSuffixRule implements Rule
 {
     /**
+     * @readonly
+     */
+    private ClassToSuffixResolver $classToSuffixResolver;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Class should have suffix "%s" to respect parent type';
@@ -53,9 +57,10 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      * @param class-string[] $parentClasses
      */
     public function __construct(
-        private readonly ClassToSuffixResolver $classToSuffixResolver,
-        array $parentClasses = [],
+        ClassToSuffixResolver $classToSuffixResolver,
+        array $parentClasses = []
     ) {
+        $this->classToSuffixResolver = $classToSuffixResolver;
         $this->parentClasses = array_merge($parentClasses, self::DEFAULT_PARENT_CLASSES);
     }
 
@@ -97,7 +102,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
             }
 
             $expectedSuffix = $this->classToSuffixResolver->resolveFromClass($parentClass);
-            if (\str_ends_with($classReflection->getName(), $expectedSuffix)) {
+            if (substr_compare($classReflection->getName(), $expectedSuffix, -strlen($expectedSuffix)) === 0) {
                 return [];
             }
 
