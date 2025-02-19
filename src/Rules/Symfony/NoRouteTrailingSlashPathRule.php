@@ -49,7 +49,7 @@ final class NoRouteTrailingSlashPathRule implements Rule
         }
 
         // path is valid
-        if ($routePath === '/' || ! str_ends_with($routePath, '/')) {
+        if ($routePath === '/' || substr_compare($routePath, '/', -strlen('/')) !== 0) {
             return [];
         }
 
@@ -68,7 +68,7 @@ final class NoRouteTrailingSlashPathRule implements Rule
         }
 
         // not a route
-        if (! str_contains($docComment->getText(), 'Route')) {
+        if (strpos($docComment->getText(), 'Route') === false) {
             return null;
         }
 
