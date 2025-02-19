@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Rules\Symfony;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
+use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
@@ -42,8 +43,7 @@ final class NoRoutingPrefixRule implements Rule
             return [];
         }
 
-        $methodName = $node->name->toString();
-        if ($methodName !== 'prefix') {
+        if ($node->name->toString() !== 'prefix') {
             return [];
         }
 
@@ -56,11 +56,39 @@ final class NoRoutingPrefixRule implements Rule
             return [];
         }
 
+        if ($this->isAllowedExternalBundleImport($node)) {
+            return [];
+        }
+
         $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->line($node->getStartLine())
             ->identifier(SymfonyRuleIdentifier::NO_ROUTING_PREFIX)
             ->build();
 
         return [$ruleError];
+    }
+
+    private function isAllowedExternalBundleImport(MethodCall $methodCall): bool
+    {
+        if (! $methodCall->var instanceof MethodCall) {
+            return false;
+        }
+
+        $parentCaller = $methodCall->var;
+        if (! $parentCaller->name instanceof Identifier || $parentCaller->name->toString() !== 'import') {
+            return false;
+        }
+
+        $importArgPath = $parentCaller->getArgs()[0]->value;
+        if (! $importArgPath instanceof String_) {
+            return false;
+        }
+
+        // these external bundles are typically prefixed on purpose
+        if (str_starts_with($importArgPath->value, '@FrameworkBundle')) {
+            return true;
+        }
+
+        return str_starts_with($importArgPath->value, '@WebProfilerBundle');
     }
 }

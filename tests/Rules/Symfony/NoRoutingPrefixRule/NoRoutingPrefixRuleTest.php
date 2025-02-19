@@ -26,6 +26,10 @@ final class NoRoutingPrefixRuleTest extends RuleTestCase
         ], []];
 
         yield [[
+            __DIR__ . '/Fixture/skip_bundle_import.php',
+        ], []];
+
+        yield [[
             __DIR__ . '/Fixture/routing_imports.php',
         ], [[NoRoutingPrefixRule::ERROR_MESSAGE, 8]]];
     }
