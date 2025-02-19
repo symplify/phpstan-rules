@@ -12,7 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
@@ -52,7 +52,7 @@ final class NoRoutingPrefixRule implements Rule
             return [];
         }
 
-        if (! $callerType->isInstanceOf(ClassName::SYMFONY_ROUTE_IMPORT_CONFIGURATOR)->yes()) {
+        if (! $callerType->isInstanceOf(SymfonyClass::ROUTE_IMPORT_CONFIGURATOR)->yes()) {
             return [];
         }
 

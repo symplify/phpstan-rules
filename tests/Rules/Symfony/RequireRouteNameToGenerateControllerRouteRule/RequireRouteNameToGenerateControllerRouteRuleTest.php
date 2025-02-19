@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\Rules\Symfony\RouteGenerateControllerClassRequireNameRule;
+namespace Symplify\PHPStanRules\Tests\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule;
 
 use Iterator;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\Rules\Symfony\RouteGenerateControllerClassRequireNameRule;
+use Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule;
 
-/**
- * @extends RuleTestCase<RouteGenerateControllerClassRequireNameRule>
- */
-final class RouteGenerateControllerClassRequireNameRuleTest extends RuleTestCase
+final class RequireRouteNameToGenerateControllerRouteRuleTest extends RuleTestCase
 {
     /**
      * @param mixed[] $expectedErrorMessagesWithLines
@@ -31,15 +28,15 @@ final class RouteGenerateControllerClassRequireNameRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/TwoRoutes.php', []];
 
         yield [__DIR__ . '/Fixture/CallingWrongController.php', [
-            [RouteGenerateControllerClassRequireNameRule::ERROR_MESSAGE, 14],
+            [RequireRouteNameToGenerateControllerRouteRule::ERROR_MESSAGE, 14],
         ]];
 
         yield [__DIR__ . '/Fixture/CallingControllerWithoutInvoke.php', [
-            [RouteGenerateControllerClassRequireNameRule::ERROR_MESSAGE, 14],
+            [RequireRouteNameToGenerateControllerRouteRule::ERROR_MESSAGE, 14],
         ]];
 
         yield [__DIR__ . '/Fixture/CallingControllerWithWrongString.php', [
-            [RouteGenerateControllerClassRequireNameRule::ERROR_MESSAGE, 14],
+            [RequireRouteNameToGenerateControllerRouteRule::ERROR_MESSAGE, 14],
         ]];
     }
 
@@ -47,6 +44,6 @@ final class RouteGenerateControllerClassRequireNameRuleTest extends RuleTestCase
     {
         $reflectionProvider = self::getContainer()->getByType(ReflectionProvider::class);
 
-        return new RouteGenerateControllerClassRequireNameRule($reflectionProvider);
+        return new RequireRouteNameToGenerateControllerRouteRule($reflectionProvider);
     }
 }

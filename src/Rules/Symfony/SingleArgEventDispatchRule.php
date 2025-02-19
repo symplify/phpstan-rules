@@ -11,7 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
@@ -52,7 +52,7 @@ final class SingleArgEventDispatchRule implements Rule
             return [];
         }
 
-        if (! $callerType->isInstanceOf(ClassName::EVENT_DISPATCHER_INTERFACE)->yes()) {
+        if (! $callerType->isInstanceOf(SymfonyClass::EVENT_DISPATCHER_INTERFACE)->yes()) {
             return [];
         }
 

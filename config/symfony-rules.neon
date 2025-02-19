@@ -11,6 +11,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
     - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
     - Symplify\PHPStanRules\Rules\Symfony\NoRouteTrailingSlashPathRule
+    - Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule
 
     # dependency injection
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule

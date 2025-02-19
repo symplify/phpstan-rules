@@ -17,8 +17,9 @@ use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\ObjectType;
 use ReflectionAttribute;
 use ReflectionMethod;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Route;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
+use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\Reflection\InvokeClassMethodResolver;
 
 /**
  * To pass a controller class in $this->router->generate(SomeController::class),
@@ -28,20 +29,15 @@ use Symfony\Component\Routing\Route;
  *
  * @implements Rule<MethodCall>
  *
- * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\RouteGenerateControllerClassRequireNameRule\RouteGenerateControllerClassRequireNameRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule\RequireRouteNameToGenerateControllerRouteRuleTest
  */
-final readonly class RouteGenerateControllerClassRequireNameRule implements Rule
+final readonly class RequireRouteNameToGenerateControllerRouteRule implements Rule
 {
     /**
      * @api
      * @var string
      */
     public const ERROR_MESSAGE = 'To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method';
-
-    /**
-     * @var string
-     */
-    private const IDENTIFIER = 'be5.routeGenerateControllerName';
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
@@ -70,11 +66,15 @@ final readonly class RouteGenerateControllerClassRequireNameRule implements Rule
             return [];
         }
 
-        $invokeClassMethodReflection = \Symplify\PHPStanRules\Reflection\InvokeClassMethodResolver::resolve($controllerClassReflection);
+        $invokeClassMethodReflection = InvokeClassMethodResolver::resolve($controllerClassReflection);
 
         // there must be __invoke() method
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(SymfonyRuleIdentifier::REQUIRE_ROUTE_NAME_TO_GENERATE_CONTROLLER_ROUTE)
+            ->build();
+
         if (! $invokeClassMethodReflection instanceof ReflectionMethod) {
-            return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->identifier(self::IDENTIFIER)->build()];
+            return [$identifierRuleError];
         }
 
         $routeAttributes = $this->findRouteAttributes($invokeClassMethodReflection);
@@ -82,7 +82,7 @@ final readonly class RouteGenerateControllerClassRequireNameRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->identifier(self::IDENTIFIER)->build()];
+        return [$identifierRuleError];
     }
 
     private function isRouterGenerateMethodCall(MethodCall $methodCall, Scope $scope): bool
@@ -104,7 +104,7 @@ final readonly class RouteGenerateControllerClassRequireNameRule implements Rule
             return false;
         }
 
-        return $callerType->isInstanceOf(UrlGeneratorInterface::class)->yes();
+        return $callerType->isInstanceOf(SymfonyClass::URL_GENERATOR)->yes();
     }
 
     private function matchControllerFirstArgClassReflection(MethodCall $methodCall, Scope $scope): ?ClassReflection
@@ -131,9 +131,8 @@ final readonly class RouteGenerateControllerClassRequireNameRule implements Rule
     private function findRouteAttributes(ReflectionMethod $reflectionMethod): array
     {
         return array_merge(
-            $reflectionMethod->getAttributes(\Symfony\Component\Routing\Attribute\Route::class),
-            $reflectionMethod->getAttributes(Route::class),
-            $reflectionMethod->getAttributes(\Symfony\Component\Routing\Annotation\Route::class)
+            $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ATTRIBUTE),
+            $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ANNOTATION)
         );
     }
 

@@ -6,7 +6,7 @@ namespace Symplify\PHPStanRules\NodeAnalyzer;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node\Stmt\ClassMethod;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 
 final class SymfonyRequiredMethodAnalyzer
 {
@@ -23,7 +23,7 @@ final class SymfonyRequiredMethodAnalyzer
 
         foreach ($classMethod->getAttrGroups() as $attributeGroup) {
             foreach ($attributeGroup->attrs as $attr) {
-                if ($attr->name->toString() === ClassName::REQUIRED_ATTRIBUTE) {
+                if ($attr->name->toString() === SymfonyClass::REQUIRED_ATTRIBUTE) {
                     return true;
                 }
             }
