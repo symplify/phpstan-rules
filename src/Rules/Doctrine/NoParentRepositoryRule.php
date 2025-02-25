@@ -10,7 +10,7 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
 
 /**
@@ -43,12 +43,12 @@ final class NoParentRepositoryRule implements Rule
         }
 
         $parentClass = $node->extends->toString();
-        if ($parentClass !== ClassName::ENTITY_REPOSITORY_CLASS) {
+        if ($parentClass !== DoctrineClass::ENTITY_REPOSITORY) {
             return [];
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(DoctrineRuleIdentifier::DOCTRINE_NO_PARENT_REPOSITORY)
+            ->identifier(DoctrineRuleIdentifier::NO_PARENT_REPOSITORY)
             ->build();
 
         return [$identifierRuleError];

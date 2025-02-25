@@ -9,11 +9,6 @@ final class ClassName
     /**
      * @var string
      */
-    public const PHPUNIT_TEST_CASE = 'PHPUnit\Framework\TestCase';
-
-    /**
-     * @var string
-     */
     public const SNIFF = 'PHP_CodeSniffer\Sniffs\Sniff';
 
     /**
@@ -35,16 +30,6 @@ final class ClassName
      * @var string
      */
     public const RECTOR_ATTRIBUTE_KEY = 'Rector\NodeTypeResolver\Node\AttributeKey';
-
-    /**
-     * @var string
-     */
-    public const DOCTRINE_FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
-
-    /**
-     * @var string
-     */
-    public const ENTITY_REPOSITORY_CLASS = 'Doctrine\ORM\EntityRepository';
 
     /**
      * @var string
