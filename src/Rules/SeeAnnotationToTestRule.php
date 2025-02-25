@@ -15,8 +15,8 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\TestClassName;
 use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
 
@@ -113,7 +113,7 @@ final readonly class SeeAnnotationToTestRule implements Rule
                 continue;
             }
 
-            if (is_a($seeTag->value->value, ClassName::PHPUNIT_TEST_CASE, true)) {
+            if (is_a($seeTag->value->value, TestClassName::PHPUNIT_TEST_CASE, true)) {
                 return true;
             }
         }

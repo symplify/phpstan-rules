@@ -11,7 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
 
 /**
@@ -48,7 +48,7 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
         }
 
         // we safe as both select() + from() calls are made on the repository
-        if ($callerType->isInstanceOf(ClassName::ENTITY_REPOSITORY_CLASS)->yes()) {
+        if ($callerType->isInstanceOf(DoctrineClass::ENTITY_REPOSITORY)->yes()) {
             return [];
         }
 

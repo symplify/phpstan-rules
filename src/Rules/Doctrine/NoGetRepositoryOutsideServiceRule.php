@@ -44,7 +44,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
 
         if (! $scope->isInClass()) {
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(DoctrineRuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+                ->identifier(DoctrineRuleIdentifier::NO_GET_REPOSITORY_OUTSIDE_SERVICE)
                 ->build();
 
             return [$ruleError];
@@ -57,7 +57,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
         }
 
         $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(DoctrineRuleIdentifier::DOCTRINE_NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+            ->identifier(DoctrineRuleIdentifier::NO_GET_REPOSITORY_OUTSIDE_SERVICE)
             ->build();
 
         return [$ruleError];

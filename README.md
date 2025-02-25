@@ -1221,6 +1221,71 @@ final class SomeRepository
 
 <br>
 
+### NoGetRepositoryOnServiceRepositoryEntityRule
+
+Instead of calling "->getRepository(...::class)" service locator, inject service repository via constructor and use it directly
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule
+```
+
+<br>
+
+```php
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=SomeRepository::class)
+ */
+class SomeEntity
+{
+}
+```
+
+<br>
+
+```php
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+final class SomeEntityRepository extends ServiceEntityRepository
+{
+}
+```
+
+<br>
+
+```php
+use Doctrine\ORM\EntityManagerInterface;
+
+final class SomeService
+{
+    public function run(EntityManagerInterface $entityManager)
+    {
+        return $this->entityManager->getRepository(SomeEntity::class);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Doctrine\ORM\EntityManagerInterface;
+
+final class SomeService
+{
+    public function __construct(private SomeEntityRepository $someEntityRepository)
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
 ### NoRepositoryCallInDataFixtureRule
 
 Repository should not be called in data fixtures, as it can lead to tight coupling

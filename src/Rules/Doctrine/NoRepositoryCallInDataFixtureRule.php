@@ -11,7 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoRepositoryCallInDataFixtureRule\NoRepositoryCallInDataFixtureRuleTest;
 
@@ -56,7 +56,7 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(DoctrineRuleIdentifier::DOCTRINE_NO_REPOSITORY_CALL_IN_DATA_FIXTURES)
+            ->identifier(DoctrineRuleIdentifier::NO_REPOSITORY_CALL_IN_DATA_FIXTURES)
             ->build();
 
         return [$identifierRuleError];
@@ -69,6 +69,6 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        return $classReflection->isSubclassOf(ClassName::DOCTRINE_FIXTURE_INTERFACE);
+        return $classReflection->isSubclassOf(DoctrineClass::FIXTURE_INTERFACE);
     }
 }
