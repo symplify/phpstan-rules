@@ -51,6 +51,7 @@ final readonly class NoMockOnlyTestRule implements Rule
         }
 
         $hasExclusivelyMockedProperties = true;
+        $hasSomeProperties = false;
 
         foreach ($classLike->getProperties() as $property) {
             if (! $property->type instanceof Name) {
@@ -61,10 +62,12 @@ final readonly class NoMockOnlyTestRule implements Rule
 
             if ($propertyClassName !== ClassName::MOCK_OBJECT_CLASS) {
                 $hasExclusivelyMockedProperties = false;
+            } else {
+                $hasSomeProperties = true;
             }
         }
 
-        if ($hasExclusivelyMockedProperties === false) {
+        if ($hasExclusivelyMockedProperties === false || $hasSomeProperties === false) {
             return [];
         }
 

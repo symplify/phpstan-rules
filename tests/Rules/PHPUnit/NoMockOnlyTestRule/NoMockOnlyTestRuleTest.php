@@ -27,6 +27,7 @@ final class NoMockOnlyTestRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/SkipTestWithClass.php', []];
         yield [__DIR__ . '/Fixture/SkipNoProperty.php', []];
+        yield [__DIR__ . '/Fixture/SkipSoleProperty.php', []];
     }
 
     protected function getRule(): Rule
