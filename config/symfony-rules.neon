@@ -14,8 +14,9 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule
 
     # dependency injection
-    - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoGetInCommandRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoFindTaggedServiceIdsCallRule
 
     # magic required inject

@@ -40,8 +40,8 @@ final class RequireInvokableControllerRule implements Rule
     {
         $classReflection = $node->getClassReflection();
         if (
-            ! $classReflection->isSubclassOf(SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER) &&
-            ! $classReflection->isSubclassOf(SymfonyClass::SYMFONY_CONTROLLER)
+            ! $classReflection->isSubclassOf(SymfonyClass::ABSTRACT_CONTROLLER) &&
+            ! $classReflection->isSubclassOf(SymfonyClass::CONTROLLER)
         ) {
             return [];
         }

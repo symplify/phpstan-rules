@@ -11,17 +11,17 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\MethodCallNameAnalyzer;
-use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
+use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyCommandAnalyzer;
 
 /**
  * @implements Rule<MethodCall>
  */
-final class NoGetInControllerRule implements Rule
+final class NoGetInCommandRule implements Rule
 {
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Do not use $this->get(Type::class) method in controller to get services. Use __construct(Type $type) instead';
+    public const ERROR_MESSAGE = 'Do not use $this->get(Type::class) method in commands to get services. Use __construct(Type $type) instead';
 
     public function getNodeType(): string
     {
@@ -37,12 +37,12 @@ final class NoGetInControllerRule implements Rule
             return [];
         }
 
-        if (! SymfonyControllerAnalyzer::isControllerScope($scope)) {
+        if (! SymfonyCommandAnalyzer::isCommandScope($scope)) {
             return [];
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::NO_GET_IN_CONTROLLER)
+            ->identifier(SymfonyRuleIdentifier::NO_GET_IN_COMMAND)
             ->build();
 
         return [$identifierRuleError];

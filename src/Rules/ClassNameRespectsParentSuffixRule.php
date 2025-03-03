@@ -34,9 +34,9 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      * @var string[]
      */
     private const DEFAULT_PARENT_CLASSES = [
-        'Symfony\Component\Console\Command\Command',
+        SymfonyClass::COMMAND,
         SymfonyClass::EVENT_SUBSCRIBER_INTERFACE,
-        SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER,
+        SymfonyClass::ABSTRACT_CONTROLLER,
         ClassName::SNIFF,
         TestClassName::PHPUNIT_TEST_CASE,
         Exception::class,

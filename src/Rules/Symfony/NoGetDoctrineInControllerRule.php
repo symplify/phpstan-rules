@@ -41,12 +41,10 @@ final class NoGetDoctrineInControllerRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->file($scope->getFile())
-            ->line($node->getStartLine())
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(SymfonyRuleIdentifier::NO_GET_DOCTRINE_IN_CONTROLLER)
             ->build();
 
-        return [$ruleError];
+        return [$identifierRuleError];
     }
 }

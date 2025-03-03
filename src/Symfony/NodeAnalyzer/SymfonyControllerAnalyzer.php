@@ -17,8 +17,8 @@ final class SymfonyControllerAnalyzer
      * @var string[]
      */
     private const CONTROLLER_TYPES = [
-        SymfonyClass::SYMFONY_CONTROLLER,
-        SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER,
+        SymfonyClass::CONTROLLER,
+        SymfonyClass::ABSTRACT_CONTROLLER,
     ];
 
     public static function isControllerScope(Scope $scope): bool
