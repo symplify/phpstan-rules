@@ -42,7 +42,6 @@ final class NoRequiredOutsideClassRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->file($scope->getFile())
                 ->identifier(SymfonyRuleIdentifier::SYMFONY_NO_REQUIRED_OUTSIDE_CLASS)
                 ->line($classMethod->getLine())
                 ->build();

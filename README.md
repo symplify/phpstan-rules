@@ -1379,6 +1379,19 @@ rules:
 <br>
 
 
+### NoGetInCommandRule
+
+Prevents using `$this->get(...)` in commands, to promote dependency injection.
+
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoGetInCommandRule
+```
+
+<br>
+
+
 ### NoAbstractControllerConstructorRule
 
 Abstract controller should not have constructor, as it can lead to tight coupling. Use @required annotation instead

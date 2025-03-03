@@ -8,6 +8,8 @@ final class SymfonyRuleIdentifier
 {
     public const NO_GET_IN_CONTROLLER = 'symfony.noGetInController';
 
+    public const NO_GET_IN_COMMAND = 'symfony.noGetInCommand';
+
     public const NO_GET_DOCTRINE_IN_CONTROLLER = 'symfony.noGetDoctrineInController';
 
     public const SINGLE_ARG_EVENT_DISPATCH = 'symfony.singleArgEventDispatch';
