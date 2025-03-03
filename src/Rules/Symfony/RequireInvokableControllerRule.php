@@ -38,11 +38,7 @@ final class RequireInvokableControllerRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $classReflection = $node->getClassReflection();
-        if (
-            ! $classReflection->isSubclassOf(SymfonyClass::ABSTRACT_CONTROLLER) &&
-            ! $classReflection->isSubclassOf(SymfonyClass::CONTROLLER)
-        ) {
+        if (! SymfonyControllerAnalyzer::isControllerScope($scope)) {
             return [];
         }
 
