@@ -11,5 +11,18 @@ final class MethodName
      */
     public const INVOKE = '__invoke';
 
+    /**
+     * @var string
+     */
     public const CONSTRUCTOR = '__construct';
+
+    /**
+     * @var string
+     */
+    public const SET_UP = 'setUp';
+
+    /**
+     * @var string
+     */
+    public const TEAR_DOWN = 'tearDown';
 }

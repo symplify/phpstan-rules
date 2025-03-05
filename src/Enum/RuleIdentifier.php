@@ -69,4 +69,6 @@ final class RuleIdentifier
     public const STRING_FILE_ABSOLUTE_PATH_EXISTS = 'symplify.stringFileAbsolutePathExists';
 
     public const NO_JUST_PROPERTY_ASSIGN = 'symplify.noJustPropertyAssign';
+
+    public const NO_PROTECTED_CLASS_STMT = 'symplify.noProtectedClassStmt';
 }
