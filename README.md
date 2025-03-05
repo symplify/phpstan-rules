@@ -245,6 +245,17 @@ abstract class AbstractClass
 
 <br>
 
+### NoProtectedClassStmtRule
+
+Avoid protected class stmts as they yield unexpected behavior. Use clear interface contract instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Explicit\NoProtectedClassStmtRule
+```
+
+<br>
+
 ### ForbiddenArrayMethodCallRule
 
 Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code
