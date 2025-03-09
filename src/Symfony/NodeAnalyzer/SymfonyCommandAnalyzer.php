@@ -16,6 +16,6 @@ final class SymfonyCommandAnalyzer
         }
 
         $classReflection = $scope->getClassReflection();
-        return $classReflection->isSubclassOf(SymfonyClass::COMMAND);
+        return $classReflection->is(SymfonyClass::COMMAND);
     }
 }

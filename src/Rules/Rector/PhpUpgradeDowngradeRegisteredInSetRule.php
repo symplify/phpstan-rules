@@ -110,12 +110,12 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return null;
         }
 
-        if (! $classReflection->isSubclassOf(ClassName::RECTOR)) {
+        if (! $classReflection->is(ClassName::RECTOR)) {
             return null;
         }
 
         // configurable Rector can be registered optionally
-        if ($classReflection->isSubclassOf(ClassName::CONFIGURABLE_RECTOR)) {
+        if ($classReflection->is(ClassName::CONFIGURABLE_RECTOR)) {
             return null;
         }
 

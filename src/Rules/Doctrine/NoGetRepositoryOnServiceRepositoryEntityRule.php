@@ -90,11 +90,11 @@ final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rul
             return true;
         }
 
-        if ($classReflection->isSubclassOf(TestClassName::PHPUNIT_TEST_CASE)) {
+        if ($classReflection->is(TestClassName::PHPUNIT_TEST_CASE)) {
             return true;
         }
 
-        return $classReflection->isSubclassOf(TestClassName::BEHAT_CONTEXT);
+        return $classReflection->is(TestClassName::BEHAT_CONTEXT);
     }
 
     private function resolveRepositoryClassFromGetRepositoryEntity(MethodCall $methodCall, Scope $scope): ?string
@@ -130,10 +130,10 @@ final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rul
         }
 
         $repositoryClassReflection = $this->reflectionProvider->getClass($repositoryClassName);
-        if ($repositoryClassReflection->isSubclassOf(DoctrineClass::ODM_SERVICE_REPOSITORY)) {
+        if ($repositoryClassReflection->is(DoctrineClass::ODM_SERVICE_REPOSITORY)) {
             return true;
         }
 
-        return $repositoryClassReflection->isSubclassOf(DoctrineClass::ORM_SERVICE_REPOSITORY);
+        return $repositoryClassReflection->is(DoctrineClass::ORM_SERVICE_REPOSITORY);
     }
 }

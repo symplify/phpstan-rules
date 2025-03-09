@@ -29,7 +29,7 @@ final class SymfonyControllerAnalyzer
 
         $classReflection = $scope->getClassReflection();
         foreach (self::CONTROLLER_TYPES as $controllerType) {
-            if ($classReflection->isSubclassOf($controllerType)) {
+            if ($classReflection->is($controllerType)) {
                 return true;
             }
         }

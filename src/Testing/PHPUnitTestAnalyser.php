@@ -22,7 +22,7 @@ final class PHPUnitTestAnalyser
             return false;
         }
 
-        return $classReflection->isSubclassOf(self::TEST_CASE_CLASS);
+        return $classReflection->is(self::TEST_CASE_CLASS);
     }
 
     /**

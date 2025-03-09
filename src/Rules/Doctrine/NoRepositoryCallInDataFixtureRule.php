@@ -69,6 +69,6 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        return $classReflection->isSubclassOf(DoctrineClass::FIXTURE_INTERFACE);
+        return $classReflection->is(DoctrineClass::FIXTURE_INTERFACE);
     }
 }
