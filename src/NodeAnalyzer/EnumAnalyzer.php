@@ -34,7 +34,7 @@ final readonly class EnumAnalyzer
             return true;
         }
 
-        if ($classReflection->isSubclassOf('MyCLabs\Enum\Enum')) {
+        if ($classReflection->is('MyCLabs\Enum\Enum')) {
             return true;
         }
 

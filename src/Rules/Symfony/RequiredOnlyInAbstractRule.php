@@ -93,7 +93,7 @@ final class RequiredOnlyInAbstractRule implements Rule
         }
 
         foreach (self::SKIPPED_PARENT_TYPES as $skippedParentType) {
-            if ($classReflection->isSubclassOf($skippedParentType)) {
+            if ($classReflection->is($skippedParentType)) {
                 return true;
             }
         }

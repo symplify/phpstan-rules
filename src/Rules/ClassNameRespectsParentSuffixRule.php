@@ -93,7 +93,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
     private function processClassNameAndShort(ClassReflection $classReflection): array
     {
         foreach ($this->parentClasses as $parentClass) {
-            if (! $classReflection->isSubclassOf($parentClass)) {
+            if (! $classReflection->is($parentClass)) {
                 continue;
             }
 

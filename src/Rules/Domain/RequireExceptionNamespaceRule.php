@@ -37,7 +37,7 @@ final class RequireExceptionNamespaceRule implements Rule
             return [];
         }
 
-        if (! $classReflection->isSubclassOf('Exception')) {
+        if (! $classReflection->is('Exception')) {
             return [];
         }
 
