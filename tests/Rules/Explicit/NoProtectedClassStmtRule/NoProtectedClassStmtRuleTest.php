@@ -24,6 +24,7 @@ final class NoProtectedClassStmtRuleTest extends RuleTestCase
             [NoProtectedClassStmtRule::ERROR_MESSAGE, 7],
         ]];
 
+        yield [__DIR__ . '/Fixture/SkipPHPUnitTetsCase.php', []];
         yield [__DIR__ . '/Fixture/SkipParentRequired.php', []];
         yield [__DIR__ . '/Fixture/SkipAbstractWithProtected.php', []];
     }
