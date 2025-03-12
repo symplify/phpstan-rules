@@ -1,0 +1,6 @@
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\Convention\ParamNameToTypeConventionRule
+        arguments:
+            paramNamesToTypes:
+                userId: int
