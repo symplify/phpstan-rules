@@ -71,4 +71,6 @@ final class RuleIdentifier
     public const NO_JUST_PROPERTY_ASSIGN = 'symplify.noJustPropertyAssign';
 
     public const NO_PROTECTED_CLASS_STMT = 'symplify.noProtectedClassStmt';
+
+    public const CONVENTION_PARAM_NAME_TO_TYPE = 'symplify.conventionParamNameToType';
 }

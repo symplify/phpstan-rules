@@ -8,15 +8,15 @@
         "webmozart/assert": "^1.11",
         "phpstan/phpstan": "^2.1.8",
         "nette/utils": "^3.2|^4.0",
-        "phpstan/phpdoc-parser": "^2.0"
+        "phpstan/phpdoc-parser": "^2.1"
     },
     "require-dev": {
-        "nikic/php-parser": "^5.3",
+        "nikic/php-parser": "^5.4",
         "phpunit/phpunit": "^11.5",
         "symfony/framework-bundle": "6.1.*",
-        "symplify/easy-coding-standard": "^12.5",
+        "phpecs/phpecs": "^2.0",
         "tomasvotruba/class-leak": "^2.0",
-        "rector/rector": "^2.0.6",
+        "rector/rector": "^2.0.10",
         "phpstan/extension-installer": "^1.4",
         "symplify/phpstan-extensions": "^12.0",
         "tomasvotruba/unused-public": "^2.0",

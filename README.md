@@ -53,6 +53,40 @@ parameters:
 
 <br>
 
+### ParamNameToTypeConventionRule
+
+By convention, we can define parameter type by its name. If we know the "userId" is always an `int`, PHPStan can warn us about it and let us know to fill the type.
+
+```yaml
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\Convention\ParamNameToTypeConventionRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            paramNamesToTypes:
+                userId: int
+```
+
+```php
+function run($userId)
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+function run(int $userId)
+{
+}
+```
+
+:+1:
+
+<br>
+
 ### CheckRequiredInterfaceInContractNamespaceRule
 
 Interface must be located in "Contract" or "Contracts" namespace
