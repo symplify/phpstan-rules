@@ -76,7 +76,10 @@ final class NoProtectedClassStmtRule implements Rule
         return $ruleErrors;
     }
 
-    private function shouldSkipClassMethod(ClassMethod|ClassConst|Property $classStmt, Scope $scope): bool
+    /**
+     * @param \PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\ClassConst|\PhpParser\Node\Stmt\Property $classStmt
+     */
+    private function shouldSkipClassMethod($classStmt, Scope $scope): bool
     {
         if (! $classStmt instanceof ClassMethod) {
             return false;

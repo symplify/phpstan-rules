@@ -9,8 +9,12 @@ use Nette\Utils\Strings;
 use PHPStan\Reflection\ReflectionProvider;
 use Rector\Exception\ShouldNotHappenException;
 
-final readonly class RepositoryClassResolver
+final class RepositoryClassResolver
 {
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
     /**
      * @var string
      */
@@ -21,9 +25,9 @@ final readonly class RepositoryClassResolver
      */
     private const USE_REPOSITORY_REGEX = '#use (?<repositoryClass>.*?Repository);#';
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function resolveFromEntityClass(string $entityClassName): ?string
