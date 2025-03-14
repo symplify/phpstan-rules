@@ -2,7 +2,14 @@
 
 [![Downloads](https://img.shields.io/packagist/dt/symplify/phpstan-rules.svg?style=flat-square)](https://packagist.org/packages/symplify/phpstan-rules/stats)
 
-Set of 35 custom PHPStan rules that check architecture, typos, class namespace locations, accidental visibility override and more. Useful for any type of PHP project, from legacy to modern stack.
+Set of 65+ PHPStan fun and practical rules that check:
+
+* clean architecture, logical errors,
+* naming, class namespace locations
+* accidental visibility override,
+* and Symfony, Doctrine or PHPUnit ~~best~~ proven practices.
+
+Useful for any type of PHP project, from legacy to modern stack.
 
 <br>
 
