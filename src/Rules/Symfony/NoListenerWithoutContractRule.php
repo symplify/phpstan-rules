@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
@@ -25,7 +26,7 @@ final class NoListenerWithoutContractRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract and PHP instead';
+    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and PHP instead ';
 
     /**
      * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.3/reference/events.html
@@ -78,6 +79,10 @@ final class NoListenerWithoutContractRule implements Rule
             return [];
         }
 
+        if ($this->isAttributeListener($classLike)) {
+            return [];
+        }
+
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(SymfonyRuleIdentifier::NO_LISTENER_WITHOUT_CONTRACT)
             ->build();
@@ -91,6 +96,19 @@ final class NoListenerWithoutContractRule implements Rule
         foreach ($class->getMethods() as $classMethod) {
             if (in_array($classMethod->name->toString(), self::DOCTRINE_EVENT_NAMES)) {
                 return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isAttributeListener(Class_ $class): bool
+    {
+        foreach ($class->attrGroups as $attrGroup) {
+            foreach ($attrGroup->attrs as $attr) {
+                if ($attr->name->toString() === SymfonyClass::EVENT_LISTENER_ATTRIBUTE) {
+                    return true;
+                }
             }
         }
 
