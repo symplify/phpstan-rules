@@ -25,6 +25,7 @@ final class RequireExceptionNamespaceRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/MisslocatedException.php', [[RequireExceptionNamespaceRule::ERROR_MESSAGE, 9]]];
         yield [__DIR__ . '/Fixture/Exception/SkipCorrectException.php', []];
+        yield [__DIR__ . '/Fixture/AnonymousException.php', []];
     }
 
     /**
