@@ -1667,7 +1667,7 @@ final class SomeClass
 
 ### NoListenerWithoutContractRule
 
-There should be no listeners modified in config. Use EventSubscriberInterface contract and PHP instead
+There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and PHP instead
 
 ```yaml
 rules:
@@ -1700,6 +1700,22 @@ class SomeListener implements EventSubscriberInterface
     }
 
     public function onEvent()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+```php
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+
+#[AsEventListener]
+class SomeListener
+{
+    public function __invoke()
     {
     }
 }
