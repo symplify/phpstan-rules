@@ -25,4 +25,9 @@ final class DoctrineClass
      * @var string
      */
     public const ENTITY_REPOSITORY = 'Doctrine\ORM\EntityRepository';
+
+    /**
+     * @var string
+     */
+    public const CONNECTION = 'Doctrine\DBAL\Connection';
 }
