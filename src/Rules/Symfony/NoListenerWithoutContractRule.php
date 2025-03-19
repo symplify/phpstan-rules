@@ -26,7 +26,7 @@ final class NoListenerWithoutContractRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and PHP instead ';
+    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
 
     /**
      * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.3/reference/events.html
@@ -79,7 +79,11 @@ final class NoListenerWithoutContractRule implements Rule
             return [];
         }
 
-        if ($this->isAttributeListener($classLike)) {
+        if ($this->hasAsListenerAttribute($classLike)) {
+            return [];
+        }
+
+        if ($this->isFormEventsListener($classLike)) {
             return [];
         }
 
@@ -102,12 +106,35 @@ final class NoListenerWithoutContractRule implements Rule
         return false;
     }
 
-    private function isAttributeListener(Class_ $class): bool
+    private function hasAsListenerAttribute(Class_ $class): bool
     {
         foreach ($class->attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attr) {
                 if ($attr->name->toString() === SymfonyClass::EVENT_LISTENER_ATTRIBUTE) {
                     return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Form listeners are often registered manually in code and don't need any specific hooks
+     */
+    private function isFormEventsListener(Class_ $class): bool
+    {
+        foreach ($class->getMethods() as $classMethod) {
+            if (! $classMethod->isPublic()) {
+                continue;
+            }
+
+            foreach ($classMethod->params as $param) {
+                if ($param->type instanceof Node\Name) {
+
+                    if (str_starts_with($param->type->toString(), 'Symfony\Component\Form\Event\\')) {
+                        return true;
+                    }
                 }
             }
         }
