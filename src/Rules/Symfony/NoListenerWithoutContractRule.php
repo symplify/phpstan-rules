@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
-use PhpParser\Node\Name;
 use PhpParser\Node;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -151,6 +151,6 @@ final class NoListenerWithoutContractRule implements Rule
             return false;
         }
 
-        return $class->extends->toString() === SymfonyClass::SECURITY_LISTENER;
+        return in_array($class->extends->toString(), [SymfonyClass::SECURITY_LISTENER, SymfonyClass::FORM_SECURITY_LISTENER], true);
     }
 }

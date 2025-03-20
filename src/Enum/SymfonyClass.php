@@ -8,6 +8,8 @@ final class SymfonyClass
 {
     public const SECURITY_LISTENER = 'Symfony\Component\Security\Http\Firewall\AbstractListener';
 
+    public const FORM_SECURITY_LISTENER = 'Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener';
+
     public const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Attribute\Route';
 
     /**
