@@ -21,6 +21,7 @@ final class NoListenerWithoutContractRuleTest extends RuleTestCase
 
     public static function provideData(): Iterator
     {
+        yield [[__DIR__ . '/Fixture/SkipSecurityListener.php'], []];
         yield [[__DIR__ . '/Fixture/SkipFormListener.php'], []];
 
         yield [[__DIR__ . '/Fixture/SomeContractedListener.php'], []];

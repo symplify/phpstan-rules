@@ -79,6 +79,10 @@ final class NoListenerWithoutContractRule implements Rule
             return [];
         }
 
+        if ($this->isSecurityListener($classLike)) {
+            return [];
+        }
+
         if ($this->hasAsListenerAttribute($classLike)) {
             return [];
         }
@@ -140,5 +144,14 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         return false;
+    }
+
+    private function isSecurityListener(Class_ $class): bool
+    {
+        if (! $class->extends instanceof Node\Name) {
+            return false;
+        }
+
+        return $class->extends->toString() === SymfonyClass::SECURITY_LISTENER;
     }
 }
