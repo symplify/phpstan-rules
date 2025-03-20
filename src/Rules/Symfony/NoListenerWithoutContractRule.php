@@ -63,7 +63,7 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        if (! str_ends_with($classReflection->getName(), 'Listener')) {
+        if (substr_compare($classReflection->getName(), 'Listener', -strlen('Listener')) !== 0) {
             return [];
         }
 
@@ -135,7 +135,7 @@ final class NoListenerWithoutContractRule implements Rule
             }
 
             foreach ($classMethod->params as $param) {
-                if ($param->type instanceof Name && str_starts_with($param->type->toString(), 'Symfony\Component\Form\Event\\')) {
+                if ($param->type instanceof Name && strncmp($param->type->toString(), 'Symfony\Component\Form\Event\\', strlen('Symfony\Component\Form\Event\\')) === 0) {
 
                     return true;
                 }
