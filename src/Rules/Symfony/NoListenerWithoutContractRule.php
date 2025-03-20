@@ -46,6 +46,8 @@ final class NoListenerWithoutContractRule implements Rule
         'onFlush',
         'postFlush',
         'onClear',
+        // ODM
+        'documentNotFound',
     ];
 
     public function getNodeType(): string
