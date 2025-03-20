@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use PhpParser\Node\Name;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
@@ -134,11 +135,9 @@ final class NoListenerWithoutContractRule implements Rule
             }
 
             foreach ($classMethod->params as $param) {
-                if ($param->type instanceof Node\Name) {
+                if ($param->type instanceof Name && str_starts_with($param->type->toString(), 'Symfony\Component\Form\Event\\')) {
 
-                    if (str_starts_with($param->type->toString(), 'Symfony\Component\Form\Event\\')) {
-                        return true;
-                    }
+                    return true;
                 }
             }
         }
@@ -148,7 +147,7 @@ final class NoListenerWithoutContractRule implements Rule
 
     private function isSecurityListener(Class_ $class): bool
     {
-        if (! $class->extends instanceof Node\Name) {
+        if (! $class->extends instanceof Name) {
             return false;
         }
 
