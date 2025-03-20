@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Rules\Symfony;
 use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
@@ -75,6 +76,11 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         if ($classLike->implements !== []) {
+            return [];
+        }
+
+        // is invokable listeners?
+        if ($classLike->getMethod('__invoke') instanceof ClassMethod) {
             return [];
         }
 
