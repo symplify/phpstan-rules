@@ -60,7 +60,7 @@ final class NoAssertFuncCallInTestsRule implements Rule
     private function isTestFile(Scope $scope): bool
     {
         foreach (self::TEST_FILE_SUFFIXES as $testFileSuffix) {
-            if (str_ends_with($scope->getFile(), $testFileSuffix)) {
+            if (substr_compare($scope->getFile(), $testFileSuffix, -strlen($testFileSuffix)) === 0) {
                 return true;
             }
         }
