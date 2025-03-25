@@ -1725,6 +1725,50 @@ class SomeListener
 
 <br>
 
+### NoDoctrineListenerWithoutContractRule
+
+There should be no Doctrine listeners modified in config. Implement  "Document\Event\EventSubscriber" to provide events in the class itself
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoDoctrineListenerWithoutContractRule
+```
+
+```php
+class SomeListener
+{
+    public function onFlush()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ODM\MongoDB\Events;
+
+class SomeListener implements EventSubscriber
+{
+    public function onFlush()
+    {
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            Events::onFlush
+        ];
+    }
+}
+```
+
+:+1:
+
+
 ### NoStringInGetSubscribedEventsRule
 
 Symfony getSubscribedEvents() method must contain only event class references, no strings
