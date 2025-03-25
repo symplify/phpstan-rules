@@ -12,6 +12,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Doctrine\DoctrineEventSubscriberAnalyzer;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
@@ -29,27 +30,6 @@ final class NoListenerWithoutContractRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
-
-    /**
-     * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.3/reference/events.html
-     */
-    private const DOCTRINE_EVENT_NAMES = [
-        'preRemove',
-        'postRemove',
-        'prePersist',
-        'postPersist',
-        'preUpdate',
-        'postUpdate',
-        'postLoad',
-        'loadClassMetadata',
-        'onClassMetadataNotFound',
-        'preFlush',
-        'onFlush',
-        'postFlush',
-        'onClear',
-        // ODM
-        'documentNotFound',
-    ];
 
     public function getNodeType(): string
     {
@@ -84,7 +64,7 @@ final class NoListenerWithoutContractRule implements Rule
             return [];
         }
 
-        if ($this->isDoctrineListener($classLike)) {
+        if (DoctrineEventSubscriberAnalyzer::detect($classLike)) {
             return [];
         }
 
@@ -105,18 +85,6 @@ final class NoListenerWithoutContractRule implements Rule
             ->build();
 
         return [$identifierRuleError];
-    }
-
-    private function isDoctrineListener(Class_ $class): bool
-    {
-        // skip doctrine, as this is handling symfony only
-        foreach ($class->getMethods() as $classMethod) {
-            if (in_array($classMethod->name->toString(), self::DOCTRINE_EVENT_NAMES)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private function hasAsListenerAttribute(Class_ $class): bool
