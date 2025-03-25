@@ -1,8 +1,9 @@
 rules:
     - Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule
 
+    # mocking
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule
-
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
