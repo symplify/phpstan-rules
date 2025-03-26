@@ -108,6 +108,6 @@ final class RequiredOnlyInAbstractRule implements Rule
             return false;
         }
 
-        return str_contains($docComment->getText(), 'circular');
+        return strpos($docComment->getText(), 'circular') !== false;
     }
 }

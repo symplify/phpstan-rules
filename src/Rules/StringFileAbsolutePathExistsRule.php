@@ -61,7 +61,7 @@ final class StringFileAbsolutePathExistsRule implements Rule
         }
 
         // probably glob or wildcard, cannot be checked
-        if (str_contains($stringValue, '*')) {
+        if (strpos($stringValue, '*') !== false) {
             return [];
         }
 
@@ -88,7 +88,7 @@ final class StringFileAbsolutePathExistsRule implements Rule
     private function isDesiredFileSuffix(string $stringValue): bool
     {
         foreach (self::SUFFIXES_TO_CHECK as $suffixToCheck) {
-            if (str_ends_with($stringValue, $suffixToCheck)) {
+            if (substr_compare($stringValue, $suffixToCheck, -strlen($suffixToCheck)) === 0) {
                 return true;
             }
         }

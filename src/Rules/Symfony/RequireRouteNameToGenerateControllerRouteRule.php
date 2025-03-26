@@ -31,17 +31,21 @@ use Symplify\PHPStanRules\Reflection\InvokeClassMethodResolver;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule\RequireRouteNameToGenerateControllerRouteRuleTest
  */
-final readonly class RequireRouteNameToGenerateControllerRouteRule implements Rule
+final class RequireRouteNameToGenerateControllerRouteRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
     /**
      * @api
      * @var string
      */
     public const ERROR_MESSAGE = 'To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method';
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -131,8 +135,8 @@ final readonly class RequireRouteNameToGenerateControllerRouteRule implements Ru
     private function findRouteAttributes(ReflectionMethod $reflectionMethod): array
     {
         return array_merge(
-            $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ATTRIBUTE),
-            $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ANNOTATION)
+            method_exists($reflectionMethod, 'getAttributes') ? $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ATTRIBUTE) : [],
+            method_exists($reflectionMethod, 'getAttributes') ? $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ANNOTATION) : []
         );
     }
 

@@ -24,8 +24,13 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  *
  * @implements Rule<Node>
  */
-final readonly class PreferredClassRule implements Rule
+final class PreferredClassRule implements Rule
 {
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private array $oldToPreferredClasses;
     /**
      * @var string
      */
@@ -34,9 +39,9 @@ final readonly class PreferredClassRule implements Rule
     /**
      * @param string[] $oldToPreferredClasses
      */
-    public function __construct(
-        private array $oldToPreferredClasses
-    ) {
+    public function __construct(array $oldToPreferredClasses)
+    {
+        $this->oldToPreferredClasses = $oldToPreferredClasses;
     }
 
     public function processNode(Node $node, Scope $scope): array
@@ -135,8 +140,9 @@ final readonly class PreferredClassRule implements Rule
 
     /**
      * @return list<IdentifierRuleError>
+     * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\Instanceof_ $node
      */
-    private function processExprWithClass(StaticCall|Instanceof_ $node): array
+    private function processExprWithClass($node): array
     {
         if ($node->class instanceof Expr) {
             return [];
