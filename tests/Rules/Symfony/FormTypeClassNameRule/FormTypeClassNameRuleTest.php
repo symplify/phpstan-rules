@@ -8,7 +8,9 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\Form\AbstractType;
 use Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule;
+use Symplify\PHPStanRules\Tests\Rules\Symfony\FormTypeClassNameRule\Fixture\SomeType;
 
 final class FormTypeClassNameRuleTest extends RuleTestCase
 {
@@ -27,7 +29,7 @@ final class FormTypeClassNameRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/SomeType.php', [
             [
-                'Class extends "Symfony\Component\Form\AbstractType" must have "FormType" suffix to make form explicit, "Symplify\PHPStanRules\Tests\Rules\Symfony\FormTypeClassNameRule\Fixture\SomeType" given',
+                sprintf(FormTypeClassNameRule::ERROR_MESSAGE, AbstractType::class, SomeType::class),
                 9,
             ],
         ]];

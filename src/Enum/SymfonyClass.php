@@ -40,4 +40,6 @@ final class SymfonyClass
     public const COMMAND = 'Symfony\Component\Console\Command\Command';
 
     public const VALIDATOR_TEST_CASE = 'Symfony\Component\Validator\Test\ConstraintValidatorTestCase';
+
+    public const CONTAINER_CONFIGURATOR = 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator';
 }
