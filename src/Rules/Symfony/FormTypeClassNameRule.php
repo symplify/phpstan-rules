@@ -22,6 +22,11 @@ use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
  */
 final class FormTypeClassNameRule implements Rule
 {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class extends "%s" must have "FormType" suffix to make form explicit, "%s" given';
+
     public function getNodeType(): string
     {
         return Class_::class;
@@ -50,11 +55,7 @@ final class FormTypeClassNameRule implements Rule
             return [];
         }
 
-        $errorMessage = sprintf(
-            'Class extends "%s" must have "FormType" suffix to make form explicit, "%s" given',
-            SymfonyClass::FORM_TYPE,
-            $className
-        );
+        $errorMessage = sprintf(self::ERROR_MESSAGE, SymfonyClass::FORM_TYPE, $className);
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
             ->identifier(SymfonyRuleIdentifier::FORM_TYPE_CLASS_NAME)

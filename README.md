@@ -39,6 +39,9 @@ includes:
     - vendor/symplify/phpstan-rules/config/rector-rules.neon
     - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
     - vendor/symplify/phpstan-rules/config/symfony-rules.neon
+
+    # special set for PHP configs
+    - vendor/symplify/phpstan-rules/config/symfony-config-rules.neon
 ```
 
 <br>
@@ -1478,6 +1481,45 @@ abstract class AbstractController extends Controller
         $this->someService = $someService;
     }
 }
+```
+
+:+1:
+
+<br>
+
+### ServicesExcludedDirectoryMustExistRule
+
+Services excluded path must exist. If not, remove it
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $configurator): void {
+    $services = $configurator->serivces();
+
+    $services->load('App\\', __DIR__ . '/../src')
+        ->exclude([__DIR__ . '/this-path-does-not-exist']);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $configurator): void {
+    $services = $configurator->services();
+
+    $services->load('App\\', __DIR__ . '/../src')
+        ->exclude([__DIR__ . '/../src/ValueObject']);
+};
 ```
 
 :+1:
