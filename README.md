@@ -1526,6 +1526,17 @@ return static function (ContainerConfigurator $configurator): void {
 
 <br>
 
+### NoBundleResourceConfigRule
+
+Avoid using configs in `*Bundle/Resources` directory. Move them to `/config` directory instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoBundleResourceConfigRule
+```
+
+<br>
+
 ### NoRoutingPrefixRule
 
 Avoid global route prefixing. Use single place for paths in @Route/#[Route] and improve static analysis instead.
