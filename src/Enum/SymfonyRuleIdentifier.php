@@ -45,4 +45,6 @@ final class SymfonyRuleIdentifier
     public const SERVICES_EXCLUDED_DIRECTORY_MUST_EXIST = 'symfony.servicesExcludedDirectoryMustExist';
 
     public const NO_BUNDLE_RESOURCE_CONFIG = 'symfony.noBundleResourceConfig';
+
+    public const ALREADY_REGISTERED_AUTODISCOVERY_SERVICE = 'symfony.alreadyRegisteredAutodiscoveryService';
 }
