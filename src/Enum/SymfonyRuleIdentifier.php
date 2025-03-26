@@ -43,4 +43,6 @@ final class SymfonyRuleIdentifier
     public const REQUIRE_ROUTE_NAME_TO_GENERATE_CONTROLLER_ROUTE = 'symfony.requireRouteNameToGenerateControllerRoute';
 
     public const SERVICES_EXCLUDED_DIRECTORY_MUST_EXIST = 'symfony.servicesExcludedDirectoryMustExist';
+
+    public const NO_BUNDLE_RESOURCE_CONFIG = 'symfony.noBundleResourceConfig';
 }
