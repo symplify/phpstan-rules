@@ -43,7 +43,7 @@ final class RequireAttributeNameRule implements Rule
             }
 
             // skip PHPUnit
-            if (str_starts_with($attributeName, 'PHPUnit\Framework\Attributes\\')) {
+            if (strncmp($attributeName, 'PHPUnit\Framework\Attributes\\', strlen('PHPUnit\Framework\Attributes\\')) === 0) {
                 continue;
             }
 
