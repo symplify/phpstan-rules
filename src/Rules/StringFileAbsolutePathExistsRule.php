@@ -60,6 +60,11 @@ final class StringFileAbsolutePathExistsRule implements Rule
             return [];
         }
 
+        // probably glob or wildcard, cannot be checked
+        if (str_contains($stringValue, '*')) {
+            return [];
+        }
+
         $absoluteFilePath = $this->getAbsoluteFilePath($scope, $stringValue);
         if (file_exists($absoluteFilePath)) {
             return [];

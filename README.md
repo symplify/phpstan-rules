@@ -2,7 +2,14 @@
 
 [![Downloads](https://img.shields.io/packagist/dt/symplify/phpstan-rules.svg?style=flat-square)](https://packagist.org/packages/symplify/phpstan-rules/stats)
 
-Set of 35 custom PHPStan rules that check architecture, typos, class namespace locations, accidental visibility override and more. Useful for any type of PHP project, from legacy to modern stack.
+Set of 65+ PHPStan fun and practical rules that check:
+
+* clean architecture, logical errors,
+* naming, class namespace locations
+* accidental visibility override,
+* and Symfony, Doctrine or PHPUnit ~~best~~ proven practices.
+
+Useful for any type of PHP project, from legacy to modern stack.
 
 <br>
 
@@ -36,6 +43,9 @@ includes:
     - vendor/symplify/phpstan-rules/config/rector-rules.neon
     - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
     - vendor/symplify/phpstan-rules/config/symfony-rules.neon
+
+    # special set for PHP configs
+    - vendor/symplify/phpstan-rules/config/symfony-config-rules.neon
 ```
 
 <br>
@@ -1481,6 +1491,56 @@ abstract class AbstractController extends Controller
 
 <br>
 
+### ServicesExcludedDirectoryMustExistRule
+
+Services excluded path must exist. If not, remove it
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $configurator): void {
+    $services = $configurator->serivces();
+
+    $services->load('App\\', __DIR__ . '/../src')
+        ->exclude([__DIR__ . '/this-path-does-not-exist']);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $configurator): void {
+    $services = $configurator->services();
+
+    $services->load('App\\', __DIR__ . '/../src')
+        ->exclude([__DIR__ . '/../src/ValueObject']);
+};
+```
+
+:+1:
+
+<br>
+
+### NoBundleResourceConfigRule
+
+Avoid using configs in `*Bundle/Resources` directory. Move them to `/config` directory instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoBundleResourceConfigRule
+```
+
+<br>
+
 ### NoRoutingPrefixRule
 
 Avoid global route prefixing. Use single place for paths in @Route/#[Route] and improve static analysis instead.
@@ -1664,7 +1724,7 @@ final class SomeClass
 
 ### NoListenerWithoutContractRule
 
-There should be no listeners modified in config. Use EventSubscriberInterface contract and PHP instead
+There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and PHP instead
 
 ```yaml
 rules:
@@ -1705,6 +1765,66 @@ class SomeListener implements EventSubscriberInterface
 :+1:
 
 <br>
+
+```php
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+
+#[AsEventListener]
+class SomeListener
+{
+    public function __invoke()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoDoctrineListenerWithoutContractRule
+
+There should be no Doctrine listeners modified in config. Implement  "Document\Event\EventSubscriber" to provide events in the class itself
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoDoctrineListenerWithoutContractRule
+```
+
+```php
+class SomeListener
+{
+    public function onFlush()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ODM\MongoDB\Events;
+
+class SomeListener implements EventSubscriber
+{
+    public function onFlush()
+    {
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            Events::onFlush
+        ];
+    }
+}
+```
+
+:+1:
+
 
 ### NoStringInGetSubscribedEventsRule
 

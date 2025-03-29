@@ -52,6 +52,10 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
             return [];
         }
 
+        if ($callerType->isInstanceOf(DoctrineClass::CONNECTION)->yes()) {
+            return [];
+        }
+
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(DoctrineRuleIdentifier::REQUIRE_QUERY_BUILDER_ON_REPOSITORY)
             ->build();

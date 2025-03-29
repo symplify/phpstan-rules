@@ -37,13 +37,13 @@ jobs:
             -   run: rector-local/vendor/bin/rector process src config --config build/rector-downgrade-php.php --ansi
 
             # clear the dev files
-            -   run: rm -rf tests rector-local ecs.php phpstan.neon phpunit.xml .editorconfig
+            -   run: rm -rf tests rector-local ecs.php phpstan.neon phpunit.xml .editorconfig stubs
 
             # copy PHP 7.4 composer + workflows
             -   run: cp -r build/target-repository/. .
 
             # clear the dev files
-            -   run: rm -rf build monorepo-builder.php full-tool-build.sh rector.php phpstan-for-tests.neon tests
+            -   run: rm -rf build rector.php phpstan-for-tests.neon tests stubs
 
             # setup git user
             -

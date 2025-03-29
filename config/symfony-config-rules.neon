@@ -1,0 +1,4 @@
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoBundleResourceConfigRule
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\AlreadyRegisteredAutodiscoveryServiceRule

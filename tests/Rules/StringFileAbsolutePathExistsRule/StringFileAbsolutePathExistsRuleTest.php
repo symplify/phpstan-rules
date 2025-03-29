@@ -28,6 +28,8 @@ final class StringFileAbsolutePathExistsRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/SkipReferenceToExistingFile.php', []];
         yield [__DIR__ . '/Fixture/SkipNestedConcats.php', []];
+        yield [__DIR__ . '/Fixture/SkipMasks.php', []];
+        yield [__DIR__ . '/Fixture/SkipClosure.php', []];
     }
 
     protected function getRule(): Rule

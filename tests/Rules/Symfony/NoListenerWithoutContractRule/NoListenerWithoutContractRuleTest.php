@@ -21,7 +21,15 @@ final class NoListenerWithoutContractRuleTest extends RuleTestCase
 
     public static function provideData(): Iterator
     {
+        // @see https://symfony.com/blog/new-in-symfony-4-1-invokable-event-listeners
+        yield [[__DIR__ . '/Fixture/SkipInvokableListener.php'], []];
+
+        yield [[__DIR__ . '/Fixture/SkipSecurityListener.php'], []];
+        yield [[__DIR__ . '/Fixture/SkipAnotherSecurityListener.php'], []];
+        yield [[__DIR__ . '/Fixture/SkipFormListener.php'], []];
+
         yield [[__DIR__ . '/Fixture/SomeContractedListener.php'], []];
+        yield [[__DIR__ . '/Fixture/SomeContractedWithAttributeListener.php'], []];
         yield [[__DIR__ . '/Fixture/SkipDoctrineListener.php'], []];
 
         yield [[__DIR__ . '/Fixture/SomeBareListener.php'], [[

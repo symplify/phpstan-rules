@@ -4,5 +4,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule
 
+    - Symplify\PHPStanRules\Rules\Doctrine\NoDoctrineListenerWithoutContractRule
+
     # test fixtures
     - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule

@@ -13,6 +13,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\PHPUnitRuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
 /**
@@ -43,6 +44,10 @@ final readonly class NoMockOnlyTestRule implements Rule
 
         $classLike = $node->getOriginalNode();
         if (! $classLike instanceof Class_) {
+            return [];
+        }
+
+        if ($classLike->extends instanceof Name && $classLike->extends->toString() === SymfonyClass::VALIDATOR_TEST_CASE) {
             return [];
         }
 
