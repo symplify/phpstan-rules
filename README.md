@@ -26,7 +26,11 @@ composer require symplify/phpstan-rules --dev
 
 ## Usage
 
-Later, once you have most rules applied, it's best practice to include whole sets:
+Configuration should be added to your `phpstan.neon` file.
+
+<br>
+
+Once you have most rules applied, it's best practice to include whole sets:
 
 ```yaml
 includes:
@@ -202,7 +206,7 @@ Possible __construct() override, this can cause missing dependencies or setup
 
 ```yaml
 rules:
-    - Symplify\PHPStanRules\Rules\NoConstructorOverrideRule
+    - Symplify\PHPStanRules\Rules\Complexity\NoConstructorOverrideRule
 ```
 
 ```php
@@ -409,7 +413,7 @@ Type "%s" is forbidden to be created manually with `new X()`. Use service and co
 ```yaml
 services:
     -
-        class: Symplify\PHPStanRules\Rules\ForbiddenNewArgumentRule
+        class: Symplify\PHPStanRules\Rules\Complexity\ForbiddenNewArgumentRule
         tag: [phpstan.rules.rule]
         arguments:
             forbiddenTypes:
@@ -1940,8 +1944,8 @@ Instead of entity or document mocking, create object directly to get better type
 
 ```yaml
 rules:
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoEntityMockingRule
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoDocumentMockingRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
 ```
 
 ```php
@@ -2095,6 +2099,5 @@ final class SomeTest extends TestCase
 :+1:
 
 <br>
-
 
 Happy coding!
