@@ -34,6 +34,8 @@ includes:
 
     # project specific
     - vendor/symplify/phpstan-rules/config/rector-rules.neon
+    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
+    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
 ```
 
 <br>
