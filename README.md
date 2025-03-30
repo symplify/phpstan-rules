@@ -81,23 +81,19 @@ services:
                 userId: int
 ```
 
-```php
-function run($userId)
-{
-}
-```
+> [!WARNING]
+> ```php
+> function run($userId)
+> {
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-function run(int $userId)
-{
-}
-```
-
-:+1:
+> [!TIP]
+> ```php
+> function run(int $userId)
+> {
+> }
+> ```
 
 <br>
 
@@ -110,27 +106,23 @@ rules:
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
 ```
 
-```php
-namespace App\Repository;
+> [!WARNING]
+> ```php
+> namespace App\Repository;
+>
+> interface ProductRepositoryInterface
+> {
+> }
+> ```
 
-interface ProductRepositoryInterface
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-namespace App\Contract\Repository;
-
-interface ProductRepositoryInterface
-{
-}
-```
-
-:+1:
+> [!TIP]
+> ```php
+> namespace App\Contract\Repository;
+>
+> interface ProductRepositoryInterface
+> {
+> }
+> ```
 
 <br>
 
@@ -152,25 +144,19 @@ services:
 
 ↓
 
-```php
-class Some extends Command
-{
-}
-```
+> [!WARNING]
+> ```php
+> class Some extends Command
+> {
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeCommand extends Command
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeCommand extends Command
+> {
+> }
+> ```
 
 ### StringFileAbsolutePathExistsRule
 
@@ -181,24 +167,17 @@ rules:
     - Symplify\PHPStanRules\Rules\StringFileAbsolutePathExistsRule
 ```
 
-```php
-// missing file path
-return __DIR__  . '/some_file.yml';
-```
+> [!WARNING]
+> ```php
+> // missing file path
+> return __DIR__  . '/some_file.yml';
+> ```
 
-:x:
-
-<br>
-
-```php
-// correct file path
-return __DIR__  . '/../fixtures/some_file.yml';
-```
-
-:+1:
-
-
-<br>
+> [!TIP]
+> ```php
+> // correct file path
+> return __DIR__  . '/../fixtures/some_file.yml';
+> ```
 
 ### NoConstructorOverrideRule
 
@@ -209,40 +188,32 @@ rules:
     - Symplify\PHPStanRules\Rules\Complexity\NoConstructorOverrideRule
 ```
 
-```php
-class ParentClass
-{
-    public function __construct(private string $dependency)
-    {
-    }
-}
+> [!WARNING]
+> ```php
+> class ParentClass
+> {
+>     public function __construct(private string $dependency)
+>     {
+>     }
+> }
+>
+> class SomeClass extends ParentClass
+> {
+>     public function __construct()
+>     {
+>     }
+> }
+> ```
 
-class SomeClass extends ParentClass
-{
-    public function __construct()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass extends ParentClass
-{
-    public function __construct(private string $dependency)
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
-
+> [!TIP]
+> ```php
+> final class SomeClass extends ParentClass
+> {
+>     public function __construct(private string $dependency)
+>     {
+>     }
+> }
+> ```
 
 ### ExplicitClassPrefixSuffixRule
 
@@ -253,45 +224,39 @@ rules:
     - Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule
 ```
 
-```php
-<?php
+> [!WARNING]
+> ```php
+> <?php
+>
+> interface NotSuffixed
+> {
+> }
+>
+> trait NotSuffixed
+> {
+> }
+>
+> abstract class NotPrefixedClass
+> {
+> }
+> ```
 
-interface NotSuffixed
-{
-}
-
-trait NotSuffixed
-{
-}
-
-abstract class NotPrefixedClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-<?php
-
-interface SuffixedInterface
-{
-}
-
-trait SuffixedTrait
-{
-}
-
-abstract class AbstractClass
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> <?php
+>
+> interface SuffixedInterface
+> {
+> }
+>
+> trait SuffixedTrait
+> {
+> }
+>
+> abstract class AbstractClass
+> {
+> }
+> ```
 
 ### NoProtectedClassStmtRule
 
@@ -313,23 +278,17 @@ rules:
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
 ```
 
-```php
-usort($items, [$this, "method"]);
-```
+> [!WARNING]
+> ```php
+> usort($items, [$this, "method"]);
+> ```
 
-:x:
-
-<br>
-
-```php
-usort($items, function (array $apples) {
-    return $this->method($apples);
-};
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> usort($items, function (array $apples) {
+>     return $this->method($apples);
+> };
+> ```
 
 ### NoJustPropertyAssignRule
 
@@ -340,38 +299,32 @@ rules:
     - Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule
 ```
 
-```php
-class SomeClass
-{
-    // ...
+> [!WARNING]
+> ```php
+> class SomeClass
+> {
+>     // ...
+>
+>     public function run()
+>     {
+>         $someService = $this->someService;
+>         $someService->run();
+>     }
+> }
+> ```
 
-    public function run()
-    {
-        $someService = $this->someService;
-        $someService->run();
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    // ...
-
-    public function run()
-    {
-        $this->someService->run();
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeClass
+> {
+>     // ...
+>
+>     public function run()
+>     {
+>         $this->someService->run();
+>     }
+> }
+> ```
 
 ### ForbiddenExtendOfNonAbstractClassRule
 
@@ -382,29 +335,23 @@ rules:
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
 ```
 
-```php
-final class SomeClass extends ParentClass
-{
-}
+> [!WARNING]
+> ```php
+> final class SomeClass extends ParentClass
+> {
+> }
+>
+> class ParentClass
+> {
+> }
+> ```
 
-class ParentClass
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-abstract class ParentClass
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> abstract class ParentClass
+> {
+> }
+> ```
 
 ### ForbiddenNewArgumentRule
 
@@ -422,38 +369,32 @@ services:
 
 ↓
 
-```php
-class SomeService
-{
-    public function run()
-    {
-        $repositoryService = new RepositoryService();
-        $item = $repositoryService->get(1);
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeService
+> {
+>     public function run()
+>     {
+>         $repositoryService = new RepositoryService();
+>         $item = $repositoryService->get(1);
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeService
-{
-    public function __construct(private RepositoryService $repositoryService)
-    {
-    }
-
-    public function run()
-    {
-        $item = $this->repositoryService->get(1);
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeService
+> {
+>     public function __construct(private RepositoryService $repositoryService)
+>     {
+>     }
+>
+>     public function run()
+>     {
+>         $item = $this->repositoryService->get(1);
+>     }
+> }
+> ```
 
 ### ForbiddenFuncCallRule
 
@@ -476,21 +417,15 @@ services:
 
 ↓
 
-```php
-dump('...');
-```
+> [!WARNING]
+> ```php
+> dump('...');
+> ```
 
-:x:
-
-<br>
-
-```php
-echo '...';
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> echo '...';
+> ```
 
 ### ForbiddenMultipleClassLikeInOneFileRule
 
@@ -501,36 +436,30 @@ rules:
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 ```
 
-```php
-// src/SomeClass.php
-class SomeClass
-{
-}
+> [!WARNING]
+> ```php
+> // src/SomeClass.php
+> class SomeClass
+> {
+> }
+>
+> interface SomeInterface
+> {
+> }
+> ```
 
-interface SomeInterface
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-// src/SomeClass.php
-class SomeClass
-{
-}
-
-// src/SomeInterface.php
-interface SomeInterface
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> // src/SomeClass.php
+> class SomeClass
+> {
+> }
+>
+> // src/SomeInterface.php
+> interface SomeInterface
+> {
+> }
+> ```
 
 ### ForbiddenNodeRule
 
@@ -550,21 +479,15 @@ services:
 
 ↓
 
-```php
-return @strlen('...');
-```
+> [!WARNING]
+> ```php
+> return @strlen('...');
+> ```
 
-:x:
-
-<br>
-
-```php
-return strlen('...');
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> return strlen('...');
+> ```
 
 ### ForbiddenStaticClassConstFetchRule
 
@@ -575,33 +498,27 @@ rules:
     - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
 ```
 
-```php
-class SomeClass
-{
-    public function run()
-    {
-        return static::SOME_CONST;
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeClass
+> {
+>     public function run()
+>     {
+>         return static::SOME_CONST;
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        return self::SOME_CONST;
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeClass
+> {
+>     public function run()
+>     {
+>         return self::SOME_CONST;
+>     }
+> }
+> ```
 
 ### NoDynamicNameRule
 
@@ -612,33 +529,27 @@ rules:
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
 ```
 
-```php
-class SomeClass
-{
-    public function old(): bool
-    {
-        return $this->${variable};
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeClass
+> {
+>     public function old(): bool
+>     {
+>         return $this->${variable};
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function old(): bool
-    {
-        return $this->specificMethodName();
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeClass
+> {
+>     public function old(): bool
+>     {
+>         return $this->specificMethodName();
+>     }
+> }
+> ```
 
 ### NoEntityOutsideEntityNamespaceRule
 
@@ -649,35 +560,29 @@ rules:
     - Symplify\PHPStanRules\Rules\NoEntityOutsideEntityNamespaceRule
 ```
 
-```php
-namespace App\ValueObject;
+> [!WARNING]
+> ```php
+> namespace App\ValueObject;
+>
+> use Doctrine\ORM\Mapping as ORM;
+>
+> #[ORM\Entity]
+> class Product
+> {
+> }
+> ```
 
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity]
-class Product
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-namespace App\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity]
-class Product
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> namespace App\Entity;
+>
+> use Doctrine\ORM\Mapping as ORM;
+>
+> #[ORM\Entity]
+> class Product
+> {
+> }
+> ```
 
 ### NoGlobalConstRule
 
@@ -688,27 +593,21 @@ rules:
     - Symplify\PHPStanRules\Rules\NoGlobalConstRule
 ```
 
-```php
-const SOME_GLOBAL_CONST = 'value';
-```
+> [!WARNING]
+> ```php
+> const SOME_GLOBAL_CONST = 'value';
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        return self::SOME_CONST;
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeClass
+> {
+>     public function run()
+>     {
+>         return self::SOME_CONST;
+>     }
+> }
+> ```
 
 ### NoReferenceRule
 
@@ -719,32 +618,26 @@ rules:
     - Symplify\PHPStanRules\Rules\NoReferenceRule
 ```
 
-```php
-class SomeClass
-{
-    public function run(&$value)
-    {
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeClass
+> {
+>     public function run(&$value)
+>     {
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function run($value)
-    {
-        return $value;
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeClass
+> {
+>     public function run($value)
+>     {
+>         return $value;
+>     }
+> }
+> ```
 
 ### NoReturnSetterMethodRule
 
@@ -755,37 +648,31 @@ rules:
     - Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule
 ```
 
-```php
-final class SomeClass
-{
-    private $name;
+> [!WARNING]
+> ```php
+> final class SomeClass
+> {
+>     private $name;
+>
+>     public function setName(string $name): int
+>     {
+>         return 1000;
+>     }
+> }
+> ```
 
-    public function setName(string $name): int
-    {
-        return 1000;
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    private $name;
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> final class SomeClass
+> {
+>     private $name;
+>
+>     public function setName(string $name): void
+>     {
+>         $this->name = $name;
+>     }
+> }
+> ```
 
 ### NoTestMocksRule
 
@@ -796,37 +683,31 @@ rules:
     - Symplify\PHPStanRules\Rules\PHPUnit\NoTestMocksRule
 ```
 
-```php
-use PHPUnit\Framework\TestCase;
+> [!WARNING]
+> ```php
+> use PHPUnit\Framework\TestCase;
+>
+> final class SkipApiMock extends TestCase
+> {
+>     public function test()
+>     {
+>         $someTypeMock = $this->createMock(SomeType::class);
+>     }
+> }
+> ```
 
-final class SkipApiMock extends TestCase
-{
-    public function test()
-    {
-        $someTypeMock = $this->createMock(SomeType::class);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SkipApiMock extends TestCase
-{
-    public function test()
-    {
-        $someTypeMock = new class() implements SomeType {};
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use PHPUnit\Framework\TestCase;
+>
+> final class SkipApiMock extends TestCase
+> {
+>     public function test()
+>     {
+>         $someTypeMock = new class() implements SomeType {};
+>     }
+> }
+> ```
 
 ### PreferredClassRule
 
@@ -846,33 +727,27 @@ services:
 
 ↓
 
-```php
-class SomeClass
-{
-    public function run()
-    {
-        return new SplFileInfo('...');
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeClass
+> {
+>     public function run()
+>     {
+>         return new SplFileInfo('...');
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function run()
-    {
-        return new CustomFileInfo('...');
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeClass
+> {
+>     public function run()
+>     {
+>         return new CustomFileInfo('...');
+>     }
+> }
+> ```
 
 ### PreventParentMethodVisibilityOverrideRule
 
@@ -883,45 +758,39 @@ rules:
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 ```
 
-```php
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
+> [!WARNING]
+> ```php
+> class SomeParentClass
+> {
+>     public function run()
+>     {
+>     }
+> }
+>
+> class SomeClass extends SomeParentClass
+> {
+>     protected function run()
+>     {
+>     }
+> }
+> ```
 
-class SomeClass extends SomeParentClass
-{
-    protected function run()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-
-class SomeClass extends SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeParentClass
+> {
+>     public function run()
+>     {
+>     }
+> }
+>
+> class SomeClass extends SomeParentClass
+> {
+>     public function run()
+>     {
+>     }
+> }
+> ```
 
 ### RequiredOnlyInAbstractRule
 
@@ -965,37 +834,31 @@ rules:
     - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
 ```
 
-```php
-use Symfony\Component\Routing\Annotation\Route;
+> [!WARNING]
+> ```php
+> use Symfony\Component\Routing\Annotation\Route;
+>
+> class SomeController
+> {
+>     #[Route("/path")]
+>     public function someAction()
+>     {
+>     }
+> }
+> ```
 
-class SomeController
-{
-    #[Route("/path")]
-    public function someAction()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\Routing\Annotation\Route;
-
-class SomeController
-{
-    #[Route(path: "/path")]
-    public function someAction()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Symfony\Component\Routing\Annotation\Route;
+>
+> class SomeController
+> {
+>     #[Route(path: "/path")]
+>     public function someAction()
+>     {
+>     }
+> }
+> ```
 
 ### NoRouteTrailingSlashPathRule
 
@@ -1017,33 +880,27 @@ rules:
     - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
 ```
 
-```php
-// app/Entity/SomeAttribute.php
-namespace App\Controller;
+> [!WARNING]
+> ```php
+> // app/Entity/SomeAttribute.php
+> namespace App\Controller;
+>
+> #[\Attribute]
+> final class SomeAttribute
+> {
+> }
+> ```
 
-#[\Attribute]
-final class SomeAttribute
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-// app/Attribute/SomeAttribute.php
-namespace App\Attribute;
-
-#[\Attribute]
-final class SomeAttribute
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> // app/Attribute/SomeAttribute.php
+> namespace App\Attribute;
+>
+> #[\Attribute]
+> final class SomeAttribute
+> {
+> }
+> ```
 
 ### RequireExceptionNamespaceRule
 
@@ -1054,32 +911,26 @@ rules:
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
 ```
 
-```php
-// app/Controller/SomeException.php
-namespace App\Controller;
+> [!WARNING]
+> ```php
+> // app/Controller/SomeException.php
+> namespace App\Controller;
+>
+> final class SomeException extends Exception
+> {
+>
+> }
+> ```
 
-final class SomeException extends Exception
-{
-
-}
-```
-
-:x:
-
-<br>
-
-```php
-// app/Exception/SomeException.php
-namespace App\Exception;
-
-final class SomeException extends Exception
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> // app/Exception/SomeException.php
+> namespace App\Exception;
+>
+> final class SomeException extends Exception
+> {
+> }
+> ```
 
 ### RequireUniqueEnumConstantRule
 
@@ -1090,35 +941,29 @@ rules:
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
 ```
 
-```php
-use MyCLabs\Enum\Enum;
+> [!WARNING]
+> ```php
+> use MyCLabs\Enum\Enum;
+>
+> class SomeClass extends Enum
+> {
+>     private const YES = 'yes';
+>
+>     private const NO = 'yes';
+> }
+> ```
 
-class SomeClass extends Enum
-{
-    private const YES = 'yes';
-
-    private const NO = 'yes';
-}
-```
-
-:x:
-
-<br>
-
-```php
-use MyCLabs\Enum\Enum;
-
-class SomeClass extends Enum
-{
-    private const YES = 'yes';
-
-    private const NO = 'no';
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use MyCLabs\Enum\Enum;
+>
+> class SomeClass extends Enum
+> {
+>     private const YES = 'yes';
+>
+>     private const NO = 'no';
+> }
+> ```
 
 ### SeeAnnotationToTestRule
 
@@ -1138,28 +983,22 @@ services:
 
 ↓
 
-```php
-class SomeClass extends Rule
-{
-}
-```
+> [!WARNING]
+> ```php
+> class SomeClass extends Rule
+> {
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-/**
- * @see SomeClassTest
- */
-class SomeClass extends Rule
-{
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> /**
+>  * @see SomeClassTest
+>  */
+> class SomeClass extends Rule
+> {
+> }
+> ```
 
 ### UppercaseConstantRule
 
@@ -1170,31 +1009,23 @@ rules:
     - Symplify\PHPStanRules\Rules\UppercaseConstantRule
 ```
 
-```php
-final class SomeClass
-{
-    public const some = 'value';
-}
-```
+> [!WARNING]
+> ```php
+> final class SomeClass
+> {
+>     public const some = 'value';
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-final class SomeClass
-{
-    public const SOME = 'value';
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> final class SomeClass
+> {
+>     public const SOME = 'value';
+> }
+> ```
 
 ---
-
-<br>
 
 ## 2. Doctrine-specific Rules
 
@@ -1218,32 +1049,26 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
 ```
 
-```php
-class SomeClass
-{
-    public function run(EntityManagerInterface $entityManager)
-    {
-        return $entityManager->getRepository(SomeEntity::class);
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeClass
+> {
+>     public function run(EntityManagerInterface $entityManager)
+>     {
+>         return $entityManager->getRepository(SomeEntity::class);
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-class SomeClass
-{
-    public function __construct(SomeEntityRepository $someEntityRepository)
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> class SomeClass
+> {
+>     public function __construct(SomeEntityRepository $someEntityRepository)
+>     {
+>     }
+> }
+> ```
 
 ### NoParentRepositoryRule
 
@@ -1254,31 +1079,25 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule
 ```
 
-```php
-use Doctrine\ORM\EntityRepository;
+> [!WARNING]
+> ```php
+> use Doctrine\ORM\EntityRepository;
+>
+> final class SomeRepository extends EntityRepository
+> {
+> }
+> ```
 
-final class SomeRepository extends EntityRepository
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-final class SomeRepository
-{
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->repository = $entityManager->getRepository(SomeEntity::class);
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> final class SomeRepository
+> {
+>     public function __construct(EntityManagerInterface $entityManager)
+>     {
+>         $this->repository = $entityManager->getRepository(SomeEntity::class);
+>     }
+> }
+> ```
 
 ### NoGetRepositoryOnServiceRepositoryEntityRule
 
@@ -1289,61 +1108,51 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule
 ```
 
-<br>
+> [!WARNING]
+> ```php
+> use Doctrine\ORM\Mapping as ORM;
+>
+> /**
+>  * @ORM\Entity(repositoryClass=SomeRepository::class)
+>  */
+> class SomeEntity
+> {
+> }
+> ```
 
-```php
-use Doctrine\ORM\Mapping as ORM;
+> [!WARNING]
+> ```php
+> use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+>
+> final class SomeEntityRepository extends ServiceEntityRepository
+> {
+> }
+> ```
 
-/**
- * @ORM\Entity(repositoryClass=SomeRepository::class)
- */
-class SomeEntity
-{
-}
-```
+> [!WARNING]
+> ```php
+> use Doctrine\ORM\EntityManagerInterface;
+>
+> final class SomeService
+> {
+>     public function run(EntityManagerInterface $entityManager)
+>     {
+>         return $this->entityManager->getRepository(SomeEntity::class);
+>     }
+> }
+> ```
 
-<br>
-
-```php
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-
-final class SomeEntityRepository extends ServiceEntityRepository
-{
-}
-```
-
-<br>
-
-```php
-use Doctrine\ORM\EntityManagerInterface;
-
-final class SomeService
-{
-    public function run(EntityManagerInterface $entityManager)
-    {
-        return $this->entityManager->getRepository(SomeEntity::class);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Doctrine\ORM\EntityManagerInterface;
-
-final class SomeService
-{
-    public function __construct(private SomeEntityRepository $someEntityRepository)
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Doctrine\ORM\EntityManagerInterface;
+>
+> final class SomeService
+> {
+>     public function __construct(private SomeEntityRepository $someEntityRepository)
+>     {
+>     }
+> }
+> ```
 
 ### NoRepositoryCallInDataFixtureRule
 
@@ -1354,38 +1163,32 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
 ```
 
-```php
-use Doctrine\Common\DataFixtures\AbstractFixture;
+> [!WARNING]
+> ```php
+> use Doctrine\Common\DataFixtures\AbstractFixture;
+>
+> final class SomeFixture extends AbstractFixture
+> {
+>     public function load(ObjectManager $objectManager)
+>     {
+>         $someRepository = $objectManager->getRepository(SomeEntity::class);
+>         $someEntity = $someRepository->get(1);
+>     }
+> }
+> ```
 
-final class SomeFixture extends AbstractFixture
-{
-    public function load(ObjectManager $objectManager)
-    {
-        $someRepository = $objectManager->getRepository(SomeEntity::class);
-        $someEntity = $someRepository->get(1);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Doctrine\Common\DataFixtures\AbstractFixture;
-
-final class SomeFixture extends AbstractFixture
-{
-    public function load(ObjectManager $objectManager)
-    {
-        $someEntity = $this->getReference('some-entity-1');
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Doctrine\Common\DataFixtures\AbstractFixture;
+>
+> final class SomeFixture extends AbstractFixture
+> {
+>     public function load(ObjectManager $objectManager)
+>     {
+>         $someEntity = $this->getReference('some-entity-1');
+>     }
+> }
+> ```
 
 ---
 
@@ -1460,36 +1263,30 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoAbstractControllerConstructorRule
 ```
 
-```php
-abstract class AbstractController extends Controller
-{
-    public function __construct(
-        private SomeService $someService
-    ) {
-    }
-}
-```
+> [!WARNING]
+> ```php
+> abstract class AbstractController extends Controller
+> {
+>     public function __construct(
+>         private SomeService $someService
+>     ) {
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-abstract class AbstractController extends Controller
-{
-    private $someService;
-
-    #[Required]
-    public function autowireAbstractController(SomeService $someService)
-    {
-        $this->someService = $someService;
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> abstract class AbstractController extends Controller
+> {
+>     private $someService;
+>
+>     #[Required]
+>     public function autowireAbstractController(SomeService $someService)
+>     {
+>         $this->someService = $someService;
+>     }
+> }
+> ```
 
 ### ServicesExcludedDirectoryMustExistRule
 
@@ -1500,35 +1297,29 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule
 ```
 
-```php
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+> [!WARNING]
+> ```php
+> use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+>
+> return static function (ContainerConfigurator $configurator): void {
+>     $services = $configurator->serivces();
+>
+>     $services->load('App\\', __DIR__ . '/../src')
+>         ->exclude([__DIR__ . '/this-path-does-not-exist']);
+> };
+> ```
 
-return static function (ContainerConfigurator $configurator): void {
-    $services = $configurator->serivces();
-
-    $services->load('App\\', __DIR__ . '/../src')
-        ->exclude([__DIR__ . '/this-path-does-not-exist']);
-};
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
-return static function (ContainerConfigurator $configurator): void {
-    $services = $configurator->services();
-
-    $services->load('App\\', __DIR__ . '/../src')
-        ->exclude([__DIR__ . '/../src/ValueObject']);
-};
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+>
+> return static function (ContainerConfigurator $configurator): void {
+>     $services = $configurator->services();
+>
+>     $services->load('App\\', __DIR__ . '/../src')
+>         ->exclude([__DIR__ . '/../src/ValueObject']);
+> };
+> ```
 
 ### NoBundleResourceConfigRule
 
@@ -1550,31 +1341,24 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
 ```
 
+> [!WARNING]
+> ```php
+> use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+>
+> return static function (RoutingConfigurator $routingConfigurator): void {
+>     $routingConfigurator->import(__DIR__ . '/some-path')
+>         ->prefix('/some-prefix');
+> };
+> ```
 
-```php
-use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-
-return static function (RoutingConfigurator $routingConfigurator): void {
-    $routingConfigurator->import(__DIR__ . '/some-path')
-        ->prefix('/some-prefix');
-};
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-
-return static function (RoutingConfigurator $routingConfigurator): void {
-    $routingConfigurator->import(__DIR__ . '/some-path');
-};
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+>
+> return static function (RoutingConfigurator $routingConfigurator): void {
+>     $routingConfigurator->import(__DIR__ . '/some-path');
+> };
+> ```
 
 ### NoClassLevelRouteRule
 
@@ -1585,39 +1369,32 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
 ```
 
-```php
-use Symfony\Component\Routing\Attribute\Route;
+> [!WARNING]
+> ```php
+> use Symfony\Component\Routing\Attribute\Route;
+>
+> #[Route('/some-prefix')]
+> class SomeController
+> {
+>     #[Route('/some-action')]
+>     public function someAction()
+>     {
+>     }
+> }
+> ```
 
-#[Route('/some-prefix')]
-class SomeController
-{
-    #[Route('/some-action')]
-    public function someAction()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\Routing\Attribute\Route;
-
-class SomeController
-{
-    #[Route('/some-prefix/some-action')]
-    public function someAction()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
+> [!TIP]
+> ```php
+> use Symfony\Component\Routing\Attribute\Route;
+>
+> class SomeController
+> {
+>     #[Route('/some-prefix/some-action')]
+>     public function someAction()
+>     {
+>     }
+> }
+> ```
 
 ### NoFindTaggedServiceIdsCallRule
 
@@ -1639,37 +1416,31 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoRequiredOutsideClassRule
 ```
 
-```php
-use Symfony\Component\DependencyInjection\Attribute\Required;
+> [!WARNING]
+> ```php
+> use Symfony\Component\DependencyInjection\Attribute\Required;
+>
+> trait SomeTrait
+> {
+>     #[Required]
+>     public function autowireSomeTrait(SomeService $someService)
+>     {
+>         // ...
+>     }
+> }
+> ```
 
-trait SomeTrait
-{
-    #[Required]
-    public function autowireSomeTrait(SomeService $someService)
-    {
-        // ...
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-abstract class SomeClass
-{
-    #[Required]
-    public function autowireSomeClass(SomeService $someService)
-    {
-        // ...
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> abstract class SomeClass
+> {
+>     #[Required]
+>     public function autowireSomeClass(SomeService $someService)
+>     {
+>         // ...
+>     }
+> }
+> ```
 
 ### SingleArgEventDispatchRule
 
@@ -1680,47 +1451,41 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
 ```
 
-```php
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+> [!WARNING]
+> ```php
+> use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+>
+> final class SomeClass
+> {
+>     public function __construct(
+>         private EventDispatcherInterface $eventDispatcher
+>     ) {
+>     }
+>
+>     public function run()
+>     {
+>         $this->eventDispatcher->dispatch('event', 'another-arg');
+>     }
+> }
+> ```
 
-final class SomeClass
-{
-    public function __construct(
-        private EventDispatcherInterface $eventDispatcher
-    ) {
-    }
-
-    public function run()
-    {
-        $this->eventDispatcher->dispatch('event', 'another-arg');
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-
-final class SomeClass
-{
-    public function __construct(
-        private EventDispatcherInterface $eventDispatcher
-    ) {
-    }
-
-    public function run()
-    {
-        $this->eventDispatcher->dispatch(new EventObject());
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+>
+> final class SomeClass
+> {
+>     public function __construct(
+>         private EventDispatcherInterface $eventDispatcher
+>     ) {
+>     }
+>
+>     public function run()
+>     {
+>         $this->eventDispatcher->dispatch(new EventObject());
+>     }
+> }
+> ```
 
 ### NoListenerWithoutContractRule
 
@@ -1731,56 +1496,48 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
 ```
 
-```php
-class SomeListener
-{
-    public function onEvent()
-    {
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeListener
+> {
+>     public function onEvent()
+>     {
+>     }
+> }
+> ```
 
-:x:
+> [!TIP]
+> ```php
+> use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+>
+> class SomeListener implements EventSubscriberInterface
+> {
+>     public static function getSubscribedEvents(): array
+>     {
+>         return [
+>             'event' => 'onEvent',
+>         ];
+>     }
+>
+>     public function onEvent()
+>     {
+>     }
+> }
+> ```
 
-<br>
+> [!TIP]
+> ```php
+> use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+>
+> #[AsEventListener]
+> class SomeListener
+> {
+>     public function __invoke()
+>     {
+>     }
+> }
+> ```
 
-```php
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
-class SomeListener implements EventSubscriberInterface
-{
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            'event' => 'onEvent',
-        ];
-    }
-
-    public function onEvent()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
-```php
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-
-#[AsEventListener]
-class SomeListener
-{
-    public function __invoke()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
 
 ### NoDoctrineListenerWithoutContractRule
 
@@ -1791,40 +1548,35 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoDoctrineListenerWithoutContractRule
 ```
 
-```php
-class SomeListener
-{
-    public function onFlush()
-    {
-    }
-}
-```
+> [!WARNING]
+> ```php
+> class SomeListener
+> {
+>     public function onFlush()
+>     {
+>     }
+> }
+> ```
 
-:x:
-
-<br>
-
-```php
-use Doctrine\Common\EventSubscriber;
-use Doctrine\ODM\MongoDB\Events;
-
-class SomeListener implements EventSubscriber
-{
-    public function onFlush()
-    {
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            Events::onFlush
-        ];
-    }
-}
-```
-
-:+1:
-
+> [!TIP]
+> ```php
+> use Doctrine\Common\EventSubscriber;
+> use Doctrine\ODM\MongoDB\Events;
+>
+> class SomeListener implements EventSubscriber
+> {
+>     public function onFlush()
+>     {
+>     }
+>
+>     public static function getSubscribedEvents(): array
+>     {
+>         return [
+>             Events::onFlush
+>         ];
+>     }
+> }
+> ```
 
 ### NoStringInGetSubscribedEventsRule
 
@@ -1835,49 +1587,43 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule
 ```
 
-```php
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+> [!WARNING]
+> ```php
+> use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+>
+> class SomeListener implements EventSubscriberInterface
+> {
+>     public static function getSubscribedEvents(): array
+>     {
+>         return [
+>             'event' => 'onEvent',
+>         ];
+>     }
+>
+>     public function onEvent()
+>     {
+>     }
+> }
+> ```
 
-class SomeListener implements EventSubscriberInterface
-{
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            'event' => 'onEvent',
-        ];
-    }
-
-    public function onEvent()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
-class SomeListener implements EventSubscriberInterface
-{
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            Event::class => 'onEvent',
-        ];
-    }
-
-    public function onEvent()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+>
+> class SomeListener implements EventSubscriberInterface
+> {
+>     public static function getSubscribedEvents(): array
+>     {
+>         return [
+>             Event::class => 'onEvent',
+>         ];
+>     }
+>
+>     public function onEvent()
+>     {
+>     }
+> }
+> ```
 
 ### RequireInvokableControllerRule
 
@@ -1888,38 +1634,32 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
 ```
 
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+> [!WARNING]
+> ```php
+> use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+> use Symfony\Component\Routing\Annotation\Route;
+>
+> final class SomeController extends AbstractController
+> {
+>     #[Route()]
+>     public function someMethod()
+>     {
+>     }
+> }
+> ```
 
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function someMethod()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function __invoke()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+>
+> final class SomeController extends AbstractController
+> {
+>     #[Route()]
+>     public function __invoke()
+>     {
+>     }
+> }
+> ```
 
 ---
 
@@ -1948,37 +1688,31 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
 ```
 
-```php
-use PHPUnit\Framework\TestCase;
+> [!WARNING]
+> ```php
+> use PHPUnit\Framework\TestCase;
+>
+> final class SomeTest extends TestCase
+> {
+>     public function test()
+>     {
+>         $someEntityMock = $this->createMock(SomeEntity::class);
+>     }
+> }
+> ```
 
-final class SomeTest extends TestCase
-{
-    public function test()
-    {
-        $someEntityMock = $this->createMock(SomeEntity::class);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeTest extends TestCase
-{
-    public function test()
-    {
-        $someEntityMock = new SomeEntity();
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use PHPUnit\Framework\TestCase;
+>
+> final class SomeTest extends TestCase
+> {
+>     public function test()
+>     {
+>         $someEntityMock = new SomeEntity();
+>     }
+> }
+> ```
 
 ### NoAssertFuncCallInTestsRule
 
@@ -2000,48 +1734,42 @@ rules:
     - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
 ```
 
-```php
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
+> [!WARNING]
+> ```php
+> use PHPUnit\Framework\MockObject\MockObject;
+> use PHPUnit\Framework\TestCase;
+>
+> class SomeTest extends TestCase
+> {
+>     private MockObject $firstMock;
+>     private MockObject $secondMock;
+>
+>     public function setUp()
+>     {
+>         $this->firstMock = $this->createMock(SomeService::class);
+>         $this->secondMock = $this->createMock(AnotherService::class);
+>     }
+> }
+> ```
 
-class SomeTest extends TestCase
-{
-    private MockObject $firstMock;
-    private MockObject $secondMock;
-
-    public function setUp()
-    {
-        $this->firstMock = $this->createMock(SomeService::class);
-        $this->secondMock = $this->createMock(AnotherService::class);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-
-class SomeTest extends TestCase
-{
-    private SomeService $someService;
-
-    private FirstMock $firstMock;
-
-    public function setUp()
-    {
-        $this->someService = new SomeService();
-        $this->firstMock = $this->createMock(AnotherService::class);
-    }
-}
-```
-
-:+1:
-
-<br>
+> [!TIP]
+> ```php
+> use PHPUnit\Framework\MockObject\MockObject;
+> use PHPUnit\Framework\TestCase;
+>
+> class SomeTest extends TestCase
+> {
+>     private SomeService $someService;
+>
+>     private FirstMock $firstMock;
+>
+>     public function setUp()
+>     {
+>         $this->someService = new SomeService();
+>         $this->firstMock = $this->createMock(AnotherService::class);
+>     }
+> }
+> ```
 
 ### PublicStaticDataProviderRule
 
@@ -2052,51 +1780,47 @@ rules:
     - Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule
 ```
 
-```php
-use PHPUnit\Framework\TestCase;
+> [!WARNING]
+> ```php
+> use PHPUnit\Framework\TestCase;
+>
+> final class SomeTest extends TestCase
+> {
+>     /**
+>      * @dataProvider dataProvider
+>      */
+>     public function test(): array
+>     {
+>         return [];
+>     }
+>
+>     protected function dataProvider(): array
+>     {
+>         return [];
+>     }
+> }
+> ```
 
-final class SomeTest extends TestCase
-{
-    /**
-     * @dataProvider dataProvider
-     */
-    public function test(): array
-    {
-        return [];
-    }
-
-    protected function dataProvider(): array
-    {
-        return [];
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeTest extends TestCase
-{
-    /**
-     * @dataProvider dataProvider
-     */
-    public function test(): array
-    {
-        return [];
-    }
-
-    public static function dataProvider(): array
-    {
-        return [];
-    }
-}
-```
-
-:+1:
+> [!TIP]
+> ```php
+> use PHPUnit\Framework\TestCase;
+>
+> final class SomeTest extends TestCase
+> {
+>     /**
+>      * @dataProvider dataProvider
+>      */
+>     public function test(): array
+>     {
+>         return [];
+>     }
+>
+>     public static function dataProvider(): array
+>     {
+>         return [];
+>     }
+> }
+> ```
 
 <br>
 
