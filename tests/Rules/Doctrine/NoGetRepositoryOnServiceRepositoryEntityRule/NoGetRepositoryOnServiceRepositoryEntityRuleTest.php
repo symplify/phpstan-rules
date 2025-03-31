@@ -10,7 +10,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule;
-use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Source\SomeServiceRepository;
+use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Source\Repository\SomeServiceRepository;
 
 final class NoGetRepositoryOnServiceRepositoryEntityRuleTest extends RuleTestCase
 {
@@ -26,8 +26,13 @@ final class NoGetRepositoryOnServiceRepositoryEntityRuleTest extends RuleTestCas
     public static function provideData(): Iterator
     {
         $errorMessage = sprintf(NoGetRepositoryOnServiceRepositoryEntityRule::ERROR_MESSAGE, 'SomeEntity', SomeServiceRepository::class);
-
         yield [__DIR__ . '/Fixture/GetRepositoryOnServiceAwareEntity.php', [[
+            $errorMessage,
+            14,
+        ]]];
+
+        $errorMessage = sprintf(NoGetRepositoryOnServiceRepositoryEntityRule::ERROR_MESSAGE, 'SomeEntity', SomeServiceRepository::class);
+        yield [__DIR__ . '/Fixture/GetServiceInterfaceRepository.php', [[
             $errorMessage,
             14,
         ]]];
