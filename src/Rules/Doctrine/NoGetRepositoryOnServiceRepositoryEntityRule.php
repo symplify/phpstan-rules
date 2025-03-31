@@ -134,7 +134,7 @@ final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rul
             return true;
         }
 
-        if ($repositoryClassReflection->is(DoctrineClass::ODM_SERVICE_DOCUMENT_REPOSITORY_INTERFACE)) {
+        if ($repositoryClassReflection->is(DoctrineClass::ODM_SERVICE_REPOSITORY_INTERFACE)) {
             return true;
         }
 

@@ -1782,6 +1782,46 @@ class SomeListener
 
 <br>
 
+### RequiredDoctrineServiceRepositoryParentRule
+
+Repository must extend *, so it can be injected as a service
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\RequiredDoctrineServiceRepositoryParentRule
+```
+
+```php
+final class SomeRepository
+{
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        // ...
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+final class SomeRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, SomeEntity::class);
+    }
+}
+```
+
+:+1:
+
+<br>
+
 ### NoDoctrineListenerWithoutContractRule
 
 There should be no Doctrine listeners modified in config. Implement  "Document\Event\EventSubscriber" to provide events in the class itself
