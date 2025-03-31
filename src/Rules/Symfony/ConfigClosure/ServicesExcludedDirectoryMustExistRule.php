@@ -108,7 +108,7 @@ final class ServicesExcludedDirectoryMustExistRule implements Rule
         $stringPart = $concat->right->value;
 
         // uses magic mask, nothing to validate
-        if (str_contains($stringPart, '*') || str_contains($stringPart, '{')) {
+        if (strpos($stringPart, '*') !== false || strpos($stringPart, '{') !== false) {
             return null;
         }
 
