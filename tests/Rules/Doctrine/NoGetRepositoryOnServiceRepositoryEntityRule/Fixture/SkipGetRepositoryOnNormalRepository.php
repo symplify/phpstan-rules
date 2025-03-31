@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Fixture;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Source\NormalEntity;
+use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Source\Entity\NormalEntity;
 
 class SkipGetRepositoryOnNormalRepository
 {

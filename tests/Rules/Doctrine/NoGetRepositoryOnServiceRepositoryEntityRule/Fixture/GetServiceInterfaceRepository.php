@@ -7,7 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRep
 use Doctrine\ORM\EntityManagerInterface;
 use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Source\Entity\SomeEntity;
 
-class GetRepositoryOnServiceAwareEntity
+final class GetServiceInterfaceRepository
 {
     public function run(EntityManagerInterface $entityManager)
     {

@@ -19,7 +19,21 @@ final readonly class RepositoryClassResolver
     /**
      * @var string
      */
+    private const REPOSITORY_CLASS_CONST_REGEX = '#repositoryClass=?(\\\\)(?<repositoryClass>.*?)::class#';
+
+    /**
+     * @var string
+     */
     private const USE_REPOSITORY_REGEX = '#use (?<repositoryClass>.*?Repository);#';
+
+    /**
+     * @var string[]
+     */
+    private const REGEX_TRAIN = [
+        self::QUOTED_REPOSITORY_CLASS_REGEX,
+        self::REPOSITORY_CLASS_CONST_REGEX,
+        self::USE_REPOSITORY_REGEX,
+    ];
 
     public function __construct(
         private ReflectionProvider $reflectionProvider
@@ -29,7 +43,7 @@ final readonly class RepositoryClassResolver
     public function resolveFromEntityClass(string $entityClassName): ?string
     {
         if (! $this->reflectionProvider->hasClass($entityClassName)) {
-            throw new ShouldNotHappenException();
+            throw new ShouldNotHappenException(sprintf('Entity "%s" class was not found', $entityClassName));
         }
 
         $classReflection = $this->reflectionProvider->getClass($entityClassName);
@@ -40,28 +54,25 @@ final readonly class RepositoryClassResolver
         }
 
         $entityFileContents = FileSystem::read($entityClassFileName);
+        $repositoryClass = null;
 
-        // match repositoryClass="..." in entity
-        $match = Strings::match($entityFileContents, self::QUOTED_REPOSITORY_CLASS_REGEX);
-
-        if (! isset($match['repositoryClass'])) {
-            // try fallback to repository ::class + use import
-
-            $repositoryUseMatch = Strings::match($entityFileContents, self::USE_REPOSITORY_REGEX);
-            if (isset($repositoryUseMatch['repositoryClass'])) {
-                $repositoryClass = $repositoryUseMatch['repositoryClass'];
-            } else {
-                // unable to resolve
-                return null;
+        foreach (self::REGEX_TRAIN as $regex) {
+            $match = Strings::match($entityFileContents, $regex);
+            if ($match === null) {
+                continue;
             }
-        } else {
+
             $repositoryClass = $match['repositoryClass'];
+            break;
+        }
+
+        if ($repositoryClass === null) {
+            return null;
         }
 
         if (! $this->reflectionProvider->hasClass($repositoryClass)) {
-            throw new ShouldNotHappenException(
-                sprintf('Repository class "%s" for entity "%s" does not exist', $repositoryClass, $entityClassName)
-            );
+            $errorMessage = sprintf('Repository class "%s" for entity "%s" does not exist', $repositoryClass, $entityClassName);
+            throw new ShouldNotHappenException($errorMessage);
         }
 
         return $repositoryClass;
