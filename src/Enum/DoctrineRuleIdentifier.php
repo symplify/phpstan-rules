@@ -19,4 +19,6 @@ final class DoctrineRuleIdentifier
     public const INJECT_SERVICE_REPOSITORY = 'doctrine.injectServiceRepository';
 
     public const NO_LISTENER_WITHOUT_CONTRACT = 'doctrine.noListenerWithoutContract';
+
+    public const REQUIRE_SERVICE_PARENT_REPOSITORY = 'doctrine.requireServiceParentRepository';
 }
