@@ -14,6 +14,11 @@ final class DoctrineClass
     /**
      * @var string
      */
+    public const ODM_SERVICE_DOCUMENT_REPOSITORY_INTERFACE = 'Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepositoryInterface';
+
+    /**
+     * @var string
+     */
     public const ORM_SERVICE_REPOSITORY = 'Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository';
 
     /**
