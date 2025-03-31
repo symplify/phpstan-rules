@@ -77,6 +77,6 @@ final class RequireServiceRepositoryParentRule implements Rule
         }
 
         // simple check
-        return str_ends_with($classReflection->getName(), 'Repository');
+        return substr_compare($classReflection->getName(), 'Repository', -strlen('Repository')) === 0;
     }
 }

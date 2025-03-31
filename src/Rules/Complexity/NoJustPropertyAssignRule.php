@@ -23,17 +23,20 @@ use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
  *
  * @implements Rule<Expression>
  */
-final readonly class NoJustPropertyAssignRule implements Rule
+final class NoJustPropertyAssignRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private PhpDocResolver $phpDocResolver;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of assigning service property to a variable, use the property directly';
 
-    public function __construct(
-        private PhpDocResolver $phpDocResolver
-    ) {
-
+    public function __construct(PhpDocResolver $phpDocResolver)
+    {
+        $this->phpDocResolver = $phpDocResolver;
     }
 
     public function getNodeType(): string
@@ -133,7 +136,7 @@ final readonly class NoJustPropertyAssignRule implements Rule
     private function shouldSkipCurrentClass(Scope $scope): bool
     {
         // skip entities as rather static
-        if (str_contains($scope->getFile(), '/Document/') || str_contains($scope->getFile(), '/Entity/')) {
+        if (strpos($scope->getFile(), '/Document/') !== false || strpos($scope->getFile(), '/Entity/') !== false) {
             return true;
         }
 
