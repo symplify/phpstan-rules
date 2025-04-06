@@ -6,13 +6,13 @@ namespace Symplify\PHPStanRules\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
@@ -34,11 +34,7 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->name instanceof Identifier) {
-            return [];
-        }
-
-        if ($node->name->toString() !== 'createQueryBuilder') {
+        if (! NamingHelper::isName($node->name, 'createQueryBuilder')) {
             return [];
         }
 

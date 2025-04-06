@@ -4,12 +4,12 @@ namespace Symplify\PHPStanRules\Rules\PHPUnit;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<FuncCall>
@@ -38,11 +38,7 @@ final class NoAssertFuncCallInTestsRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->name instanceof Name) {
-            return [];
-        }
-
-        if ($node->name->toString() !== 'assert') {
+        if (! NamingHelper::isName($node->name, 'assert')) {
             return [];
         }
 

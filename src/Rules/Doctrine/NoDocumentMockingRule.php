@@ -11,6 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
@@ -36,12 +37,7 @@ final class NoDocumentMockingRule implements Rule
             return [];
         }
 
-        if (! $node->name instanceof Identifier) {
-            return [];
-        }
-
-        $methodName = $node->name->toString();
-        if ($methodName !== 'createMock') {
+        if (! NamingHelper::isName($node->name, 'createMock')) {
             return [];
         }
 
