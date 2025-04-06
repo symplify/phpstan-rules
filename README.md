@@ -1493,6 +1493,81 @@ rules:
 
 <br>
 
+### NoServiceSameNameSetClassRule
+
+No need to duplicate service class and name. Use only "$services->set(%s::class)" instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSameNameSetClassRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class, SomeService::class);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class);
+};
+```
+
+<br>
+
+### NoDuplicateArgsAutowireByTypeRule
+
+Instead of passing "%s" to args(), remove the line and let autowiring handle it
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgAutowireByTypeRule
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgsAutowireByTypeRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class)
+        ->args([
+            ref(SomeService::class),
+        ]);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class);
+};
+```
+
+:+1:
+
+<br>
 
 ### NoAbstractControllerConstructorRule
 
