@@ -11,8 +11,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
-use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>

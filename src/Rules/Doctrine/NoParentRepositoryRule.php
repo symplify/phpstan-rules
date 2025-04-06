@@ -11,7 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 
 /**
  * Check if class extends repository class,

@@ -12,7 +12,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\PHPUnitRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 

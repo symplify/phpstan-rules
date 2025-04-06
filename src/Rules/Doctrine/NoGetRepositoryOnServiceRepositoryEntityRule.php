@@ -17,7 +17,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use Symplify\PHPStanRules\Doctrine\RepositoryClassResolver;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Enum\TestClassName;
 
 /**

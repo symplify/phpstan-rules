@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Enum;
+namespace Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 final class PHPUnitRuleIdentifier
 {

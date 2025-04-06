@@ -12,7 +12,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Rector\VersionBonding\Contract\MinPhpVersionInterface;
-use Symplify\PHPStanRules\Enum\RectorRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule\PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest

@@ -10,7 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\PHPUnitRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\PHPUnit\DataProviderMethodResolver;
 use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
