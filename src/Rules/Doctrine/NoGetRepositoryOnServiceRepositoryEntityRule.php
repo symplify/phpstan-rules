@@ -19,6 +19,7 @@ use Symplify\PHPStanRules\Doctrine\RepositoryClassResolver;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Enum\TestClassName;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
@@ -51,7 +52,7 @@ final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rul
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->name instanceof Identifier || $node->name->toString() !== 'getRepository') {
+        if (! NamingHelper::isName($node->name, 'getRepository')) {
             return [];
         }
 

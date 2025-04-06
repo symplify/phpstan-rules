@@ -12,6 +12,7 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
@@ -34,11 +35,7 @@ final class NoFindTaggedServiceIdsCallRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->name instanceof Identifier) {
-            return [];
-        }
-
-        if ($node->name->toString() !== 'findTaggedServiceIds') {
+        if (! NamingHelper::isName($node->name, 'findTaggedServiceIds')) {
             return [];
         }
 

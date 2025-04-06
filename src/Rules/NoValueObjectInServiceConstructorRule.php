@@ -11,6 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<ClassMethod>
@@ -27,7 +28,7 @@ final class NoValueObjectInServiceConstructorRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if ($node->name->toString() !== '__construct') {
+        if (! NamingHelper::isName($node->name, '__construct')) {
             return [];
         }
 

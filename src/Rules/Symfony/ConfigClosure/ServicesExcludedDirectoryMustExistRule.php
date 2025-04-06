@@ -11,7 +11,6 @@ use PhpParser\Node\Expr\BinaryOp;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Identifier;
 use PhpParser\Node\Scalar\MagicConst\Dir;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeFinder;
@@ -20,6 +19,7 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
 
 /**
@@ -138,11 +138,7 @@ final class ServicesExcludedDirectoryMustExistRule implements Rule
                 return false;
             }
 
-            if (! $node->name instanceof Identifier) {
-                return false;
-            }
-
-            return $node->name->toString() === 'exclude';
+            return NamingHelper::isName($node->name, 'exclude');
         });
 
         /** @var MethodCall[] $methodCalls */
