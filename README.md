@@ -1438,6 +1438,49 @@ rules:
 <br>
 
 
+### TaggedIteratorOverRepeatedServiceCallRuleTest
+
+Instead of repeated "->call(%s, ...)" calls, pass services as tagged iterator argument to the constructor
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\TaggedIteratorOverRepeatedServiceCallRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class)
+        ->call('setService', [ref('service1')])
+        ->call('setService', [ref('service2')])
+        ->call('setService', [ref('service3')]);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class)
+        ->arg('$services', tagged_iterator('SomeServiceTag'));
+};
+```
+
+:+1:
+
+<br>
+
 ### NoGetInCommandRule
 
 Prevents using `$this->get(...)` in commands, to promote dependency injection.
