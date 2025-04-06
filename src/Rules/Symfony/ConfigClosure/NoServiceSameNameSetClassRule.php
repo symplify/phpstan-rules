@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
+use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\MethodCall;
@@ -11,17 +12,20 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
+ *
+ * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\ConfigClosure\NoServiceSameNameSetClassRule\NoServiceSameNameSetClassRuleTest
  */
 final class NoServiceSameNameSetClassRule implements Rule
 {
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'No need to duplicate service class and name. Use only $services->set(%s) instead';
+    public const ERROR_MESSAGE = 'No need to duplicate service class and name. Use only "$services->set(%s::class)" instead';
 
     public function getNodeType(): string
     {
@@ -58,14 +62,25 @@ final class NoServiceSameNameSetClassRule implements Rule
         }
 
         $serviceNameValue = NamingHelper::getName($serviceName->class);
+        if (! is_string($serviceNameValue)) {
+            return [];
+        }
+
         $serviceTypeValue = NamingHelper::getName($serviceType->class);
+        if (! is_string($serviceTypeValue)) {
+            return [];
+        }
 
         if ($serviceNameValue !== $serviceTypeValue) {
             return [];
         }
 
+        if (str_contains($serviceNameValue, '\\')) {
+            $serviceNameValue = Strings::after($serviceNameValue, '\\', -1);
+        }
+
         $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $serviceNameValue))
-            ->identifier('symfony.noServiceSameNameSetClass')
+            ->identifier(SymfonyRuleIdentifier::NO_SERVICE_SAME_NAME_SET_CLASS)
             ->build();
 
         return [$identifierRuleError];

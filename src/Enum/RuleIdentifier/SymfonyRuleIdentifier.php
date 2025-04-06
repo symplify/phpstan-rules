@@ -51,4 +51,6 @@ final class SymfonyRuleIdentifier
     public const NO_DUPLICATE_ARGS_AUTOWIRE_BY_TYPE = 'symfony.noDuplicateArgsAutowireByType';
 
     public const NO_DUPLICATE_ARG_AUTOWIRE_BY_TYPE = 'symfony.noDuplicateArgAutowireByType';
+
+    public const NO_SERVICE_SAME_NAME_SET_CLASS = 'symfony.noServiceSameNameSetClass';
 }
