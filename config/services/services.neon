@@ -25,6 +25,9 @@ services:
     # doctrine
     - Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser
 
+    # symfony
+    - Symplify\PHPStanRules\Symfony\Reflection\ClassConstructorTypesResolver
+
     # rules enabled by configuration
     -
         class: Symplify\PHPStanRules\Rules\MaximumIgnoredErrorCountRule

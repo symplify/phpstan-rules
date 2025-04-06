@@ -11,7 +11,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser;
-use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\MethodCallNameAnalyzer;
 
 /**

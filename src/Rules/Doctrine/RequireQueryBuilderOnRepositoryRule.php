@@ -12,7 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>

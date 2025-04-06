@@ -17,8 +17,8 @@ use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\ObjectType;
 use ReflectionAttribute;
 use ReflectionMethod;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
-use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Reflection\InvokeClassMethodResolver;
 
 /**

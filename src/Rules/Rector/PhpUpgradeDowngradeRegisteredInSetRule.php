@@ -15,7 +15,7 @@ use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Set\ValueObject\SetList;
 use SplFileInfo;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RectorRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 use Symplify\PHPStanRules\FileSystem\FileSystem;
 

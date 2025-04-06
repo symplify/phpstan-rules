@@ -10,7 +10,7 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 
 /**
  * Check if abstract controller has constructor, as it should use

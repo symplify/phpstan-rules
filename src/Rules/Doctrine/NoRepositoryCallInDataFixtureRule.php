@@ -12,7 +12,7 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoRepositoryCallInDataFixtureRule\NoRepositoryCallInDataFixtureRuleTest;
 
 /**

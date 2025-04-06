@@ -10,7 +10,7 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\PHPUnitRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>

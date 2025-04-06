@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Enum;
+namespace Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 final class SymfonyRuleIdentifier
 {
@@ -47,4 +47,10 @@ final class SymfonyRuleIdentifier
     public const NO_BUNDLE_RESOURCE_CONFIG = 'symfony.noBundleResourceConfig';
 
     public const ALREADY_REGISTERED_AUTODISCOVERY_SERVICE = 'symfony.alreadyRegisteredAutodiscoveryService';
+
+    public const NO_DUPLICATE_ARGS_AUTOWIRE_BY_TYPE = 'symfony.noDuplicateArgsAutowireByType';
+
+    public const NO_DUPLICATE_ARG_AUTOWIRE_BY_TYPE = 'symfony.noDuplicateArgAutowireByType';
+
+    public const NO_SERVICE_SAME_NAME_SET_CLASS = 'symfony.noServiceSameNameSetClass';
 }

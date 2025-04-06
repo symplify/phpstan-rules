@@ -11,7 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use ReflectionClass;
-use Symplify\PHPStanRules\Enum\RectorRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
 
 /**
