@@ -75,7 +75,7 @@ final class NoServiceSameNameSetClassRule implements Rule
             return [];
         }
 
-        if (str_contains($serviceNameValue, '\\')) {
+        if (strpos($serviceNameValue, '\\') !== false) {
             $serviceNameValue = Strings::after($serviceNameValue, '\\', -1);
         }
 
