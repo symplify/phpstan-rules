@@ -66,7 +66,7 @@ final class RepeatedServiceAdderCallNameFinder
         $nodeFinder = new NodeFinder();
 
         /** @var MethodCall[] $callMethodCalls */
-        $callMethodCalls = $nodeFinder->find($methodCall, function (Node $node) {
+        $callMethodCalls = $nodeFinder->find($methodCall, function (Node $node): bool {
             if (! $node instanceof MethodCall) {
                 return false;
             }

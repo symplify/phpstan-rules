@@ -6,7 +6,7 @@ namespace Symplify\PHPStanRules\Enum;
 
 final class SymfonyFunctionName
 {
-    public const REFERENCE = 'Symfony\Component\DependencyInjection\Loader\Configurator\reference';
+    public const REFERENCE = 'Symfony\Component\DependencyInjection\Loader\Configurator\ref';
 
     public const SERVICE = 'Symfony\Component\DependencyInjection\Loader\Configurator\service';
 }
