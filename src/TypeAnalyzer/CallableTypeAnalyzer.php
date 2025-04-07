@@ -20,11 +20,7 @@ final class CallableTypeAnalyzer
         $nameStaticType = $scope->getType($expr);
         $unwrappedNameStaticType = TypeCombinator::removeNull($nameStaticType);
 
-        if ($unwrappedNameStaticType instanceof CallableType) {
-            return true;
-        }
-
-        if ($unwrappedNameStaticType instanceof ClosureType) {
+        if ($unwrappedNameStaticType->isCallable()->yes()) {
             return true;
         }
 
