@@ -35,6 +35,7 @@ final class NoDynamicNameRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipInvokable.php', []];
         yield [__DIR__ . '/Fixture/SkipClosure.php', []];
         yield [__DIR__ . '/Fixture/SkipCallable.php', []];
+        yield [__DIR__ . '/Fixture/SkipCallableUnion.php', []];
         yield [__DIR__ . '/Fixture/SkipNullableClosure.php', []];
         yield [__DIR__ . '/Fixture/SkipImmediatelyInvokedFunctionExpression.php', []];
     }
