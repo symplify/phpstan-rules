@@ -6,8 +6,6 @@ namespace Symplify\PHPStanRules\TypeAnalyzer;
 
 use PhpParser\Node\Expr;
 use PHPStan\Analyser\Scope;
-use PHPStan\Type\CallableType;
-use PHPStan\Type\ClosureType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
