@@ -42,4 +42,6 @@ final class SymfonyClass
     public const VALIDATOR_TEST_CASE = 'Symfony\Component\Validator\Test\ConstraintValidatorTestCase';
 
     public const CONTAINER_CONFIGURATOR = 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator';
+
+    public const IS_GRANTED = 'Symfony\Component\Security\Http\Attribute\IsGranted';
 }

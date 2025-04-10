@@ -10,10 +10,19 @@ use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\Enum\SensioClass;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 
+/**
+ * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\RequireIsGrantedEnumRule\RequireIsGrantedEnumRuleTest
+ *
+ * @implements Rule<Attribute>
+ */
 final class RequireIsGrantedEnumRule implements Rule
 {
+    public const ERROR_MESSAGE = 'Instead of "%s" string, use enum constant for #[IsGranted]';
+
     public function getNodeType(): string
     {
         return Attribute::class;
@@ -24,7 +33,7 @@ final class RequireIsGrantedEnumRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if ($node->name->toString() !== IsGranted::class) {
+        if (! in_array($node->name->toString(), [SensioClass::IS_GRANTED, SymfonyClass::IS_GRANTED], true)) {
             return [];
         }
 
@@ -33,12 +42,10 @@ final class RequireIsGrantedEnumRule implements Rule
             return [];
         }
 
-        return [
-            RuleErrorBuilder::message(
-                sprintf('Instead of "%s" string, use enum constant for #[IsGranted]', $isGrantedExpr->value)
-            )
-                ->identifier('symfony.requiredIsGrantedEnum')
-                ->build(),
-        ];
+        $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $isGrantedExpr->value))
+            ->identifier(SymfonyRuleIdentifier::REQUIRED_IS_GRANTED_ENUM)
+            ->build();
+
+        return [$identifierRuleError];
     }
 }

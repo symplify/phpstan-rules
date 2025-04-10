@@ -53,4 +53,6 @@ final class SymfonyRuleIdentifier
     public const NO_DUPLICATE_ARG_AUTOWIRE_BY_TYPE = 'symfony.noDuplicateArgAutowireByType';
 
     public const NO_SERVICE_SAME_NAME_SET_CLASS = 'symfony.noServiceSameNameSetClass';
+
+    public const REQUIRED_IS_GRANTED_ENUM = 'symfony.requiredIsGrantedEnum';
 }
