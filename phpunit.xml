@@ -12,5 +12,6 @@
         <exclude>tests/Rules/ClassNameRespectsParentSuffixRule/Fixture/</exclude>
         <exclude>tests/Rules/PHPUnit/PublicStaticDataProviderRule</exclude>
         <exclude>tests/Rules/PHPUnit/NoAssertFuncCallInTestsRule/Fixture</exclude>
+        <exclude>tests/Rules/PHPUnit/NoMockOnlyTestRule/Fixture/SkipConstraintValidatorTest.php</exclude>
     </testsuite>
 </phpunit>
