@@ -26,3 +26,4 @@ rules:
 
     # attributes
     - Symplify\PHPStanRules\Rules\Symfony\RequireIsGrantedEnumRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoBareAndSecurityIsGrantedContentsRule
