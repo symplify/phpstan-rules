@@ -2,7 +2,7 @@
 
 [![Downloads](https://img.shields.io/packagist/dt/symplify/phpstan-rules.svg?style=flat-square)](https://packagist.org/packages/symplify/phpstan-rules/stats)
 
-Set of 65+ PHPStan fun and practical rules that check:
+Set of 70+ PHPStan fun and practical rules that check:
 
 * clean architecture, logical errors,
 * naming, class namespace locations
@@ -1525,6 +1525,46 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(SomeService::class);
 };
 ```
+
+<br>
+
+### PreferAutowireAttributeOverConfigParamRule
+
+Instead of parameter reference in config, add #[Autowire(param: ...)] in the "%s" class constructor
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferAutowireAttributeOverConfigParamRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class)->args(['%some_param%']);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+
+final class SomeService
+{
+    public function __construct(
+        #[Autowire(param: 'some_param')]
+        private string $someParam
+    ) {
+    }
+}
+```
+
+:+1:
 
 <br>
 

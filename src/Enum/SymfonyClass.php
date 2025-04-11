@@ -12,9 +12,6 @@ final class SymfonyClass
 
     public const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Attribute\Route';
 
-    /**
-     * @api
-     */
     public const ROUTE_ANNOTATION = 'Symfony\Component\Routing\Annotation\Route';
 
     public const CONTROLLER = 'Symfony\Bundle\FrameworkBundle\Controller\Controller';
@@ -44,4 +41,6 @@ final class SymfonyClass
     public const CONTAINER_CONFIGURATOR = 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator';
 
     public const IS_GRANTED = 'Symfony\Component\Security\Http\Attribute\IsGranted';
+
+    public const ATTRIBUTE = 'Symfony\Component\DependencyInjection\Attribute\Autowire';
 }
