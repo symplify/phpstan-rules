@@ -29,10 +29,21 @@ final class NoServiceSameNameSetClassRuleTest extends RuleTestCase
                 11,
             ],
         ]];
+
+        yield [__DIR__ . '/Fixture/SkipNonClosureConstantSet.php', []];
+        yield [__DIR__ . '/Fixture/SkipParametersSetConstant.php', []];
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getAdditionalConfigFiles(): array
+    {
+        return [__DIR__ . '/config/configured_rule.neon'];
     }
 
     protected function getRule(): Rule
     {
-        return new NoServiceSameNameSetClassRule();
+        return self::getContainer()->getByType(NoServiceSameNameSetClassRule::class);
     }
 }
