@@ -70,12 +70,12 @@ final class NoConstructorAndRequiredTogetherRule implements Rule
                 continue;
             }
 
-            if (! str_contains($docComment->getText(), '@required')) {
+            if (strpos($docComment->getText(), '@required') === false) {
                 continue;
             }
 
             // special case when its allowed, to avoid circular references
-            if (str_contains($docComment->getText(), 'circular')) {
+            if (strpos($docComment->getText(), 'circular') !== false) {
                 continue;
             }
 
