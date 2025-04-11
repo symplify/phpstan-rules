@@ -8,5 +8,8 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgsAutowireByTypeRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgAutowireByTypeRule
 
+    # #[Autowire() in-class attribute over param() in config
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferAutowireAttributeOverConfigParamRule
+
     # $services->set('X', 'X')
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSameNameSetClassRule
