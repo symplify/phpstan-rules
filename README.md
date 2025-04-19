@@ -1769,6 +1769,75 @@ rules:
 
 <br>
 
+### NoBareAndSecurityIsGrantedContentsRule
+
+Instead of using one long "and" condition join, split into multiple standalone #[IsGranted] attributes
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoBareAndSecurityIsGrantedContentsRule
+```
+
+```php
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[IsGranted('has_role(ROLE_USER) and has_role(ROLE_ADMIN)')]
+class SomeController
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[IsGranted('ROLE_USER')]
+#[IsGranted('ROLE_ADMIN')]
+class SomeController
+{
+}
+```
+
+:+1:
+
+
+### RequireIsGrantedEnumRule
+
+Instead of string, use enum constant for #[IsGranted]
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\RequireIsGrantedEnumRule
+```
+
+```php
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[IsGranted('ROLE_USER')]
+class SomeController
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[IsGranted(SomeEnum::ROLE_USER)]
+class SomeController
+{
+}
+```
+
+:+1:
+
+
 ### NoRoutingPrefixRule
 
 Avoid global route prefixing. Use single place for paths in @Route/#[Route] and improve static analysis instead.
