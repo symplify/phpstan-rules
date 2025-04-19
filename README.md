@@ -1678,6 +1678,47 @@ abstract class AbstractController extends Controller
 
 <br>
 
+### AlreadyRegisteredAutodiscoveryServiceRule
+
+Remove service, as already registered via autodiscovery ->load(), no need to set it twice.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\AlreadyRegisteredAutodiscoveryServiceRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->load('App\\', __DIR__ . '/../src')
+        ->exclude([__DIR__ . '/src/Services']);
+
+    $services->set(SomeService::class);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->load('App\\', __DIR__ . '/../src')
+        ->exclude([__DIR__ . '/src/Services']);
+};
+```
+
+:+1:
+
+<br>
+
 ### ServicesExcludedDirectoryMustExistRule
 
 Services excluded path must exist. If not, remove it
