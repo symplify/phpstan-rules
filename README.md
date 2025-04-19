@@ -200,6 +200,35 @@ return __DIR__  . '/../fixtures/some_file.yml';
 
 <br>
 
+### NoArrayMapWithArrayCallableRule
+
+Array map with array callable is not allowed. Use anonymous/arrow function instead, to get better static analysis
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoArrayMapWithArrayCallableRule
+```
+
+```php
+$items = ['apple', 'banana', 'orange'];
+$items = array_map(['SomeClass', 'method'], $items);
+```
+
+:x:
+
+<br>
+
+```php
+$items = ['apple', 'banana', 'orange'];
+$items = array_map(function ($item) {
+    return $this->method($item);
+}, $items);
+```
+
+:+1:
+
+<br>
+
 ### NoConstructorOverrideRule
 
 Possible __construct() override, this can cause missing dependencies or setup
