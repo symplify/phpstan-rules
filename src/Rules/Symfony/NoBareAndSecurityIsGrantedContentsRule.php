@@ -43,11 +43,11 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         // nothing to split
-        if (str_contains($attributeExpr->value, ' or ')) {
+        if (strpos($attributeExpr->value, ' or ') !== false) {
             return [];
         }
 
-        if (! str_contains($attributeExpr->value, ' and ') && ! str_contains($attributeExpr->value, ' && ')) {
+        if (strpos($attributeExpr->value, ' and ') === false && strpos($attributeExpr->value, ' && ') === false) {
             return [];
         }
 
