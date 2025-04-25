@@ -37,6 +37,9 @@
         },
         "classmap": [
             "stubs"
+        ],
+        "files": [
+            "vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php"
         ]
     },
     "config": {

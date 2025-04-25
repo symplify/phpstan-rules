@@ -13,7 +13,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPUnit\Framework\MockObject\MockObject;
+use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 
 /**
@@ -46,7 +46,7 @@ final class NoMockObjectAndRealObjectPropertyRule implements Rule
                 continue;
             }
 
-            if ($type->toString() !== MockObject::class) {
+            if ($type->toString() !== ClassName::MOCK_OBJECT_CLASS) {
                 continue;
             }
 
