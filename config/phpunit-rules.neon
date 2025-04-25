@@ -7,3 +7,4 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
