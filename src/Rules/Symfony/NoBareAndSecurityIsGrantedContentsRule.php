@@ -51,10 +51,37 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
             return [];
         }
 
+        if ($this->usesCustomFunctios($attributeExpr)) {
+            return [];
+        }
+
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(SymfonyRuleIdentifier::REQUIRED_IS_GRANTED_ENUM)
             ->build();
 
         return [$identifierRuleError];
+    }
+
+    private function usesCustomFunctios(String_ $string): bool
+    {
+        $joinedItems = preg_split('# (and|&&|or) #', $string->value, -1, PREG_SPLIT_NO_EMPTY);
+
+        if ($joinedItems === false) {
+            return false;
+        }
+
+        foreach ($joinedItems as $joinedItem) {
+            if (str_contains($joinedItem, 'is_granted')) {
+                continue;
+            }
+
+            if (str_contains($joinedItem, 'has_role')) {
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }
