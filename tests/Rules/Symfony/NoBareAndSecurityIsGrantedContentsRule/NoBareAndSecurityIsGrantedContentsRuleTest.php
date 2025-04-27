@@ -32,6 +32,7 @@ final class NoBareAndSecurityIsGrantedContentsRuleTest extends RuleTestCase
         ]];
 
         yield [__DIR__ . '/Fixture/SkipInnerOr.php', []];
+        yield [__DIR__ . '/Fixture/SkipCustomFunction.php', []];
         yield [__DIR__ . '/Fixture/SkipSplitOne.php', []];
     }
 
