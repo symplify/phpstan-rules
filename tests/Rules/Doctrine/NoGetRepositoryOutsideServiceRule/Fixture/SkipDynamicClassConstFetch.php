@@ -7,12 +7,12 @@ namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServi
 use Doctrine\ORM\EntityManager;
 use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServiceRule\Source\SomeRandomEntity;
 
-final readonly class SkipDymamicFetch
+final readonly class SkipDynamicClassConstFetch
 {
     public function run(
         EntityManager $entityManager,
-        string $className
+        object $someObject
     ) {
-        $someRepository = $entityManager->getRepository($className);
+        $someRepository = $entityManager->getRepository($someObject::class);
     }
 }
