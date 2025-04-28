@@ -28,7 +28,13 @@ final class NoGetRepositoryOutsideServiceRuleTest extends RuleTestCase
             18,
         ]]];
 
+        yield [__DIR__ . '/Fixture/GetRepositoryRandomEntity.php', [[
+            NoGetRepositoryOutsideServiceRule::ERROR_MESSAGE,
+            19,
+        ]]];
+
         yield [__DIR__ . '/Fixture/SkipInRepository.php', []];
+        yield [__DIR__ . '/Fixture/SkipDymamicFetch.php', []];
     }
 
     protected function getRule(): Rule
