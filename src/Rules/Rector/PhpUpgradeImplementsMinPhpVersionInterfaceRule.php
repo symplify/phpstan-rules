@@ -44,7 +44,7 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
     {
         /** @var string $className */
         $className = (string) $node->namespacedName;
-        if (! str_ends_with($className, 'Rector')) {
+        if (substr_compare($className, 'Rector', -strlen('Rector')) !== 0) {
             return [];
         }
 
