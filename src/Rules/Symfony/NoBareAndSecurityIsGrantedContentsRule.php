@@ -43,11 +43,11 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         // nothing to split
-        if (str_contains($attributeExpr->value, ' or ')) {
+        if (strpos($attributeExpr->value, ' or ') !== false) {
             return [];
         }
 
-        if (! str_contains($attributeExpr->value, ' and ') && ! str_contains($attributeExpr->value, ' && ')) {
+        if (strpos($attributeExpr->value, ' and ') === false && strpos($attributeExpr->value, ' && ') === false) {
             return [];
         }
 
@@ -71,11 +71,11 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         foreach ($joinedItems as $joinedItem) {
-            if (str_contains($joinedItem, 'is_granted')) {
+            if (strpos($joinedItem, 'is_granted') !== false) {
                 continue;
             }
 
-            if (str_contains($joinedItem, 'has_role')) {
+            if (strpos($joinedItem, 'has_role') !== false) {
                 continue;
             }
 
