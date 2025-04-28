@@ -35,4 +35,9 @@ final class DoctrineClass
      * @var string
      */
     public const CONNECTION = 'Doctrine\DBAL\Connection';
+
+    /**
+     * @var string
+     */
+    public const DOCUMENT_REPOSITORY = 'Doctrine\ODM\MongoDB\Repository\DocumentRepository';
 }

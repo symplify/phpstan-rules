@@ -8,4 +8,7 @@ if (class_exists('Doctrine\ODM\MongoDB\Repository\DocumentRepository')) {
 
 abstract class DocumentRepository
 {
+    public function getQueryBuilder()
+    {
+    }
 }

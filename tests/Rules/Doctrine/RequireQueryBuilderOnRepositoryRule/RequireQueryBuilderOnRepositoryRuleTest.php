@@ -21,9 +21,15 @@ final class RequireQueryBuilderOnRepositoryRuleTest extends RuleTestCase
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipCreateQueryBuilderOnRepository.php', []];
+        yield [__DIR__ . '/Fixture/SkipDocumentRepository.php', []];
+        yield [__DIR__ . '/Fixture/SkipConnection.php', []];
 
         yield [__DIR__ . '/Fixture/ReportOnEntityManager.php', [
             [RequireQueryBuilderOnRepositoryRule::ERROR_MESSAGE, 14],
+        ]];
+
+        yield [__DIR__ . '/Fixture/ReportOnDocumentManager.php', [
+            [RequireQueryBuilderOnRepositoryRule::ERROR_MESSAGE, 13],
         ]];
     }
 

@@ -10,12 +10,15 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
+use PHPStan\Type\Type;
+use PHPStan\Type\UnionType;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
+ * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule\RequireQueryBuilderOnRepositoryRuleTest
  */
 final class RequireQueryBuilderOnRepositoryRule implements Rule
 {
@@ -39,16 +42,7 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
         }
 
         $callerType = $scope->getType($node->var);
-        if (! $callerType instanceof ObjectType) {
-            return [];
-        }
-
-        // we safe as both select() + from() calls are made on the repository
-        if ($callerType->isInstanceOf(DoctrineClass::ENTITY_REPOSITORY)->yes()) {
-            return [];
-        }
-
-        if ($callerType->isInstanceOf(DoctrineClass::CONNECTION)->yes()) {
+        if ($this->isValidRepositoryObjectType($callerType)) {
             return [];
         }
 
@@ -57,5 +51,31 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
             ->build();
 
         return [$identifierRuleError];
+    }
+
+    private function isValidRepositoryObjectType(Type $type): bool
+    {
+        if ($type instanceof UnionType) {
+            foreach ($type->getTypes() as $unionType) {
+                if ($this->isValidRepositoryObjectType($unionType)) {
+                    return true;
+                }
+            }
+        }
+
+        if (! $type instanceof ObjectType) {
+            return true;
+        }
+
+        // we safe as both select() + from() calls are made on the repository
+        if ($type->isInstanceOf(DoctrineClass::ENTITY_REPOSITORY)->yes()) {
+            return true;
+        }
+
+        if ($type->isInstanceOf(DoctrineClass::DOCUMENT_REPOSITORY)->yes()) {
+            return true;
+        }
+
+        return $type->isInstanceOf(DoctrineClass::CONNECTION)->yes();
     }
 }
