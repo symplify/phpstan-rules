@@ -2,3 +2,4 @@ rules:
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
     - Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule
     - Symplify\PHPStanRules\Rules\Complexity\NoArrayMapWithArrayCallableRule
+    - Symplify\PHPStanRules\Rules\Complexity\NoConstructorOverrideRule
