@@ -58,7 +58,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
 
         // dummy check
         $classReflection = $scope->getClassReflection();
-        if (str_ends_with($classReflection->getName(), 'Repository')) {
+        if (substr_compare($classReflection->getName(), 'Repository', -strlen('Repository')) === 0) {
             return [];
         }
 
