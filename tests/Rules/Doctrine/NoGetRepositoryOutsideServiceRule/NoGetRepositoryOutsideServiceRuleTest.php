@@ -34,7 +34,8 @@ final class NoGetRepositoryOutsideServiceRuleTest extends RuleTestCase
         ]]];
 
         yield [__DIR__ . '/Fixture/SkipInRepository.php', []];
-        yield [__DIR__ . '/Fixture/SkipDymamicFetch.php', []];
+        yield [__DIR__ . '/Fixture/SkipDynamicFetch.php', []];
+        yield [__DIR__ . '/Fixture/SkipDynamicClassConstFetch.php', []];
     }
 
     protected function getRule(): Rule

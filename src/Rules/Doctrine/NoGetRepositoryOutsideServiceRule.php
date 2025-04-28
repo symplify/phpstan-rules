@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Rules\Doctrine;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
@@ -76,6 +77,11 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
             return false;
         }
 
-        return ! $firstArg->value instanceof ClassConstFetch;
+        if ($firstArg->value instanceof ClassConstFetch) {
+            $classConstFetch = $firstArg->value;
+            return ! $classConstFetch->class instanceof Name;
+        }
+
+        return true;
     }
 }
