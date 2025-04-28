@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Doctrine;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -34,7 +36,15 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        if ($node->isFirstClassCallable()) {
+            return [];
+        }
+
         if (! NamingHelper::isName($node->name, 'getRepository')) {
+            return [];
+        }
+
+        if ($this->isDynamicArg($node)) {
             return [];
         }
 
@@ -57,5 +67,15 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
             ->build();
 
         return [$ruleError];
+    }
+
+    private function isDynamicArg(MethodCall $methodCall): bool
+    {
+        $firstArg = $methodCall->getArgs()[0];
+        if ($firstArg->value instanceof String_) {
+            return false;
+        }
+
+        return ! $firstArg->value instanceof ClassConstFetch;
     }
 }
