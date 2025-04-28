@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireServiceRepositoryParentRuleTest\Fixture;
+namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireServiceRepositoryParentRule\Fixture;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 

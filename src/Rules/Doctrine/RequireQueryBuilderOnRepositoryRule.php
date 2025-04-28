@@ -22,7 +22,7 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
+    public const ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
 
     public function getNodeType(): string
     {
