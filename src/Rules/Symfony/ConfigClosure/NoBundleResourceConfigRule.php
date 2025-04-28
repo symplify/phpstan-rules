@@ -38,7 +38,7 @@ final class NoBundleResourceConfigRule implements Rule
             return [];
         }
 
-        if (! str_contains($scope->getFile(), 'Resources/config')) {
+        if (strpos($scope->getFile(), 'Resources/config') === false) {
             return [];
         }
 

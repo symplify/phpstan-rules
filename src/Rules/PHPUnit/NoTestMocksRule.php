@@ -16,8 +16,13 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 /**
  * @implements Rule<MethodCall>
  */
-final readonly class NoTestMocksRule implements Rule
+final class NoTestMocksRule implements Rule
 {
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private array $allowedTypes = [];
     /**
      * @api
      * @var string
@@ -32,9 +37,9 @@ final readonly class NoTestMocksRule implements Rule
     /**
      * @param string[] $allowedTypes
      */
-    public function __construct(
-        private array $allowedTypes = []
-    ) {
+    public function __construct(array $allowedTypes = [])
+    {
+        $this->allowedTypes = $allowedTypes;
     }
 
     public function getNodeType(): string
