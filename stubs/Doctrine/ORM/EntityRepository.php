@@ -8,4 +8,7 @@ if (class_exists('Doctrine\ORM\EntityRepository')) {
 
 class EntityRepository
 {
+    public function createQueryBuilder()
+    {
+    }
 }
