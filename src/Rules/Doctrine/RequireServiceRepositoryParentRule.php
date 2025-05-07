@@ -17,7 +17,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 /**
  * @implements Rule<InClassNode>
  *
- * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireServiceRepositoryParentRuleTest\RequireServiceRepositoryParentRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireServiceRepositoryParentRule\RequireServiceRepositoryParentRuleTest
  */
 final class RequireServiceRepositoryParentRule implements Rule
 {

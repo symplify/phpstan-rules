@@ -2079,13 +2079,13 @@ class SomeListener
 
 <br>
 
-### RequiredDoctrineServiceRepositoryParentRule
+### RequireServiceRepositoryParentRule
 
 Repository must extend *, so it can be injected as a service
 
 ```yaml
 rules:
-    - Symplify\PHPStanRules\Rules\Doctrine\RequiredDoctrineServiceRepositoryParentRule
+    - Symplify\PHPStanRules\Rules\Doctrine\RequireServiceRepositoryParentRule
 ```
 
 ```php
