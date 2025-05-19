@@ -206,7 +206,7 @@ Array map with array callable is not allowed. Use anonymous/arrow function inste
 
 ```yaml
 rules:
-    - Symplify\PHPStanRules\Rules\NoArrayMapWithArrayCallableRule
+    - Symplify\PHPStanRules\Rules\Complexity\NoArrayMapWithArrayCallableRule
 ```
 
 ```php
