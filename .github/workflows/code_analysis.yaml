@@ -20,10 +20,9 @@ jobs:
                         name: 'Composer Validate'
                         run: composer validate --ansi
 
-# temporary disable due to missing method PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode::getSealedTagValues() due requirement of latest phpdoc-parser
-#                    -
-#                        name: 'Rector'
-#                        run: composer rector --ansi
+                    -
+                        name: 'Rector'
+                        run: composer rector --ansi
 
                     -
                         name: 'Coding Standard'
