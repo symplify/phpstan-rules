@@ -45,7 +45,8 @@
     "config": {
         "platform-check": false,
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "rector/extension-installer": true
         }
     },
     "scripts": {
