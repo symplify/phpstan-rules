@@ -27,7 +27,7 @@ final readonly class MaximumIgnoredErrorCountRule implements Rule
     public function __construct(
         private int $limit = 0
     ) {
-        $this->neonAdapter = new NeonAdapter();
+        $this->neonAdapter = new NeonAdapter([]);
     }
 
     /**
