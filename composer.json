@@ -60,5 +60,7 @@
                 "config/services/services.neon"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
