@@ -33,9 +33,10 @@ jobs:
                         name: 'Tests'
                         run: vendor/bin/phpunit
 
-                    -
-                        name: 'Composer Dependency Analysis'
-                        run: vendor/bin/composer-dependency-analyser
+# will be enabled later once new rector released
+#                    -
+#                        name: 'Composer Dependency Analysis'
+#                        run: vendor/bin/composer-dependency-analyser
 
                     -
                         name: 'Check Active Classes'
