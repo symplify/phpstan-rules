@@ -7,7 +7,7 @@ namespace Symplify\PHPStanRules\Doctrine;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use PHPStan\Reflection\ReflectionProvider;
-use Rector\Exception\ShouldNotHappenException;
+use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 
 final readonly class RepositoryClassResolver
 {
