@@ -7,7 +7,7 @@ use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 
 return RectorConfig::configure()
     ->withPhpSets()
-    ->withPreparedSets(codeQuality: true, deadCode: true, codingStyle: true, typeDeclarations: true, naming: true, privatization: true, earlyReturn: true, phpunitCodeQuality: true)
+    ->withPreparedSets(deadCode: true, codeQuality: true, codingStyle: true, typeDeclarations: true, privatization: true, naming: true, earlyReturn: true, phpunitCodeQuality: true)
     ->withPaths([__DIR__ . '/config', __DIR__ . '/src', __DIR__ . '/tests'])
     ->withRootFiles()
     ->withImportNames()

@@ -90,8 +90,8 @@ final readonly class RequireUniqueEnumConstantRule implements Rule
     private function resolveClassConstantValues(ClassLike $classLike, Scope $scope): array
     {
         $constantValues = [];
-        foreach ($classLike->getConstants() as $classConst) {
-            foreach ($classConst->consts as $const) {
+        foreach ($classLike->getConstants() as $constant) {
+            foreach ($constant->consts as $const) {
                 $constValueType = $scope->getType($const->value);
                 if (! $constValueType instanceof ConstantStringType) {
                     continue;
