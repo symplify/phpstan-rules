@@ -75,4 +75,6 @@ final class RuleIdentifier
     public const CONVENTION_PARAM_NAME_TO_TYPE = 'symplify.conventionParamNameToType';
 
     public const NO_ARRAY_MAP_WITH_ARRAY_CALLABLE = 'symplify.noArrayMapWithArrayCallable';
+
+    public const RULE_IDENTIFIER = 'symplify.foreachCeption';
 }

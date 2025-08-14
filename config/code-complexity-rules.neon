@@ -3,3 +3,4 @@ rules:
     - Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule
     - Symplify\PHPStanRules\Rules\Complexity\NoArrayMapWithArrayCallableRule
     - Symplify\PHPStanRules\Rules\Complexity\NoConstructorOverrideRule
+    - Symplify\PHPStanRules\Rules\Complexity\ForeachCeptionRule
