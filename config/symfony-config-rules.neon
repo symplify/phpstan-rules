@@ -4,6 +4,9 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\AlreadyRegisteredAutodiscoveryServiceRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\TaggedIteratorOverRepeatedServiceCallRule
 
+    # no autowire duplicate
+    - Symplify\PHPStanRules\Rules\Symfony\NoServiceAutowireDuplicateRule
+
     # args() and arg() call
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgsAutowireByTypeRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgAutowireByTypeRule

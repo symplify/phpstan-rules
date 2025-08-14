@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Issues;
 
-use Symplify\PHPStanRules\Rules\MaximumIgnoredErrorCountRule;
 use PHPUnit\Framework\TestCase;
+use Symplify\PHPStanRules\Rules\MaximumIgnoredErrorCountRule;
 
 final class InstantiateMaximumIgnoredErrorCountRuleTest extends TestCase
 {
