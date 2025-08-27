@@ -16,3 +16,6 @@ rules:
 
     # $services->set('X', 'X')
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSameNameSetClassRule
+
+    # $services->set('X')->class('X')
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoSetClassServiceDuplicationRule
