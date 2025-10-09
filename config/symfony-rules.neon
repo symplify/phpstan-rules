@@ -7,6 +7,9 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule
 
+    # controllers
+    - Symplify\PHPStanRules\Rules\Symfony\NoControllerMethodInjectionRule
+
     # routing
     - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
     - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
