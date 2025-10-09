@@ -44,7 +44,7 @@ final class NoControllerMethodInjectionRule implements Rule
 
         $className = $node->name->toString();
 
-        if (! str_ends_with($className, 'Controller')) {
+        if (substr_compare($className, 'Controller', -strlen('Controller')) !== 0) {
             return [];
         }
 
