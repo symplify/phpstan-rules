@@ -43,4 +43,6 @@ final class SymfonyClass
     public const IS_GRANTED = 'Symfony\Component\Security\Http\Attribute\IsGranted';
 
     public const ATTRIBUTE = 'Symfony\Component\DependencyInjection\Attribute\Autowire';
+
+    public const REQUEST = 'Symfony\Component\HttpFoundation\Request';
 }
