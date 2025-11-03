@@ -40,13 +40,13 @@ final readonly class ClassConstructorTypesResolver
 
         $extendedMethodReflection = $classReflection->getConstructor();
 
-        foreach ($extendedMethodReflection->getOnlyVariant()->getParameters() as $parameterReflection) {
-            $parameterType = $parameterReflection->getType();
+        foreach ($extendedMethodReflection->getOnlyVariant()->getParameters() as $extendedParameterReflection) {
+            $parameterType = $extendedParameterReflection->getType();
             if (! $parameterType instanceof ObjectType) {
                 continue;
             }
 
-            $classArgumentNamesToTypes[$parameterReflection->getName()] = $parameterType->getClassName();
+            $classArgumentNamesToTypes[$extendedParameterReflection->getName()] = $parameterType->getClassName();
         }
 
         return $classArgumentNamesToTypes;
