@@ -74,6 +74,7 @@ final class NoControllerMethodInjectionRule implements Rule
 
                 $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $typeName))
                     ->identifier(SymfonyRuleIdentifier::NO_CONTROLLER_METHOD_INJECTION)
+                    ->line($classMethod->getStartLine())
                     ->build();
 
                 $ruleErrors[] = $identifierRuleError;
