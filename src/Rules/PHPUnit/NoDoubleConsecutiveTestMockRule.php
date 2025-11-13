@@ -10,8 +10,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Rector\PHPUnit\Enum\PHPUnitClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
+use Symplify\PHPStanRules\Enum\TestClassName;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
@@ -41,7 +41,7 @@ final class NoDoubleConsecutiveTestMockRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        if (! $classReflection->is(PHPUnitClassName::TEST_CASE)) {
+        if (! $classReflection->is(TestClassName::PHPUNIT_TEST_CASE)) {
             return [];
         }
 
