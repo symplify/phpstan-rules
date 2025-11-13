@@ -1,5 +1,0 @@
-includes:
-    - ../../../../../../config/services/services.neon
-
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgsAutowireByTypeRule
