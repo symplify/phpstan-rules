@@ -53,7 +53,8 @@ final class NoControllerMethodInjectionRule implements Rule
                 continue;
             }
 
-            if ($classMethod->isMagic()) {
+            // check invoke as well
+            if ($classMethod->isMagic() && $classMethod->name->toString() !== '__invoke') {
                 continue;
             }
 

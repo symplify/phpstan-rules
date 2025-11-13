@@ -29,6 +29,11 @@ final class NoControllerMethodInjectionRuleTest extends RuleTestCase
             15,
         ]]];
 
+        yield [__DIR__ . '/Fixture/InvokableActionInjectionController.php', [[
+            sprintf(NoControllerMethodInjectionRule::ERROR_MESSAGE, SomeService::class),
+            15,
+        ]]];
+
         yield [__DIR__ . '/Fixture/SkipRequestParameterController.php', []];
         yield [__DIR__ . '/Fixture/SkipScalarParameterController.php', []];
     }
