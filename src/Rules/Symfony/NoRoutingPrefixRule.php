@@ -82,10 +82,10 @@ final class NoRoutingPrefixRule implements Rule
         }
 
         // these external bundles are typically prefixed on purpose
-        if (str_starts_with($importArgPath->value, '@FrameworkBundle')) {
+        if (strncmp($importArgPath->value, '@FrameworkBundle', strlen('@FrameworkBundle')) === 0) {
             return true;
         }
 
-        return str_starts_with($importArgPath->value, '@WebProfilerBundle');
+        return strncmp($importArgPath->value, '@WebProfilerBundle', strlen('@WebProfilerBundle')) === 0;
     }
 }
