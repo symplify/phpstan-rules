@@ -21,7 +21,7 @@ use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
  *
  * @implements Rule<InClassNode>
  */
-final readonly class NoMockOnlyTestRule implements Rule
+final class NoMockOnlyTestRule implements Rule
 {
     /**
      * @var string
