@@ -63,4 +63,6 @@ final class SymfonyRuleIdentifier
     public const NO_SET_CLASS_SERVICE_DUPLICATE = 'symfony.noSetClassServiceDuplicate';
 
     public const NO_CONTROLLER_METHOD_INJECTION = 'symfony.noControllerMethodInjection';
+
+    public const FILE_NAME_MATCHES_EXTENSION = 'symfony.fileNameMatchesExtension';
 }

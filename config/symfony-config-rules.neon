@@ -4,6 +4,9 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\AlreadyRegisteredAutodiscoveryServiceRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\TaggedIteratorOverRepeatedServiceCallRule
 
+    # sync file name and extension name
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\FileNameMatchesExtensionRule
+
     # no autowire duplicate
     - Symplify\PHPStanRules\Rules\Symfony\NoServiceAutowireDuplicateRule
 
