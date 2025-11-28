@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\NoServiceAutowireDuplicateRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\NoServiceAutowireDuplicateRule;
@@ -29,7 +28,7 @@ final class NoServiceAutowireDuplicateRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/AlsoNoDuplicate.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoServiceAutowireDuplicateRule
     {
         return new NoServiceAutowireDuplicateRule();
     }

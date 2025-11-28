@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\NoClassLevelRouteRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule;
@@ -36,7 +35,7 @@ final class NoClassLevelRouteRuleTest extends RuleTestCase
         ], [[NoClassLevelRouteRule::ERROR_MESSAGE, 11]]];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoClassLevelRouteRule
     {
         return new NoClassLevelRouteRule();
     }

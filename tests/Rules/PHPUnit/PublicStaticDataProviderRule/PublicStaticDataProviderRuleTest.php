@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\PublicStaticDataProviderRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule;
@@ -31,7 +30,7 @@ final class PublicStaticDataProviderRuleTest extends RuleTestCase
         yield [[__DIR__ . '/Fixture/SkipStaticTest.php'], []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): PublicStaticDataProviderRule
     {
         return new PublicStaticDataProviderRule();
     }

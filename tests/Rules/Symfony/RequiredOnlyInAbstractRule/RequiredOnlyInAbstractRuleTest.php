@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\RequiredOnlyInAbstractRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\RequiredOnlyInAbstractRule;
@@ -30,7 +29,7 @@ final class RequiredOnlyInAbstractRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipParentDocumentRepository.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): RequiredOnlyInAbstractRule
     {
         return new RequiredOnlyInAbstractRule();
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\NoBareAndSecurityIsGrantedContentsRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\NoBareAndSecurityIsGrantedContentsRule;
@@ -36,7 +35,7 @@ final class NoBareAndSecurityIsGrantedContentsRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipSplitOne.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoBareAndSecurityIsGrantedContentsRule
     {
         return new NoBareAndSecurityIsGrantedContentsRule();
     }

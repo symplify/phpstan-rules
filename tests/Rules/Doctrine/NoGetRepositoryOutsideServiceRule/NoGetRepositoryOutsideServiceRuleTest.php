@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServiceRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule;
@@ -38,7 +37,7 @@ final class NoGetRepositoryOutsideServiceRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipDynamicClassConstFetch.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoGetRepositoryOutsideServiceRule
     {
         return new NoGetRepositoryOutsideServiceRule();
     }

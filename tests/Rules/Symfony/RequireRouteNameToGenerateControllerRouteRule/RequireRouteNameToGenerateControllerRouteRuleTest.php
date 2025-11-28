@@ -6,7 +6,6 @@ namespace Symplify\PHPStanRules\Tests\Rules\Symfony\RequireRouteNameToGenerateCo
 
 use Iterator;
 use PHPStan\Reflection\ReflectionProvider;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule;
@@ -40,7 +39,7 @@ final class RequireRouteNameToGenerateControllerRouteRuleTest extends RuleTestCa
         ]];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): RequireRouteNameToGenerateControllerRouteRule
     {
         $reflectionProvider = self::getContainer()->getByType(ReflectionProvider::class);
 

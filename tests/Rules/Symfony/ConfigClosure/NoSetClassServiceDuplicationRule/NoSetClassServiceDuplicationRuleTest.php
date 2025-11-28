@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\ConfigClosure\NoSetClassServiceDuplicationRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoSetClassServiceDuplicationRule;
@@ -34,7 +33,7 @@ final class NoSetClassServiceDuplicationRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipSoleSet.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoSetClassServiceDuplicationRule
     {
         return new NoSetClassServiceDuplicationRule();
     }

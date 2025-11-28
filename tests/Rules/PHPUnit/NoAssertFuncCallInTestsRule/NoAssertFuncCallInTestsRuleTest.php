@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoAssertFuncCallInTestsRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule;
@@ -25,7 +24,7 @@ final class NoAssertFuncCallInTestsRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipTestOutside.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoAssertFuncCallInTestsRule
     {
         return new NoAssertFuncCallInTestsRule();
     }

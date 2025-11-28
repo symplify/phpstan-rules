@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\SingleArgEventDispatchRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule;
@@ -26,7 +25,7 @@ final class SingleArgEventDispatchRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipUnrelatedDispatch.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): SingleArgEventDispatchRule
     {
         return new SingleArgEventDispatchRule();
     }

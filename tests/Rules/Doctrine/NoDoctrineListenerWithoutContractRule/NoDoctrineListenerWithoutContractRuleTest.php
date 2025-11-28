@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoDoctrineListenerWithoutContractRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Doctrine\NoDoctrineListenerWithoutContractRule;
@@ -32,7 +31,7 @@ final class NoDoctrineListenerWithoutContractRuleTest extends RuleTestCase
         ]]];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoDoctrineListenerWithoutContractRule
     {
         return new NoDoctrineListenerWithoutContractRule();
     }

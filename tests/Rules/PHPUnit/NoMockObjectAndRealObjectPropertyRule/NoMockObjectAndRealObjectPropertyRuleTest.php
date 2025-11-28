@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule;
@@ -27,7 +26,7 @@ final class NoMockObjectAndRealObjectPropertyRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipNullableObject.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): NoMockObjectAndRealObjectPropertyRule
     {
         return new NoMockObjectAndRealObjectPropertyRule();
     }

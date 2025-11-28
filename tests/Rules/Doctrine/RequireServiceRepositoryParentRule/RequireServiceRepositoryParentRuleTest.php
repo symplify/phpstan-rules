@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireServiceRepositoryParentRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
@@ -29,7 +28,7 @@ final class RequireServiceRepositoryParentRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipContractImplementingRepository.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): RequireServiceRepositoryParentRule
     {
         return new RequireServiceRepositoryParentRule();
     }

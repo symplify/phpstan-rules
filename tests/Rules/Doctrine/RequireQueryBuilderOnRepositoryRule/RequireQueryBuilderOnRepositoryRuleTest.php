@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule;
@@ -33,7 +32,7 @@ final class RequireQueryBuilderOnRepositoryRuleTest extends RuleTestCase
         ]];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): RequireQueryBuilderOnRepositoryRule
     {
         return new RequireQueryBuilderOnRepositoryRule();
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\SingleRequiredMethodRule;
 
 use Iterator;
-use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\SingleRequiredMethodRule;
@@ -28,7 +27,7 @@ final class SingleRequiredMethodRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipSingleRequiredMethod.php', []];
     }
 
-    protected function getRule(): Rule
+    protected function getRule(): SingleRequiredMethodRule
     {
         return new SingleRequiredMethodRule();
     }
