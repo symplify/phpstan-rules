@@ -17,4 +17,6 @@ final class RectorRuleIdentifier
     public const NO_PROPERTY_NODE_ASSIGN = 'rector.noPropertyNodeAssign';
 
     public const PREFER_DIRECT_IS_NAME = 'rector.preferDirectIsName';
+
+    public const NO_ONLY_NULL_RETURN_IN_REFACTOR = 'rector.noOnlyNullReturnInRefactor';
 }
