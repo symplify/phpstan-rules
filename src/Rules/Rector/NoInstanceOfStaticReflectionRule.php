@@ -60,7 +60,10 @@ final class NoInstanceOfStaticReflectionRule implements Rule
             ->build()];
     }
 
-    private function resolveExprStaticType(FuncCall|Instanceof_ $node, Scope $scope): ?Type
+    /**
+     * @param \PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Instanceof_ $node
+     */
+    private function resolveExprStaticType($node, Scope $scope): ?Type
     {
         if ($node instanceof Instanceof_) {
             return $this->resolveInstanceOfType($node, $scope);

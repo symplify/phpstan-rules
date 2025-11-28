@@ -64,7 +64,10 @@ final class FileNameMatchesExtensionRule implements Rule
         return [$identifierRuleError];
     }
 
-    private function findExtensionName(Closure|Node $node): ?string
+    /**
+     * @param \PhpParser\Node\Expr\Closure|\PhpParser\Node $node
+     */
+    private function findExtensionName($node): ?string
     {
         $extensionName = null;
 

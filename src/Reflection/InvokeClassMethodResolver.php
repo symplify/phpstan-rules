@@ -7,7 +7,7 @@ use ReflectionMethod;
 
 final class InvokeClassMethodResolver
 {
-    public static function resolve(ClassReflection $controllerClassReflection): null|ReflectionMethod
+    public static function resolve(ClassReflection $controllerClassReflection): ?\ReflectionMethod
     {
         if (! $controllerClassReflection->hasMethod('__invoke')) {
             return null;
