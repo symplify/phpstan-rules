@@ -19,4 +19,6 @@ final class RectorRuleIdentifier
     public const PREFER_DIRECT_IS_NAME = 'rector.preferDirectIsName';
 
     public const NO_ONLY_NULL_RETURN_IN_REFACTOR = 'rector.noOnlyNullReturnInRefactor';
+
+    public const NO_INTEGER_REFACTOR_RETURN = 'rector.noIntegerRefactorReturn';
 }

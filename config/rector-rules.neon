@@ -7,6 +7,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Rector\NoPropertyNodeAssignRule
     - Symplify\PHPStanRules\Rules\Rector\PreferDirectIsNameRule
     - Symplify\PHPStanRules\Rules\Rector\NoOnlyNullReturnInRefactorRule
+    - Symplify\PHPStanRules\Rules\Rector\NoIntegerRefactorReturnRule
 
 services:
     # $node->getAttribute($1) => Type|null by $1
