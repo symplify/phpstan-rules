@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Rector;
 
+use PhpParser\Node\Name;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\UnionType;
-use PhpParser\NodeFinder;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
+use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Rector\NoIntegerRefactorReturnRule\NoIntegerRefactorReturnRuleTest
@@ -85,32 +86,31 @@ final class NoIntegerRefactorReturnRule implements Rule
     {
         $constantNames = [];
 
-        // find exact constants
-        $nodeFinder = new NodeFinder();
-        $nodeFinder->find($classMethod, function (Node $subNode) use (&$constantNames): int|bool {
+        $simpleCallableNodeTraverser = new SimpleCallableNodeTraverser();
+        $simpleCallableNodeTraverser->traverseNodesWithCallable($classMethod, function (Node $subNode) use (&$constantNames): int|null {
             // skip closure nodes as they have their own scope
             if ($subNode instanceof Closure) {
-                return NodeVisitor::DONT_TRAVERSE_CHILDREN;
+                return NodeVisitor::DONT_TRAVERSE_CURRENT_AND_CHILDREN;
             }
 
             if (! $subNode instanceof ClassConstFetch) {
-                return false;
+                return null;
             }
 
-            if (! $subNode->class instanceof Node\Name) {
-                return false;
+            if (! $subNode->class instanceof Name) {
+                return null;
             }
 
             if (! in_array($subNode->class->toString(), [NodeVisitor::class, NodeTraverser::class])) {
-                return false;
+                return null;
             }
 
             if (! $subNode->name instanceof Identifier) {
-                return false;
+                return null;
             }
 
             $constantNames[] = $subNode->name->toString();
-            return true;
+            return null;
         });
 
         return array_unique($constantNames);
