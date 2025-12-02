@@ -65,7 +65,7 @@ final class NoIntegerRefactorReturnRule implements Rule
             $constantNames = $this->findUsedNodeVisitorConstantNames($node);
 
             $undesiredConstantNames = array_diff($constantNames, ['REMOVE_NODE']);
-            if ($undesiredConstantNames === []) {
+            if ($constantNames !== [] && $undesiredConstantNames === []) {
                 return [];
             }
 
