@@ -87,7 +87,7 @@ final class NoIntegerRefactorReturnRule implements Rule
         $constantNames = [];
 
         $simpleCallableNodeTraverser = new SimpleCallableNodeTraverser();
-        $simpleCallableNodeTraverser->traverseNodesWithCallable($classMethod, function (Node $subNode) use (&$constantNames): int|null {
+        $simpleCallableNodeTraverser->traverseNodesWithCallable($classMethod, function (Node $subNode) use (&$constantNames): ?int {
             // skip closure nodes as they have their own scope
             if ($subNode instanceof Closure) {
                 return NodeVisitor::DONT_TRAVERSE_CURRENT_AND_CHILDREN;

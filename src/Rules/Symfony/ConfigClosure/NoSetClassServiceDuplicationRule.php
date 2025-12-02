@@ -18,13 +18,16 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 /**
  * @implements Rule<MethodCall>
  */
-final readonly class NoSetClassServiceDuplicationRule implements Rule
+final class NoSetClassServiceDuplicationRule implements Rule
 {
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of "$services->set(%s)->class(%s)" that brings no value, use simple $services->set(%s)';
 
+    /**
+     * @readonly
+     */
     private Standard $standard;
 
     public function __construct()
@@ -75,7 +78,7 @@ final readonly class NoSetClassServiceDuplicationRule implements Rule
             return [];
         }
 
-        if (str_contains($parentSoleArgContents, '\\')) {
+        if (strpos($parentSoleArgContents, '\\') !== false) {
             $shortClassName = Strings::after($parentSoleArgContents, '\\', -1);
         } else {
             $shortClassName = $parentSoleArgContents;
