@@ -2366,7 +2366,7 @@ class SomeTest extends TestCase
 {
     private SomeService $someService;
 
-    private FirstMock $firstMock;
+    private MockObject $firstMock;
 
     public function setUp()
     {
