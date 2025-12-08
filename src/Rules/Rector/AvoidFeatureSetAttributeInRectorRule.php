@@ -32,7 +32,7 @@ final class AvoidFeatureSetAttributeInRectorRule implements Rule
     /**
      * @var string[]
      */
-    private const ALLOWED_ATTRIBUTES = ['kind', 'origNode', 'comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos', 'rawValue'];
+    private const ALLOWED_ATTRIBUTES = ['kind', 'origNode', 'comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos', 'rawValue', 'docLabel'];
 
     public function getNodeType(): string
     {
