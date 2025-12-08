@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\NoOnlyNullReturnInRefactorRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Rector\NoOnlyNullReturnInRefactorRule;
@@ -24,7 +25,7 @@ final class NoOnlyNullReturnInRefactorRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipOtherReturnThanNull.php', []];
     }
 
-    protected function getRule(): NoOnlyNullReturnInRefactorRule
+    protected function getRule(): Rule
     {
         return new NoOnlyNullReturnInRefactorRule();
     }

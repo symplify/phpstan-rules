@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\FormTypeClassNameRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Form\AbstractType;
@@ -34,7 +35,7 @@ final class FormTypeClassNameRuleTest extends RuleTestCase
         ]];
     }
 
-    protected function getRule(): FormTypeClassNameRule
+    protected function getRule(): Rule
     {
         return new FormTypeClassNameRule();
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\StringFileAbsolutePathExistsRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\StringFileAbsolutePathExistsRule;
@@ -31,7 +32,7 @@ final class StringFileAbsolutePathExistsRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipClosure.php', []];
     }
 
-    protected function getRule(): StringFileAbsolutePathExistsRule
+    protected function getRule(): Rule
     {
         return new StringFileAbsolutePathExistsRule();
     }

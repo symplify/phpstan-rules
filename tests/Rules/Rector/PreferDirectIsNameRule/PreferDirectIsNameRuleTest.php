@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\PreferDirectIsNameRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Rector\PreferDirectIsNameRule;
@@ -29,7 +30,7 @@ final class PreferDirectIsNameRuleTest extends RuleTestCase
         ]];
     }
 
-    protected function getRule(): PreferDirectIsNameRule
+    protected function getRule(): Rule
     {
         return new PreferDirectIsNameRule();
     }

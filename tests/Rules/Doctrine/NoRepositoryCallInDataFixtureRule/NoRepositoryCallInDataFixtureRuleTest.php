@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoRepositoryCallInDataFixtureRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule;
@@ -30,7 +31,7 @@ final class NoRepositoryCallInDataFixtureRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipNonFixtureClass.php', []];
     }
 
-    protected function getRule(): NoRepositoryCallInDataFixtureRule
+    protected function getRule(): Rule
     {
         return new NoRepositoryCallInDataFixtureRule();
     }

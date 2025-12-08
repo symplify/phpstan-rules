@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\NoListenerWithoutContractRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule;
@@ -39,7 +40,7 @@ final class NoListenerWithoutContractRuleTest extends RuleTestCase
         ]]];
     }
 
-    protected function getRule(): NoListenerWithoutContractRule
+    protected function getRule(): Rule
     {
         return new NoListenerWithoutContractRule();
     }
