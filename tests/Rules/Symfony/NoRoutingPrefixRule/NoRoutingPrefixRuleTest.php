@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\NoRoutingPrefixRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule;
@@ -35,7 +36,7 @@ final class NoRoutingPrefixRuleTest extends RuleTestCase
         ], [[NoRoutingPrefixRule::ERROR_MESSAGE, 8]]];
     }
 
-    protected function getRule(): NoRoutingPrefixRule
+    protected function getRule(): Rule
     {
         return new NoRoutingPrefixRule();
     }

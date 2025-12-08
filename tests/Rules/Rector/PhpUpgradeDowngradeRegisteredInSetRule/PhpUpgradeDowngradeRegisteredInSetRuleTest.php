@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule;
@@ -39,7 +40,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/DowngradePhp80/SomePhpFeature2Rector.php', [[$errorMessage, 10]]];
     }
 
-    protected function getRule(): PhpUpgradeDowngradeRegisteredInSetRule
+    protected function getRule(): Rule
     {
         return new PhpUpgradeDowngradeRegisteredInSetRule();
     }

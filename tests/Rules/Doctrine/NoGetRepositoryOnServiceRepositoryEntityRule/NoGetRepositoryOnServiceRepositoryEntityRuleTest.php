@@ -6,6 +6,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRep
 
 use Iterator;
 use PHPStan\Reflection\ReflectionProvider;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule;
@@ -39,7 +40,7 @@ final class NoGetRepositoryOnServiceRepositoryEntityRuleTest extends RuleTestCas
         yield [__DIR__ . '/Fixture/SkipGetRepositoryOnNormalRepository.php', []];
     }
 
-    protected function getRule(): NoGetRepositoryOnServiceRepositoryEntityRule
+    protected function getRule(): Rule
     {
         $reflectionProvider = self::getContainer()->getByType(ReflectionProvider::class);
 

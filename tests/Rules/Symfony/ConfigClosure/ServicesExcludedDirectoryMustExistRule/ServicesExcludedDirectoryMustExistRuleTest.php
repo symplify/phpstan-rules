@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule;
@@ -33,7 +34,7 @@ final class ServicesExcludedDirectoryMustExistRuleTest extends RuleTestCase
         ]];
     }
 
-    protected function getRule(): ServicesExcludedDirectoryMustExistRule
+    protected function getRule(): Rule
     {
         return new ServicesExcludedDirectoryMustExistRule();
     }

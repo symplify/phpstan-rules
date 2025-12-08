@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Symfony\RequireIsGrantedEnumRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Symfony\RequireIsGrantedEnumRule;
@@ -29,7 +30,7 @@ final class RequireIsGrantedEnumRuleTest extends RuleTestCase
         ]];
     }
 
-    protected function getRule(): RequireIsGrantedEnumRule
+    protected function getRule(): Rule
     {
         return new RequireIsGrantedEnumRule();
     }

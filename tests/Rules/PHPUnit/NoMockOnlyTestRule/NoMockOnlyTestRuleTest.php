@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoMockOnlyTestRule;
 
 use Iterator;
+use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule;
@@ -30,7 +31,7 @@ final class NoMockOnlyTestRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipConstraintValidatorTest.php', []];
     }
 
-    protected function getRule(): NoMockOnlyTestRule
+    protected function getRule(): Rule
     {
         return new NoMockOnlyTestRule();
     }

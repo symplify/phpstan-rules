@@ -8,6 +8,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Rector\PreferDirectIsNameRule
     - Symplify\PHPStanRules\Rules\Rector\NoOnlyNullReturnInRefactorRule
     - Symplify\PHPStanRules\Rules\Rector\NoIntegerRefactorReturnRule
+    - Symplify\PHPStanRules\Rules\Rector\AvoidFeatureSetAttributeInRectorRule
 
 services:
     # $node->getAttribute($1) => Type|null by $1
