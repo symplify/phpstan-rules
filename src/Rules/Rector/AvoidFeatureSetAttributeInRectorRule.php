@@ -32,7 +32,13 @@ final class AvoidFeatureSetAttributeInRectorRule implements Rule
     /**
      * @var string[]
      */
-    private const ALLOWED_ATTRIBUTES = ['kind', 'origNode', 'comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos', 'rawValue', 'docLabel'];
+    private const ALLOWED_ATTRIBUTES = [
+        // php-parser keys
+        'kind', 'origNode', 'comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos', 'rawValue', 'docLabel',
+        // rector internal keys, designed to be changed and used by printer
+        'wrapped_in_parentheses',
+        'is_regular_pattern',
+    ];
 
     public function getNodeType(): string
     {
