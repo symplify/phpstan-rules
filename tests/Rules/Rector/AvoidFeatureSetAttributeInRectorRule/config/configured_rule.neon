@@ -1,0 +1,2 @@
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\AvoidFeatureSetAttributeInRectorRule
