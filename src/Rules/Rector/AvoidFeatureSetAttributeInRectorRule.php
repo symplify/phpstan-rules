@@ -38,6 +38,7 @@ final class AvoidFeatureSetAttributeInRectorRule implements Rule
         // rector internal keys, designed to be changed and used by printer
         'wrapped_in_parentheses',
         'is_regular_pattern',
+        'newlined_array_print',
     ];
 
     public function getNodeType(): string
