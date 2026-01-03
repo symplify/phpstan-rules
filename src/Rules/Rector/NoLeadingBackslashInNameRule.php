@@ -57,7 +57,7 @@ final class NoLeadingBackslashInNameRule implements Rule
             return [];
         }
 
-        if (! str_starts_with($argType->getValue(), '\\')) {
+        if (strncmp($argType->getValue(), '\\', strlen('\\')) !== 0) {
             return [];
         }
 

@@ -38,6 +38,6 @@ final class PHPUnitTestAnalyser
             return true;
         }
 
-        return str_starts_with($classMethod->name->toString(), 'test');
+        return strncmp($classMethod->name->toString(), 'test', strlen('test')) === 0;
     }
 }
