@@ -12,12 +12,18 @@ use Symplify\PHPStanRules\Rules\Rector\NoInstanceOfStaticReflectionRule;
 
 final class NoInstanceOfStaticReflectionRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         $errorMessage = NoInstanceOfStaticReflectionRule::ERROR_MESSAGE;
@@ -39,6 +45,9 @@ final class NoInstanceOfStaticReflectionRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipSelfType.php', []];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

@@ -14,6 +14,7 @@ final class NoListenerWithoutContractRuleTest extends RuleTestCase
 {
     /**
      * @param string[] $filePaths
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(array $filePaths, array $expectedErrorsWithLines): void
@@ -21,6 +22,9 @@ final class NoListenerWithoutContractRuleTest extends RuleTestCase
         $this->analyse($filePaths, $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, array<int, mixed>>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         // @see https://symfony.com/blog/new-in-symfony-4-1-invokable-event-listeners

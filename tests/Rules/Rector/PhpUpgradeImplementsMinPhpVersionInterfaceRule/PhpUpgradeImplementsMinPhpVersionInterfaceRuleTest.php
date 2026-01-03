@@ -8,16 +8,23 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Rector\Php80\Rector\Class_\SomePhpFeatureRector;
 use Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule;
 
 final class PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipDowngradeRector.php', []];
@@ -26,13 +33,16 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest extends RuleTestC
             [
                 sprintf(
                     PhpUpgradeImplementsMinPhpVersionInterfaceRule::ERROR_MESSAGE,
-                    'Rector\Php80\Rector\Class_\SomePhpFeatureRector',
+                    SomePhpFeatureRector::class,
                 ),
                 7,
             ],
         ]];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

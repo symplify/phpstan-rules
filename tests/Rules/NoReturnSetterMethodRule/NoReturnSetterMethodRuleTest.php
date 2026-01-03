@@ -12,12 +12,18 @@ use Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule;
 
 final class NoReturnSetterMethodRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SomeSetterClass.php', [[NoReturnSetterMethodRule::ERROR_MESSAGE, 9]]];

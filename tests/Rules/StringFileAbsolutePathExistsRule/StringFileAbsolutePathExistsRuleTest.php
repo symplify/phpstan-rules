@@ -13,7 +13,7 @@ use Symplify\PHPStanRules\Rules\StringFileAbsolutePathExistsRule;
 final class StringFileAbsolutePathExistsRuleTest extends RuleTestCase
 {
     /**
-     * @param mixed[] $expectedErrorMessagesWithLines
+     * @param array<int, array<string|int>> $expectedErrorMessagesWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
@@ -21,6 +21,9 @@ final class StringFileAbsolutePathExistsRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         $errorMessage = sprintf(StringFileAbsolutePathExistsRule::ERROR_MESSAGE, __DIR__ . '/Fixture/some_file.yml');

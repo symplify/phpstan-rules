@@ -13,7 +13,7 @@ use Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule;
 final class NoJustPropertyAssignRuleTest extends RuleTestCase
 {
     /**
-     * @param mixed[] $expectedErrorsWithLines
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
@@ -21,6 +21,9 @@ final class NoJustPropertyAssignRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/ServiceAssign.php', [

@@ -13,7 +13,7 @@ use Symplify\PHPStanRules\Rules\Convention\ParamNameToTypeConventionRule;
 final class ParamNameToTypeConventionRuleTest extends RuleTestCase
 {
     /**
-     * @param mixed[] $expectedErrorsWithLines
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
@@ -21,6 +21,9 @@ final class ParamNameToTypeConventionRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         $errorMessage = sprintf(ParamNameToTypeConventionRule::ERROR_MESSAGE, 'userId', 'int');
