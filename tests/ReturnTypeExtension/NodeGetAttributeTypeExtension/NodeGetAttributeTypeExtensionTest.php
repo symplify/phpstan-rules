@@ -19,6 +19,9 @@ final class NodeGetAttributeTypeExtensionTest extends TypeInferenceTestCase
         $this->assertFileAsserts($assertType, $file, ...$args);
     }
 
+    /**
+     * @return Iterator<array<string, array<array<mixed>, mixed>>>
+     */
     public static function dataAsserts(): Iterator
     {
         yield from self::gatherAssertTypes(__DIR__ . '/data/get_parent_node.php.inc');

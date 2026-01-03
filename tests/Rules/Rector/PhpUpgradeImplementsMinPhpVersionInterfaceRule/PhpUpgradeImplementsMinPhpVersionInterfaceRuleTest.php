@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule;
 
+use Rector\Php80\Rector\Class_\SomePhpFeatureRector;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
@@ -12,12 +13,18 @@ use Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfac
 
 final class PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipDowngradeRector.php', []];
@@ -26,13 +33,16 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest extends RuleTestC
             [
                 sprintf(
                     PhpUpgradeImplementsMinPhpVersionInterfaceRule::ERROR_MESSAGE,
-                    'Rector\Php80\Rector\Class_\SomePhpFeatureRector',
+                    SomePhpFeatureRector::class,
                 ),
                 7,
             ],
         ]];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

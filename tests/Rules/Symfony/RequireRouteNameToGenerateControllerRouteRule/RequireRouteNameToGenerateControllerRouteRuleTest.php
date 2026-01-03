@@ -14,7 +14,7 @@ use Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRout
 final class RequireRouteNameToGenerateControllerRouteRuleTest extends RuleTestCase
 {
     /**
-     * @param mixed[] $expectedErrorMessagesWithLines
+     * @param array<int, array<string|int>> $expectedErrorMessagesWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
@@ -22,6 +22,9 @@ final class RequireRouteNameToGenerateControllerRouteRuleTest extends RuleTestCa
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/CallingCorrectController.php', []];

@@ -12,12 +12,18 @@ use Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule;
 
 final class NoRepositoryCallInDataFixtureRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [

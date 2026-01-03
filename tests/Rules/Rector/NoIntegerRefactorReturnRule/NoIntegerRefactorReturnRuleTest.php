@@ -12,12 +12,18 @@ use Symplify\PHPStanRules\Rules\Rector\NoIntegerRefactorReturnRule;
 
 final class NoIntegerRefactorReturnRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         $errorMessage = NoIntegerRefactorReturnRule::ERROR_MESSAGE;

@@ -13,7 +13,7 @@ use Symplify\PHPStanRules\Rules\UppercaseConstantRule;
 final class UppercaseConstantRuleTest extends RuleTestCase
 {
     /**
-     * @param mixed[] $expectedErrorMessagesWithLines
+     * @param array<int, array<string|int>> $expectedErrorMessagesWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
@@ -21,6 +21,9 @@ final class UppercaseConstantRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
+    /**
+     * @return Iterator<(array<int, array<int, array<int, int>>>|array<int, array<int, array<int, string>>>|array<int, string>)>
+     */
     public static function provideData(): Iterator
     {
         $errorMessage = sprintf(UppercaseConstantRule::ERROR_MESSAGE, 'SMall');

@@ -12,12 +12,18 @@ use Symplify\PHPStanRules\Rules\Rector\NoClassReflectionStaticReflectionRule;
 
 final class NoClassReflectionStaticReflectionRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/NewOnExternal.php', [[NoClassReflectionStaticReflectionRule::ERROR_MESSAGE, 13]]];
@@ -26,6 +32,9 @@ final class NoClassReflectionStaticReflectionRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipNonReflectionNew.php', []];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

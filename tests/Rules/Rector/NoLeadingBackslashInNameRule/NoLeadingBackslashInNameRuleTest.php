@@ -12,12 +12,18 @@ use Symplify\PHPStanRules\Rules\Rector\NoLeadingBackslashInNameRule;
 
 final class NoLeadingBackslashInNameRuleTest extends RuleTestCase
 {
+    /**
+     * @param array<int, array<string|int>> $expectedErrorsWithLines
+     */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorsWithLines): void
     {
         $this->analyse([$filePath], $expectedErrorsWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         $errorMessage = NoLeadingBackslashInNameRule::ERROR_MESSAGE;
@@ -27,6 +33,9 @@ final class NoLeadingBackslashInNameRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipUseFullyQualified.php', []];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

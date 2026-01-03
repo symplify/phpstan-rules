@@ -15,7 +15,7 @@ use Symplify\PHPStanRules\Tests\Rules\Symfony\FormTypeClassNameRule\Fixture\Some
 final class FormTypeClassNameRuleTest extends RuleTestCase
 {
     /**
-     * @param mixed[] $expectedErrorMessagesWithLines
+     * @param array<int, array<string|int>> $expectedErrorMessagesWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
@@ -23,6 +23,9 @@ final class FormTypeClassNameRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SomeFormType.php', []];

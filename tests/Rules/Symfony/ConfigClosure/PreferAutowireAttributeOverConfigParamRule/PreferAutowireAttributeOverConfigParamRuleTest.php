@@ -14,7 +14,7 @@ use Symplify\PHPStanRules\Tests\Rules\Symfony\ConfigClosure\PreferAutowireAttrib
 final class PreferAutowireAttributeOverConfigParamRuleTest extends RuleTestCase
 {
     /**
-     * @param mixed[] $expectedErrorMessagesWithLines
+     * @param array<int, array<string|int>> $expectedErrorMessagesWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
@@ -22,6 +22,9 @@ final class PreferAutowireAttributeOverConfigParamRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
+    /**
+     * @return Iterator<array<array<int, mixed>, mixed>>
+     */
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SomeConfigWithInvalidSet.php', [
@@ -41,6 +44,9 @@ final class PreferAutowireAttributeOverConfigParamRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipNoParameterReference.php', []];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];
