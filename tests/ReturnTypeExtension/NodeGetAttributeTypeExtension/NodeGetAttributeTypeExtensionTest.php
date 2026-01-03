@@ -20,7 +20,7 @@ final class NodeGetAttributeTypeExtensionTest extends TypeInferenceTestCase
     }
 
     /**
-     * @return Iterator<array<string, array<array<mixed>, mixed>>>
+     * @return Iterator<array<string, mixed>>
      */
     public static function dataAsserts(): Iterator
     {

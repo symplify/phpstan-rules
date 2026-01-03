@@ -40,7 +40,8 @@
             "stubs"
         ],
         "files": [
-            "vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php"
+            "vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php",
+            "tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/Fixture/SomePhpFeatureRector.php"
         ]
     },
     "config": {

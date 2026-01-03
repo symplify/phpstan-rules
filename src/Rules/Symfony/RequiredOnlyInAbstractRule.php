@@ -12,6 +12,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\SymfonyRequiredMethodAnalyzer;
 
@@ -34,7 +35,7 @@ final class RequiredOnlyInAbstractRule implements Rule
      * @var string[]
      */
     private const SKIPPED_PARENT_TYPES = [
-        'Doctrine\ODM\MongoDB\Repository\DocumentRepository',
+        DoctrineClass::DOCUMENT_REPOSITORY,
     ];
 
     public function getNodeType(): string
