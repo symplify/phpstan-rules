@@ -4,3 +4,4 @@ rules:
     - Symplify\PHPStanRules\Rules\Complexity\NoArrayMapWithArrayCallableRule
     - Symplify\PHPStanRules\Rules\Complexity\NoConstructorOverrideRule
     - Symplify\PHPStanRules\Rules\Complexity\ForeachCeptionRule
+    - Symplify\PHPStanRules\Rules\Explicit\NoMissingVariableDimFetchRule
