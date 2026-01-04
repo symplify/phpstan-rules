@@ -15,3 +15,6 @@ rules:
     - Symplify\PHPStanRules\Rules\NoReferenceRule
     - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
+
+    # docblock
+    - Symplify\PHPStanRules\Rules\NoMissnamedDocTagRule

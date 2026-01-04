@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Symplify\PHPStanRules\Tests\Rules\NoMissnamedDocTagRule\Fixture;
+
+class SomeConstant
+{
+    /**
+     * @return string
+     */
+    private const NAME = 'value';
+}
