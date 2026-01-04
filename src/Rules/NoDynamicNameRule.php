@@ -65,6 +65,10 @@ final readonly class NoDynamicNameRule implements Rule
         }
 
         if ($node instanceof MethodCall || $node instanceof StaticCall || $node instanceof FuncCall || $node instanceof PropertyFetch) {
+            // skip magic calls, as dynamic names expected
+            if (in_array($scope->getFunctionName(), ['__get', '__set'], true)) {
+                return [];
+            }
 
             if (! $node->name instanceof Expr) {
                 return [];
