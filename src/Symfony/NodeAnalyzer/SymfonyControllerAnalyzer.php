@@ -42,7 +42,10 @@ final class SymfonyControllerAnalyzer
         return self::hasRouteAnnotationOrAttribute($classMethod);
     }
 
-    public static function hasRouteAnnotationOrAttribute(ClassLike | ClassMethod $node): bool
+    /**
+     * @param \PhpParser\Node\Stmt\ClassLike|\PhpParser\Node\Stmt\ClassMethod $node
+     */
+    public static function hasRouteAnnotationOrAttribute($node): bool
     {
         if ($node instanceof ClassMethod && ! $node->isPublic()) {
             return false;
@@ -59,10 +62,10 @@ final class SymfonyControllerAnalyzer
             return false;
         }
 
-        if (str_contains($docComment->getText(), SymfonyClass::ROUTE_ANNOTATION)) {
+        if (strpos($docComment->getText(), SymfonyClass::ROUTE_ANNOTATION) !== false) {
             return true;
         }
 
-        return \str_contains($docComment->getText(), '@Route');
+        return strpos($docComment->getText(), '@Route') !== false;
     }
 }

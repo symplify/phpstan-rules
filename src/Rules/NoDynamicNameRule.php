@@ -24,16 +24,20 @@ use Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer;
  *
  * @implements Rule<Node>
  */
-final readonly class NoDynamicNameRule implements Rule
+final class NoDynamicNameRule implements Rule
 {
+    /**
+     * @readonly
+     */
+    private CallableTypeAnalyzer $callableTypeAnalyzer;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use explicit names over dynamic ones';
 
-    public function __construct(
-        private CallableTypeAnalyzer $callableTypeAnalyzer,
-    ) {
+    public function __construct(CallableTypeAnalyzer $callableTypeAnalyzer)
+    {
+        $this->callableTypeAnalyzer = $callableTypeAnalyzer;
     }
 
     public function getNodeType(): string
