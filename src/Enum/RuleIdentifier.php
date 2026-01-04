@@ -79,4 +79,6 @@ final class RuleIdentifier
     public const RULE_IDENTIFIER = 'symplify.foreachCeption';
 
     public const NO_MISSING_VARIABLE_DIM_FETCH = 'symplify.noMissingVariableDimFetch';
+
+    public const NO_MISSNAMED_DOC_TAG = 'symplify.noMissnamedDocTag';
 }
