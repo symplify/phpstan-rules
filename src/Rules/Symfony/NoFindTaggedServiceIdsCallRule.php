@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoFindTaggedServiceIdsCallRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of "$this->findTaggedServiceIds()" use more reliable registerForAutoconfiguration() and tagged iterator attribute. Those work outside any configuration and avoid missed tag errors';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of "$this->findTaggedServiceIds()" use more reliable registerForAutoconfiguration() and tagged iterator attribute. Those work outside any configuration and avoid missed tag errors';
 
     public function getNodeType(): string
     {

@@ -22,13 +22,20 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  *
  * @implements Rule<Closure>
  */
-final readonly class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
+final class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'The "%s" service is already registered via autodiscovery ->load(), no need to set it twice';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'The "%s" service is already registered via autodiscovery ->load(), no need to set it twice';
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -98,7 +105,7 @@ final readonly class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
 
         foreach ($standaloneSetServicesToLines as $serviceClass => $line) {
             foreach ($loadedServiceNamespaces as $loadedServiceNamespace) {
-                if (str_starts_with($serviceClass, $loadedServiceNamespace)) {
+                if (strncmp($serviceClass, $loadedServiceNamespace, strlen($loadedServiceNamespace)) === 0) {
                     $twiceRegisteredServices[$serviceClass] = $line;
                     continue 2;
                 }
@@ -125,7 +132,7 @@ final readonly class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
         return $servicesToLine;
     }
 
-    private function resolveServiceFilePath(string $className): string|null
+    private function resolveServiceFilePath(string $className): ?string
     {
         if (! $this->reflectionProvider->hasClass($className)) {
             return null;
@@ -146,7 +153,7 @@ final readonly class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
         }
 
         foreach ($excludedPaths as $excludedPath) {
-            if (str_starts_with($serviceFilePath, $excludedPath)) {
+            if (strncmp($serviceFilePath, $excludedPath, strlen($excludedPath)) === 0) {
                 return true;
             }
         }

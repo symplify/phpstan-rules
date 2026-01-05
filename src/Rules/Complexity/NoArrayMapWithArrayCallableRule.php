@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoArrayMapWithArrayCallableRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid using array callables in array_map(), as it cripples static analysis on used method';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid using array callables in array_map(), as it cripples static analysis on used method';
 
     public function getNodeType(): string
     {

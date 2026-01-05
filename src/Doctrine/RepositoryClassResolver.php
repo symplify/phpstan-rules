@@ -9,26 +9,39 @@ use Nette\Utils\Strings;
 use PHPStan\Reflection\ReflectionProvider;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 
-final readonly class RepositoryClassResolver
+final class RepositoryClassResolver
 {
-    private const string QUOTED_REPOSITORY_CLASS_REGEX = '#repositoryClass=\"(?<repositoryClass>.*?)\"#';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+    /**
+     * @var string
+     */
+    private const QUOTED_REPOSITORY_CLASS_REGEX = '#repositoryClass=\"(?<repositoryClass>.*?)\"#';
 
-    private const string REPOSITORY_CLASS_CONST_REGEX = '#repositoryClass=?(\\\\)(?<repositoryClass>.*?)::class#';
+    /**
+     * @var string
+     */
+    private const REPOSITORY_CLASS_CONST_REGEX = '#repositoryClass=?(\\\\)(?<repositoryClass>.*?)::class#';
 
-    private const string USE_REPOSITORY_REGEX = '#use (?<repositoryClass>.*?Repository);#';
+    /**
+     * @var string
+     */
+    private const USE_REPOSITORY_REGEX = '#use (?<repositoryClass>.*?Repository);#';
 
     /**
      * @var string[]
      */
-    private const array REGEX_TRAIN = [
+    private const REGEX_TRAIN = [
         self::QUOTED_REPOSITORY_CLASS_REGEX,
         self::REPOSITORY_CLASS_CONST_REGEX,
         self::USE_REPOSITORY_REGEX,
     ];
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function resolveFromEntityClass(string $entityClassName): ?string

@@ -19,12 +19,15 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class StringFileAbsolutePathExistsRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'File "%s" could not be found. Make sure it exists';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'File "%s" could not be found. Make sure it exists';
 
     /**
      * @var string[]
      */
-    private const array SUFFIXES_TO_CHECK = [
+    private const SUFFIXES_TO_CHECK = [
         '.sql',
         '.php',
         '.yml',
@@ -58,7 +61,7 @@ final class StringFileAbsolutePathExistsRule implements Rule
         }
 
         // probably glob or wildcard, cannot be checked
-        if (str_contains($stringValue, '*')) {
+        if (strpos($stringValue, '*') !== false) {
             return [];
         }
 
@@ -85,7 +88,7 @@ final class StringFileAbsolutePathExistsRule implements Rule
     private function isDesiredFileSuffix(string $stringValue): bool
     {
         foreach (self::SUFFIXES_TO_CHECK as $suffixToCheck) {
-            if (str_ends_with($stringValue, $suffixToCheck)) {
+            if (substr_compare($stringValue, $suffixToCheck, -strlen($suffixToCheck)) === 0) {
                 return true;
             }
         }

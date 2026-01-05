@@ -17,7 +17,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class RequireAttributeNamespaceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Attribute must be located in "Attribute" namespace';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Attribute must be located in "Attribute" namespace';
 
     /**
      * @return class-string<Node>
@@ -39,7 +42,7 @@ final class RequireAttributeNamespaceRule implements Rule
 
         // is class in "Attribute" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Attribute\\')) {
+        if (strpos($className, '\\Attribute\\') !== false) {
             return [];
         }
 

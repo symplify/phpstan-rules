@@ -24,7 +24,10 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoRoutingPrefixRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid global route prefixing, to use single place for paths and improve static analysis';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid global route prefixing, to use single place for paths and improve static analysis';
 
     public function getNodeType(): string
     {
@@ -79,10 +82,10 @@ final class NoRoutingPrefixRule implements Rule
         }
 
         // these external bundles are typically prefixed on purpose
-        if (str_starts_with($importArgPath->value, '@FrameworkBundle')) {
+        if (strncmp($importArgPath->value, '@FrameworkBundle', strlen('@FrameworkBundle')) === 0) {
             return true;
         }
 
-        return str_starts_with($importArgPath->value, '@WebProfilerBundle');
+        return strncmp($importArgPath->value, '@WebProfilerBundle', strlen('@WebProfilerBundle')) === 0;
     }
 }

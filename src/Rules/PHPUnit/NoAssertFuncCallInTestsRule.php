@@ -16,9 +16,15 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoAssertFuncCallInTestsRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
 
-    private const array TEST_FILE_SUFFIXES = [
+    /**
+     * @var mixed[]
+     */
+    private const TEST_FILE_SUFFIXES = [
         'Test.php',
         'TestCase.php',
         'Context.php',
@@ -53,7 +59,7 @@ final class NoAssertFuncCallInTestsRule implements Rule
     private function isTestFile(Scope $scope): bool
     {
         foreach (self::TEST_FILE_SUFFIXES as $testFileSuffix) {
-            if (str_ends_with($scope->getFile(), $testFileSuffix)) {
+            if (substr_compare($scope->getFile(), $testFileSuffix, -strlen($testFileSuffix)) === 0) {
                 return true;
             }
         }

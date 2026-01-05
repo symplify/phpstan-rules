@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoGlobalConstRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Global constants are forbidden. Use enum-like class list instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Global constants are forbidden. Use enum-like class list instead';
 
     public function getNodeType(): string
     {

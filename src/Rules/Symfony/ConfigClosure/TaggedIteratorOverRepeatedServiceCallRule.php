@@ -22,9 +22,15 @@ use Symplify\PHPStanRules\Symfony\NodeFinder\RepeatedServiceAdderCallNameFinder;
  */
 final class TaggedIteratorOverRepeatedServiceCallRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of repeated "->call(%s, ...)" calls, pass services as tagged iterator argument to the constructor';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of repeated "->call(%s, ...)" calls, pass services as tagged iterator argument to the constructor';
 
-    private const string RULE_IDENTIFIER = 'symfony.taggedIteratorOverRepeatedServiceCall';
+    /**
+     * @var string
+     */
+    private const RULE_IDENTIFIER = 'symfony.taggedIteratorOverRepeatedServiceCall';
 
     public function getNodeType(): string
     {
