@@ -20,10 +20,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final readonly class ForbiddenMultipleClassLikeInOneFileRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
+    public const string ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
 
     private NodeFinder $nodeFinder;
 

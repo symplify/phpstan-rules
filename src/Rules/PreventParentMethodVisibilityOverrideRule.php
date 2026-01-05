@@ -20,10 +20,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final readonly class PreventParentMethodVisibilityOverrideRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
+    public const string ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
 
     public function __construct(
         private ReflectionProvider $reflectionProvider

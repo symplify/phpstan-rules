@@ -19,10 +19,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class RequireAttributeNameRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Attribute must have all names explicitly defined';
+    public const string ERROR_MESSAGE = 'Attribute must have all names explicitly defined';
 
     public function getNodeType(): string
     {

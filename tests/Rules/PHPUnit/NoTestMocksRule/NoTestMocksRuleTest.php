@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoTestMocksRule;
 
 use Iterator;
+use Override;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -37,6 +38,7 @@ final class NoTestMocksRuleTest extends RuleTestCase
     /**
      * @return string[]
      */
+    #[Override]
     public static function getAdditionalConfigFiles(): array
     {
         return [

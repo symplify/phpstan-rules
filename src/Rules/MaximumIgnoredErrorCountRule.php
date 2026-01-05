@@ -17,10 +17,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final readonly class MaximumIgnoredErrorCountRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = "Ignored error count %d in phpstan.neon surpassed maximum limit %d.\nInstead of ignoring more errors, fix them to keep your codebase fit.";
+    public const string ERROR_MESSAGE = "Ignored error count %d in phpstan.neon surpassed maximum limit %d.\nInstead of ignoring more errors, fix them to keep your codebase fit.";
 
     private NeonAdapter $neonAdapter;
 

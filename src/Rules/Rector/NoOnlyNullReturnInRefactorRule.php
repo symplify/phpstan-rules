@@ -24,10 +24,7 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoOnlyNullReturnInRefactorRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'The refactor() method returns always null, but it should return at least one modified node';
+    public const string ERROR_MESSAGE = 'The refactor() method returns always null, but it should return at least one modified node';
 
     public function getNodeType(): string
     {

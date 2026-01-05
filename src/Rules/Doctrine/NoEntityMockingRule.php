@@ -24,10 +24,7 @@ use Symplify\PHPStanRules\NodeAnalyzer\MethodCallNameAnalyzer;
  */
 final readonly class NoEntityMockingRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of entity or document mocking, create object directly to get better type support';
+    public const string ERROR_MESSAGE = 'Instead of entity or document mocking, create object directly to get better type support';
 
     public function __construct(
         private ReflectionProvider $reflectionProvider

@@ -35,9 +35,8 @@ final readonly class RequireRouteNameToGenerateControllerRouteRule implements Ru
 {
     /**
      * @api
-     * @var string
      */
-    public const ERROR_MESSAGE = 'To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method';
+    public const string ERROR_MESSAGE = 'To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method';
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,

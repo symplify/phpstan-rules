@@ -28,10 +28,7 @@ use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
  */
 final readonly class NoReferenceRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
+    public const string ERROR_MESSAGE = 'Use explicit return value over magic &reference';
 
     public function __construct(
         private ParentClassMethodNodeResolver $parentClassMethodNodeResolver,

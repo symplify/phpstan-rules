@@ -25,10 +25,7 @@ use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
  */
 final readonly class NoJustPropertyAssignRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of assigning service property to a variable, use the property directly';
+    public const string ERROR_MESSAGE = 'Instead of assigning service property to a variable, use the property directly';
 
     public function __construct(
         private PhpDocResolver $phpDocResolver

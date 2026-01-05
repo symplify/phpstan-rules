@@ -16,7 +16,7 @@ final class SymfonyControllerAnalyzer
     /**
      * @var string[]
      */
-    private const CONTROLLER_TYPES = [
+    private const array CONTROLLER_TYPES = [
         SymfonyClass::CONTROLLER,
         SymfonyClass::ABSTRACT_CONTROLLER,
     ];

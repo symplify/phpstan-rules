@@ -22,10 +22,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
  */
 final class NoAbstractControllerConstructorRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Abstract controller should not have constructor, to avoid override by child classes. Use #[Require] or @require and autowire() method instead';
+    public const string ERROR_MESSAGE = 'Abstract controller should not have constructor, to avoid override by child classes. Use #[Require] or @require and autowire() method instead';
 
     public function getNodeType(): string
     {

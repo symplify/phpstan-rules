@@ -26,10 +26,7 @@ use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
  */
 final readonly class SeeAnnotationToTestRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
+    public const string ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
 
     /**
      * @param string[] $requiredSeeTypes

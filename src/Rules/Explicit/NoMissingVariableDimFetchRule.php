@@ -21,9 +21,8 @@ final class NoMissingVariableDimFetchRule implements Rule
 {
     /**
      * @api
-     * @var string
      */
-    public const ERROR_MESSAGE = 'Dim fetch assign variable is missing, create it first';
+    public const string ERROR_MESSAGE = 'Dim fetch assign variable is missing, create it first';
 
     public function getNodeType(): string
     {

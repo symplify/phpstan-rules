@@ -21,10 +21,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
  */
 final class RequireServiceRepositoryParentRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Repository must extend "%s", "%s" or implement "%s", so it can be injected as a service';
+    public const string ERROR_MESSAGE = 'Repository must extend "%s", "%s" or implement "%s", so it can be injected as a service';
 
     public function getNodeType(): string
     {

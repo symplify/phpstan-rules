@@ -9,7 +9,7 @@ final class DoctrineEvents
     /**
      * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.3/reference/events.html
      */
-    public const ORM_LIST = [
+    public const array ORM_LIST = [
         'preRemove',
         'postRemove',
         'prePersist',
@@ -28,7 +28,7 @@ final class DoctrineEvents
     /**
      * @see https://www.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/reference/events.html#lifecycle-events
      */
-    public const ODM_LIST = [
+    public const array ODM_LIST = [
         'documentNotFound',
         'onClear',
         'postCollectionLoad',

@@ -17,14 +17,13 @@ final class RectorAllowedAutoloadedTypeAnalyzer
 {
     /**
      * @see https://regex101.com/r/BBm9bf/1
-     * @var string
      */
-    private const AUTOLOADED_CLASS_PREFIX_REGEX = '#^(PhpParser|PHPStan|Rector|Reflection|Symfony\\\\Component\\\\Console)#';
+    private const string AUTOLOADED_CLASS_PREFIX_REGEX = '#^(PhpParser|PHPStan|Rector|Reflection|Symfony\\\\Component\\\\Console)#';
 
     /**
      * @var array<string>
      */
-    private const ALLOWED_CLASSES = [
+    private const array ALLOWED_CLASSES = [
         Node::class,
         PhpDocNode::class,
     ];

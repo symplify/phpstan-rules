@@ -20,10 +20,7 @@ use Webmozart\Assert\Assert;
  */
 final class ParamNameToTypeConventionRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Parameter name "$%s" should probably have "%s" type';
+    public const string ERROR_MESSAGE = 'Parameter name "$%s" should probably have "%s" type';
 
     /**
      * @param array<string, string> $paramNamesToTypes

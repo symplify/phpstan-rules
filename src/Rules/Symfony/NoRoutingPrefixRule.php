@@ -24,10 +24,7 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoRoutingPrefixRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Avoid global route prefixing, to use single place for paths and improve static analysis';
+    public const string ERROR_MESSAGE = 'Avoid global route prefixing, to use single place for paths and improve static analysis';
 
     public function getNodeType(): string
     {

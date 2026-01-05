@@ -12,7 +12,7 @@ final readonly class DoctrineEntityDocumentAnalyser
     /**
      * @var string[]
      */
-    private const ENTITY_DOCBLOCK_MARKERS = ['@Document', '@ORM\\Document', '@Entity', '@ORM\\Entity'];
+    private const array ENTITY_DOCBLOCK_MARKERS = ['@Document', '@ORM\\Document', '@Entity', '@ORM\\Entity'];
 
     public static function isEntityClass(ClassReflection $classReflection): bool
     {

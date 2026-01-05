@@ -26,10 +26,7 @@ use Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer;
  */
 final readonly class NoDynamicNameRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Use explicit names over dynamic ones';
+    public const string ERROR_MESSAGE = 'Use explicit names over dynamic ones';
 
     public function __construct(
         private CallableTypeAnalyzer $callableTypeAnalyzer,

@@ -18,15 +18,9 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoConstructorOverrideRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Possible __construct() override, this can cause missing dependencies or setup';
+    public const string ERROR_MESSAGE = 'Possible __construct() override, this can cause missing dependencies or setup';
 
-    /**
-     * @var string
-     */
-    private const CONSTRUCTOR_NAME = '__construct';
+    private const string CONSTRUCTOR_NAME = '__construct';
 
     public function getNodeType(): string
     {

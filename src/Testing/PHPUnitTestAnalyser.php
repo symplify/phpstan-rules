@@ -10,10 +10,7 @@ use PHPStan\Reflection\ClassReflection;
 
 final class PHPUnitTestAnalyser
 {
-    /**
-     * @var string
-     */
-    private const TEST_CASE_CLASS = 'PHPUnit\Framework\TestCase';
+    private const string TEST_CASE_CLASS = 'PHPUnit\Framework\TestCase';
 
     public static function isTestClass(Scope $scope): bool
     {

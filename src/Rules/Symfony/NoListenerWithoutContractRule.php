@@ -26,10 +26,7 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class NoListenerWithoutContractRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
+    public const string ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
 
     public function getNodeType(): string
     {

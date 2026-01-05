@@ -24,15 +24,12 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class AvoidFeatureSetAttributeInRectorRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of using Rector rule to setAttribute("%s") to be used later, create a service extending "DecoratingNodeVisitorInterface". This ensures attribute decoration and node changes are in 2 separated steps.';
+    public const string ERROR_MESSAGE = 'Instead of using Rector rule to setAttribute("%s") to be used later, create a service extending "DecoratingNodeVisitorInterface". This ensures attribute decoration and node changes are in 2 separated steps.';
 
     /**
      * @var string[]
      */
-    private const ALLOWED_ATTRIBUTES = [
+    private const array ALLOWED_ATTRIBUTES = [
         // php-parser keys
         'kind', 'origNode', 'comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos', 'rawValue', 'docLabel',
         // rector internal keys, designed to be changed and used by printer

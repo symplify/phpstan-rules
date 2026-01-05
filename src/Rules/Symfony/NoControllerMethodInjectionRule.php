@@ -21,10 +21,7 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class NoControllerMethodInjectionRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of service "%s" action injection, use __construct() and invokable controller with __invoke() to clearly separate services and parameters';
+    public const string ERROR_MESSAGE = 'Instead of service "%s" action injection, use __construct() and invokable controller with __invoke() to clearly separate services and parameters';
 
     public function getNodeType(): string
     {

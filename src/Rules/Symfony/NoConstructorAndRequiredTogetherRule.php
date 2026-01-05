@@ -21,10 +21,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
  */
 final class NoConstructorAndRequiredTogetherRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Avoid using __construct() and @required in the same class. Pick one to keep architecture clean';
+    public const string ERROR_MESSAGE = 'Avoid using __construct() and @required in the same class. Pick one to keep architecture clean';
 
     public function getNodeType(): string
     {

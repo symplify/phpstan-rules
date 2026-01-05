@@ -23,10 +23,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
  */
 final class NoParentRepositoryRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Extending EntityRepository is not allowed, use constructor injection and pass entity manager instead';
+    public const string ERROR_MESSAGE = 'Extending EntityRepository is not allowed, use constructor injection and pass entity manager instead';
 
     public function getNodeType(): string
     {

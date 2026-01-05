@@ -6,23 +6,11 @@ namespace Symplify\PHPStanRules\Enum;
 
 final class MethodName
 {
-    /**
-     * @var string
-     */
-    public const INVOKE = '__invoke';
+    public const string INVOKE = '__invoke';
 
-    /**
-     * @var string
-     */
-    public const CONSTRUCTOR = '__construct';
+    public const string CONSTRUCTOR = '__construct';
 
-    /**
-     * @var string
-     */
-    public const SET_UP = 'setUp';
+    public const string SET_UP = 'setUp';
 
-    /**
-     * @var string
-     */
-    public const TEAR_DOWN = 'tearDown';
+    public const string TEAR_DOWN = 'tearDown';
 }

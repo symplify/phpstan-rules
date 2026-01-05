@@ -23,10 +23,7 @@ use Symplify\PHPStanRules\NodeAnalyzer\SymfonyRequiredMethodAnalyzer;
  */
 final class RequiredOnlyInAbstractRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = '#Symfony @required or #[Required] is reserved exclusively for abstract classes. For the rest of classes, use clean constructor injection';
+    public const string ERROR_MESSAGE = '#Symfony @required or #[Required] is reserved exclusively for abstract classes. For the rest of classes, use clean constructor injection';
 
     /**
      * Magic parent types that require constructor internally,
@@ -34,7 +31,7 @@ final class RequiredOnlyInAbstractRule implements Rule
      *
      * @var string[]
      */
-    private const SKIPPED_PARENT_TYPES = [
+    private const array SKIPPED_PARENT_TYPES = [
         DoctrineClass::DOCUMENT_REPOSITORY,
     ];
 

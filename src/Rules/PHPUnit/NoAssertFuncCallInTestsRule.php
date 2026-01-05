@@ -16,12 +16,9 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoAssertFuncCallInTestsRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
+    public const string ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
 
-    private const TEST_FILE_SUFFIXES = [
+    private const array TEST_FILE_SUFFIXES = [
         'Test.php',
         'TestCase.php',
         'Context.php',

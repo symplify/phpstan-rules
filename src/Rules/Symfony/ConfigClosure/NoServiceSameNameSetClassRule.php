@@ -25,10 +25,7 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  */
 final readonly class NoServiceSameNameSetClassRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'No need to duplicate service class and name. Use only "$services->set(%s::class)" instead';
+    public const string ERROR_MESSAGE = 'No need to duplicate service class and name. Use only "$services->set(%s::class)" instead';
 
     private NodeFinder $nodeFinder;
 

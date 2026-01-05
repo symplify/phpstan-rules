@@ -22,10 +22,7 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class NoStringInGetSubscribedEventsRule implements Rule
 {
-    /**
-     * @var string
-     */
-    private const ERROR_MESSAGE = 'Symfony getSubscribedEvents() method must contain only event class references, no strings';
+    private const string ERROR_MESSAGE = 'Symfony getSubscribedEvents() method must contain only event class references, no strings';
 
     public function getNodeType(): string
     {

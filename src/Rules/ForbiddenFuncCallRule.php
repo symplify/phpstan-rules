@@ -24,10 +24,7 @@ use Symplify\PHPStanRules\ValueObject\Configuration\RequiredWithMessage;
  */
 final readonly class ForbiddenFuncCallRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
+    public const string ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
 
     /**
      * @param array<string> $forbiddenFunctions
