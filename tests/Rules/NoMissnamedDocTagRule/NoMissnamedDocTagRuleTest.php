@@ -39,6 +39,7 @@ final class NoMissnamedDocTagRuleTest extends RuleTestCase
         ]];
 
         yield [__DIR__ . '/Fixture/SkipValidPropertyTag.php', []];
+        yield [__DIR__ . '/Fixture/SkipPartOfComment.php', []];
     }
 
     /**

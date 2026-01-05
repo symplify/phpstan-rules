@@ -54,7 +54,7 @@ final class NoMissnamedDocTagRule implements Rule
                 continue;
             }
 
-            $matches = Strings::match($classMethod->getDocComment()->getText(), '#(@var)\b#mi');
+            $matches = Strings::match($classMethod->getDocComment()->getText(), '#\*\s(@var)\b#mi');
             if ($matches === null) {
                 continue;
             }
@@ -71,7 +71,7 @@ final class NoMissnamedDocTagRule implements Rule
                 continue;
             }
 
-            $matches = Strings::match($property->getDocComment()->getText(), '#(@param|@return)\b#mi');
+            $matches = Strings::match($property->getDocComment()->getText(), '#\*\s(@param|@return)\b#mi');
             if ($matches === null) {
                 continue;
             }
