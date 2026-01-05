@@ -27,7 +27,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  */
 final class ServicesExcludedDirectoryMustExistRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Services excluded path "%s" does not exists. You can remove it';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Services excluded path "%s" does not exists. You can remove it';
 
     public function getNodeType(): string
     {
@@ -105,7 +108,7 @@ final class ServicesExcludedDirectoryMustExistRule implements Rule
         $stringPart = $concat->right->value;
 
         // uses magic mask, nothing to validate
-        if (str_contains($stringPart, '*') || str_contains($stringPart, '{')) {
+        if (strpos($stringPart, '*') !== false || strpos($stringPart, '{') !== false) {
             return null;
         }
 

@@ -21,12 +21,16 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
  */
 final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Rule %s must implements Rector\VersionBonding\Contract\MinPhpVersionInterface';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Rule %s must implements Rector\VersionBonding\Contract\MinPhpVersionInterface';
 
     /**
      * @see https://regex101.com/r/9d3jGP/2/
+     * @var string
      */
-    private const string PREFIX_REGEX = '#\\\\Php\d+\\\\#';
+    private const PREFIX_REGEX = '#\\\\Php\d+\\\\#';
 
     public function getNodeType(): string
     {
@@ -40,7 +44,7 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
     {
         /** @var string $className */
         $className = (string) $node->namespacedName;
-        if (! str_ends_with($className, 'Rector')) {
+        if (substr_compare($className, 'Rector', -strlen('Rector')) !== 0) {
             return [];
         }
 

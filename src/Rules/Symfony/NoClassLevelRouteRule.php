@@ -20,7 +20,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
  */
 final class NoClassLevelRouteRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid class-level route prefixing. Use method route to keep single source of truth and focus';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid class-level route prefixing. Use method route to keep single source of truth and focus';
 
     public function getNodeType(): string
     {

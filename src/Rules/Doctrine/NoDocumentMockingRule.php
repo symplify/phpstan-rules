@@ -17,7 +17,10 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoDocumentMockingRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of document mocking, create object directly to get better type support';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of document mocking, create object directly to get better type support';
 
     public function getNodeType(): string
     {
@@ -40,7 +43,7 @@ final class NoDocumentMockingRule implements Rule
         $firstArg = $node->getArgs()[0];
         $mockedClassType = $scope->getType($firstArg->value);
         foreach ($mockedClassType->getConstantStrings() as $constantStringType) {
-            if (! str_contains($constantStringType->getValue(), '\\Document\\')) {
+            if (strpos($constantStringType->getValue(), '\\Document\\') === false) {
                 continue;
             }
 

@@ -25,7 +25,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoProtectedClassStmtRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid protected class stmts as they yield unexpected behavior. Use clear interface contract instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid protected class stmts as they yield unexpected behavior. Use clear interface contract instead';
 
     public function getNodeType(): string
     {
@@ -73,7 +76,10 @@ final class NoProtectedClassStmtRule implements Rule
         return $ruleErrors;
     }
 
-    private function shouldSkipClassMethod(ClassMethod|ClassConst|Property $classStmt, Scope $scope): bool
+    /**
+     * @param \PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\ClassConst|\PhpParser\Node\Stmt\Property $classStmt
+     */
+    private function shouldSkipClassMethod($classStmt, Scope $scope): bool
     {
         if (! $classStmt instanceof ClassMethod) {
             return false;

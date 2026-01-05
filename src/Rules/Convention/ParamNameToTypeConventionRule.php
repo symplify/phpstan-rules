@@ -20,14 +20,22 @@ use Webmozart\Assert\Assert;
  */
 final class ParamNameToTypeConventionRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Parameter name "$%s" should probably have "%s" type';
+    /**
+     * @var array<string, string>
+     */
+    private array $paramNamesToTypes;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Parameter name "$%s" should probably have "%s" type';
 
     /**
      * @param array<string, string> $paramNamesToTypes
      */
     public function __construct(
-        private array $paramNamesToTypes
+        array $paramNamesToTypes
     ) {
+        $this->paramNamesToTypes = $paramNamesToTypes;
         Assert::notEmpty($paramNamesToTypes);
 
         Assert::allString(array_keys($paramNamesToTypes));
