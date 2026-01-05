@@ -25,15 +25,12 @@ use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
  */
 final class ClassNameRespectsParentSuffixRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Class should have suffix "%s" to respect parent type';
+    public const string ERROR_MESSAGE = 'Class should have suffix "%s" to respect parent type';
 
     /**
      * @var string[]
      */
-    private const DEFAULT_PARENT_CLASSES = [
+    private const array DEFAULT_PARENT_CLASSES = [
         SymfonyClass::COMMAND,
         SymfonyClass::EVENT_SUBSCRIBER_INTERFACE,
         SymfonyClass::ABSTRACT_CONTROLLER,

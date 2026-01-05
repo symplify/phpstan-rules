@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\NoMissnamedDocTagRule;
 
 use Iterator;
+use Override;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -45,6 +46,7 @@ final class NoMissnamedDocTagRuleTest extends RuleTestCase
     /**
      * @return array<int, string>
      */
+    #[Override]
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

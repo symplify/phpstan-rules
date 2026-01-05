@@ -20,10 +20,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class ForbiddenArrayMethodCallRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code';
+    public const string ERROR_MESSAGE = 'Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code';
 
     public function getNodeType(): string
     {

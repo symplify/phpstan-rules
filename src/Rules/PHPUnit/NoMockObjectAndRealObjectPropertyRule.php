@@ -21,10 +21,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
  */
 final class NoMockObjectAndRealObjectPropertyRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of ambiguous mock + object mix, pick single type that is more relevant';
+    public const string ERROR_MESSAGE = 'Instead of ambiguous mock + object mix, pick single type that is more relevant';
 
     public function getNodeType(): string
     {

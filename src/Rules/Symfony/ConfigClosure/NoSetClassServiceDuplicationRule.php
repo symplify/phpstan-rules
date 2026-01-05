@@ -20,10 +20,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
  */
 final readonly class NoSetClassServiceDuplicationRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of "$services->set(%s)->class(%s)" that brings no value, use simple $services->set(%s)';
+    public const string ERROR_MESSAGE = 'Instead of "$services->set(%s)->class(%s)" that brings no value, use simple $services->set(%s)';
 
     private Standard $standard;
 

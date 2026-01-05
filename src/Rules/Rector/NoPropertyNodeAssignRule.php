@@ -22,10 +22,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
  */
 final class NoPropertyNodeAssignRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Avoid assigning a node to property to avoid object juggling, pass it as argument instead';
+    public const string ERROR_MESSAGE = 'Avoid assigning a node to property to avoid object juggling, pass it as argument instead';
 
     public function getNodeType(): string
     {

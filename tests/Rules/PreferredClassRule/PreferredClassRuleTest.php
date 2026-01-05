@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\PreferredClassRule;
 use DateTime as NativeDateTime;
 use Iterator;
 use Nette\Utils\DateTime;
+use Override;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -49,6 +50,7 @@ final class PreferredClassRuleTest extends RuleTestCase
     /**
      * @return string[]
      */
+    #[Override]
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

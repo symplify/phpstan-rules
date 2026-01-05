@@ -19,10 +19,7 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class SingleArgEventDispatchRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'The event dispatch() method can have only 1 arg - the event object';
+    public const string ERROR_MESSAGE = 'The event dispatch() method can have only 1 arg - the event object';
 
     public function getNodeType(): string
     {

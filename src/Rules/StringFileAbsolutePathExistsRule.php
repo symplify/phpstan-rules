@@ -19,15 +19,12 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class StringFileAbsolutePathExistsRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'File "%s" could not be found. Make sure it exists';
+    public const string ERROR_MESSAGE = 'File "%s" could not be found. Make sure it exists';
 
     /**
      * @var string[]
      */
-    private const SUFFIXES_TO_CHECK = [
+    private const array SUFFIXES_TO_CHECK = [
         '.sql',
         '.php',
         '.yml',

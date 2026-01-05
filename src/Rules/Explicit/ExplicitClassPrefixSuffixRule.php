@@ -25,21 +25,18 @@ final class ExplicitClassPrefixSuffixRule implements Rule
 {
     /**
      * @api
-     * @var string
      */
-    public const INTERFACE_ERROR_MESSAGE = 'Interface must be suffixed with "Interface" exclusively';
+    public const string INTERFACE_ERROR_MESSAGE = 'Interface must be suffixed with "Interface" exclusively';
 
     /**
      * @api
-     * @var string
      */
-    public const TRAIT_ERROR_MESSAGE = 'Trait must be suffixed by "Trait" exclusively';
+    public const string TRAIT_ERROR_MESSAGE = 'Trait must be suffixed by "Trait" exclusively';
 
     /**
      * @api
-     * @var string
      */
-    public const ABSTRACT_ERROR_MESSAGE = 'Abstract class must be prefixed by "Abstract" exclusively';
+    public const string ABSTRACT_ERROR_MESSAGE = 'Abstract class must be prefixed by "Abstract" exclusively';
 
     public function getNodeType(): string
     {

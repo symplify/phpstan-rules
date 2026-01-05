@@ -29,7 +29,7 @@ final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExte
     /**
      * @var array<string, string>
      */
-    private const ARGUMENT_KEY_TO_RETURN_TYPE = [
+    private const array ARGUMENT_KEY_TO_RETURN_TYPE = [
         'scope' => Scope::class,
         ClassName::RECTOR_ATTRIBUTE_KEY . '::SCOPE' => Scope::class,
         'originalNode' => Node::class,

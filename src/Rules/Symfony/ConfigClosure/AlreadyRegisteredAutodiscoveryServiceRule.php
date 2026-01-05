@@ -24,10 +24,7 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  */
 final readonly class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'The "%s" service is already registered via autodiscovery ->load(), no need to set it twice';
+    public const string ERROR_MESSAGE = 'The "%s" service is already registered via autodiscovery ->load(), no need to set it twice';
 
     public function __construct(
         private ReflectionProvider $reflectionProvider

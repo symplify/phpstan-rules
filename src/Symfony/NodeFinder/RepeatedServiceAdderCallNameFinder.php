@@ -13,9 +13,9 @@ use Symplify\PHPStanRules\Symfony\ConfigClosure\SymfonyServiceReferenceFunctionA
 
 final class RepeatedServiceAdderCallNameFinder
 {
-    private const CALL_NAME = 'call';
+    private const string CALL_NAME = 'call';
 
-    private const MIN_ALERT_COUNT = 3;
+    private const int MIN_ALERT_COUNT = 3;
 
     public static function find(MethodCall $methodCall): ?string
     {

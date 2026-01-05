@@ -18,10 +18,7 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  */
 final class NoBundleResourceConfigRule implements Rule
 {
-    /**
-     * @var string
-     */
-    private const ERROR_MESSAGE = 'Avoid using configs in Bundle/Resources directory. Move them to "/config" directory instead';
+    private const string ERROR_MESSAGE = 'Avoid using configs in Bundle/Resources directory. Move them to "/config" directory instead';
 
     public function getNodeType(): string
     {

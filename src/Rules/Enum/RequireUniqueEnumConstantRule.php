@@ -20,10 +20,7 @@ use Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer;
  */
 final readonly class RequireUniqueEnumConstantRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
+    public const string ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
 
     public function __construct(
         private EnumAnalyzer $enumAnalyzer

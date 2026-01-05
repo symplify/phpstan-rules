@@ -18,10 +18,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class ForbiddenExtendOfNonAbstractClassRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Only abstract classes can be extended';
+    public const string ERROR_MESSAGE = 'Only abstract classes can be extended';
 
     /**
      * @return class-string<Node>

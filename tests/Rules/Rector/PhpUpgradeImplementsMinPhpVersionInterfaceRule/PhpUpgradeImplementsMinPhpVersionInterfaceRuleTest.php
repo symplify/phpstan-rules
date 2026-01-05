@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule;
 
 use Iterator;
+use Override;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -43,6 +44,7 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRuleTest extends RuleTestC
     /**
      * @return array<int, string>
      */
+    #[Override]
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/configured_rule.neon'];

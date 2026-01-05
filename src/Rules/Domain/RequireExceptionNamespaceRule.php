@@ -17,10 +17,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class RequireExceptionNamespaceRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Exception must be located in "Exception" namespace';
+    public const string ERROR_MESSAGE = 'Exception must be located in "Exception" namespace';
 
     public function getNodeType(): string
     {

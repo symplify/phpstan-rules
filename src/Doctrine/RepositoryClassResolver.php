@@ -11,25 +11,16 @@ use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 
 final readonly class RepositoryClassResolver
 {
-    /**
-     * @var string
-     */
-    private const QUOTED_REPOSITORY_CLASS_REGEX = '#repositoryClass=\"(?<repositoryClass>.*?)\"#';
+    private const string QUOTED_REPOSITORY_CLASS_REGEX = '#repositoryClass=\"(?<repositoryClass>.*?)\"#';
 
-    /**
-     * @var string
-     */
-    private const REPOSITORY_CLASS_CONST_REGEX = '#repositoryClass=?(\\\\)(?<repositoryClass>.*?)::class#';
+    private const string REPOSITORY_CLASS_CONST_REGEX = '#repositoryClass=?(\\\\)(?<repositoryClass>.*?)::class#';
 
-    /**
-     * @var string
-     */
-    private const USE_REPOSITORY_REGEX = '#use (?<repositoryClass>.*?Repository);#';
+    private const string USE_REPOSITORY_REGEX = '#use (?<repositoryClass>.*?Repository);#';
 
     /**
      * @var string[]
      */
-    private const REGEX_TRAIN = [
+    private const array REGEX_TRAIN = [
         self::QUOTED_REPOSITORY_CLASS_REGEX,
         self::REPOSITORY_CLASS_CONST_REGEX,
         self::USE_REPOSITORY_REGEX,

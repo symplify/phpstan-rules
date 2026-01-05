@@ -19,10 +19,7 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
  */
 final class NoRouteTrailingSlashPathRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Avoid trailing slash in route path "%s", to prevent redirects and SEO issues';
+    public const string ERROR_MESSAGE = 'Avoid trailing slash in route path "%s", to prevent redirects and SEO issues';
 
     public function getNodeType(): string
     {

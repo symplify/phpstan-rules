@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\ReturnTypeExtension\NodeGetAttributeTypeExtension;
 
 use Iterator;
+use Override;
 use PHPStan\Testing\TypeInferenceTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -30,6 +31,7 @@ final class NodeGetAttributeTypeExtensionTest extends TypeInferenceTestCase
     /**
      * @return string[]
      */
+    #[Override]
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/config/type_extension.neon'];

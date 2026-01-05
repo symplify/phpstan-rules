@@ -26,10 +26,7 @@ use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
  */
 final class NoIntegerRefactorReturnRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of using DONT_TRAVERSE_CHILDREN* or STOP_TRAVERSAL in refactor() method, make use of attributes. Return always node, null or REMOVE_NODE. Using traverser enums might lead to unexpected results';
+    public const string ERROR_MESSAGE = 'Instead of using DONT_TRAVERSE_CHILDREN* or STOP_TRAVERSAL in refactor() method, make use of attributes. Return always node, null or REMOVE_NODE. Using traverser enums might lead to unexpected results';
 
     public function getNodeType(): string
     {

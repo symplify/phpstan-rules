@@ -34,17 +34,14 @@ use Symplify\PHPStanRules\Symfony\Reflection\ClassConstructorTypesResolver;
  */
 final readonly class NoDuplicateArgAutowireByTypeRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of passing "%s" to arg(), remove the line and let autowiring handle it';
+    public const string ERROR_MESSAGE = 'Instead of passing "%s" to arg(), remove the line and let autowiring handle it';
 
     /**
      * @todo possible extract to an own rule, include more common Symfony services
      *
      * @var string[]
      */
-    private const NAMED_AUTOWIRED_TYPES = ['request_stack'];
+    private const array NAMED_AUTOWIRED_TYPES = ['request_stack'];
 
     public function __construct(
         private ClassConstructorTypesResolver $classConstructorTypesResolver,

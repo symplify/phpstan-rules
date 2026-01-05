@@ -20,14 +20,13 @@ final readonly class NoTestMocksRule implements Rule
 {
     /**
      * @api
-     * @var string
      */
-    public const ERROR_MESSAGE = 'Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis';
+    public const string ERROR_MESSAGE = 'Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis';
 
     /**
      * @var string[]
      */
-    private const MOCKING_METHOD_NAMES = ['createMock', 'createPartialMock', 'createConfiguredMock', 'createStub'];
+    private const array MOCKING_METHOD_NAMES = ['createMock', 'createPartialMock', 'createConfiguredMock', 'createStub'];
 
     /**
      * @param string[] $allowedTypes

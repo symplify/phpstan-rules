@@ -34,10 +34,7 @@ use Symplify\PHPStanRules\Symfony\Reflection\ClassConstructorTypesResolver;
  */
 final readonly class NoDuplicateArgsAutowireByTypeRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of passing "%s" to args(), remove the line and let autowiring handle it';
+    public const string ERROR_MESSAGE = 'Instead of passing "%s" to args(), remove the line and let autowiring handle it';
 
     public function __construct(
         private ClassConstructorTypesResolver $classConstructorTypesResolver,

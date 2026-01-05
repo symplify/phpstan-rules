@@ -23,16 +23,12 @@ use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
  */
 final readonly class NoReturnSetterMethodRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Setter method cannot return anything, only set value';
+    public const string ERROR_MESSAGE = 'Setter method cannot return anything, only set value';
 
     /**
-     * @var string
      * @see https://regex101.com/r/IIvg8L/1
      */
-    private const SETTER_START_REGEX = '#^set[A-Z]#';
+    private const string SETTER_START_REGEX = '#^set[A-Z]#';
 
     public function __construct(
         private TypeAwareNodeFinder $typeAwareNodeFinder

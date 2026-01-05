@@ -19,10 +19,7 @@ use Symplify\PHPStanRules\NodeAnalyzer\SymfonyRequiredMethodAnalyzer;
  */
 final class NoRequiredOutsideClassRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Symfony #[Require]/@required should be used only in classes to avoid misuse';
+    public const string ERROR_MESSAGE = 'Symfony #[Require]/@required should be used only in classes to avoid misuse';
 
     public function getNodeType(): string
     {

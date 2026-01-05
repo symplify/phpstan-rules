@@ -17,10 +17,7 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoDocumentMockingRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of document mocking, create object directly to get better type support';
+    public const string ERROR_MESSAGE = 'Instead of document mocking, create object directly to get better type support';
 
     public function getNodeType(): string
     {

@@ -22,10 +22,7 @@ use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
  */
 final class NoRepositoryCallInDataFixtureRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Refactor read-data fixtures to write-only, make use of references';
+    public const string ERROR_MESSAGE = 'Refactor read-data fixtures to write-only, make use of references';
 
     public function getNodeType(): string
     {

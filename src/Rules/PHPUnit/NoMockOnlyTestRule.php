@@ -23,10 +23,7 @@ use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
  */
 final readonly class NoMockOnlyTestRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Test should have at least one non-mocked property, to test something';
+    public const string ERROR_MESSAGE = 'Test should have at least one non-mocked property, to test something';
 
     public function getNodeType(): string
     {

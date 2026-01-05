@@ -26,10 +26,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final readonly class PreferredClassRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
+    public const string ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
 
     /**
      * @param string[] $oldToPreferredClasses

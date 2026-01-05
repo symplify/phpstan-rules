@@ -27,10 +27,7 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of calling "->getRepository(%s::class)" service locator, inject service repository "%s" via constructor and use it directly';
+    public const string ERROR_MESSAGE = 'Instead of calling "->getRepository(%s::class)" service locator, inject service repository "%s" via constructor and use it directly';
 
     private RepositoryClassResolver $repositoryClassResolver;
 

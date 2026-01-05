@@ -31,9 +31,8 @@ final readonly class PreferAutowireAttributeOverConfigParamRule implements Rule
 {
     /**
      * @api used in tests
-     * @var string
      */
-    public const ERROR_MESSAGE = 'Instead of parameter reference in config, add #[Autowire(param: ...)] in the "%s" class constructor';
+    public const string ERROR_MESSAGE = 'Instead of parameter reference in config, add #[Autowire(param: ...)] in the "%s" class constructor';
 
     private NodeFinder $nodeFinder;
 

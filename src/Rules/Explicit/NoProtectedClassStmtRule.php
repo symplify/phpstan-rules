@@ -25,10 +25,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoProtectedClassStmtRule implements Rule
 {
-    /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Avoid protected class stmts as they yield unexpected behavior. Use clear interface contract instead';
+    public const string ERROR_MESSAGE = 'Avoid protected class stmts as they yield unexpected behavior. Use clear interface contract instead';
 
     public function getNodeType(): string
     {
