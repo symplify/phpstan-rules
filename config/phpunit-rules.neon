@@ -8,3 +8,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
+
+    # @todo test first
+    # ever method() must have expects() call to define how many times it is expected
+    # - Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule
