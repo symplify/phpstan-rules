@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Symplify\PHPStanRules\Rules\PHPUnit;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\PropertyFetch;
+use PhpParser\Node\Expr\Variable;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
@@ -13,28 +17,39 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
 /**
- * @implements Rule<FuncCall>
+ * @implements Rule<MethodCall>
+ *
+ * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\ExplicitExpectsMockMethodRule\ExplicitExpectsMockMethodRuleTest
  */
-final class NoAssertFuncCallInTestsRule implements Rule
+final class ExplicitExpectsMockMethodRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
+    public const string ERROR_MESSAGE = 'PHPUnit mock method is missing explicit expects(), e.g. $this->mock->expects($this->once())->...';
 
     public function getNodeType(): string
     {
-        return FuncCall::class;
+        return MethodCall::class;
     }
 
     /**
-     * @param FuncCall $node
+     * @param MethodCall $node
      * @return IdentifierRuleError[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! NamingHelper::isName($node->name, 'assert')) {
+        if (! NamingHelper::isName($node->name, 'method')) {
             return [];
         }
 
         if (! TestClassDetector::isTestClass($scope)) {
+            return [];
+        }
+
+        if (! $node->var instanceof Variable && ! $node->var instanceof PropertyFetch) {
+            return [];
+        }
+
+        $callerType = $scope->getType($node->var);
+        if (! $callerType->hasMethod('expects')->yes()) {
             return [];
         }
 
