@@ -16,6 +16,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule;
 use Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule;
 use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Source\Repository\SomeServiceRepository;
 >>>>>>> 0ffdc220 (add test)
@@ -66,9 +67,13 @@ final class NoDocumentMockingRuleTest extends RuleTestCase
 =======
     protected function getRule(): Rule
     {
+<<<<<<< HEAD
         $reflectionProvider = self::getContainer()->getByType(ReflectionProvider::class);
 
         return new NoGetRepositoryOnServiceRepositoryEntityRule($reflectionProvider);
 >>>>>>> 0ffdc220 (add test)
+=======
+        return new NoDocumentMockingRule();
+>>>>>>> d892b6fc (add test)
     }
 }
