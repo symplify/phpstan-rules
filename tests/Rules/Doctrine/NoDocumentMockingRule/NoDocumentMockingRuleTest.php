@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\NoDocumentMockingRule;
 
 use Iterator;
-use PHPStan\Reflection\ReflectionProvider;
+use Override;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule;
-use Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule;
-use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\Source\Repository\SomeServiceRepository;
 
 final class NoDocumentMockingRuleTest extends RuleTestCase
 {
@@ -29,17 +27,25 @@ final class NoDocumentMockingRuleTest extends RuleTestCase
      */
     public static function provideData(): Iterator
     {
-        $errorMessage = sprintf(NoGetRepositoryOnServiceRepositoryEntityRule::ERROR_MESSAGE, 'SomeEntity', SomeServiceRepository::class);
         yield [__DIR__ . '/Fixture/SomeEntityMocking.php', [[
-            $errorMessage,
+            NoDocumentMockingRule::ERROR_MESSAGE,
             14,
         ]]];
 
         yield [__DIR__ . '/Fixture/SomeAbstractEntityMocking.php', []];
     }
 
+    /**
+     * @return string[]
+     */
+    #[Override]
+    public static function getAdditionalConfigFiles(): array
+    {
+        return [__DIR__ . '/config/configured_rule.neon'];
+    }
+
     protected function getRule(): Rule
     {
-        return new NoDocumentMockingRule();
+        return self::getContainer()->getByType(NoDocumentMockingRule::class);
     }
 }
