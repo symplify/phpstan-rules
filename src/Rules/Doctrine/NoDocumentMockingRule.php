@@ -33,7 +33,7 @@ final class NoDocumentMockingRule implements Rule
             return [];
         }
 
-        if (! NamingHelper::isName($node->name, 'createMock')) {
+        if (! NamingHelper::isNames($node->name, ['createMock', 'createStub', 'createConfiguredMock'])) {
             return [];
         }
 
