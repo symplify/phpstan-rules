@@ -23,9 +23,13 @@ final class SymfonyServiceReferenceFunctionAnalyzer
 
         $functionName = $expr->name->toString();
 
-        return in_array($functionName, [
-            SymfonyFunctionName::REF,
-            SymfonyFunctionName::SERVICE,
-        ]);
+        return in_array(
+            $functionName,
+            [
+                SymfonyFunctionName::REF,
+                SymfonyFunctionName::SERVICE,
+            ],
+            true
+        );
     }
 }

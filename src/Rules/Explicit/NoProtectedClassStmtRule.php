@@ -80,7 +80,7 @@ final class NoProtectedClassStmtRule implements Rule
         }
 
         // PHPUnit test methods
-        if (in_array($classStmt->name->toString(), [MethodName::SET_UP, MethodName::TEAR_DOWN])) {
+        if (in_array($classStmt->name->toString(), [MethodName::SET_UP, MethodName::TEAR_DOWN], true)) {
             return true;
         }
 

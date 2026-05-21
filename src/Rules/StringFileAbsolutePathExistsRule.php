@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;

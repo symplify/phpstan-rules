@@ -11,10 +11,13 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symplify\PHPStanRules\Rules\NoDynamicNameRule;
 
+/**
+ * @extends RuleTestCase<NoDynamicNameRule>
+ */
 final class NoDynamicNameRuleTest extends RuleTestCase
 {
     /**
-     * @param array<int, array<string|int>> $expectedErrorMessagesWithLines
+     * @param list<array{string, int, 2?: string|null}> $expectedErrorMessagesWithLines
      */
     #[DataProvider('provideData')]
     public function testRule(string $filePath, array $expectedErrorMessagesWithLines): void
@@ -42,6 +45,7 @@ final class NoDynamicNameRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipMagicGet.php', []];
         yield [__DIR__ . '/Fixture/SkipCallableUnion.php', []];
         yield [__DIR__ . '/Fixture/SkipNullableClosure.php', []];
+        yield [__DIR__ . '/Fixture/SkipConstantLookupOnKnownType.php', []];
         yield [__DIR__ . '/Fixture/SkipImmediatelyInvokedFunctionExpression.php', []];
     }
 

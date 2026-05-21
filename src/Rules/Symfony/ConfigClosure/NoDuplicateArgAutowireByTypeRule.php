@@ -105,7 +105,7 @@ final readonly class NoDuplicateArgAutowireByTypeRule implements Rule
         }
 
         // 2. special case for string known values
-        if ($referenceExpr instanceof String_ && in_array($referenceExpr->value, self::NAMED_AUTOWIRED_TYPES)) {
+        if ($referenceExpr instanceof String_ && in_array($referenceExpr->value, self::NAMED_AUTOWIRED_TYPES, true)) {
             $ruleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $referenceExpr->value))
                 ->identifier(SymfonyRuleIdentifier::NO_DUPLICATE_ARG_AUTOWIRE_BY_TYPE)
                 ->line($referenceFuncCall->getStartLine())
