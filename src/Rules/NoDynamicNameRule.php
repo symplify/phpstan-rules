@@ -56,10 +56,8 @@ final readonly class NoDynamicNameRule implements Rule
             }
 
             $classType = $scope->getType($node->class);
-            if ($classType instanceof UnionType) {
-                if ($classType->getObjectClassReflections() !== []) {
-                    return [];
-                }
+            if ($classType instanceof UnionType && $classType->getObjectClassReflections() !== []) {
+                return [];
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
