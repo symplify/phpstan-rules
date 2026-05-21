@@ -11,8 +11,8 @@ final class SkipConstantLookupOnKnownType
 {
     public function run()
     {
-        $object = $this->getObject();
-        if ($object::MY_CONSTANT === 3) {
+        $objectOfKnownType = $this->getObject();
+        if ($objectOfKnownType::MY_CONSTANT === 3) {
             echo "a";
         }
     }
