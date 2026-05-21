@@ -98,7 +98,7 @@ final class NoIntegerRefactorReturnRule implements Rule
                 return null;
             }
 
-            if (! in_array($subNode->class->toString(), [NodeVisitor::class, NodeTraverser::class])) {
+            if (! in_array($subNode->class->toString(), [NodeVisitor::class, NodeTraverser::class], true)) {
                 return null;
             }
 

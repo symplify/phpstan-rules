@@ -48,7 +48,7 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
         }
 
         $methodName = $node->name->toString();
-        if (! in_array($methodName, ['getRepository', 'find', 'findAll', 'findBy', 'findOneBy'])) {
+        if (! in_array($methodName, ['getRepository', 'find', 'findAll', 'findBy', 'findOneBy'], true)) {
             return [];
         }
 
