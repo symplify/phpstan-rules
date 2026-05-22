@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  */
 final class NoServiceAutowireDuplicateRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Service autowire() is called as duplicate of $services->defaults()->autowire(). Remove it on the service';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Service autowire() is called as duplicate of $services->defaults()->autowire(). Remove it on the service';
 
     public function getNodeType(): string
     {

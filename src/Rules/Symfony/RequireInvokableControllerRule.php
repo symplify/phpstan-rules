@@ -19,7 +19,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
  */
 final class RequireInvokableControllerRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
 
     /**
      * @return class-string<Node>

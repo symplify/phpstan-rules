@@ -1,2 +1,0 @@
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSameNameSetClassRule

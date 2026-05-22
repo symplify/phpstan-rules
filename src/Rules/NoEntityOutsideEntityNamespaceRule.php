@@ -17,7 +17,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoEntityOutsideEntityNamespaceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Class with #[Entity] attribute must be located in "Entity" namespace to be loaded by Doctrine';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class with #[Entity] attribute must be located in "Entity" namespace to be loaded by Doctrine';
 
     public function getNodeType(): string
     {

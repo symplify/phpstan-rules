@@ -1,2 +1,0 @@
-rules:
-    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule

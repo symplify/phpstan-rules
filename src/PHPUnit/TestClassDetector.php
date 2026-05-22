@@ -11,7 +11,7 @@ final class TestClassDetector
     /**
      * @var string[]
      */
-    private const array TEST_FILE_SUFFIXES = [
+    private const TEST_FILE_SUFFIXES = [
         'Test.php',
         'TestCase.php',
         'Context.php',
@@ -20,7 +20,7 @@ final class TestClassDetector
     public static function isTestClass(Scope $scope): bool
     {
         foreach (self::TEST_FILE_SUFFIXES as $testFileSuffix) {
-            if (str_ends_with($scope->getFile(), $testFileSuffix)) {
+            if (substr_compare($scope->getFile(), $testFileSuffix, -strlen($testFileSuffix)) === 0) {
                 return true;
             }
         }

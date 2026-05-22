@@ -23,7 +23,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
  */
 final class NoDoctrineListenerWithoutContractRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'There should be no Doctrine listeners modified in config. Implement  "Document\Event\EventSubscriber" to provide events in the class itself';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'There should be no Doctrine listeners modified in config. Implement  "Document\Event\EventSubscriber" to provide events in the class itself';
 
     public function getNodeType(): string
     {
@@ -40,7 +43,7 @@ final class NoDoctrineListenerWithoutContractRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        if (! str_ends_with($classReflection->getName(), 'Listener')) {
+        if (substr_compare($classReflection->getName(), 'Listener', -strlen('Listener')) !== 0) {
             return [];
         }
 

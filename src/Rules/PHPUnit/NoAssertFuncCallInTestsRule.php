@@ -17,7 +17,10 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
  */
 final class NoAssertFuncCallInTestsRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
 
     public function getNodeType(): string
     {

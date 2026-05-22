@@ -10,12 +10,20 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use Symplify\PHPStanRules\Reflection\ReflectionParser;
 
-final readonly class ParentClassMethodNodeResolver
+final class ParentClassMethodNodeResolver
 {
-    public function __construct(
-        private ReflectionParser $reflectionParser,
-        private ReflectionProvider $reflectionProvider
-    ) {
+    /**
+     * @readonly
+     */
+    private ReflectionParser $reflectionParser;
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+    public function __construct(ReflectionParser $reflectionParser, ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionParser = $reflectionParser;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function resolveParentClassMethod(Scope $scope, string $methodName): ?ClassMethod

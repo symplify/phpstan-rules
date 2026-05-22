@@ -24,18 +24,34 @@ use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
  */
-final readonly class SeeAnnotationToTestRule implements Rule
+final class SeeAnnotationToTestRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
+    /**
+     * @readonly
+     */
+    private PhpDocResolver $phpDocResolver;
+    /**
+     * @readonly
+     */
+    private SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder;
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private array $requiredSeeTypes;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
 
     /**
      * @param string[] $requiredSeeTypes
      */
-    public function __construct(
-        private PhpDocResolver $phpDocResolver,
-        private SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder,
-        private array $requiredSeeTypes
-    ) {
+    public function __construct(PhpDocResolver $phpDocResolver, SeePhpDocTagNodesFinder $seePhpDocTagNodesFinder, array $requiredSeeTypes)
+    {
+        $this->phpDocResolver = $phpDocResolver;
+        $this->seePhpDocTagNodesFinder = $seePhpDocTagNodesFinder;
+        $this->requiredSeeTypes = $requiredSeeTypes;
     }
 
     public function getNodeType(): string

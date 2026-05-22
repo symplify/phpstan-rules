@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
  */
 final class NoGetInControllerRule implements Rule
 {
-    private const string ERROR_MESSAGE = 'Do not use $this->get(Type::class) method in controller to get services. Use __construct(Type $type) instead';
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Do not use $this->get(Type::class) method in controller to get services. Use __construct(Type $type) instead';
 
     public function getNodeType(): string
     {

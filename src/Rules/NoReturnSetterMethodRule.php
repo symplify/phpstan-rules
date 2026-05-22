@@ -21,18 +21,26 @@ use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
  * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
-final readonly class NoReturnSetterMethodRule implements Rule
+final class NoReturnSetterMethodRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Setter method cannot return anything, only set value';
+    /**
+     * @readonly
+     */
+    private TypeAwareNodeFinder $typeAwareNodeFinder;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Setter method cannot return anything, only set value';
 
     /**
      * @see https://regex101.com/r/IIvg8L/1
+     * @var string
      */
-    private const string SETTER_START_REGEX = '#^set[A-Z]#';
+    private const SETTER_START_REGEX = '#^set[A-Z]#';
 
-    public function __construct(
-        private TypeAwareNodeFinder $typeAwareNodeFinder
-    ) {
+    public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
+    {
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
     }
 
     /**

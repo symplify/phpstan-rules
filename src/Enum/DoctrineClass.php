@@ -6,17 +6,38 @@ namespace Symplify\PHPStanRules\Enum;
 
 final class DoctrineClass
 {
-    public const string ODM_SERVICE_REPOSITORY = 'Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository';
+    /**
+     * @var string
+     */
+    public const ODM_SERVICE_REPOSITORY = 'Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository';
 
-    public const string ODM_SERVICE_REPOSITORY_INTERFACE = 'Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepositoryInterface';
+    /**
+     * @var string
+     */
+    public const ODM_SERVICE_REPOSITORY_INTERFACE = 'Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepositoryInterface';
 
-    public const string ORM_SERVICE_REPOSITORY = 'Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository';
+    /**
+     * @var string
+     */
+    public const ORM_SERVICE_REPOSITORY = 'Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository';
 
-    public const string FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
+    /**
+     * @var string
+     */
+    public const FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
 
-    public const string ENTITY_REPOSITORY = 'Doctrine\ORM\EntityRepository';
+    /**
+     * @var string
+     */
+    public const ENTITY_REPOSITORY = 'Doctrine\ORM\EntityRepository';
 
-    public const string CONNECTION = 'Doctrine\DBAL\Connection';
+    /**
+     * @var string
+     */
+    public const CONNECTION = 'Doctrine\DBAL\Connection';
 
-    public const string DOCUMENT_REPOSITORY = 'Doctrine\ODM\MongoDB\Repository\DocumentRepository';
+    /**
+     * @var string
+     */
+    public const DOCUMENT_REPOSITORY = 'Doctrine\ODM\MongoDB\Repository\DocumentRepository';
 }
