@@ -2,7 +2,7 @@
 
 [![Downloads](https://img.shields.io/packagist/dt/symplify/phpstan-rules.svg?style=flat-square)](https://packagist.org/packages/symplify/phpstan-rules/stats)
 
-Set of 70+ PHPStan fun and practical rules that check:
+Set of 90+ PHPStan fun and practical rules that check:
 
 * clean architecture, logical errors,
 * naming, class namespace locations
@@ -52,11 +52,13 @@ includes:
 
 But at start, make baby steps with one rule at a time:
 
-Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific rules](#2-doctrine-specific-rules) or [PHPUnit-specific rules](#4-phpunit-specific-rules).
+Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific rules](#2-doctrine-specific-rules), [PHPUnit-specific rules](#4-phpunit-specific-rules) or [Rector-specific rules](#5-rector-specific-rules).
 
 <br>
 
 ## Special rules
+
+### MaximumIgnoredErrorCountRule
 
 Tired of ever growing ignored error count in your `phpstan.neon`? Set hard limit to keep them low:
 
@@ -1221,6 +1223,151 @@ final class SomeClass
 
 <br>
 
+### ForeachCeptionRule
+
+Avoid more than 3 nested foreach loops. Refactor to a flatter approach or to a collection to avoid high complexity
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Complexity\ForeachCeptionRule
+```
+
+```php
+foreach ($items as $item) {
+    foreach ($item->getChildren() as $child) {
+        foreach ($child->getGrandchildren() as $grandchild) {
+            foreach ($grandchild->getData() as $data) {
+                // ...
+            }
+        }
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+foreach ($items as $item) {
+    $this->processItem($item);
+}
+```
+
+:+1:
+
+<br>
+
+### NoMissingVariableDimFetchRule
+
+Dim fetch assign variable is missing, create it first
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Explicit\NoMissingVariableDimFetchRule
+```
+
+```php
+final class SomeClass
+{
+    public function run()
+    {
+        $dim['key'] = 'value';
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class SomeClass
+{
+    public function run()
+    {
+        $dim = [];
+        $dim['key'] = 'value';
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoMissnamedDocTagRule
+
+Constant doc comment tag must be `@var`, not `@return` or other tags
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoMissnamedDocTagRule
+```
+
+```php
+class SomeConstant
+{
+    /**
+     * @return string
+     */
+    private const NAME = 'value';
+}
+```
+
+:x:
+
+<br>
+
+```php
+class SomeConstant
+{
+    /**
+     * @var string
+     */
+    private const NAME = 'value';
+}
+```
+
+:+1:
+
+<br>
+
+### NoValueObjectInServiceConstructorRule
+
+Value object cannot be passed to constructor of a service. Pass it as a method argument instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoValueObjectInServiceConstructorRule
+```
+
+```php
+final class SomeService
+{
+    public function __construct(private SomeValueObject $someValueObject)
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class SomeService
+{
+    public function run(SomeValueObject $someValueObject)
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
 ---
 
 <br>
@@ -2258,6 +2405,164 @@ final class SomeController extends AbstractController
 
 <br>
 
+### NoControllerMethodInjectionRule
+
+Instead of action method service injection, use `__construct()` and an invokable controller with `__invoke()` to clearly separate services and parameters
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoControllerMethodInjectionRule
+```
+
+```php
+use Symfony\Component\Routing\Annotation\Route;
+
+final class SomeController
+{
+    #[Route('/some-action')]
+    public function someAction(SomeService $someService)
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\Routing\Annotation\Route;
+
+final class SomeController
+{
+    public function __construct(private SomeService $someService)
+    {
+    }
+
+    #[Route('/some-action')]
+    public function __invoke()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoServiceAutowireDuplicateRule
+
+Service `autowire()` is called as a duplicate of `$services->defaults()->autowire()`. Remove it on the service.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoServiceAutowireDuplicateRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+    $services->defaults()->autowire();
+
+    $services->set('some_service')
+        ->autowire();
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+    $services->defaults()->autowire();
+
+    $services->set('some_service');
+};
+```
+
+:+1:
+
+<br>
+
+### NoSetClassServiceDuplicationRule
+
+Instead of `$services->set(X)->class(X)` that brings no value, use simple `$services->set(X)`
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoSetClassServiceDuplicationRule
+```
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class)
+        ->class(SomeService::class);
+};
+```
+
+:x:
+
+<br>
+
+```php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+
+    $services->set(SomeService::class);
+};
+```
+
+:+1:
+
+<br>
+
+### FileNameMatchesExtensionRule
+
+The config uses a specific extension, but the file name does not match. Sync them to ease discovery.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\FileNameMatchesExtensionRule
+```
+
+```php
+// wrong_name.php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return function (ContainerConfigurator $container) {
+    $framework = $container->extension('framework');
+};
+```
+
+:x:
+
+<br>
+
+```php
+// framework.php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return function (ContainerConfigurator $container) {
+    $framework = $container->extension('framework');
+};
+```
+
+:+1:
+
+<br>
+
 ---
 
 <br>
@@ -2430,6 +2735,411 @@ final class SomeTest extends TestCase
     {
         return [];
     }
+}
+```
+
+:+1:
+
+<br>
+
+### ExplicitExpectsMockMethodRule
+
+PHPUnit mock method is missing explicit `expects()`, e.g. `$this->mock->expects($this->once())->...`
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule
+```
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test(): void
+    {
+        $mock = $this->createMock(\stdClass::class);
+        $mock->method('someMethod')->willReturn('value');
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test(): void
+    {
+        $mock = $this->createMock(\stdClass::class);
+
+        $mock->expects($this->atLeastOnce())
+            ->method('someMethod')
+            ->willReturn('value');
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoDoubleConsecutiveTestMockRule
+
+Do not use `willReturnOnConsecutiveCalls()` and `willReturnCallback()` on the same mock. Use `willReturnCallback()` only instead to make the test more clear.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
+```
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $this->createMock('SomeClass')
+            ->expects($this->exactly(2))
+            ->method('someMethod')
+            ->willReturnCallback(function () {
+                return 'first';
+            })
+            ->willReturnOnConsecutiveCalls('first');
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $this->createMock('SomeClass')
+            ->expects($this->exactly(2))
+            ->method('someMethod')
+            ->willReturnCallback(function () {
+                return 'first';
+            });
+    }
+}
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
+## 5. Rector-specific Rules
+
+### AvoidFeatureSetAttributeInRectorRule
+
+Instead of using a Rector rule to `setAttribute()` to be used later, create a service extending `DecoratingNodeVisitorInterface`. This ensures attribute decoration and node changes are in 2 separated steps.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\AvoidFeatureSetAttributeInRectorRule
+```
+
+```php
+use PhpParser\Node;
+use Rector\Rector\AbstractRector;
+
+final class SomeRector extends AbstractRector
+{
+    public function refactor(Node $node)
+    {
+        $node->setAttribute('some_attribute', 'some_value');
+
+        return null;
+    }
+}
+```
+
+:x:
+
+<br>
+
+### NoClassReflectionStaticReflectionRule
+
+Instead of `new ReflectionClass()` use `ReflectionProvider` service or `(new PHPStan\Reflection\ClassReflection(<desired_type>))` for static reflection to work
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\NoClassReflectionStaticReflectionRule
+```
+
+```php
+use ReflectionClass;
+
+final class SomeClass
+{
+    public function run(): object
+    {
+        return new ReflectionClass('SomeType');
+    }
+}
+```
+
+:x:
+
+<br>
+
+### NoInstanceOfStaticReflectionRule
+
+Instead of `instanceof`/`is_a()` use `ReflectionProvider` service or `(new ObjectType(<desired_type>))->isSuperTypeOf(<element_type>)` for static reflection to work
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\NoInstanceOfStaticReflectionRule
+```
+
+```php
+final class SomeClass
+{
+    public function check(object $object): bool
+    {
+        if ($object instanceof SomeExternalType) {
+            return true;
+        }
+
+        return false;
+    }
+}
+```
+
+:x:
+
+<br>
+
+### NoIntegerRefactorReturnRule
+
+Instead of using `DONT_TRAVERSE_CHILDREN*` or `STOP_TRAVERSAL` in `refactor()` method, make use of attributes. Return always node, null or `REMOVE_NODE`. Using traverser enums might lead to unexpected results
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\NoIntegerRefactorReturnRule
+```
+
+```php
+use PhpParser\Node;
+use PhpParser\Node\Stmt\Class_;
+use PhpParser\NodeVisitor;
+use Rector\Rector\AbstractRector;
+
+final class SomeRector extends AbstractRector
+{
+    public function refactor(Node $node): \PhpParser\Node|int
+    {
+        if ($node instanceof Class_) {
+            return $node;
+        }
+
+        return NodeVisitor::DONT_TRAVERSE_CHILDREN;
+    }
+}
+```
+
+:x:
+
+<br>
+
+### NoLeadingBackslashInNameRule
+
+Instead of `new Name('\Foo')` use `new FullyQualified('Foo')`
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\NoLeadingBackslashInNameRule
+```
+
+```php
+use PhpParser\Node\Name;
+
+final class SomeClass
+{
+    public function run(): object
+    {
+        return new Name('\Closure');
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PhpParser\Node\Name\FullyQualified;
+
+final class SomeClass
+{
+    public function run(): object
+    {
+        return new FullyQualified('Closure');
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoOnlyNullReturnInRefactorRule
+
+The `refactor()` method returns always null, but it should return at least one modified node
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\NoOnlyNullReturnInRefactorRule
+```
+
+```php
+use PhpParser\Node;
+use PhpParser\Node\Stmt\If_;
+use Rector\Rector\AbstractRector;
+
+final class SomeRector extends AbstractRector
+{
+    public function refactor(Node $node)
+    {
+        if ($node instanceof If_) {
+            return null;
+        }
+
+        return null;
+    }
+}
+```
+
+:x:
+
+<br>
+
+### NoPropertyNodeAssignRule
+
+Avoid assigning a node to a property to avoid object juggling, pass it as argument instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\NoPropertyNodeAssignRule
+```
+
+```php
+use PhpParser\Node;
+use Rector\Rector\AbstractRector;
+
+final class SomeRector extends AbstractRector
+{
+    private ?Node $localNode = null;
+
+    public function refactor(Node $node)
+    {
+        $this->localNode = $node;
+    }
+}
+```
+
+:x:
+
+<br>
+
+### PreferDirectIsNameRule
+
+Use direct `$this->isName()` instead of fetching `NodeNameResolver` service
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\PreferDirectIsNameRule
+```
+
+```php
+use PhpParser\Node;
+use Rector\Rector\AbstractRector;
+
+final class SomeRector extends AbstractRector
+{
+    public function refactor(Node $node)
+    {
+        $isName = $this->nodeNameResolver->isName($node, 'test');
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PhpParser\Node;
+use Rector\Rector\AbstractRector;
+
+final class SomeRector extends AbstractRector
+{
+    public function refactor(Node $node)
+    {
+        $isName = $this->isName($node, 'test');
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### PhpUpgradeDowngradeRegisteredInSetRule
+
+Register PHP version Rector rules into the matching `SetList` (e.g. `Php80` rule into `PHP_80` set, `DowngradePhp80` rule into `DOWNGRADE_PHP80` set).
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule
+```
+
+<br>
+
+### PhpUpgradeImplementsMinPhpVersionInterfaceRule
+
+PHP version Rector rules must implement `Rector\VersionBonding\Contract\MinPhpVersionInterface`
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Rector\PhpUpgradeImplementsMinPhpVersionInterfaceRule
+```
+
+```php
+namespace Rector\Php80\Rector\Class_;
+
+final class SomePhpFeatureRector
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+namespace Rector\Php80\Rector\Class_;
+
+use Rector\VersionBonding\Contract\MinPhpVersionInterface;
+
+final class SomePhpFeatureRector implements MinPhpVersionInterface
+{
 }
 ```
 
