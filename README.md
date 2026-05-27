@@ -903,55 +903,6 @@ class SomeClass
 
 <br>
 
-### PreventParentMethodVisibilityOverrideRule
-
-Change `"%s()"` method visibility to "%s" to respect parent method visibility.
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
-```
-
-```php
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-
-class SomeClass extends SomeParentClass
-{
-    protected function run()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-class SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-
-class SomeClass extends SomeParentClass
-{
-    public function run()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### RequiredOnlyInAbstractRule
 
 `@required` annotation should be used only in abstract classes, to child classes can use clean `__construct()` service injection.

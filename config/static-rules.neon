@@ -9,7 +9,6 @@ rules:
     - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
 
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
-    - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
     - Symplify\PHPStanRules\Rules\NoReferenceRule

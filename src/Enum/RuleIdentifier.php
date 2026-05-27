@@ -14,8 +14,6 @@ final class RuleIdentifier
 
     public const string PHP_PARSER_NO_LEADING_BACKSLASH_IN_NAME = 'phpParser.noLeadingBackslashInName';
 
-    public const string PARENT_METHOD_VISIBILITY_OVERRIDE = 'symplify.parentMethodVisibilityOverride';
-
     public const string NO_RETURN_SETTER_METHOD = 'symplify.noReturnSetterMethod';
 
     public const string FORBIDDEN_STATIC_CLASS_CONST_FETCH = 'symplify.forbiddenStaticClassConstFetch';
