@@ -62,8 +62,8 @@ final readonly class RequireUniqueEnumConstantRule implements Rule
     }
 
     /**
-     * @param array<int|float|bool|string> $values
-     * @return array<int|float|bool|string>
+     * @param array<string> $values
+     * @return array<int|string>
      */
     private function filterDuplicatedValues(array $values): array
     {
@@ -82,7 +82,7 @@ final readonly class RequireUniqueEnumConstantRule implements Rule
     }
 
     /**
-     * @return array<int|float|bool|string>
+     * @return array<string>
      */
     private function resolveClassConstantValues(ClassLike $classLike, Scope $scope): array
     {
