@@ -81,4 +81,6 @@ final class RuleIdentifier
     public const string NO_MISSING_VARIABLE_DIM_FETCH = 'symplify.noMissingVariableDimFetch';
 
     public const string NO_MISSNAMED_DOC_TAG = 'symplify.noMissnamedDocTag';
+
+    public const string NEW_OVER_SETTERS = 'symplify.newOverSetters';
 }

@@ -59,7 +59,8 @@
     "extra": {
         "phpstan": {
             "includes": [
-                "config/services/services.neon"
+                "config/services/services.neon",
+                "config/ctor-rules.neon"
             ]
         }
     }

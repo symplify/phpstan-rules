@@ -68,6 +68,39 @@ parameters:
 
 <br>
 
+### NewOverSettersRule
+
+If a class is always created with the same set of setters, pass the values via constructor instead. It makes the object state explicit, safer and easier to test:
+
+```php
+$human = new Human();
+$human->setName('Tomas');
+$human->setAge(35);
+```
+
+:x:
+
+<br>
+
+```php
+$human = new Human(name: 'Tomas', age: 35);
+```
+
+:+1:
+
+<br>
+
+Both `set*` and `add*` method prefixes are treated as setters. The rule is intentionally conservative — it only reports a class instantiated **at least twice** with the same set of setters each time. It skips Doctrine entities, Symfony `Kernel` subclasses, vendor code and `new` + setters blocks interrupted by a `return` or `throw`.
+
+This rule is disabled by default. Enable it with the `ctor` parameter:
+
+```yaml
+parameters:
+    ctor: true
+```
+
+<br>
+
 ### ParamNameToTypeConventionRule
 
 By convention, we can define parameter type by its name. If we know the "userId" is always an `int`, PHPStan can warn us about it and let us know to fill the type.

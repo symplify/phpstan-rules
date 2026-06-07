@@ -1,0 +1,21 @@
+parameters:
+    # enables NewOverSettersRule, disabled by default
+    ctor: false
+
+parametersSchema:
+    ctor: bool()
+
+services:
+    -
+        class: Symplify\PHPStanRules\Collector\NewWithFollowingSettersCollector
+        tags:
+            - phpstan.collector
+        arguments:
+            isEnabled: %ctor%
+
+    -
+        class: Symplify\PHPStanRules\Rules\NewOverSettersRule
+        tags:
+            - phpstan.rules.rule
+        arguments:
+            isEnabled: %ctor%
