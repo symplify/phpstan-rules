@@ -2,13 +2,7 @@ rules:
     - Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule
 
-    # mocking
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
-    - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
-    - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
-
-    # @todo test first
-    # ever method() must have expects() call to define how many times it is expected
-    # - Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule
+# mocking rules moved to mock-rules.neon, enable them with:
+#
+# parameters:
+#     mocks: true
