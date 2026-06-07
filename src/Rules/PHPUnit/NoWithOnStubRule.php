@@ -19,11 +19,11 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 /**
  * @implements Rule<MethodCall>
  *
- * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\ExplicitExpectsMockMethodRule\ExplicitExpectsMockMethodRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoWithOnStubRule\NoWithOnStubRuleTest
  */
-final class ExplicitExpectsMockMethodRule implements Rule
+final class NoWithOnStubRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'PHPUnit mock method is missing explicit expects(), e.g. $this->mock->expects($this->once())->...';
+    public const string ERROR_MESSAGE = 'Using with() on a stub is misleading and deprecated by PHPUnit. Use explicit expects() to turn it into a mock, or drop with()';
 
     public function getNodeType(): string
     {
@@ -36,7 +36,7 @@ final class ExplicitExpectsMockMethodRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! NamingHelper::isName($node->name, 'method')) {
+        if (! NamingHelper::isName($node->name, 'with')) {
             return [];
         }
 
@@ -44,17 +44,30 @@ final class ExplicitExpectsMockMethodRule implements Rule
             return [];
         }
 
-        if (! $node->var instanceof Variable && ! $node->var instanceof PropertyFetch) {
+        if (! $node->var instanceof MethodCall) {
             return [];
         }
 
-        $callerType = $scope->getType($node->var);
+        $methodCall = $node->var;
+        if (! NamingHelper::isName($methodCall->name, 'method')) {
+            return [];
+        }
+
+        if ($methodCall->var instanceof MethodCall && NamingHelper::isName($methodCall->var->name, 'expects')) {
+            return [];
+        }
+
+        if (! $methodCall->var instanceof Variable && ! $methodCall->var instanceof PropertyFetch) {
+            return [];
+        }
+
+        $callerType = $scope->getType($methodCall->var);
         if (! $callerType->hasMethod('expects')->yes()) {
             return [];
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(PHPUnitRuleIdentifier::EXPLICIT_EXPECTS_MOCK_METHOD)
+            ->identifier(PHPUnitRuleIdentifier::NO_WITH_ON_STUB)
             ->build();
 
         return [$identifierRuleError];

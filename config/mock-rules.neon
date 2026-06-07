@@ -1,0 +1,48 @@
+# PHPUnit mocking rules, enable in your phpstan.neon with:
+#
+# parameters:
+#     mocks: true
+
+parameters:
+    mocks: false
+
+parametersSchema:
+    mocks: bool()
+
+conditionalTags:
+    # mocking
+    Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule:
+        phpstan.rules.rule: %mocks%
+    Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule:
+        phpstan.rules.rule: %mocks%
+
+    # overly complicated
+    Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule:
+        phpstan.rules.rule: %mocks%
+
+    # explicit expects()
+    Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule:
+        phpstan.rules.rule: %mocks%
+    Symplify\PHPStanRules\Rules\PHPUnit\AvoidAnyExpectsRule:
+        phpstan.rules.rule: %mocks%
+    Symplify\PHPStanRules\Rules\PHPUnit\NoWithOnStubRule:
+        phpstan.rules.rule: %mocks%
+    Symplify\PHPStanRules\Rules\PHPUnit\RequireAtLeastOneRule:
+        phpstan.rules.rule: %mocks%
+
+    # better alternative than mocks
+    Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule:
+        phpstan.rules.rule: %mocks%
+    Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule:
+        phpstan.rules.rule: %mocks%
+
+services:
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\AvoidAnyExpectsRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\NoWithOnStubRule
+    - Symplify\PHPStanRules\Rules\PHPUnit\RequireAtLeastOneRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule

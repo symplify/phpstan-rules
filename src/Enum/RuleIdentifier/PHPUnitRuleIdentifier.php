@@ -17,4 +17,12 @@ final class PHPUnitRuleIdentifier
     public const string NO_ASSERT_FUNC_CALL_IN_TESTS = 'phpunit.noAssertFuncCallInTests';
 
     public const string NO_DOUBLE_CONSECUTIVE_TEST_MOCK = 'phpunit.noDoubleConsecutiveTestMock';
+
+    public const string EXPLICIT_EXPECTS_MOCK_METHOD = 'phpunit.explicitExpectsMockMethod';
+
+    public const string AVOID_ANY_EXPECTS = 'phpunit.avoidAnyExpects';
+
+    public const string NO_WITH_ON_STUB = 'phpunit.noWithOnStub';
+
+    public const string REQUIRE_AT_LEAST_ONE = 'phpunit.requireAtLeastOne';
 }

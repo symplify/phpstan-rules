@@ -49,9 +49,18 @@ includes:
 
 <br>
 
+Do you use mocks in your PHPUnit tests? Enable mocking rules with single parameter:
+
+```yaml
+parameters:
+    mocks: true
+```
+
+<br>
+
 But at start, make baby steps with one rule at a time:
 
-Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific rules](#2-doctrine-specific-rules) or [PHPUnit-specific rules](#4-phpunit-specific-rules).
+Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific rules](#2-doctrine-specific-rules), [PHPUnit-specific rules](#4-phpunit-specific-rules) or [PHPUnit mock rules](#5-phpunit-mock-rules).
 
 <br>
 
@@ -2601,59 +2610,6 @@ return function (ContainerConfigurator $container) {
 
 ## 4. PHPUnit-specific Rules
 
-### NoMockObjectAndRealObjectPropertyRule
-
-Avoid using one property for both real object and mock object. Use separate properties or single type instead
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
-```
-
-<br>
-
-### NoEntityMockingRule, NoDocumentMockingRule
-
-Instead of entity or document mocking, create object directly to get better type support
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule
-    - Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule
-```
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeTest extends TestCase
-{
-    public function test()
-    {
-        $someEntityMock = $this->createMock(SomeEntity::class);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeTest extends TestCase
-{
-    public function test()
-    {
-        $someEntityMock = new SomeEntity();
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### NoAssertFuncCallInTestsRule
 
 Avoid using assert*() functions in tests, as they can lead to false positives
@@ -2662,58 +2618,6 @@ Avoid using assert*() functions in tests, as they can lead to false positives
 rules:
     - Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule
 ```
-
-<br>
-
-### NoMockOnlyTestRule
-
-Test should have at least one non-mocked property, to test something
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
-```
-
-```php
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-
-class SomeTest extends TestCase
-{
-    private MockObject $firstMock;
-    private MockObject $secondMock;
-
-    public function setUp()
-    {
-        $this->firstMock = $this->createMock(SomeService::class);
-        $this->secondMock = $this->createMock(AnotherService::class);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-
-class SomeTest extends TestCase
-{
-    private SomeService $someService;
-
-    private MockObject $firstMock;
-
-    public function setUp()
-    {
-        $this->someService = new SomeService();
-        $this->firstMock = $this->createMock(AnotherService::class);
-    }
-}
-```
-
-:+1:
 
 <br>
 
@@ -2774,14 +2678,141 @@ final class SomeTest extends TestCase
 
 <br>
 
-### ExplicitExpectsMockMethodRule
+## 5. PHPUnit Mock Rules
 
-PHPUnit mock method is missing explicit `expects()`, e.g. `$this->mock->expects($this->once())->...`
+* Do you use extensive mocking in your PHPUnit tests?
+* Do you want to keep your tests clean, maintainable and avoid upgrade hell in the future?
+* Do you want to have tests that actually test something?
+
+This set is for you! Enable all mocking rules with single parameter in your `phpstan.neon`:
 
 ```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule
+parameters:
+    mocks: true
 ```
+
+<br>
+
+### NoMockOnlyTestRule
+
+Test should have at least one non-mocked property, to test something
+
+```php
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+class SomeTest extends TestCase
+{
+    private MockObject $firstMock;
+    private MockObject $secondMock;
+
+    public function setUp()
+    {
+        $this->firstMock = $this->createMock(SomeService::class);
+        $this->secondMock = $this->createMock(AnotherService::class);
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+class SomeTest extends TestCase
+{
+    private SomeService $someService;
+
+    private MockObject $firstMock;
+
+    public function setUp()
+    {
+        $this->someService = new SomeService();
+        $this->firstMock = $this->createMock(AnotherService::class);
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoMockObjectAndRealObjectPropertyRule
+
+Avoid using one property for both real object and mock object. Use separate properties or single type instead
+
+```php
+$this->service = $this->createMock(Service::class);
+$this->service = new Service();
+```
+
+:x:
+
+<br>
+
+```php
+$this->someMock = $this->createMock(AnotherService::class);
+
+$this->realService = new Service();
+```
+
+:+1:
+
+<br>
+
+### NoDoubleConsecutiveTestMockRule
+
+Do not use `willReturnOnConsecutiveCalls()` and `willReturnCallback()` on the same mock. Use `willReturnCallback()` only instead to make the test more clear.
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $this->createMock('SomeClass')
+            ->expects($this->exactly(2))
+            ->method('someMethod')
+            ->willReturnCallback(function () {
+                return 'first';
+            })
+            ->willReturnOnConsecutiveCalls('first');
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+use PHPUnit\Framework\TestCase;
+
+final class SomeTest extends TestCase
+{
+    public function test()
+    {
+        $this->createMock('SomeClass')
+            ->expects($this->exactly(2))
+            ->method('someMethod')
+            ->willReturnCallback(function () {
+                return 'first';
+            });
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### ExplicitExpectsMockMethodRule
+
+PHPUnit mock method is missing explicit `expects()`, e.g. `$this->mock->expects($this->once())->...`. This is required since PHPUnit 12 to avoid silent stubs.
 
 ```php
 use PHPUnit\Framework\TestCase;
@@ -2820,14 +2851,88 @@ final class SomeTest extends TestCase
 
 <br>
 
-### NoDoubleConsecutiveTestMockRule
+### AvoidAnyExpectsRule
 
-Do not use `willReturnOnConsecutiveCalls()` and `willReturnCallback()` on the same mock. Use `willReturnCallback()` only instead to make the test more clear.
+Disallow usage of `any()` expectation in mocks to ensure that all mock interactions are explicitly defined and verified.
 
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
+```php
+$someMock = $this->createMock(Service::class);
+$someMock->expects($this->any())
+    ->method('calculate')
+    ->willReturn(10);
 ```
+
+:x:
+
+<br>
+
+```php
+$someMock = $this->createMock(Service::class);
+$someMock->expects($this->once())
+    ->method('calculate')
+    ->willReturn(10);
+```
+
+:+1:
+
+<br>
+
+### NoWithOnStubRule
+
+Disallow `with()` on stubs (mocks without `expects()`). PHPUnit deprecates `with()` on test stubs because they silently swallow argument mismatches.
+
+```php
+$someMock = $this->createMock(Service::class);
+$someMock->method('calculate')
+    ->with(10)
+    ->willReturn(20);
+```
+
+:x:
+
+<br>
+
+```php
+$someMock = $this->createMock(Service::class);
+$someMock->expects($this->once())
+    ->method('calculate')
+    ->with(10)
+    ->willReturn(20);
+```
+
+:+1:
+
+<br>
+
+### RequireAtLeastOneRule
+
+Disallow `atLeast(0)` on mock expectations, as it matches any number of calls (including zero) and provides no real verification. Require a value of `1` or higher.
+
+```php
+$someMock = $this->createMock(Service::class);
+$someMock->expects($this->atLeast(0))
+    ->method('calculate')
+    ->willReturn(10);
+```
+
+:x:
+
+<br>
+
+```php
+$someMock = $this->createMock(Service::class);
+$someMock->expects($this->atLeast(1))
+    ->method('calculate')
+    ->willReturn(10);
+```
+
+:+1:
+
+<br>
+
+### NoEntityMockingRule, NoDocumentMockingRule
+
+Instead of entity or document mocking, create object directly to get better type support
 
 ```php
 use PHPUnit\Framework\TestCase;
@@ -2836,13 +2941,7 @@ final class SomeTest extends TestCase
 {
     public function test()
     {
-        $this->createMock('SomeClass')
-            ->expects($this->exactly(2))
-            ->method('someMethod')
-            ->willReturnCallback(function () {
-                return 'first';
-            })
-            ->willReturnOnConsecutiveCalls('first');
+        $someEntityMock = $this->createMock(SomeEntity::class);
     }
 }
 ```
@@ -2858,12 +2957,7 @@ final class SomeTest extends TestCase
 {
     public function test()
     {
-        $this->createMock('SomeClass')
-            ->expects($this->exactly(2))
-            ->method('someMethod')
-            ->willReturnCallback(function () {
-                return 'first';
-            });
+        $someEntityMock = new SomeEntity();
     }
 }
 ```

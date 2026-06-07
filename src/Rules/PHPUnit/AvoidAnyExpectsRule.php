@@ -6,8 +6,6 @@ namespace Symplify\PHPStanRules\Rules\PHPUnit;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\PropertyFetch;
-use PhpParser\Node\Expr\Variable;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
@@ -19,11 +17,11 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 /**
  * @implements Rule<MethodCall>
  *
- * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\ExplicitExpectsMockMethodRule\ExplicitExpectsMockMethodRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\PHPUnit\AvoidAnyExpectsRule\AvoidAnyExpectsRuleTest
  */
-final class ExplicitExpectsMockMethodRule implements Rule
+final class AvoidAnyExpectsRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'PHPUnit mock method is missing explicit expects(), e.g. $this->mock->expects($this->once())->...';
+    public const string ERROR_MESSAGE = 'Using $this->any() on mock is ambigous. Use explicit count or change to a stub';
 
     public function getNodeType(): string
     {
@@ -36,25 +34,26 @@ final class ExplicitExpectsMockMethodRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! NamingHelper::isName($node->name, 'method')) {
-            return [];
-        }
-
         if (! TestClassDetector::isTestClass($scope)) {
             return [];
         }
 
-        if (! $node->var instanceof Variable && ! $node->var instanceof PropertyFetch) {
+        if (! NamingHelper::isName($node->name, 'expects')) {
             return [];
         }
 
-        $callerType = $scope->getType($node->var);
-        if (! $callerType->hasMethod('expects')->yes()) {
+        $firstArg = $node->getArgs()[0];
+        if (! $firstArg->value instanceof MethodCall) {
+            return [];
+        }
+
+        $nestedCall = $firstArg->value;
+        if (! NamingHelper::isName($nestedCall->name, 'any')) {
             return [];
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(PHPUnitRuleIdentifier::EXPLICIT_EXPECTS_MOCK_METHOD)
+            ->identifier(PHPUnitRuleIdentifier::AVOID_ANY_EXPECTS)
             ->build();
 
         return [$identifierRuleError];
