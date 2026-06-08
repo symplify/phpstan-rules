@@ -145,12 +145,6 @@ final readonly class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
             return false;
         }
 
-        foreach ($excludedPaths as $excludedPath) {
-            if (str_starts_with($serviceFilePath, $excludedPath)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($excludedPaths, fn ($excludedPath): bool => str_starts_with($serviceFilePath, (string) $excludedPath));
     }
 }

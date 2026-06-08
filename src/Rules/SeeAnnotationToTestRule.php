@@ -91,13 +91,7 @@ final readonly class SeeAnnotationToTestRule implements Rule
             return true;
         }
 
-        foreach ($this->requiredSeeTypes as $requiredSeeType) {
-            if ($classReflection->is($requiredSeeType)) {
-                return false;
-            }
-        }
-
-        return true;
+        return array_all($this->requiredSeeTypes, fn (string $requiredSeeType): bool => ! $classReflection->is($requiredSeeType));
     }
 
     /**

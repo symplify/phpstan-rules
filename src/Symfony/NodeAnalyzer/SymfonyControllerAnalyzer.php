@@ -28,13 +28,7 @@ final class SymfonyControllerAnalyzer
         }
 
         $classReflection = $scope->getClassReflection();
-        foreach (self::CONTROLLER_TYPES as $controllerType) {
-            if ($classReflection->is($controllerType)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any(self::CONTROLLER_TYPES, fn (string $controllerType): bool => $classReflection->is($controllerType));
     }
 
     public static function isControllerActionMethod(ClassMethod $classMethod): bool

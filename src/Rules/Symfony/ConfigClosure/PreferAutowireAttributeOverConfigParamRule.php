@@ -105,13 +105,7 @@ final readonly class PreferAutowireAttributeOverConfigParamRule implements Rule
 
     private function hasPossibleParameterInject(MethodCall $methodCall): bool
     {
-        foreach ($methodCall->getArgs() as $arg) {
-            if ($this->isParamFuncOrString($arg->value)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($methodCall->getArgs(), fn ($arg): bool => $this->isParamFuncOrString($arg->value));
     }
 
     private function isParamFuncOrString(Expr $expr): bool

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use ShipMonk\ComposerDependencyAnalyser\Config\Configuration;
 use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 
-return (new Configuration())
+return new Configuration()
     ->addPathToExclude(__DIR__ . '/tests/Rules/Rector/NoInstanceOfStaticReflectionRule/Fixture')
     ->addPathToExclude(__DIR__ . '/tests/Rules/Enum/RequireUniqueEnumConstantRule/Fixture')
     ->addPathToExclude(__DIR__ . '/tests/Rules/ForbiddenExtendOfNonAbstractClassRule/Fixture')

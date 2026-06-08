@@ -86,12 +86,6 @@ final class StringFileAbsolutePathExistsRule implements Rule
 
     private function isDesiredFileSuffix(string $stringValue): bool
     {
-        foreach (self::SUFFIXES_TO_CHECK as $suffixToCheck) {
-            if (str_ends_with($stringValue, $suffixToCheck)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any(self::SUFFIXES_TO_CHECK, fn ($suffixToCheck): bool => str_ends_with($stringValue, (string) $suffixToCheck));
     }
 }

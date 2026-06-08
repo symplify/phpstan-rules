@@ -4,7 +4,7 @@
     "description": "Set of Symplify rules for PHPStan",
     "license": "MIT",
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.4",
         "webmozart/assert": "^1.12 || ^2.0",
         "phpstan/phpstan": "^2.1.33",
         "nette/utils": "^4.1",
@@ -22,7 +22,7 @@
         "tomasvotruba/unused-public": "^2.1",
         "tomasvotruba/type-coverage": "^2.1",
         "shipmonk/composer-dependency-analyser": "^1.8",
-        "rector/jack": "^0.4.0"
+        "rector/jack": "^1.0"
     },
     "autoload": {
         "psr-4": {
