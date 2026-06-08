@@ -1,0 +1,7 @@
+services:
+    - Symplify\PHPStanRules\TypeResolver\ClassConstFetchReturnTypeResolver
+
+    # $container->make($1) => $1 type
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\LaravelContainerMakeTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]

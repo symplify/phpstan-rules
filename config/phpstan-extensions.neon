@@ -1,0 +1,26 @@
+services:
+    # use with "errorFormat: symplify" in CLI/config
+    errorFormatter.symplify:
+        class: Symplify\PHPStanRules\ErrorFormatter\SymplifyErrorFormatter
+
+    - Symplify\PHPStanRules\TypeResolver\ClassConstFetchReturnTypeResolver
+
+    # Symfony Container::get($1) => $1 type
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\ContainerGetReturnTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+    # Laravel Container::make($1) => $1 type
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\LaravelContainerMakeTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+    # Symfony Finder SplFileInfo::getRealPath() => string type
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\SplFileInfoTolerantReturnTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+    # getcwd()/dirname()/realpath() => always "string"
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\NativeFunctionReturnTypeExtension
+        tags: [phpstan.broker.dynamicFunctionReturnTypeExtension]

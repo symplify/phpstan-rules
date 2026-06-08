@@ -1,0 +1,5 @@
+services:
+    # $splFileInfo->getRealPath() => string type
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\SplFileInfoTolerantReturnTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]

@@ -2966,4 +2966,51 @@ final class SomeTest extends TestCase
 
 <br>
 
+## 6. Type Extensions and Error Formatter
+
+These extensions were merged from the now-deprecated [`symplify/phpstan-extensions`](https://github.com/symplify/phpstan-extensions)
+package. They load automatically once `phpstan/extension-installer` is set up - no extra
+configuration is needed.
+
+<br>
+
+### `symplify` Error Formatter
+
+A compact error format with pre-escaped, regex-ready messages that are easy to copy into
+your `ignoreErrors` list. File paths are printed with line numbers and stay clickable in
+the terminal (works best with [anthraxx/intellij-awesome-console](https://github.com/anthraxx/intellij-awesome-console)).
+
+Enable it in your `phpstan.neon`:
+
+```yaml
+parameters:
+    errorFormat: symplify
+```
+
+or on the command line:
+
+```bash
+vendor/bin/phpstan analyse --error-format symplify
+```
+
+<br>
+
+### Type Extensions
+
+Always-on return type extensions that sharpen PHPStan inference for common framework calls:
+
+* **`ContainerGetReturnTypeExtension`** - `$container->get(SomeService::class)` returns
+  `SomeService` instead of plain `object` (Symfony `ContainerInterface`).
+
+* **`LaravelContainerMakeTypeExtension`** - `$container->make(SomeService::class)` and
+  `->get(SomeService::class)` return `SomeService` (Laravel `Illuminate\Container\Container`).
+
+* **`SplFileInfoTolerantReturnTypeExtension`** - `$splFileInfo->getRealPath()` returns
+  `string` instead of `string|false`, as Symfony Finder only yields existing files.
+
+* **`NativeFunctionReturnTypeExtension`** - `getcwd()`, `dirname()` and `realpath()` return
+  `string` instead of `string|false`.
+
+<br>
+
 Happy coding!
