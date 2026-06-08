@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
 use PhpParser\Node;
+use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Expr\FuncCall;
@@ -105,7 +106,7 @@ final readonly class PreferAutowireAttributeOverConfigParamRule implements Rule
 
     private function hasPossibleParameterInject(MethodCall $methodCall): bool
     {
-        return array_any($methodCall->getArgs(), fn ($arg): bool => $this->isParamFuncOrString($arg->value));
+        return array_any($methodCall->getArgs(), fn (Arg $arg): bool => $this->isParamFuncOrString($arg->value));
     }
 
     private function isParamFuncOrString(Expr $expr): bool

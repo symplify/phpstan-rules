@@ -21,7 +21,6 @@ return new Configuration()
     ->ignoreErrorsOnPackage('symfony/service-contracts', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/http-kernel', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/event-dispatcher', [ErrorType::SHADOW_DEPENDENCY])
-    ->ignoreErrorsOnPackage('symfony/deprecation-contracts', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/dependency-injection', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/config', [ErrorType::SHADOW_DEPENDENCY])
 

@@ -19,6 +19,6 @@ final class TestClassDetector
 
     public static function isTestClass(Scope $scope): bool
     {
-        return array_any(self::TEST_FILE_SUFFIXES, fn ($testFileSuffix): bool => str_ends_with($scope->getFile(), (string) $testFileSuffix));
+        return array_any(self::TEST_FILE_SUFFIXES, fn (string $testFileSuffix): bool => str_ends_with($scope->getFile(), $testFileSuffix));
     }
 }
