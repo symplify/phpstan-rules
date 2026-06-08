@@ -31,13 +31,7 @@ final class RectorAllowedAutoloadedTypeAnalyzer
     public static function isAllowedType(Type $type): bool
     {
         if ($type instanceof UnionType) {
-            foreach ($type->getTypes() as $unionedType) {
-                if (! self::isAllowedType($unionedType)) {
-                    return false;
-                }
-            }
-
-            return true;
+            return array_all($type->getTypes(), fn (Type $unionedType): bool => self::isAllowedType($unionedType));
         }
 
         if ($type instanceof ConstantStringType) {

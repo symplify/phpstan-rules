@@ -90,13 +90,7 @@ final class RequiredOnlyInAbstractRule implements Rule
             return true;
         }
 
-        foreach (self::SKIPPED_PARENT_TYPES as $skippedParentType) {
-            if ($classReflection->is($skippedParentType)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any(self::SKIPPED_PARENT_TYPES, fn (string $skippedParentType): bool => $classReflection->is($skippedParentType));
     }
 
     private function hasCircularDocNote(Node $node): bool

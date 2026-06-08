@@ -5,7 +5,7 @@ declare(strict_types=1);
 use ShipMonk\ComposerDependencyAnalyser\Config\Configuration;
 use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 
-return (new Configuration())
+return new Configuration()
     ->addPathToExclude(__DIR__ . '/tests/Rules/Rector/NoInstanceOfStaticReflectionRule/Fixture')
     ->addPathToExclude(__DIR__ . '/tests/Rules/Enum/RequireUniqueEnumConstantRule/Fixture')
     ->addPathToExclude(__DIR__ . '/tests/Rules/ForbiddenExtendOfNonAbstractClassRule/Fixture')
@@ -21,7 +21,6 @@ return (new Configuration())
     ->ignoreErrorsOnPackage('symfony/service-contracts', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/http-kernel', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/event-dispatcher', [ErrorType::SHADOW_DEPENDENCY])
-    ->ignoreErrorsOnPackage('symfony/deprecation-contracts', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/dependency-injection', [ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackage('symfony/config', [ErrorType::SHADOW_DEPENDENCY])
 

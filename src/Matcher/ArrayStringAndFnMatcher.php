@@ -18,13 +18,7 @@ final class ArrayStringAndFnMatcher
             return true;
         }
 
-        foreach ($matchingValues as $matchingValue) {
-            if (is_a($currentValue, $matchingValue, true)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($matchingValues, fn (string $matchingValue): bool => is_a($currentValue, $matchingValue, true));
     }
 
     /**
