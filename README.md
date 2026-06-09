@@ -58,6 +58,23 @@ parameters:
 
 <br>
 
+Want sharper type inference for service containers? The Symfony and Laravel return type extensions are **disabled by default** — enable the ones that fit your stack:
+
+```yaml
+parameters:
+    symfonyReturnType: true
+    laravelReturnType: true
+```
+
+`symfonyReturnType` resolves `$container->get(SomeService::class)` to `SomeService` and Symfony Finder's `$splFileInfo->getRealPath()` to `string`. `laravelReturnType` does the same for Laravel's `$container->make(SomeService::class)`:
+
+```php
+$service = $container->get(SomeService::class);
+// $service is now known as SomeService, instead of plain object
+```
+
+<br>
+
 But at start, make baby steps with one rule at a time:
 
 Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific rules](#2-doctrine-specific-rules), [PHPUnit-specific rules](#4-phpunit-specific-rules) or [PHPUnit mock rules](#5-phpunit-mock-rules).
