@@ -1,16 +1,19 @@
-# Symfony/Laravel return type extensions are disabled by default; enable in your phpstan.neon with:
+# return type extensions are disabled by default; enable in your phpstan.neon with:
 #
 # parameters:
 #     symfonyReturnType: true
 #     laravelReturnType: true
+#     pathStrings: true
 
 parameters:
     symfonyReturnType: false
     laravelReturnType: false
+    pathStrings: false
 
 parametersSchema:
     symfonyReturnType: bool()
     laravelReturnType: bool()
+    pathStrings: bool()
 
 conditionalTags:
     # Symfony Container::get($1) => $1 type
@@ -22,6 +25,9 @@ conditionalTags:
     # Laravel Container::make($1) => $1 type
     Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension:
         phpstan.broker.dynamicMethodReturnTypeExtension: %laravelReturnType%
+    # getcwd()/dirname()/realpath() => always "string"
+    Symplify\PHPStanRules\ReturnTypeExtension\NativeFunctionReturnTypeExtension:
+        phpstan.broker.dynamicFunctionReturnTypeExtension: %pathStrings%
 
 services:
     # use with "errorFormat: symplify" in CLI/config
@@ -31,8 +37,4 @@ services:
     - Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension
     - Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension
     - Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension
-
-    # getcwd()/dirname()/realpath() => always "string"
-    -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\NativeFunctionReturnTypeExtension
-        tags: [phpstan.broker.dynamicFunctionReturnTypeExtension]
+    - Symplify\PHPStanRules\ReturnTypeExtension\NativeFunctionReturnTypeExtension

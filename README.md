@@ -58,15 +58,16 @@ parameters:
 
 <br>
 
-Want sharper type inference for service containers? The Symfony and Laravel return type extensions are **disabled by default** — enable the ones that fit your stack:
+Want sharper type inference? The return type extensions are **disabled by default** — enable the ones that fit your stack:
 
 ```yaml
 parameters:
     symfonyReturnType: true
     laravelReturnType: true
+    pathStrings: true
 ```
 
-`symfonyReturnType` resolves `$container->get(SomeService::class)` to `SomeService` and Symfony Finder's `$splFileInfo->getRealPath()` to `string`. `laravelReturnType` does the same for Laravel's `$container->make(SomeService::class)`:
+`symfonyReturnType` resolves `$container->get(SomeService::class)` to `SomeService` and Symfony Finder's `$splFileInfo->getRealPath()` to `string`. `laravelReturnType` does the same for Laravel's `$container->make(SomeService::class)`. `pathStrings` narrows `getcwd()`, `dirname()` and `realpath()` to `string`:
 
 ```php
 $service = $container->get(SomeService::class);
