@@ -10,7 +10,7 @@ use PHPStan\Testing\TypeInferenceTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
- * @see \Symplify\PHPStanRules\ReturnTypeExtension\SplFileInfoTolerantReturnTypeExtension
+ * @see \Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension
  */
 final class SplFileInfoTolerantReturnTypeExtensionTest extends TypeInferenceTestCase
 {

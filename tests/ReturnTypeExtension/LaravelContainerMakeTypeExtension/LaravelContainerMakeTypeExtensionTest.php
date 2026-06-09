@@ -10,7 +10,7 @@ use PHPStan\Testing\TypeInferenceTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
- * @see \Symplify\PHPStanRules\ReturnTypeExtension\LaravelContainerMakeTypeExtension
+ * @see \Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension
  */
 final class LaravelContainerMakeTypeExtensionTest extends TypeInferenceTestCase
 {

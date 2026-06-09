@@ -10,7 +10,7 @@ use PHPStan\Testing\TypeInferenceTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
- * @see \Symplify\PHPStanRules\ReturnTypeExtension\ContainerGetReturnTypeExtension
+ * @see \Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension
  */
 final class ContainerGetReturnTypeExtensionTest extends TypeInferenceTestCase
 {

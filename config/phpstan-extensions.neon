@@ -7,17 +7,17 @@ services:
 
     # Symfony Container::get($1) => $1 type
     -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\ContainerGetReturnTypeExtension
+        class: Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
     # Laravel Container::make($1) => $1 type
     -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\LaravelContainerMakeTypeExtension
+        class: Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
     # Symfony Finder SplFileInfo::getRealPath() => string type
     -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\SplFileInfoTolerantReturnTypeExtension
+        class: Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
     # getcwd()/dirname()/realpath() => always "string"

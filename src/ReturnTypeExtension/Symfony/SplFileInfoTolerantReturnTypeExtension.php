@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\ReturnTypeExtension;
+namespace Symplify\PHPStanRules\ReturnTypeExtension\Symfony;
 
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;

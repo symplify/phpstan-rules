@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\ReturnTypeExtension;
+namespace Symplify\PHPStanRules\ReturnTypeExtension\Laravel;
 
 use Illuminate\Container\Container;
 use PhpParser\Node\Expr\MethodCall;
