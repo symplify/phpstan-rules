@@ -1,0 +1,5 @@
+services:
+    # $container->get($1) => $1 type
+    -
+        class: Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]

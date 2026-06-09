@@ -14,6 +14,15 @@ return new Configuration()
     // optional classes
     ->ignoreUnknownClasses(['Symfony\Component\ExpressionLanguage\Expression'])
 
+    // windows-only function used in Terminal helper
+    ->ignoreUnknownFunctions(['sapi_windows_vt100_support'])
+
+    // used only by the Symfony Finder SplFileInfo return type extension
+    ->ignoreErrorsOnPackage('symfony/finder', [ErrorType::SHADOW_DEPENDENCY])
+
+    // extension that runs on Laravel Container only
+    ->ignoreErrorsOnPackage('illuminate/container', [ErrorType::DEV_DEPENDENCY_IN_PROD])
+
     // already in phpstan/phpstan
     ->ignoreErrorsOnPackage('nikic/php-parser', [ErrorType::DEV_DEPENDENCY_IN_PROD])
     ->ignoreErrorsOnPackage('symfony/routing', [ErrorType::SHADOW_DEPENDENCY])

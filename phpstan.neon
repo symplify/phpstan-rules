@@ -1,6 +1,7 @@
 includes:
     - config/services/services.neon
     - config/naming-rules.neon
+    - config/phpstan-extensions.neon
 
 parameters:
     treatPhpDocTypesAsCertain: false
@@ -46,7 +47,12 @@ parameters:
 
         -
             message: '#Generator expects value type array<string, mixed>, list<bool\|float\|int\|list<string>\|PHPStan\\TrinaryLogic\|string\|null> given#'
-            path: tests/ReturnTypeExtension/NodeGetAttributeTypeExtension/NodeGetAttributeTypeExtensionTest.php
+            path: tests/ReturnTypeExtension/*
+
+        # PHPStan testing helper, intentionally extended
+        -
+            message: '#is not covered by backward compatibility promise#'
+            path: tests/ErrorFormatter/SymplifyErrorFormatterTest.php
 
         - '#Although PHPStan\\Node\\InClassNode is covered by backward compatibility promise, this instanceof assumption might break because (.*?) not guaranteed to always stay the same#'
         - '#PHPStan\\DependencyInjection\\NeonAdapter#'

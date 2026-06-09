@@ -58,6 +58,24 @@ parameters:
 
 <br>
 
+Want sharper type inference? The return type extensions are **disabled by default** — enable the ones that fit your stack:
+
+```yaml
+parameters:
+    symfonyReturnType: true
+    laravelReturnType: true
+    pathStrings: true
+```
+
+`symfonyReturnType` resolves `$container->get(SomeService::class)` to `SomeService` and Symfony Finder's `$splFileInfo->getRealPath()` to `string`. `laravelReturnType` does the same for Laravel's `$container->make(SomeService::class)`. `pathStrings` narrows `getcwd()`, `dirname()` and `realpath()` to `string`:
+
+```php
+$service = $container->get(SomeService::class);
+// $service is now known as SomeService, instead of plain object
+```
+
+<br>
+
 But at start, make baby steps with one rule at a time:
 
 Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific rules](#2-doctrine-specific-rules), [PHPUnit-specific rules](#4-phpunit-specific-rules) or [PHPUnit mock rules](#5-phpunit-mock-rules).
@@ -2963,6 +2981,53 @@ final class SomeTest extends TestCase
 ```
 
 :+1:
+
+<br>
+
+## 6. Type Extensions and Error Formatter
+
+These extensions were merged from the now-deprecated [`symplify/phpstan-extensions`](https://github.com/symplify/phpstan-extensions)
+package. They load automatically once `phpstan/extension-installer` is set up - no extra
+configuration is needed.
+
+<br>
+
+### `symplify` Error Formatter
+
+A compact error format with pre-escaped, regex-ready messages that are easy to copy into
+your `ignoreErrors` list. File paths are printed with line numbers and stay clickable in
+the terminal (works best with [anthraxx/intellij-awesome-console](https://github.com/anthraxx/intellij-awesome-console)).
+
+Enable it in your `phpstan.neon`:
+
+```yaml
+parameters:
+    errorFormat: symplify
+```
+
+or on the command line:
+
+```bash
+vendor/bin/phpstan analyse --error-format symplify
+```
+
+<br>
+
+### Type Extensions
+
+Always-on return type extensions that sharpen PHPStan inference for common framework calls:
+
+* **`ContainerGetReturnTypeExtension`** - `$container->get(SomeService::class)` returns
+  `SomeService` instead of plain `object` (Symfony `ContainerInterface`).
+
+* **`LaravelContainerMakeTypeExtension`** - `$container->make(SomeService::class)` and
+  `->get(SomeService::class)` return `SomeService` (Laravel `Illuminate\Container\Container`).
+
+* **`SplFileInfoTolerantReturnTypeExtension`** - `$splFileInfo->getRealPath()` returns
+  `string` instead of `string|false`, as Symfony Finder only yields existing files.
+
+* **`NativeFunctionReturnTypeExtension`** - `getcwd()`, `dirname()` and `realpath()` return
+  `string` instead of `string|false`.
 
 <br>
 
