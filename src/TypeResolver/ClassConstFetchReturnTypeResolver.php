@@ -16,7 +16,7 @@ use PHPStan\Type\Type;
 
 final class ClassConstFetchReturnTypeResolver
 {
-    public function resolve(MethodReflection $methodReflection, MethodCall $methodCall): ?Type
+    public static function resolve(MethodReflection $methodReflection, MethodCall $methodCall): ?Type
     {
         if (! isset($methodCall->args[0])) {
             return null;

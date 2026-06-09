@@ -17,13 +17,8 @@ use Symplify\PHPStanRules\TypeResolver\ClassConstFetchReturnTypeResolver;
  *
  * @see \Symplify\PHPStanRules\Tests\ReturnTypeExtension\ContainerGetReturnTypeExtension\ContainerGetReturnTypeExtensionTest
  */
-final readonly class ContainerGetReturnTypeExtension implements DynamicMethodReturnTypeExtension
+final class ContainerGetReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
-    public function __construct(
-        private ClassConstFetchReturnTypeResolver $classConstFetchReturnTypeResolver
-    ) {
-    }
-
     public function getClass(): string
     {
         return ContainerInterface::class;
@@ -39,6 +34,6 @@ final readonly class ContainerGetReturnTypeExtension implements DynamicMethodRet
         MethodCall $methodCall,
         Scope $scope
     ): ?Type {
-        return $this->classConstFetchReturnTypeResolver->resolve($methodReflection, $methodCall);
+        return ClassConstFetchReturnTypeResolver::resolve($methodReflection, $methodCall);
     }
 }

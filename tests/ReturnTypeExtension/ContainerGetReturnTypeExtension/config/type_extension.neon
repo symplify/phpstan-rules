@@ -1,6 +1,4 @@
 services:
-    - Symplify\PHPStanRules\TypeResolver\ClassConstFetchReturnTypeResolver
-
     # $container->get($1) => $1 type
     -
         class: Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension

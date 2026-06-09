@@ -17,13 +17,8 @@ use Symplify\PHPStanRules\TypeResolver\ClassConstFetchReturnTypeResolver;
  *
  * @see \Symplify\PHPStanRules\Tests\ReturnTypeExtension\LaravelContainerMakeTypeExtension\LaravelContainerMakeTypeExtensionTest
  */
-final readonly class LaravelContainerMakeTypeExtension implements DynamicMethodReturnTypeExtension
+final class LaravelContainerMakeTypeExtension implements DynamicMethodReturnTypeExtension
 {
-    public function __construct(
-        private ClassConstFetchReturnTypeResolver $classConstFetchReturnTypeResolver
-    ) {
-    }
-
     public function getClass(): string
     {
         return Container::class;
@@ -39,6 +34,6 @@ final readonly class LaravelContainerMakeTypeExtension implements DynamicMethodR
         MethodCall $methodCall,
         Scope $scope
     ): ?Type {
-        return $this->classConstFetchReturnTypeResolver->resolve($methodReflection, $methodCall);
+        return ClassConstFetchReturnTypeResolver::resolve($methodReflection, $methodCall);
     }
 }

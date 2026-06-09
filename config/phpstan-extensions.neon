@@ -1,24 +1,36 @@
+# Symfony/Laravel return type extensions are disabled by default; enable in your phpstan.neon with:
+#
+# parameters:
+#     symfonyReturnType: true
+#     laravelReturnType: true
+
+parameters:
+    symfonyReturnType: false
+    laravelReturnType: false
+
+parametersSchema:
+    symfonyReturnType: bool()
+    laravelReturnType: bool()
+
+conditionalTags:
+    # Symfony Container::get($1) => $1 type
+    Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension:
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symfonyReturnType%
+    # Symfony Finder SplFileInfo::getRealPath() => string type
+    Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension:
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symfonyReturnType%
+    # Laravel Container::make($1) => $1 type
+    Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension:
+        phpstan.broker.dynamicMethodReturnTypeExtension: %laravelReturnType%
+
 services:
     # use with "errorFormat: symplify" in CLI/config
     errorFormatter.symplify:
         class: Symplify\PHPStanRules\ErrorFormatter\SymplifyErrorFormatter
 
-    - Symplify\PHPStanRules\TypeResolver\ClassConstFetchReturnTypeResolver
-
-    # Symfony Container::get($1) => $1 type
-    -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension
-        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
-
-    # Laravel Container::make($1) => $1 type
-    -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension
-        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
-
-    # Symfony Finder SplFileInfo::getRealPath() => string type
-    -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension
-        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+    - Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension
+    - Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension
+    - Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension
 
     # getcwd()/dirname()/realpath() => always "string"
     -

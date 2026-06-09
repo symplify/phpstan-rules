@@ -1,6 +1,4 @@
 services:
-    - Symplify\PHPStanRules\TypeResolver\ClassConstFetchReturnTypeResolver
-
     # $container->make($1) => $1 type
     -
         class: Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension
