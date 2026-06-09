@@ -16,14 +16,19 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 /**
  * @implements Rule<New_>
  */
-final readonly class ForbiddenNewArgumentRule implements Rule
+final class ForbiddenNewArgumentRule implements Rule
 {
+    /**
+     * @var string[]
+     * @readonly
+     */
+    private array $forbiddenTypes;
     /**
      * @param string[] $forbiddenTypes
      */
-    public function __construct(
-        private array $forbiddenTypes
-    ) {
+    public function __construct(array $forbiddenTypes)
+    {
+        $this->forbiddenTypes = $forbiddenTypes;
     }
 
     public function getNodeType(): string

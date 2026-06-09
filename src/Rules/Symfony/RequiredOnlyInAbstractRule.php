@@ -23,7 +23,10 @@ use Symplify\PHPStanRules\NodeAnalyzer\SymfonyRequiredMethodAnalyzer;
  */
 final class RequiredOnlyInAbstractRule implements Rule
 {
-    public const string ERROR_MESSAGE = '#Symfony @required or #[Required] is reserved exclusively for abstract classes. For the rest of classes, use clean constructor injection';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = '#Symfony @required or #[Required] is reserved exclusively for abstract classes. For the rest of classes, use clean constructor injection';
 
     /**
      * Magic parent types that require constructor internally,
@@ -31,7 +34,7 @@ final class RequiredOnlyInAbstractRule implements Rule
      *
      * @var string[]
      */
-    private const array SKIPPED_PARENT_TYPES = [
+    private const SKIPPED_PARENT_TYPES = [
         DoctrineClass::DOCUMENT_REPOSITORY,
     ];
 
@@ -89,8 +92,14 @@ final class RequiredOnlyInAbstractRule implements Rule
         if ($classReflection->isAbstract()) {
             return true;
         }
-
-        return array_any(self::SKIPPED_PARENT_TYPES, fn (string $skippedParentType): bool => $classReflection->is($skippedParentType));
+        $found = false;
+        foreach (self::SKIPPED_PARENT_TYPES as $skippedParentType) {
+            if ($classReflection->is($skippedParentType)) {
+                $found = true;
+                break;
+            }
+        }
+        return $found;
     }
 
     private function hasCircularDocNote(Node $node): bool
@@ -100,6 +109,6 @@ final class RequiredOnlyInAbstractRule implements Rule
             return false;
         }
 
-        return str_contains($docComment->getText(), 'circular');
+        return strpos($docComment->getText(), 'circular') !== false;
     }
 }

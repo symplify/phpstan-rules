@@ -23,7 +23,10 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
  */
 final class NoWithOnStubRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Using with() on a stub is misleading and deprecated by PHPUnit. Use explicit expects() to turn it into a mock, or drop with()';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Using with() on a stub is misleading and deprecated by PHPUnit. Use explicit expects() to turn it into a mock, or drop with()';
 
     public function getNodeType(): string
     {

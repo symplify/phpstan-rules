@@ -22,7 +22,10 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class RequireQueryBuilderOnRepositoryRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
 
     public function getNodeType(): string
     {

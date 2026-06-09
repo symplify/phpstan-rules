@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
  */
 final class NoConstructorAndRequiredTogetherRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid using __construct() and @required in the same class. Pick one to keep architecture clean';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid using __construct() and @required in the same class. Pick one to keep architecture clean';
 
     public function getNodeType(): string
     {
@@ -67,12 +70,12 @@ final class NoConstructorAndRequiredTogetherRule implements Rule
                 continue;
             }
 
-            if (! str_contains($docComment->getText(), '@required')) {
+            if (strpos($docComment->getText(), '@required') === false) {
                 continue;
             }
 
             // special case when its allowed, to avoid circular references
-            if (str_contains($docComment->getText(), 'circular')) {
+            if (strpos($docComment->getText(), 'circular') !== false) {
                 continue;
             }
 

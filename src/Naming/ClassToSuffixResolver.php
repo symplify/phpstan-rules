@@ -13,7 +13,7 @@ final class ClassToSuffixResolver
 {
     public function resolveFromClass(string $parentClass): string
     {
-        $expectedSuffix = \str_contains($parentClass, '\\') ? (string) Strings::after(
+        $expectedSuffix = strpos($parentClass, '\\') !== false ? (string) Strings::after(
             $parentClass,
             '\\',
             -1
@@ -31,16 +31,16 @@ final class ClassToSuffixResolver
 
     private function removeAbstractInterfacePrefixSuffix(string $parentType): string
     {
-        if (\str_ends_with($parentType, 'Interface')) {
-            $parentType = substr($parentType, 0, -strlen('Interface'));
+        if (substr_compare($parentType, 'Interface', -strlen('Interface')) === 0) {
+            $parentType = (string) substr($parentType, 0, -strlen('Interface'));
         }
 
-        if (\str_ends_with($parentType, 'Abstract')) {
-            $parentType = substr($parentType, 0, -strlen('Abstract'));
+        if (substr_compare($parentType, 'Abstract', -strlen('Abstract')) === 0) {
+            $parentType = (string) substr($parentType, 0, -strlen('Abstract'));
         }
 
-        if (\str_starts_with($parentType, 'Abstract')) {
-            return substr($parentType, strlen('Abstract'));
+        if (strncmp($parentType, 'Abstract', strlen('Abstract')) === 0) {
+            return (string) substr($parentType, strlen('Abstract'));
         }
 
         return $parentType;

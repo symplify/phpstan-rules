@@ -27,7 +27,10 @@ use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
  */
 final class NoInstanceOfStaticReflectionRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of "instanceof/is_a()" use ReflectionProvider service or "(new ObjectType(<desired_type>))->isSuperTypeOf(<element_type>)" for static reflection to work';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of "instanceof/is_a()" use ReflectionProvider service or "(new ObjectType(<desired_type>))->isSuperTypeOf(<element_type>)" for static reflection to work';
 
     public function getNodeType(): string
     {
@@ -57,7 +60,10 @@ final class NoInstanceOfStaticReflectionRule implements Rule
             ->build()];
     }
 
-    private function resolveExprStaticType(FuncCall|Instanceof_ $node, Scope $scope): ?Type
+    /**
+     * @param \PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Instanceof_ $node
+     */
+    private function resolveExprStaticType($node, Scope $scope): ?Type
     {
         if ($node instanceof Instanceof_) {
             return $this->resolveInstanceOfType($node, $scope);

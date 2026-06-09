@@ -26,7 +26,10 @@ use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
  */
 final class NoIntegerRefactorReturnRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of using DONT_TRAVERSE_CHILDREN* or STOP_TRAVERSAL in refactor() method, make use of attributes. Return always node, null or REMOVE_NODE. Using traverser enums might lead to unexpected results';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of using DONT_TRAVERSE_CHILDREN* or STOP_TRAVERSAL in refactor() method, make use of attributes. Return always node, null or REMOVE_NODE. Using traverser enums might lead to unexpected results';
 
     public function getNodeType(): string
     {
@@ -84,7 +87,7 @@ final class NoIntegerRefactorReturnRule implements Rule
         $constantNames = [];
 
         $simpleCallableNodeTraverser = new SimpleCallableNodeTraverser();
-        $simpleCallableNodeTraverser->traverseNodesWithCallable($classMethod, function (Node $subNode) use (&$constantNames): int|null {
+        $simpleCallableNodeTraverser->traverseNodesWithCallable($classMethod, function (Node $subNode) use (&$constantNames): ?int {
             // skip closure nodes as they have their own scope
             if ($subNode instanceof Closure) {
                 return NodeVisitor::DONT_TRAVERSE_CURRENT_AND_CHILDREN;

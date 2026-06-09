@@ -1,5 +1,0 @@
-includes:
-    - ../../../../config/ctor-rules.neon
-
-parameters:
-    ctor: true

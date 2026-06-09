@@ -22,7 +22,10 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
  */
 final class RequireAtLeastOneRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Using $this->atLeast(0) is meaningless, as it matches any number of calls. Use 1 or higher';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Using $this->atLeast(0) is meaningless, as it matches any number of calls. Use 1 or higher';
 
     public function getNodeType(): string
     {

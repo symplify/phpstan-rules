@@ -7,12 +7,12 @@ namespace Symplify\PHPStanRules\Doctrine;
 use PHPStan\PhpDoc\ResolvedPhpDocBlock;
 use PHPStan\Reflection\ClassReflection;
 
-final readonly class DoctrineEntityDocumentAnalyser
+final class DoctrineEntityDocumentAnalyser
 {
     /**
      * @var string[]
      */
-    private const array ENTITY_DOCBLOCK_MARKERS = ['@Document', '@ORM\\Document', '@Entity', '@ORM\\Entity'];
+    private const ENTITY_DOCBLOCK_MARKERS = ['@Document', '@ORM\\Document', '@Entity', '@ORM\\Entity'];
 
     public static function isEntityClass(ClassReflection $classReflection): bool
     {
@@ -20,7 +20,13 @@ final readonly class DoctrineEntityDocumentAnalyser
         if (! $resolvedPhpDocBlock instanceof ResolvedPhpDocBlock) {
             return false;
         }
-
-        return array_any(self::ENTITY_DOCBLOCK_MARKERS, fn (string $entityDocBlockMarker): bool => str_contains($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarker));
+        $found = false;
+        foreach (self::ENTITY_DOCBLOCK_MARKERS as $entityDocBlockMarker) {
+            if (strpos($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarker) !== false) {
+                $found = true;
+                break;
+            }
+        }
+        return $found;
     }
 }

@@ -20,14 +20,20 @@ use Webmozart\Assert\Assert;
  */
 final class ForbiddenNodeRule implements Rule
 {
-    public const string ERROR_MESSAGE = '"%s" is forbidden to use';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = '"%s" is forbidden to use';
 
     /**
      * @var array<class-string<Node>>
      */
     private array $forbiddenNodes = [];
 
-    private readonly Standard $standard;
+    /**
+     * @readonly
+     */
+    private Standard $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes

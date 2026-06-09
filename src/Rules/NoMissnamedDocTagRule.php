@@ -22,18 +22,21 @@ final class NoMissnamedDocTagRule implements Rule
 {
     /**
      * @api used in tests
+     * @var string
      */
-    public const string CONSTANT_ERROR_MESSAGE = 'Constant doc comment tag must be @var, "%s" given';
+    public const CONSTANT_ERROR_MESSAGE = 'Constant doc comment tag must be @var, "%s" given';
 
     /**
      * @api used in tests
+     * @var string
      */
-    public const string PROPERTY_ERROR_MESSAGE = 'Property doc comment tag must be @var, "%s" given';
+    public const PROPERTY_ERROR_MESSAGE = 'Property doc comment tag must be @var, "%s" given';
 
     /**
      * @api used in tests
+     * @var string
      */
-    public const string METHOD_ERROR_MESSAGE = 'Method doc comment tag must be @param or @return, "%s" given';
+    public const METHOD_ERROR_MESSAGE = 'Method doc comment tag must be @param or @return, "%s" given';
 
     public function getNodeType(): string
     {

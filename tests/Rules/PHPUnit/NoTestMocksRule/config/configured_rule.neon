@@ -1,7 +1,0 @@
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\PHPUnit\NoTestMocksRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            allowedTypes:
-                - Symplify\PHPStanRules\Tests\PHPUnit\Rules\NoTestMocksRule\Source\SomeAllowedType
