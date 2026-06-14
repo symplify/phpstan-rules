@@ -5,17 +5,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "webmozart/assert": "^2.0",
+        "webmozart/assert": "^2.4",
         "phpstan/phpstan": "^2.2",
         "nette/utils": "^4.1",
         "phpstan/phpdoc-parser": "^2.3"
     },
     "require-dev": {
         "nikic/php-parser": "^5.7",
-        "phpunit/phpunit": "^13.0",
-        "symfony/framework-bundle": "^6.2",
-        "illuminate/container": "^11.0",
-        "symplify/easy-coding-standard": "^13.1",
+        "phpunit/phpunit": "^13.2",
+        "symfony/framework-bundle": "^6.4",
+        "illuminate/container": "^11.51",
+        "symplify/easy-coding-standard": "^13.2",
         "tomasvotruba/class-leak": "^2.1",
         "rector/rector": "^2.4",
         "phpstan/extension-installer": "^1.4",
