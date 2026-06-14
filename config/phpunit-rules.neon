@@ -5,4 +5,5 @@ rules:
 # mocking rules moved to mock-rules.neon, enable them with:
 #
 # parameters:
-#     mocks: true
+#     symplify:
+#         mocks: true

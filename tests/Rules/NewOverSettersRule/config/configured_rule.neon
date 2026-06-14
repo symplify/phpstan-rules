@@ -1,5 +1,7 @@
 includes:
+    - ../../../../config/phpstan-extensions.neon
     - ../../../../config/ctor-rules.neon
 
 parameters:
-    ctor: true
+    symplify:
+        ctor: true

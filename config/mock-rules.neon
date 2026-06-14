@@ -1,6 +1,7 @@
 # PHPUnit mocking rules, enable in your phpstan.neon with:
 #
 # parameters:
+#     mocks: true
 #     symplify:
 #         mocks: true
 

@@ -53,7 +53,8 @@ Do you use mocks in your PHPUnit tests? Enable mocking rules with single paramet
 
 ```yaml
 parameters:
-    mocks: true
+    symplify:
+        mocks: true
 ```
 
 <br>
@@ -62,9 +63,10 @@ Want sharper type inference? The return type extensions are **disabled by defaul
 
 ```yaml
 parameters:
-    symfonyReturnType: true
-    laravelReturnType: true
-    pathStrings: true
+    symplify:
+        symfonyReturnType: true
+        laravelReturnType: true
+        pathStrings: true
 ```
 
 `symfonyReturnType` resolves `$container->get(SomeService::class)` to `SomeService` and Symfony Finder's `$splFileInfo->getRealPath()` to `string`. `laravelReturnType` does the same for Laravel's `$container->make(SomeService::class)`. `pathStrings` narrows `getcwd()`, `dirname()` and `realpath()` to `string`:
@@ -90,7 +92,8 @@ Tired of ever growing ignored error count in your `phpstan.neon`? Set hard limit
 
 ```yaml
 parameters:
-    maximumIgnoredErrorCount: 50
+    symplify:
+        maximumIgnoredErrorCount: 50
 ```
 
 <br>
@@ -123,7 +126,8 @@ This rule is disabled by default. Enable it with the `ctor` parameter:
 
 ```yaml
 parameters:
-    ctor: true
+    symplify:
+        ctor: true
 ```
 
 <br>
@@ -2706,7 +2710,8 @@ This set is for you! Enable all mocking rules with single parameter in your `php
 
 ```yaml
 parameters:
-    mocks: true
+    symplify:
+        mocks: true
 ```
 
 <br>

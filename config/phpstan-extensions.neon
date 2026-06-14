@@ -1,18 +1,41 @@
-# return type extensions are disabled by default; enable in your phpstan.neon with:
+# Nested configuration, the clear and preferred way to configure these rules:
 #
 # parameters:
 #     symplify:
+#         mocks: true
+#         ctor: true
 #         symfonyReturnType: true
 #         laravelReturnType: true
 #         pathStrings: true
+#         maximumIgnoredErrorCount: 0
+#
+# The flat parameters (e.g. "mocks: true") are kept for backward compatibility
+# and default to their nested "symplify.*" counterpart.
 
 parameters:
+    symplify:
+        mocks: false
+        ctor: false
+        symfonyReturnType: false
+        laravelReturnType: false
+        pathStrings: false
+        maximumIgnoredErrorCount: 0
+
     # kept flat for backward compatibility, default to the %symplify.*% nested values
     symfonyReturnType: %symplify.symfonyReturnType%
     laravelReturnType: %symplify.laravelReturnType%
     pathStrings: %symplify.pathStrings%
 
 parametersSchema:
+    symplify: structure([
+        mocks: bool()
+        ctor: bool()
+        symfonyReturnType: bool()
+        laravelReturnType: bool()
+        pathStrings: bool()
+        maximumIgnoredErrorCount: int()
+    ])
+
     symfonyReturnType: bool()
     laravelReturnType: bool()
     pathStrings: bool()

@@ -2,6 +2,7 @@ parameters:
     # enables NewOverSettersRule, disabled by default
     #
     # parameters:
+    #     ctor: true
     #     symplify:
     #         ctor: true
     #

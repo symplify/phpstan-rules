@@ -47,6 +47,8 @@ final class SymplifyErrorFormatterTest extends ErrorFormatterTestCase
     #[Override]
     public static function getAdditionalConfigFiles(): array
     {
-        return [__DIR__ . '/../../config/phpstan-extensions.neon'];
+        return [
+            __DIR__ . '/../../config/phpstan-extensions.neon',
+        ];
     }
 }
