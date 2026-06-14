@@ -1,8 +1,36 @@
 parameters:
+    # nested configuration, the clear and preferred way to configure these rules:
+    #
+    # parameters:
+    #     symplify:
+    #         mocks: true
+    #         ctor: true
+    #         symfonyReturnType: true
+    #         laravelReturnType: true
+    #         pathStrings: true
+    #         maximumIgnoredErrorCount: 0
+    symplify:
+        mocks: false
+        ctor: false
+        symfonyReturnType: false
+        laravelReturnType: false
+        pathStrings: false
+        maximumIgnoredErrorCount: 0
+
     # related to MaximumIgnoredErrorCountRule
-    maximumIgnoredErrorCount: 0
+    # kept flat for backward compatibility, defaults to the nested value above
+    maximumIgnoredErrorCount: %symplify.maximumIgnoredErrorCount%
 
 parametersSchema:
+    symplify: structure([
+        mocks: bool()
+        ctor: bool()
+        symfonyReturnType: bool()
+        laravelReturnType: bool()
+        pathStrings: bool()
+        maximumIgnoredErrorCount: int()
+    ])
+
     # related to MaximumIgnoredErrorCountRule
     maximumIgnoredErrorCount: int()
 

@@ -1,6 +1,12 @@
 parameters:
     # enables NewOverSettersRule, disabled by default
-    ctor: false
+    #
+    # parameters:
+    #     symplify:
+    #         ctor: true
+    #
+    # kept flat for backward compatibility, defaults to %symplify.ctor%
+    ctor: %symplify.ctor%
 
 parametersSchema:
     ctor: bool()

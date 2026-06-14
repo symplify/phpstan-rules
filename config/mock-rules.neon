@@ -1,10 +1,12 @@
 # PHPUnit mocking rules, enable in your phpstan.neon with:
 #
 # parameters:
-#     mocks: true
+#     symplify:
+#         mocks: true
 
 parameters:
-    mocks: false
+    # kept flat for backward compatibility, defaults to %symplify.mocks%
+    mocks: %symplify.mocks%
 
 parametersSchema:
     mocks: bool()

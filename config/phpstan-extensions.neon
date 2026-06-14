@@ -1,14 +1,16 @@
 # return type extensions are disabled by default; enable in your phpstan.neon with:
 #
 # parameters:
-#     symfonyReturnType: true
-#     laravelReturnType: true
-#     pathStrings: true
+#     symplify:
+#         symfonyReturnType: true
+#         laravelReturnType: true
+#         pathStrings: true
 
 parameters:
-    symfonyReturnType: false
-    laravelReturnType: false
-    pathStrings: false
+    # kept flat for backward compatibility, default to the %symplify.*% nested values
+    symfonyReturnType: %symplify.symfonyReturnType%
+    laravelReturnType: %symplify.laravelReturnType%
+    pathStrings: %symplify.pathStrings%
 
 parametersSchema:
     symfonyReturnType: bool()
