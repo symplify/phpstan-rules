@@ -49,15 +49,7 @@ includes:
 
 <br>
 
-Do you use mocks in your PHPUnit tests? Enable mocking rules with single parameter:
-
-```yaml
-parameters:
-    symplify:
-        mocks: true
-```
-
-<br>
+### Symfony/Laravel container `->get()`/`->make()` return type extensions
 
 Want sharper type inference? The return type extensions are **disabled by default** — enable the ones that fit your stack:
 
@@ -69,12 +61,17 @@ parameters:
         pathStrings: true
 ```
 
-`symfonyReturnType` resolves `$container->get(SomeService::class)` to `SomeService` and Symfony Finder's `$splFileInfo->getRealPath()` to `string`. `laravelReturnType` does the same for Laravel's `$container->make(SomeService::class)`. `pathStrings` narrows `getcwd()`, `dirname()` and `realpath()` to `string`:
+* `symfonyReturnType` resolves
+    * `$container->get(SomeService::class)` to `SomeService` and
+    * Symfony Finder's `$splFileInfo->getRealPath()` to `string`
 
 ```php
 $service = $container->get(SomeService::class);
 // $service is now known as SomeService, instead of plain object
 ```
+
+* `laravelReturnType` does the same for Laravel's `$container->make(SomeService::class)`
+* `pathStrings` narrows `getcwd()`, `dirname()` and `realpath()` to `string`:
 
 <br>
 
