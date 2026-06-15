@@ -2,20 +2,19 @@ name: Downgraded Release
 
 on:
     push:
+        branches:
+            - main
         tags:
-            # avoid infinite looping, skip tags that ends with ".74"
-            # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-including-and-excluding-branches
             - '*'
-            - '!**.74'
 
 jobs:
     downgrade_release:
         runs-on: ubuntu-latest
 
         steps:
-            -   uses: "actions/checkout@v3"
+            -   uses: "actions/checkout@v5"
                 with:
-                    token: ${{ secrets.WORKFLOWS_TOKEN }}
+                    token: ${{ secrets.WORKFLOWS_TOKEN || github.token }}
 
             -
                 uses: "shivammathur/setup-php@v2"
@@ -39,26 +38,55 @@ jobs:
             # clear the dev files
             -   run: rm -rf tests rector-local ecs.php phpstan.neon phpunit.xml .editorconfig stubs
 
-            # copy PHP 7.4 composer + workflows
+            # remove the original .github, to fully override it with the target repository one below
+            -   run: rm -rf .github
+
+            # copy PHP 7.4 composer + workflows + empty .gitignore
             -   run: cp -r build/target-repository/. .
 
             # clear the dev files
             -   run: rm -rf build rector.php phpstan-for-tests.neon tests stubs
 
+            # clone the remote repository, so we can commit on top of its history and push without --force
+            # inspired by https://github.com/easy-coding-standard/ecs-src/blob/main/.github/workflows/buid_release.yaml
+            -
+                uses: "actions/checkout@v5"
+                with:
+                    repository: anywherephp/phpstan-rules
+                    path: remote-repository
+                    token: ${{ secrets.WORKFLOWS_TOKEN }}
+
+            # remove remote files, to avoid piling up dead code in remote repository
+            -   run: rm -rf remote-repository/src remote-repository/config remote-repository/.github
+
+            # copy the downgraded code to the remote repository
+            -   run: rsync -a --exclude .git --exclude remote-repository ./ remote-repository/
+
             # setup git user
             -
+                working-directory: remote-repository
                 run: |
-                    git config user.email "action@github.com"
-                    git config user.name "GitHub Action"
-            # publish to the same repository with a new tag
-            # see https://tomasvotruba.com/blog/how-to-release-php-81-and-72-package-in-the-same-repository/
-            -
-                name: "Tag Downgraded Code"
-                run: |
-                    # separate a "git add" to add untracked (new) files too
-                    git add --all
-                    git commit -m "release PHP 7.4 downgraded"
+                    git config user.email "tomas@getrector.org"
+                    git config user.name "rector-bot"
 
-                    # force push tag, so there is only 1 version
-                    git tag "${GITHUB_REF#refs/tags/}" --force
-                    git push origin "${GITHUB_REF#refs/tags/}" --force
+            # publish to remote repository without tag
+            -
+                name: "Push Downgraded Code - branch"
+                working-directory: remote-repository
+                if: "!startsWith(github.ref, 'refs/tags/')"
+                run: |
+                    git add --all
+                    git commit -m "Updated PHPStanRules to commit ${{ github.event.after }}"
+                    git push --quiet origin main
+
+            # publish to remote repository with tag
+            -
+                name: "Push Downgraded Code - tag"
+                working-directory: remote-repository
+                if: "startsWith(github.ref, 'refs/tags/')"
+                run: |
+                    git add --all
+                    git commit --allow-empty -m "PHPStanRules ${GITHUB_REF#refs/tags/}"
+                    git push --quiet origin main
+                    git tag "${GITHUB_REF#refs/tags/}" -m "${GITHUB_REF#refs/tags/}"
+                    git push --quiet origin "${GITHUB_REF#refs/tags/}"
