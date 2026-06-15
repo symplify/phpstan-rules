@@ -1,12 +1,3 @@
-parameters:
-    # related to MaximumIgnoredErrorCountRule
-    # kept flat for backward compatibility, defaults to %symplify.maximumIgnoredErrorCount%
-    maximumIgnoredErrorCount: %symplify.maximumIgnoredErrorCount%
-
-parametersSchema:
-    # related to MaximumIgnoredErrorCountRule
-    maximumIgnoredErrorCount: int()
-
 services:
     - Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser
     - Symplify\PHPStanRules\PhpDocParser\PhpDocNodeTraverser
@@ -28,10 +19,3 @@ services:
 
     # symfony
     - Symplify\PHPStanRules\Symfony\Reflection\ClassConstructorTypesResolver
-
-    # rules enabled by configuration
-    -
-        class: Symplify\PHPStanRules\Rules\MaximumIgnoredErrorCountRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            limit: %maximumIgnoredErrorCount%
