@@ -1,17 +1,3 @@
-# Nested configuration, the clear and preferred way to configure these rules:
-#
-# parameters:
-#     symplify:
-#         mocks: true
-#         ctor: true
-#         symfonyReturnType: true
-#         laravelReturnType: true
-#         pathStrings: true
-#         maximumIgnoredErrorCount: 0
-#
-# The flat parameters (e.g. "mocks: true") are kept for backward compatibility
-# and default to their nested "symplify.*" counterpart.
-
 parameters:
     symplify:
         mocks: false
@@ -43,16 +29,19 @@ parametersSchema:
 conditionalTags:
     # Symfony Container::get($1) => $1 type
     Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension:
-        phpstan.broker.dynamicMethodReturnTypeExtension: %symfonyReturnType%
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symplify.symfonyReturnType%
+
     # Symfony Finder SplFileInfo::getRealPath() => string type
     Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension:
-        phpstan.broker.dynamicMethodReturnTypeExtension: %symfonyReturnType%
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symplify.symfonyReturnType%
+
     # Laravel Container::make($1) => $1 type
     Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension:
-        phpstan.broker.dynamicMethodReturnTypeExtension: %laravelReturnType%
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symplify.laravelReturnType%
+
     # getcwd()/dirname()/realpath() => always "string"
     Symplify\PHPStanRules\ReturnTypeExtension\NativeFunctionReturnTypeExtension:
-        phpstan.broker.dynamicFunctionReturnTypeExtension: %pathStrings%
+        phpstan.broker.dynamicFunctionReturnTypeExtension: %symplify.pathStrings%
 
 services:
     # use with "errorFormat: symplify" in CLI/config

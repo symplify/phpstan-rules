@@ -1,28 +1,14 @@
-parameters:
-    # enables NewOverSettersRule, disabled by default
-    #
-    # parameters:
-    #     ctor: true
-    #     symplify:
-    #         ctor: true
-    #
-    # kept flat for backward compatibility, defaults to %symplify.ctor%
-    ctor: %symplify.ctor%
-
-parametersSchema:
-    ctor: bool()
-
 services:
     -
         class: Symplify\PHPStanRules\Collector\NewWithFollowingSettersCollector
         tags:
             - phpstan.collector
         arguments:
-            isEnabled: %ctor%
+            isEnabled: %symplify.ctor%
 
     -
         class: Symplify\PHPStanRules\Rules\NewOverSettersRule
         tags:
             - phpstan.rules.rule
         arguments:
-            isEnabled: %ctor%
+            isEnabled: %symplify.ctor%

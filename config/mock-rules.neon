@@ -1,43 +1,29 @@
-# PHPUnit mocking rules, enable in your phpstan.neon with:
-#
-# parameters:
-#     mocks: true
-#     symplify:
-#         mocks: true
-
-parameters:
-    # kept flat for backward compatibility, defaults to %symplify.mocks%
-    mocks: %symplify.mocks%
-
-parametersSchema:
-    mocks: bool()
-
 conditionalTags:
     # mocking
     Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
 
     # overly complicated
     Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
 
     # explicit expects()
     Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\PHPUnit\AvoidAnyExpectsRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\PHPUnit\NoWithOnStubRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\PHPUnit\RequireAtLeastOneRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
 
     # better alternative than mocks
     Symplify\PHPStanRules\Rules\Doctrine\NoDocumentMockingRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\Doctrine\NoEntityMockingRule:
-        phpstan.rules.rule: %mocks%
+        phpstan.rules.rule: %symplify.mocks%
 
 services:
     - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
