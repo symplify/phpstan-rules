@@ -1,6 +1,7 @@
 parameters:
     # related to MaximumIgnoredErrorCountRule
-    maximumIgnoredErrorCount: 0
+    # kept flat for backward compatibility, defaults to %symplify.maximumIgnoredErrorCount%
+    maximumIgnoredErrorCount: %symplify.maximumIgnoredErrorCount%
 
 parametersSchema:
     # related to MaximumIgnoredErrorCountRule

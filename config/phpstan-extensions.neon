@@ -1,16 +1,27 @@
-# return type extensions are disabled by default; enable in your phpstan.neon with:
-#
-# parameters:
-#     symfonyReturnType: true
-#     laravelReturnType: true
-#     pathStrings: true
-
 parameters:
-    symfonyReturnType: false
-    laravelReturnType: false
-    pathStrings: false
+    symplify:
+        mocks: false
+        ctor: false
+        symfonyReturnType: false
+        laravelReturnType: false
+        pathStrings: false
+        maximumIgnoredErrorCount: 0
+
+    # kept flat for backward compatibility, default to the %symplify.*% nested values
+    symfonyReturnType: %symplify.symfonyReturnType%
+    laravelReturnType: %symplify.laravelReturnType%
+    pathStrings: %symplify.pathStrings%
 
 parametersSchema:
+    symplify: structure([
+        mocks: bool()
+        ctor: bool()
+        symfonyReturnType: bool()
+        laravelReturnType: bool()
+        pathStrings: bool()
+        maximumIgnoredErrorCount: int()
+    ])
+
     symfonyReturnType: bool()
     laravelReturnType: bool()
     pathStrings: bool()
@@ -18,16 +29,19 @@ parametersSchema:
 conditionalTags:
     # Symfony Container::get($1) => $1 type
     Symplify\PHPStanRules\ReturnTypeExtension\Symfony\ContainerGetReturnTypeExtension:
-        phpstan.broker.dynamicMethodReturnTypeExtension: %symfonyReturnType%
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symplify.symfonyReturnType%
+
     # Symfony Finder SplFileInfo::getRealPath() => string type
     Symplify\PHPStanRules\ReturnTypeExtension\Symfony\SplFileInfoTolerantReturnTypeExtension:
-        phpstan.broker.dynamicMethodReturnTypeExtension: %symfonyReturnType%
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symplify.symfonyReturnType%
+
     # Laravel Container::make($1) => $1 type
     Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension:
-        phpstan.broker.dynamicMethodReturnTypeExtension: %laravelReturnType%
+        phpstan.broker.dynamicMethodReturnTypeExtension: %symplify.laravelReturnType%
+
     # getcwd()/dirname()/realpath() => always "string"
     Symplify\PHPStanRules\ReturnTypeExtension\NativeFunctionReturnTypeExtension:
-        phpstan.broker.dynamicFunctionReturnTypeExtension: %pathStrings%
+        phpstan.broker.dynamicFunctionReturnTypeExtension: %symplify.pathStrings%
 
 services:
     # use with "errorFormat: symplify" in CLI/config
