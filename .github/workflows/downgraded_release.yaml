@@ -47,14 +47,21 @@ jobs:
             # clear the dev files
             -   run: rm -rf build rector.php phpstan-for-tests.neon tests stubs
 
-            # clone the remote repository, so we can commit on top of its history and push without --force
-            # inspired by https://github.com/easy-coding-standard/ecs-src/blob/main/.github/workflows/buid_release.yaml
+            # prepare the remote repository, so we can commit on top of its history and push without --force
+            # handle the initial empty-repository state before the first commit creates refs/heads/main
             -
-                uses: "actions/checkout@v5"
-                with:
-                    repository: anywherephp/phpstan-rules
-                    path: remote-repository
-                    token: ${{ secrets.WORKFLOWS_TOKEN }}
+                run: |
+                    mkdir remote-repository
+                    cd remote-repository
+                    git init --initial-branch=main
+                    git remote add origin "https://x-access-token:${{ secrets.WORKFLOWS_TOKEN }}@github.com/anywherephp/phpstan-rules.git"
+
+                    if git ls-remote --exit-code --heads origin main; then
+                        git fetch --depth=1 origin main
+                        git checkout -B main FETCH_HEAD
+                    else
+                        git checkout --orphan main
+                    fi
 
             # remove remote files, to avoid piling up dead code in remote repository
             -   run: rm -rf remote-repository/src remote-repository/config remote-repository/.github
