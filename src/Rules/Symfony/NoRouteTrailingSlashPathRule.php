@@ -19,7 +19,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
  */
 final class NoRouteTrailingSlashPathRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid trailing slash in route path "%s", to prevent redirects and SEO issues';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid trailing slash in route path "%s", to prevent redirects and SEO issues';
 
     public function getNodeType(): string
     {
@@ -46,7 +49,7 @@ final class NoRouteTrailingSlashPathRule implements Rule
         }
 
         // path is valid
-        if ($routePath === '/' || ! str_ends_with($routePath, '/')) {
+        if ($routePath === '/' || substr_compare($routePath, '/', -strlen('/')) !== 0) {
             return [];
         }
 
@@ -65,7 +68,7 @@ final class NoRouteTrailingSlashPathRule implements Rule
         }
 
         // not a route
-        if (! str_contains($docComment->getText(), 'Route')) {
+        if (strpos($docComment->getText(), 'Route') === false) {
             return null;
         }
 

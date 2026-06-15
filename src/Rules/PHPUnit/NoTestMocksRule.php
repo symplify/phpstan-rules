@@ -16,24 +16,30 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 /**
  * @implements Rule<MethodCall>
  */
-final readonly class NoTestMocksRule implements Rule
+final class NoTestMocksRule implements Rule
 {
     /**
-     * @api
+     * @var string[]
+     * @readonly
      */
-    public const string ERROR_MESSAGE = 'Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis';
+    private array $allowedTypes = [];
+    /**
+     * @api
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Mocking "%s" class is forbidden. Use direct/anonymous class instead for better static analysis';
 
     /**
      * @var string[]
      */
-    private const array MOCKING_METHOD_NAMES = ['createMock', 'createPartialMock', 'createConfiguredMock', 'createStub'];
+    private const MOCKING_METHOD_NAMES = ['createMock', 'createPartialMock', 'createConfiguredMock', 'createStub'];
 
     /**
      * @param string[] $allowedTypes
      */
-    public function __construct(
-        private array $allowedTypes = []
-    ) {
+    public function __construct(array $allowedTypes = [])
+    {
+        $this->allowedTypes = $allowedTypes;
     }
 
     public function getNodeType(): string

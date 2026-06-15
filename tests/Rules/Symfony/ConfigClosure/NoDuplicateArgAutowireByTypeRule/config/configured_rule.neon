@@ -1,6 +1,0 @@
-includes:
-    - ../../../../../../config/phpstan-extensions.neon
-    - ../../../../../../config/services/services.neon
-
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgAutowireByTypeRule

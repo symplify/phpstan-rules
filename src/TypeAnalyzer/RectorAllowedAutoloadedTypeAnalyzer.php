@@ -17,13 +17,14 @@ final class RectorAllowedAutoloadedTypeAnalyzer
 {
     /**
      * @see https://regex101.com/r/BBm9bf/1
+     * @var string
      */
-    private const string AUTOLOADED_CLASS_PREFIX_REGEX = '#^(PhpParser|PHPStan|Rector|Reflection|Symfony\\\\Component\\\\Console)#';
+    private const AUTOLOADED_CLASS_PREFIX_REGEX = '#^(PhpParser|PHPStan|Rector|Reflection|Symfony\\\\Component\\\\Console)#';
 
     /**
      * @var array<string>
      */
-    private const array ALLOWED_CLASSES = [
+    private const ALLOWED_CLASSES = [
         Node::class,
         PhpDocNode::class,
     ];
@@ -31,7 +32,14 @@ final class RectorAllowedAutoloadedTypeAnalyzer
     public static function isAllowedType(Type $type): bool
     {
         if ($type instanceof UnionType) {
-            return array_all($type->getTypes(), fn (Type $unionedType): bool => self::isAllowedType($unionedType));
+            $found = true;
+            foreach ($type->getTypes() as $unionedType) {
+                if (!self::isAllowedType($unionedType)) {
+                    $found = false;
+                    break;
+                }
+            }
+            return $found;
         }
 
         if ($type instanceof ConstantStringType) {

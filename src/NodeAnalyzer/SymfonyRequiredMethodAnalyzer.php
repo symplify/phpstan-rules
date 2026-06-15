@@ -34,6 +34,6 @@ final class SymfonyRequiredMethodAnalyzer
             return false;
         }
 
-        return str_contains($docComment->getText(), '@required');
+        return strpos($docComment->getText(), '@required') !== false;
     }
 }

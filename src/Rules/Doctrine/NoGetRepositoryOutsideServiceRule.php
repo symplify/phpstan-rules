@@ -22,7 +22,10 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoGetRepositoryOutsideServiceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of getting repository from EntityManager, use constructor injection and service pattern to keep code clean';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of getting repository from EntityManager, use constructor injection and service pattern to keep code clean';
 
     public function getNodeType(): string
     {
@@ -56,7 +59,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
 
         // dummy check
         $classReflection = $scope->getClassReflection();
-        if (str_ends_with($classReflection->getName(), 'Repository')) {
+        if (substr_compare($classReflection->getName(), 'Repository', -strlen('Repository')) === 0) {
             return [];
         }
 

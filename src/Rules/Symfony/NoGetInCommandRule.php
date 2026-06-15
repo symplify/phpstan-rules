@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyCommandAnalyzer;
  */
 final class NoGetInCommandRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Do not use $this->get(Type::class) method in commands to get services. Use __construct(Type $type) instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Do not use $this->get(Type::class) method in commands to get services. Use __construct(Type $type) instead';
 
     public function getNodeType(): string
     {

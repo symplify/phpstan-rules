@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class UppercaseConstantRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Constant "%s" must be uppercase';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Constant "%s" must be uppercase';
 
     public function getNodeType(): string
     {

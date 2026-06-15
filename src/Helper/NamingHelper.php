@@ -34,6 +34,13 @@ final class NamingHelper
      */
     public static function isNames(Node $node, array $names): bool
     {
-        return array_any($names, fn (string $name): bool => self::isName($node, $name));
+        $found = false;
+        foreach ($names as $name) {
+            if (self::isName($node, $name)) {
+                $found = true;
+                break;
+            }
+        }
+        return $found;
     }
 }

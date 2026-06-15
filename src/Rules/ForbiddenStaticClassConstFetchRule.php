@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class ForbiddenStaticClassConstFetchRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid static access of constants, as they can change value. Use interface and contract method instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid static access of constants, as they can change value. Use interface and contract method instead';
 
     public function getNodeType(): string
     {

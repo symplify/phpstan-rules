@@ -22,7 +22,10 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class FormTypeClassNameRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Class extends "%s" must have "FormType" suffix to make form explicit, "%s" given';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class extends "%s" must have "FormType" suffix to make form explicit, "%s" given';
 
     public function getNodeType(): string
     {
@@ -41,7 +44,7 @@ final class FormTypeClassNameRule implements Rule
 
         // all good
         $className = $node->namespacedName->toString();
-        if (str_ends_with($className, 'FormType')) {
+        if (substr_compare($className, 'FormType', -strlen('FormType')) === 0) {
             return [];
         }
 

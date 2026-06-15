@@ -24,7 +24,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  */
 final class FileNameMatchesExtensionRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'The config uses "%s" extension, but the file name is "%s". Sync them to ease discovery';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'The config uses "%s" extension, but the file name is "%s". Sync them to ease discovery';
 
     public function getNodeType(): string
     {
@@ -61,7 +64,10 @@ final class FileNameMatchesExtensionRule implements Rule
         return [$identifierRuleError];
     }
 
-    private function findExtensionName(Closure|Node $node): ?string
+    /**
+     * @param \PhpParser\Node\Expr\Closure|\PhpParser\Node $node
+     */
+    private function findExtensionName($node): ?string
     {
         $extensionName = null;
 

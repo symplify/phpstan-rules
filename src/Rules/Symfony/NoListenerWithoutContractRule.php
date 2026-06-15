@@ -26,7 +26,10 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class NoListenerWithoutContractRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
 
     public function getNodeType(): string
     {
@@ -43,7 +46,7 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        if (! str_ends_with($classReflection->getName(), 'Listener')) {
+        if (substr_compare($classReflection->getName(), 'Listener', -strlen('Listener')) !== 0) {
             return [];
         }
 
@@ -108,7 +111,7 @@ final class NoListenerWithoutContractRule implements Rule
             }
 
             foreach ($classMethod->params as $param) {
-                if ($param->type instanceof Name && str_starts_with($param->type->toString(), 'Symfony\Component\Form\Event\\')) {
+                if ($param->type instanceof Name && strncmp($param->type->toString(), 'Symfony\Component\Form\Event\\', strlen('Symfony\Component\Form\Event\\')) === 0) {
 
                     return true;
                 }

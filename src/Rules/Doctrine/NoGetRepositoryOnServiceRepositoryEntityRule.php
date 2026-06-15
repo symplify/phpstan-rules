@@ -25,15 +25,26 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule\NoGetRepositoryOnServiceRepositoryEntityRuleTest
  */
-final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rule
+final class NoGetRepositoryOnServiceRepositoryEntityRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of calling "->getRepository(%s::class)" service locator, inject service repository "%s" via constructor and use it directly';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of calling "->getRepository(%s::class)" service locator, inject service repository "%s" via constructor and use it directly';
 
+    /**
+     * @readonly
+     */
     private RepositoryClassResolver $repositoryClassResolver;
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider
+        ReflectionProvider $reflectionProvider
     ) {
+        $this->reflectionProvider = $reflectionProvider;
         $this->repositoryClassResolver = new RepositoryClassResolver($reflectionProvider);
     }
 

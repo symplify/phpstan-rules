@@ -16,7 +16,10 @@ abstract class AbstractPhpDocNodeVisitor implements PhpDocNodeVisitorInterface
     {
     }
 
-    public function enterNode(Node $node): int|Node|null
+    /**
+     * @return int|\PHPStan\PhpDocParser\Ast\Node|null
+     */
+    public function enterNode(Node $node)
     {
         return null;
     }
@@ -24,7 +27,7 @@ abstract class AbstractPhpDocNodeVisitor implements PhpDocNodeVisitorInterface
     /**
      * @return null|int|\PhpParser\Node|Node[] Replacement node (or special return)
      */
-    public function leaveNode(Node $node): int|\PhpParser\Node|array|null
+    public function leaveNode(Node $node)
     {
         return null;
     }

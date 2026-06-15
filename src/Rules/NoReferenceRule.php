@@ -26,13 +26,20 @@ use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
  *
  * @implements Rule<Node>
  */
-final readonly class NoReferenceRule implements Rule
+final class NoReferenceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Use explicit return value over magic &reference';
+    /**
+     * @readonly
+     */
+    private ParentClassMethodNodeResolver $parentClassMethodNodeResolver;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
 
-    public function __construct(
-        private ParentClassMethodNodeResolver $parentClassMethodNodeResolver,
-    ) {
+    public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
+    {
+        $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;
     }
 
     public function getNodeType(): string
@@ -66,8 +73,9 @@ final readonly class NoReferenceRule implements Rule
 
     /**
      * @return list<IdentifierRuleError>
+     * @param \PhpParser\Node\Stmt\Function_|\PhpParser\Node\Stmt\ClassMethod $functionLike
      */
-    private function collectParamErrorMessages(Function_|ClassMethod $functionLike, Scope $scope): array
+    private function collectParamErrorMessages($functionLike, Scope $scope): array
     {
         // has parent method? → skip it as enforced by parent
         $methodName = (string) $functionLike->name;

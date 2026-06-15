@@ -25,18 +25,21 @@ final class ExplicitClassPrefixSuffixRule implements Rule
 {
     /**
      * @api
+     * @var string
      */
-    public const string INTERFACE_ERROR_MESSAGE = 'Interface must be suffixed with "Interface" exclusively';
+    public const INTERFACE_ERROR_MESSAGE = 'Interface must be suffixed with "Interface" exclusively';
 
     /**
      * @api
+     * @var string
      */
-    public const string TRAIT_ERROR_MESSAGE = 'Trait must be suffixed by "Trait" exclusively';
+    public const TRAIT_ERROR_MESSAGE = 'Trait must be suffixed by "Trait" exclusively';
 
     /**
      * @api
+     * @var string
      */
-    public const string ABSTRACT_ERROR_MESSAGE = 'Abstract class must be prefixed by "Abstract" exclusively';
+    public const ABSTRACT_ERROR_MESSAGE = 'Abstract class must be prefixed by "Abstract" exclusively';
 
     public function getNodeType(): string
     {
@@ -72,11 +75,11 @@ final class ExplicitClassPrefixSuffixRule implements Rule
      */
     private function processInterfaceSuffix(Identifier $identifier): array
     {
-        if (str_ends_with($identifier->toString(), 'Interface')) {
+        if (substr_compare($identifier->toString(), 'Interface', -strlen('Interface')) === 0) {
             return [];
         }
 
-        if (str_ends_with($identifier->toString(), 'Trait')) {
+        if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
                 ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
                 ->build()];
@@ -92,7 +95,7 @@ final class ExplicitClassPrefixSuffixRule implements Rule
      */
     private function processTraitSuffix(Identifier $identifier): array
     {
-        if (str_ends_with($identifier->toString(), 'Trait')) {
+        if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [];
         }
 
@@ -106,26 +109,26 @@ final class ExplicitClassPrefixSuffixRule implements Rule
      */
     private function processClassSuffix(Identifier $identifier, bool $isAbstract): array
     {
-        if ($isAbstract && ! str_starts_with($identifier->toString(), 'Abstract')) {
+        if ($isAbstract && strncmp($identifier->toString(), 'Abstract', strlen('Abstract')) !== 0) {
             return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)
                 ->identifier(RuleIdentifier::EXPLICIT_ABSTRACT_PREFIX_NAME)
                 ->build()];
         }
 
-        if (! $isAbstract && str_starts_with($identifier->toString(), 'Abstract')) {
+        if (! $isAbstract && strncmp($identifier->toString(), 'Abstract', strlen('Abstract')) === 0) {
             return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)
                 ->identifier(RuleIdentifier::EXPLICIT_ABSTRACT_PREFIX_NAME)
                 ->build(),
             ];
         }
 
-        if (str_ends_with($identifier->toString(), 'Interface')) {
+        if (substr_compare($identifier->toString(), 'Interface', -strlen('Interface')) === 0) {
             return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)
                 ->identifier(RuleIdentifier::EXPLICIT_INTERFACE_SUFFIX_NAME)
                 ->build()];
         }
 
-        if (str_ends_with($identifier->toString(), 'Trait')) {
+        if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
                 ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
                 ->build()];

@@ -28,18 +28,27 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\ConfigClosure\PreferAutowireAttributeOverConfigParamRule\PreferAutowireAttributeOverConfigParamRuleTest
  */
-final readonly class PreferAutowireAttributeOverConfigParamRule implements Rule
+final class PreferAutowireAttributeOverConfigParamRule implements Rule
 {
     /**
-     * @api used in tests
+     * @readonly
      */
-    public const string ERROR_MESSAGE = 'Instead of parameter reference in config, add #[Autowire(param: ...)] in the "%s" class constructor';
+    private ReflectionProvider $reflectionProvider;
+    /**
+     * @api used in tests
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of parameter reference in config, add #[Autowire(param: ...)] in the "%s" class constructor';
 
+    /**
+     * @readonly
+     */
     private NodeFinder $nodeFinder;
 
     public function __construct(
-        private ReflectionProvider $reflectionProvider,
+        ReflectionProvider $reflectionProvider
     ) {
+        $this->reflectionProvider = $reflectionProvider;
         $this->nodeFinder = new NodeFinder();
     }
 
@@ -106,7 +115,14 @@ final readonly class PreferAutowireAttributeOverConfigParamRule implements Rule
 
     private function hasPossibleParameterInject(MethodCall $methodCall): bool
     {
-        return array_any($methodCall->getArgs(), fn (Arg $arg): bool => $this->isParamFuncOrString($arg->value));
+        $found = false;
+        foreach ($methodCall->getArgs() as $arg) {
+            if ($this->isParamFuncOrString($arg->value)) {
+                $found = true;
+                break;
+            }
+        }
+        return $found;
     }
 
     private function isParamFuncOrString(Expr $expr): bool
@@ -125,7 +141,7 @@ final readonly class PreferAutowireAttributeOverConfigParamRule implements Rule
         /** @var String_[] $strings */
         $strings = $nodeFinder->findInstanceOf($expr, String_::class);
         foreach ($strings as $string) {
-            if (str_starts_with($string->value, '%')) {
+            if (strncmp($string->value, '%', strlen('%')) === 0) {
                 return true;
             }
         }
@@ -140,7 +156,7 @@ final readonly class PreferAutowireAttributeOverConfigParamRule implements Rule
         }
 
         $serviceClassReflection = $this->reflectionProvider->getClass($className);
-        return str_contains((string) $serviceClassReflection->getFileName(), '/vendor/');
+        return strpos((string) $serviceClassReflection->getFileName(), '/vendor/') !== false;
     }
 
     private function resolveClassNameFromServiceSetMethodCall(MethodCall $setMethodCall, Scope $scope): ?string

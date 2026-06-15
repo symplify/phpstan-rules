@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
  */
 final class AvoidAnyExpectsRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Using $this->any() on mock is ambigous. Use explicit count or change to a stub';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Using $this->any() on mock is ambigous. Use explicit count or change to a stub';
 
     public function getNodeType(): string
     {

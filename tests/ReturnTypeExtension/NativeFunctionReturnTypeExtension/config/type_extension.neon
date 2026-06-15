@@ -1,5 +1,0 @@
-services:
-    # getcwd()/dirname()/realpath() => always "string"
-    -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\NativeFunctionReturnTypeExtension
-        tags: [phpstan.broker.dynamicFunctionReturnTypeExtension]

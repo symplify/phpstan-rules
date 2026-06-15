@@ -18,7 +18,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
  */
 final class NoGetDoctrineInControllerRule implements Rule
 {
-    private const string ERROR_MESSAGE = 'Do not use $this->getDoctrine() method in controller. Use __construct(EntityManagerInterface $entityManager) instead';
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Do not use $this->getDoctrine() method in controller. Use __construct(EntityManagerInterface $entityManager) instead';
 
     public function getNodeType(): string
     {

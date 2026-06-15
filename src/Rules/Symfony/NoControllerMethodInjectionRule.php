@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class NoControllerMethodInjectionRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of service "%s" action injection, use __construct() and invokable controller with __invoke() to clearly separate services and parameters';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of service "%s" action injection, use __construct() and invokable controller with __invoke() to clearly separate services and parameters';
 
     public function getNodeType(): string
     {
@@ -41,7 +44,7 @@ final class NoControllerMethodInjectionRule implements Rule
 
         $className = $node->name->toString();
 
-        if (! str_ends_with($className, 'Controller')) {
+        if (substr_compare($className, 'Controller', -strlen('Controller')) !== 0) {
             return [];
         }
 

@@ -18,13 +18,20 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreventParentMethodVisibilityOverrideRule\PreventParentMethodVisibilityOverrideRuleTest
  */
-final readonly class PreventParentMethodVisibilityOverrideRule implements Rule
+final class PreventParentMethodVisibilityOverrideRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string

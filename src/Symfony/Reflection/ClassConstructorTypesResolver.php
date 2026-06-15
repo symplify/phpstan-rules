@@ -11,11 +11,15 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\ObjectType;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
-final readonly class ClassConstructorTypesResolver
+final class ClassConstructorTypesResolver
 {
-    public function __construct(
-        private ReflectionProvider $reflectionProvider
-    ) {
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     /**

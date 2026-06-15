@@ -19,7 +19,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class RequireAttributeNameRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Attribute must have all names explicitly defined';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Attribute must have all names explicitly defined';
 
     public function getNodeType(): string
     {
@@ -40,7 +43,7 @@ final class RequireAttributeNameRule implements Rule
             }
 
             // skip PHPUnit
-            if (str_starts_with($attributeName, 'PHPUnit\Framework\Attributes\\')) {
+            if (strncmp($attributeName, 'PHPUnit\Framework\Attributes\\', strlen('PHPUnit\Framework\Attributes\\')) === 0) {
                 continue;
             }
 

@@ -22,7 +22,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoLeadingBackslashInNameRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of "new Name(\'\\\\Foo\')" use "new FullyQualified(\'Foo\')"';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of "new Name(\'\\\\Foo\')" use "new FullyQualified(\'Foo\')"';
 
     public function getNodeType(): string
     {
@@ -54,7 +57,7 @@ final class NoLeadingBackslashInNameRule implements Rule
             return [];
         }
 
-        if (! str_starts_with($argType->getValue(), '\\')) {
+        if (strncmp($argType->getValue(), '\\', strlen('\\')) !== 0) {
             return [];
         }
 

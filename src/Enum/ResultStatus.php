@@ -6,7 +6,13 @@ namespace Symplify\PHPStanRules\Enum;
 
 final class ResultStatus
 {
-    public const int SUCCESS = 0;
+    /**
+     * @var int
+     */
+    public const SUCCESS = 0;
 
-    public const int FAILURE = 1;
+    /**
+     * @var int
+     */
+    public const FAILURE = 1;
 }

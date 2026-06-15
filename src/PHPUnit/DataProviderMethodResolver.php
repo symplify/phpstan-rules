@@ -16,7 +16,7 @@ final class DataProviderMethodResolver
             return null;
         }
 
-        if (! str_contains($docComment->getText(), '@dataProvider')) {
+        if (strpos($docComment->getText(), '@dataProvider') === false) {
             return null;
         }
 

@@ -1,5 +1,0 @@
-services:
-    # $container->make($1) => $1 type
-    -
-        class: Symplify\PHPStanRules\ReturnTypeExtension\Laravel\LaravelContainerMakeTypeExtension
-        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]

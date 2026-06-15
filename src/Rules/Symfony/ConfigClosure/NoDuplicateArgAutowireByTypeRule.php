@@ -32,20 +32,27 @@ use Symplify\PHPStanRules\Symfony\Reflection\ClassConstructorTypesResolver;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\ConfigClosure\NoDuplicateArgAutowireByTypeRule\NoDuplicateArgAutowireByTypeRuleTest
  */
-final readonly class NoDuplicateArgAutowireByTypeRule implements Rule
+final class NoDuplicateArgAutowireByTypeRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of passing "%s" to arg(), remove the line and let autowiring handle it';
+    /**
+     * @readonly
+     */
+    private ClassConstructorTypesResolver $classConstructorTypesResolver;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of passing "%s" to arg(), remove the line and let autowiring handle it';
 
     /**
      * @todo possible extract to an own rule, include more common Symfony services
      *
      * @var string[]
      */
-    private const array NAMED_AUTOWIRED_TYPES = ['request_stack'];
+    private const NAMED_AUTOWIRED_TYPES = ['request_stack'];
 
-    public function __construct(
-        private ClassConstructorTypesResolver $classConstructorTypesResolver,
-    ) {
+    public function __construct(ClassConstructorTypesResolver $classConstructorTypesResolver)
+    {
+        $this->classConstructorTypesResolver = $classConstructorTypesResolver;
     }
 
     public function getNodeType(): string
