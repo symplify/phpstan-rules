@@ -22,7 +22,8 @@
         "tomasvotruba/unused-public": "^2.2",
         "tomasvotruba/type-coverage": "^2.2",
         "shipmonk/composer-dependency-analyser": "^1.8",
-        "rector/jack": "^1.0"
+        "rector/jack": "^1.0",
+        "nette/neon": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -53,6 +54,7 @@
     "scripts": {
         "check-cs": "vendor/bin/ecs check --ansi",
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
+        "lint-neon": "vendor/bin/neon-lint config/",
         "phpstan": "vendor/bin/phpstan analyse --ansi",
         "rector": "vendor/bin/rector process --dry-run --ansi"
     },
