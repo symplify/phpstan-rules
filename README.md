@@ -83,18 +83,6 @@ Jump to: [Symfony-specific rules](#3-symfony-specific-rules), [Doctrine-specific
 
 ## Special rules
 
-### MaximumIgnoredErrorCountRule
-
-Tired of ever growing ignored error count in your `phpstan.neon`? Set hard limit to keep them low:
-
-```yaml
-parameters:
-    symplify:
-        maximumIgnoredErrorCount: 50
-```
-
-<br>
-
 ### NewOverSettersRule
 
 If a class is always created with the same set of setters, pass the values via constructor instead. It makes the object state explicit, safer and easier to test:
