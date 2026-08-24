@@ -115,6 +115,11 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return null;
         }
 
+        // deprecated Rector rules are not registered in sets
+        if ($classReflection->is(ClassName::DEPRECATED_RECTOR)) {
+            return null;
+        }
+
         return $classReflection->getName();
     }
 }

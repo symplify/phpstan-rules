@@ -14,6 +14,8 @@ final class ClassName
 
     public const string CONFIGURABLE_RECTOR = 'Rector\Contract\Rector\ConfigurableRectorInterface';
 
+    public const string DEPRECATED_RECTOR = 'Rector\Configuration\Deprecation\Contract\DeprecatedInterface';
+
     public const string RECTOR_ATTRIBUTE_KEY = 'Rector\NodeTypeResolver\Node\AttributeKey';
 
     public const string MOCK_OBJECT_CLASS = 'PHPUnit\Framework\MockObject\MockObject';
