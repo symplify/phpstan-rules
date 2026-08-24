@@ -52,7 +52,8 @@ final class SymfonyClosureServicesSetClassesResolver
                 return false;
             }
 
-            $setServiceExpr = $methodCall->getArgs()[0]->value;
+            $setServiceExpr = $methodCall->getArgs()[0]
+                ->value;
             if (! $setServiceExpr instanceof ClassConstFetch) {
                 return false;
             }

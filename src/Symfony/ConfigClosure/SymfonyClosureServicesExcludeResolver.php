@@ -40,7 +40,8 @@ final class SymfonyClosureServicesExcludeResolver
                 return false;
             }
 
-            $excludedExpr = $node->getArgs()[0]->value;
+            $excludedExpr = $node->getArgs()[0]
+                ->value;
             if (! $excludedExpr instanceof Array_) {
                 return false;
             }

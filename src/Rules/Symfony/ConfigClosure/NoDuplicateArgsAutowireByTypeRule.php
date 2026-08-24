@@ -84,7 +84,8 @@ final readonly class NoDuplicateArgsAutowireByTypeRule implements Rule
             }
 
             $referenceFuncCall = $arrayItem->value;
-            $referenceExpr = $referenceFuncCall->getArgs()[0]->value;
+            $referenceExpr = $referenceFuncCall->getArgs()[0]
+                ->value;
 
             if (! $referenceExpr instanceof ClassConstFetch) {
                 continue;

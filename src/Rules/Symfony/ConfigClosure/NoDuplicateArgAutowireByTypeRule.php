@@ -86,7 +86,8 @@ final readonly class NoDuplicateArgAutowireByTypeRule implements Rule
 
         // 1. compare referenced type and constructor type
         $classArgumentNamesToTypes = $this->classConstructorTypesResolver->resolveClassConstructorNamesToTypes($node);
-        $referenceExpr = $referenceFuncCall->getArgs()[0]->value;
+        $referenceExpr = $referenceFuncCall->getArgs()[0]
+            ->value;
 
         if (isset($classArgumentNamesToTypes[$currentArgumentName])) {
             $constructorType = $classArgumentNamesToTypes[$currentArgumentName];

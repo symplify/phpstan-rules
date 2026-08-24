@@ -18,16 +18,16 @@ use Webmozart\Assert\Assert;
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final class ForbiddenNodeRule implements Rule
+final readonly class ForbiddenNodeRule implements Rule
 {
     public const string ERROR_MESSAGE = '"%s" is forbidden to use';
 
     /**
      * @var array<class-string<Node>>
      */
-    private array $forbiddenNodes = [];
+    private array $forbiddenNodes;
 
-    private readonly Standard $standard;
+    private Standard $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes

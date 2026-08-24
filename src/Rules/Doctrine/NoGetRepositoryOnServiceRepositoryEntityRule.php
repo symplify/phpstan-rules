@@ -110,7 +110,8 @@ final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rul
             return null;
         }
 
-        $firstArgument = $methodCall->getArgs()[0]->value;
+        $firstArgument = $methodCall->getArgs()[0]
+            ->value;
 
         $entityClassType = $scope->getType($firstArgument);
         if (! $entityClassType instanceof ConstantStringType) {

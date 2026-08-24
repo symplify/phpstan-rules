@@ -13,7 +13,7 @@ use PhpParser\Node\Stmt\Property;
 
 final class AttributeFinder
 {
-    public function hasAttribute(ClassLike | ClassMethod | Property | Param $node, string $desiredAttributeClass): bool
+    public function hasAttribute(ClassLike|ClassMethod|Property|Param $node, string $desiredAttributeClass): bool
     {
         return (bool) $this->findAttribute($node, $desiredAttributeClass);
     }
@@ -21,7 +21,7 @@ final class AttributeFinder
     /**
      * @return Attribute[]
      */
-    private function findAttributes(ClassMethod | Property | ClassLike | Param $node): array
+    private function findAttributes(ClassMethod|Property|ClassLike|Param $node): array
     {
         $attributes = [];
 
@@ -33,7 +33,7 @@ final class AttributeFinder
     }
 
     private function findAttribute(
-        ClassMethod | Property | ClassLike | Param $node,
+        ClassMethod|Property|ClassLike|Param $node,
         string $desiredAttributeClass
     ): ?Attribute {
         $attributes = $this->findAttributes($node);
