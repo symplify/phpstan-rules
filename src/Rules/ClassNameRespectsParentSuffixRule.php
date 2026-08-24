@@ -23,7 +23,7 @@ use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
  * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\ClassNameRespectsParentSuffixRule\ClassNameRespectsParentSuffixRuleTest
  */
-final class ClassNameRespectsParentSuffixRule implements Rule
+final readonly class ClassNameRespectsParentSuffixRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Class should have suffix "%s" to respect parent type';
 
@@ -45,13 +45,13 @@ final class ClassNameRespectsParentSuffixRule implements Rule
     /**
      * @var string[]
      */
-    private array $parentClasses = [];
+    private array $parentClasses;
 
     /**
      * @param class-string[] $parentClasses
      */
     public function __construct(
-        private readonly ClassToSuffixResolver $classToSuffixResolver,
+        private ClassToSuffixResolver $classToSuffixResolver,
         array $parentClasses = [],
     ) {
         $this->parentClasses = array_merge($parentClasses, self::DEFAULT_PARENT_CLASSES);

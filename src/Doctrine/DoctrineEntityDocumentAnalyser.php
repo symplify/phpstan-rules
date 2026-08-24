@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Doctrine;
 
+use PHPStan\BetterReflection\Reflection\Adapter\FakeReflectionAttribute;
+use PHPStan\BetterReflection\Reflection\Adapter\ReflectionAttribute;
 use PHPStan\PhpDoc\ResolvedPhpDocBlock;
 use PHPStan\Reflection\ClassReflection;
 
@@ -43,7 +45,7 @@ final readonly class DoctrineEntityDocumentAnalyser
 
         return array_any(
             $attributeReflections,
-            static fn ($reflectionAttribute): bool => in_array(
+            static fn (ReflectionAttribute|FakeReflectionAttribute $reflectionAttribute): bool => in_array(
                 $reflectionAttribute->getName(),
                 self::ENTITY_ATTRIBUTES,
                 true

@@ -45,7 +45,8 @@ final class NoClassReflectionStaticReflectionRule implements Rule
             return [];
         }
 
-        $argValue = $node->getArgs()[0]->value;
+        $argValue = $node->getArgs()[0]
+            ->value;
         $exprStaticType = $scope->getType($argValue);
 
         if (RectorAllowedAutoloadedTypeAnalyzer::isAllowedType($exprStaticType)) {

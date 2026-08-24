@@ -73,7 +73,8 @@ final class NoRoutingPrefixRule implements Rule
             return false;
         }
 
-        $importArgPath = $parentCaller->getArgs()[0]->value;
+        $importArgPath = $parentCaller->getArgs()[0]
+            ->value;
         if (! $importArgPath instanceof String_) {
             return false;
         }

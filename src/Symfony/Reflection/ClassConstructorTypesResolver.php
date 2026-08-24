@@ -62,7 +62,8 @@ final readonly class ClassConstructorTypesResolver
                 continue;
             }
 
-            $serviceClassOrName = $currentMethodCall->getArgs()[0]->value;
+            $serviceClassOrName = $currentMethodCall->getArgs()[0]
+                ->value;
             if ($serviceClassOrName instanceof ClassConstFetch) {
                 return NamingHelper::getName($serviceClassOrName->class);
             }

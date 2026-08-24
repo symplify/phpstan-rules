@@ -46,34 +46,41 @@ final class NoIntegerRefactorReturnRule implements Rule
             return [];
         }
 
-        if (! $node->returnType instanceof UnionType) {
+        if (! $this->hasIntReturnType($node->returnType)) {
             return [];
         }
 
-        foreach ($node->returnType->types as $type) {
-            if (! $type instanceof Identifier) {
-                continue;
-            }
+        $constantNames = $this->findUsedNodeVisitorConstantNames($node);
 
-            if ($type->name !== 'int') {
-                continue;
-            }
-
-            $constantNames = $this->findUsedNodeVisitorConstantNames($node);
-
-            $undesiredConstantNames = array_diff($constantNames, ['REMOVE_NODE']);
-            if ($constantNames !== [] && $undesiredConstantNames === []) {
-                return [];
-            }
-
-            $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RectorRuleIdentifier::NO_INTEGER_REFACTOR_RETURN)
-                ->build();
-
-            return [$ruleError];
+        $undesiredConstantNames = array_diff($constantNames, ['REMOVE_NODE']);
+        if ($constantNames !== [] && $undesiredConstantNames === []) {
+            return [];
         }
 
-        return [];
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RectorRuleIdentifier::NO_INTEGER_REFACTOR_RETURN)
+            ->build();
+
+        return [$identifierRuleError];
+    }
+
+    private function hasIntReturnType(?Node $node): bool
+    {
+        // bare "int" return type
+        if ($node instanceof Identifier) {
+            return $node->name === 'int';
+        }
+
+        // "int" as one of the union members
+        if ($node instanceof UnionType) {
+            foreach ($node->types as $type) {
+                if ($type instanceof Identifier && $type->name === 'int') {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**

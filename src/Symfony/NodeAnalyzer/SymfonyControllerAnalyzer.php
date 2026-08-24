@@ -36,7 +36,7 @@ final class SymfonyControllerAnalyzer
         return self::hasRouteAnnotationOrAttribute($classMethod);
     }
 
-    public static function hasRouteAnnotationOrAttribute(ClassLike | ClassMethod $node): bool
+    public static function hasRouteAnnotationOrAttribute(ClassLike|ClassMethod $node): bool
     {
         if ($node instanceof ClassMethod && ! $node->isPublic()) {
             return false;

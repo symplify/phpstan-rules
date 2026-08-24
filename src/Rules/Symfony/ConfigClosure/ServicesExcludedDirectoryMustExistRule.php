@@ -53,7 +53,8 @@ final class ServicesExcludedDirectoryMustExistRule implements Rule
 
         foreach ($excludeMethodCalls as $excludeMethodCall) {
             // check all array args
-            $firstArgValue = $excludeMethodCall->getArgs()[0]->value;
+            $firstArgValue = $excludeMethodCall->getArgs()[0]
+                ->value;
             if (! $firstArgValue instanceof Array_) {
                 continue;
             }

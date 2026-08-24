@@ -30,6 +30,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/SkipSomePhpFeatureRector.php', []];
         yield [__DIR__ . '/Fixture/Php80/SkipConfigurableRector.php', []];
+        yield [__DIR__ . '/Fixture/Php80/SkipDeprecatedRector.php', []];
 
         $errorMessage = sprintf(
             PhpUpgradeDowngradeRegisteredInSetRule::ERROR_MESSAGE,

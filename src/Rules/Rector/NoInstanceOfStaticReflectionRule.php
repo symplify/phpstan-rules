@@ -67,7 +67,8 @@ final class NoInstanceOfStaticReflectionRule implements Rule
             return null;
         }
 
-        $typeArgValue = $node->getArgs()[1]->value;
+        $typeArgValue = $node->getArgs()[1]
+            ->value;
         return $scope->getType($typeArgValue);
     }
 

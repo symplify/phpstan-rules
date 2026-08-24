@@ -36,7 +36,8 @@ final class SymfonyClosureServicesLoadResolver
                 return false;
             }
 
-            $namespaceExpr = $node->getArgs()[0]->value;
+            $namespaceExpr = $node->getArgs()[0]
+                ->value;
             if (! $namespaceExpr instanceof String_) {
                 return false;
             }

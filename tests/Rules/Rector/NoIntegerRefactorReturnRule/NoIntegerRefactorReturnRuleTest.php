@@ -32,8 +32,11 @@ final class NoIntegerRefactorReturnRuleTest extends RuleTestCase
         $errorMessage = NoIntegerRefactorReturnRule::ERROR_MESSAGE;
         yield [__DIR__ . '/Fixture/NestedReturnInt.php', [[$errorMessage, 20]]];
 
+        yield [__DIR__ . '/Fixture/BareIntReturn.php', [[$errorMessage, 19]]];
+
         yield [__DIR__ . '/Fixture/SkipBareNodeReturn.php', []];
         yield [__DIR__ . '/Fixture/AllowRemoveNode.php', []];
+        yield [__DIR__ . '/Fixture/AllowBareIntRemoveNode.php', []];
         yield [__DIR__ . '/Fixture/AllowNestedClosure.php', []];
     }
 

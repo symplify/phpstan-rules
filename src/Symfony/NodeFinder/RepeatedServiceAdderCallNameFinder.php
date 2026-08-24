@@ -25,11 +25,13 @@ final class RepeatedServiceAdderCallNameFinder
 
         foreach ($callMethodCalls as $callMethodCall) {
             /** @var String_ $calledMethodNameExpr */
-            $calledMethodNameExpr = $callMethodCall->getArgs()[0]->value;
+            $calledMethodNameExpr = $callMethodCall->getArgs()[0]
+                ->value;
             $callMethodName = $calledMethodNameExpr->value;
 
             // is passing a service references?
-            $passedExpr = $callMethodCall->getArgs()[1]->value;
+            $passedExpr = $callMethodCall->getArgs()[1]
+                ->value;
             if (! $passedExpr instanceof Array_) {
                 continue;
             }
@@ -79,7 +81,8 @@ final class RepeatedServiceAdderCallNameFinder
                 return false;
             }
 
-            $callNameExpr = $node->getArgs()[0]->value;
+            $callNameExpr = $node->getArgs()[0]
+                ->value;
             return $callNameExpr instanceof String_;
         });
 

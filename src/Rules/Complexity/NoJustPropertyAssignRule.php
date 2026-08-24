@@ -124,7 +124,8 @@ final readonly class NoJustPropertyAssignRule implements Rule
         }
 
         $exprType = $scope->getType($assign->expr);
-        return $exprType->isObject()->yes();
+        return $exprType->isObject()
+            ->yes();
     }
 
     private function shouldSkipCurrentClass(Scope $scope): bool

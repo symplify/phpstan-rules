@@ -47,7 +47,8 @@ final class NoLeadingBackslashInNameRule implements Rule
             return [];
         }
 
-        $argValue = $node->getArgs()[0]->value;
+        $argValue = $node->getArgs()[0]
+            ->value;
         $argType = $scope->getType($argValue);
 
         if (! $argType instanceof ConstantStringType) {

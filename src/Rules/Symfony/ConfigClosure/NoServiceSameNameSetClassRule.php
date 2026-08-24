@@ -98,8 +98,10 @@ final readonly class NoServiceSameNameSetClassRule implements Rule
             return null;
         }
 
-        $serviceName = $methodCall->getArgs()[0]->value;
-        $serviceType = $methodCall->getArgs()[1]->value;
+        $serviceName = $methodCall->getArgs()[0]
+            ->value;
+        $serviceType = $methodCall->getArgs()[1]
+            ->value;
 
         if (! $serviceName instanceof ClassConstFetch) {
             return null;
