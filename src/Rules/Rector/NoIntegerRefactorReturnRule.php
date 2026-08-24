@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
+use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\UnionType;
 use PhpParser\NodeTraverser;
@@ -22,7 +23,7 @@ use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Rector\NoIntegerRefactorReturnRule\NoIntegerRefactorReturnRuleTest
  *
- * @implements Rule<ClassMethod>
+ * @implements Rule<Class_>
  */
 final class NoIntegerRefactorReturnRule implements Rule
 {
@@ -30,35 +31,38 @@ final class NoIntegerRefactorReturnRule implements Rule
 
     public function getNodeType(): string
     {
-        return ClassMethod::class;
+        return Class_::class;
     }
 
     /**
-     * @param ClassMethod $node
+     * @param Class_ $node
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->isPublic()) {
+        $refactorClassMethod = $node->getMethod('refactor');
+        if (! $refactorClassMethod instanceof ClassMethod) {
             return [];
         }
 
-        if ($node->name->toString() !== 'refactor') {
+        if (! $refactorClassMethod->isPublic()) {
             return [];
         }
 
-        if (! $this->hasIntReturnType($node->returnType)) {
+        if (! $this->hasIntReturnType($refactorClassMethod->returnType)) {
             return [];
         }
 
+        // scan the whole class, as refactor() often delegates the int return to private helper methods
         $constantNames = $this->findUsedNodeVisitorConstantNames($node);
 
         $undesiredConstantNames = array_diff($constantNames, ['REMOVE_NODE']);
-        if ($constantNames !== [] && $undesiredConstantNames === []) {
+        if ($undesiredConstantNames === []) {
             return [];
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(RectorRuleIdentifier::NO_INTEGER_REFACTOR_RETURN)
+            ->line($refactorClassMethod->getStartLine())
             ->build();
 
         return [$identifierRuleError];
@@ -86,12 +90,12 @@ final class NoIntegerRefactorReturnRule implements Rule
     /**
      * @return string[]
      */
-    private function findUsedNodeVisitorConstantNames(ClassMethod $classMethod): array
+    private function findUsedNodeVisitorConstantNames(Class_ $class): array
     {
         $constantNames = [];
 
         $simpleCallableNodeTraverser = new SimpleCallableNodeTraverser();
-        $simpleCallableNodeTraverser->traverseNodesWithCallable($classMethod, function (Node $subNode) use (&$constantNames): int|null {
+        $simpleCallableNodeTraverser->traverseNodesWithCallable($class, function (Node $subNode) use (&$constantNames): int|null {
             // skip closure nodes as they have their own scope
             if ($subNode instanceof Closure) {
                 return NodeVisitor::DONT_TRAVERSE_CURRENT_AND_CHILDREN;
