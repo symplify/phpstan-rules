@@ -57,23 +57,23 @@ final class NoIntegerRefactorReturnRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+        $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(RectorRuleIdentifier::NO_INTEGER_REFACTOR_RETURN)
             ->build();
 
-        return [$ruleError];
+        return [$identifierRuleError];
     }
 
-    private function hasIntReturnType(?Node $returnType): bool
+    private function hasIntReturnType(?Node $node): bool
     {
         // bare "int" return type
-        if ($returnType instanceof Identifier) {
-            return $returnType->name === 'int';
+        if ($node instanceof Identifier) {
+            return $node->name === 'int';
         }
 
         // "int" as one of the union members
-        if ($returnType instanceof UnionType) {
-            foreach ($returnType->types as $type) {
+        if ($node instanceof UnionType) {
+            foreach ($node->types as $type) {
                 if ($type instanceof Identifier && $type->name === 'int') {
                     return true;
                 }
