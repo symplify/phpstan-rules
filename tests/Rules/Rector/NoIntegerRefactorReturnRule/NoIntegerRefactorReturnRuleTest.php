@@ -38,6 +38,7 @@ final class NoIntegerRefactorReturnRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/AllowRemoveNode.php', []];
         yield [__DIR__ . '/Fixture/AllowBareIntRemoveNode.php', []];
         yield [__DIR__ . '/Fixture/AllowNestedClosure.php', []];
+        yield [__DIR__ . '/Fixture/SkipDelegatedRemoveNode.php', []];
     }
 
     protected function getRule(): Rule
