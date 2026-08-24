@@ -87,7 +87,7 @@ final class NoMissnamedDocTagRule implements Rule
                 continue;
             }
 
-            $matches = Strings::match($classConst->getDocComment()->getText(), '#(@param|@return)\b#mi');
+            $matches = Strings::match($classConst->getDocComment()->getText(), '#\*\s(@param|@return)\b#mi');
             if ($matches === null) {
                 continue;
             }
