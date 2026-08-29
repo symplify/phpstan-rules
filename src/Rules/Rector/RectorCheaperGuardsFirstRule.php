@@ -98,6 +98,12 @@ final class RectorCheaperGuardsFirstRule implements Rule
             return [];
         }
 
+        // only hoist past an anchor that just captures the expensive value or bails on it;
+        // an anchor with its own side effects (attribute writes, by-ref closure mutations) is unsafe to skip
+        if (! $this->isHoistSafeAnchor($stmts[$anchorIndex])) {
+            return [];
+        }
+
         $assignedVariableNames = $this->resolveAssignedVariableNames($stmts[$anchorIndex]);
         $counter = count($stmts);
 
@@ -131,6 +137,25 @@ final class RectorCheaperGuardsFirstRule implements Rule
         }
 
         return [];
+    }
+
+    /**
+     * The anchor is safe to hoist a guard above only when it merely produces the expensive value:
+     * either `$type = $this->getType(...)` (assignment) or `if ($this->isObjectType(...)) { return; }`
+     * (pure bail guard). Anything else - a block that writes attributes, a bare call statement that
+     * mutates state - would lose its side effect for the nodes the hoisted guard bails out on.
+     */
+    private function isHoistSafeAnchor(Stmt $stmt): bool
+    {
+        if ($stmt instanceof Expression) {
+            return $stmt->expr instanceof Assign;
+        }
+
+        if ($stmt instanceof If_) {
+            return $this->isPureBailGuard($stmt) && $this->containsCall($stmt->cond, self::EXPENSIVE_CALLS);
+        }
+
+        return false;
     }
 
     /**

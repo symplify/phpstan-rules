@@ -30,6 +30,10 @@ final class RectorCheaperGuardsFirstRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/SkipDependentGuard.php', []];
 
+        yield [__DIR__ . '/Fixture/SkipSideEffectAnchor.php', []];
+
+        yield [__DIR__ . '/Fixture/SkipByRefClosureAnchor.php', []];
+
         yield [__DIR__ . '/Fixture/ExpensiveBeforeCheapGuard.php', [
             [
                 sprintf(RectorCheaperGuardsFirstRule::ERROR_MESSAGE, 26, 20),
