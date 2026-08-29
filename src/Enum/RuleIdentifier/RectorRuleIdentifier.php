@@ -23,4 +23,6 @@ final class RectorRuleIdentifier
     public const string NO_INTEGER_REFACTOR_RETURN = 'rector.noIntegerRefactorReturn';
 
     public const string AVOID_FEATURE_SET_ATTRIBUTE_IN_RECTOR = 'rector.avoidFeatureSetAttributeInRector';
+
+    public const string RECTOR_CHEAPER_GUARDS_FIRST = 'rector.rectorCheaperGuardsFirst';
 }

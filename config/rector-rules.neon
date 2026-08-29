@@ -9,6 +9,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Rector\NoOnlyNullReturnInRefactorRule
     - Symplify\PHPStanRules\Rules\Rector\NoIntegerRefactorReturnRule
     - Symplify\PHPStanRules\Rules\Rector\AvoidFeatureSetAttributeInRectorRule
+    - Symplify\PHPStanRules\Rules\Rector\RectorCheaperGuardsFirstRule
 
 services:
     # $node->getAttribute($1) => Type|null by $1
