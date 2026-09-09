@@ -30,4 +30,16 @@ final readonly class TypeAwareNodeFinder
     {
         return $this->nodeFinder->findFirstInstanceOf($nodes, $type);
     }
+
+    /**
+     * @template TNode as Node
+     *
+     * @param Node[]|Node $nodes
+     * @param class-string<TNode> $type
+     * @return TNode[]
+     */
+    public function findInstanceOf(array|Node $nodes, string $type): array
+    {
+        return $this->nodeFinder->findInstanceOf($nodes, $type);
+    }
 }

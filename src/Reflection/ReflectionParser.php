@@ -23,7 +23,7 @@ final class ReflectionParser
     /**
      * @var array<string, ClassLike>
      */
-    private array $classesByFilename = [];
+    private array $classLikesByName = [];
 
     private readonly Parser $parser;
 
@@ -54,7 +54,7 @@ final class ReflectionParser
             return null;
         }
 
-        return $this->parseFilenameToClass($fileName);
+        return $this->parseFilenameToClass($fileName, $classReflection->getName());
     }
 
     private function parseNativeClassReflection(ReflectionClass|ClassReflection $reflectionClass): ?ClassLike
@@ -68,13 +68,13 @@ final class ReflectionParser
             return null;
         }
 
-        return $this->parseFilenameToClass($fileName);
+        return $this->parseFilenameToClass($fileName, $reflectionClass->getName());
     }
 
-    private function parseFilenameToClass(string $fileName): ClassLike|null
+    private function parseFilenameToClass(string $fileName, string $className): ClassLike|null
     {
-        if (isset($this->classesByFilename[$fileName])) {
-            return $this->classesByFilename[$fileName];
+        if (isset($this->classLikesByName[$className])) {
+            return $this->classLikesByName[$className];
         }
 
         try {
@@ -92,13 +92,16 @@ final class ReflectionParser
             return null;
         }
 
-        $classLike = $this->typeAwareNodeFinder->findFirstInstanceOf($stmts, ClassLike::class);
-        if (! $classLike instanceof ClassLike) {
-            return null;
+        foreach ($this->typeAwareNodeFinder->findInstanceOf($stmts, ClassLike::class) as $classLike) {
+            if ($classLike->namespacedName?->toString() !== $className) {
+                continue;
+            }
+
+            $this->classLikesByName[$className] = $classLike;
+
+            return $classLike;
         }
 
-        $this->classesByFilename[$fileName] = $classLike;
-
-        return $classLike;
+        return null;
     }
 }
