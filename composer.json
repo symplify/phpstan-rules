@@ -42,7 +42,8 @@
         ],
         "files": [
             "vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php",
-            "tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/Fixture/SomePhpFeatureRector.php"
+            "tests/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule/Fixture/SomePhpFeatureRector.php",
+            "tests/Reflection/Fixture/TwoClassLikes.php"
         ]
     },
     "config": {
