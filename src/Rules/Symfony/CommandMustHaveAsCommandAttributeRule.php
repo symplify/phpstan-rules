@@ -12,6 +12,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
@@ -24,7 +25,7 @@ final readonly class CommandMustHaveAsCommandAttributeRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Class "%s" extends Command but is missing the #[AsCommand] attribute';
 
-    private const string AS_COMMAND_ATTRIBUTE = 'Symfony\Component\Console\Attribute\AsCommand';
+    private const string AS_COMMAND_ATTRIBUTE = AsCommand::class;
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
