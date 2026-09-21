@@ -61,6 +61,11 @@ final readonly class CommandMustHaveAsCommandAttributeRule implements Rule
             return [];
         }
 
+        // do not require an attribute the project does not even have
+        if (! $this->reflectionProvider->hasClass(SymfonyAttribute::AS_COMMAND)) {
+            return [];
+        }
+
         foreach ($node->attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attr) {
                 if ($attr->name->toString() === SymfonyAttribute::AS_COMMAND) {
