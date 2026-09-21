@@ -67,4 +67,10 @@ final class SymfonyRuleIdentifier
     public const string FILE_NAME_MATCHES_EXTENSION = 'symfony.fileNameMatchesExtension';
 
     public const string PREFER_CLASS_SERVICE_REFERENCE = 'symfony.preferClassServiceReference';
+
+    public const string NO_AUTOCONFIGURED_SERVICE_TAG = 'symfony.noAutoconfiguredServiceTag';
+
+    public const string NO_SERVICE_SETTER_CALL = 'symfony.noServiceSetterCall';
+
+    public const string PREFER_CLASS_IN_DEFINITION_FETCH = 'symfony.preferClassInDefinitionFetch';
 }

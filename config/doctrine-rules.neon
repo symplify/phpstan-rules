@@ -8,3 +8,7 @@ rules:
 
     # test fixtures
     - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule
+
+    # entity mapping
+    - Symplify\PHPStanRules\Rules\Doctrine\NoStringTargetEntityRule
+    - Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule
