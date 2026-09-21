@@ -1,0 +1,13 @@
+includes:
+    - ../../../../../../config/phpstan-extensions.neon
+
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferClassServiceReferenceRule
+        tags: [phpstan.rules.rule]
+    -
+        class: Symplify\PHPStanRules\Collector\ClassTargetServiceAliasCollector
+        tags: [phpstan.collector]
+    -
+        class: Symplify\PHPStanRules\Collector\ServiceStringReferenceCollector
+        tags: [phpstan.collector]
