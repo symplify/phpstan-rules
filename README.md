@@ -1513,6 +1513,58 @@ public function run(): array
 
 ## 2. Doctrine-specific Rules
 
+### NoStringTargetEntityRule
+
+A Doctrine association attribute must reference its target entity as a class constant, not a string.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoStringTargetEntityRule
+```
+
+```php
+#[ManyToOne(targetEntity: 'App\Entity\Category')]
+```
+
+:x:
+
+<br>
+
+```php
+#[ManyToOne(targetEntity: Category::class)]
+```
+
+:+1:
+
+<br>
+
+### NoReadonlyEntityClassRule
+
+A Doctrine entity is hydrated via reflection without the constructor, so it must not be a `readonly` class. An entity is recognized by an `#[ORM\Entity]` attribute or a public static `loadMetadata()` method.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule
+```
+
+```php
+#[ORM\Entity]
+final readonly class Product {}
+```
+
+:x:
+
+<br>
+
+```php
+#[ORM\Entity]
+final class Product {}
+```
+
+:+1:
+
+<br>
+
 ### RequireQueryBuilderOnRepositoryRule
 
 Prevents using `$entityManager->createQueryBuilder('...')`,  use `$repository->createQueryBuilder()` as safer.
@@ -2910,6 +2962,95 @@ $services->alias('some.helper', SomeHelper::class);
 
 $services->set(SomeConsumer::class)
     ->args([service(SomeHelper::class)]);
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
+### PreferClassInDefinitionFetchRule
+
+A container definition fetch that names a class by a plain string should use the class constant instead. The string is only flagged when it is a real class name; a service id string is left alone.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\PreferClassInDefinitionFetchRule
+```
+
+```php
+$container->getDefinition('App\Helper\ColumnSchemaHelper');
+```
+
+:x:
+
+<br>
+
+```php
+$container->getDefinition(ColumnSchemaHelper::class);
+```
+
+:+1:
+
+<br>
+
+### NoServiceSetterCallRule
+
+In a PHP config closure, a setter injection wired by hand with `->call('setX', [service(...)])` should be a `#[Required]` attribute on the setter, so autowiring calls it. Only a `setXxx()` method fed a `service()` is reported; a container parameter or a non-setter call stays.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSetterCallRule
+```
+
+```php
+$services->set(SomeService::class)
+    ->call('setRepository', [service(SomeRepository::class)]);
+```
+
+:x:
+
+<br>
+
+```php
+#[Required]
+public function setRepository(SomeRepository $someRepository): void
+{
+    $this->someRepository = $someRepository;
+}
+```
+
+:+1:
+
+<br>
+
+### NoAutoconfiguredServiceTagRule
+
+When a PHP config closure's `defaults()` uses `autoconfigure()`, a `->tag()` that autoconfiguration already adds by interface (`console.command`, `form.type`, `kernel.event_subscriber`, `security.voter`, `twig.extension`, `validator.constraint_validator`) is redundant. Only a tag with no attributes of its own is reported.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoAutoconfiguredServiceTagRule
+```
+
+```php
+$services->defaults()->autoconfigure();
+
+$services->set(SomeSubscriber::class)
+    ->tag('kernel.event_subscriber');
+```
+
+:x:
+
+<br>
+
+```php
+$services->defaults()->autoconfigure();
+
+$services->set(SomeSubscriber::class);
 ```
 
 :+1:

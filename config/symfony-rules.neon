@@ -18,6 +18,7 @@ rules:
 
     # dependency injection
     - Symplify\PHPStanRules\Rules\Symfony\NoServiceJugglingRule
+    - Symplify\PHPStanRules\Rules\Symfony\PreferClassInDefinitionFetchRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInCommandRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule

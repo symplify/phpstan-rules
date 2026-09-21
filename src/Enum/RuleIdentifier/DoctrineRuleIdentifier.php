@@ -21,4 +21,8 @@ final class DoctrineRuleIdentifier
     public const string NO_LISTENER_WITHOUT_CONTRACT = 'doctrine.noListenerWithoutContract';
 
     public const string REQUIRE_SERVICE_PARENT_REPOSITORY = 'doctrine.requireServiceParentRepository';
+
+    public const string NO_STRING_TARGET_ENTITY = 'doctrine.noStringTargetEntity';
+
+    public const string NO_READONLY_ENTITY_CLASS = 'doctrine.noReadonlyEntityClass';
 }

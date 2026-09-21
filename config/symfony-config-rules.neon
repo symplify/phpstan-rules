@@ -26,6 +26,12 @@ rules:
     # service('id') where an alias points 'id' at a class
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferClassServiceReferenceRule
 
+    # redundant ->tag() that autoconfigure() already adds
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoAutoconfiguredServiceTagRule
+
+    # ->call('setX', [service()]) that should be a #[Required] setter
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSetterCallRule
+
 services:
     -
         class: Symplify\PHPStanRules\Collector\ClassTargetServiceAliasCollector
