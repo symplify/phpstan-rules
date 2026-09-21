@@ -2801,6 +2801,55 @@ public function __construct(
 
 <br>
 
+### NoServiceJugglingRule
+
+A service injected in `__construct()` or an `autowire*()` method must not be passed to another method of the same class. The called method has its own constructor, so it can take the service directly instead of receiving it through a parameter list.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoServiceJugglingRule
+```
+
+```php
+public function run(): void
+{
+    $this->handle($this->userHelper);
+}
+
+public function handle(UserHelper $userHelper): void
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+public function __construct(
+    private readonly UserHelper $userHelper,
+) {
+}
+
+public function run(): void
+{
+    $this->handle();
+}
+
+public function handle(): void
+{
+    // use $this->userHelper directly
+}
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
 ## 4. PHPUnit-specific Rules
 
 ### NoAssertFuncCallInTestsRule

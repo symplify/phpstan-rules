@@ -93,4 +93,6 @@ final class RuleIdentifier
     public const string NO_PROPERTY_TO_PROPERTY_ASSIGN = 'symplify.noPropertyToPropertyAssign';
 
     public const string REQUIRE_ARRAY_SHAPE_RETURN = 'symplify.requireArrayShapeReturn';
+
+    public const string NO_SERVICE_JUGGLING = 'symplify.noServiceJuggling';
 }
