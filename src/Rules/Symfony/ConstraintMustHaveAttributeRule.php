@@ -13,8 +13,8 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symfony\Component\Validator\Constraint;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Rules\Enum\SymfonyAttribute;
 
 /**
  * Every class that extends Symfony Constraint must declare the #[\Attribute] attribute,
@@ -27,8 +27,6 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 final readonly class ConstraintMustHaveAttributeRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Class "%s" extends Constraint but is missing the #[\Attribute] attribute. Add it, so the constraint can be used as an attribute on properties, as Symfony convention';
-
-    private const string CONSTRAINT_CLASS = Constraint::class;
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
@@ -62,7 +60,7 @@ final readonly class ConstraintMustHaveAttributeRule implements Rule
             return [];
         }
 
-        if (! $this->reflectionProvider->getClass($className)->is(self::CONSTRAINT_CLASS)) {
+        if (! $this->reflectionProvider->getClass($className)->is(SymfonyAttribute::CONSTRAINT)) {
             return [];
         }
 

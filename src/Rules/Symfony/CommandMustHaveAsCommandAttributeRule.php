@@ -12,9 +12,9 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Rules\Enum\SymfonyAttribute;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\CommandMustHaveAsCommandAttributeRule\CommandMustHaveAsCommandAttributeRuleTest
@@ -24,8 +24,6 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
 final readonly class CommandMustHaveAsCommandAttributeRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Class "%s" extends Command but is missing the #[AsCommand] attribute';
-
-    private const string AS_COMMAND_ATTRIBUTE = AsCommand::class;
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
@@ -65,7 +63,7 @@ final readonly class CommandMustHaveAsCommandAttributeRule implements Rule
 
         foreach ($node->attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attr) {
-                if ($attr->name->toString() === self::AS_COMMAND_ATTRIBUTE) {
+                if ($attr->name->toString() === SymfonyAttribute::AS_COMMAND) {
                     return [];
                 }
             }
