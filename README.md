@@ -2885,6 +2885,41 @@ public function __construct(
 
 <br>
 
+### PreferClassServiceReferenceRule
+
+In a Symfony PHP config closure, when a `$services->alias('some.helper', SomeHelper::class)` points a string id at a class, a `service('some.helper')` reference should name the service by its class instead - `service(SomeHelper::class)`. Then the string alias nothing else asks for can be dropped.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferClassServiceReferenceRule
+```
+
+```php
+$services->alias('some.helper', SomeHelper::class);
+
+$services->set(SomeConsumer::class)
+    ->args([service('some.helper')]);
+```
+
+:x:
+
+<br>
+
+```php
+$services->alias('some.helper', SomeHelper::class);
+
+$services->set(SomeConsumer::class)
+    ->args([service(SomeHelper::class)]);
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
 ## 4. PHPUnit-specific Rules
 
 ### NoAssertFuncCallInTestsRule

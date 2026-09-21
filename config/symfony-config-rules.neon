@@ -22,3 +22,14 @@ rules:
 
     # $services->set('X')->class('X')
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoSetClassServiceDuplicationRule
+
+    # service('id') where an alias points 'id' at a class
+    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferClassServiceReferenceRule
+
+services:
+    -
+        class: Symplify\PHPStanRules\Collector\ClassTargetServiceAliasCollector
+        tags: [phpstan.collector]
+    -
+        class: Symplify\PHPStanRules\Collector\ServiceStringReferenceCollector
+        tags: [phpstan.collector]
