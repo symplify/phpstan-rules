@@ -81,4 +81,16 @@ final class RuleIdentifier
     public const string NO_MISSNAMED_DOC_TAG = 'symplify.noMissnamedDocTag';
 
     public const string NEW_OVER_SETTERS = 'symplify.newOverSetters';
+
+    public const string COMMAND_HAS_AS_COMMAND_ATTRIBUTE = 'symplify.commandHasAsCommandAttribute';
+
+    public const string CONSTRAINT_HAS_ATTRIBUTE = 'symplify.constraintHasAttribute';
+
+    public const string PREFER_INTERFACE_IN_CONSTRUCTOR = 'symplify.preferInterfaceInConstructor';
+
+    public const string NO_DUPLICATE_NON_REPEATABLE_ATTRIBUTE = 'symplify.noDuplicateNonRepeatableAttribute';
+
+    public const string NO_PROPERTY_TO_PROPERTY_ASSIGN = 'symplify.noPropertyToPropertyAssign';
+
+    public const string REQUIRE_ARRAY_SHAPE_RETURN = 'symplify.requireArrayShapeReturn';
 }

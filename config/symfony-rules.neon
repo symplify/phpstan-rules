@@ -30,3 +30,8 @@ rules:
     # attributes
     - Symplify\PHPStanRules\Rules\Symfony\RequireIsGrantedEnumRule
     - Symplify\PHPStanRules\Rules\Symfony\NoBareAndSecurityIsGrantedContentsRule
+    - Symplify\PHPStanRules\Rules\Symfony\CommandMustHaveAsCommandAttributeRule
+    - Symplify\PHPStanRules\Rules\Symfony\ConstraintMustHaveAttributeRule
+
+    # constructor injection
+    - Symplify\PHPStanRules\Rules\Symfony\PreferInterfaceInConstructorRule

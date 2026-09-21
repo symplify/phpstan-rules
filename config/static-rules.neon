@@ -18,3 +18,7 @@ rules:
 
     # docblock
     - Symplify\PHPStanRules\Rules\NoMissnamedDocTagRule
+    - Symplify\PHPStanRules\Rules\RequireArrayShapeReturnRule
+
+    # attributes
+    - Symplify\PHPStanRules\Rules\NoDuplicateNonRepeatableAttributeRule
