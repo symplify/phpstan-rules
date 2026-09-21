@@ -28,7 +28,8 @@ use Throwable;
  * A service is always provided by the container, so "?SomeService $service" or "SomeService|null $service" only hides
  * that it is really required. Nullable is allowed on an abstract class, whose optional dependency is filled by a child.
  * A nullable scalar, array, exception ("$previous" is nullable by PHP convention) or date value object is left alone,
- * as those are values, not services.
+ * as those are values, not services. Data-holder classes in an Entity, Event, DTO, Message, DAO, Token, Exception,
+ * Helper, ValueObject, Form\Type or Badge namespace are skipped whole - their constructors carry values, not services.
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoNullableServiceInConstructorRule\NoNullableServiceInConstructorRuleTest
  *
@@ -37,6 +38,25 @@ use Throwable;
 final readonly class NoNullableServiceInConstructorRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Constructor service "%s" of type "%s" is nullable. A service is always provided, make it non-nullable';
+
+    /**
+     * Data-holder namespaces whose constructors carry nullable values, not container services.
+     *
+     * @var string[]
+     */
+    private const array SKIPPED_NAMESPACE_PARTS = [
+        '\\Entity\\',
+        '\\Event\\',
+        '\\DTO\\',
+        '\\Message\\',
+        '\\DAO\\',
+        '\\Token\\',
+        '\\Exception\\',
+        '\\Helper\\',
+        '\\ValueObject\\',
+        '\\Form\\Type\\',
+        '\\Badge\\',
+    ];
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
@@ -67,6 +87,11 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
 
         // an abstract base class may leave a dependency optional for a child to provide
         if ($classReflection->isAbstract()) {
+            return [];
+        }
+
+        // a data-holder namespace (event, DTO, token, exception, helper, form type, badge, ...) carries values, not services
+        if ($this->isSkippedNamespace($classReflection->getName())) {
             return [];
         }
 
@@ -165,6 +190,14 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
         }
 
         return null;
+    }
+
+    private function isSkippedNamespace(string $className): bool
+    {
+        return array_any(
+            self::SKIPPED_NAMESPACE_PARTS,
+            static fn (string $skippedNamespacePart): bool => str_contains($className, $skippedNamespacePart)
+        );
     }
 
     /**
