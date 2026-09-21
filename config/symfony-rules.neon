@@ -36,3 +36,4 @@ rules:
 
     # constructor injection
     - Symplify\PHPStanRules\Rules\Symfony\PreferInterfaceInConstructorRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoNullableServiceInConstructorRule

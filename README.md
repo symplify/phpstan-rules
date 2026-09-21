@@ -2850,6 +2850,41 @@ public function handle(): void
 
 <br>
 
+### NoNullableServiceInConstructorRule
+
+A constructor service dependency must not be nullable - a service is always provided by the container, so `?SomeService` only hides that it is really required. Nullable is allowed on an abstract class (a child fills the dependency) and on values that are not services: scalars, arrays, exceptions (`?Throwable $previous`) and date value objects.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\NoNullableServiceInConstructorRule
+```
+
+```php
+public function __construct(
+    private readonly ?SomeService $someService,
+) {
+}
+```
+
+:x:
+
+<br>
+
+```php
+public function __construct(
+    private readonly SomeService $someService,
+) {
+}
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
 ## 4. PHPUnit-specific Rules
 
 ### NoAssertFuncCallInTestsRule
