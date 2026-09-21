@@ -2852,7 +2852,7 @@ public function handle(): void
 
 ### NoNullableServiceInConstructorRule
 
-A constructor service dependency must not be nullable - a service is always provided by the container, so `?SomeService` only hides that it is really required. Nullable is allowed on an abstract class (a child fills the dependency) and on values that are not services: scalars, arrays, exceptions (`?Throwable $previous`) and date value objects.
+A constructor service dependency must not be nullable - a service is always provided by the container, so `?SomeService` only hides that it is really required. Nullable is allowed on an abstract class (a child fills the dependency), on values that are not services (scalars, arrays, exceptions like `?Throwable $previous`, date value objects), and on data-holder classes in an `Entity`, `Event`, `DTO`, `Message`, `DAO`, `Token`, `Exception`, `Helper`, `ValueObject`, `Form\Type` or `Badge` namespace.
 
 ```yaml
 rules:
