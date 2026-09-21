@@ -55,6 +55,11 @@ final readonly class ConstraintMustHaveAttributeRule implements Rule
             return [];
         }
 
+        // do not require an attribute when the validator component is not even installed
+        if (! $this->reflectionProvider->hasClass(SymfonyAttribute::CONSTRAINT)) {
+            return [];
+        }
+
         $className = (string) $node->namespacedName;
         if (! $this->reflectionProvider->hasClass($className)) {
             return [];

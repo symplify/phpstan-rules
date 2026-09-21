@@ -16,6 +16,7 @@ return RectorConfig::configure()
         '*/Fixture/*',
         StringClassNameToClassConstantRector::class => [
             __DIR__ . '/src/Enum',
+            __DIR__ . '/src/Rules/Enum',
             __DIR__ . '/src/Testing/PHPUnitTestAnalyser.php',
             __DIR__ . '/src/Rules/NoEntityOutsideEntityNamespaceRule.php',
             __DIR__ . '/src/Rules/Symfony/CommandMustHaveAsCommandAttributeRule.php',
