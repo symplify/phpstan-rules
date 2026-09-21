@@ -20,6 +20,7 @@ return RectorConfig::configure()
             __DIR__ . '/src/Testing/PHPUnitTestAnalyser.php',
             __DIR__ . '/src/Rules/NoEntityOutsideEntityNamespaceRule.php',
             __DIR__ . '/src/Rules/Symfony/CommandMustHaveAsCommandAttributeRule.php',
+            __DIR__ . '/src/Rules/Doctrine/NoStringTargetEntityRule.php',
             __DIR__ . '/src/Rules/Symfony/ConstraintMustHaveAttributeRule.php',
             __DIR__ . '/tests/Naming/ClassToSuffixResolverTest.php',
             __DIR__ . '/src/Doctrine/DoctrineEntityDocumentAnalyser.php',
