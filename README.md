@@ -1420,6 +1420,97 @@ final class SomeService
 
 <br>
 
+### NoPropertyToPropertyAssignRule
+
+An object property must not be assigned from another object property of the same object - it keeps the same service under 2 names. Use the original property directly instead.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Complexity\NoPropertyToPropertyAssignRule
+```
+
+```php
+$this->repository = $this->someRepository;
+```
+
+:x:
+
+<br>
+
+```php
+// use $this->someRepository directly
+```
+
+:+1:
+
+<br>
+
+### NoDuplicateNonRepeatableAttributeRule
+
+An attribute can only be repeated on the same class, method or property when it is declared with the `\Attribute::IS_REPEATABLE` flag.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoDuplicateNonRepeatableAttributeRule
+```
+
+```php
+#[SomeAttribute]
+#[SomeAttribute]
+private string $name;
+```
+
+:x:
+
+<br>
+
+```php
+#[SomeAttribute]
+private string $name;
+```
+
+:+1:
+
+<br>
+
+### RequireArrayShapeReturnRule
+
+A method that returns a packed keyed array of 2-3 named values should declare that shape in its `@return`, so the caller knows each key and its type.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\RequireArrayShapeReturnRule
+```
+
+```php
+public function run(): array
+{
+    return ['name' => $name, 'age' => $age];
+}
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @return array{name: string, age: int}
+ */
+public function run(): array
+{
+    return ['name' => $name, 'age' => $age];
+}
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
 ## 2. Doctrine-specific Rules
 
 ### RequireQueryBuilderOnRepositoryRule
@@ -2605,6 +2696,101 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return function (ContainerConfigurator $container) {
     $framework = $container->extension('framework');
 };
+```
+
+:+1:
+
+<br>
+
+---
+
+<br>
+
+### CommandMustHaveAsCommandAttributeRule
+
+Every class that extends Symfony `Command` must declare the `#[AsCommand]` attribute.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\CommandMustHaveAsCommandAttributeRule
+```
+
+```php
+final class ReportCommand extends Command
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+#[AsCommand('app:report')]
+final class ReportCommand extends Command
+{
+}
+```
+
+:+1:
+
+<br>
+
+### ConstraintMustHaveAttributeRule
+
+Every class that extends Symfony `Constraint` must declare the `#[\Attribute]` attribute, so it can be used as an attribute on properties.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\ConstraintMustHaveAttributeRule
+```
+
+```php
+final class UniqueEmail extends Constraint
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+#[\Attribute]
+final class UniqueEmail extends Constraint
+{
+}
+```
+
+:+1:
+
+<br>
+
+### PreferInterfaceInConstructorRule
+
+A constructor dependency typed as a concrete Symfony/Doctrine class that has a same-named `*Interface` should use that interface instead - it blocks decoration otherwise.
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Symfony\PreferInterfaceInConstructorRule
+```
+
+```php
+public function __construct(
+    private Router $router,
+) {
+}
+```
+
+:x:
+
+<br>
+
+```php
+public function __construct(
+    private RouterInterface $router,
+) {
+}
 ```
 
 :+1:
