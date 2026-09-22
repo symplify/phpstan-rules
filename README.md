@@ -2596,51 +2596,6 @@ final class SomeController extends AbstractController
 
 <br>
 
-### NoControllerMethodInjectionRule
-
-Instead of action method service injection, use `__construct()` and an invokable controller with `__invoke()` to clearly separate services and parameters
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\NoControllerMethodInjectionRule
-```
-
-```php
-use Symfony\Component\Routing\Annotation\Route;
-
-final class SomeController
-{
-    #[Route('/some-action')]
-    public function someAction(SomeService $someService)
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\Routing\Annotation\Route;
-
-final class SomeController
-{
-    public function __construct(private SomeService $someService)
-    {
-    }
-
-    #[Route('/some-action')]
-    public function __invoke()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### NoServiceAutowireDuplicateRule
 
 Service `autowire()` is called as a duplicate of `$services->defaults()->autowire()`. Remove it on the service.
