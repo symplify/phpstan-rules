@@ -34,6 +34,7 @@ final class AlreadyRegisteredAutodiscoveryServiceRuleTest extends RuleTestCase
         ]]];
 
         yield [__DIR__ . '/Fixture/SkipExcludedPath.php', []];
+        yield [__DIR__ . '/Fixture/SkipBraceGlobExcludedPath.php', []];
         yield [__DIR__ . '/Fixture/SkipDifferentLoad.php', []];
     }
 
