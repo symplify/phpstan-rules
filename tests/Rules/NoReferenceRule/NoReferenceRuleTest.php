@@ -33,6 +33,9 @@ final class NoReferenceRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/ReferenceArgument.php', [[NoReferenceRule::ERROR_MESSAGE, 11]]];
         yield [__DIR__ . '/Fixture/AssignReference.php', [[NoReferenceRule::ERROR_MESSAGE, 14]]];
 
+        // magic parent method (e.g. Doctrine findBy*) must not crash reflection; it is not a native override, so the reference is still reported
+        yield [__DIR__ . '/Fixture/MagicParentFinderReference.php', [[NoReferenceRule::ERROR_MESSAGE, 11]]];
+
         yield [__DIR__ . '/Fixture/SkipUseInReference.php', []];
         yield [__DIR__ . '/Fixture/SkipParentMethodWithReference.php', []];
     }
