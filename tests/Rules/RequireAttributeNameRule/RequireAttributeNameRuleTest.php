@@ -32,6 +32,7 @@ final class RequireAttributeNameRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipCorrectName.php', []];
         yield [__DIR__ . '/Fixture/SkipDefaultName.php', []];
         yield [__DIR__ . '/Fixture/SkipPHPUnitAttributes.php', []];
+        yield [__DIR__ . '/Fixture/SkipSingleParamAttribute.php', []];
     }
 
     /**
