@@ -1,5 +1,6 @@
 parameters:
     symplify:
+        naming: true
         mocks: false
         ctor: false
         symfonyReturnType: false
@@ -13,6 +14,7 @@ parameters:
 
 parametersSchema:
     symplify: structure([
+        naming: bool()
         mocks: bool()
         ctor: bool()
         symfonyReturnType: bool()

@@ -36,7 +36,6 @@ Once you have most rules applied, it's best practice to include whole sets:
 includes:
     - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
     - vendor/symplify/phpstan-rules/config/configurable-rules.neon
-    - vendor/symplify/phpstan-rules/config/naming-rules.neon
     - vendor/symplify/phpstan-rules/config/static-rules.neon
 
     # project specific
@@ -45,6 +44,16 @@ includes:
 
     # special set for PHP configs
     - vendor/symplify/phpstan-rules/config/symfony-config-rules.neon
+```
+
+<br>
+
+The naming rules (class/constant naming and namespace rules, e.g. interface must live in a "Contract" namespace) load automatically and are **enabled by default**. Turn them off with the `naming` parameter:
+
+```yaml
+parameters:
+    symplify:
+        naming: false
 ```
 
 <br>
@@ -330,6 +339,14 @@ Interface have suffix of "Interface", trait have "Trait" suffix exclusively
 ```yaml
 rules:
     - Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule
+```
+
+Reported under these identifiers:
+
+```yaml
+- identifier: symplify.explicitAbstractPrefixName
+- identifier: symplify.explicitInterfaceSuffixName
+- identifier: symplify.explicitTraitSuffixName
 ```
 
 ```php

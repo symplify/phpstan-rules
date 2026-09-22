@@ -1,5 +1,26 @@
-rules:
+conditionalTags:
+    Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule:
+        phpstan.rules.rule: %symplify.naming%
+    Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule:
+        phpstan.rules.rule: %symplify.naming%
+    Symplify\PHPStanRules\Rules\UppercaseConstantRule:
+        phpstan.rules.rule: %symplify.naming%
+    Symplify\PHPStanRules\Rules\ClassNameRespectsParentSuffixRule:
+        phpstan.rules.rule: %symplify.naming%
+
+    # namespace
+    Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule:
+        phpstan.rules.rule: %symplify.naming%
+    Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule:
+        phpstan.rules.rule: %symplify.naming%
+    Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule:
+        phpstan.rules.rule: %symplify.naming%
+
+services:
     - Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule
     - Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule
     - Symplify\PHPStanRules\Rules\UppercaseConstantRule
     - Symplify\PHPStanRules\Rules\ClassNameRespectsParentSuffixRule
+    - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
+    - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
+    - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
