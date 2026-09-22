@@ -164,6 +164,11 @@ function run(int $userId)
 
 Interface must be located in "Contract" or "Contracts" namespace
 
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
+```
+
 ```php
 namespace App\Repository;
 
@@ -192,7 +197,7 @@ interface ProductRepositoryInterface
 
 Class should have suffix "%s" to respect parent type
 
-On by default via the `naming` parameter with a built-in parent list. To extend it with your own parents, set `naming: false` and register the rule yourself:
+:wrench: **configure it!**
 
 ```yaml
 services:
@@ -330,6 +335,11 @@ final class SomeClass extends ParentClass
 ### ExplicitClassPrefixSuffixRule
 
 Interface have suffix of "Interface", trait have "Trait" suffix exclusively
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule
+```
 
 ```php
 <?php
@@ -828,6 +838,11 @@ class SomeClass
 
 Setter method cannot return anything, only set value
 
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\NoReturnSetterMethodRule
+```
+
 ```php
 final class SomeClass
 {
@@ -1085,6 +1100,11 @@ rules:
 
 Attribute must be located in "Attribute" namespace
 
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
+```
+
 ```php
 // app/Entity/SomeAttribute.php
 namespace App\Controller;
@@ -1116,6 +1136,11 @@ final class SomeAttribute
 ### RequireExceptionNamespaceRule
 
 `Exception` must be located in "Exception" namespace
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
+```
 
 ```php
 // app/Controller/SomeException.php
@@ -1227,6 +1252,11 @@ class SomeClass extends Rule
 ### UppercaseConstantRule
 
 Constant "%s" must be uppercase
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\UppercaseConstantRule
+```
 
 ```php
 final class SomeClass
