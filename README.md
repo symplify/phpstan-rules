@@ -341,6 +341,14 @@ rules:
     - Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule
 ```
 
+Reported under these identifiers:
+
+```yaml
+- identifier: symplify.explicitAbstractPrefixName
+- identifier: symplify.explicitInterfaceSuffixName
+- identifier: symplify.explicitTraitSuffixName
+```
+
 ```php
 <?php
 
