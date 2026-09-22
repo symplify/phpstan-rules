@@ -10,7 +10,7 @@ use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Form\AbstractType;
 use Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule;
-use Symplify\PHPStanRules\Tests\Rules\Symfony\FormTypeClassNameRule\Fixture\SomeType;
+use Symplify\PHPStanRules\Tests\Rules\Symfony\FormTypeClassNameRule\Fixture\SomeForm;
 
 final class FormTypeClassNameRuleTest extends RuleTestCase
 {
@@ -30,9 +30,11 @@ final class FormTypeClassNameRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/SomeFormType.php', []];
 
-        yield [__DIR__ . '/Fixture/SomeType.php', [
+        yield [__DIR__ . '/Fixture/SomeType.php', []];
+
+        yield [__DIR__ . '/Fixture/SomeForm.php', [
             [
-                sprintf(FormTypeClassNameRule::ERROR_MESSAGE, AbstractType::class, SomeType::class),
+                sprintf(FormTypeClassNameRule::ERROR_MESSAGE, AbstractType::class, SomeForm::class),
                 9,
             ],
         ]];
