@@ -9,6 +9,7 @@ use PhpParser\Node;
 use PhpParser\Node\AttributeGroup;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
@@ -17,9 +18,14 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
  * @implements Rule<AttributeGroup>
  */
-final class RequireAttributeNameRule implements Rule
+final readonly class RequireAttributeNameRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Attribute must have all names explicitly defined';
+
+    public function __construct(
+        private ReflectionProvider $reflectionProvider,
+    ) {
+    }
 
     public function getNodeType(): string
     {
@@ -44,6 +50,11 @@ final class RequireAttributeNameRule implements Rule
                 continue;
             }
 
+            // single-param attribute is unambiguous, positional value is enough
+            if ($this->hasSingleConstructorParam($attributeName)) {
+                continue;
+            }
+
             foreach ($attribute->args as $arg) {
                 if ($arg->name instanceof Identifier) {
                     continue;
@@ -57,5 +68,24 @@ final class RequireAttributeNameRule implements Rule
         }
 
         return $ruleErrors;
+    }
+
+    private function hasSingleConstructorParam(string $attributeName): bool
+    {
+        if (! $this->reflectionProvider->hasClass($attributeName)) {
+            return false;
+        }
+
+        $classReflection = $this->reflectionProvider->getClass($attributeName);
+        if (! $classReflection->hasConstructor()) {
+            return false;
+        }
+
+        $extendedMethodReflection = $classReflection->getConstructor();
+        foreach ($extendedMethodReflection->getVariants() as $extendedParametersAcceptor) {
+            return count($extendedParametersAcceptor->getParameters()) === 1;
+        }
+
+        return false;
     }
 }
