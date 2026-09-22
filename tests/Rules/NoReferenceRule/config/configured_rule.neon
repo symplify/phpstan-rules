@@ -3,3 +3,8 @@ includes:
 
 rules:
     - Symplify\PHPStanRules\Rules\NoReferenceRule
+
+services:
+    -
+        class: Symplify\PHPStanRules\Tests\Rules\NoReferenceRule\Source\MagicFinderMethodsExtension
+        tags: [phpstan.broker.methodsClassReflectionExtension]

@@ -23,12 +23,13 @@ final readonly class ParentClassMethodNodeResolver
         $parentClassReflections = $this->getParentClassReflections($scope);
 
         foreach ($parentClassReflections as $parentClassReflection) {
-            if (! $parentClassReflection->hasMethod($methodName)) {
+            // only native methods have an AST to compare; magic methods (e.g. Doctrine findBy*) would throw on getNativeMethod()
+            if (! $parentClassReflection->hasNativeMethod($methodName)) {
                 continue;
             }
 
             $classReflection = $this->reflectionProvider->getClass($parentClassReflection->getName());
-            $parentMethodReflection = $classReflection->getMethod($methodName, $scope);
+            $parentMethodReflection = $classReflection->getNativeMethod($methodName);
             return $this->reflectionParser->parseMethodReflection($parentMethodReflection);
         }
 
