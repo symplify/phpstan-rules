@@ -7,6 +7,8 @@ namespace Symplify\PHPStanRules\Rules;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Yield_;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeTraverser;
 use PHPStan\Analyser\Scope;
@@ -66,6 +68,11 @@ final readonly class NoReturnSetterMethodRule implements Rule
             return [];
         }
 
+        // fluent setter returning self/static is allowed
+        if ($this->hasFluentReturnType($node)) {
+            return [];
+        }
+
         if (! $this->hasReturnReturnFunctionLike($node)) {
             return [];
         }
@@ -73,6 +80,16 @@ final readonly class NoReturnSetterMethodRule implements Rule
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(RuleIdentifier::NO_RETURN_SETTER_METHOD)
             ->build()];
+    }
+
+    private function hasFluentReturnType(ClassMethod $classMethod): bool
+    {
+        $returnType = $classMethod->returnType;
+        if (! $returnType instanceof Identifier && ! $returnType instanceof Name) {
+            return false;
+        }
+
+        return in_array($returnType->toLowerString(), ['self', 'static'], true);
     }
 
     private function hasReturnReturnFunctionLike(ClassMethod $classMethod): bool
