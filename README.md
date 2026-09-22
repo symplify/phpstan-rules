@@ -2554,48 +2554,6 @@ class SomeListener implements EventSubscriberInterface
 
 <br>
 
-### RequireInvokableControllerRule
-
-Use invokable controller with __invoke() method instead of named action method
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\RequireInvokableControllerRule
-```
-
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function someMethod()
-    {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-final class SomeController extends AbstractController
-{
-    #[Route()]
-    public function __invoke()
-    {
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### NoServiceAutowireDuplicateRule
 
 Service `autowire()` is called as a duplicate of `$services->defaults()->autowire()`. Remove it on the service.

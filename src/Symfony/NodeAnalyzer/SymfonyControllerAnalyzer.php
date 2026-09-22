@@ -31,11 +31,6 @@ final class SymfonyControllerAnalyzer
         return array_any(self::CONTROLLER_TYPES, fn (string $controllerType): bool => $classReflection->is($controllerType));
     }
 
-    public static function isControllerActionMethod(ClassMethod $classMethod): bool
-    {
-        return self::hasRouteAnnotationOrAttribute($classMethod);
-    }
-
     public static function hasRouteAnnotationOrAttribute(ClassLike|ClassMethod $node): bool
     {
         if ($node instanceof ClassMethod && ! $node->isPublic()) {
