@@ -62,6 +62,7 @@
         "phpstan": {
             "includes": [
                 "config/services/services.neon",
+                "config/naming-rules.neon",
                 "config/ctor-rules.neon",
                 "config/mock-rules.neon",
                 "config/phpstan-extensions.neon"

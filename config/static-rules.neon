@@ -3,9 +3,6 @@ rules:
     - Symplify\PHPStanRules\Rules\NoGlobalConstRule
 
     # domain
-    - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
-    - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
-    - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
     - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
 
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
