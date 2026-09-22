@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Doctrine;
 
 use PhpParser\Node;
+use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Name;
@@ -69,7 +70,11 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
 
     private function isDynamicArg(MethodCall $methodCall): bool
     {
-        $firstArg = $methodCall->getArgs()[0];
+        $firstArg = $methodCall->getArgs()[0] ?? null;
+        if (! $firstArg instanceof Arg) {
+            return true;
+        }
+
         if ($firstArg->value instanceof String_) {
             return false;
         }
