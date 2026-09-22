@@ -20,8 +20,6 @@ final class SymfonyRuleIdentifier
 
     public const string NO_STRING_IN_GET_SUBSCRIBED_EVENTS = 'symfony.noStringInGetSubscribedEvents';
 
-    public const string SYMFONY_NO_ABSTRACT_CONTROLLER_CONSTRUCTOR = 'symfony.noAbstractControllerConstructor';
-
     public const string SINGLE_REQUIRED_METHOD = 'symfony.singleRequiredMethod';
 
     public const string SYMFONY_REQUIRED_ONLY_IN_ABSTRACT = 'symfony.requiredOnlyInAbstract';
