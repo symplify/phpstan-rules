@@ -1767,7 +1767,7 @@ rules:
     - Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule
 ```
 
-Classes that extend `AbstractType` should have `*FormType` suffix, to make it clear it's a form class.
+Classes that extend `AbstractType` should have `*Type` suffix, to make it clear it's a form class.
 
 <br>
 
