@@ -56,6 +56,16 @@ parameters:
         naming: false
 ```
 
+The `code-complexity-rules.neon`, `configurable-rules.neon` and `static-rules.neon` sets are **enabled by default** once included, and can be toggled the same way:
+
+```yaml
+parameters:
+    symplify:
+        complexity: false
+        configurable: false
+        static: false
+```
+
 <br>
 
 ### Symfony/Laravel container `->get()`/`->make()` return type extensions

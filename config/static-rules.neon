@@ -1,4 +1,38 @@
-rules:
+conditionalTags:
+    Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule:
+        phpstan.rules.rule: %symplify.static%
+    Symplify\PHPStanRules\Rules\NoGlobalConstRule:
+        phpstan.rules.rule: %symplify.static%
+
+    # domain
+    Symplify\PHPStanRules\Rules\RequireAttributeNameRule:
+        phpstan.rules.rule: %symplify.static%
+
+    Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule:
+        phpstan.rules.rule: %symplify.static%
+    Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule:
+        phpstan.rules.rule: %symplify.static%
+
+    Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule:
+        phpstan.rules.rule: %symplify.static%
+    Symplify\PHPStanRules\Rules\NoReferenceRule:
+        phpstan.rules.rule: %symplify.static%
+    Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule:
+        phpstan.rules.rule: %symplify.static%
+    Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule:
+        phpstan.rules.rule: %symplify.static%
+
+    # docblock
+    Symplify\PHPStanRules\Rules\NoMissnamedDocTagRule:
+        phpstan.rules.rule: %symplify.static%
+    Symplify\PHPStanRules\Rules\RequireArrayShapeReturnRule:
+        phpstan.rules.rule: %symplify.static%
+
+    # attributes
+    Symplify\PHPStanRules\Rules\NoDuplicateNonRepeatableAttributeRule:
+        phpstan.rules.rule: %symplify.static%
+
+services:
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
     - Symplify\PHPStanRules\Rules\NoGlobalConstRule
 
