@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Rules\Doctrine;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
@@ -38,6 +39,11 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
             return [];
         }
 
+        // only relevant inside repository classes, where $this->createQueryBuilder() is available as a safe swap
+        if (! $this->isInsideRepositoryClass($scope)) {
+            return [];
+        }
+
         $callerType = $scope->getType($node->var);
         if ($this->isValidRepositoryObjectType($callerType)) {
             return [];
@@ -48,6 +54,20 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
             ->build();
 
         return [$identifierRuleError];
+    }
+
+    private function isInsideRepositoryClass(Scope $scope): bool
+    {
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        if ($classReflection->isSubclassOf(DoctrineClass::ENTITY_REPOSITORY)) {
+            return true;
+        }
+
+        return $classReflection->isSubclassOf(DoctrineClass::DOCUMENT_REPOSITORY);
     }
 
     private function isValidRepositoryObjectType(Type $type): bool
