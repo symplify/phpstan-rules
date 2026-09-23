@@ -36,6 +36,11 @@ final class NoGetRepositoryOutsideServiceRuleTest extends RuleTestCase
             19,
         ]]];
 
+        yield [__DIR__ . '/Fixture/GetRepositoryInsideContext.php', [[
+            NoGetRepositoryOutsideServiceRule::TEST_ERROR_MESSAGE,
+            19,
+        ]]];
+
         yield [__DIR__ . '/Fixture/SkipInRepository.php', []];
         yield [__DIR__ . '/Fixture/SkipDynamicFetch.php', []];
         yield [__DIR__ . '/Fixture/SkipDynamicClassConstFetch.php', []];

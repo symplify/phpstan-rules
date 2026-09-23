@@ -15,6 +15,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
+use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\NoGetRepositoryOutsideServiceRule\NoGetRepositoryOutsideServiceRuleTest
@@ -24,6 +25,8 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
 final class NoGetRepositoryOutsideServiceRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Instead of getting repository from EntityManager, use constructor injection and service pattern to keep code clean';
+
+    public const string TEST_ERROR_MESSAGE = 'Instead of getting repository from EntityManager, fetch the repository service directly from the test container';
 
     public function getNodeType(): string
     {
@@ -61,7 +64,9 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
             return [];
         }
 
-        $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+        $errorMessage = TestClassDetector::isTestClass($scope) ? self::TEST_ERROR_MESSAGE : self::ERROR_MESSAGE;
+
+        $ruleError = RuleErrorBuilder::message($errorMessage)
             ->identifier(DoctrineRuleIdentifier::NO_GET_REPOSITORY_OUTSIDE_SERVICE)
             ->build();
 

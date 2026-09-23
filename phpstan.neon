@@ -41,6 +41,7 @@ parameters:
 
         # used in tests
         - '#Public constant "Symplify\\PHPStanRules\\(.*?)Rule\:\:ERROR_MESSAGE" is never used#'
+        - '#Public constant "Symplify\\PHPStanRules\\(.*?)Rule\:\:TEST_ERROR_MESSAGE" is never used#'
 
         -
             message: '#Generator expects value type array<string, mixed>, list<bool\|float\|int\|list<string>\|PHPStan\\TrinaryLogic\|string\|null> given#'
