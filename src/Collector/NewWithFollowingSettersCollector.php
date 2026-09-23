@@ -24,6 +24,7 @@ use PhpParser\Node\Stmt\While_;
 use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use Symfony\Component\HttpKernel\Kernel;
 use Webmozart\Assert\Assert;
@@ -159,11 +160,24 @@ final readonly class NewWithFollowingSettersCollector implements Collector
             return true;
         }
 
-        // skip Doctrine entities
-        $fileContents = file_get_contents($classReflection->getFileName());
+        // skip Doctrine entities, they are usually set/get magically
+        return $this->isDoctrineEntity($classReflection);
+    }
+
+    private function isDoctrineEntity(ClassReflection $classReflection): bool
+    {
+        // #[ORM\Entity] attribute
+        foreach ($classReflection->getNativeReflection()->getAttributes() as $attributeReflection) {
+            if ($attributeReflection->getName() === 'Doctrine\ORM\Mapping\Entity') {
+                return true;
+            }
+        }
+
+        // @ORM\Entity annotation fallback
+        $fileContents = file_get_contents((string) $classReflection->getFileName());
         Assert::string($fileContents);
 
-        return str_contains($fileContents, '@ORM\Entity') || str_starts_with($fileContents, '#[Entity]');
+        return str_contains($fileContents, '@ORM\Entity');
     }
 
     /**
