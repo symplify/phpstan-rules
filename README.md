@@ -1912,46 +1912,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
 <br>
 
-### PreferAutowireAttributeOverConfigParamRule
-
-Instead of parameter reference in config, add #[Autowire(param: ...)] in the "%s" class constructor
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferAutowireAttributeOverConfigParamRule
-```
-
-```php
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
-
-    $services->set(SomeService::class)->args(['%some_param%']);
-};
-```
-
-:x:
-
-<br>
-
-```php
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-
-final class SomeService
-{
-    public function __construct(
-        #[Autowire(param: 'some_param')]
-        private string $someParam
-    ) {
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### NoDuplicateArgsAutowireByTypeRule
 
 Instead of passing "%s" to args(), remove the line and let autowiring handle it

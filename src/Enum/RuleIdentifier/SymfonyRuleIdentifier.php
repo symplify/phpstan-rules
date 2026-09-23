@@ -52,8 +52,6 @@ final class SymfonyRuleIdentifier
 
     public const string REQUIRED_IS_GRANTED_ENUM = 'symfony.requiredIsGrantedEnum';
 
-    public const string PREFER_AUTOWIRE_ATTRIBUTE_OVER_CONFIG_PARAM = 'symfony.preferAutowireAttributeOverConfigParam';
-
     public const string RULE_IDENTIFIER = 'symfony.noServiceAutowireDuplicate';
 
     public const string NO_SET_CLASS_SERVICE_DUPLICATE = 'symfony.noSetClassServiceDuplicate';
