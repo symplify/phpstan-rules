@@ -29,6 +29,8 @@ final class NoAssertFuncCallInTestsRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/AssertFuncCallInsideTest.php', [[NoAssertFuncCallInTestsRule::ERROR_MESSAGE, 9]]];
 
         yield [__DIR__ . '/Fixture/SkipTestOutside.php', []];
+
+        yield [__DIR__ . '/Fixture/SkipVariableCallable.php', []];
     }
 
     protected function getRule(): Rule
