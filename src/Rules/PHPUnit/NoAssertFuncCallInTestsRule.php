@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Symplify\PHPStanRules\Rules\PHPUnit;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
@@ -30,6 +33,10 @@ final class NoAssertFuncCallInTestsRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        if (! $node->name instanceof Name) {
+            return [];
+        }
+
         if (! NamingHelper::isName($node->name, 'assert')) {
             return [];
         }
