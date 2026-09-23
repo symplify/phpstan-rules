@@ -12,6 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
+use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
 /**
  * @implements Rule<MethodCall>
@@ -32,6 +33,11 @@ final class NoFindTaggedServiceIdsCallRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         if (! NamingHelper::isName($node->name, 'findTaggedServiceIds')) {
+            return [];
+        }
+
+        // tagged service ids are commonly used in tests to assert service registration
+        if (TestClassDetector::isTestClass($scope)) {
             return [];
         }
 
