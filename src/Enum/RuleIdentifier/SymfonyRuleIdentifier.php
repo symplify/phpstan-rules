@@ -16,8 +16,6 @@ final class SymfonyRuleIdentifier
 
     public const string NO_LISTENER_WITHOUT_CONTRACT = 'symfony.noListenerWithoutContract';
 
-    public const string SYMFONY_NO_REQUIRED_OUTSIDE_CLASS = 'symfony.noRequiredOutsideClass';
-
     public const string NO_STRING_IN_GET_SUBSCRIBED_EVENTS = 'symfony.noStringInGetSubscribedEvents';
 
     public const string SINGLE_REQUIRED_METHOD = 'symfony.singleRequiredMethod';

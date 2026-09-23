@@ -1,5 +1,4 @@
 rules:
-    - Symplify\PHPStanRules\Rules\Symfony\NoRequiredOutsideClassRule
     - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
     - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
     - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule

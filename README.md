@@ -2235,47 +2235,6 @@ rules:
 
 <br>
 
-### NoRequiredOutsideClassRule
-
-Symfony #[Require]/@required should be used only in classes to avoid misuse
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\NoRequiredOutsideClassRule
-```
-
-```php
-use Symfony\Component\DependencyInjection\Attribute\Required;
-
-trait SomeTrait
-{
-    #[Required]
-    public function autowireSomeTrait(SomeService $someService)
-    {
-        // ...
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-abstract class SomeClass
-{
-    #[Required]
-    public function autowireSomeClass(SomeService $someService)
-    {
-        // ...
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### SingleArgEventDispatchRule
 
 The event dispatch() method can have only 1 arg - the event object
