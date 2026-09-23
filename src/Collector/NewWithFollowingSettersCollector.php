@@ -27,6 +27,7 @@ use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use Symfony\Component\HttpKernel\Kernel;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Webmozart\Assert\Assert;
 
 /**
@@ -47,7 +48,12 @@ final readonly class NewWithFollowingSettersCollector implements Collector
     /**
      * @var string[]
      */
-    private const array EXCLUDED_CLASSES = [Kernel::class];
+    private const array EXCLUDED_CLASSES = [
+        Kernel::class,
+        // controllers use setContainer() by Symfony design
+        SymfonyClass::ABSTRACT_CONTROLLER,
+        SymfonyClass::CONTROLLER,
+    ];
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
