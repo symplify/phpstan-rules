@@ -31,7 +31,7 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final readonly class RequireQueryBuilderOnRepositoryRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
+    public const string ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager inside a repository class, as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
 
     /**
      * UPDATE/DELETE builders are not plain SELECTs, the repository shortcut cannot express them

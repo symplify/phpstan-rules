@@ -1583,7 +1583,7 @@ final class Product {}
 
 ### RequireQueryBuilderOnRepositoryRule
 
-Prevents using `$entityManager->createQueryBuilder()`, use `$repository->createQueryBuilder()` as safer.
+Prevents using `$entityManager->createQueryBuilder()` inside a repository class, use `$repository->createQueryBuilder()` as safer.
 
 Builders that the repository shortcut cannot express are skipped: `update()`/`delete()` builders and `from()` on another entity than the repository's own one (e.g. cross-entity subqueries).
 
