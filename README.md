@@ -1583,12 +1583,46 @@ final class Product {}
 
 ### RequireQueryBuilderOnRepositoryRule
 
-Prevents using `$entityManager->createQueryBuilder('...')`,  use `$repository->createQueryBuilder()` as safer.
+Prevents using `$entityManager->createQueryBuilder()`, use `$repository->createQueryBuilder()` as safer.
+
+Builders that the repository shortcut cannot express are skipped: `update()`/`delete()` builders and `from()` on another entity than the repository's own one (e.g. cross-entity subqueries).
 
 ```yaml
 rules:
     - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule
 ```
+
+```php
+final class SomeRepository extends EntityRepository
+{
+    public function getSome(): array
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select('s')
+            ->from(SomeEntity::class, 's')
+            ->getQuery()
+            ->getResult();
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class SomeRepository extends EntityRepository
+{
+    public function getSome(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->getQuery()
+            ->getResult();
+    }
+}
+```
+
+:+1:
 
 <br>
 

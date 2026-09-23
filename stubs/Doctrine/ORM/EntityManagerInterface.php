@@ -14,5 +14,5 @@ interface EntityManagerInterface
      */
     public function getRepository(string $class): object;
 
-    public function createQueryBuilder();
+    public function createQueryBuilder(): QueryBuilder;
 }

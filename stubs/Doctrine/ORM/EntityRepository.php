@@ -6,9 +6,12 @@ if (class_exists('Doctrine\ORM\EntityRepository')) {
     return;
 }
 
+/**
+ * @template T of object
+ */
 class EntityRepository
 {
-    public function createQueryBuilder()
+    public function createQueryBuilder(string $alias, ?string $indexBy = null): QueryBuilder
     {
     }
 }
