@@ -54,6 +54,7 @@ final class NewOverSettersRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipAttributeEntity.php', []];
         yield [__DIR__ . '/Fixture/SkipNotSetterCall.php', []];
         yield [__DIR__ . '/Fixture/SkipNoArgSetters.php', []];
+        yield [__DIR__ . '/Fixture/SkipSetterContext.php', []];
     }
 
     /**
