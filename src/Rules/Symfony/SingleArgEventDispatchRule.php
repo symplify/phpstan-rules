@@ -39,9 +39,19 @@ final class SingleArgEventDispatchRule implements Rule
             return [];
         }
 
+        $args = $node->getArgs();
+
         // all good
-        if (count($node->getArgs()) === 1) {
+        if (count($args) === 1) {
             return [];
+        }
+
+        // allow 2nd arg when dynamic, e.g. a variable event name
+        if (count($args) === 2) {
+            $secondArgType = $scope->getType($args[1]->value);
+            if ($secondArgType->getConstantStrings() === []) {
+                return [];
+            }
         }
 
         $callerType = $scope->getType($node->var);
