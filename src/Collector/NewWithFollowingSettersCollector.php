@@ -28,6 +28,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use Symfony\Component\HttpKernel\Kernel;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
+use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 use Webmozart\Assert\Assert;
 
 /**
@@ -73,6 +74,11 @@ final readonly class NewWithFollowingSettersCollector implements Collector
     {
         // enable with "ctor: true" parameter
         if (! $this->isEnabled) {
+            return null;
+        }
+
+        // tests create objects and exercise their behavior, not configure them for construction
+        if (TestClassDetector::isTestClass($scope)) {
             return null;
         }
 
