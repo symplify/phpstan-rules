@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule\Fixture;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 
-final class ReportOnEntityManager extends EntityRepository
+final class SkipNonRepositoryClass
 {
     public function process(EntityManagerInterface $entityManager)
     {
-        $someRepository = $entityManager->createQueryBuilder();
+        $queryBuilder = $entityManager->createQueryBuilder();
     }
 }

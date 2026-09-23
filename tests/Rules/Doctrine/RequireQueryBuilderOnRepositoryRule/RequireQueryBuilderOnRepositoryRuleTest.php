@@ -29,13 +29,14 @@ final class RequireQueryBuilderOnRepositoryRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipCreateQueryBuilderOnRepository.php', []];
         yield [__DIR__ . '/Fixture/SkipDocumentRepository.php', []];
         yield [__DIR__ . '/Fixture/SkipConnection.php', []];
+        yield [__DIR__ . '/Fixture/SkipNonRepositoryClass.php', []];
 
         yield [__DIR__ . '/Fixture/ReportOnEntityManager.php', [
             [RequireQueryBuilderOnRepositoryRule::ERROR_MESSAGE, 14],
         ]];
 
         yield [__DIR__ . '/Fixture/ReportOnDocumentManager.php', [
-            [RequireQueryBuilderOnRepositoryRule::ERROR_MESSAGE, 13],
+            [RequireQueryBuilderOnRepositoryRule::ERROR_MESSAGE, 14],
         ]];
     }
 
