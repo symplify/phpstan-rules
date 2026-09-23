@@ -1029,17 +1029,6 @@ class SomeClass extends SomeParentClass
 
 <br>
 
-### RequiredOnlyInAbstractRule
-
-`@required` annotation should be used only in abstract classes, to child classes can use clean `__construct()` service injection.
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\RequiredOnlyInAbstractRule
-```
-
-<br>
-
 ### RequireRouteNameToGenerateControllerRouteRule
 
 To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method

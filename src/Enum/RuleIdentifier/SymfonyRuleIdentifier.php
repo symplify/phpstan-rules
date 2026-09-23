@@ -22,8 +22,6 @@ final class SymfonyRuleIdentifier
 
     public const string SINGLE_REQUIRED_METHOD = 'symfony.singleRequiredMethod';
 
-    public const string SYMFONY_REQUIRED_ONLY_IN_ABSTRACT = 'symfony.requiredOnlyInAbstract';
-
     public const string NO_CONSTRUCT_AND_REQUIRED = 'symfony.noConstructAndRequired';
 
     public const string FORM_TYPE_CLASS_NAME = 'symfony.formTypeClassName';
