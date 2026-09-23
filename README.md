@@ -1993,46 +1993,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
 <br>
 
-### NoAbstractControllerConstructorRule
-
-Abstract controller should not have constructor, as it can lead to tight coupling. Use @required annotation instead
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\Symfony\NoAbstractControllerConstructorRule
-```
-
-```php
-abstract class AbstractController extends Controller
-{
-    public function __construct(
-        private SomeService $someService
-    ) {
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-abstract class AbstractController extends Controller
-{
-    private $someService;
-
-    #[Required]
-    public function autowireAbstractController(SomeService $someService)
-    {
-        $this->someService = $someService;
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### AlreadyRegisteredAutodiscoveryServiceRule
 
 Remove service, as already registered via autodiscovery ->load(), no need to set it twice.
