@@ -1,4 +1,20 @@
-rules:
+conditionalTags:
+    Symplify\PHPStanRules\Rules\NoDynamicNameRule:
+        phpstan.rules.rule: %symplify.complexity%
+    Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule:
+        phpstan.rules.rule: %symplify.complexity%
+    Symplify\PHPStanRules\Rules\Complexity\NoPropertyToPropertyAssignRule:
+        phpstan.rules.rule: %symplify.complexity%
+    Symplify\PHPStanRules\Rules\Complexity\NoArrayMapWithArrayCallableRule:
+        phpstan.rules.rule: %symplify.complexity%
+    Symplify\PHPStanRules\Rules\Complexity\NoConstructorOverrideRule:
+        phpstan.rules.rule: %symplify.complexity%
+    Symplify\PHPStanRules\Rules\Complexity\ForeachCeptionRule:
+        phpstan.rules.rule: %symplify.complexity%
+    Symplify\PHPStanRules\Rules\Explicit\NoMissingVariableDimFetchRule:
+        phpstan.rules.rule: %symplify.complexity%
+
+services:
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
     - Symplify\PHPStanRules\Rules\Complexity\NoJustPropertyAssignRule
     - Symplify\PHPStanRules\Rules\Complexity\NoPropertyToPropertyAssignRule

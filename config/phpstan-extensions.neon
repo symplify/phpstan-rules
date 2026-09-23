@@ -1,6 +1,9 @@
 parameters:
     symplify:
         naming: true
+        complexity: true
+        configurable: true
+        static: true
         mocks: false
         ctor: false
         symfonyReturnType: false
@@ -15,6 +18,9 @@ parameters:
 parametersSchema:
     symplify: structure([
         naming: bool()
+        complexity: bool()
+        configurable: bool()
+        static: bool()
         mocks: bool()
         ctor: bool()
         symfonyReturnType: bool()

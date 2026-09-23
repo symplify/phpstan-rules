@@ -1,7 +1,16 @@
+conditionalTags:
+    Symplify\PHPStanRules\Rules\ForbiddenNodeRule:
+        phpstan.rules.rule: %symplify.configurable%
+    Symplify\PHPStanRules\Rules\PreferredClassRule:
+        phpstan.rules.rule: %symplify.configurable%
+    Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule:
+        phpstan.rules.rule: %symplify.configurable%
+    Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule:
+        phpstan.rules.rule: %symplify.configurable%
+
 services:
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
-        tags: [phpstan.rules.rule]
         arguments:
             forbiddenNodes:
                 - PhpParser\Node\Stmt\Trait_
@@ -16,7 +25,6 @@ services:
 
     -
         class: Symplify\PHPStanRules\Rules\PreferredClassRule
-        tags: [phpstan.rules.rule]
         arguments:
             oldToPreferredClasses:
                 # prevents typos
@@ -25,7 +33,6 @@ services:
 
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
-        tags: [phpstan.rules.rule]
         arguments:
             forbiddenFunctions:
                 - 'd'
@@ -43,7 +50,6 @@ services:
 
     -
         class: Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule
-        tags: [phpstan.rules.rule]
         arguments:
             requiredSeeTypes:
                 - PHPStan\Rules\Rule

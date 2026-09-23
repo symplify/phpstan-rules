@@ -1,5 +1,4 @@
 includes:
     - code-complexity-rules.neon
     - configurable-rules.neon
-    - naming-rules.neon
     - static-rules.neon
