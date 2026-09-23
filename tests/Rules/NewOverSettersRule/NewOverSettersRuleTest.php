@@ -49,6 +49,7 @@ final class NewOverSettersRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipCalledOnlyOnce.php', []];
 
         yield [__DIR__ . '/Fixture/SkipSomeKernel.php', []];
+        yield [__DIR__ . '/Fixture/SkipController.php', []];
         yield [__DIR__ . '/Fixture/SkipEntity.php', []];
         yield [__DIR__ . '/Fixture/SkipAttributeEntity.php', []];
         yield [__DIR__ . '/Fixture/SkipNotSetterCall.php', []];
