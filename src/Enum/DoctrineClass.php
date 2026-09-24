@@ -19,4 +19,6 @@ final class DoctrineClass
     public const string CONNECTION = 'Doctrine\DBAL\Connection';
 
     public const string DOCUMENT_REPOSITORY = 'Doctrine\ODM\MongoDB\Repository\DocumentRepository';
+
+    public const string DOCTRINE_LISTENER_ATTRIBUTE = 'Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener';
 }
