@@ -2427,6 +2427,20 @@ class SomeListener implements EventSubscriber
 }
 ```
 
+or
+
+```php
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+
+#[AsDoctrineListener(event: 'onFlush')]
+class SomeListener
+{
+    public function onFlush()
+    {
+    }
+}
+```
+
 :+1:
 
 

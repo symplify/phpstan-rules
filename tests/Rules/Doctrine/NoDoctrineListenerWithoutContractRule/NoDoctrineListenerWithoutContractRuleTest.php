@@ -29,6 +29,7 @@ final class NoDoctrineListenerWithoutContractRuleTest extends RuleTestCase
     {
         yield [[__DIR__ . '/Fixture/SkipContractAwareListener.php'], []];
         yield [[__DIR__ . '/Fixture/SkipNonDoctrineEvent.php'], []];
+        yield [[__DIR__ . '/Fixture/SkipAttributeAwareListener.php'], []];
 
         yield [[__DIR__ . '/Fixture/SimpleDoctrineListener.php'], [[
             NoDoctrineListenerWithoutContractRule::ERROR_MESSAGE,

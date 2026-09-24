@@ -11,6 +11,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Doctrine\DoctrineEventSubscriberAnalyzer;
+use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 
 /**
@@ -57,10 +58,27 @@ final class NoDoctrineListenerWithoutContractRule implements Rule
             return [];
         }
 
+        if ($this->hasAsDoctrineListenerAttribute($classLike)) {
+            return [];
+        }
+
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier(DoctrineRuleIdentifier::NO_LISTENER_WITHOUT_CONTRACT)
             ->build();
 
         return [$identifierRuleError];
+    }
+
+    private function hasAsDoctrineListenerAttribute(Class_ $class): bool
+    {
+        foreach ($class->attrGroups as $attrGroup) {
+            foreach ($attrGroup->attrs as $attr) {
+                if ($attr->name->toString() === DoctrineClass::DOCTRINE_LISTENER_ATTRIBUTE) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
