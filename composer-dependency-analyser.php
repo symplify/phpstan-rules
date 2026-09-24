@@ -12,7 +12,10 @@ return new Configuration()
     ->addPathToExclude(__DIR__ . '/tests/Rules/PHPUnit/NoTestMocksRule/Fixture')
 
     // optional classes
-    ->ignoreUnknownClasses(['Symfony\Component\ExpressionLanguage\Expression'])
+    ->ignoreUnknownClasses([
+        'Symfony\Component\ExpressionLanguage\Expression',
+        'Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener',
+    ])
 
     // windows-only function used in Terminal helper
     ->ignoreUnknownFunctions(['sapi_windows_vt100_support'])
