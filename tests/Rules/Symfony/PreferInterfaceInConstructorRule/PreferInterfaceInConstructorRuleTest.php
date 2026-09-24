@@ -42,6 +42,7 @@ final class PreferInterfaceInConstructorRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/SkipRouterInterface.php', []];
         yield [__DIR__ . '/Fixture/SkipProjectClass.php', []];
+        yield [__DIR__ . '/Fixture/SkipMailerTransport.php', []];
     }
 
     /**

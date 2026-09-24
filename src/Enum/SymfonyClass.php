@@ -41,4 +41,6 @@ final class SymfonyClass
     public const string CONTAINER_CONFIGURATOR = 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator';
 
     public const string IS_GRANTED = 'Symfony\Component\Security\Http\Attribute\IsGranted';
+
+    public const string MAILER_TRANSPORT = 'Symfony\Component\Mailer\Transport';
 }

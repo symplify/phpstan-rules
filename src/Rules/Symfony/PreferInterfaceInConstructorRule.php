@@ -14,6 +14,7 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 
 /**
  * A constructor dependency must be autowired by its interface, not by the concrete class.
@@ -37,6 +38,11 @@ final readonly class PreferInterfaceInConstructorRule implements Rule
      * @var string[]
      */
     private const array HANDLED_NAMESPACE_PREFIXES = ['Symfony\\', 'Doctrine\\'];
+
+    /**
+     * @var string[]
+     */
+    private const array SKIPPED_CLASSES = [SymfonyClass::MAILER_TRANSPORT];
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
@@ -93,6 +99,10 @@ final readonly class PreferInterfaceInConstructorRule implements Rule
     private function matchImplementedSameNamedInterface(string $className): ?string
     {
         if (! $this->isHandledNamespace($className)) {
+            return null;
+        }
+
+        if (in_array($className, self::SKIPPED_CLASSES, true)) {
             return null;
         }
 
