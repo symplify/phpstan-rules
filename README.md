@@ -30,41 +30,27 @@ Configuration should be added to your `phpstan.neon` file.
 
 <br>
 
-Once you have most rules applied, it's best practice to include whole sets:
-
-```yaml
-includes:
-    - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
-    - vendor/symplify/phpstan-rules/config/configurable-rules.neon
-    - vendor/symplify/phpstan-rules/config/static-rules.neon
-
-    # project specific
-    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
-    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
-
-    # special set for PHP configs
-    - vendor/symplify/phpstan-rules/config/symfony-config-rules.neon
-```
-
-<br>
-
-The naming rules (class/constant naming and namespace rules, e.g. interface must live in a "Contract" namespace) load automatically and are **enabled by default**. Turn them off with the `naming` parameter:
+All rule sets load automatically via `phpstan/extension-installer` - no `includes:` needed. Most are **enabled by default**, toggle them in `phpstan.neon`:
 
 ```yaml
 parameters:
     symplify:
-        naming: false
+        # enabled by default
+        naming: true
+        complexity: true
+        configurable: true
+        static: true
+        symfony: true
+        symfonyConfig: true
+        doctrine: true
+        phpunit: true
+
+        # disabled by default
+        mocks: false
+        ctor: false
 ```
 
-The `code-complexity-rules.neon`, `configurable-rules.neon` and `static-rules.neon` sets are **enabled by default** once included, and can be toggled the same way:
-
-```yaml
-parameters:
-    symplify:
-        complexity: false
-        configurable: false
-        static: false
-```
+*Note: If you included the sets manually before, remove those `includes:` lines - PHPStan reports duplicated includes.*
 
 <br>
 

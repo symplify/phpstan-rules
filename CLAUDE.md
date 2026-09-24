@@ -17,14 +17,19 @@ visibility, and Symfony/Doctrine/PHPUnit proven practices). It is a PHPStan exte
   every rule, e.g. `symplify.noTestMocks`.
 - `config/*.neon` — one set per topic. Sets registered globally via the
   `composer.json` `extra.phpstan.includes` are auto-loaded by
-  `phpstan/extension-installer`; the rest are opt-in via `includes:` in the user's
-  `phpstan.neon`.
+  `phpstan/extension-installer` and toggled via `symplify.*` parameters; only
+  `rector-rules.neon` stays opt-in via `includes:` in the user's `phpstan.neon`.
 - `tests/Rules/<RuleName>/` — one dir per rule, with `Fixture/` PHP files and a
   `config/configured_rule.neon`.
 
-## Opt-in parameters
+## Toggle parameters
 
-Two rule groups are disabled by default and toggled by a single parameter:
+Every auto-loaded set is toggled by a `symplify.*` parameter defined in
+`config/phpstan-extensions.neon`, registered via `conditionalTags`. `naming`,
+`complexity`, `configurable`, `static`, `symfony`, `symfonyConfig`, `doctrine` and
+`phpunit` default to `true`.
+
+Two rule groups are disabled by default:
 
 - `mocks: true` — enables the PHPUnit mock rules in `config/mock-rules.neon`
   (registered via `conditionalTags` keyed on `%mocks%`).

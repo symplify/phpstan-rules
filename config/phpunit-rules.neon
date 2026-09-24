@@ -1,3 +1,9 @@
-rules:
+conditionalTags:
+    Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule:
+        phpstan.rules.rule: %symplify.phpunit%
+    Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule:
+        phpstan.rules.rule: %symplify.phpunit%
+
+services:
     - Symplify\PHPStanRules\Rules\PHPUnit\PublicStaticDataProviderRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoAssertFuncCallInTestsRule
