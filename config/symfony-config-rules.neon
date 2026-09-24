@@ -1,38 +1,66 @@
-rules:
+conditionalTags:
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoBundleResourceConfigRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\AlreadyRegisteredAutodiscoveryServiceRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\TaggedIteratorOverRepeatedServiceCallRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # sync file name and extension name
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\FileNameMatchesExtensionRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # no autowire duplicate
+    Symplify\PHPStanRules\Rules\Symfony\NoServiceAutowireDuplicateRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # args() and arg() call
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgsAutowireByTypeRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgAutowireByTypeRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # $services->set('X', 'X')
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSameNameSetClassRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # $services->set('X')->class('X')
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoSetClassServiceDuplicationRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # service('id') where an alias points 'id' at a class
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferClassServiceReferenceRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # redundant ->tag() that autoconfigure() already adds
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoAutoconfiguredServiceTagRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+    # ->call('setX', [service()]) that should be a #[Required] setter
+    Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSetterCallRule:
+        phpstan.rules.rule: %symplify.symfonyConfig%
+
+
+
+
+
+
+
+
+
+services:
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\ServicesExcludedDirectoryMustExistRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoBundleResourceConfigRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\AlreadyRegisteredAutodiscoveryServiceRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\TaggedIteratorOverRepeatedServiceCallRule
-
-    # sync file name and extension name
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\FileNameMatchesExtensionRule
-
-    # no autowire duplicate
     - Symplify\PHPStanRules\Rules\Symfony\NoServiceAutowireDuplicateRule
-
-    # args() and arg() call
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgsAutowireByTypeRule
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoDuplicateArgAutowireByTypeRule
-
-    # $services->set('X', 'X')
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSameNameSetClassRule
-
-    # $services->set('X')->class('X')
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoSetClassServiceDuplicationRule
-
-    # service('id') where an alias points 'id' at a class
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\PreferClassServiceReferenceRule
-
-    # redundant ->tag() that autoconfigure() already adds
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoAutoconfiguredServiceTagRule
-
-    # ->call('setX', [service()]) that should be a #[Required] setter
     - Symplify\PHPStanRules\Rules\Symfony\ConfigClosure\NoServiceSetterCallRule
-
-services:
-    -
-        class: Symplify\PHPStanRules\Collector\ClassTargetServiceAliasCollector
-        tags: [phpstan.collector]
-    -
-        class: Symplify\PHPStanRules\Collector\ServiceStringReferenceCollector
-        tags: [phpstan.collector]

@@ -4,6 +4,10 @@ parameters:
         complexity: true
         configurable: true
         static: true
+        symfony: true
+        symfonyConfig: true
+        doctrine: true
+        phpunit: true
         mocks: false
         ctor: false
         symfonyReturnType: false
@@ -21,6 +25,10 @@ parametersSchema:
         complexity: bool()
         configurable: bool()
         static: bool()
+        symfony: bool()
+        symfonyConfig: bool()
+        doctrine: bool()
+        phpunit: bool()
         mocks: bool()
         ctor: bool()
         symfonyReturnType: bool()

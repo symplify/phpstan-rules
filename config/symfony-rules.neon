@@ -1,33 +1,79 @@
-rules:
+conditionalTags:
+    Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule:
+        phpstan.rules.rule: %symplify.symfony%
+
+    # routing
+    Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoRouteTrailingSlashPathRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule:
+        phpstan.rules.rule: %symplify.symfony%
+
+    # dependency injection
+    Symplify\PHPStanRules\Rules\Symfony\NoServiceJugglingRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\PreferClassInDefinitionFetchRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoGetInCommandRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoFindTaggedServiceIdsCallRule:
+        phpstan.rules.rule: %symplify.symfony%
+
+    # magic required inject
+    Symplify\PHPStanRules\Rules\Symfony\SingleRequiredMethodRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoConstructorAndRequiredTogetherRule:
+        phpstan.rules.rule: %symplify.symfony%
+
+    # attributes
+    Symplify\PHPStanRules\Rules\Symfony\RequireIsGrantedEnumRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoBareAndSecurityIsGrantedContentsRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\CommandMustHaveAsCommandAttributeRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\ConstraintMustHaveAttributeRule:
+        phpstan.rules.rule: %symplify.symfony%
+
+    # constructor injection
+    Symplify\PHPStanRules\Rules\Symfony\PreferInterfaceInConstructorRule:
+        phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoNullableServiceInConstructorRule:
+        phpstan.rules.rule: %symplify.symfony%
+
+services:
     - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
     - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
     - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule
     - Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule
-
-    # routing
     - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
     - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
     - Symplify\PHPStanRules\Rules\Symfony\NoRouteTrailingSlashPathRule
     - Symplify\PHPStanRules\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule
-
-    # dependency injection
     - Symplify\PHPStanRules\Rules\Symfony\NoServiceJugglingRule
     - Symplify\PHPStanRules\Rules\Symfony\PreferClassInDefinitionFetchRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInCommandRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoFindTaggedServiceIdsCallRule
-
-    # magic required inject
     - Symplify\PHPStanRules\Rules\Symfony\SingleRequiredMethodRule
     - Symplify\PHPStanRules\Rules\Symfony\NoConstructorAndRequiredTogetherRule
-
-    # attributes
     - Symplify\PHPStanRules\Rules\Symfony\RequireIsGrantedEnumRule
     - Symplify\PHPStanRules\Rules\Symfony\NoBareAndSecurityIsGrantedContentsRule
     - Symplify\PHPStanRules\Rules\Symfony\CommandMustHaveAsCommandAttributeRule
     - Symplify\PHPStanRules\Rules\Symfony\ConstraintMustHaveAttributeRule
-
-    # constructor injection
     - Symplify\PHPStanRules\Rules\Symfony\PreferInterfaceInConstructorRule
     - Symplify\PHPStanRules\Rules\Symfony\NoNullableServiceInConstructorRule

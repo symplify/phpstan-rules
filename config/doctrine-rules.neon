@@ -1,14 +1,32 @@
-rules:
+conditionalTags:
+    Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule:
+        phpstan.rules.rule: %symplify.doctrine%
+    Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule:
+        phpstan.rules.rule: %symplify.doctrine%
+    Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule:
+        phpstan.rules.rule: %symplify.doctrine%
+    Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule:
+        phpstan.rules.rule: %symplify.doctrine%
+
+    Symplify\PHPStanRules\Rules\Doctrine\NoDoctrineListenerWithoutContractRule:
+        phpstan.rules.rule: %symplify.doctrine%
+
+    # test fixtures
+    Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule:
+        phpstan.rules.rule: %symplify.doctrine%
+
+    # entity mapping
+    Symplify\PHPStanRules\Rules\Doctrine\NoStringTargetEntityRule:
+        phpstan.rules.rule: %symplify.doctrine%
+    Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule:
+        phpstan.rules.rule: %symplify.doctrine%
+
+services:
     - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoRepositoryCallInDataFixtureRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOnServiceRepositoryEntityRule
-
     - Symplify\PHPStanRules\Rules\Doctrine\NoDoctrineListenerWithoutContractRule
-
-    # test fixtures
     - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule
-
-    # entity mapping
     - Symplify\PHPStanRules\Rules\Doctrine\NoStringTargetEntityRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule
