@@ -30,4 +30,13 @@ final readonly class TypeAwareNodeFinder
     {
         return $this->nodeFinder->findFirstInstanceOf($nodes, $type);
     }
+
+    /**
+     * @param Node[]|Node $nodes
+     * @param callable(Node): bool $filter
+     */
+    public function findFirst(array|Node $nodes, callable $filter): ?Node
+    {
+        return $this->nodeFinder->findFirst($nodes, $filter);
+    }
 }

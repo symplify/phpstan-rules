@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Reflection;
 
+use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\NodeTraverser;
@@ -23,7 +24,7 @@ final class ReflectionParser
     /**
      * @var array<string, ClassLike>
      */
-    private array $classesByFilename = [];
+    private array $classesByName = [];
 
     private readonly Parser $parser;
 
@@ -54,7 +55,7 @@ final class ReflectionParser
             return null;
         }
 
-        return $this->parseFilenameToClass($fileName);
+        return $this->parseFilenameToClass($fileName, $classReflection->getName());
     }
 
     private function parseNativeClassReflection(ReflectionClass|ClassReflection $reflectionClass): ?ClassLike
@@ -68,13 +69,13 @@ final class ReflectionParser
             return null;
         }
 
-        return $this->parseFilenameToClass($fileName);
+        return $this->parseFilenameToClass($fileName, $reflectionClass->getName());
     }
 
-    private function parseFilenameToClass(string $fileName): ClassLike|null
+    private function parseFilenameToClass(string $fileName, string $className): ClassLike|null
     {
-        if (isset($this->classesByFilename[$fileName])) {
-            return $this->classesByFilename[$fileName];
+        if (isset($this->classesByName[$className])) {
+            return $this->classesByName[$className];
         }
 
         try {
@@ -92,12 +93,17 @@ final class ReflectionParser
             return null;
         }
 
-        $classLike = $this->typeAwareNodeFinder->findFirstInstanceOf($stmts, ClassLike::class);
+        // a file can hold multiple class-likes, match the requested one by name
+        $classLike = $this->typeAwareNodeFinder->findFirst(
+            $stmts,
+            static fn (Node $node): bool => $node instanceof ClassLike && (string) $node->namespacedName === $className
+        );
+
         if (! $classLike instanceof ClassLike) {
             return null;
         }
 
-        $this->classesByFilename[$fileName] = $classLike;
+        $this->classesByName[$className] = $classLike;
 
         return $classLike;
     }
