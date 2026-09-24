@@ -32,6 +32,10 @@ final class NoFindTaggedServiceIdsCallRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/FindTaggedServiceIdsInPass.php', [[NoFindTaggedServiceIdsCallRule::ERROR_MESSAGE, 14]]];
 
+        yield [__DIR__ . '/Fixture/FindTaggedServiceIdsSimpleForeach.php', [[NoFindTaggedServiceIdsCallRule::ERROR_MESSAGE, 16]]];
+
+        yield [__DIR__ . '/Fixture/SkipTagAttributesInForeach.php', []];
+
         yield [__DIR__ . '/Fixture/SkipFindTaggedServiceIdsInContext.php', []];
     }
 
