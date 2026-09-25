@@ -28,8 +28,9 @@ use Throwable;
  * A service is always provided by the container, so "?SomeService $service" or "SomeService|null $service" only hides
  * that it is really required. Nullable is allowed on an abstract class, whose optional dependency is filled by a child.
  * A nullable scalar, array, exception ("$previous" is nullable by PHP convention) or date value object is left alone,
- * as those are values, not services. Data-holder classes in an Entity, Event, DTO, Message, DAO, Token, Exception,
- * Helper, ValueObject, Form\Type or Badge namespace are skipped whole - their constructors carry values, not services.
+ * as those are values, not services. Data-holder classes in an Entity, Event, DTO, Dto, Message, DAO, Dao, Token,
+ * Exception, Helper, ValueObject, Form\Type or Badge namespace are skipped whole - their constructors carry values,
+ * not services.
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoNullableServiceInConstructorRule\NoNullableServiceInConstructorRuleTest
  *
@@ -48,8 +49,10 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
         '\\Entity\\',
         '\\Event\\',
         '\\DTO\\',
+        '\\Dto\\',
         '\\Message\\',
         '\\DAO\\',
+        '\\Dao\\',
         '\\Token\\',
         '\\Exception\\',
         '\\Helper\\',
