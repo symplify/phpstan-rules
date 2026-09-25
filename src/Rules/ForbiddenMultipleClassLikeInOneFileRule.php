@@ -13,6 +13,7 @@ use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
 /**
  * @implements Rule<FileNode>
@@ -39,6 +40,10 @@ final readonly class ForbiddenMultipleClassLikeInOneFileRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        if (TestClassDetector::isTestClass($scope)) {
+            return [];
+        }
+
         /** @var ClassLike[] $classLikes */
         $classLikes = $this->nodeFinder->findInstanceOf($node->getNodes(), ClassLike::class);
 

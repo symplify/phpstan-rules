@@ -31,6 +31,7 @@ final class ForbiddenMultipleClassLikeInOneFileRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipOneClassWithAnonymousClass.php', []];
         yield [__DIR__ . '/Fixture/SkipOneClass.php', []];
         yield [__DIR__ . '/Fixture/SkipOneTrait.php', []];
+        yield [__DIR__ . '/Fixture/SkipMultipleClassLikeTestCase.php', []];
 
         yield [
             __DIR__ . '/Fixture/MultipleClassLike.php',
