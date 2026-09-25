@@ -4,7 +4,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Symfony\SingleArgEventDispatchRule\F
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-final class SkipVariableSecondArg
+final class ReportConstantStringVariableSecondArg
 {
     public function run(EventDispatcherInterface $eventDispatcher, object $event)
     {

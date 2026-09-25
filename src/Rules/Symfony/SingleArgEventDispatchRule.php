@@ -6,8 +6,6 @@ namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\New_;
-use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
@@ -50,12 +48,7 @@ final class SingleArgEventDispatchRule implements Rule
 
         // allow 2nd arg when dynamic, e.g. a variable event name
         if (count($args) === 2) {
-            $secondArgExpr = $args[1]->value;
-            if ($secondArgExpr instanceof Variable || $secondArgExpr instanceof New_) {
-                return [];
-            }
-
-            $secondArgType = $scope->getType($secondArgExpr);
+            $secondArgType = $scope->getType($args[1]->value);
             if ($secondArgType->getConstantStrings() === []) {
                 return [];
             }
