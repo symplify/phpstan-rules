@@ -36,6 +36,7 @@ final class SingleArgEventDispatchRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipUnrelatedDispatch.php', []];
         yield [__DIR__ . '/Fixture/SkipDynamicSecondArg.php', []];
         yield [__DIR__ . '/Fixture/SkipUntypedArgumentSecondArg.php', []];
+        yield [__DIR__ . '/Fixture/SkipStringArgumentSecondArg.php', []];
         yield [__DIR__ . '/Fixture/SkipNewSecondArg.php', []];
     }
 
