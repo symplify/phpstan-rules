@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
@@ -35,6 +36,11 @@ final class ForbiddenStaticClassConstFetchRule implements Rule
         }
 
         if ($node->class->toString() !== 'static') {
+            return [];
+        }
+
+        $classReflection = $scope->getClassReflection();
+        if ($classReflection instanceof ClassReflection && $classReflection->isAbstract()) {
             return [];
         }
 

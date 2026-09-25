@@ -31,6 +31,8 @@ final class ForbiddenStaticClassConstFetchRuleTest extends RuleTestCase
             __DIR__ . '/Fixture/SomeClassWithStaticConstFetch.php',
             [[ForbiddenStaticClassConstFetchRule::ERROR_MESSAGE, 11]],
         ];
+
+        yield [__DIR__ . '/Fixture/SkipAbstractClass.php', []];
     }
 
     /**
