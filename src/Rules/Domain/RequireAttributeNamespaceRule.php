@@ -37,9 +37,9 @@ final class RequireAttributeNamespaceRule implements Rule
             return [];
         }
 
-        // is class in "Attribute" namespace?
+        // is class in "Attribute" or "Attributes" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Attribute\\')) {
+        if (str_contains($className, '\\Attribute\\') || str_contains($className, '\\Attributes\\')) {
             return [];
         }
 
