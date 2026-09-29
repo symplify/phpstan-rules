@@ -15,6 +15,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Doctrine\DoctrineEventSubscriberAnalyzer;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 
 /**
  * Based on https://tomasvotruba.com/blog/2019/07/22/how-to-convert-listeners-to-subscribers-and-reduce-your-configs
@@ -24,9 +25,14 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoListenerWithoutContractRule\NoListenerWithoutContractRuleTest
  */
-final class NoListenerWithoutContractRule implements Rule
+final readonly class NoListenerWithoutContractRule implements Rule
 {
     public const string ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
+
+    public function __construct(
+        private LaravelPresenceResolver $laravelPresenceResolver,
+    ) {
+    }
 
     public function getNodeType(): string
     {
@@ -38,6 +44,10 @@ final class NoListenerWithoutContractRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        if ($this->laravelPresenceResolver->isLaravelProject()) {
+            return [];
+        }
+
         if (! $scope->isInClass()) {
             return [];
         }

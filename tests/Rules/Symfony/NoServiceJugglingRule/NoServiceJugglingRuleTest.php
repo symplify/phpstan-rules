@@ -8,6 +8,7 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 use Symplify\PHPStanRules\Rules\Symfony\NoServiceJugglingRule;
 use Symplify\PHPStanRules\Tests\Rules\Symfony\NoServiceJugglingRule\Source\SomeUserHelper;
 
@@ -48,6 +49,8 @@ final class NoServiceJugglingRuleTest extends RuleTestCase
 
     protected function getRule(): Rule
     {
-        return new NoServiceJugglingRule();
+        return new NoServiceJugglingRule(
+            new LaravelPresenceResolver($this->createReflectionProvider())
+        );
     }
 }

@@ -55,6 +55,8 @@ conditionalTags:
         phpstan.rules.rule: %symplify.symfony%
 
 services:
+    - Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver
+
     - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
     - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
     - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule

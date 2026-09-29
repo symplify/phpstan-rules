@@ -26,6 +26,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Contracts\Service\Attribute\Required;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 
 /**
  * A service injected in __construct() or an autowire*() method must not be handed over to another method call.
@@ -38,7 +39,7 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  *
  * @implements Rule<InClassNode>
  */
-final class NoServiceJugglingRule implements Rule
+final readonly class NoServiceJugglingRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Service "$this->%s" is passed to "%s()" as an argument. Inject "%s" in the constructor of the class that uses it instead';
 
@@ -47,6 +48,11 @@ final class NoServiceJugglingRule implements Rule
     private const string AUTOWIRE_PREFIX = 'autowire';
 
     private const string REQUIRED_ATTRIBUTE = Required::class;
+
+    public function __construct(
+        private LaravelPresenceResolver $laravelPresenceResolver,
+    ) {
+    }
 
     public function getNodeType(): string
     {
@@ -60,6 +66,10 @@ final class NoServiceJugglingRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        if ($this->laravelPresenceResolver->isLaravelProject()) {
+            return [];
+        }
+
         $classLike = $node->getOriginalNode();
         if (! $classLike instanceof Class_) {
             return [];
