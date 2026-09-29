@@ -10,6 +10,7 @@ parameters:
         phpunit: true
         mocks: false
         ctor: false
+        inlineTrait: false
         symfonyReturnType: false
         laravelReturnType: false
         pathStrings: false
@@ -31,6 +32,7 @@ parametersSchema:
         phpunit: bool()
         mocks: bool()
         ctor: bool()
+        inlineTrait: bool()
         symfonyReturnType: bool()
         laravelReturnType: bool()
         pathStrings: bool()

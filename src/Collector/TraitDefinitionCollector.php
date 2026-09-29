@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Symplify\PHPStanRules\Collector;
+
+use PhpParser\Node;
+use PhpParser\Node\Stmt\Trait_;
+use PHPStan\Analyser\Scope;
+use PHPStan\Collectors\Collector;
+
+/**
+ * Collect every trait definition with its FQN, file, line and line count,
+ * so the rule can decide which traits are used too rarely to justify existence.
+ *
+ * @implements Collector<Trait_, array{traitName: string, file: string, line: int, lineCount: int}>
+ */
+final readonly class TraitDefinitionCollector implements Collector
+{
+    public function __construct(
+        private bool $isEnabled
+    ) {
+    }
+
+    public function getNodeType(): string
+    {
+        return Trait_::class;
+    }
+
+    /**
+     * @param Trait_ $node
+     * @return array{traitName: string, file: string, line: int, lineCount: int}|null
+     */
+    public function processNode(Node $node, Scope $scope): ?array
+    {
+        // enable with "inlineTrait: true" parameter
+        if (! $this->isEnabled) {
+            return null;
+        }
+
+        $traitName = $node->namespacedName?->toString() ?? $node->name?->toString();
+        if ($traitName === null) {
+            return null;
+        }
+
+        return [
+            'traitName' => $traitName,
+            'file' => $scope->getFile(),
+            'line' => $node->getStartLine(),
+            'lineCount' => $node->getEndLine() - $node->getStartLine() + 1,
+        ];
+    }
+}
