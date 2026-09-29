@@ -8,6 +8,7 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 use Symplify\PHPStanRules\Rules\Symfony\NoConstructorAndRequiredTogetherRule;
 
 final class NoConstructorAndRequiredTogetherRuleTest extends RuleTestCase
@@ -39,6 +40,8 @@ final class NoConstructorAndRequiredTogetherRuleTest extends RuleTestCase
 
     protected function getRule(): Rule
     {
-        return new NoConstructorAndRequiredTogetherRule();
+        return new NoConstructorAndRequiredTogetherRule(
+            new LaravelPresenceResolver($this->createReflectionProvider())
+        );
     }
 }

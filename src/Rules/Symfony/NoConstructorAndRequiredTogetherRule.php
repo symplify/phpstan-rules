@@ -13,15 +13,21 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\MethodName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 
 /**
  * @implements Rule<Class_>
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoConstructorAndRequiredTogetherRule\NoConstructorAndRequiredTogetherRuleTest
  */
-final class NoConstructorAndRequiredTogetherRule implements Rule
+final readonly class NoConstructorAndRequiredTogetherRule implements Rule
 {
     public const string ERROR_MESSAGE = 'Avoid using __construct() and @required in the same class. Pick one to keep architecture clean';
+
+    public function __construct(
+        private LaravelPresenceResolver $laravelPresenceResolver,
+    ) {
+    }
 
     public function getNodeType(): string
     {
@@ -34,6 +40,10 @@ final class NoConstructorAndRequiredTogetherRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        if ($this->laravelPresenceResolver->isLaravelProject()) {
+            return [];
+        }
+
         if ($node->isAnonymous()) {
             return [];
         }

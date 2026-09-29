@@ -8,6 +8,7 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 use Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule;
 
 final class NoListenerWithoutContractRuleTest extends RuleTestCase
@@ -46,6 +47,8 @@ final class NoListenerWithoutContractRuleTest extends RuleTestCase
 
     protected function getRule(): Rule
     {
-        return new NoListenerWithoutContractRule();
+        return new NoListenerWithoutContractRule(
+            new LaravelPresenceResolver($this->createReflectionProvider())
+        );
     }
 }

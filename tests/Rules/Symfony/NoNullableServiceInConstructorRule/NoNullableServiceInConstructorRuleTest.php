@@ -8,6 +8,7 @@ use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 use Symplify\PHPStanRules\Rules\Symfony\NoNullableServiceInConstructorRule;
 use Symplify\PHPStanRules\Tests\Rules\Symfony\NoNullableServiceInConstructorRule\Source\AnotherService;
 use Symplify\PHPStanRules\Tests\Rules\Symfony\NoNullableServiceInConstructorRule\Source\SomeService;
@@ -55,6 +56,9 @@ final class NoNullableServiceInConstructorRuleTest extends RuleTestCase
 
     protected function getRule(): Rule
     {
-        return new NoNullableServiceInConstructorRule($this->createReflectionProvider());
+        return new NoNullableServiceInConstructorRule(
+            $this->createReflectionProvider(),
+            new LaravelPresenceResolver($this->createReflectionProvider())
+        );
     }
 }

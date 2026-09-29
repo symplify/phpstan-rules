@@ -20,6 +20,7 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 use Throwable;
 
 /**
@@ -63,6 +64,7 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
+        private LaravelPresenceResolver $laravelPresenceResolver,
     ) {
     }
 
@@ -78,6 +80,10 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        if ($this->laravelPresenceResolver->isLaravelProject()) {
+            return [];
+        }
+
         if ($node->name->toLowerString() !== '__construct') {
             return [];
         }
