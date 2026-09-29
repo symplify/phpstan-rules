@@ -97,4 +97,6 @@ final class RuleIdentifier
     public const string NO_SERVICE_JUGGLING = 'symplify.noServiceJuggling';
 
     public const string NO_NULLABLE_SERVICE_IN_CONSTRUCTOR = 'symplify.noNullableServiceInConstructor';
+
+    public const string PREFER_INLINE_TRAIT = 'symplify.preferInlineTrait';
 }

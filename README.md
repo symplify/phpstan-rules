@@ -122,6 +122,34 @@ parameters:
 
 <br>
 
+### PreferInlineTraitRule
+
+A trait with a handful of lines used in a single service is better inlined into the class. It empowers IDE, Rector and PHPStan to understand the code. This rule spots traits used only a few times across the project, so you can inline them:
+
+```php
+trait NameTrait
+{
+    public function getName(): string
+    {
+        return $this->name;
+    }
+}
+```
+
+:x:
+
+<br>
+
+The rule reports traits used at most `maxUsage` times (2 by default). It is disabled by default. Enable it with the `inlineTrait` parameter:
+
+```yaml
+parameters:
+    symplify:
+        inlineTrait: true
+```
+
+<br>
+
 ### ParamNameToTypeConventionRule
 
 By convention, we can define parameter type by its name. If we know the "userId" is always an `int`, PHPStan can warn us about it and let us know to fill the type.

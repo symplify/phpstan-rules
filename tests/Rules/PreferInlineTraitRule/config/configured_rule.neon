@@ -1,0 +1,7 @@
+includes:
+    - ../../../../config/phpstan-extensions.neon
+    - ../../../../config/inline-trait-rules.neon
+
+parameters:
+    symplify:
+        inlineTrait: true

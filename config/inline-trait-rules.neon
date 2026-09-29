@@ -1,0 +1,22 @@
+services:
+    -
+        class: Symplify\PHPStanRules\Collector\TraitDefinitionCollector
+        tags:
+            - phpstan.collector
+        arguments:
+            isEnabled: %symplify.inlineTrait%
+
+    -
+        class: Symplify\PHPStanRules\Collector\TraitUsageCollector
+        tags:
+            - phpstan.collector
+        arguments:
+            isEnabled: %symplify.inlineTrait%
+
+    -
+        class: Symplify\PHPStanRules\Rules\PreferInlineTraitRule
+        tags:
+            - phpstan.rules.rule
+        arguments:
+            maxUsage: 2
+            isEnabled: %symplify.inlineTrait%
