@@ -29,6 +29,7 @@ final class RequireAttributeNamespaceRuleTest extends RuleTestCase
     {
         yield [__DIR__ . '/Fixture/MisslocatedAttribute.php', [[RequireAttributeNamespaceRule::ERROR_MESSAGE, 7]]];
         yield [__DIR__ . '/Fixture/Attribute/SkipCorrectAttribute.php', []];
+        yield [__DIR__ . '/Fixture/Attributes/SkipCorrectPluralAttribute.php', []];
     }
 
     /**
