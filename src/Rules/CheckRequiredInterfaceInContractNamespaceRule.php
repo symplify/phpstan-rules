@@ -18,12 +18,12 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Interface must be located in "Contract" or "Contracts" namespace';
+    public const string ERROR_MESSAGE = 'Interface must be located in "Contract", "Contracts", "Interface" or "Interfaces" namespace';
 
     /**
      * @see https://regex101.com/r/kmrIG1/2
      */
-    private const string A_CONTRACT_NAMESPACE_REGEX = '#\bContracts?\b#';
+    private const string A_CONTRACT_NAMESPACE_REGEX = '#\b(Contracts?|Interfaces?)\b#';
 
     public function getNodeType(): string
     {

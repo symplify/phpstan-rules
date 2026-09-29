@@ -158,7 +158,7 @@ function run(int $userId)
 
 ### CheckRequiredInterfaceInContractNamespaceRule
 
-Interface must be located in "Contract" or "Contracts" namespace
+Interface must be located in "Contract", "Contracts", "Interface" or "Interfaces" namespace
 
 ```yaml
 rules:

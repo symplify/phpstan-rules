@@ -29,6 +29,7 @@ final class CheckRequiredInterfaceInContractNamespaceRuleTest extends RuleTestCa
     {
         yield [__DIR__ . '/Fixture/Contract/SkipInterfaceInContract.php', []];
         yield [__DIR__ . '/Fixture/Illuminate/Contracts/View/View.php', []];
+        yield [__DIR__ . '/Fixture/Interfaces/SkipInterfaceInInterfacesNamespace.php', []];
         yield [
             __DIR__ . '/Fixture/AnInterfaceNotInContract.php',
             [[CheckRequiredInterfaceInContractNamespaceRule::ERROR_MESSAGE, 7]], ];
