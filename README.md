@@ -1045,7 +1045,7 @@ class SomeClass extends SomeParentClass
 
 ### RequireRouteNameToGenerateControllerRouteRule
 
-To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method
+To pass a controller class to generate() method, the controller must have "#[Route]" above the __invoke() method
 
 ```yaml
 rules:

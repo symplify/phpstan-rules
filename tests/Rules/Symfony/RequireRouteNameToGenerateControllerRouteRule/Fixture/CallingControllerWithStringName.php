@@ -7,7 +7,7 @@ namespace Symplify\PHPStanRules\Tests\Rules\Symfony\RequireRouteNameToGenerateCo
 use Symfony\Component\Routing\RouterInterface;
 use Symplify\PHPStanRules\Tests\Rules\Symfony\RequireRouteNameToGenerateControllerRouteRule\Source\SomeControllerWithStringNameClass;
 
-final class CallingControllerWithWrongString
+final class CallingControllerWithStringName
 {
     public function run(RouterInterface $router)
     {

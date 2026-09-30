@@ -23,7 +23,8 @@ use Symplify\PHPStanRules\Reflection\InvokeClassMethodResolver;
 
 /**
  * To pass a controller class in $this->router->generate(SomeController::class),
- * the controller must be present #[Route(name:: self::class)
+ * the __invoke() must have a #[Route]. Since Symfony 6.4 the FQCN route alias is
+ * auto-created for any route name.
  *
  * @see https://symfony.com/blog/new-in-symfony-6-4-fqcn-based-routes
  *
@@ -36,7 +37,7 @@ final readonly class RequireRouteNameToGenerateControllerRouteRule implements Ru
     /**
      * @api
      */
-    public const string ERROR_MESSAGE = 'To pass a controller class to generate() method, the controller must have "#[Route(name: self::class)]" above the __invoke() method';
+    public const string ERROR_MESSAGE = 'To pass a controller class to generate() method, the controller must have "#[Route]" above the __invoke() method';
 
     public function __construct(
         private ReflectionProvider $reflectionProvider,
@@ -77,7 +78,9 @@ final readonly class RequireRouteNameToGenerateControllerRouteRule implements Ru
         }
 
         $routeAttributes = $this->findRouteAttributes($invokeClassMethodReflection);
-        if ($this->hasAtLeastOneRouteWithSelfClassName($routeAttributes, $controllerClassReflection)) {
+
+        // any #[Route] is enough, Symfony 6.4+ auto-creates the FQCN alias
+        if ($routeAttributes !== []) {
             return [];
         }
 
@@ -133,22 +136,5 @@ final readonly class RequireRouteNameToGenerateControllerRouteRule implements Ru
             $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ATTRIBUTE),
             $reflectionMethod->getAttributes(SymfonyClass::ROUTE_ANNOTATION)
         );
-    }
-
-    /**
-     * @param ReflectionAttribute[] $routeAttributes
-     */
-    private function hasAtLeastOneRouteWithSelfClassName(array $routeAttributes, ClassReflection $classReflection): bool
-    {
-        foreach ($routeAttributes as $routeAttribute) {
-            $routeName = $routeAttribute->getArguments()['name'] ?? null;
-
-            // name must be same as current controller class
-            if ($routeName === $classReflection->getName()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

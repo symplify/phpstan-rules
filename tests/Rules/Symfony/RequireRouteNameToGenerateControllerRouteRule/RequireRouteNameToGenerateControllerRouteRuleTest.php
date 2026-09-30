@@ -30,15 +30,14 @@ final class RequireRouteNameToGenerateControllerRouteRuleTest extends RuleTestCa
         yield [__DIR__ . '/Fixture/CallingCorrectController.php', []];
         yield [__DIR__ . '/Fixture/TwoRoutes.php', []];
 
+        // any #[Route] name is valid since Symfony 6.4 auto-creates the FQCN alias
+        yield [__DIR__ . '/Fixture/CallingControllerWithStringName.php', []];
+
         yield [__DIR__ . '/Fixture/CallingWrongController.php', [
             [RequireRouteNameToGenerateControllerRouteRule::ERROR_MESSAGE, 14],
         ]];
 
         yield [__DIR__ . '/Fixture/CallingControllerWithoutInvoke.php', [
-            [RequireRouteNameToGenerateControllerRouteRule::ERROR_MESSAGE, 14],
-        ]];
-
-        yield [__DIR__ . '/Fixture/CallingControllerWithWrongString.php', [
             [RequireRouteNameToGenerateControllerRouteRule::ERROR_MESSAGE, 14],
         ]];
     }
