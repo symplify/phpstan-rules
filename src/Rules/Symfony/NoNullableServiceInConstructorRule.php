@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use Closure;
 use DateTimeInterface;
 use PhpParser\Node;
 use PhpParser\Node\ComplexType;
@@ -28,8 +29,9 @@ use Throwable;
  *
  * A service is always provided by the container, so "?SomeService $service" or "SomeService|null $service" only hides
  * that it is really required. Nullable is allowed on an abstract class, whose optional dependency is filled by a child.
- * A nullable scalar, array, exception ("$previous" is nullable by PHP convention) or date value object is left alone,
- * as those are values, not services. Data-holder classes in an Entity, Event, DTO, Dto, Message, DAO, Dao, Token,
+ * A nullable scalar, array, exception ("$previous" is nullable by PHP convention), date value object, enum or closure
+ * is left alone, as those are values, not services. An exception class is skipped whole - its constructor carries
+ * error context, not services. Data-holder classes in an Entity, Event, DTO, Dto, Message, DAO, Dao, Token,
  * Exception, Helper, ValueObject, Form\Type or Badge namespace are skipped whole - their constructors carry values,
  * not services.
  *
@@ -101,6 +103,11 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
 
         // a data-holder namespace (event, DTO, token, exception, helper, form type, badge, ...) carries values, not services
         if ($this->isSkippedNamespace($classReflection->getName())) {
+            return [];
+        }
+
+        // an exception is built with "new" at the throw site and carries error context, not services
+        if ($classReflection->is(Throwable::class)) {
             return [];
         }
 
@@ -210,7 +217,8 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
     }
 
     /**
-     * A nullable class type that is not really a service: an exception ("$previous") or a date value object.
+     * A nullable class type that is not really a service: an exception ("$previous"), a date value object, an enum or a
+     * closure.
      */
     private function isValueObjectType(string $className): bool
     {
@@ -219,7 +227,12 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
         }
 
         $classReflection = $this->reflectionProvider->getClass($className);
+        if ($classReflection->isEnum()) {
+            return true;
+        }
 
-        return $classReflection->is(Throwable::class) || $classReflection->is(DateTimeInterface::class);
+        return $classReflection->is(Throwable::class)
+            || $classReflection->is(DateTimeInterface::class)
+            || $classReflection->is(Closure::class);
     }
 }
