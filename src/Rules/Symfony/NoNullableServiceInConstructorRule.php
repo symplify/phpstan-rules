@@ -20,6 +20,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use ReflectionProperty;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 use Throwable;
@@ -31,9 +32,9 @@ use Throwable;
  * that it is really required. Nullable is allowed on an abstract class, whose optional dependency is filled by a child.
  * A nullable scalar, array, exception ("$previous" is nullable by PHP convention), date value object, enum or closure
  * is left alone, as those are values, not services. An exception class is skipped whole - its constructor carries
- * error context, not services. Data-holder classes in an Entity, Event, DTO, Dto, Message, DAO, Dao, Token,
- * Exception, Helper, ValueObject, Form\Type or Badge namespace are skipped whole - their constructors carry values,
- * not services.
+ * error context, not services - and so is a class with public properties, which holds data. Data-holder classes in
+ * an Entity, Event, DTO, Dto, Message, DAO, Dao, Token, Exception, Helper, ValueObject, Form\Type or Badge namespace
+ * are skipped whole - their constructors carry values, not services.
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoNullableServiceInConstructorRule\NoNullableServiceInConstructorRuleTest
  *
@@ -108,6 +109,11 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
 
         // an exception is built with "new" at the throw site and carries error context, not services
         if ($classReflection->is(Throwable::class)) {
+            return [];
+        }
+
+        // a class with public properties is a data holder - a service does not expose its dependencies
+        if ($this->hasPublicProperty($classReflection)) {
             return [];
         }
 
@@ -206,6 +212,20 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
         }
 
         return null;
+    }
+
+    /**
+     * Own, promoted and inherited public instance properties count.
+     */
+    private function hasPublicProperty(ClassReflection $classReflection): bool
+    {
+        foreach ($classReflection->getNativeReflection()->getProperties(ReflectionProperty::IS_PUBLIC) as $reflectionProperty) {
+            if (! $reflectionProperty->isStatic()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function isSkippedNamespace(string $className): bool

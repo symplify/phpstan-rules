@@ -52,6 +52,8 @@ final class NoNullableServiceInConstructorRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/Event/SkipEventDataHolder.php', []];
         yield [__DIR__ . '/Fixture/SkipDuplicateType.php', []];
         yield [__DIR__ . '/Fixture/SkipAnonymousClass.php', []];
+        yield [__DIR__ . '/Fixture/SkipPublicPropertyDataHolder.php', []];
+        yield [__DIR__ . '/Fixture/SkipChildOfPublicPropertyDataHolder.php', []];
         yield [__DIR__ . '/Fixture/SkipNullableEnum.php', []];
         yield [__DIR__ . '/Fixture/SkipNullableClosure.php', []];
         yield [__DIR__ . '/Fixture/SkipExceptionClass.php', []];
