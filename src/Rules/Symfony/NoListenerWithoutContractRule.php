@@ -62,7 +62,8 @@ final readonly class NoListenerWithoutContractRule implements Rule
             return [];
         }
 
-        if ($classLike->implements !== []) {
+        // a contract inherited from a parent class counts as well
+        if ($classLike->implements !== [] || $classReflection->getInterfaces() !== []) {
             return [];
         }
 
@@ -94,9 +95,17 @@ final readonly class NoListenerWithoutContractRule implements Rule
         return [$identifierRuleError];
     }
 
+    /**
+     * The attribute registers the listener on the class or on one of its methods.
+     */
     private function hasAsListenerAttribute(Class_ $class): bool
     {
-        foreach ($class->attrGroups as $attrGroup) {
+        $attrGroups = $class->attrGroups;
+        foreach ($class->getMethods() as $classMethod) {
+            $attrGroups = [...$attrGroups, ...$classMethod->attrGroups];
+        }
+
+        foreach ($attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attr) {
                 if ($attr->name->toString() === SymfonyClass::EVENT_LISTENER_ATTRIBUTE) {
                     return true;

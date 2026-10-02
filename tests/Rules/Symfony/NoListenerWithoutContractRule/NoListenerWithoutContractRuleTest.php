@@ -38,6 +38,8 @@ final class NoListenerWithoutContractRuleTest extends RuleTestCase
         yield [[__DIR__ . '/Fixture/SomeContractedListener.php'], []];
         yield [[__DIR__ . '/Fixture/SomeContractedWithAttributeListener.php'], []];
         yield [[__DIR__ . '/Fixture/SkipDoctrineListener.php'], []];
+        yield [[__DIR__ . '/Fixture/SkipInheritedContractListener.php'], []];
+        yield [[__DIR__ . '/Fixture/SkipMethodAttributeListener.php'], []];
 
         yield [[__DIR__ . '/Fixture/SomeBareListener.php'], [[
             NoListenerWithoutContractRule::ERROR_MESSAGE,
