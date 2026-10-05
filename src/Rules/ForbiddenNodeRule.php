@@ -21,20 +21,14 @@ final readonly class ForbiddenNodeRule implements Rule
 {
     public const string ERROR_MESSAGE = '"%s" is forbidden to use';
 
-    /**
-     * @var array<class-string<Node>>
-     */
-    private array $forbiddenNodes;
-
     private Standard $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        array $forbiddenNodes
+        private array $forbiddenNodes
     ) {
-        $this->forbiddenNodes = $forbiddenNodes;
         $this->standard = new Standard();
     }
 
