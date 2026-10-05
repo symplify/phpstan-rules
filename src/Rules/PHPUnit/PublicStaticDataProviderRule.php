@@ -23,13 +23,15 @@ final class PublicStaticDataProviderRule implements Rule
 {
     /**
      * @api used in test
+     * @var string
      */
-    public const string PUBLIC_ERROR_MESSAGE = 'PHPUnit data provider method "%s" must be public';
+    public const PUBLIC_ERROR_MESSAGE = 'PHPUnit data provider method "%s" must be public';
 
     /**
      * @api used in test
+     * @var string
      */
-    public const string STATIC_ERROR_MESSAGE = 'PHPUnit data provider method "%s" must be static';
+    public const STATIC_ERROR_MESSAGE = 'PHPUnit data provider method "%s" must be static';
 
     public function getNodeType(): string
     {

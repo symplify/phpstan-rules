@@ -28,25 +28,33 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  *
  * @implements Rule<ClassMethod>
  */
-final readonly class PreferInterfaceInConstructorRule implements Rule
+final class PreferInterfaceInConstructorRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Constructor dependency "%s" is typed as concrete "%s". Use the "%s" interface instead';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Constructor dependency "%s" is typed as concrete "%s". Use the "%s" interface instead';
 
     /**
      * Only 3rd-party contracts are enforced - project classes are free to be typed directly.
      *
      * @var string[]
      */
-    private const array HANDLED_NAMESPACE_PREFIXES = ['Symfony\\', 'Doctrine\\'];
+    private const HANDLED_NAMESPACE_PREFIXES = ['Symfony\\', 'Doctrine\\'];
 
     /**
      * @var string[]
      */
-    private const array SKIPPED_CLASSES = [SymfonyClass::MAILER_TRANSPORT];
+    private const SKIPPED_CLASSES = [SymfonyClass::MAILER_TRANSPORT];
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -133,9 +141,14 @@ final readonly class PreferInterfaceInConstructorRule implements Rule
 
     private function isHandledNamespace(string $className): bool
     {
-        return array_any(
-            self::HANDLED_NAMESPACE_PREFIXES,
-            fn (string $handledNamespacePrefix): bool => str_starts_with($className, $handledNamespacePrefix)
-        );
+        $found = false;
+        foreach (self::HANDLED_NAMESPACE_PREFIXES as $handledNamespacePrefix) {
+            if (strncmp($className, $handledNamespacePrefix, strlen($handledNamespacePrefix)) === 0) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 }

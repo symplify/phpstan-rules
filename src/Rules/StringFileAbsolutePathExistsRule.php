@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Scalar\MagicConst\Dir;
@@ -21,12 +22,15 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class StringFileAbsolutePathExistsRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'File "%s" could not be found. Make sure it exists';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'File "%s" could not be found. Make sure it exists';
 
     /**
      * @var string[]
      */
-    private const array SUFFIXES_TO_CHECK = [
+    private const SUFFIXES_TO_CHECK = [
         '.sql',
         '.php',
         '.yml',
@@ -60,7 +64,7 @@ final class StringFileAbsolutePathExistsRule implements Rule
         }
 
         // probably glob or wildcard, cannot be checked
-        if (str_contains($stringValue, '*')) {
+        if (Strings::contains($stringValue, '*')) {
             return [];
         }
 
@@ -86,6 +90,14 @@ final class StringFileAbsolutePathExistsRule implements Rule
 
     private function isDesiredFileSuffix(string $stringValue): bool
     {
-        return array_any(self::SUFFIXES_TO_CHECK, fn (string $suffixToCheck): bool => str_ends_with($stringValue, $suffixToCheck));
+        $found = false;
+        foreach (self::SUFFIXES_TO_CHECK as $suffixToCheck) {
+            if (substr_compare($stringValue, $suffixToCheck, -strlen($suffixToCheck)) === 0) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 }

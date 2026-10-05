@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\NodeAnalyzer;
 
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node\Stmt\ClassMethod;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
@@ -34,6 +35,6 @@ final class SymfonyRequiredMethodAnalyzer
             return false;
         }
 
-        return str_contains($docComment->getText(), '@required');
+        return Strings::contains($docComment->getText(), '@required');
     }
 }

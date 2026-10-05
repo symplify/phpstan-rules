@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Collector;
 
 use Entropy\Utils\FileSystem;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
@@ -40,26 +41,42 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
  *
  * @implements Collector<Node, array<array{variableName: string, className: string, setterNames: string[]}>>
  */
-final readonly class NewWithFollowingSettersCollector implements Collector
+final class NewWithFollowingSettersCollector implements Collector
 {
-    public const string SETTER_NAMES = 'setterNames';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    private const string VARIABLE_NAME = 'variableName';
+    /**
+     * @readonly
+     */
+    private bool $isEnabled;
+
+    /**
+     * @var string
+     */
+    public const SETTER_NAMES = 'setterNames';
+
+    /**
+     * @var string
+     */
+    private const VARIABLE_NAME = 'variableName';
 
     /**
      * @var string[]
      */
-    private const array EXCLUDED_CLASSES = [
+    private const EXCLUDED_CLASSES = [
         Kernel::class,
         // controllers use setContainer() by Symfony design
         SymfonyClass::ABSTRACT_CONTROLLER,
         SymfonyClass::CONTROLLER,
     ];
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-        private bool $isEnabled
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider, bool $isEnabled)
+    {
+        $this->reflectionProvider = $reflectionProvider;
+        $this->isEnabled = $isEnabled;
     }
 
     public function getNodeType(): string
@@ -168,7 +185,7 @@ final readonly class NewWithFollowingSettersCollector implements Collector
         }
 
         // skip vendor classes
-        if (str_contains($classReflection->getFileName(), 'vendor')) {
+        if (Strings::contains($classReflection->getFileName(), 'vendor')) {
             return true;
         }
 
@@ -179,7 +196,7 @@ final readonly class NewWithFollowingSettersCollector implements Collector
     private function isDoctrineEntity(ClassReflection $classReflection): bool
     {
         // #[ORM\Entity] attribute
-        foreach ($classReflection->getNativeReflection()->getAttributes() as $attributeReflection) {
+        foreach (method_exists($classReflection->getNativeReflection(), 'getAttributes') ? $classReflection->getNativeReflection()->getAttributes() : [] as $attributeReflection) {
             if ($attributeReflection->getName() === 'Doctrine\ORM\Mapping\Entity') {
                 return true;
             }
@@ -188,7 +205,7 @@ final readonly class NewWithFollowingSettersCollector implements Collector
         // @ORM\Entity annotation fallback
         $fileContents = FileSystem::read((string) $classReflection->getFileName());
 
-        return str_contains($fileContents, '@ORM\Entity');
+        return Strings::contains($fileContents, '@ORM\Entity');
     }
 
     /**
@@ -249,10 +266,10 @@ final readonly class NewWithFollowingSettersCollector implements Collector
 
     private function isSetterName(string $setterMethodName): bool
     {
-        if (str_starts_with($setterMethodName, 'add')) {
+        if (strncmp($setterMethodName, 'add', strlen('add')) === 0) {
             return true;
         }
 
-        return str_starts_with($setterMethodName, 'set');
+        return strncmp($setterMethodName, 'set', strlen('set')) === 0;
     }
 }

@@ -39,19 +39,36 @@ use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
  *
  * @implements Rule<InClassNode>
  */
-final readonly class NoServiceJugglingRule implements Rule
+final class NoServiceJugglingRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Service "$this->%s" is passed to "%s()" as an argument. Inject "%s" in the constructor of the class that uses it instead';
+    /**
+     * @readonly
+     */
+    private LaravelPresenceResolver $laravelPresenceResolver;
 
-    private const string CONSTRUCTOR_NAME = '__construct';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Service "$this->%s" is passed to "%s()" as an argument. Inject "%s" in the constructor of the class that uses it instead';
 
-    private const string AUTOWIRE_PREFIX = 'autowire';
+    /**
+     * @var string
+     */
+    private const CONSTRUCTOR_NAME = '__construct';
 
-    private const string REQUIRED_ATTRIBUTE = Required::class;
+    /**
+     * @var string
+     */
+    private const AUTOWIRE_PREFIX = 'autowire';
 
-    public function __construct(
-        private LaravelPresenceResolver $laravelPresenceResolver,
-    ) {
+    /**
+     * @var string
+     */
+    private const REQUIRED_ATTRIBUTE = Required::class;
+
+    public function __construct(LaravelPresenceResolver $laravelPresenceResolver)
+    {
+        $this->laravelPresenceResolver = $laravelPresenceResolver;
     }
 
     public function getNodeType(): string
@@ -169,7 +186,7 @@ final readonly class NoServiceJugglingRule implements Rule
             return true;
         }
 
-        if (str_starts_with($methodName, self::AUTOWIRE_PREFIX)) {
+        if (strncmp($methodName, self::AUTOWIRE_PREFIX, strlen(self::AUTOWIRE_PREFIX)) === 0) {
             return true;
         }
 
@@ -340,10 +357,15 @@ final readonly class NoServiceJugglingRule implements Rule
             return false;
         }
 
-        return array_any(
-            $classReflection->getTraits(true),
-            fn (ClassReflection $classReflection): bool => $classReflection->hasNativeMethod($methodName)
-        );
+        $found = false;
+        foreach ($classReflection->getTraits(true) as $classReflection) {
+            if ($classReflection->hasNativeMethod($methodName)) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 
     /**

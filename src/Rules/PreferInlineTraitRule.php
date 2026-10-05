@@ -21,14 +21,27 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  *
  * @implements Rule<CollectedDataNode>
  */
-final readonly class PreferInlineTraitRule implements Rule
+final class PreferInlineTraitRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Trait "%s" (%d lines) is used only %d-time(s).%sInline it into its user(s) to empower IDE, Rector and PHPStan';
+    /**
+     * @readonly
+     */
+    private int $maxUsage;
 
-    public function __construct(
-        private int $maxUsage,
-        private bool $isEnabled
-    ) {
+    /**
+     * @readonly
+     */
+    private bool $isEnabled;
+
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Trait "%s" (%d lines) is used only %d-time(s).%sInline it into its user(s) to empower IDE, Rector and PHPStan';
+
+    public function __construct(int $maxUsage, bool $isEnabled)
+    {
+        $this->maxUsage = $maxUsage;
+        $this->isEnabled = $isEnabled;
     }
 
     public function getNodeType(): string

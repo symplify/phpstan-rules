@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
  */
 final class RequireServiceRepositoryParentRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Repository must extend "%s", "%s" or implement "%s", so it can be injected as a service';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Repository must extend "%s", "%s" or implement "%s", so it can be injected as a service';
 
     public function getNodeType(): string
     {
@@ -74,6 +77,6 @@ final class RequireServiceRepositoryParentRule implements Rule
         }
 
         // simple check
-        return str_ends_with($classReflection->getName(), 'Repository');
+        return substr_compare($classReflection->getName(), 'Repository', -strlen('Repository')) === 0;
     }
 }

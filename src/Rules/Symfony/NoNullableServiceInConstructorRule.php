@@ -6,6 +6,7 @@ namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use Closure;
 use DateTimeInterface;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\ComplexType;
 use PhpParser\Node\Expr\Variable;
@@ -40,16 +41,29 @@ use Throwable;
  *
  * @implements Rule<ClassMethod>
  */
-final readonly class NoNullableServiceInConstructorRule implements Rule
+final class NoNullableServiceInConstructorRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Constructor service "%s" of type "%s" is nullable. A service is always provided, make it non-nullable';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+
+    /**
+     * @readonly
+     */
+    private LaravelPresenceResolver $laravelPresenceResolver;
+
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Constructor service "%s" of type "%s" is nullable. A service is always provided, make it non-nullable';
 
     /**
      * Data-holder namespaces whose constructors carry nullable values, not container services.
      *
      * @var string[]
      */
-    private const array SKIPPED_NAMESPACE_PARTS = [
+    private const SKIPPED_NAMESPACE_PARTS = [
         '\\Entity\\',
         '\\Event\\',
         '\\DTO\\',
@@ -65,10 +79,10 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
         '\\Badge\\',
     ];
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-        private LaravelPresenceResolver $laravelPresenceResolver,
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider, LaravelPresenceResolver $laravelPresenceResolver)
+    {
+        $this->reflectionProvider = $reflectionProvider;
+        $this->laravelPresenceResolver = $laravelPresenceResolver;
     }
 
     public function getNodeType(): string
@@ -173,30 +187,32 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
 
     /**
      * Returns the class-type name node of any type, nullable or not, null when the type is not a class type.
+     * @param Identifier|Name|ComplexType|null $node
      */
-    private function matchClassName(Identifier|Name|ComplexType|null $type): ?Name
+    private function matchClassName(?Node $node): ?Name
     {
-        if ($type instanceof Name) {
-            return $type;
+        if ($node instanceof Name) {
+            return $node;
         }
 
-        return $this->matchNullableServiceName($type);
+        return $this->matchNullableServiceName($node);
     }
 
     /**
      * Returns the class-type name node when the type is a nullable class type, null otherwise.
+     * @param Identifier|Name|ComplexType|null $node
      */
-    private function matchNullableServiceName(Identifier|Name|ComplexType|null $type): ?Name
+    private function matchNullableServiceName(?Node $node): ?Name
     {
-        if ($type instanceof NullableType) {
-            return $type->type instanceof Name ? $type->type : null;
+        if ($node instanceof NullableType) {
+            return $node->type instanceof Name ? $node->type : null;
         }
 
-        if ($type instanceof UnionType) {
+        if ($node instanceof UnionType) {
             $className = null;
             $hasNull = false;
 
-            foreach ($type->types as $unionedType) {
+            foreach ($node->types as $unionedType) {
                 if ($unionedType instanceof Identifier && $unionedType->toLowerString() === 'null') {
                     $hasNull = true;
 
@@ -230,10 +246,15 @@ final readonly class NoNullableServiceInConstructorRule implements Rule
 
     private function isSkippedNamespace(string $className): bool
     {
-        return array_any(
-            self::SKIPPED_NAMESPACE_PARTS,
-            static fn (string $skippedNamespacePart): bool => str_contains($className, $skippedNamespacePart)
-        );
+        $found = false;
+        foreach (self::SKIPPED_NAMESPACE_PARTS as $skippedNamespacePart) {
+            if (Strings::contains($className, $skippedNamespacePart)) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 
     /**

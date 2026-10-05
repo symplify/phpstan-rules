@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\NodeAnalyzer;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassLike;
 use PHPStan\Analyser\Scope;
@@ -11,11 +12,16 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\Reflection\ClassReflection;
 use Symplify\PHPStanRules\PhpDoc\BarePhpDocParser;
 
-final readonly class EnumAnalyzer
+final class EnumAnalyzer
 {
-    public function __construct(
-        private BarePhpDocParser $barePhpDocParser
-    ) {
+    /**
+     * @readonly
+     */
+    private BarePhpDocParser $barePhpDocParser;
+
+    public function __construct(BarePhpDocParser $barePhpDocParser)
+    {
+        $this->barePhpDocParser = $barePhpDocParser;
     }
 
     public function detect(Scope $scope, ClassLike $classLike): bool
@@ -38,7 +44,7 @@ final readonly class EnumAnalyzer
         }
 
         // is in /Enum/ namespace
-        return str_contains($classReflection->getName(), '\\Enum\\');
+        return Strings::contains($classReflection->getName(), '\\Enum\\');
     }
 
     private function hasEnumAnnotation(Class_ $class): bool

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Domain;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -17,7 +18,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class RequireExceptionNamespaceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Exception must be located in "Exception" namespace';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Exception must be located in "Exception" namespace';
 
     public function getNodeType(): string
     {
@@ -45,7 +49,7 @@ final class RequireExceptionNamespaceRule implements Rule
 
         // is class in "Exception" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Exception\\')) {
+        if (Strings::contains($className, '\\Exception\\')) {
             return [];
         }
 

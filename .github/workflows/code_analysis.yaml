@@ -59,3 +59,17 @@ jobs:
             -   uses: "ramsey/composer-install@v2"
 
             -   run: ${{ matrix.actions.run }}
+
+    # verify the runtime source stays syntax-compatible with PHP 7.4
+    php_74_compatibility:
+        runs-on: ubuntu-latest
+        name: 'PHP 7.4 Compatibility'
+
+        steps:
+            -   uses: actions/checkout@v3
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+
+            -   run: find src -name '*.php' -print0 | xargs -0 -n1 -P4 php -l

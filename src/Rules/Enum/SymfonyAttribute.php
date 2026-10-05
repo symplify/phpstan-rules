@@ -6,7 +6,13 @@ namespace Symplify\PHPStanRules\Rules\Enum;
 
 final class SymfonyAttribute
 {
-    public const string AS_COMMAND = 'Symfony\Component\Console\Attribute\AsCommand';
+    /**
+     * @var string
+     */
+    public const AS_COMMAND = 'Symfony\Component\Console\Attribute\AsCommand';
 
-    public const string CONSTRAINT = 'Symfony\Component\Validator\Constraint';
+    /**
+     * @var string
+     */
+    public const CONSTRAINT = 'Symfony\Component\Validator\Constraint';
 }

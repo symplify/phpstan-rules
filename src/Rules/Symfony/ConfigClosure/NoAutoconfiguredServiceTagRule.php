@@ -36,18 +36,29 @@ use Twig\Extension\ExtensionInterface;
  *
  * @implements Rule<FileNode>
  */
-final readonly class NoAutoconfiguredServiceTagRule implements Rule
+final class NoAutoconfiguredServiceTagRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Tag "%s" is added by autoconfigure() on its own, as "%s" is a %s - remove the ->tag() call';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    private const string SERVICES_VARIABLE_NAME = 'services';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Tag "%s" is added by autoconfigure() on its own, as "%s" is a %s - remove the ->tag() call';
+
+    /**
+     * @var string
+     */
+    private const SERVICES_VARIABLE_NAME = 'services';
 
     /**
      * The tags Symfony adds on its own to a service of the given type.
      *
      * @var array<string, string>
      */
-    private const array AUTOCONFIGURED_TAGS = [
+    private const AUTOCONFIGURED_TAGS = [
         'console.command' => Command::class,
         'form.type' => 'Symfony\Component\Form\FormTypeInterface',
         'kernel.event_subscriber' => EventSubscriberInterface::class,
@@ -56,9 +67,9 @@ final readonly class NoAutoconfiguredServiceTagRule implements Rule
         'validator.constraint_validator' => 'Symfony\Component\Validator\ConstraintValidatorInterface',
     ];
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -121,10 +132,15 @@ final readonly class NoAutoconfiguredServiceTagRule implements Rule
      */
     private function hasAutoconfigureCall(array $methodCalls): bool
     {
-        return array_any(
-            $methodCalls,
-            static fn (MethodCall $methodCall): bool => $methodCall->name instanceof Identifier && $methodCall->name->toString() === 'autoconfigure'
-        );
+        $found = false;
+        foreach ($methodCalls as $methodCall) {
+            if ($methodCall->name instanceof Identifier && $methodCall->name->toString() === 'autoconfigure') {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 
     /**

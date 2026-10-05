@@ -6,6 +6,7 @@ namespace Symplify\PHPStanRules\Rules\Rector;
 
 use Entropy\Utils\FileSystem;
 use Entropy\Utils\Regex;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -26,12 +27,16 @@ use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
  */
 final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Register "%s" service to "%s" config set';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Register "%s" service to "%s" config set';
 
     /**
      * @see https://regex101.com/r/VGmFKR/1
+     * @var string
      */
-    private const string DOWNGRADE_PREFIX_REGEX = '#(?<is_downgrade>Downgrade)?Php(?<version>\d+)#';
+    private const DOWNGRADE_PREFIX_REGEX = '#(?<is_downgrade>Downgrade)?Php(?<version>\d+)#';
 
     public function getNodeType(): string
     {
@@ -56,7 +61,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         $configContent = FileSystem::read($configFilePath);
 
         // is rule registered?
-        if (str_contains($configContent, $className)) {
+        if (Strings::contains($configContent, $className)) {
             return [];
         }
 
@@ -75,7 +80,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
 
         $constantName = 'PHP_' . $match['version'];
         if ($match['is_downgrade']) {
-            $resolvedValue = DowngradeSetList::{$constantName};
+            $resolvedValue = constant(DowngradeSetList::class . '::' . $constantName);
             if (! is_string($resolvedValue)) {
                 throw new ShouldNotHappenException();
             }
@@ -83,7 +88,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return $resolvedValue;
         }
 
-        $resolvedValue = SetList::{$constantName};
+        $resolvedValue = constant(SetList::class . '::' . $constantName);
         if (! is_string($resolvedValue)) {
             throw new ShouldNotHappenException();
         }

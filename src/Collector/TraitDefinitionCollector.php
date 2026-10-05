@@ -15,11 +15,16 @@ use PHPStan\Collectors\Collector;
  *
  * @implements Collector<Trait_, array{traitName: string, file: string, line: int, lineCount: int}>
  */
-final readonly class TraitDefinitionCollector implements Collector
+final class TraitDefinitionCollector implements Collector
 {
-    public function __construct(
-        private bool $isEnabled
-    ) {
+    /**
+     * @readonly
+     */
+    private bool $isEnabled;
+
+    public function __construct(bool $isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
     }
 
     public function getNodeType(): string
@@ -38,7 +43,7 @@ final readonly class TraitDefinitionCollector implements Collector
             return null;
         }
 
-        $traitName = $node->namespacedName?->toString() ?? $node->name?->toString();
+        $traitName = (($nullsafeVariable1 = $node->namespacedName) ? $nullsafeVariable1->toString() : null) ?? (($nullsafeVariable2 = $node->name) ? $nullsafeVariable2->toString() : null);
         if ($traitName === null) {
             return null;
         }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Symfony\NodeAnalyzer;
 
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
+use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
@@ -16,7 +18,7 @@ final class SymfonyControllerAnalyzer
     /**
      * @var string[]
      */
-    private const array CONTROLLER_TYPES = [
+    private const CONTROLLER_TYPES = [
         SymfonyClass::CONTROLLER,
         SymfonyClass::ABSTRACT_CONTROLLER,
     ];
@@ -28,10 +30,21 @@ final class SymfonyControllerAnalyzer
         }
 
         $classReflection = $scope->getClassReflection();
-        return array_any(self::CONTROLLER_TYPES, fn (string $controllerType): bool => $classReflection->is($controllerType));
+        $found = false;
+        foreach (self::CONTROLLER_TYPES as $controllerType) {
+            if ($classReflection->is($controllerType)) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 
-    public static function hasRouteAnnotationOrAttribute(ClassLike|ClassMethod $node): bool
+    /**
+     * @param ClassLike|ClassMethod $node
+     */
+    public static function hasRouteAnnotationOrAttribute(Node $node): bool
     {
         if ($node instanceof ClassMethod && ! $node->isPublic()) {
             return false;
@@ -48,10 +61,10 @@ final class SymfonyControllerAnalyzer
             return false;
         }
 
-        if (str_contains($docComment->getText(), SymfonyClass::ROUTE_ANNOTATION)) {
+        if (Strings::contains($docComment->getText(), SymfonyClass::ROUTE_ANNOTATION)) {
             return true;
         }
 
-        return \str_contains($docComment->getText(), '@Route');
+        return Strings::contains($docComment->getText(), '@Route');
     }
 }

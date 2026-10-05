@@ -25,13 +25,21 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  *
  * @implements Rule<Node\Stmt>
  */
-final readonly class NoDuplicateNonRepeatableAttributeRule implements Rule
+final class NoDuplicateNonRepeatableAttributeRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Attribute "#[%s]" is used %d times on the same %s, but is not repeatable. Add the ' . Attribute::class . '::IS_REPEATABLE flag to its #[' . Attribute::class . '] declaration, or remove the duplicate';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Attribute "#[%s]" is used %d times on the same %s, but is not repeatable. Add the ' . Attribute::class . '::IS_REPEATABLE flag to its #[' . Attribute::class . '] declaration, or remove the duplicate';
+
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -104,7 +112,7 @@ final readonly class NoDuplicateNonRepeatableAttributeRule implements Rule
 
         $nativeReflection = $this->reflectionProvider->getClass($attributeName)
             ->getNativeReflection();
-        foreach ($nativeReflection->getAttributes(Attribute::class) as $reflectionAttribute) {
+        foreach (method_exists($nativeReflection, 'getAttributes') ? $nativeReflection->getAttributes(Attribute::class) : [] as $reflectionAttribute) {
             $flags = $reflectionAttribute->getArguments()[0] ?? 0;
 
             return (bool) ($flags & Attribute::IS_REPEATABLE);

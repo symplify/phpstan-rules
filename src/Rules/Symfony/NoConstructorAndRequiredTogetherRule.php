@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -20,13 +21,21 @@ use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoConstructorAndRequiredTogetherRule\NoConstructorAndRequiredTogetherRuleTest
  */
-final readonly class NoConstructorAndRequiredTogetherRule implements Rule
+final class NoConstructorAndRequiredTogetherRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid using __construct() and @required in the same class. Pick one to keep architecture clean';
+    /**
+     * @readonly
+     */
+    private LaravelPresenceResolver $laravelPresenceResolver;
 
-    public function __construct(
-        private LaravelPresenceResolver $laravelPresenceResolver,
-    ) {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid using __construct() and @required in the same class. Pick one to keep architecture clean';
+
+    public function __construct(LaravelPresenceResolver $laravelPresenceResolver)
+    {
+        $this->laravelPresenceResolver = $laravelPresenceResolver;
     }
 
     public function getNodeType(): string
@@ -77,12 +86,12 @@ final readonly class NoConstructorAndRequiredTogetherRule implements Rule
                 continue;
             }
 
-            if (! str_contains($docComment->getText(), '@required')) {
+            if (! Strings::contains($docComment->getText(), '@required')) {
                 continue;
             }
 
             // special case when its allowed, to avoid circular references
-            if (str_contains($docComment->getText(), 'circular')) {
+            if (Strings::contains($docComment->getText(), 'circular')) {
                 continue;
             }
 

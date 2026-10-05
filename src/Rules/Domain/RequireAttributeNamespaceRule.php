@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Domain;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -17,7 +18,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class RequireAttributeNamespaceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Attribute must be located in "Attribute" namespace';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Attribute must be located in "Attribute" namespace';
 
     /**
      * @return class-string<Node>
@@ -39,7 +43,7 @@ final class RequireAttributeNamespaceRule implements Rule
 
         // is class in "Attribute" or "Attributes" namespace?
         $className = $classReflection->getName();
-        if (str_contains($className, '\\Attribute\\') || str_contains($className, '\\Attributes\\')) {
+        if (Strings::contains($className, '\\Attribute\\') || Strings::contains($className, '\\Attributes\\')) {
             return [];
         }
 

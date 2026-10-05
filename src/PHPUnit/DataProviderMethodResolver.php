@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\PHPUnit;
 
 use Entropy\Utils\Regex;
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node\Stmt\ClassMethod;
 
@@ -17,7 +18,7 @@ final class DataProviderMethodResolver
             return null;
         }
 
-        if (! str_contains($docComment->getText(), '@dataProvider')) {
+        if (! Strings::contains($docComment->getText(), '@dataProvider')) {
             return null;
         }
 

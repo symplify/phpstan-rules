@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Doctrine;
 
-use PHPStan\BetterReflection\Reflection\Adapter\FakeReflectionAttribute;
-use PHPStan\BetterReflection\Reflection\Adapter\ReflectionAttribute;
+use Entropy\Utils\Strings;
 use PHPStan\PhpDoc\ResolvedPhpDocBlock;
 use PHPStan\Reflection\ClassReflection;
 
-final readonly class DoctrineEntityDocumentAnalyser
+final class DoctrineEntityDocumentAnalyser
 {
     /**
      * @var string[]
      */
-    private const array ENTITY_DOCBLOCK_MARKERS = ['@Document', '@ORM\\Document', '@Entity', '@ORM\\Entity'];
+    private const ENTITY_DOCBLOCK_MARKERS = ['@Document', '@ORM\\Document', '@Entity', '@ORM\\Entity'];
 
     /**
      * @var string[]
      */
-    private const array ENTITY_ATTRIBUTES = [
+    private const ENTITY_ATTRIBUTES = [
         'Doctrine\\ORM\\Mapping\\Entity',
         'Doctrine\\ODM\\MongoDB\\Mapping\\Annotations\\Document',
     ];
@@ -35,21 +34,33 @@ final readonly class DoctrineEntityDocumentAnalyser
             return false;
         }
 
-        return array_any(self::ENTITY_DOCBLOCK_MARKERS, fn (string $entityDocBlockMarker): bool => str_contains($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarker));
+        $found = false;
+        foreach (self::ENTITY_DOCBLOCK_MARKERS as $entityDocBlockMarker) {
+            if (Strings::contains($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarker)) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 
     private static function hasEntityAttribute(ClassReflection $classReflection): bool
     {
-        $attributeReflections = $classReflection->getNativeReflection()
-            ->getAttributes();
-
-        return array_any(
-            $attributeReflections,
-            static fn (ReflectionAttribute|FakeReflectionAttribute $reflectionAttribute): bool => in_array(
-                $reflectionAttribute->getName(),
+        $attributeReflections = method_exists($classReflection->getNativeReflection(), 'getAttributes') ? $classReflection->getNativeReflection()
+            ->getAttributes() : [];
+        $found = false;
+        foreach ($attributeReflections as $attributeReflection) {
+            if (in_array(
+                $attributeReflection->getName(),
                 self::ENTITY_ATTRIBUTES,
                 true
-            )
-        );
+            )) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 }

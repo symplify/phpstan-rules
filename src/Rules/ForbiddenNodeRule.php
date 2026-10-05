@@ -18,18 +18,31 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
  * @implements Rule<Node>
  */
-final readonly class ForbiddenNodeRule implements Rule
+final class ForbiddenNodeRule implements Rule
 {
-    public const string ERROR_MESSAGE = '"%s" is forbidden to use';
+    /**
+     * @var array<class-string<Node>>
+     * @readonly
+     */
+    private array $forbiddenNodes;
 
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = '"%s" is forbidden to use';
+
+    /**
+     * @readonly
+     */
     private Standard $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        private array $forbiddenNodes
+        array $forbiddenNodes
     ) {
+        $this->forbiddenNodes = $forbiddenNodes;
         Assert::allIsAOf($forbiddenNodes, Node::class);
 
         $this->standard = new Standard();

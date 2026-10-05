@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
  */
 final class PreferDirectIsNameRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Use direct $this->isName() instead of fetching NodeNameResolver service';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use direct $this->isName() instead of fetching NodeNameResolver service';
 
     public function getNodeType(): string
     {

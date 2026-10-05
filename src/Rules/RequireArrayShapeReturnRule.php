@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\ConstFetch;
@@ -39,13 +38,22 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  *
  * @implements Rule<ClassMethod>
  */
-final readonly class RequireArrayShapeReturnRule implements Rule
+final class RequireArrayShapeReturnRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Method "%s()" returns a keyed array of %d values; declare its shape in @return, e.g. array{key: type}';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Method "%s()" returns a keyed array of %d values; declare its shape in @return, e.g. array{key: type}';
 
-    private const int MIN_VALUE_COUNT = 2;
+    /**
+     * @var int
+     */
+    private const MIN_VALUE_COUNT = 2;
 
-    private const int MAX_VALUE_COUNT = 3;
+    /**
+     * @var int
+     */
+    private const MAX_VALUE_COUNT = 3;
 
     public function getNodeType(): string
     {
@@ -166,11 +174,11 @@ final readonly class RequireArrayShapeReturnRule implements Rule
             foreach ($node->getSubNodeNames() as $subNodeName) {
                 $child = $node->{$subNodeName};
                 if ($child instanceof Node) {
-                    $returns = [...$returns, ...$this->collectReturns([$child])];
+                    $returns = array_merge($returns, $this->collectReturns([$child]));
                 } elseif (is_array($child)) {
-                    $returns = [...$returns, ...$this->collectReturns(
+                    $returns = array_merge($returns, $this->collectReturns(
                         array_filter($child, static fn ($item): bool => $item instanceof Node)
-                    )];
+                    ));
                 }
             }
         }
@@ -182,7 +190,15 @@ final readonly class RequireArrayShapeReturnRule implements Rule
     private function declaresArrayShape(Type $type): bool
     {
         $types = $type instanceof UnionType ? $type->getTypes() : [$type];
-        return array_any($types, fn (Type $innerType): bool => $innerType->isConstantArray()->yes());
+        $found = false;
+        foreach ($types as $innerType) {
+            if ($innerType->isConstantArray()->yes()) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 
     private function isDeclaredInParent(ClassReflection $classReflection, string $methodName): bool
@@ -201,7 +217,15 @@ final readonly class RequireArrayShapeReturnRule implements Rule
 
     private function hasStringKeyOnEveryItem(Array_ $array): bool
     {
-        return array_all($array->items, fn (ArrayItem $arrayItem): bool => $arrayItem->key instanceof String_);
+        $found = true;
+        foreach ($array->items as $arrayItem) {
+            if (! $arrayItem->key instanceof String_) {
+                $found = false;
+                break;
+            }
+        }
+
+        return $found;
     }
 
     /**

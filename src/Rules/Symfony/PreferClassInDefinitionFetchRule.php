@@ -25,18 +25,26 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
  *
  * @implements Rule<MethodCall>
  */
-final readonly class PreferClassInDefinitionFetchRule implements Rule
+final class PreferClassInDefinitionFetchRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Fetch the definition by class constant, %s::class, rather than the string "%s"';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Fetch the definition by class constant, %s::class, rather than the string "%s"';
 
     /**
      * @var list<string>
      */
-    private const array DEFINITION_METHOD_NAMES = ['getDefinition', 'hasDefinition', 'findDefinition', 'removeDefinition'];
+    private const DEFINITION_METHOD_NAMES = ['getDefinition', 'hasDefinition', 'findDefinition', 'removeDefinition'];
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string

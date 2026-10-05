@@ -85,7 +85,7 @@ final class SymfonyClosureServicesExcludeResolver
             $value = $constantStringType->getValue();
 
             // absolute path is used as-is, relative path is resolved against the config file directory
-            $pathPatterns[] = str_starts_with($value, '/')
+            $pathPatterns[] = strncmp($value, '/', strlen('/')) === 0
                 ? $value
                 : dirname($scope->getFile()) . '/' . $value;
         }
@@ -113,8 +113,8 @@ final class SymfonyClosureServicesExcludeResolver
             return [$pattern];
         }
 
-        $prefix = substr($pattern, 0, (int) $match[0][1]);
-        $suffix = substr($pattern, (int) $match[0][1] + strlen((string) $match[0][0]));
+        $prefix = (string) substr($pattern, 0, (int) $match[0][1]);
+        $suffix = (string) substr($pattern, (int) $match[0][1] + strlen((string) $match[0][0]));
 
         $expanded = [];
         foreach (explode(',', (string) $match[1][0]) as $option) {

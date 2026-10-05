@@ -43,14 +43,17 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
  */
 final class RectorCheaperGuardsFirstRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Cheap guard on line %d can run before the expensive call on line %d; move the early return up to bail before the costly analysis.';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Cheap guard on line %d can run before the expensive call on line %d; move the early return up to bail before the costly analysis.';
 
     /**
      * Calls that trigger heavy analysis (type resolution, docblock parsing, file re-parsing).
      *
      * @var string[]
      */
-    private const array EXPENSIVE_CALLS = [
+    private const EXPENSIVE_CALLS = [
         'getType',
         'getNativeType',
         'isObjectType',
@@ -64,9 +67,12 @@ final class RectorCheaperGuardsFirstRule implements Rule
      *
      * @var string[]
      */
-    private const array CHEAP_CALLS = ['isName', 'isNames', 'isFirstClassCallable', 'in_array', 'count'];
+    private const CHEAP_CALLS = ['isName', 'isNames', 'isFirstClassCallable', 'in_array', 'count'];
 
-    private const string ABSTRACT_RECTOR_CLASS = AbstractRector::class;
+    /**
+     * @var string
+     */
+    private const ABSTRACT_RECTOR_CLASS = AbstractRector::class;
 
     public function getNodeType(): string
     {
@@ -128,7 +134,7 @@ final class RectorCheaperGuardsFirstRule implements Rule
             }
 
             if ($stmt instanceof Expression && $stmt->expr instanceof Assign) {
-                $assignedVariableNames = [...$assignedVariableNames, ...$this->resolveAssignedVariableNames($stmt)];
+                $assignedVariableNames = array_merge($assignedVariableNames, $this->resolveAssignedVariableNames($stmt));
                 continue;
             }
 

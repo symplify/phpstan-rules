@@ -24,13 +24,21 @@ use Symplify\PHPStanRules\Rules\Enum\SymfonyAttribute;
  *
  * @implements Rule<Class_>
  */
-final readonly class ConstraintMustHaveAttributeRule implements Rule
+final class ConstraintMustHaveAttributeRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Class "%s" extends Constraint but is missing the #[\Attribute] attribute. Add it, so the constraint can be used as an attribute on properties, as Symfony convention';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class "%s" extends Constraint but is missing the #[\Attribute] attribute. Add it, so the constraint can be used as an attribute on properties, as Symfony convention';
+
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string

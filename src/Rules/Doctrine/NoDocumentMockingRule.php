@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Doctrine;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -18,13 +19,21 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  * @implements Rule<MethodCall>
  * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\NoDocumentMockingRule\NoDocumentMockingRuleTest
  */
-final readonly class NoDocumentMockingRule implements Rule
+final class NoDocumentMockingRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of document mocking, create object directly to get better type support';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider
-    ) {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of document mocking, create object directly to get better type support';
+
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -48,7 +57,7 @@ final readonly class NoDocumentMockingRule implements Rule
         $firstArg = $node->getArgs()[0];
         $mockedClassType = $scope->getType($firstArg->value);
         foreach ($mockedClassType->getConstantStrings() as $constantStringType) {
-            if (! str_contains($constantStringType->getValue(), '\\Document\\') && ! str_contains($constantStringType->getValue(), '\\Entity\\')) {
+            if (! Strings::contains($constantStringType->getValue(), '\\Document\\') && ! Strings::contains($constantStringType->getValue(), '\\Entity\\')) {
                 continue;
             }
 

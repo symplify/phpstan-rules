@@ -19,7 +19,10 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  */
 final class NoDoubleConsecutiveTestMockRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Do not use "willReturnOnConsecutiveCalls()" and "willReturnCallback()" on the same mock. Use "willReturnCallback() only instead to make test more clear.';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Do not use "willReturnOnConsecutiveCalls()" and "willReturnCallback()" on the same mock. Use "willReturnCallback() only instead to make test more clear.';
 
     public function getNodeType(): string
     {

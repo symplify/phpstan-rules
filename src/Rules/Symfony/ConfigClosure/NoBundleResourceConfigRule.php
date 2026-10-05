@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Closure;
 use PHPStan\Analyser\Scope;
@@ -18,7 +19,10 @@ use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
  */
 final class NoBundleResourceConfigRule implements Rule
 {
-    private const string ERROR_MESSAGE = 'Avoid using configs in Bundle/Resources directory. Move them to "/config" directory instead';
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Avoid using configs in Bundle/Resources directory. Move them to "/config" directory instead';
 
     public function getNodeType(): string
     {
@@ -35,7 +39,7 @@ final class NoBundleResourceConfigRule implements Rule
             return [];
         }
 
-        if (! str_contains($scope->getFile(), 'Resources/config')) {
+        if (! Strings::contains($scope->getFile(), 'Resources/config')) {
             return [];
         }
 

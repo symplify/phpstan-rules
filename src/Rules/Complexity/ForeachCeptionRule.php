@@ -17,9 +17,15 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class ForeachCeptionRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'There is %d nested foreach nested in each other. Refactor to more flat approach or to collection to avoid high complexity';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'There is %d nested foreach nested in each other. Refactor to more flat approach or to collection to avoid high complexity';
 
-    private const int MAX_NESTED_FOREACHES = 3;
+    /**
+     * @var int
+     */
+    private const MAX_NESTED_FOREACHES = 3;
 
     public function getNodeType(): string
     {

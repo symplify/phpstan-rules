@@ -18,13 +18,21 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
  * @implements Rule<AttributeGroup>
  */
-final readonly class RequireAttributeNameRule implements Rule
+final class RequireAttributeNameRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Attribute must have all names explicitly defined';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Attribute must have all names explicitly defined';
+
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -46,7 +54,7 @@ final readonly class RequireAttributeNameRule implements Rule
             }
 
             // skip PHPUnit
-            if (str_starts_with($attributeName, 'PHPUnit\Framework\Attributes\\')) {
+            if (strncmp($attributeName, 'PHPUnit\Framework\Attributes\\', strlen('PHPUnit\Framework\Attributes\\')) === 0) {
                 continue;
             }
 

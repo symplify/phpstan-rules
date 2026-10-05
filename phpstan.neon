@@ -9,6 +9,11 @@ parameters:
 
     level: 8
 
+    # typed constants (8.3) are not available on PHP 7.4
+    type_coverage:
+        constant_type: 0
+        param_type: 99
+
     paths:
         - src
         - config
@@ -38,6 +43,11 @@ parameters:
         -
             message: '#Function is_a\(\) is a runtime reflection concept that might not work in PHPStan because it uses fully static reflection engine#'
             path: src/Rules/SeeAnnotationToTestRule.php
+
+        # PHP 7.4 compatibility shim - getAttributes() only exists on PHP 8.0+
+        -
+            message: '#Call to function method_exists\(\) with ReflectionMethod and .getAttributes. will always evaluate to true#'
+            path: src/Rules/Symfony/RequireRouteNameToGenerateControllerRouteRule.php
 
         # used in tests
         - '#Public constant "Symplify\\PHPStanRules\\(.*?)Rule\:\:ERROR_MESSAGE" is never used#'

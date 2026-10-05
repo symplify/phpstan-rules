@@ -21,13 +21,21 @@ use Symplify\PHPStanRules\Rules\Enum\SymfonyAttribute;
  *
  * @implements Rule<Class_>
  */
-final readonly class CommandMustHaveAsCommandAttributeRule implements Rule
+final class CommandMustHaveAsCommandAttributeRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Class "%s" extends Command but is missing the #[AsCommand] attribute';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class "%s" extends Command but is missing the #[AsCommand] attribute';
+
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string

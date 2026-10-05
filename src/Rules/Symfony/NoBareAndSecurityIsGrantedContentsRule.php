@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Attribute;
 use PhpParser\Node\Scalar\String_;
@@ -21,7 +22,10 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class NoBareAndSecurityIsGrantedContentsRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of using one long "and" condition join, split into multiple standalone #[IsGranted] attributes';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of using one long "and" condition join, split into multiple standalone #[IsGranted] attributes';
 
     public function getNodeType(): string
     {
@@ -43,11 +47,11 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         // nothing to split
-        if (str_contains($attributeExpr->value, ' or ')) {
+        if (Strings::contains($attributeExpr->value, ' or ')) {
             return [];
         }
 
-        if (! str_contains($attributeExpr->value, ' and ') && ! str_contains($attributeExpr->value, ' && ')) {
+        if (! Strings::contains($attributeExpr->value, ' and ') && ! Strings::contains($attributeExpr->value, ' && ')) {
             return [];
         }
 
@@ -71,11 +75,11 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         foreach ($joinedItems as $joinedItem) {
-            if (str_contains($joinedItem, 'is_granted')) {
+            if (Strings::contains($joinedItem, 'is_granted')) {
                 continue;
             }
 
-            if (str_contains($joinedItem, 'has_role')) {
+            if (Strings::contains($joinedItem, 'has_role')) {
                 continue;
             }
 

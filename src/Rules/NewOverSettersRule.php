@@ -20,14 +20,27 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  *
  * @implements Rule<CollectedDataNode>
  */
-final readonly class NewOverSettersRule implements Rule
+final class NewOverSettersRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Class "%s" is always created with same %d setter(s): "%s()"%sPass these values via constructor instead';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-        private bool $isEnabled
-    ) {
+    /**
+     * @readonly
+     */
+    private bool $isEnabled;
+
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class "%s" is always created with same %d setter(s): "%s()"%sPass these values via constructor instead';
+
+    public function __construct(ReflectionProvider $reflectionProvider, bool $isEnabled)
+    {
+        $this->reflectionProvider = $reflectionProvider;
+        $this->isEnabled = $isEnabled;
     }
 
     public function getNodeType(): string

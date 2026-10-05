@@ -23,10 +23,16 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 /**
  * @implements Rule<InClassNode>
  */
-final readonly class NoFindTaggedServiceIdsCallRule implements Rule
+final class NoFindTaggedServiceIdsCallRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of "$this->findTaggedServiceIds()" use more reliable registerForAutoconfiguration() and tagged iterator attribute. Those work outside any configuration and avoid missed tag errors';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of "$this->findTaggedServiceIds()" use more reliable registerForAutoconfiguration() and tagged iterator attribute. Those work outside any configuration and avoid missed tag errors';
 
+    /**
+     * @readonly
+     */
     private NodeFinder $nodeFinder;
 
     public function __construct()
