@@ -12,7 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
-use Webmozart\Assert\Assert;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
@@ -35,8 +34,6 @@ final readonly class ForbiddenNodeRule implements Rule
     public function __construct(
         array $forbiddenNodes
     ) {
-        Assert::allIsAOf($forbiddenNodes, Node::class);
-
         $this->forbiddenNodes = $forbiddenNodes;
         $this->standard = new Standard();
     }

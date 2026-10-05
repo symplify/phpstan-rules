@@ -29,7 +29,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use Symfony\Component\HttpKernel\Kernel;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
-use Webmozart\Assert\Assert;
 
 /**
  * Collect instance of `new`,
@@ -187,7 +186,9 @@ final readonly class NewWithFollowingSettersCollector implements Collector
 
         // @ORM\Entity annotation fallback
         $fileContents = file_get_contents((string) $classReflection->getFileName());
-        Assert::string($fileContents);
+        if (! is_string($fileContents)) {
+            return false;
+        }
 
         return str_contains($fileContents, '@ORM\Entity');
     }

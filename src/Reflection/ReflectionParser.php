@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Reflection;
 
+use Entropy\Utils\FileSystem;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -15,7 +16,6 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
-use Symplify\PHPStanRules\FileSystem\FileSystem;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Throwable;
 

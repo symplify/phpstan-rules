@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Naming;
 
-use Nette\Utils\Strings;
-
 /**
  * @see \Symplify\PHPStanRules\Tests\Naming\ClassToSuffixResolverTest
  */
@@ -13,11 +11,9 @@ final class ClassToSuffixResolver
 {
     public function resolveFromClass(string $parentClass): string
     {
-        $expectedSuffix = \str_contains($parentClass, '\\') ? (string) Strings::after(
-            $parentClass,
-            '\\',
-            -1
-        ) : $parentClass;
+        $expectedSuffix = \str_contains($parentClass, '\\')
+            ? substr($parentClass, strrpos($parentClass, '\\') + 1)
+            : $parentClass;
 
         $expectedSuffix = $this->removeAbstractInterfacePrefixSuffix($expectedSuffix);
 

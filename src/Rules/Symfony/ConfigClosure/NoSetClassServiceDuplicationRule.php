@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
@@ -73,7 +72,7 @@ final readonly class NoSetClassServiceDuplicationRule implements Rule
         }
 
         if (str_contains($parentSoleArgContents, '\\')) {
-            $shortClassName = Strings::after($parentSoleArgContents, '\\', -1);
+            $shortClassName = substr($parentSoleArgContents, strrpos($parentSoleArgContents, '\\') + 1);
         } else {
             $shortClassName = $parentSoleArgContents;
         }

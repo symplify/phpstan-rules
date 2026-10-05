@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Doctrine;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -68,7 +67,9 @@ final readonly class NoGetRepositoryOnServiceRepositoryEntityRule implements Rul
 
         /** @var string $entityClassName */
         $entityClassName = $this->resolveEntityClass($node, $scope);
-        $shortEntityClassName = Strings::after($entityClassName, '\\', -1);
+        $shortEntityClassName = str_contains($entityClassName, '\\')
+            ? substr($entityClassName, strrpos($entityClassName, '\\') + 1)
+            : $entityClassName;
 
         $errorMessage = sprintf(self::ERROR_MESSAGE, $shortEntityClassName, $repositoryClassName);
 
