@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Rector;
 
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Stmt\Class_;
@@ -42,7 +43,7 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
             return [];
         }
 
-        if (preg_match(self::PREFIX_REGEX, $className) !== 1) {
+        if (Regex::match($className, self::PREFIX_REGEX) === []) {
             return [];
         }
 

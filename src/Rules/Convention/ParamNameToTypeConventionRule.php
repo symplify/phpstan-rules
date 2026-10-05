@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Convention;
 
-use InvalidArgumentException;
+use Entropy\Validation\Assert;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Param;
@@ -28,15 +28,10 @@ final class ParamNameToTypeConventionRule implements Rule
     public function __construct(
         private array $paramNamesToTypes
     ) {
-        if ($paramNamesToTypes === []) {
-            throw new InvalidArgumentException('Provided param names to types cannot be empty');
-        }
+        Assert::notEmpty($paramNamesToTypes);
 
-        foreach ($paramNamesToTypes as $paramName => $type) {
-            if (! is_string($paramName) || ! is_string($type)) {
-                throw new InvalidArgumentException('Param names and types must be strings');
-            }
-        }
+        Assert::allString(array_keys($paramNamesToTypes));
+        Assert::allString($paramNamesToTypes);
     }
 
     public function getNodeType(): string

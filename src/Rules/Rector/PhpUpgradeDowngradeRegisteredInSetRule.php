@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Rector;
 
 use Entropy\Utils\FileSystem;
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -67,7 +68,8 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
 
     private function resolveRelatedConfigFilePath(string $className): ?string
     {
-        if (preg_match(self::DOWNGRADE_PREFIX_REGEX, $className, $match) !== 1) {
+        $match = Regex::match($className, self::DOWNGRADE_PREFIX_REGEX);
+        if ($match === []) {
             return null;
         }
 

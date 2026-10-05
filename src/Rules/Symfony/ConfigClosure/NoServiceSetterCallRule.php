@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr\Array_;
@@ -63,7 +64,7 @@ final class NoServiceSetterCallRule implements Rule
         }
 
         $methodName = $firstArg->value->value;
-        if (preg_match(self::SETTER_METHOD_PATTERN, $methodName) !== 1) {
+        if (Regex::match($methodName, self::SETTER_METHOD_PATTERN) === []) {
             return [];
         }
 

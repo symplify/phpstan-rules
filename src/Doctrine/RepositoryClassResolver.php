@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Doctrine;
 
 use Entropy\Utils\FileSystem;
+use Entropy\Utils\Regex;
 use PHPStan\Reflection\ReflectionProvider;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 
@@ -47,7 +48,8 @@ final readonly class RepositoryClassResolver
         $repositoryClass = null;
 
         foreach (self::REGEX_TRAIN as $regex) {
-            if (preg_match($regex, $entityFileContents, $match) !== 1) {
+            $match = Regex::match($entityFileContents, $regex);
+            if ($match === []) {
                 continue;
             }
 

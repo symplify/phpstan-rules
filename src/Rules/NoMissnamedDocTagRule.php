@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
@@ -53,7 +54,8 @@ final class NoMissnamedDocTagRule implements Rule
                 continue;
             }
 
-            if (preg_match('#\*\s(@var)\b#mi', $classMethod->getDocComment()->getText(), $matches) !== 1) {
+            $matches = Regex::match($classMethod->getDocComment()->getText(), '#\*\s(@var)\b#mi');
+            if (! isset($matches[1])) {
                 continue;
             }
 
@@ -69,7 +71,8 @@ final class NoMissnamedDocTagRule implements Rule
                 continue;
             }
 
-            if (preg_match('#\*\s(@param|@return)\b#mi', $property->getDocComment()->getText(), $matches) !== 1) {
+            $matches = Regex::match($property->getDocComment()->getText(), '#\*\s(@param|@return)\b#mi');
+            if (! isset($matches[1])) {
                 continue;
             }
 
@@ -84,7 +87,8 @@ final class NoMissnamedDocTagRule implements Rule
                 continue;
             }
 
-            if (preg_match('#\*\s(@param|@return)\b#mi', $classConst->getDocComment()->getText(), $matches) !== 1) {
+            $matches = Regex::match($classConst->getDocComment()->getText(), '#\*\s(@param|@return)\b#mi');
+            if (! isset($matches[1])) {
                 continue;
             }
 

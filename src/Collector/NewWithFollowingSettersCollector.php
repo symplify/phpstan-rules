@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Collector;
 
+use Entropy\Utils\FileSystem;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
@@ -185,10 +186,7 @@ final readonly class NewWithFollowingSettersCollector implements Collector
         }
 
         // @ORM\Entity annotation fallback
-        $fileContents = file_get_contents((string) $classReflection->getFileName());
-        if (! is_string($fileContents)) {
-            return false;
-        }
+        $fileContents = FileSystem::read((string) $classReflection->getFileName());
 
         return str_contains($fileContents, '@ORM\Entity');
     }

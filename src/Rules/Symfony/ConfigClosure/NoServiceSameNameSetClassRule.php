@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\Closure;
@@ -72,7 +73,7 @@ final readonly class NoServiceSameNameSetClassRule implements Rule
             }
 
             if (str_contains($serviceNameValue, '\\')) {
-                $serviceNameValue = substr($serviceNameValue, strrpos($serviceNameValue, '\\') + 1);
+                $serviceNameValue = Strings::after($serviceNameValue, '\\', -1);
             }
 
             $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $serviceNameValue))

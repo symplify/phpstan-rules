@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use Entropy\Validation\Assert;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\Encapsed;
 use PhpParser\Node\Scalar\EncapsedStringPart;
@@ -29,6 +30,8 @@ final readonly class ForbiddenNodeRule implements Rule
     public function __construct(
         private array $forbiddenNodes
     ) {
+        Assert::allIsAOf($forbiddenNodes, Node::class);
+
         $this->standard = new Standard();
     }
 

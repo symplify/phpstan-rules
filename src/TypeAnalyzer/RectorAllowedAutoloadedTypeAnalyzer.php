@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\TypeAnalyzer;
 
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PHPStan\PhpDocParser\Ast\Node as PhpDocNode;
 use PHPStan\Type\Constant\ConstantStringType;
@@ -51,7 +52,7 @@ final class RectorAllowedAutoloadedTypeAnalyzer
     private static function isAllowedClassString(string $value): bool
     {
         // autoloaded allowed type
-        if (preg_match(self::AUTOLOADED_CLASS_PREFIX_REGEX, $value) === 1) {
+        if (Regex::match($value, self::AUTOLOADED_CLASS_PREFIX_REGEX) !== []) {
             return true;
         }
 
