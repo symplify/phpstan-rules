@@ -6,6 +6,7 @@ namespace Symplify\PHPStanRules\Rules\Rector;
 
 use Entropy\Utils\FileSystem;
 use Entropy\Utils\Regex;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -60,7 +61,7 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         $configContent = FileSystem::read($configFilePath);
 
         // is rule registered?
-        if (strpos($configContent, $className) !== false) {
+        if (Strings::contains($configContent, $className)) {
             return [];
         }
 

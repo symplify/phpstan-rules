@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Doctrine;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -56,7 +57,7 @@ final class NoDocumentMockingRule implements Rule
         $firstArg = $node->getArgs()[0];
         $mockedClassType = $scope->getType($firstArg->value);
         foreach ($mockedClassType->getConstantStrings() as $constantStringType) {
-            if (strpos($constantStringType->getValue(), '\\Document\\') === false && strpos($constantStringType->getValue(), '\\Entity\\') === false) {
+            if (! Strings::contains($constantStringType->getValue(), '\\Document\\') && ! Strings::contains($constantStringType->getValue(), '\\Entity\\')) {
                 continue;
             }
 

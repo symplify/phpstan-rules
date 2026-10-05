@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Domain;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -48,7 +49,7 @@ final class RequireExceptionNamespaceRule implements Rule
 
         // is class in "Exception" namespace?
         $className = $classReflection->getName();
-        if (strpos($className, '\\Exception\\') !== false) {
+        if (Strings::contains($className, '\\Exception\\')) {
             return [];
         }
 

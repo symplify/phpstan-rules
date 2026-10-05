@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -58,7 +59,7 @@ final class ForbiddenExtendOfNonAbstractClassRule implements Rule
 
         // skip vendor based classes, as designed for extension
         $fileName = $parentClassReflection->getFileName();
-        if (is_string($fileName) && strpos($fileName, 'vendor') !== false) {
+        if (is_string($fileName) && Strings::contains($fileName, 'vendor')) {
             return [];
         }
 

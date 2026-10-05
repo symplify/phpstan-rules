@@ -4,7 +4,7 @@
     "description": "Set of Symplify rules, type extensions and error formatter for PHPStan",
     "license": "MIT",
     "require": {
-        "entropy/entropy": "^0.4.24",
+        "entropy/entropy": "^0.4.25",
         "php": ">=7.4",
         "phpstan/phpstan": "^2.2.14",
         "phpstan/phpdoc-parser": "^2.3.5"

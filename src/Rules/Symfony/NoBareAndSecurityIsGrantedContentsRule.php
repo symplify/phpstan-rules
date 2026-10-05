@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Attribute;
 use PhpParser\Node\Scalar\String_;
@@ -46,11 +47,11 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         // nothing to split
-        if (strpos($attributeExpr->value, ' or ') !== false) {
+        if (Strings::contains($attributeExpr->value, ' or ')) {
             return [];
         }
 
-        if (strpos($attributeExpr->value, ' and ') === false && strpos($attributeExpr->value, ' && ') === false) {
+        if (! Strings::contains($attributeExpr->value, ' and ') && ! Strings::contains($attributeExpr->value, ' && ')) {
             return [];
         }
 
@@ -74,11 +75,11 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         foreach ($joinedItems as $joinedItem) {
-            if (strpos($joinedItem, 'is_granted') !== false) {
+            if (Strings::contains($joinedItem, 'is_granted')) {
                 continue;
             }
 
-            if (strpos($joinedItem, 'has_role') !== false) {
+            if (Strings::contains($joinedItem, 'has_role')) {
                 continue;
             }
 

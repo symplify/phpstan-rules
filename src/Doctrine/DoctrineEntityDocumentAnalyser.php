@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Doctrine;
 
+use Entropy\Utils\Strings;
 use PHPStan\PhpDoc\ResolvedPhpDocBlock;
 use PHPStan\Reflection\ClassReflection;
 
@@ -35,7 +36,7 @@ final class DoctrineEntityDocumentAnalyser
 
         $found = false;
         foreach (self::ENTITY_DOCBLOCK_MARKERS as $entityDocBlockMarker) {
-            if (strpos($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarker) !== false) {
+            if (Strings::contains($resolvedPhpDocBlock->getPhpDocString(), $entityDocBlockMarker)) {
                 $found = true;
                 break;
             }

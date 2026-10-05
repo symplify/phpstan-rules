@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Collector;
 
 use Entropy\Utils\FileSystem;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
@@ -184,7 +185,7 @@ final class NewWithFollowingSettersCollector implements Collector
         }
 
         // skip vendor classes
-        if (strpos($classReflection->getFileName(), 'vendor') !== false) {
+        if (Strings::contains($classReflection->getFileName(), 'vendor')) {
             return true;
         }
 
@@ -204,7 +205,7 @@ final class NewWithFollowingSettersCollector implements Collector
         // @ORM\Entity annotation fallback
         $fileContents = FileSystem::read((string) $classReflection->getFileName());
 
-        return strpos($fileContents, '@ORM\Entity') !== false;
+        return Strings::contains($fileContents, '@ORM\Entity');
     }
 
     /**

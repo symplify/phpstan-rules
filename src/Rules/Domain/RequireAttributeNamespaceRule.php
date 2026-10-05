@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Domain;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -42,7 +43,7 @@ final class RequireAttributeNamespaceRule implements Rule
 
         // is class in "Attribute" or "Attributes" namespace?
         $className = $classReflection->getName();
-        if (strpos($className, '\\Attribute\\') !== false || strpos($className, '\\Attributes\\') !== false) {
+        if (Strings::contains($className, '\\Attribute\\') || Strings::contains($className, '\\Attributes\\')) {
             return [];
         }
 

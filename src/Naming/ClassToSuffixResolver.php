@@ -13,7 +13,7 @@ final class ClassToSuffixResolver
 {
     public function resolveFromClass(string $parentClass): string
     {
-        $expectedSuffix = strpos($parentClass, '\\') !== false
+        $expectedSuffix = Strings::contains($parentClass, '\\')
             ? (string) Strings::after($parentClass, '\\', -1)
             : $parentClass;
 

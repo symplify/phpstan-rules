@@ -2,6 +2,7 @@
 
 namespace Symplify\PHPStanRules\Rules\Complexity;
 
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Expr;
@@ -138,7 +139,7 @@ final class NoJustPropertyAssignRule implements Rule
     private function shouldSkipCurrentClass(Scope $scope): bool
     {
         // skip entities as rather static
-        if (strpos($scope->getFile(), '/Document/') !== false || strpos($scope->getFile(), '/Entity/') !== false) {
+        if (Strings::contains($scope->getFile(), '/Document/') || Strings::contains($scope->getFile(), '/Entity/')) {
             return true;
         }
 

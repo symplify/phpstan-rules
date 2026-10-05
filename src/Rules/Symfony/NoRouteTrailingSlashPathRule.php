@@ -3,6 +3,7 @@
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use Entropy\Utils\Regex;
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -69,7 +70,7 @@ final class NoRouteTrailingSlashPathRule implements Rule
         }
 
         // not a route
-        if (strpos($docComment->getText(), 'Route') === false) {
+        if (! Strings::contains($docComment->getText(), 'Route')) {
             return null;
         }
 

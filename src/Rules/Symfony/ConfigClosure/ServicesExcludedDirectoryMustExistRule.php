@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr\Array_;
@@ -109,7 +110,7 @@ final class ServicesExcludedDirectoryMustExistRule implements Rule
         $stringPart = $concat->right->value;
 
         // uses magic mask, nothing to validate
-        if (strpos($stringPart, '*') !== false || strpos($stringPart, '{') !== false) {
+        if (Strings::contains($stringPart, '*') || Strings::contains($stringPart, '{')) {
             return null;
         }
 

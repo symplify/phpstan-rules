@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Scalar\MagicConst\Dir;
@@ -63,7 +64,7 @@ final class StringFileAbsolutePathExistsRule implements Rule
         }
 
         // probably glob or wildcard, cannot be checked
-        if (strpos($stringValue, '*') !== false) {
+        if (Strings::contains($stringValue, '*')) {
             return [];
         }
 

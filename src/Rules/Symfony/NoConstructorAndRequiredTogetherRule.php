@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -85,12 +86,12 @@ final class NoConstructorAndRequiredTogetherRule implements Rule
                 continue;
             }
 
-            if (strpos($docComment->getText(), '@required') === false) {
+            if (! Strings::contains($docComment->getText(), '@required')) {
                 continue;
             }
 
             // special case when its allowed, to avoid circular references
-            if (strpos($docComment->getText(), 'circular') !== false) {
+            if (Strings::contains($docComment->getText(), 'circular')) {
                 continue;
             }
 

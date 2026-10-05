@@ -78,7 +78,7 @@ final class NoSetClassServiceDuplicationRule implements Rule
             return [];
         }
 
-        if (strpos($parentSoleArgContents, '\\') !== false) {
+        if (Strings::contains($parentSoleArgContents, '\\')) {
             $shortClassName = Strings::after($parentSoleArgContents, '\\', -1);
         } else {
             $shortClassName = $parentSoleArgContents;

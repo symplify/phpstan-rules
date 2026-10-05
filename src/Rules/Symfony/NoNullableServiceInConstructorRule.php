@@ -6,6 +6,7 @@ namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use Closure;
 use DateTimeInterface;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\ComplexType;
 use PhpParser\Node\Expr\Variable;
@@ -247,7 +248,7 @@ final class NoNullableServiceInConstructorRule implements Rule
     {
         $found = false;
         foreach (self::SKIPPED_NAMESPACE_PARTS as $skippedNamespacePart) {
-            if (strpos($className, $skippedNamespacePart) !== false) {
+            if (Strings::contains($className, $skippedNamespacePart)) {
                 $found = true;
                 break;
             }

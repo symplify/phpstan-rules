@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\NodeAnalyzer;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassLike;
 use PHPStan\Analyser\Scope;
@@ -43,7 +44,7 @@ final class EnumAnalyzer
         }
 
         // is in /Enum/ namespace
-        return strpos($classReflection->getName(), '\\Enum\\') !== false;
+        return Strings::contains($classReflection->getName(), '\\Enum\\');
     }
 
     private function hasEnumAnnotation(Class_ $class): bool

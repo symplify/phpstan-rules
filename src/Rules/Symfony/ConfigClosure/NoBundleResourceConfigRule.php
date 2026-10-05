@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Closure;
 use PHPStan\Analyser\Scope;
@@ -38,7 +39,7 @@ final class NoBundleResourceConfigRule implements Rule
             return [];
         }
 
-        if (strpos($scope->getFile(), 'Resources/config') === false) {
+        if (! Strings::contains($scope->getFile(), 'Resources/config')) {
             return [];
         }
 

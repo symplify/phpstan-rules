@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Symfony\NodeAnalyzer;
 
+use Entropy\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassLike;
@@ -60,10 +61,10 @@ final class SymfonyControllerAnalyzer
             return false;
         }
 
-        if (strpos($docComment->getText(), SymfonyClass::ROUTE_ANNOTATION) !== false) {
+        if (Strings::contains($docComment->getText(), SymfonyClass::ROUTE_ANNOTATION)) {
             return true;
         }
 
-        return strpos($docComment->getText(), '@Route') !== false;
+        return Strings::contains($docComment->getText(), '@Route');
     }
 }
