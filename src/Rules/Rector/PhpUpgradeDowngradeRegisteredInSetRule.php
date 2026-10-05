@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Rector;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\FileSystem;
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
@@ -17,7 +18,6 @@ use SplFileInfo;
 use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
-use Symplify\PHPStanRules\FileSystem\FileSystem;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\PhpUpgradeDowngradeRegisteredInSetRuleTest
@@ -68,8 +68,8 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
 
     private function resolveRelatedConfigFilePath(string $className): ?string
     {
-        $match = Strings::match($className, self::DOWNGRADE_PREFIX_REGEX);
-        if ($match === null) {
+        $match = Regex::match($className, self::DOWNGRADE_PREFIX_REGEX);
+        if ($match === []) {
             return null;
         }
 

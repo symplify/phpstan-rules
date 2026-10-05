@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Convention;
 
+use Entropy\Validation\Assert;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Param;
@@ -12,7 +13,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
-use Webmozart\Assert\Assert;
 
 /**
  * @implements Rule<Param>

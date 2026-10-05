@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\PreferredClassRule;
 
 use DateTime as NativeDateTime;
+use DateTimeImmutable;
 use Iterator;
-use Nette\Utils\DateTime;
 use Override;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
@@ -31,7 +31,7 @@ final class PreferredClassRuleTest extends RuleTestCase
      */
     public static function provideData(): Iterator
     {
-        $errorMessage = sprintf(PreferredClassRule::ERROR_MESSAGE, NativeDateTime::class, DateTime::class);
+        $errorMessage = sprintf(PreferredClassRule::ERROR_MESSAGE, NativeDateTime::class, DateTimeImmutable::class);
         yield [__DIR__ . '/Fixture/ClassUsingOld.php', [[$errorMessage, 13]]];
         yield [__DIR__ . '/Fixture/ClassExtendingOld.php', [[$errorMessage, 9]]];
         yield [__DIR__ . '/Fixture/ClassMethodParameterUsingOld.php', [[$errorMessage, 11]]];

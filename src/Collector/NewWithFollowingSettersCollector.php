@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Collector;
 
+use Entropy\Utils\FileSystem;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\MethodCall;
@@ -29,7 +30,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use Symfony\Component\HttpKernel\Kernel;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
-use Webmozart\Assert\Assert;
 
 /**
  * Collect instance of `new`,
@@ -186,8 +186,7 @@ final readonly class NewWithFollowingSettersCollector implements Collector
         }
 
         // @ORM\Entity annotation fallback
-        $fileContents = file_get_contents((string) $classReflection->getFileName());
-        Assert::string($fileContents);
+        $fileContents = FileSystem::read((string) $classReflection->getFileName());
 
         return str_contains($fileContents, '@ORM\Entity');
     }

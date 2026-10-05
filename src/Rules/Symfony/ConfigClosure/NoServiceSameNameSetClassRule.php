@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\Closure;

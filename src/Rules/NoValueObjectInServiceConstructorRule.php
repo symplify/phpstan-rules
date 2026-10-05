@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -68,6 +69,6 @@ final class NoValueObjectInServiceConstructorRule implements Rule
 
     private function isValueObject(string $className): bool
     {
-        return preg_match('#(ValueObject|DataObject|Models)#', $className) === 1;
+        return Regex::match($className, '#(ValueObject|DataObject|Models)#') !== [];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
+use Entropy\Utils\Regex;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -70,7 +71,7 @@ final class NoRouteTrailingSlashPathRule implements Rule
         }
 
         /** @see https://regex101.com/r/Qo7aLu/1 */
-        preg_match('#@Route\((path=)?"(?<path>[\/\w\-]+)"#', $docComment->getText(), $matches);
+        $matches = Regex::match($docComment->getText(), '#@Route\((path=)?"(?<path>[\/\w\-]+)"#');
 
         return $matches['path'] ?? null;
     }

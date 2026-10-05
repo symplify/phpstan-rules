@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
+use Entropy\Validation\Assert;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\Encapsed;
 use PhpParser\Node\Scalar\EncapsedStringPart;
@@ -12,7 +13,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
-use Webmozart\Assert\Assert;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule\ForbiddenNodeRuleTest
@@ -22,22 +22,16 @@ final readonly class ForbiddenNodeRule implements Rule
 {
     public const string ERROR_MESSAGE = '"%s" is forbidden to use';
 
-    /**
-     * @var array<class-string<Node>>
-     */
-    private array $forbiddenNodes;
-
     private Standard $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes
      */
     public function __construct(
-        array $forbiddenNodes
+        private array $forbiddenNodes
     ) {
         Assert::allIsAOf($forbiddenNodes, Node::class);
 
-        $this->forbiddenNodes = $forbiddenNodes;
         $this->standard = new Standard();
     }
 

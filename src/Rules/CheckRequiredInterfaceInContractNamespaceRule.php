@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Interface_;
 use PHPStan\Analyser\Scope;
@@ -40,7 +40,7 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
             return [];
         }
 
-        if (Strings::match($namespace, self::A_CONTRACT_NAMESPACE_REGEX)) {
+        if (Regex::match($namespace, self::A_CONTRACT_NAMESPACE_REGEX) !== []) {
             return [];
         }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\PHPUnit;
 
+use Entropy\Utils\Regex;
 use PhpParser\Comment\Doc;
 use PhpParser\Node\Stmt\ClassMethod;
 
@@ -20,7 +21,7 @@ final class DataProviderMethodResolver
             return null;
         }
 
-        preg_match('/@dataProvider\s+(?<method_name>\w+)/', $docComment->getText(), $matches);
+        $matches = Regex::match($docComment->getText(), '/@dataProvider\s+(?<method_name>\w+)/');
 
         // reference to static call on another class
         if (! isset($matches['method_name'])) {

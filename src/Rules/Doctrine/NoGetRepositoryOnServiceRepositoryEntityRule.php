@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Doctrine;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;

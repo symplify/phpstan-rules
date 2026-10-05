@@ -8,5 +8,5 @@ services:
         arguments:
             oldToPreferredClasses:
                 SplFileInfo: 'Symplify\SmartFileSystem\SmartFileInfo'
-                DateTime: 'Nette\Utils\DateTime'
+                DateTime: 'DateTimeImmutable'
                 Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\Source\AbstractNotWhatYouWant: 'Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\Fixture\SkipPreferredExtendingTheOldOne'

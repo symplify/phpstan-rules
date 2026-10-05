@@ -15,6 +15,7 @@ jobs:
                     -
                         name: 'Lint Neon'
                         run: vendor/bin/neon-lint config/
+
                     -
                         name: 'PHPStan'
                         run: composer phpstan --ansi

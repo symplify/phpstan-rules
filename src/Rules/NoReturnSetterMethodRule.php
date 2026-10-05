@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use Nette\Utils\Strings;
+use Entropy\Utils\Regex;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Yield_;
 use PhpParser\Node\Identifier;
@@ -64,7 +64,7 @@ final readonly class NoReturnSetterMethodRule implements Rule
             return [];
         }
 
-        if (! Strings::match($classMethodName, self::SETTER_START_REGEX)) {
+        if (Regex::match($classMethodName, self::SETTER_START_REGEX) === []) {
             return [];
         }
 
