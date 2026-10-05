@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\NodeAnalyzer;
 
+use PhpParser\Node;
 use PhpParser\Node\Attribute;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Param;
@@ -13,15 +14,19 @@ use PhpParser\Node\Stmt\Property;
 
 final class AttributeFinder
 {
-    public function hasAttribute(ClassLike|ClassMethod|Property|Param $node, string $desiredAttributeClass): bool
+    /**
+     * @param ClassLike|ClassMethod|Property|Param $node
+     */
+    public function hasAttribute(Node $node, string $desiredAttributeClass): bool
     {
         return (bool) $this->findAttribute($node, $desiredAttributeClass);
     }
 
     /**
      * @return Attribute[]
+     * @param ClassMethod|Property|ClassLike|Param $node
      */
-    private function findAttributes(ClassMethod|Property|ClassLike|Param $node): array
+    private function findAttributes(Node $node): array
     {
         $attributes = [];
 
@@ -32,8 +37,11 @@ final class AttributeFinder
         return $attributes;
     }
 
+    /**
+     * @param ClassMethod|Property|ClassLike|Param $node
+     */
     private function findAttribute(
-        ClassMethod|Property|ClassLike|Param $node,
+        Node $node,
         string $desiredAttributeClass
     ): ?Attribute {
         $attributes = $this->findAttributes($node);

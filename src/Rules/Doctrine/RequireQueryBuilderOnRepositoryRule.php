@@ -29,16 +29,22 @@ use Symplify\PHPStanRules\Helper\NamingHelper;
  * @implements Rule<InClassMethodNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule\RequireQueryBuilderOnRepositoryRuleTest
  */
-final readonly class RequireQueryBuilderOnRepositoryRule implements Rule
+final class RequireQueryBuilderOnRepositoryRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager inside a repository class, as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Avoid calling ->createQueryBuilder() directly on EntityManager inside a repository class, as it requires select() + from() calls with specific values. Use $repository->createQueryBuilder() to be safe instead';
 
     /**
      * UPDATE/DELETE builders are not plain SELECTs, the repository shortcut cannot express them
      * @var string[]
      */
-    private const array NON_SELECT_BUILDER_METHODS = ['update', 'delete'];
+    private const NON_SELECT_BUILDER_METHODS = ['update', 'delete'];
 
+    /**
+     * @readonly
+     */
     private NodeFinder $nodeFinder;
 
     public function __construct()

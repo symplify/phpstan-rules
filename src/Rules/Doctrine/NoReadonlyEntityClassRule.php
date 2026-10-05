@@ -25,9 +25,15 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
  */
 final class NoReadonlyEntityClassRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Entity class "%s" must not be readonly. Doctrine hydrates entities via reflection without the constructor, which a readonly class forbids. Remove the readonly modifier from the class';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Entity class "%s" must not be readonly. Doctrine hydrates entities via reflection without the constructor, which a readonly class forbids. Remove the readonly modifier from the class';
 
-    private const string ENTITY_ATTRIBUTE = Entity::class;
+    /**
+     * @var string
+     */
+    private const ENTITY_ATTRIBUTE = Entity::class;
 
     public function getNodeType(): string
     {

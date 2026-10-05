@@ -33,7 +33,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
  */
 final class PreferClassServiceReferenceRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Reference the service by its class, service(%s::class), rather than by the string id "%s" a class name alias already covers';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Reference the service by its class, service(%s::class), rather than by the string id "%s" a class name alias already covers';
 
     public function getNodeType(): string
     {

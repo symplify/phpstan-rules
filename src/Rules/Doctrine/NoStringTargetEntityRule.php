@@ -24,12 +24,15 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
  */
 final class NoStringTargetEntityRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Doctrine association #[%s] uses a string targetEntity "%s"; use %s::class instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Doctrine association #[%s] uses a string targetEntity "%s"; use %s::class instead';
 
     /**
      * @var string[]
      */
-    private const array ASSOCIATION_ATTRIBUTES = [
+    private const ASSOCIATION_ATTRIBUTES = [
         'Doctrine\ORM\Mapping\ManyToOne',
         'Doctrine\ORM\Mapping\OneToMany',
         'Doctrine\ORM\Mapping\OneToOne',

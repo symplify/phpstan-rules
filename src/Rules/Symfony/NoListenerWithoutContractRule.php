@@ -25,13 +25,21 @@ use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoListenerWithoutContractRule\NoListenerWithoutContractRuleTest
  */
-final readonly class NoListenerWithoutContractRule implements Rule
+final class NoListenerWithoutContractRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
+    /**
+     * @readonly
+     */
+    private LaravelPresenceResolver $laravelPresenceResolver;
 
-    public function __construct(
-        private LaravelPresenceResolver $laravelPresenceResolver,
-    ) {
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
+
+    public function __construct(LaravelPresenceResolver $laravelPresenceResolver)
+    {
+        $this->laravelPresenceResolver = $laravelPresenceResolver;
     }
 
     public function getNodeType(): string
@@ -53,7 +61,7 @@ final readonly class NoListenerWithoutContractRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
-        if (! str_ends_with($classReflection->getName(), 'Listener')) {
+        if (substr_compare($classReflection->getName(), 'Listener', -strlen('Listener')) !== 0) {
             return [];
         }
 
@@ -102,7 +110,7 @@ final readonly class NoListenerWithoutContractRule implements Rule
     {
         $attrGroups = $class->attrGroups;
         foreach ($class->getMethods() as $classMethod) {
-            $attrGroups = [...$attrGroups, ...$classMethod->attrGroups];
+            $attrGroups = array_merge($attrGroups, $classMethod->attrGroups);
         }
 
         foreach ($attrGroups as $attrGroup) {
@@ -127,7 +135,7 @@ final readonly class NoListenerWithoutContractRule implements Rule
             }
 
             foreach ($classMethod->params as $param) {
-                if ($param->type instanceof Name && str_starts_with($param->type->toString(), 'Symfony\Component\Form\Event\\')) {
+                if ($param->type instanceof Name && strncmp($param->type->toString(), 'Symfony\Component\Form\Event\\', strlen('Symfony\Component\Form\Event\\')) === 0) {
 
                     return true;
                 }

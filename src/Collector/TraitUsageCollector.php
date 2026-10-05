@@ -15,11 +15,16 @@ use PHPStan\Collectors\Collector;
  *
  * @implements Collector<TraitUse, string[]>
  */
-final readonly class TraitUsageCollector implements Collector
+final class TraitUsageCollector implements Collector
 {
-    public function __construct(
-        private bool $isEnabled
-    ) {
+    /**
+     * @readonly
+     */
+    private bool $isEnabled;
+
+    public function __construct(bool $isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
     }
 
     public function getNodeType(): string

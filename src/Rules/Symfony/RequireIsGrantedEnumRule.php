@@ -21,7 +21,10 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class RequireIsGrantedEnumRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Instead of "%s" string, use enum constant for #[IsGranted]';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of "%s" string, use enum constant for #[IsGranted]';
 
     public function getNodeType(): string
     {

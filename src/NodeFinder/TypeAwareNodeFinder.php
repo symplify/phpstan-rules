@@ -10,8 +10,11 @@ use PhpParser\NodeFinder;
 /**
  * @todo remove after https://github.com/nikic/PHP-Parser/pull/869 is released
  */
-final readonly class TypeAwareNodeFinder
+final class TypeAwareNodeFinder
 {
+    /**
+     * @readonly
+     */
     private NodeFinder $nodeFinder;
 
     public function __construct()
@@ -26,7 +29,7 @@ final readonly class TypeAwareNodeFinder
      * @param class-string<TNode> $type
      * @return TNode|null
      */
-    public function findFirstInstanceOf(array|Node $nodes, string $type): ?Node
+    public function findFirstInstanceOf($nodes, string $type): ?Node
     {
         return $this->nodeFinder->findFirstInstanceOf($nodes, $type);
     }
@@ -35,7 +38,7 @@ final readonly class TypeAwareNodeFinder
      * @param Node[]|Node $nodes
      * @param callable(Node): bool $filter
      */
-    public function findFirst(array|Node $nodes, callable $filter): ?Node
+    public function findFirst($nodes, callable $filter): ?Node
     {
         return $this->nodeFinder->findFirst($nodes, $filter);
     }

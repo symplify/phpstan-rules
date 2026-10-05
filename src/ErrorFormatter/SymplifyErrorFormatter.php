@@ -21,13 +21,15 @@ final class SymplifyErrorFormatter implements ErrorFormatter
 {
     /**
      * To fit in Linux/Windows terminal windows to prevent overflow.
+     * @var int
      */
-    private const int BULGARIAN_CONSTANT = 8;
+    private const BULGARIAN_CONSTANT = 8;
 
     /**
      * @see https://regex101.com/r/1ghDuM/1
+     * @var string
      */
-    private const string FILE_WITH_TRAIT_CONTEXT_REGEX = '#(?<file>.*?)(\s+\(in context.*?)?$#';
+    private const FILE_WITH_TRAIT_CONTEXT_REGEX = '#(?<file>.*?)(\s+\(in context.*?)?$#';
 
     private ?Output $output = null;
 
@@ -102,7 +104,9 @@ final class SymplifyErrorFormatter implements ErrorFormatter
 
     private function writeln(string $separator): void
     {
-        $this->output?->writeLineFormatted(' ' . $separator);
+        if (($nullsafeVariable1 = $this->output) instanceof Output) {
+            $nullsafeVariable1->writeLineFormatted(' ' . $separator);
+        }
     }
 
     private function printSingleError(Error $error, OutputStyle $outputStyle): void

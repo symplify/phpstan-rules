@@ -9,13 +9,21 @@ use PHPStan\Reflection\ReflectionProvider;
 /**
  * Detects a Laravel project, so Symfony-only rules can skip it.
  */
-final readonly class LaravelPresenceResolver
+final class LaravelPresenceResolver
 {
-    private const string LARAVEL_APPLICATION_CLASS = 'Illuminate\Foundation\Application';
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
 
-    public function __construct(
-        private ReflectionProvider $reflectionProvider,
-    ) {
+    /**
+     * @var string
+     */
+    private const LARAVEL_APPLICATION_CLASS = 'Illuminate\Foundation\Application';
+
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function isLaravelProject(): bool

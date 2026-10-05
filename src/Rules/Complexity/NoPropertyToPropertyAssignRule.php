@@ -32,7 +32,10 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier;
  */
 final class NoPropertyToPropertyAssignRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Property "$this->%s" must not be assigned from property "$this->%s". Use the original property directly instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Property "$this->%s" must not be assigned from property "$this->%s". Use the original property directly instead';
 
     public function getNodeType(): string
     {

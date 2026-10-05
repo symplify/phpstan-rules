@@ -6,7 +6,6 @@ namespace Symplify\PHPStanRules\Rules\Symfony\ConfigClosure;
 
 use Entropy\Utils\Regex;
 use PhpParser\Node;
-use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
@@ -33,14 +32,21 @@ use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
  */
 final class NoServiceSetterCallRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'Setter call() to "%s()" wires the dependency by hand, mark the method #[Required] and let autowiring call it instead';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Setter call() to "%s()" wires the dependency by hand, mark the method #[Required] and let autowiring call it instead';
 
     /**
      * A setter is a setXxx() method, e.g. setListLeadRepository(). A "setup" or "settle" method is no setter.
+     * @var string
      */
-    private const string SETTER_METHOD_PATTERN = '#^set\p{Lu}#u';
+    private const SETTER_METHOD_PATTERN = '#^set\p{Lu}#u';
 
-    private const string SERVICE_FUNCTION = 'Symfony\Component\DependencyInjection\Loader\Configurator\service';
+    /**
+     * @var string
+     */
+    private const SERVICE_FUNCTION = 'Symfony\Component\DependencyInjection\Loader\Configurator\service';
 
     public function getNodeType(): string
     {
@@ -92,10 +98,15 @@ final class NoServiceSetterCallRule implements Rule
             return false;
         }
 
-        return array_any(
-            $secondArg->value->items,
-            fn (ArrayItem $arrayItem): bool => $arrayItem->value instanceof FuncCall && $this->isServiceFunction($arrayItem->value)
-        );
+        $found = false;
+        foreach ($secondArg->value->items as $arrayItem) {
+            if ($arrayItem->value instanceof FuncCall && $this->isServiceFunction($arrayItem->value)) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 
     private function isServiceFunction(FuncCall $funcCall): bool

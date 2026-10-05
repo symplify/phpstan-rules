@@ -22,20 +22,32 @@ use Throwable;
 final class ReflectionParser
 {
     /**
+     * @readonly
+     */
+    private TypeAwareNodeFinder $typeAwareNodeFinder;
+
+    /**
      * @var array<string, ClassLike>
      */
     private array $classesByName = [];
 
-    private readonly Parser $parser;
+    /**
+     * @readonly
+     */
+    private Parser $parser;
 
     public function __construct(
-        private readonly TypeAwareNodeFinder $typeAwareNodeFinder
+        TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
+        $this->typeAwareNodeFinder = $typeAwareNodeFinder;
         $parserFactory = new ParserFactory();
         $this->parser = $parserFactory->createForNewestSupportedVersion();
     }
 
-    public function parseMethodReflection(ReflectionMethod|MethodReflection $reflectionMethod): ?ClassMethod
+    /**
+     * @param ReflectionMethod|MethodReflection $reflectionMethod
+     */
+    public function parseMethodReflection($reflectionMethod): ?ClassMethod
     {
         $classLike = $this->parseNativeClassReflection($reflectionMethod->getDeclaringClass());
         if (! $classLike instanceof ClassLike) {
@@ -58,7 +70,10 @@ final class ReflectionParser
         return $this->parseFilenameToClass($fileName, $classReflection->getName());
     }
 
-    private function parseNativeClassReflection(ReflectionClass|ClassReflection $reflectionClass): ?ClassLike
+    /**
+     * @param ReflectionClass|ClassReflection $reflectionClass
+     */
+    private function parseNativeClassReflection($reflectionClass): ?ClassLike
     {
         $fileName = $reflectionClass->getFileName();
         if ($fileName === false) {
@@ -72,7 +87,7 @@ final class ReflectionParser
         return $this->parseFilenameToClass($fileName, $reflectionClass->getName());
     }
 
-    private function parseFilenameToClass(string $fileName, string $className): ClassLike|null
+    private function parseFilenameToClass(string $fileName, string $className): ?ClassLike
     {
         if (isset($this->classesByName[$className])) {
             return $this->classesByName[$className];
@@ -88,7 +103,7 @@ final class ReflectionParser
             $nodeTraverser = new NodeTraverser();
             $nodeTraverser->addVisitor(new NameResolver());
             $nodeTraverser->traverse($stmts);
-        } catch (Throwable) {
+        } catch (Throwable $throwable) {
             // not reachable
             return null;
         }

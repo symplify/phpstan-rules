@@ -23,7 +23,10 @@ use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
  */
 final class ExplicitExpectsMockMethodRule implements Rule
 {
-    public const string ERROR_MESSAGE = 'PHPUnit mock method is missing explicit expects(), e.g. $this->mock->expects($this->once())->...';
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'PHPUnit mock method is missing explicit expects(), e.g. $this->mock->expects($this->once())->...';
 
     public function getNodeType(): string
     {

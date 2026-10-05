@@ -22,7 +22,10 @@ use PHPStan\Collectors\Collector;
  */
 final class ServiceStringReferenceCollector implements Collector
 {
-    private const string SERVICE_FUNCTION = 'Symfony\Component\DependencyInjection\Loader\Configurator\service';
+    /**
+     * @var string
+     */
+    private const SERVICE_FUNCTION = 'Symfony\Component\DependencyInjection\Loader\Configurator\service';
 
     public function getNodeType(): string
     {

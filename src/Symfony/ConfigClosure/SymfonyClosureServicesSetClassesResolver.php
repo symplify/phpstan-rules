@@ -71,7 +71,10 @@ final class SymfonyClosureServicesSetClassesResolver
         return $standaloneSetServices;
     }
 
-    private static function isName(Node|string $node, string $name): bool
+    /**
+     * @param Node|string $node
+     */
+    private static function isName($node, string $name): bool
     {
         if (is_string($node)) {
             return $node === $name;

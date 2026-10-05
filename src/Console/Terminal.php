@@ -13,7 +13,7 @@ final class Terminal
     /**
      * @var array<int, array<string>>
      */
-    private const array DESCRIPTORSPEC = [
+    private const DESCRIPTORSPEC = [
         1 => ['pipe', 'w'],
         2 => ['pipe', 'w'],
     ];
