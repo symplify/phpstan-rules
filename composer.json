@@ -18,11 +18,11 @@
         "tomasvotruba/class-leak": "^2.2",
         "rector/rector": "^2.6.7",
         "phpstan/extension-installer": "^1.4",
-        "tomasvotruba/unused-public": "^2.2",
         "tomasvotruba/type-coverage": "^2.3",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "rector/jack": "^1.1",
-        "nette/neon": "^3.4"
+        "nette/neon": "^3.4",
+        "shipmonk/dead-code-detector": "^1.4"
     },
     "autoload": {
         "psr-4": {
