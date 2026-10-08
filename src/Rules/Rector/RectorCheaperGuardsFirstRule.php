@@ -138,60 +138,11 @@ final class RectorCheaperGuardsFirstRule implements Rule
                 continue;
             }
 
-            // a positive guard `if (cheapIndependentCond) { ...transform... }` whose only tail is
-            // `return null` can have its cheap condition inverted and hoisted above the expensive call:
-            // when the condition fails the method returns null anyway, so the costly analysis is wasted
-            if (
-                $stmt instanceof If_
-                && $stmt->elseifs === []
-                && ! $stmt->else instanceof Else_
-                && $this->isCheapCondition($stmt->cond)
-                && $this->isIndependent($stmt->cond, $assignedVariableNames)
-                && $this->isNullReturningTail($stmts, $index + 1)
-            ) {
-                return [
-                    RuleErrorBuilder::message(
-                        sprintf(self::ERROR_MESSAGE, $stmt->getStartLine(), $stmts[$anchorIndex]->getStartLine())
-                    )
-                        ->identifier(RectorRuleIdentifier::RECTOR_CHEAPER_GUARDS_FIRST)
-                        ->line($stmt->getStartLine())
-                        ->build(),
-                ];
-            }
-
             // any other statement (value return, transformation, loop) makes hoisting unsafe
             return [];
         }
 
         return [];
-    }
-
-    /**
-     * Every statement from $fromIndex to the end is a bare `return;` or `return null;`, so the
-     * method yields null once control leaves the preceding guard.
-     *
-     * @param Stmt[] $stmts
-     */
-    private function isNullReturningTail(array $stmts, int $fromIndex): bool
-    {
-        $counter = count($stmts);
-        for ($index = $fromIndex; $index < $counter; ++$index) {
-            $stmt = $stmts[$index];
-            if (! $stmt instanceof Return_) {
-                return false;
-            }
-
-            // bare "return;"
-            if (! $stmt->expr instanceof Node) {
-                continue;
-            }
-
-            if (! $stmt->expr instanceof ConstFetch || $stmt->expr->name->toLowerString() !== 'null') {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
