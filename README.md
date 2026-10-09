@@ -641,26 +641,19 @@ interface SomeInterface
 
 <br>
 
-### ForbiddenNodeRule
+### ForbiddenTraitRule
 
-"%s" is forbidden to use
-
-:wrench: **configure it!**
+Trait is forbidden to use, use explicit service composition instead
 
 ```yaml
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            forbiddenNodes:
-                - PhpParser\Node\Expr\ErrorSuppress
+rules:
+    - Symplify\PHPStanRules\Rules\ForbiddenTraitRule
 ```
 
-↓
-
 ```php
-return @strlen('...');
+trait SomeTrait
+{
+}
 ```
 
 :x:
@@ -668,7 +661,42 @@ return @strlen('...');
 <br>
 
 ```php
-return strlen('...');
+final class SomeService
+{
+}
+```
+
+:+1:
+
+<br>
+
+### ForbiddenSwitchRule
+
+switch() is forbidden to use, use match() or early return instead
+
+```yaml
+rules:
+    - Symplify\PHPStanRules\Rules\ForbiddenSwitchRule
+```
+
+```php
+switch ($value) {
+    case 1:
+        return 'one';
+    default:
+        return 'many';
+}
+```
+
+:x:
+
+<br>
+
+```php
+return match ($value) {
+    1 => 'one',
+    default => 'many',
+};
 ```
 
 :+1:
