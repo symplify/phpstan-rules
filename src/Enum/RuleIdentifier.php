@@ -164,11 +164,6 @@ final class RuleIdentifier
     /**
      * @var string
      */
-    public const NO_PROTECTED_CLASS_STMT = 'symplify.noProtectedClassStmt';
-
-    /**
-     * @var string
-     */
     public const CONVENTION_PARAM_NAME_TO_TYPE = 'symplify.conventionParamNameToType';
 
     /**
