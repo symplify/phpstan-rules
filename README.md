@@ -675,6 +675,38 @@ return match ($value) {
 
 <br>
 
+### ForbiddenNodeRule
+
+"%s" is forbidden to use
+
+:wrench: **configure it!**
+
+```yaml
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            forbiddenNodes:
+                - PhpParser\Node\Expr\ErrorSuppress
+```
+
+```php
+return @strlen('...');
+```
+
+:x:
+
+<br>
+
+```php
+return strlen('...');
+```
+
+:+1:
+
+<br>
+
 ### ForbiddenStaticClassConstFetchRule
 
 Avoid static access of constants, as they can change value. Use interface and contract method instead

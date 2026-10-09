@@ -74,6 +74,11 @@ final class RuleIdentifier
     /**
      * @var string
      */
+    public const FORBIDDEN_NODE = 'symplify.forbiddenNode';
+
+    /**
+     * @var string
+     */
     public const MULTIPLE_CLASS_LIKE_IN_FILE = 'symplify.multipleClassLikeInFile';
 
     /**
