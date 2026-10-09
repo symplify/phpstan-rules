@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Tests\Rules\ForbiddenNodeRule;
+namespace Symplify\PHPStanRules\Tests\Rules\ForbiddenTraitRule;
 
 use Iterator;
 use Override;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symplify\PHPStanRules\Rules\ForbiddenNodeRule;
+use Symplify\PHPStanRules\Rules\ForbiddenTraitRule;
 
-final class ForbiddenNodeRuleTest extends RuleTestCase
+final class ForbiddenTraitRuleTest extends RuleTestCase
 {
     /**
      * @param array<int, array<string|int>> $expectedErrorMessagesWithLines
@@ -22,13 +22,10 @@ final class ForbiddenNodeRuleTest extends RuleTestCase
         $this->analyse([$filePath], $expectedErrorMessagesWithLines);
     }
 
-    /**
-     * @return Iterator<(array<int, array<int, array<int, int>>>|array<int, array<int, array<int, string>>>|array<int, string>)>
-     */
     public static function provideData(): Iterator
     {
-        $errorMessage = sprintf(ForbiddenNodeRule::ERROR_MESSAGE, 'empty($value)');
-        yield [__DIR__ . '/Fixture/EmptyCall.php', [[$errorMessage, 11]]];
+        yield [__DIR__ . '/Fixture/SomeTrait.php', [[ForbiddenTraitRule::ERROR_MESSAGE, 7]]];
+        yield [__DIR__ . '/Fixture/SkipClass.php', []];
     }
 
     /**
@@ -42,6 +39,6 @@ final class ForbiddenNodeRuleTest extends RuleTestCase
 
     protected function getRule(): Rule
     {
-        return self::getContainer()->getByType(ForbiddenNodeRule::class);
+        return self::getContainer()->getByType(ForbiddenTraitRule::class);
     }
 }

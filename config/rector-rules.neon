@@ -10,22 +10,14 @@ rules:
     - Symplify\PHPStanRules\Rules\Rector\NoIntegerRefactorReturnRule
     - Symplify\PHPStanRules\Rules\Rector\AvoidFeatureSetAttributeInRectorRule
     - Symplify\PHPStanRules\Rules\Rector\RectorCheaperGuardsFirstRule
+    - Symplify\PHPStanRules\Rules\ForbiddenTraitRule
+    - Symplify\PHPStanRules\Rules\ForbiddenSwitchRule
 
 services:
     # $node->getAttribute($1) => Type|null by $1
     -
         class: Symplify\PHPStanRules\ReturnTypeExtension\NodeGetAttributeTypeExtension
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
-
-    -
-        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            forbiddenNodes:
-                - PhpParser\Node\Expr\ErrorSuppress
-                - PhpParser\Node\Stmt\Switch_
-                - PhpParser\Node\Expr\Empty_
-                - PhpParser\Node\Stmt\Trait_
 
     -
         class: Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule

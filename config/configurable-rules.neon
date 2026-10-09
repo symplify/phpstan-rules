@@ -1,5 +1,7 @@
 conditionalTags:
-    Symplify\PHPStanRules\Rules\ForbiddenNodeRule:
+    Symplify\PHPStanRules\Rules\ForbiddenTraitRule:
+        phpstan.rules.rule: %symplify.configurable%
+    Symplify\PHPStanRules\Rules\ForbiddenSwitchRule:
         phpstan.rules.rule: %symplify.configurable%
     Symplify\PHPStanRules\Rules\PreferredClassRule:
         phpstan.rules.rule: %symplify.configurable%
@@ -10,18 +12,10 @@ conditionalTags:
 
 services:
     -
-        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
-        arguments:
-            forbiddenNodes:
-                - PhpParser\Node\Stmt\Trait_
-                - PhpParser\Node\Expr\Empty_
-                - PhpParser\Node\Stmt\Switch_
-                - PhpParser\Node\Expr\ErrorSuppress
-                - PhpParser\Node\Scalar\Encapsed
-                - PhpParser\Node\Scalar\EncapsedStringPart
-                # use pre* nodes instead
-                - PhpParser\Node\Expr\PostInc
-                - PhpParser\Node\Expr\PostDec
+        class: Symplify\PHPStanRules\Rules\ForbiddenTraitRule
+
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenSwitchRule
 
     -
         class: Symplify\PHPStanRules\Rules\PreferredClassRule
