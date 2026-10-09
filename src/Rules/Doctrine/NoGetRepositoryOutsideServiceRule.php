@@ -13,7 +13,6 @@ use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
@@ -58,7 +57,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
 
         if (! $scope->isInClass()) {
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(DoctrineRuleIdentifier::NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+                ->identifier('doctrine.noGetRepositoryOutsideService')
                 ->build();
 
             return [$ruleError];
@@ -73,7 +72,7 @@ final class NoGetRepositoryOutsideServiceRule implements Rule
         $errorMessage = TestClassDetector::isTestClass($scope) ? self::TEST_ERROR_MESSAGE : self::ERROR_MESSAGE;
 
         $ruleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(DoctrineRuleIdentifier::NO_GET_REPOSITORY_OUTSIDE_SERVICE)
+            ->identifier('doctrine.noGetRepositoryOutsideService')
             ->build();
 
         return [$ruleError];

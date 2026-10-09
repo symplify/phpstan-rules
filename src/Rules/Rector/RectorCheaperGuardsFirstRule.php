@@ -30,7 +30,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Rector\Rector\AbstractRector;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 
 /**
  * Inside a Rector rule, a cheap early-return guard (isName(), instanceof, isset(), arg count)
@@ -123,7 +122,7 @@ final class RectorCheaperGuardsFirstRule implements Rule
                         RuleErrorBuilder::message(
                             sprintf(self::ERROR_MESSAGE, $stmt->getStartLine(), $stmts[$anchorIndex]->getStartLine())
                         )
-                            ->identifier(RectorRuleIdentifier::RECTOR_CHEAPER_GUARDS_FIRST)
+                            ->identifier('rector.rectorCheaperGuardsFirst')
                             ->line($stmt->getStartLine())
                             ->build(),
                     ];

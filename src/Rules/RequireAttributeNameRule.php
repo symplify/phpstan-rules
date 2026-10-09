@@ -12,7 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
@@ -69,7 +68,7 @@ final class RequireAttributeNameRule implements Rule
                 }
 
                 $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                    ->identifier(RuleIdentifier::REQUIRE_ATTRIBUTE_NAME)
+                    ->identifier('symplify.requireAttributeName')
                     ->line($attribute->getLine())
                     ->build();
             }

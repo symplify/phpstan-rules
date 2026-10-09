@@ -12,7 +12,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
@@ -66,7 +65,7 @@ final class NoDocumentMockingRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(PHPUnitRuleIdentifier::NO_DOCUMENT_MOCKING)
+                ->identifier('phpunit.noDocumentMocking')
                 ->build();
 
             return [$ruleError];

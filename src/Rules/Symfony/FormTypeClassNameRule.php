@@ -12,7 +12,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 
 /**
@@ -58,7 +57,7 @@ final class FormTypeClassNameRule implements Rule
         $errorMessage = sprintf(self::ERROR_MESSAGE, SymfonyClass::FORM_TYPE, $className);
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(SymfonyRuleIdentifier::FORM_TYPE_CLASS_NAME)
+            ->identifier('symfony.formTypeClassName')
             ->build();
 
         return [$identifierRuleError];

@@ -17,7 +17,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\UnionType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer;
 
 /**
@@ -69,7 +68,7 @@ final class NoDynamicNameRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::NO_DYNAMIC_NAME)
+                ->identifier('symplify.noDynamicName')
                 ->build();
 
             return [$ruleError];
@@ -90,7 +89,7 @@ final class NoDynamicNameRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::NO_DYNAMIC_NAME)
+                ->identifier('symplify.noDynamicName')
                 ->build();
 
             return [$ruleError];

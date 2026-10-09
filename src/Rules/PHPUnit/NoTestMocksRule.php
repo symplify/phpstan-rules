@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -74,7 +73,7 @@ final class NoTestMocksRule implements Rule
         $errorMessage = sprintf(self::ERROR_MESSAGE, $mockedObjectType->getClassName());
 
         return [RuleErrorBuilder::message($errorMessage)
-            ->identifier(RuleIdentifier::NO_TEST_MOCKS)
+            ->identifier('symplify.noTestMocks')
             ->build()];
     }
 

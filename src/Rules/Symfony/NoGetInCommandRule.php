@@ -9,7 +9,6 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\MethodCallNameAnalyzer;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyCommandAnalyzer;
 
@@ -42,7 +41,7 @@ final class NoGetInCommandRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::NO_GET_IN_COMMAND)
+            ->identifier('symfony.noGetInCommand')
             ->build();
 
         return [$identifierRuleError];

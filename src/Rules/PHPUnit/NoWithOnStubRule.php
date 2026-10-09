@@ -12,7 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
@@ -70,7 +69,7 @@ final class NoWithOnStubRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(PHPUnitRuleIdentifier::NO_WITH_ON_STUB)
+            ->identifier('phpunit.noWithOnStub')
             ->build();
 
         return [$identifierRuleError];

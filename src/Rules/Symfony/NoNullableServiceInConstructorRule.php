@@ -22,7 +22,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use ReflectionProperty;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 use Throwable;
 
@@ -158,7 +157,7 @@ final class NoNullableServiceInConstructorRule implements Rule
             $ruleErrors[] = RuleErrorBuilder::message(
                 sprintf(self::ERROR_MESSAGE, $parameterName, $serviceType)
             )
-                ->identifier(RuleIdentifier::NO_NULLABLE_SERVICE_IN_CONSTRUCTOR)
+                ->identifier('symplify.noNullableServiceInConstructor')
                 ->line($param->getStartLine())
                 ->build();
         }

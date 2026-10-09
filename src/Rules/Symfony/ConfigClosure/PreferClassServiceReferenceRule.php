@@ -12,7 +12,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Collector\ClassTargetServiceAliasCollector;
 use Symplify\PHPStanRules\Collector\ServiceStringReferenceCollector;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 
 /**
  * Reports a config-closure service() reference that asks for a service by a string id an alias already points at
@@ -65,7 +64,7 @@ final class PreferClassServiceReferenceRule implements Rule
                 }
 
                 $ruleErrors[] = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className, $serviceId))
-                    ->identifier(SymfonyRuleIdentifier::PREFER_CLASS_SERVICE_REFERENCE)
+                    ->identifier('symfony.preferClassServiceReference')
                     ->file($filePath)
                     ->line($line)
                     ->build();

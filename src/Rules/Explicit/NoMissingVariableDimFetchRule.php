@@ -11,7 +11,6 @@ use PhpParser\Node\Expr\Variable;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Assign>
@@ -55,7 +54,7 @@ final class NoMissingVariableDimFetchRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::NO_MISSING_VARIABLE_DIM_FETCH)
+            ->identifier('symplify.noMissingVariableDimFetch')
             ->build();
 
         return [$identifierRuleError];

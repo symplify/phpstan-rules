@@ -10,7 +10,6 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 
 /**
@@ -47,7 +46,7 @@ final class NoClassLevelRouteRule implements Rule
 
         $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->line($node->getStartLine())
-            ->identifier(SymfonyRuleIdentifier::NO_CLASS_LEVEL_ROUTE)
+            ->identifier('symfony.noClassLevelRoute')
             ->build();
 
         return [$ruleError];

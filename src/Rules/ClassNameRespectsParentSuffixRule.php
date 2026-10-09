@@ -14,7 +14,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\TestClassName;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
@@ -111,7 +110,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $expectedSuffix);
             return [RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::CLASS_NAME_RESPECTS_PARENT_SUFFIX)
+                ->identifier('symplify.classNameRespectsParentSuffix')
                 ->build()];
         }
 

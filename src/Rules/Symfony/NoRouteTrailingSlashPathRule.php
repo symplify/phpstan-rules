@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 
 /**
@@ -56,7 +55,7 @@ final class NoRouteTrailingSlashPathRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $routePath))
-            ->identifier(SymfonyRuleIdentifier::NO_ROUTE_TRAILING_SLASH_PATH)
+            ->identifier('symfony.noRouteTrailingSlashPath')
             ->build();
 
         return [$identifierRuleError];

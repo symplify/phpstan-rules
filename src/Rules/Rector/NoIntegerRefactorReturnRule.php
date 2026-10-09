@@ -17,7 +17,6 @@ use PhpParser\NodeVisitor;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
 
 /**
@@ -64,7 +63,7 @@ final class NoIntegerRefactorReturnRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RectorRuleIdentifier::NO_INTEGER_REFACTOR_RETURN)
+            ->identifier('rector.noIntegerRefactorReturn')
             ->line($refactorClassMethod->getStartLine())
             ->build();
 

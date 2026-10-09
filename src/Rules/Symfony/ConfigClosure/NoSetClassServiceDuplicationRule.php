@@ -13,7 +13,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -92,7 +91,7 @@ final class NoSetClassServiceDuplicationRule implements Rule
         );
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(SymfonyRuleIdentifier::NO_SET_CLASS_SERVICE_DUPLICATE)
+            ->identifier('symfony.noSetClassServiceDuplicate')
             ->build();
 
         return [$identifierRuleError];

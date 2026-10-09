@@ -15,7 +15,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
 
@@ -87,7 +86,7 @@ final class NoReturnSetterMethodRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::NO_RETURN_SETTER_METHOD)
+            ->identifier('symplify.noReturnSetterMethod')
             ->build()];
     }
 

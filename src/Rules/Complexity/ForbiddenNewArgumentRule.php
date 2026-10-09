@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<New_>
@@ -58,7 +57,7 @@ final class ForbiddenNewArgumentRule implements Rule
         );
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(RuleIdentifier::FORBIDDEN_NEW_INSTANCE)
+            ->identifier('symplify.forbiddenNewInstance')
             ->build();
 
         return [$identifierRuleError];

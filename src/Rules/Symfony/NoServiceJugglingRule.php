@@ -25,7 +25,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Contracts\Service\Attribute\Required;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 
 /**
@@ -125,7 +124,7 @@ final class NoServiceJugglingRule implements Rule
                     $calledMethodName,
                     $injectedServiceTypes[$propertyName]
                 ))
-                    ->identifier(RuleIdentifier::NO_SERVICE_JUGGLING)
+                    ->identifier('symplify.noServiceJuggling')
                     ->line($arg->getStartLine())
                     ->build();
             }

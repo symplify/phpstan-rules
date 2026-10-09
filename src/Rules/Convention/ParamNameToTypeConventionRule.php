@@ -12,7 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Param>
@@ -82,7 +81,7 @@ final class ParamNameToTypeConventionRule implements Rule
         $errorMessage = sprintf(self::ERROR_MESSAGE, $variableName, $expectedType);
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(RuleIdentifier::CONVENTION_PARAM_NAME_TO_TYPE)
+            ->identifier('symplify.conventionParamNameToType')
             ->build();
 
         return [$identifierRuleError];

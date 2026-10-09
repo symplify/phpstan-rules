@@ -14,7 +14,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 
 /**
  * A container definition fetch that names a class by a plain string should use the class constant instead, e.g.
@@ -76,7 +75,7 @@ final class PreferClassInDefinitionFetchRule implements Rule
         $ruleError = RuleErrorBuilder::message(
             sprintf(self::ERROR_MESSAGE, $className, $className)
         )
-            ->identifier(SymfonyRuleIdentifier::PREFER_CLASS_IN_DEFINITION_FETCH)
+            ->identifier('symfony.preferClassInDefinitionFetch')
             ->line($firstArg->getStartLine())
             ->build();
 

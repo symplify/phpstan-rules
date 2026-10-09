@@ -10,7 +10,6 @@ use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SensioClass;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 
@@ -46,7 +45,7 @@ final class RequireIsGrantedEnumRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $isGrantedExpr->value))
-            ->identifier(SymfonyRuleIdentifier::REQUIRED_IS_GRANTED_ENUM)
+            ->identifier('symfony.requiredIsGrantedEnum')
             ->build();
 
         return [$identifierRuleError];

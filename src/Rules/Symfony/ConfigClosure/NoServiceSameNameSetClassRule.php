@@ -14,7 +14,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
 
@@ -83,7 +82,7 @@ final class NoServiceSameNameSetClassRule implements Rule
             }
 
             $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $serviceNameValue))
-                ->identifier(SymfonyRuleIdentifier::NO_SERVICE_SAME_NAME_SET_CLASS)
+                ->identifier('symfony.noServiceSameNameSetClass')
                 ->line($methodCall->getStartLine())
                 ->build();
 

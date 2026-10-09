@@ -11,7 +11,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Symfony\ConfigClosure\SymfonyClosureServicesExcludeResolver;
 use Symplify\PHPStanRules\Symfony\ConfigClosure\SymfonyClosureServicesLoadResolver;
 use Symplify\PHPStanRules\Symfony\ConfigClosure\SymfonyClosureServicesSetClassesResolver;
@@ -84,7 +83,7 @@ final class AlreadyRegisteredAutodiscoveryServiceRule implements Rule
             $errorMessage = sprintf(self::ERROR_MESSAGE, $serviceClass);
 
             $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-                ->identifier(SymfonyRuleIdentifier::ALREADY_REGISTERED_AUTODISCOVERY_SERVICE)
+                ->identifier('symfony.alreadyRegisteredAutodiscoveryService')
                 ->line($line)
                 ->build();
 

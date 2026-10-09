@@ -16,7 +16,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 
 /**
  * A config-closure setter injection wired by hand - $services->get(X::class)->call('setFoo', [service(Foo::class)]) -
@@ -81,7 +80,7 @@ final class NoServiceSetterCallRule implements Rule
 
         return [
             RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $methodName))
-                ->identifier(SymfonyRuleIdentifier::NO_SERVICE_SETTER_CALL)
+                ->identifier('symfony.noServiceSetterCall')
                 ->line($node->getStartLine())
                 ->build(),
         ];

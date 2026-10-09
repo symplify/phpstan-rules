@@ -15,7 +15,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * An attribute can only be repeated on the same class, method or property when it is
@@ -79,7 +78,7 @@ final class NoDuplicateNonRepeatableAttributeRule implements Rule
             $ruleErrors[] = RuleErrorBuilder::message(
                 sprintf(self::ERROR_MESSAGE, $attributeName, $count, $elementType)
             )
-                ->identifier(RuleIdentifier::NO_DUPLICATE_NON_REPEATABLE_ATTRIBUTE)
+                ->identifier('symplify.noDuplicateNonRepeatableAttribute')
                 ->build();
         }
 

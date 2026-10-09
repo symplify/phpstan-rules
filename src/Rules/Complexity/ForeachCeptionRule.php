@@ -10,7 +10,6 @@ use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Foreach_>
@@ -45,7 +44,7 @@ final class ForeachCeptionRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, count($nestedForeaches) + 1))
-            ->identifier(RuleIdentifier::RULE_IDENTIFIER)
+            ->identifier('symplify.foreachCeption')
             ->build();
 
         return [$identifierRuleError];

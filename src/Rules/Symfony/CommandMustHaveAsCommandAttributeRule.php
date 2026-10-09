@@ -13,7 +13,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Component\Console\Command\Command;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Rules\Enum\SymfonyAttribute;
 
 /**
@@ -83,7 +82,7 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className))
-            ->identifier(RuleIdentifier::COMMAND_HAS_AS_COMMAND_ATTRIBUTE)
+            ->identifier('symplify.commandHasAsCommandAttribute')
             ->build();
 
         return [$identifierRuleError];

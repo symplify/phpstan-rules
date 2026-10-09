@@ -11,7 +11,6 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<InClassNode>
@@ -64,7 +63,7 @@ final class ForbiddenExtendOfNonAbstractClassRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::FORBIDDEN_EXTEND_OF_NON_ABSTRACT_CLASS)
+            ->identifier('symplify.forbiddenExtendOfNonAbstractClass')
             ->build()];
     }
 }

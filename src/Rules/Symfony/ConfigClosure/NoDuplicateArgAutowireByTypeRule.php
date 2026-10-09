@@ -13,7 +13,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyFunctionName;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\Symfony\Reflection\ClassConstructorTypesResolver;
@@ -104,7 +103,7 @@ final class NoDuplicateArgAutowireByTypeRule implements Rule
                 $referenceServiceType = NamingHelper::getName($referenceExpr->class);
                 if ($referenceServiceType === $constructorType) {
                     $ruleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $constructorType))
-                        ->identifier(SymfonyRuleIdentifier::NO_DUPLICATE_ARG_AUTOWIRE_BY_TYPE)
+                        ->identifier('symfony.noDuplicateArgAutowireByType')
                         ->line($referenceFuncCall->getStartLine())
                         ->build();
 
@@ -116,7 +115,7 @@ final class NoDuplicateArgAutowireByTypeRule implements Rule
         // 2. special case for string known values
         if ($referenceExpr instanceof String_ && in_array($referenceExpr->value, self::NAMED_AUTOWIRED_TYPES, true)) {
             $ruleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $referenceExpr->value))
-                ->identifier(SymfonyRuleIdentifier::NO_DUPLICATE_ARG_AUTOWIRE_BY_TYPE)
+                ->identifier('symfony.noDuplicateArgAutowireByType')
                 ->line($referenceFuncCall->getStartLine())
                 ->build();
 

@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 
 /**
@@ -67,7 +66,7 @@ final class SingleArgEventDispatchRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::SINGLE_ARG_EVENT_DISPATCH)
+            ->identifier('symfony.singleArgEventDispatch')
             ->build();
 
         return [$identifierRuleError];

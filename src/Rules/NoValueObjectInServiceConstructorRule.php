@@ -11,7 +11,6 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
@@ -60,7 +59,7 @@ final class NoValueObjectInServiceConstructorRule implements Rule
                 'Value object "%s" cannot be passed to constructor of a service. Pass it as a method argument instead',
                 $paramType
             ))
-                ->identifier(RuleIdentifier::NO_VALUE_OBJECT_IN_SERVICE_CONSTRUCTOR)
+                ->identifier('symplify.noValueObjectInServiceConstructor')
                 ->build();
         }
 

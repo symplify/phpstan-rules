@@ -16,7 +16,6 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
@@ -67,7 +66,7 @@ final class NoFindTaggedServiceIdsCallRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(SymfonyRuleIdentifier::NO_FIND_TAGGED_SERVICE_IDS_CALL)
+                ->identifier('symfony.noFindTaggedServiceIdsCall')
                 ->line($methodCall->getStartLine())
                 ->build();
         }
