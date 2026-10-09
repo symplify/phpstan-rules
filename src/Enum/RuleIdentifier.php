@@ -64,7 +64,12 @@ final class RuleIdentifier
     /**
      * @var string
      */
-    public const FORBIDDEN_NODE = 'symplify.forbiddenNode';
+    public const FORBIDDEN_TRAIT = 'symplify.forbiddenTrait';
+
+    /**
+     * @var string
+     */
+    public const FORBIDDEN_SWITCH = 'symplify.forbiddenSwitch';
 
     /**
      * @var string
