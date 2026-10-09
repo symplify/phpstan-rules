@@ -235,9 +235,4 @@ final class RuleIdentifier
      * @var string
      */
     public const NO_NULLABLE_SERVICE_IN_CONSTRUCTOR = 'symplify.noNullableServiceInConstructor';
-
-    /**
-     * @var string
-     */
-    public const PREFER_INLINE_TRAIT = 'symplify.preferInlineTrait';
 }

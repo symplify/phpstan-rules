@@ -70,7 +70,6 @@
                 "config/doctrine-rules.neon",
                 "config/phpunit-rules.neon",
                 "config/ctor-rules.neon",
-                "config/inline-trait-rules.neon",
                 "config/mock-rules.neon",
                 "config/phpstan-extensions.neon"
             ]
