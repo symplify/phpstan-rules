@@ -12,7 +12,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Tests\Rules\Doctrine\NoRepositoryCallInDataFixtureRule\NoRepositoryCallInDataFixtureRuleTest;
 
 /**
@@ -56,7 +55,7 @@ final class NoRepositoryCallInDataFixtureRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(DoctrineRuleIdentifier::NO_REPOSITORY_CALL_IN_DATA_FIXTURES)
+            ->identifier('doctrine.noRepositoryCallInDataFixtures')
             ->build();
 
         return [$identifierRuleError];

@@ -11,7 +11,6 @@ use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SensioClass;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 
@@ -60,7 +59,7 @@ final class NoBareAndSecurityIsGrantedContentsRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::REQUIRED_IS_GRANTED_ENUM)
+            ->identifier('symfony.requiredIsGrantedEnum')
             ->build();
 
         return [$identifierRuleError];

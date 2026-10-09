@@ -15,7 +15,6 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * An object property must not be assigned from another object property of the same object.
@@ -78,7 +77,7 @@ final class NoPropertyToPropertyAssignRule implements Rule
         $identifierRuleError = RuleErrorBuilder::message(
             sprintf(self::ERROR_MESSAGE, $assignedPropertyName, $sourcePropertyName)
         )
-            ->identifier(RuleIdentifier::NO_PROPERTY_TO_PROPERTY_ASSIGN)
+            ->identifier('symplify.noPropertyToPropertyAssign')
             ->build();
 
         return [$identifierRuleError];

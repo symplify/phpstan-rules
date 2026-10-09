@@ -20,7 +20,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Twig\Extension\ExtensionInterface;
 
 /**
@@ -118,7 +117,7 @@ final class NoAutoconfiguredServiceTagRule implements Rule
             $ruleErrors[] = RuleErrorBuilder::message(
                 sprintf(self::ERROR_MESSAGE, $tagName, $className, $autoconfiguredType)
             )
-                ->identifier(SymfonyRuleIdentifier::NO_AUTOCONFIGURED_SERVICE_TAG)
+                ->identifier('symfony.noAutoconfiguredServiceTag')
                 // the name, not the call - a chained call starts on the line of the $services->set() above it
                 ->line($methodCall->name->getStartLine())
                 ->build();

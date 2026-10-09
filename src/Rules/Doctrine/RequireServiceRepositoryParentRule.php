@@ -12,7 +12,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 
 /**
  * @implements Rule<InClassNode>
@@ -51,7 +50,7 @@ final class RequireServiceRepositoryParentRule implements Rule
         $errorMessage = sprintf(self::ERROR_MESSAGE, DoctrineClass::ODM_SERVICE_REPOSITORY, DoctrineClass::ORM_SERVICE_REPOSITORY, DoctrineClass::ODM_SERVICE_REPOSITORY_INTERFACE);
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(DoctrineRuleIdentifier::REQUIRE_SERVICE_PARENT_REPOSITORY)
+            ->identifier('doctrine.requireServiceParentRepository')
             ->build();
 
         return [$identifierRuleError];

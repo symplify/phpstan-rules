@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 
 /**
  * Check if class extends repository class,
@@ -48,7 +47,7 @@ final class NoParentRepositoryRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(DoctrineRuleIdentifier::NO_PARENT_REPOSITORY)
+            ->identifier('doctrine.noParentRepository')
             ->build();
 
         return [$identifierRuleError];

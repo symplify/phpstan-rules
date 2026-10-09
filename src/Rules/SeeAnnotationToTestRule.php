@@ -15,7 +15,6 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Enum\TestClassName;
 use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 use Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder;
@@ -82,7 +81,7 @@ final class SeeAnnotationToTestRule implements Rule
 
         if (! $docComment instanceof Doc) {
             return [RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::SEE_ANNOTATION_TO_TEST)
+                ->identifier('symplify.seeAnnotationToTest')
                 ->build()];
         }
 
@@ -100,7 +99,7 @@ final class SeeAnnotationToTestRule implements Rule
         }
 
         return [RuleErrorBuilder::message($errorMessage)
-            ->identifier(RuleIdentifier::SEE_ANNOTATION_TO_TEST)
+            ->identifier('symplify.seeAnnotationToTest')
             ->build()];
     }
 

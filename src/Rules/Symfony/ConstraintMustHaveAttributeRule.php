@@ -13,7 +13,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Rules\Enum\SymfonyAttribute;
 
 /**
@@ -86,7 +85,7 @@ final class ConstraintMustHaveAttributeRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $className))
-            ->identifier(RuleIdentifier::CONSTRAINT_HAS_ATTRIBUTE)
+            ->identifier('symplify.constraintHasAttribute')
             ->build();
 
         return [$identifierRuleError];

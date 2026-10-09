@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassConstFetch>
@@ -48,7 +47,7 @@ final class ForbiddenStaticClassConstFetchRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::FORBIDDEN_STATIC_CLASS_CONST_FETCH)
+            ->identifier('symplify.forbiddenStaticClassConstFetch')
             ->build()];
     }
 }

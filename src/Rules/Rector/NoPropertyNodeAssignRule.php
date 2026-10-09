@@ -13,7 +13,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use Rector\Contract\Rector\RectorInterface;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Rector\NoPropertyNodeAssignRule\NoPropertyNodeAssignRuleTest
@@ -73,7 +72,7 @@ final class NoPropertyNodeAssignRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RectorRuleIdentifier::NO_PROPERTY_NODE_ASSIGN)
+            ->identifier('rector.noPropertyNodeAssign')
             ->build();
 
         return [$identifierRuleError];

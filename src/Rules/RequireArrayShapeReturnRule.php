@@ -21,7 +21,6 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * A method that returns a keyed array of 2-3 named values should declare that shape in its @return, so the caller
@@ -129,7 +128,7 @@ final class RequireArrayShapeReturnRule implements Rule
         $ruleError = RuleErrorBuilder::message(
             sprintf(self::ERROR_MESSAGE, $methodName, count($firstKeyedArray->items))
         )
-            ->identifier(RuleIdentifier::REQUIRE_ARRAY_SHAPE_RETURN)
+            ->identifier('symplify.requireArrayShapeReturn')
             ->line($firstKeyedArray->getStartLine())
             ->build();
 

@@ -16,7 +16,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Component\Form\AbstractType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\PhpDoc\PhpDocResolver;
 
 /**
@@ -71,7 +70,7 @@ final class NoJustPropertyAssignRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::NO_JUST_PROPERTY_ASSIGN)
+            ->identifier('symplify.noJustPropertyAssign')
             ->build()];
     }
 

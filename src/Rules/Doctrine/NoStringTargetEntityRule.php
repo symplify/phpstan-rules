@@ -12,7 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 
 /**
  * A Doctrine association attribute must reference its target entity as a class constant (Target::class), not a string.
@@ -68,7 +67,7 @@ final class NoStringTargetEntityRule implements Rule
                 RuleErrorBuilder::message(
                     sprintf(self::ERROR_MESSAGE, $node->name->getLast(), $arg->value->value, $arg->value->value)
                 )
-                    ->identifier(DoctrineRuleIdentifier::NO_STRING_TARGET_ENTITY)
+                    ->identifier('doctrine.noStringTargetEntity')
                     ->build(),
             ];
         }

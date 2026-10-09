@@ -10,7 +10,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Trait_>
@@ -35,7 +34,7 @@ final class ForbiddenTraitRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::FORBIDDEN_TRAIT)
+            ->identifier('symplify.forbiddenTrait')
             ->build()];
     }
 }

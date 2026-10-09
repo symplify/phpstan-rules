@@ -12,7 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Rector\Rector\AbstractRector;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 
 /**
  * @implements Rule<MethodCall>
@@ -57,7 +56,7 @@ final class PreferDirectIsNameRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RectorRuleIdentifier::PREFER_DIRECT_IS_NAME)
+            ->identifier('rector.preferDirectIsName')
             ->build();
 
         return [$identifierRuleError];

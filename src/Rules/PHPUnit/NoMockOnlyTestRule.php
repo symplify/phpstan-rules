@@ -12,7 +12,6 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
@@ -77,7 +76,7 @@ final class NoMockOnlyTestRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(PHPUnitRuleIdentifier::NO_MOCK_ONLY)
+            ->identifier('phpunit.noMockOnly')
             ->build();
 
         return [$identifierRuleError];

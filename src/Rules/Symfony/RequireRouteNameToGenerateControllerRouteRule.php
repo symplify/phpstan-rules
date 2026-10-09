@@ -17,7 +17,6 @@ use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\ObjectType;
 use ReflectionAttribute;
 use ReflectionMethod;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Reflection\InvokeClassMethodResolver;
 
@@ -75,7 +74,7 @@ final class RequireRouteNameToGenerateControllerRouteRule implements Rule
 
         // there must be __invoke() method
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::REQUIRE_ROUTE_NAME_TO_GENERATE_CONTROLLER_ROUTE)
+            ->identifier('symfony.requireRouteNameToGenerateControllerRoute')
             ->build();
 
         if (! $invokeClassMethodReflection instanceof ReflectionMethod) {

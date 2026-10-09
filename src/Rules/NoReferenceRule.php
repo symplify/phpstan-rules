@@ -18,7 +18,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
 
 /**
@@ -102,7 +101,7 @@ final class NoReferenceRule implements Rule
     private function createRuleError(): IdentifierRuleError
     {
         return RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::NO_REFERENCE)
+            ->identifier('symplify.noReference')
             ->build();
     }
 }

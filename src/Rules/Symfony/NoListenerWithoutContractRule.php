@@ -13,7 +13,6 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Doctrine\DoctrineEventSubscriberAnalyzer;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 
@@ -97,7 +96,7 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::NO_LISTENER_WITHOUT_CONTRACT)
+            ->identifier('symfony.noListenerWithoutContract')
             ->build();
 
         return [$identifierRuleError];

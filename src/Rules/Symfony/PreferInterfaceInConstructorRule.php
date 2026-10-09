@@ -13,7 +13,6 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 
 /**
@@ -93,7 +92,7 @@ final class PreferInterfaceInConstructorRule implements Rule
             $ruleErrors[] = RuleErrorBuilder::message(
                 sprintf(self::ERROR_MESSAGE, $parameterName, $className, $interfaceName)
             )
-                ->identifier(RuleIdentifier::PREFER_INTERFACE_IN_CONSTRUCTOR)
+                ->identifier('symplify.preferInterfaceInConstructor')
                 ->line($param->getStartLine())
                 ->build();
         }

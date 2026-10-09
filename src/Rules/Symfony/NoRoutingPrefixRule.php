@@ -13,7 +13,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
@@ -59,7 +58,7 @@ final class NoRoutingPrefixRule implements Rule
 
         $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->line($node->getStartLine())
-            ->identifier(SymfonyRuleIdentifier::NO_ROUTING_PREFIX)
+            ->identifier('symfony.noRoutingPrefix')
             ->build();
 
         return [$ruleError];

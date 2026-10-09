@@ -10,7 +10,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Const_>
@@ -35,7 +34,7 @@ final class NoGlobalConstRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::NO_GLOBAL_CONST)
+            ->identifier('symplify.noGlobalConst')
             ->build();
 
         return [$identifierRuleError];

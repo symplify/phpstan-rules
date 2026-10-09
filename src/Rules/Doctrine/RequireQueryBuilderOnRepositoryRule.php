@@ -22,7 +22,6 @@ use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
@@ -94,7 +93,7 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(DoctrineRuleIdentifier::REQUIRE_QUERY_BUILDER_ON_REPOSITORY)
+                ->identifier('doctrine.requireQueryBuilderOnRepository')
                 ->line($methodCall->getStartLine())
                 ->build();
         }

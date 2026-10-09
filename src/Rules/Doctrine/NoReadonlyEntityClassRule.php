@@ -13,7 +13,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 
 /**
  * A Doctrine entity is hydrated via reflection without the constructor, so a readonly class breaks loading and
@@ -62,7 +61,7 @@ final class NoReadonlyEntityClassRule implements Rule
         $identifierRuleError = RuleErrorBuilder::message(
             sprintf(self::ERROR_MESSAGE, (string) $node->namespacedName)
         )
-            ->identifier(DoctrineRuleIdentifier::NO_READONLY_ENTITY_CLASS)
+            ->identifier('doctrine.noReadonlyEntityClass')
             ->build();
 
         return [$identifierRuleError];

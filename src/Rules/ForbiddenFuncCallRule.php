@@ -13,7 +13,6 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeCombinator;
 use SimpleXMLElement;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter;
 use Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher;
 use Symplify\PHPStanRules\ValueObject\Configuration\RequiredWithMessage;
@@ -85,7 +84,7 @@ final class ForbiddenFuncCallRule implements Rule
             $errorMessage = $this->createErrorMessage($requiredWithMessage, $funcName);
 
             $ruleError = RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::FORBIDDEN_FUNC_CALL)
+                ->identifier('symplify.forbiddenFuncCall')
                 ->build();
 
             return [$ruleError];

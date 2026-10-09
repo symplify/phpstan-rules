@@ -12,7 +12,6 @@ use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Node>
@@ -69,7 +68,7 @@ final class ForbiddenNodeRule implements Rule
             $errorMessage = sprintf(self::ERROR_MESSAGE, $contents);
 
             $ruleError = RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::FORBIDDEN_NODE)
+                ->identifier('symplify.forbiddenNode')
                 ->build();
 
             return [$ruleError];

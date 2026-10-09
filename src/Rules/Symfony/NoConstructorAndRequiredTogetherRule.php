@@ -13,7 +13,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\MethodName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver;
 
 /**
@@ -66,7 +65,7 @@ final class NoConstructorAndRequiredTogetherRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::NO_CONSTRUCT_AND_REQUIRED)
+            ->identifier('symfony.noConstructAndRequired')
             ->build();
 
         return [

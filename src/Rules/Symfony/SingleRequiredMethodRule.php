@@ -8,7 +8,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\SymfonyRequiredMethodAnalyzer;
 
 /**
@@ -49,7 +48,7 @@ final class SingleRequiredMethodRule implements Rule
         $errorMessage = sprintf(self::ERROR_MESSAGE, $requiredClassMethodCount);
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(SymfonyRuleIdentifier::SINGLE_REQUIRED_METHOD)
+            ->identifier('symfony.singleRequiredMethod')
             ->build();
 
         return [$identifierRuleError];

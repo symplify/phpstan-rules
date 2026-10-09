@@ -19,7 +19,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
 
@@ -84,7 +83,7 @@ final class ServicesExcludedDirectoryMustExistRule implements Rule
 
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
                     ->line($arrayItem->getStartLine())
-                    ->identifier(SymfonyRuleIdentifier::SERVICES_EXCLUDED_DIRECTORY_MUST_EXIST)
+                    ->identifier('symfony.servicesExcludedDirectoryMustExist')
                     ->build();
             }
         }

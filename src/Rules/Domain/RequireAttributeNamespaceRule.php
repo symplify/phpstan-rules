@@ -10,7 +10,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<InClassNode>
@@ -48,7 +47,7 @@ final class RequireAttributeNamespaceRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::REQUIRE_ATTRIBUTE_NAMESPACE)
+            ->identifier('symplify.requireAttributeNamespace')
             ->build()];
     }
 }

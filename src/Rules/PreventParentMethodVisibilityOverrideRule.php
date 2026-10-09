@@ -12,7 +12,6 @@ use PHPStan\Reflection\ExtendedMethodReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassMethod>
@@ -77,7 +76,7 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule
             $errorMessage = sprintf(self::ERROR_MESSAGE, $methodName, $methodVisibility);
 
             return [RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::PARENT_METHOD_VISIBILITY_OVERRIDE)
+                ->identifier('symplify.parentMethodVisibilityOverride')
                 ->build()];
         }
 

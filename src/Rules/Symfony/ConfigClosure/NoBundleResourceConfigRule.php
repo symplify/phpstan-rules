@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
 
 /**
@@ -44,7 +43,7 @@ final class NoBundleResourceConfigRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(SymfonyRuleIdentifier::NO_BUNDLE_RESOURCE_CONFIG)
+            ->identifier('symfony.noBundleResourceConfig')
             ->build();
 
         return [$identifierRuleError];

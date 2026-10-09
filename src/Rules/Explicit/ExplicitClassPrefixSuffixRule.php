@@ -14,7 +14,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassLike>
@@ -80,12 +79,12 @@ final class ExplicitClassPrefixSuffixRule implements Rule
 
         if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
+                ->identifier('symplify.explicitTraitSuffixName')
                 ->build()];
         }
 
         return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::EXPLICIT_INTERFACE_SUFFIX_NAME)
+            ->identifier('symplify.explicitInterfaceSuffixName')
             ->build()];
     }
 
@@ -99,7 +98,7 @@ final class ExplicitClassPrefixSuffixRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
+            ->identifier('symplify.explicitTraitSuffixName')
             ->build()];
     }
 
@@ -110,26 +109,26 @@ final class ExplicitClassPrefixSuffixRule implements Rule
     {
         if ($isAbstract && strncmp($identifier->toString(), 'Abstract', strlen('Abstract')) !== 0) {
             return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::EXPLICIT_ABSTRACT_PREFIX_NAME)
+                ->identifier('symplify.explicitAbstractPrefixName')
                 ->build()];
         }
 
         if (! $isAbstract && strncmp($identifier->toString(), 'Abstract', strlen('Abstract')) === 0) {
             return [RuleErrorBuilder::message(self::ABSTRACT_ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::EXPLICIT_ABSTRACT_PREFIX_NAME)
+                ->identifier('symplify.explicitAbstractPrefixName')
                 ->build(),
             ];
         }
 
         if (substr_compare($identifier->toString(), 'Interface', -strlen('Interface')) === 0) {
             return [RuleErrorBuilder::message(self::INTERFACE_ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::EXPLICIT_INTERFACE_SUFFIX_NAME)
+                ->identifier('symplify.explicitInterfaceSuffixName')
                 ->build()];
         }
 
         if (substr_compare($identifier->toString(), 'Trait', -strlen('Trait')) === 0) {
             return [RuleErrorBuilder::message(self::TRAIT_ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::EXPLICIT_TRAIT_SUFFIX_NAME)
+                ->identifier('symplify.explicitTraitSuffixName')
                 ->build()];
         }
 

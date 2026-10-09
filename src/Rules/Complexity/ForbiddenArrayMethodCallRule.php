@@ -12,7 +12,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\TypeWithClassName;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Array_>
@@ -55,7 +54,7 @@ final class ForbiddenArrayMethodCallRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::FORBIDDEN_ARRAY_METHOD_CALL)
+            ->identifier('symplify.forbiddenArrayMethodCall')
             ->build()];
     }
 

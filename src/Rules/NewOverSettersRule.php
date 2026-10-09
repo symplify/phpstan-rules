@@ -12,7 +12,6 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Collector\NewWithFollowingSettersCollector;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see NewWithFollowingSettersCollector
@@ -95,7 +94,7 @@ final class NewOverSettersRule implements Rule
             );
 
             $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::NEW_OVER_SETTERS)
+                ->identifier('symplify.newOverSetters')
                 ->file((string) $classReflection->getFileName())
                 ->build();
         }

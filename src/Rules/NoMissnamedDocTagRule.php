@@ -11,7 +11,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<Class_>
@@ -63,7 +62,7 @@ final class NoMissnamedDocTagRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(sprintf(self::METHOD_ERROR_MESSAGE, $matches[1]))
-                ->identifier(RuleIdentifier::NO_MISSNAMED_DOC_TAG)
+                ->identifier('symplify.noMissnamedDocTag')
                 ->line($classMethod->getStartLine())
                 ->build();
         }
@@ -80,7 +79,7 @@ final class NoMissnamedDocTagRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(sprintf(self::PROPERTY_ERROR_MESSAGE, $matches[1]))
-                ->identifier(RuleIdentifier::NO_MISSNAMED_DOC_TAG)
+                ->identifier('symplify.noMissnamedDocTag')
                 ->line($property->getStartLine())
                 ->build();
         }
@@ -96,7 +95,7 @@ final class NoMissnamedDocTagRule implements Rule
             }
 
             $ruleErrors[] = RuleErrorBuilder::message(sprintf(self::CONSTANT_ERROR_MESSAGE, $matches[1]))
-                ->identifier(RuleIdentifier::NO_MISSNAMED_DOC_TAG)
+                ->identifier('symplify.noMissnamedDocTag')
                 ->line($classConst->getStartLine())
                 ->build();
         }

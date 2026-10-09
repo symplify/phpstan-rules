@@ -14,7 +14,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use Rector\Rector\AbstractRector;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
@@ -84,7 +83,7 @@ final class AvoidFeatureSetAttributeInRectorRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $attributeName))
-                ->identifier(RectorRuleIdentifier::AVOID_FEATURE_SET_ATTRIBUTE_IN_RECTOR)
+                ->identifier('rector.avoidFeatureSetAttributeInRector')
                 ->build();
 
             $ruleErrors[] = $ruleError;

@@ -16,7 +16,6 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
@@ -110,7 +109,7 @@ final class PreferredClassRule implements Rule
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
             return [RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->identifier('symplify.preferredClass')
                 ->build()];
         }
 
@@ -129,7 +128,7 @@ final class PreferredClassRule implements Rule
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
             $ruleError = RuleErrorBuilder::message($errorMessage)
-                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->identifier('symplify.preferredClass')
                 ->build();
 
             return [$ruleError];

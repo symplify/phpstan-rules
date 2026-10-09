@@ -15,7 +15,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
 
 /**
@@ -58,7 +57,7 @@ final class FileNameMatchesExtensionRule implements Rule
         // find if uses extension and get the name if so
 
         $identifierRuleError = RuleErrorBuilder::message(sprintf(self::ERROR_MESSAGE, $extensionName, $baseFileName))
-            ->identifier(SymfonyRuleIdentifier::FILE_NAME_MATCHES_EXTENSION)
+            ->identifier('symfony.fileNameMatchesExtension')
             ->build();
 
         return [$identifierRuleError];

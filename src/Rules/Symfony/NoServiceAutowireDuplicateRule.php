@@ -12,7 +12,6 @@ use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyClosureDetector;
 
@@ -61,7 +60,7 @@ final class NoServiceAutowireDuplicateRule implements Rule
 
             $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
                 ->line($serviceAutowireMethodCall->getLine())
-                ->identifier(SymfonyRuleIdentifier::RULE_IDENTIFIER)
+                ->identifier('symfony.noServiceAutowireDuplicate')
                 ->build();
         }
 

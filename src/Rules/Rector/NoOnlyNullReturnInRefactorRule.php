@@ -14,7 +14,6 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Rector\Rector\AbstractRector;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
@@ -71,7 +70,7 @@ final class NoOnlyNullReturnInRefactorRule implements Rule
         }
 
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RectorRuleIdentifier::NO_ONLY_NULL_RETURN_IN_REFACTOR)
+            ->identifier('rector.noOnlyNullReturnInRefactor')
             ->build()];
     }
 }

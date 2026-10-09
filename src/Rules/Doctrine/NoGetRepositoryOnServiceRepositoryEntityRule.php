@@ -16,7 +16,6 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use Symplify\PHPStanRules\Doctrine\RepositoryClassResolver;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Enum\TestClassName;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
@@ -85,7 +84,7 @@ final class NoGetRepositoryOnServiceRepositoryEntityRule implements Rule
         $errorMessage = sprintf(self::ERROR_MESSAGE, $shortEntityClassName, $repositoryClassName);
 
         $identifierRuleError = RuleErrorBuilder::message($errorMessage)
-            ->identifier(DoctrineRuleIdentifier::INJECT_SERVICE_REPOSITORY)
+            ->identifier('doctrine.injectServiceRepository')
             ->build();
 
         return [$identifierRuleError];

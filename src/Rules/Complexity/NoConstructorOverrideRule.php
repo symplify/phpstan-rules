@@ -11,7 +11,6 @@ use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassMethod>
@@ -69,7 +68,7 @@ final class NoConstructorOverrideRule implements Rule
         }
 
         $identifierRuleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier(RuleIdentifier::NO_CONSTRUCTOR_OVERRIDE)
+            ->identifier('symplify.noConstructorOverride')
             ->build();
 
         return [$identifierRuleError];
