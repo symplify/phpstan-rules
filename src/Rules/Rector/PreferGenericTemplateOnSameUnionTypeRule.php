@@ -83,17 +83,17 @@ final class PreferGenericTemplateOnSameUnionTypeRule implements Rule
      * Returns sorted class-type member names (null stripped), or null when the type is not a
      * union of 2+ class types - scalars, array and intersections disqualify it.
      *
-     * @param null|Identifier|Name|ComplexType $type
+     * @param null|Identifier|Name|ComplexType $node
      * @return list<string>|null
      */
-    private function resolveClassUnionNames(?Node $type): ?array
+    private function resolveClassUnionNames(?Node $node): ?array
     {
-        if (! $type instanceof UnionType) {
+        if (! $node instanceof UnionType) {
             return null;
         }
 
         $names = [];
-        foreach ($type->types as $memberType) {
+        foreach ($node->types as $memberType) {
             if ($memberType instanceof Identifier) {
                 if ($memberType->toLowerString() === 'null') {
                     continue;
