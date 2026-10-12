@@ -10,7 +10,6 @@ rules:
     - Symplify\PHPStanRules\Rules\Rector\NoIntegerRefactorReturnRule
     - Symplify\PHPStanRules\Rules\Rector\AvoidFeatureSetAttributeInRectorRule
     - Symplify\PHPStanRules\Rules\Rector\RectorCheaperGuardsFirstRule
-    - Symplify\PHPStanRules\Rules\Rector\PreferGenericTemplateOnSameUnionTypeRule
     - Symplify\PHPStanRules\Rules\ForbiddenTraitRule
     - Symplify\PHPStanRules\Rules\ForbiddenSwitchRule
 
