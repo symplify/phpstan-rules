@@ -30,6 +30,11 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
     /**
      * @var string
      */
+    private const LARAVEL_COMMAND_CLASS = 'Illuminate\Console\Command';
+
+    /**
+     * @var string
+     */
     public const ERROR_MESSAGE = 'Class "%s" extends Command but is missing the #[AsCommand] attribute';
 
     public function __construct(ReflectionProvider $reflectionProvider)
@@ -51,6 +56,11 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
     {
         // an anonymous class carries no name to report, and is no registered command
         if (! $node->name instanceof Identifier) {
+            return [];
+        }
+
+        // Laravel commands use $signature instead of the #[AsCommand] attribute
+        if ($this->reflectionProvider->hasClass(self::LARAVEL_COMMAND_CLASS)) {
             return [];
         }
 
