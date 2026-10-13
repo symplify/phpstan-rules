@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Rules\Complexity\ForbiddenArrayMethodCallRule\Fixture;
 
-final class SkipNonPublicMethod
+final class NonPublicMethodOnSameClass
 {
     public function run()
     {
