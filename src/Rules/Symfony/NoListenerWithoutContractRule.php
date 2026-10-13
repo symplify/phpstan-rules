@@ -114,7 +114,7 @@ final class NoListenerWithoutContractRule implements Rule
 
         foreach ($attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attr) {
-                if ($attr->name->toString() === SymfonyClass::EVENT_LISTENER_ATTRIBUTE) {
+                if (in_array($attr->name->toString(), [SymfonyClass::EVENT_LISTENER_ATTRIBUTE, SymfonyClass::DOCTRINE_LISTENER_ATTRIBUTE], true)) {
                     return true;
                 }
             }
