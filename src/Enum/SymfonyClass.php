@@ -89,11 +89,6 @@ final class SymfonyClass
     /**
      * @var string
      */
-    public const VALIDATOR_TEST_CASE = 'Symfony\Component\Validator\Test\ConstraintValidatorTestCase';
-
-    /**
-     * @var string
-     */
     public const CONTAINER_CONFIGURATOR = 'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator';
 
     /**

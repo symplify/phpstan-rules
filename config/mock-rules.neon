@@ -1,7 +1,5 @@
 conditionalTags:
     # mocking
-    Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule:
-        phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule:
         phpstan.rules.rule: %symplify.mocks%
 
@@ -30,7 +28,6 @@ conditionalTags:
         phpstan.rules.rule: %symplify.mocks%
 
 services:
-    - Symplify\PHPStanRules\Rules\PHPUnit\NoMockOnlyTestRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
     - Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule
