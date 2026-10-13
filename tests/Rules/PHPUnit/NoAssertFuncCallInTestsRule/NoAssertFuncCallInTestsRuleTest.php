@@ -31,6 +31,8 @@ final class NoAssertFuncCallInTestsRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipTestOutside.php', []];
 
         yield [__DIR__ . '/Fixture/SkipVariableCallable.php', []];
+
+        yield [__DIR__ . '/Fixture/SkipTraitTestCase.php', []];
     }
 
     protected function getRule(): Rule
