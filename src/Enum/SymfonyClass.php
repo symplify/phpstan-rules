@@ -49,6 +49,11 @@ final class SymfonyClass
     /**
      * @var string
      */
+    public const DOCTRINE_LISTENER_ATTRIBUTE = 'Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener';
+
+    /**
+     * @var string
+     */
     public const EVENT_SUBSCRIBER_INTERFACE = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
 
     /**
