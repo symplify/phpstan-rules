@@ -34,13 +34,11 @@ services:
                 - 'dump'
                 - 'var_dump'
                 - 'extract'
-                - 'curl_*'
                 - 'compact'
                 - 'method_exists'
                 - 'property_exists'
                 - 'spl_autoload_register'
                 - 'spl_autoload_unregister'
-                - array_walk
 
     -
         class: Symplify\PHPStanRules\Rules\SeeAnnotationToTestRule
