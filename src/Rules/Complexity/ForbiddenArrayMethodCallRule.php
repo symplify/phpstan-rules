@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
@@ -53,9 +54,25 @@ final class ForbiddenArrayMethodCallRule implements Rule
             return [];
         }
 
+        // allow non-public methods of a different class, as they cannot be called explicitly from outside
+        $extendedMethodReflection = $typeWithClassName->getMethod($methodName, $scope);
+        if (! $extendedMethodReflection->isPublic() && ! $this->isCurrentClass($typeWithClassName, $scope)) {
+            return [];
+        }
+
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier('symplify.forbiddenArrayMethodCall')
             ->build()];
+    }
+
+    private function isCurrentClass(TypeWithClassName $typeWithClassName, Scope $scope): bool
+    {
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        return $classReflection->getName() === $typeWithClassName->getClassName();
     }
 
     private function resolveFirstArrayItemClassType(Array_ $array, Scope $scope): ?TypeWithClassName
