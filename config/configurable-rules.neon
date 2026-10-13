@@ -1,6 +1,4 @@
 conditionalTags:
-    Symplify\PHPStanRules\Rules\ForbiddenTraitRule:
-        phpstan.rules.rule: %symplify.configurable%
     Symplify\PHPStanRules\Rules\ForbiddenSwitchRule:
         phpstan.rules.rule: %symplify.configurable%
     Symplify\PHPStanRules\Rules\PreferredClassRule:
@@ -11,9 +9,6 @@ conditionalTags:
         phpstan.rules.rule: %symplify.configurable%
 
 services:
-    -
-        class: Symplify\PHPStanRules\Rules\ForbiddenTraitRule
-
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenSwitchRule
 

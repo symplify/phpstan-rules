@@ -65,6 +65,7 @@
                 "config/code-complexity-rules.neon",
                 "config/configurable-rules.neon",
                 "config/static-rules.neon",
+                "config/modern-rules.neon",
                 "config/symfony-rules.neon",
                 "config/symfony-config-rules.neon",
                 "config/doctrine-rules.neon",

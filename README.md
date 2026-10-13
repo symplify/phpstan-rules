@@ -40,6 +40,7 @@ parameters:
         complexity: true
         configurable: true
         static: true
+        modern: true
         symfony: true
         symfonyConfig: true
         doctrine: true

@@ -1,0 +1,18 @@
+conditionalTags:
+    Symplify\PHPStanRules\Rules\ForbiddenTraitRule:
+        phpstan.rules.rule: %symplify.modern%
+    Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule:
+        phpstan.rules.rule: %symplify.modern%
+    Symplify\PHPStanRules\Rules\NoReferenceRule:
+        phpstan.rules.rule: %symplify.modern%
+    Symplify\PHPStanRules\Rules\NoDynamicNameRule:
+        phpstan.rules.rule: %symplify.modern%
+    Symplify\PHPStanRules\Rules\Complexity\ForeachCeptionRule:
+        phpstan.rules.rule: %symplify.modern%
+
+services:
+    - Symplify\PHPStanRules\Rules\ForbiddenTraitRule
+    - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
+    - Symplify\PHPStanRules\Rules\NoReferenceRule
+    - Symplify\PHPStanRules\Rules\NoDynamicNameRule
+    - Symplify\PHPStanRules\Rules\Complexity\ForeachCeptionRule
