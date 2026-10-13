@@ -1,6 +1,4 @@
 conditionalTags:
-    Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule:
-        phpstan.rules.rule: %symplify.static%
     Symplify\PHPStanRules\Rules\NoGlobalConstRule:
         phpstan.rules.rule: %symplify.static%
 
@@ -15,8 +13,6 @@ conditionalTags:
 
     Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule:
         phpstan.rules.rule: %symplify.static%
-    Symplify\PHPStanRules\Rules\NoReferenceRule:
-        phpstan.rules.rule: %symplify.static%
     Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule:
         phpstan.rules.rule: %symplify.static%
     Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule:
@@ -29,7 +25,6 @@ conditionalTags:
         phpstan.rules.rule: %symplify.static%
 
 services:
-    - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
     - Symplify\PHPStanRules\Rules\NoGlobalConstRule
 
     # domain
@@ -39,7 +34,6 @@ services:
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
-    - Symplify\PHPStanRules\Rules\NoReferenceRule
     - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
 

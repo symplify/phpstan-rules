@@ -4,6 +4,7 @@ parameters:
         complexity: true
         configurable: true
         static: true
+        modern: true
         symfony: true
         symfonyConfig: true
         doctrine: true
@@ -25,6 +26,7 @@ parametersSchema:
         complexity: bool()
         configurable: bool()
         static: bool()
+        modern: bool()
         symfony: bool()
         symfonyConfig: bool()
         doctrine: bool()
