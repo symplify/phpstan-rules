@@ -3271,6 +3271,158 @@ vendor/bin/phpstan analyse --error-format symplify
 
 <br>
 
+### RepositoryMethodMustHaveReturnTypeRule
+
+Every public method of a `*Repository` class must declare a return type - a repository is a data-access contract, a missing return type hides what a query hands back:
+
+```php
+final class ItemRepository
+{
+    public function findActive()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class ItemRepository
+{
+    public function findActive(): array
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NoPublicNonActionMethodInControllerRule
+
+Only route actions - `*Action()` and `__invoke()` - can be public in a controller. Magic methods, `#[Required]` setters, methods required by a parent class or interface and event subscriber listeners are skipped:
+
+```php
+final class ProductController
+{
+    public function helper()
+    {
+    }
+}
+```
+
+:x:
+
+<br>
+
+```php
+final class ProductController
+{
+    protected function helper()
+    {
+    }
+}
+```
+
+:+1:
+
+<br>
+
+### NullablePropertyGetterMustReturnNullableRule
+
+A getter of a nullable property must not declare a non-nullable return type - otherwise it lies about the value it can return:
+
+```php
+private ?string $name = null;
+
+public function getName(): string
+{
+    return $this->name;
+}
+```
+
+:x:
+
+<br>
+
+```php
+private ?string $name = null;
+
+public function getName(): ?string
+{
+    return $this->name;
+}
+```
+
+:+1:
+
+<br>
+
+### MockedMethodReturnMustMatchNativeTypeRule
+
+The value passed to a mocked `->method('x')->willReturn()` must match the native return type of `x()`, so the mock stays a faithful double. Disabled by default, enable it with the `mocks` parameter:
+
+```php
+// getName(): string
+$mock->method('getName')->willReturn(123);
+```
+
+:x:
+
+<br>
+
+```php
+// getName(): string
+$mock->method('getName')->willReturn('Tomas');
+```
+
+:+1:
+
+<br>
+
+```yaml
+parameters:
+    symplify:
+        mocks: true
+```
+
+<br>
+
+### NoReadonlyApiParamRule
+
+A promoted constructor property documented `@api` in its `@param` is part of the public API and may be swapped via reflection in tests, so it must not be `readonly`:
+
+```php
+/**
+ * @param SomeService $service @api
+ */
+public function __construct(
+    private readonly SomeService $service,
+) {
+}
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @param SomeService $service @api
+ */
+public function __construct(
+    private SomeService $service,
+) {
+}
+```
+
+:+1:
+
+<br>
+
 ### Type Extensions
 
 Always-on return type extensions that sharpen PHPStan inference for common framework calls:
@@ -3286,6 +3438,128 @@ Always-on return type extensions that sharpen PHPStan inference for common frame
 
 * **`NativeFunctionReturnTypeExtension`** - `getcwd()`, `dirname()` and `realpath()` return
   `string` instead of `string|false`.
+
+<br>
+
+## 7. Doctrine Collection Rules
+
+These rules enforce explicit `Collection` typing and generics on Doctrine to-many
+associations. They are enabled by default, toggle them with the `collections` parameter:
+
+```yaml
+parameters:
+    symplify:
+        collections: false
+```
+
+<br>
+
+### CollectionGetterMustReturnCollectionRule
+
+A getter that returns a to-many Doctrine association (`#[OneToMany]`/`#[ManyToMany]` property) must declare a `Collection` return type, so call sites know they get a collection, not a single entity:
+
+```php
+#[OneToMany]
+private $items;
+
+public function getItems()
+{
+    return $this->items;
+}
+```
+
+:x:
+
+<br>
+
+```php
+#[OneToMany]
+private $items;
+
+public function getItems(): Collection
+{
+    return $this->items;
+}
+```
+
+:+1:
+
+<br>
+
+### CollectionReturnMustHaveGenericDocblockRule
+
+A method typed `: Collection` must declare a generic docblock, so the value type is known:
+
+```php
+public function getItems(): Collection
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @return Collection<int, Item>
+ */
+public function getItems(): Collection
+{
+}
+```
+
+:+1:
+
+<br>
+
+### CollectionParamMustHaveGenericDocblockRule
+
+A parameter typed `Collection` must declare a generic `@param` docblock:
+
+```php
+public function setItems(Collection $items): void
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @param Collection<int, Item> $items
+ */
+public function setItems(Collection $items): void
+{
+}
+```
+
+:+1:
+
+<br>
+
+### CollectionPropertyMustHaveGenericDocblockRule
+
+A property typed `Collection` must declare a generic `@var` docblock:
+
+```php
+private Collection $items;
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @var Collection<int, Item>
+ */
+private Collection $items;
+```
+
+:+1:
 
 <br>
 

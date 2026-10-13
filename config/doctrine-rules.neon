@@ -19,6 +19,10 @@ conditionalTags:
     Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule:
         phpstan.rules.rule: %symplify.doctrine%
 
+    # repository
+    Symplify\PHPStanRules\Rules\Doctrine\RepositoryMethodMustHaveReturnTypeRule:
+        phpstan.rules.rule: %symplify.doctrine%
+
 services:
     - Symplify\PHPStanRules\Rules\Doctrine\NoGetRepositoryOutsideServiceRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoParentRepositoryRule
@@ -27,3 +31,4 @@ services:
     - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoStringTargetEntityRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule
+    - Symplify\PHPStanRules\Rules\Doctrine\RepositoryMethodMustHaveReturnTypeRule
