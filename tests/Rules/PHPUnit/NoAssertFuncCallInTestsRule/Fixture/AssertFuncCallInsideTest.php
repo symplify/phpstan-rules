@@ -2,7 +2,9 @@
 
 namespace Symplify\PHPStanRules\Tests\Rules\PHPUnit\NoAssertFuncCallInTestsRule\Fixture;
 
-final class AssertFuncCallInsideTest
+use PHPUnit\Framework\TestCase;
+
+final class AssertFuncCallInsideTest extends TestCase
 {
     public function testMe(int $input)
     {
