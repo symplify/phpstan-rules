@@ -2969,53 +2969,6 @@ parameters:
 
 <br>
 
-### NoMockOnlyTestRule
-
-Test should have at least one non-mocked property, to test something
-
-```php
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-
-class SomeTest extends TestCase
-{
-    private MockObject $firstMock;
-    private MockObject $secondMock;
-
-    public function setUp()
-    {
-        $this->firstMock = $this->createMock(SomeService::class);
-        $this->secondMock = $this->createMock(AnotherService::class);
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-
-class SomeTest extends TestCase
-{
-    private SomeService $someService;
-
-    private MockObject $firstMock;
-
-    public function setUp()
-    {
-        $this->someService = new SomeService();
-        $this->firstMock = $this->createMock(AnotherService::class);
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### NoMockObjectAndRealObjectPropertyRule
 
 Avoid using one property for both real object and mock object. Use separate properties or single type instead
