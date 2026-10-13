@@ -8,12 +8,11 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Helper\NamingHelper;
-use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
+use Symplify\PHPStanRules\Testing\PHPUnitTestAnalyser;
 
 /**
  * @implements Rule<FuncCall>
@@ -44,12 +43,7 @@ final class NoAssertFuncCallInTestsRule implements Rule
             return [];
         }
 
-        if (! TestClassDetector::isTestClass($scope)) {
-            return [];
-        }
-
-        $classReflection = $scope->getClassReflection();
-        if ($classReflection instanceof ClassReflection && $classReflection->isTrait()) {
+        if (! PHPUnitTestAnalyser::isTestClass($scope)) {
             return [];
         }
 

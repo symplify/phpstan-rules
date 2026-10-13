@@ -26,7 +26,7 @@ final class NoAssertFuncCallInTestsRuleTest extends RuleTestCase
      */
     public static function provideData(): Iterator
     {
-        yield [__DIR__ . '/Fixture/AssertFuncCallInsideTest.php', [[NoAssertFuncCallInTestsRule::ERROR_MESSAGE, 9]]];
+        yield [__DIR__ . '/Fixture/AssertFuncCallInsideTest.php', [[NoAssertFuncCallInTestsRule::ERROR_MESSAGE, 11]]];
 
         yield [__DIR__ . '/Fixture/SkipTestOutside.php', []];
 
