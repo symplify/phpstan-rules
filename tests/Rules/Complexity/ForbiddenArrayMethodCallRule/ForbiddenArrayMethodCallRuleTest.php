@@ -28,6 +28,7 @@ final class ForbiddenArrayMethodCallRuleTest extends RuleTestCase
     public static function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/SkipNormalArray.php', []];
+        yield [__DIR__ . '/Fixture/SkipNonPublicMethod.php', []];
         yield [__DIR__ . '/Fixture/ReturnCallable.php', [[ForbiddenArrayMethodCallRule::ERROR_MESSAGE, 11]]];
     }
 

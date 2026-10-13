@@ -53,6 +53,12 @@ final class ForbiddenArrayMethodCallRule implements Rule
             return [];
         }
 
+        // allow non-public methods, as they cannot be called explicitly from outside
+        $extendedMethodReflection = $typeWithClassName->getMethod($methodName, $scope);
+        if (! $extendedMethodReflection->isPublic()) {
+            return [];
+        }
+
         return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
             ->identifier('symplify.forbiddenArrayMethodCall')
             ->build()];
