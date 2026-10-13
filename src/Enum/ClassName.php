@@ -40,4 +40,9 @@ final class ClassName
      * @var string
      */
     public const MOCK_OBJECT_CLASS = 'PHPUnit\Framework\MockObject\MockObject';
+
+    /**
+     * @var string
+     */
+    public const MOCK_STUB_CLASS = 'PHPUnit\Framework\MockObject\Stub';
 }

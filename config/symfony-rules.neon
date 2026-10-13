@@ -29,6 +29,8 @@ conditionalTags:
         phpstan.rules.rule: %symplify.symfony%
     Symplify\PHPStanRules\Rules\Symfony\NoFindTaggedServiceIdsCallRule:
         phpstan.rules.rule: %symplify.symfony%
+    Symplify\PHPStanRules\Rules\Symfony\NoPublicNonActionMethodInControllerRule:
+        phpstan.rules.rule: %symplify.symfony%
 
     # magic required inject
     Symplify\PHPStanRules\Rules\Symfony\SingleRequiredMethodRule:
@@ -67,6 +69,7 @@ services:
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetInCommandRule
     - Symplify\PHPStanRules\Rules\Symfony\NoGetDoctrineInControllerRule
+    - Symplify\PHPStanRules\Rules\Symfony\NoPublicNonActionMethodInControllerRule
     - Symplify\PHPStanRules\Rules\Symfony\NoFindTaggedServiceIdsCallRule
     - Symplify\PHPStanRules\Rules\Symfony\SingleRequiredMethodRule
     - Symplify\PHPStanRules\Rules\Symfony\NoConstructorAndRequiredTogetherRule
