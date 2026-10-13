@@ -8,8 +8,6 @@ conditionalTags:
         phpstan.rules.rule: %symplify.mocks%
 
     # explicit expects()
-    Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule:
-        phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\PHPUnit\AvoidAnyExpectsRule:
         phpstan.rules.rule: %symplify.mocks%
     Symplify\PHPStanRules\Rules\PHPUnit\NoWithOnStubRule:
@@ -30,7 +28,6 @@ conditionalTags:
 services:
     - Symplify\PHPStanRules\Rules\PHPUnit\NoMockObjectAndRealObjectPropertyRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoDoubleConsecutiveTestMockRule
-    - Symplify\PHPStanRules\Rules\PHPUnit\ExplicitExpectsMockMethodRule
     - Symplify\PHPStanRules\Rules\PHPUnit\AvoidAnyExpectsRule
     - Symplify\PHPStanRules\Rules\PHPUnit\NoWithOnStubRule
     - Symplify\PHPStanRules\Rules\PHPUnit\RequireAtLeastOneRule

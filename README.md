@@ -3039,47 +3039,6 @@ final class SomeTest extends TestCase
 
 <br>
 
-### ExplicitExpectsMockMethodRule
-
-PHPUnit mock method is missing explicit `expects()`, e.g. `$this->mock->expects($this->once())->...`. This is required since PHPUnit 12 to avoid silent stubs.
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeTest extends TestCase
-{
-    public function test(): void
-    {
-        $mock = $this->createMock(\stdClass::class);
-        $mock->method('someMethod')->willReturn('value');
-    }
-}
-```
-
-:x:
-
-<br>
-
-```php
-use PHPUnit\Framework\TestCase;
-
-final class SomeTest extends TestCase
-{
-    public function test(): void
-    {
-        $mock = $this->createMock(\stdClass::class);
-
-        $mock->expects($this->atLeastOnce())
-            ->method('someMethod')
-            ->willReturn('value');
-    }
-}
-```
-
-:+1:
-
-<br>
-
 ### AvoidAnyExpectsRule
 
 Disallow usage of `any()` expectation in mocks to ensure that all mock interactions are explicitly defined and verified.

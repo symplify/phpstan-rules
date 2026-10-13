@@ -13,8 +13,6 @@
         <exclude>tests/Rules/PHPUnit/PublicStaticDataProviderRule</exclude>
         <exclude>tests/Rules/PHPUnit/NoAssertFuncCallInTestsRule/Fixture</exclude>
         <exclude>tests/Rules/PHPUnit/NoMockOnlyTestRule/Fixture/SkipConstraintValidatorTest.php</exclude>
-        <exclude>tests/Rules/PHPUnit/ExplicitExpectsMockMethodRule/Fixture/SkipMockWithExpectsTest.php</exclude>
-        <exclude>tests/Rules/PHPUnit/ExplicitExpectsMockMethodRule/Fixture/MockWithoutExpectsTest.php</exclude>
         <exclude>tests/Rules/PHPUnit/AvoidAnyExpectsRule/Fixture/SomeAnyTest.php</exclude>
         <exclude>tests/Rules/PHPUnit/NoWithOnStubRule/Fixture/StubWithWithTest.php</exclude>
         <exclude>tests/Rules/PHPUnit/NoWithOnStubRule/Fixture/SkipMockWithExpectsAndWithTest.php</exclude>
