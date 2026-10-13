@@ -5,8 +5,6 @@ conditionalTags:
         phpstan.rules.rule: %symplify.symfony%
     Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule:
         phpstan.rules.rule: %symplify.symfony%
-    Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule:
-        phpstan.rules.rule: %symplify.symfony%
 
     # routing
     Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule:
@@ -60,7 +58,6 @@ services:
     - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
     - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
     - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule
-    - Symplify\PHPStanRules\Rules\Symfony\FormTypeClassNameRule
     - Symplify\PHPStanRules\Rules\Symfony\NoRoutingPrefixRule
     - Symplify\PHPStanRules\Rules\Symfony\NoClassLevelRouteRule
     - Symplify\PHPStanRules\Rules\Symfony\NoRouteTrailingSlashPathRule
