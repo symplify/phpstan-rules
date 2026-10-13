@@ -24,11 +24,6 @@ final class DoctrineClass
     /**
      * @var string
      */
-    public const FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
-
-    /**
-     * @var string
-     */
     public const ENTITY_REPOSITORY = 'Doctrine\ORM\EntityRepository';
 
     /**
