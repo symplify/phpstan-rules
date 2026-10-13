@@ -8,6 +8,7 @@ parameters:
         symfony: true
         symfonyConfig: true
         doctrine: true
+        collections: true
         phpunit: true
         mocks: false
         ctor: false
@@ -30,6 +31,7 @@ parametersSchema:
         symfony: bool()
         symfonyConfig: bool()
         doctrine: bool()
+        collections: bool()
         phpunit: bool()
         mocks: bool()
         ctor: bool()

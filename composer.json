@@ -69,6 +69,7 @@
                 "config/symfony-rules.neon",
                 "config/symfony-config-rules.neon",
                 "config/doctrine-rules.neon",
+                "config/collection-rules.neon",
                 "config/phpunit-rules.neon",
                 "config/ctor-rules.neon",
                 "config/mock-rules.neon",

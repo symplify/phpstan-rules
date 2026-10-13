@@ -19,16 +19,6 @@ conditionalTags:
     Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule:
         phpstan.rules.rule: %symplify.doctrine%
 
-    # collection typing
-    Symplify\PHPStanRules\Rules\Doctrine\CollectionGetterMustReturnCollectionRule:
-        phpstan.rules.rule: %symplify.doctrine%
-    Symplify\PHPStanRules\Rules\Doctrine\CollectionReturnMustHaveGenericDocblockRule:
-        phpstan.rules.rule: %symplify.doctrine%
-    Symplify\PHPStanRules\Rules\Doctrine\CollectionParamMustHaveGenericDocblockRule:
-        phpstan.rules.rule: %symplify.doctrine%
-    Symplify\PHPStanRules\Rules\Doctrine\CollectionPropertyMustHaveGenericDocblockRule:
-        phpstan.rules.rule: %symplify.doctrine%
-
     # repository
     Symplify\PHPStanRules\Rules\Doctrine\RepositoryMethodMustHaveReturnTypeRule:
         phpstan.rules.rule: %symplify.doctrine%
@@ -41,8 +31,4 @@ services:
     - Symplify\PHPStanRules\Rules\Doctrine\RequireQueryBuilderOnRepositoryRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoStringTargetEntityRule
     - Symplify\PHPStanRules\Rules\Doctrine\NoReadonlyEntityClassRule
-    - Symplify\PHPStanRules\Rules\Doctrine\CollectionGetterMustReturnCollectionRule
-    - Symplify\PHPStanRules\Rules\Doctrine\CollectionReturnMustHaveGenericDocblockRule
-    - Symplify\PHPStanRules\Rules\Doctrine\CollectionParamMustHaveGenericDocblockRule
-    - Symplify\PHPStanRules\Rules\Doctrine\CollectionPropertyMustHaveGenericDocblockRule
     - Symplify\PHPStanRules\Rules\Doctrine\RepositoryMethodMustHaveReturnTypeRule

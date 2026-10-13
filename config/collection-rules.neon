@@ -1,0 +1,16 @@
+conditionalTags:
+    # collection typing
+    Symplify\PHPStanRules\Rules\Doctrine\CollectionGetterMustReturnCollectionRule:
+        phpstan.rules.rule: %symplify.collections%
+    Symplify\PHPStanRules\Rules\Doctrine\CollectionReturnMustHaveGenericDocblockRule:
+        phpstan.rules.rule: %symplify.collections%
+    Symplify\PHPStanRules\Rules\Doctrine\CollectionParamMustHaveGenericDocblockRule:
+        phpstan.rules.rule: %symplify.collections%
+    Symplify\PHPStanRules\Rules\Doctrine\CollectionPropertyMustHaveGenericDocblockRule:
+        phpstan.rules.rule: %symplify.collections%
+
+services:
+    - Symplify\PHPStanRules\Rules\Doctrine\CollectionGetterMustReturnCollectionRule
+    - Symplify\PHPStanRules\Rules\Doctrine\CollectionReturnMustHaveGenericDocblockRule
+    - Symplify\PHPStanRules\Rules\Doctrine\CollectionParamMustHaveGenericDocblockRule
+    - Symplify\PHPStanRules\Rules\Doctrine\CollectionPropertyMustHaveGenericDocblockRule

@@ -3271,115 +3271,6 @@ vendor/bin/phpstan analyse --error-format symplify
 
 <br>
 
-### CollectionGetterMustReturnCollectionRule
-
-A getter that returns a to-many Doctrine association (`#[OneToMany]`/`#[ManyToMany]` property) must declare a `Collection` return type, so call sites know they get a collection, not a single entity:
-
-```php
-#[OneToMany]
-private $items;
-
-public function getItems()
-{
-    return $this->items;
-}
-```
-
-:x:
-
-<br>
-
-```php
-#[OneToMany]
-private $items;
-
-public function getItems(): Collection
-{
-    return $this->items;
-}
-```
-
-:+1:
-
-<br>
-
-### CollectionReturnMustHaveGenericDocblockRule
-
-A method typed `: Collection` must declare a generic docblock, so the value type is known:
-
-```php
-public function getItems(): Collection
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-/**
- * @return Collection<int, Item>
- */
-public function getItems(): Collection
-{
-}
-```
-
-:+1:
-
-<br>
-
-### CollectionParamMustHaveGenericDocblockRule
-
-A parameter typed `Collection` must declare a generic `@param` docblock:
-
-```php
-public function setItems(Collection $items): void
-{
-}
-```
-
-:x:
-
-<br>
-
-```php
-/**
- * @param Collection<int, Item> $items
- */
-public function setItems(Collection $items): void
-{
-}
-```
-
-:+1:
-
-<br>
-
-### CollectionPropertyMustHaveGenericDocblockRule
-
-A property typed `Collection` must declare a generic `@var` docblock:
-
-```php
-private Collection $items;
-```
-
-:x:
-
-<br>
-
-```php
-/**
- * @var Collection<int, Item>
- */
-private Collection $items;
-```
-
-:+1:
-
-<br>
-
 ### RepositoryMethodMustHaveReturnTypeRule
 
 Every public method of a `*Repository` class must declare a return type - a repository is a data-access contract, a missing return type hides what a query hands back:
@@ -3547,6 +3438,128 @@ Always-on return type extensions that sharpen PHPStan inference for common frame
 
 * **`NativeFunctionReturnTypeExtension`** - `getcwd()`, `dirname()` and `realpath()` return
   `string` instead of `string|false`.
+
+<br>
+
+## 7. Doctrine Collection Rules
+
+These rules enforce explicit `Collection` typing and generics on Doctrine to-many
+associations. They are enabled by default, toggle them with the `collections` parameter:
+
+```yaml
+parameters:
+    symplify:
+        collections: false
+```
+
+<br>
+
+### CollectionGetterMustReturnCollectionRule
+
+A getter that returns a to-many Doctrine association (`#[OneToMany]`/`#[ManyToMany]` property) must declare a `Collection` return type, so call sites know they get a collection, not a single entity:
+
+```php
+#[OneToMany]
+private $items;
+
+public function getItems()
+{
+    return $this->items;
+}
+```
+
+:x:
+
+<br>
+
+```php
+#[OneToMany]
+private $items;
+
+public function getItems(): Collection
+{
+    return $this->items;
+}
+```
+
+:+1:
+
+<br>
+
+### CollectionReturnMustHaveGenericDocblockRule
+
+A method typed `: Collection` must declare a generic docblock, so the value type is known:
+
+```php
+public function getItems(): Collection
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @return Collection<int, Item>
+ */
+public function getItems(): Collection
+{
+}
+```
+
+:+1:
+
+<br>
+
+### CollectionParamMustHaveGenericDocblockRule
+
+A parameter typed `Collection` must declare a generic `@param` docblock:
+
+```php
+public function setItems(Collection $items): void
+{
+}
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @param Collection<int, Item> $items
+ */
+public function setItems(Collection $items): void
+{
+}
+```
+
+:+1:
+
+<br>
+
+### CollectionPropertyMustHaveGenericDocblockRule
+
+A property typed `Collection` must declare a generic `@var` docblock:
+
+```php
+private Collection $items;
+```
+
+:x:
+
+<br>
+
+```php
+/**
+ * @var Collection<int, Item>
+ */
+private Collection $items;
+```
+
+:+1:
 
 <br>
 

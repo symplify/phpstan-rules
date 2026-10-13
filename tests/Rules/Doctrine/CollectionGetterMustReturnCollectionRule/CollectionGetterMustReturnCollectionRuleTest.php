@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Tests\Rules\Doctrine\CollectionGetterMustReturnCollectionRule;
 
+use Doctrine\Common\Collections\Collection;
 use Iterator;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
@@ -30,7 +31,7 @@ final class CollectionGetterMustReturnCollectionRuleTest extends RuleTestCase
             CollectionGetterMustReturnCollectionRule::ERROR_MESSAGE,
             'getItems',
             'items',
-            'Doctrine\Common\Collections\Collection'
+            Collection::class
         );
 
         yield [__DIR__ . '/Fixture/ReportCollectionGetter.php', [[$errorMessage, 14]]];
