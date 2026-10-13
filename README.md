@@ -53,6 +53,8 @@ parameters:
 
 *Note: If you included the sets manually before, remove those `includes:` lines - PHPStan reports duplicated includes.*
 
+*Tip: Prefer the group toggles above (`true`/`false`) over registering individual rules by class. Groups are the stable public API; specific rules get added or removed based on real-world testing, so a hard-coded rule list can break on upgrade. The exception is configurable rules, which you wire up explicitly on purpose.*
+
 <br>
 
 ### Symfony/Laravel container `->get()`/`->make()` return type extensions
