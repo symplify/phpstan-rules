@@ -66,6 +66,11 @@ final class RequireQueryBuilderOnRepositoryRule implements Rule
             return [];
         }
 
+        // traits have no own repository context, skip them
+        if ($scope->isInTrait()) {
+            return [];
+        }
+
         // only relevant inside repository classes, where $this->createQueryBuilder() is available as a safe swap
         if (! $this->isInsideRepositoryClass($scope)) {
             return [];

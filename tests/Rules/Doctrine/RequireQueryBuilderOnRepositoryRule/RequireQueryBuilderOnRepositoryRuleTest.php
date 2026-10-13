@@ -30,6 +30,7 @@ final class RequireQueryBuilderOnRepositoryRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/SkipDocumentRepository.php', []];
         yield [__DIR__ . '/Fixture/SkipConnection.php', []];
         yield [__DIR__ . '/Fixture/SkipNonRepositoryClass.php', []];
+        yield [__DIR__ . '/Fixture/SkipCreateQueryBuilderInTrait.php', []];
 
         // builders that cannot be swapped for $this->createQueryBuilder()
         yield [__DIR__ . '/Fixture/SkipUpdateBuilder.php', []];
