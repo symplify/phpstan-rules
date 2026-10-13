@@ -1496,34 +1496,6 @@ $this->repository = $this->someRepository;
 
 <br>
 
-### NoDuplicateNonRepeatableAttributeRule
-
-An attribute can only be repeated on the same class, method or property when it is declared with the `\Attribute::IS_REPEATABLE` flag.
-
-```yaml
-rules:
-    - Symplify\PHPStanRules\Rules\NoDuplicateNonRepeatableAttributeRule
-```
-
-```php
-#[SomeAttribute]
-#[SomeAttribute]
-private string $name;
-```
-
-:x:
-
-<br>
-
-```php
-#[SomeAttribute]
-private string $name;
-```
-
-:+1:
-
-<br>
-
 ### RequireArrayShapeReturnRule
 
 A method that returns a packed keyed array of 2-3 named values should declare that shape in its `@return`, so the caller knows each key and its type.
