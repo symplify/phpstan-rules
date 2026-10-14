@@ -85,6 +85,11 @@ final class NoDocumentMockingRule implements Rule
             if ($classReflection->isInterface()) {
                 return true;
             }
+
+            // repositories live in the Entity/Document namespace too, but cannot be created directly
+            if ($classReflection->isSubclassOf('Doctrine\\Persistence\\ObjectRepository')) {
+                return true;
+            }
         }
 
         return false;
