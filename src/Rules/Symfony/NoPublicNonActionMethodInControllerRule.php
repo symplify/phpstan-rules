@@ -11,13 +11,14 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Only route actions - "*Action()" and "__invoke()" - can be public in a controller.
  *
- * Magic methods, #[Required] setters, methods required by a parent class or interface and event subscriber
- * listeners are skipped.
+ * Magic methods, #[Route] actions, #[Required] setters, methods required by a parent class or interface and
+ * event subscriber listeners are skipped.
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\Symfony\NoPublicNonActionMethodInControllerRule\NoPublicNonActionMethodInControllerRuleTest
  *
@@ -44,6 +45,14 @@ final class NoPublicNonActionMethodInControllerRule implements Rule
      * @var string
      */
     private const REQUIRED_ATTRIBUTE = Required::class;
+
+    /**
+     * @var string[]
+     */
+    private const ROUTE_ATTRIBUTES = [
+        Route::class,
+        \Symfony\Component\Routing\Annotation\Route::class,
+    ];
 
     /**
      * @var string
@@ -93,7 +102,7 @@ final class NoPublicNonActionMethodInControllerRule implements Rule
             return [];
         }
 
-        if ($this->hasRequiredAttribute($node) || $this->isInheritedContract($classReflection, $methodName)) {
+        if ($this->hasSkippedAttribute($node) || $this->isInheritedContract($classReflection, $methodName)) {
             return [];
         }
 
@@ -106,11 +115,16 @@ final class NoPublicNonActionMethodInControllerRule implements Rule
         ];
     }
 
-    private function hasRequiredAttribute(ClassMethod $classMethod): bool
+    private function hasSkippedAttribute(ClassMethod $classMethod): bool
     {
         foreach ($classMethod->attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attr) {
-                if ($attr->name->toString() === self::REQUIRED_ATTRIBUTE) {
+                $attributeName = $attr->name->toString();
+                if ($attributeName === self::REQUIRED_ATTRIBUTE) {
+                    return true;
+                }
+
+                if (in_array($attributeName, self::ROUTE_ATTRIBUTES, true)) {
                     return true;
                 }
             }
