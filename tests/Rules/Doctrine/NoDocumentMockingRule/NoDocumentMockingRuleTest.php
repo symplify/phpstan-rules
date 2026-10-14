@@ -33,6 +33,8 @@ final class NoDocumentMockingRuleTest extends RuleTestCase
         ]]];
 
         yield [__DIR__ . '/Fixture/SomeAbstractEntityMocking.php', []];
+
+        yield [__DIR__ . '/Fixture/SkipRepositoryMocking.php', []];
     }
 
     /**

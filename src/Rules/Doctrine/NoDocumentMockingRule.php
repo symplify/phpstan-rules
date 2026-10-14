@@ -12,6 +12,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
+use Symplify\PHPStanRules\Enum\DoctrineClass;
 use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
@@ -83,6 +84,14 @@ final class NoDocumentMockingRule implements Rule
             }
 
             if ($classReflection->isInterface()) {
+                return true;
+            }
+
+            if ($classReflection->isSubclassOf(DoctrineClass::ENTITY_REPOSITORY)) {
+                return true;
+            }
+
+            if ($classReflection->isSubclassOf(DoctrineClass::DOCUMENT_REPOSITORY)) {
                 return true;
             }
         }
