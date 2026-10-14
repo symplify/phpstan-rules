@@ -31,10 +31,11 @@ final class RequireArrayShapeReturnRuleTest extends RuleTestCase
     {
         $errorMessage = sprintf(RequireArrayShapeReturnRule::ERROR_MESSAGE, 'run', 2);
         yield [__DIR__ . '/Fixture/ReportKeyedArrayReturn.php', [[$errorMessage, 11]]];
+        yield [__DIR__ . '/Fixture/ReportPositionalArrayReturn.php', [[$errorMessage, 11]]];
 
         yield [__DIR__ . '/Fixture/SkipShapedReturn.php', []];
         yield [__DIR__ . '/Fixture/SkipSingleValueReturn.php', []];
-        yield [__DIR__ . '/Fixture/SkipPositionalArrayReturn.php', []];
+        yield [__DIR__ . '/Fixture/SkipMixedKeyArrayReturn.php', []];
     }
 
     protected function getRule(): Rule

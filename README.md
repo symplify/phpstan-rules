@@ -1501,7 +1501,7 @@ $this->repository = $this->someRepository;
 
 ### RequireArrayShapeReturnRule
 
-A method that returns a packed keyed array of 2-3 named values should declare that shape in its `@return`, so the caller knows each key and its type.
+A method that returns a packed array of 2-3 values - all named (`array{name: type}`) or all positional (`array{0: type, 1: type}`) - should declare that shape in its `@return`, so the caller knows each key/index and its type.
 
 ```yaml
 rules:

@@ -23,15 +23,16 @@ use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
 
 /**
- * A method that returns a keyed array of 2-3 named values should declare that shape in its @return, so the caller
- * knows each key and its type instead of reading an opaque array.
+ * A method that returns a fixed array of 2-3 values should declare that shape in its @return, so the caller knows
+ * each key/index and its type instead of reading an opaque array.
  *
- * Only methods whose every value-return is a literal keyed array of 2 or 3 string-keyed elements are flagged - the
- * clean "packed result" case where a single shape can describe the return. Methods that also return a plain value,
- * a variable, a call result or a general array are left alone, as a keyed shape cannot represent those and PHPStan
- * would collapse it anyway. Single values, positional arrays and larger config/option maps are left alone, and so
- * are static data maps whose values are all nested arrays or constants. A @return that already declares an array
- * shape, a void or mixed return, anonymous classes and methods overriding a parent contract are skipped too.
+ * Only methods whose every value-return is a literal array of 2 or 3 elements with a consistent key style - all
+ * string keys (array{name: type}) or all positional (array{0: type, 1: type}) - are flagged, the clean "packed
+ * result" case where a single shape can describe the return. Methods that also return a plain value, a variable,
+ * a call result or a general array are left alone, as a shape cannot represent those and PHPStan would collapse it
+ * anyway. Single values and larger config/option maps are left alone, and so are static data maps whose values are
+ * all nested arrays or constants. A @return that already declares an array shape, a void or mixed return,
+ * anonymous classes and methods overriding a parent contract are skipped too.
  *
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireArrayShapeReturnRule\RequireArrayShapeReturnRuleTest
  *
@@ -42,7 +43,7 @@ final class RequireArrayShapeReturnRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Method "%s()" returns a keyed array of %d values; declare its shape in @return, e.g. array{key: type}';
+    public const ERROR_MESSAGE = 'Method "%s()" returns a fixed array of %d values; declare its shape in @return, e.g. array{key: type}';
 
     /**
      * @var int
@@ -117,8 +118,8 @@ final class RequireArrayShapeReturnRule implements Rule
         foreach ($valueReturns as $valueReturn) {
             $expr = $valueReturn->expr;
 
-            // a return that is not a packed keyed array means no single shape fits, skip the method
-            if (! $expr instanceof Array_ || ! $this->isPackedKeyedArray($expr)) {
+            // a return that is not a packed array means no single shape fits, skip the method
+            if (! $expr instanceof Array_ || ! $this->isPackedArray($expr)) {
                 return [];
             }
 
@@ -135,14 +136,14 @@ final class RequireArrayShapeReturnRule implements Rule
         return [$ruleError];
     }
 
-    private function isPackedKeyedArray(Array_ $array): bool
+    private function isPackedArray(Array_ $array): bool
     {
         $valueCount = count($array->items);
         if ($valueCount < self::MIN_VALUE_COUNT || $valueCount > self::MAX_VALUE_COUNT) {
             return false;
         }
 
-        if (! $this->hasStringKeyOnEveryItem($array)) {
+        if (! $this->hasConsistentKeyStyle($array)) {
             return false;
         }
 
@@ -214,17 +215,31 @@ final class RequireArrayShapeReturnRule implements Rule
         return false;
     }
 
-    private function hasStringKeyOnEveryItem(Array_ $array): bool
+    // a clean shape needs one key style: all string keys (array{name: type}) or all positional (array{0: type})
+    private function hasConsistentKeyStyle(Array_ $array): bool
     {
-        $found = true;
+        $stringKeyCount = 0;
+        $positionalCount = 0;
+
         foreach ($array->items as $arrayItem) {
-            if (! $arrayItem->key instanceof String_) {
-                $found = false;
-                break;
+            // a spread turns the array variable-length, so no fixed shape fits
+            if ($arrayItem->unpack) {
+                return false;
+            }
+
+            if ($arrayItem->key instanceof String_) {
+                ++$stringKeyCount;
+            } elseif ($arrayItem->key === null) {
+                ++$positionalCount;
+            } else {
+                // explicit int or computed keys are not a clean shape
+                return false;
             }
         }
 
-        return $found;
+        $itemCount = count($array->items);
+
+        return $stringKeyCount === $itemCount || $positionalCount === $itemCount;
     }
 
     /**
