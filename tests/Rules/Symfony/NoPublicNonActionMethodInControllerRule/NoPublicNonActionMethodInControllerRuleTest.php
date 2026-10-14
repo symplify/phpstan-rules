@@ -30,6 +30,7 @@ final class NoPublicNonActionMethodInControllerRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/SomeController.php', [[$errorMessage, 9]]];
         yield [__DIR__ . '/Fixture/SkipActionController.php', []];
+        yield [__DIR__ . '/Fixture/SkipRouteAttributeController.php', []];
     }
 
     protected function getRule(): Rule
