@@ -1,5 +1,13 @@
 includes:
     - ../../../config/included_services.neon
 
-rules:
-    - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
+services:
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
+        tags: [phpstan.rules.rule]
+    -
+        class: Symplify\PHPStanRules\Collector\StaticClassConstFetchCollector
+        tags: [phpstan.collector]
+    -
+        class: Symplify\PHPStanRules\Collector\ClassConstantDeclarationCollector
+        tags: [phpstan.collector]

@@ -15,6 +15,10 @@ conditionalTags:
         phpstan.rules.rule: %symplify.static%
     Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule:
         phpstan.rules.rule: %symplify.static%
+    Symplify\PHPStanRules\Collector\StaticClassConstFetchCollector:
+        phpstan.collector: %symplify.static%
+    Symplify\PHPStanRules\Collector\ClassConstantDeclarationCollector:
+        phpstan.collector: %symplify.static%
     Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule:
         phpstan.rules.rule: %symplify.static%
 
@@ -41,6 +45,8 @@ services:
 
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
     - Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule
+    - Symplify\PHPStanRules\Collector\StaticClassConstFetchCollector
+    - Symplify\PHPStanRules\Collector\ClassConstantDeclarationCollector
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
 
     # docblock

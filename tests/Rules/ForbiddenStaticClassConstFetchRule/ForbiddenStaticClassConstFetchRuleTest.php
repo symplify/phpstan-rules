@@ -6,9 +6,13 @@ namespace Symplify\PHPStanRules\Tests\Rules\ForbiddenStaticClassConstFetchRule;
 
 use Iterator;
 use Override;
+use PhpParser\Node;
+use PHPStan\Collectors\Collector;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symplify\PHPStanRules\Collector\ClassConstantDeclarationCollector;
+use Symplify\PHPStanRules\Collector\StaticClassConstFetchCollector;
 use Symplify\PHPStanRules\Rules\ForbiddenStaticClassConstFetchRule;
 
 final class ForbiddenStaticClassConstFetchRuleTest extends RuleTestCase
@@ -32,7 +36,14 @@ final class ForbiddenStaticClassConstFetchRuleTest extends RuleTestCase
             [[ForbiddenStaticClassConstFetchRule::ERROR_MESSAGE, 11]],
         ];
 
+        yield [
+            __DIR__ . '/Fixture/ConstNotOverriddenByChild.php',
+            [[ForbiddenStaticClassConstFetchRule::ERROR_MESSAGE, 11]],
+        ];
+
         yield [__DIR__ . '/Fixture/SkipAbstractClass.php', []];
+        yield [__DIR__ . '/Fixture/SkipStaticClass.php', []];
+        yield [__DIR__ . '/Fixture/SkipConstOverriddenByChild.php', []];
     }
 
     /**
@@ -47,5 +58,17 @@ final class ForbiddenStaticClassConstFetchRuleTest extends RuleTestCase
     protected function getRule(): Rule
     {
         return self::getContainer()->getByType(ForbiddenStaticClassConstFetchRule::class);
+    }
+
+    /**
+     * @return list<Collector<Node, mixed>>
+     */
+    #[Override]
+    protected function getCollectors(): array
+    {
+        return [
+            self::getContainer()->getByType(StaticClassConstFetchCollector::class),
+            self::getContainer()->getByType(ClassConstantDeclarationCollector::class),
+        ];
     }
 }
