@@ -102,17 +102,17 @@ final class NarrowReturnToUnionParamRule implements Rule
         return $foundReturn instanceof Return_;
     }
 
-    private function isNullableReturnType(?Node $type): bool
+    private function isNullableReturnType(?Node $node): bool
     {
-        if ($type instanceof NullableType) {
+        if ($node instanceof NullableType) {
             return true;
         }
 
-        if (! $type instanceof UnionType) {
+        if (! $node instanceof UnionType) {
             return false;
         }
 
-        foreach ($type->types as $memberType) {
+        foreach ($node->types as $memberType) {
             if ($memberType instanceof Identifier && $memberType->toLowerString() === 'null') {
                 return true;
             }
@@ -125,22 +125,22 @@ final class NarrowReturnToUnionParamRule implements Rule
      * Returns the single class return type name (nullable allowed), or null when the return type is
      * missing, scalar, or a union of 2+ class types - the latter is already an explicit union.
      */
-    private function resolveSingleClassReturnName(?Node $type): ?string
+    private function resolveSingleClassReturnName(?Node $node): ?string
     {
-        if ($type instanceof NullableType) {
-            $type = $type->type;
+        if ($node instanceof NullableType) {
+            $node = $node->type;
         }
 
-        if ($type instanceof Name) {
-            return $type->toString();
+        if ($node instanceof Name) {
+            return $node->toString();
         }
 
-        if (! $type instanceof UnionType) {
+        if (! $node instanceof UnionType) {
             return null;
         }
 
         $names = [];
-        foreach ($type->types as $memberType) {
+        foreach ($node->types as $memberType) {
             if ($memberType instanceof Identifier) {
                 if ($memberType->toLowerString() === 'null') {
                     continue;
@@ -169,14 +169,14 @@ final class NarrowReturnToUnionParamRule implements Rule
      *
      * @return list<string>|null
      */
-    private function resolveClassUnionNames(?Node $type): ?array
+    private function resolveClassUnionNames(?Node $node): ?array
     {
-        if (! $type instanceof UnionType) {
+        if (! $node instanceof UnionType) {
             return null;
         }
 
         $names = [];
-        foreach ($type->types as $memberType) {
+        foreach ($node->types as $memberType) {
             if ($memberType instanceof Identifier) {
                 if ($memberType->toLowerString() === 'null') {
                     continue;
