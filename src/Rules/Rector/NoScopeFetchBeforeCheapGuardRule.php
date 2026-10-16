@@ -141,11 +141,11 @@ final class NoScopeFetchBeforeCheapGuardRule implements Rule
 
     private function usesVariable(Expr $expr, string $variableName): bool
     {
-        $foundVariable = new NodeFinder()
-            ->findFirst(
-                [$expr],
-                static fn (Node $subNode): bool => $subNode instanceof Variable && $subNode->name === $variableName
-            );
+        $nodeFinder = new NodeFinder();
+        $foundVariable = $nodeFinder->findFirst(
+            [$expr],
+            static fn (Node $subNode): bool => $subNode instanceof Variable && $subNode->name === $variableName
+        );
 
         return $foundVariable instanceof Variable;
     }

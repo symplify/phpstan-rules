@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Tests\Rules\Rector\NarrowReturnToUnionParamRule;
 
 use Iterator;
+use PhpParser\Node;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -30,7 +31,7 @@ final class NarrowReturnToUnionParamRuleTest extends RuleTestCase
 
         yield [__DIR__ . '/Fixture/BroadReturnOfUnionParam.php', [
             [
-                sprintf(NarrowReturnToUnionParamRule::ERROR_MESSAGE, 'PhpParser\Node', 'MethodCall|New_|null'),
+                sprintf(NarrowReturnToUnionParamRule::ERROR_MESSAGE, Node::class, 'MethodCall|New_|null'),
                 13,
             ],
         ]];

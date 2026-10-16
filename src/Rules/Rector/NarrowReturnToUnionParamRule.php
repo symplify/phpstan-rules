@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Rector;
 
 use PhpParser\Node;
-use PhpParser\Node\ComplexType;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
-use PhpParser\Node\IntersectionType;
 use PhpParser\Node\Name;
 use PhpParser\Node\NullableType;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -93,18 +91,18 @@ final class NarrowReturnToUnionParamRule implements Rule
             return false;
         }
 
-        $foundReturn = new NodeFinder()
-            ->findFirst(
-                $classMethod->stmts,
-                static fn (Node $subNode): bool => $subNode instanceof Return_
-                            && $subNode->expr instanceof Variable
-                            && $subNode->expr->name === $variableName
-            );
+        $nodeFinder = new NodeFinder();
+        $foundReturn = $nodeFinder->findFirst(
+            $classMethod->stmts,
+            static fn (Node $subNode): bool => $subNode instanceof Return_
+                && $subNode->expr instanceof Variable
+                && $subNode->expr->name === $variableName
+        );
 
         return $foundReturn instanceof Return_;
     }
 
-    private function isNullableReturnType(null|Identifier|Name|ComplexType $type): bool
+    private function isNullableReturnType(?Node $type): bool
     {
         if ($type instanceof NullableType) {
             return true;
@@ -114,14 +112,20 @@ final class NarrowReturnToUnionParamRule implements Rule
             return false;
         }
 
-        return array_any($type->types, fn (Identifier|Name|IntersectionType $memberType): bool => $memberType instanceof Identifier && $memberType->toLowerString() === 'null');
+        foreach ($type->types as $memberType) {
+            if ($memberType instanceof Identifier && $memberType->toLowerString() === 'null') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
      * Returns the single class return type name (nullable allowed), or null when the return type is
      * missing, scalar, or a union of 2+ class types - the latter is already an explicit union.
      */
-    private function resolveSingleClassReturnName(null|Identifier|Name|ComplexType $type): ?string
+    private function resolveSingleClassReturnName(?Node $type): ?string
     {
         if ($type instanceof NullableType) {
             $type = $type->type;
@@ -165,7 +169,7 @@ final class NarrowReturnToUnionParamRule implements Rule
      *
      * @return list<string>|null
      */
-    private function resolveClassUnionNames(null|Identifier|Name|ComplexType $type): ?array
+    private function resolveClassUnionNames(?Node $type): ?array
     {
         if (! $type instanceof UnionType) {
             return null;
