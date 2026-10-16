@@ -747,6 +747,29 @@ class SomeClass
 
 <br>
 
+Skipped when a child class overrides the constant, as late static binding then changes the value on purpose. `static::class` is always allowed.
+
+```php
+class ParentClass
+{
+    protected const SOME_CONST = 'parent';
+
+    public function run()
+    {
+        return static::SOME_CONST;
+    }
+}
+
+class ChildClass extends ParentClass
+{
+    protected const SOME_CONST = 'child';
+}
+```
+
+:+1:
+
+<br>
+
 ### NoDynamicNameRule
 
 Use explicit names over dynamic ones

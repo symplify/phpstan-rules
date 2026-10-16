@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\ClassConstFetch;
-use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\ClassReflection;
+use PHPStan\Node\CollectedDataNode;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Collector\ClassConstantDeclarationCollector;
+use Symplify\PHPStanRules\Collector\StaticClassConstFetchCollector;
 
 /**
- * @implements Rule<ClassConstFetch>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenStaticClassConstFetchRule\ForbiddenStaticClassConstFetchRuleTest
+ *
+ * @implements Rule<CollectedDataNode>
  */
 final class ForbiddenStaticClassConstFetchRule implements Rule
 {
@@ -25,29 +27,103 @@ final class ForbiddenStaticClassConstFetchRule implements Rule
 
     public function getNodeType(): string
     {
-        return ClassConstFetch::class;
+        return CollectedDataNode::class;
     }
 
     /**
-     * @param ClassConstFetch $node
+     * @param CollectedDataNode $node
+     * @return list<IdentifierRuleError>
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->class instanceof Name) {
-            return [];
+        [$constantNamesByClass, $parentClassByClass] = $this->resolveClassMaps($node);
+
+        /** @var array<string, list<array{string, string, int}>> $fetchesByFilePath */
+        $fetchesByFilePath = $node->get(StaticClassConstFetchCollector::class);
+
+        $ruleErrors = [];
+
+        foreach ($fetchesByFilePath as $filePath => $fetches) {
+            foreach ($fetches as [$className, $constantName, $line]) {
+                // a child class overriding the constant makes late static binding meaningful, so keep it
+                if ($this->isOverriddenInChildClass($className, $constantName, $constantNamesByClass, $parentClassByClass)) {
+                    continue;
+                }
+
+                $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                    ->identifier('symplify.forbiddenStaticClassConstFetch')
+                    ->file($filePath)
+                    ->line($line)
+                    ->build();
+            }
         }
 
-        if ($node->class->toString() !== 'static') {
-            return [];
+        return $ruleErrors;
+    }
+
+    /**
+     * @return array{array<string, string[]>, array<string, string|null>} constant names and parent class per class
+     */
+    private function resolveClassMaps(CollectedDataNode $collectedDataNode): array
+    {
+        /** @var array<string, list<array{string, string|null, string[]}>> $declarationsByFilePath */
+        $declarationsByFilePath = $collectedDataNode->get(ClassConstantDeclarationCollector::class);
+
+        $constantNamesByClass = [];
+        $parentClassByClass = [];
+
+        foreach ($declarationsByFilePath as $declarations) {
+            foreach ($declarations as [$className, $parentClassName, $constantNames]) {
+                $constantNamesByClass[$className] = $constantNames;
+                $parentClassByClass[$className] = $parentClassName;
+            }
         }
 
-        $classReflection = $scope->getClassReflection();
-        if ($classReflection instanceof ClassReflection && $classReflection->isAbstract()) {
-            return [];
+        return [$constantNamesByClass, $parentClassByClass];
+    }
+
+    /**
+     * @param array<string, string[]>     $constantNamesByClass
+     * @param array<string, string|null> $parentClassByClass
+     */
+    private function isOverriddenInChildClass(
+        string $parentClassName,
+        string $constantName,
+        array $constantNamesByClass,
+        array $parentClassByClass
+    ): bool {
+        foreach ($constantNamesByClass as $declaringClassName => $constantNames) {
+            if ($declaringClassName === $parentClassName) {
+                continue;
+            }
+
+            if (! in_array($constantName, $constantNames, true)) {
+                continue;
+            }
+
+            if ($this->isSubclassOf($declaringClassName, $parentClassName, $parentClassByClass)) {
+                return true;
+            }
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
-            ->identifier('symplify.forbiddenStaticClassConstFetch')
-            ->build()];
+        return false;
+    }
+
+    /**
+     * @param array<string, string|null> $parentClassByClass
+     */
+    private function isSubclassOf(string $className, string $ancestorClassName, array $parentClassByClass): bool
+    {
+        $currentClassName = $parentClassByClass[$className] ?? null;
+
+        while ($currentClassName !== null) {
+            if ($currentClassName === $ancestorClassName) {
+                return true;
+            }
+
+            $currentClassName = $parentClassByClass[$currentClassName] ?? null;
+        }
+
+        return false;
     }
 }
