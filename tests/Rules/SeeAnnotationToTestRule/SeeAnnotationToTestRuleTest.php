@@ -36,6 +36,7 @@ final class SeeAnnotationToTestRuleTest extends RuleTestCase
         yield [__DIR__ . '/Fixture/RuleWithSeeRandom.php', [[$errorMessage, 15]]];
 
         yield [__DIR__ . '/Fixture/SkipDeprecatedRuleWithoutSee.php', []];
+        yield [__DIR__ . '/Fixture/SkipImportedSee.php', []];
     }
 
     /**
