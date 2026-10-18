@@ -7,6 +7,7 @@ namespace Symplify\PHPStanRules\Rules;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
+use PHPStan\Analyser\NameScope;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\PhpDoc\Tag\DeprecatedTag;
@@ -94,7 +95,7 @@ final class SeeAnnotationToTestRule implements Rule
         }
 
         $seeTags = $this->seePhpDocTagNodesFinder->find($resolvedPhpDocBlock);
-        if ($this->hasSeeTestCaseAnnotation($seeTags)) {
+        if ($this->hasSeeTestCaseAnnotation($seeTags, $resolvedPhpDocBlock->getNullableNameScope())) {
             return [];
         }
 
@@ -123,14 +124,19 @@ final class SeeAnnotationToTestRule implements Rule
     /**
      * @param PhpDocTagNode[] $seeTags
      */
-    private function hasSeeTestCaseAnnotation(array $seeTags): bool
+    private function hasSeeTestCaseAnnotation(array $seeTags, ?NameScope $nameScope): bool
     {
         foreach ($seeTags as $seeTag) {
             if (! $seeTag->value instanceof GenericTagValueNode) {
                 continue;
             }
 
-            if (is_a($seeTag->value->value, TestClassName::PHPUNIT_TEST_CASE, true)) {
+            // resolve short imported names to fully qualified ones
+            $className = $nameScope instanceof NameScope
+                ? $nameScope->resolveStringName($seeTag->value->value)
+                : $seeTag->value->value;
+
+            if (is_a($className, TestClassName::PHPUNIT_TEST_CASE, true)) {
                 return true;
             }
         }
