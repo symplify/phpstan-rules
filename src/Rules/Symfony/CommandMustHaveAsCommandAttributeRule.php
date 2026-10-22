@@ -35,7 +35,14 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
     /**
      * @var string
      */
+    private const SYMFONY_CONSOLE_PACKAGE = 'symfony/console';
+
+    /**
+     * @var string
+     */
     public const ERROR_MESSAGE = 'Class "%s" extends Command but is missing the #[AsCommand] attribute';
+
+    private ?bool $hasSymfonyConsolePackage = null;
 
     public function __construct(ReflectionProvider $reflectionProvider)
     {
@@ -56,6 +63,11 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
     {
         // an anonymous class carries no name to report, and is no registered command
         if (! $node->name instanceof Identifier) {
+            return [];
+        }
+
+        // only projects that depend on symfony/console in composer.json
+        if (! $this->hasSymfonyConsolePackage()) {
             return [];
         }
 
@@ -96,5 +108,39 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
             ->build();
 
         return [$identifierRuleError];
+    }
+
+    private function hasSymfonyConsolePackage(): bool
+    {
+        if ($this->hasSymfonyConsolePackage !== null) {
+            return $this->hasSymfonyConsolePackage;
+        }
+
+        $composerJsonFilePath = getcwd() . '/composer.json';
+        if (! is_file($composerJsonFilePath)) {
+            return $this->hasSymfonyConsolePackage = false;
+        }
+
+        $composerJsonContents = file_get_contents($composerJsonFilePath);
+        if ($composerJsonContents === false) {
+            return $this->hasSymfonyConsolePackage = false;
+        }
+
+        $composerJson = json_decode($composerJsonContents, true);
+        if (! is_array($composerJson)) {
+            return $this->hasSymfonyConsolePackage = false;
+        }
+
+        $requirePackages = $composerJson['require'] ?? [];
+        if (is_array($requirePackages) && isset($requirePackages[self::SYMFONY_CONSOLE_PACKAGE])) {
+            return $this->hasSymfonyConsolePackage = true;
+        }
+
+        $requireDevPackages = $composerJson['require-dev'] ?? [];
+        if (is_array($requireDevPackages) && isset($requireDevPackages[self::SYMFONY_CONSOLE_PACKAGE])) {
+            return $this->hasSymfonyConsolePackage = true;
+        }
+
+        return $this->hasSymfonyConsolePackage = false;
     }
 }
