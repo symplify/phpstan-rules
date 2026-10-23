@@ -13,6 +13,7 @@ use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symfony\Component\Console\Command\Command;
+use Symplify\PHPStanRules\Composer\ComposerRequireResolver;
 use Symplify\PHPStanRules\Rules\Enum\SymfonyAttribute;
 
 /**
@@ -28,9 +29,9 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
     private ReflectionProvider $reflectionProvider;
 
     /**
-     * @var string
+     * @readonly
      */
-    private const LARAVEL_COMMAND_CLASS = 'Illuminate\Console\Command';
+    private ComposerRequireResolver $composerRequireResolver;
 
     /**
      * @var string
@@ -40,13 +41,17 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
     /**
      * @var string
      */
+    private const LARAVEL_COMMAND_CLASS = 'Illuminate\Console\Command';
+
+    /**
+     * @var string
+     */
     public const ERROR_MESSAGE = 'Class "%s" extends Command but is missing the #[AsCommand] attribute';
 
-    private ?bool $hasSymfonyConsolePackage = null;
-
-    public function __construct(ReflectionProvider $reflectionProvider)
+    public function __construct(ReflectionProvider $reflectionProvider, ComposerRequireResolver $composerRequireResolver)
     {
         $this->reflectionProvider = $reflectionProvider;
+        $this->composerRequireResolver = $composerRequireResolver;
     }
 
     public function getNodeType(): string
@@ -66,8 +71,8 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
             return [];
         }
 
-        // only projects that depend on symfony/console in composer.json
-        if (! $this->hasSymfonyConsolePackage()) {
+        // symfony/console must be a direct production dependency, require-dev is skipped
+        if (! $this->composerRequireResolver->hasRequiredPackage(self::SYMFONY_CONSOLE_PACKAGE)) {
             return [];
         }
 
@@ -108,39 +113,5 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
             ->build();
 
         return [$identifierRuleError];
-    }
-
-    private function hasSymfonyConsolePackage(): bool
-    {
-        if ($this->hasSymfonyConsolePackage !== null) {
-            return $this->hasSymfonyConsolePackage;
-        }
-
-        $composerJsonFilePath = getcwd() . '/composer.json';
-        if (! is_file($composerJsonFilePath)) {
-            return $this->hasSymfonyConsolePackage = false;
-        }
-
-        $composerJsonContents = file_get_contents($composerJsonFilePath);
-        if ($composerJsonContents === false) {
-            return $this->hasSymfonyConsolePackage = false;
-        }
-
-        $composerJson = json_decode($composerJsonContents, true);
-        if (! is_array($composerJson)) {
-            return $this->hasSymfonyConsolePackage = false;
-        }
-
-        $requirePackages = $composerJson['require'] ?? [];
-        if (is_array($requirePackages) && isset($requirePackages[self::SYMFONY_CONSOLE_PACKAGE])) {
-            return $this->hasSymfonyConsolePackage = true;
-        }
-
-        $requireDevPackages = $composerJson['require-dev'] ?? [];
-        if (is_array($requireDevPackages) && isset($requireDevPackages[self::SYMFONY_CONSOLE_PACKAGE])) {
-            return $this->hasSymfonyConsolePackage = true;
-        }
-
-        return $this->hasSymfonyConsolePackage = false;
     }
 }

@@ -1,5 +1,11 @@
 includes:
     - ../../../../config/included_services.neon
 
+services:
+    -
+        class: Symplify\PHPStanRules\Composer\ComposerRequireResolver
+        arguments:
+            workingDirectory: 'tests/Rules/Symfony/CommandMustHaveAsCommandAttributeRule/composer-fixture'
+
 rules:
     - Symplify\PHPStanRules\Rules\Symfony\CommandMustHaveAsCommandAttributeRule

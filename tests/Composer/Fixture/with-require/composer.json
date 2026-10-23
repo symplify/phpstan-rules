@@ -1,0 +1,5 @@
+{
+    "require": {
+        "symfony/console": "^7.0"
+    }
+}
