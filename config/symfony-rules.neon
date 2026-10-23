@@ -57,6 +57,11 @@ conditionalTags:
 services:
     - Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver
 
+    -
+        class: Symplify\PHPStanRules\Composer\ComposerRequireResolver
+        arguments:
+            workingDirectory: %currentWorkingDirectory%
+
     - Symplify\PHPStanRules\Rules\Symfony\SingleArgEventDispatchRule
     - Symplify\PHPStanRules\Rules\Symfony\NoListenerWithoutContractRule
     - Symplify\PHPStanRules\Rules\Symfony\NoStringInGetSubscribedEventsRule

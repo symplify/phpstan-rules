@@ -2607,7 +2607,7 @@ return function (ContainerConfigurator $container) {
 
 ### CommandMustHaveAsCommandAttributeRule
 
-Every class that extends Symfony `Command` must declare the `#[AsCommand]` attribute.
+Every class that extends Symfony `Command` must declare the `#[AsCommand]` attribute. Skipped when `symfony/console` is not a `require` dependency (a `require-dev` only entry is ignored).
 
 ```yaml
 rules:
