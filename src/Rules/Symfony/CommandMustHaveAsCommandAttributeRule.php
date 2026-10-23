@@ -71,6 +71,11 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
             return [];
         }
 
+        // do not require an attribute the project does not even have
+        if (! $this->reflectionProvider->hasClass(SymfonyAttribute::AS_COMMAND)) {
+            return [];
+        }
+
         // symfony/console must be a direct production dependency, require-dev is skipped
         if (! $this->composerRequireResolver->hasRequiredPackage(self::SYMFONY_CONSOLE_PACKAGE)) {
             return [];
@@ -92,11 +97,6 @@ final class CommandMustHaveAsCommandAttributeRule implements Rule
         }
 
         if (! $this->reflectionProvider->getClass($className)->is(Command::class)) {
-            return [];
-        }
-
-        // do not require an attribute the project does not even have
-        if (! $this->reflectionProvider->hasClass(SymfonyAttribute::AS_COMMAND)) {
             return [];
         }
 
