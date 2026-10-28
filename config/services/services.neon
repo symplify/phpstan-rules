@@ -9,6 +9,7 @@ services:
     - Symplify\PHPStanRules\Naming\ClassToSuffixResolver
     - Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
     - Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
+    - Symplify\PHPStanRules\NodeAnalyzer\LaravelPresenceResolver
     - Symplify\PHPStanRules\ParentClassMethodNodeResolver
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver
