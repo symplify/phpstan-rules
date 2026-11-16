@@ -87,12 +87,13 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return $resolvedValue;
         }
 
-        $resolvedValue = constant(SetList::class . '::' . $constantName);
-        if (! is_string($resolvedValue)) {
-            throw new ShouldNotHappenException();
+        // resolve by path, as SetList::PHP_* constants were removed
+        $configFilePath = dirname(SetList::CODE_QUALITY) . '/php' . $match['version'] . '.php';
+        if (! is_file($configFilePath)) {
+            return null;
         }
 
-        return $resolvedValue;
+        return $configFilePath;
     }
 
     private function createErrorMessage(string $configFilePath, string $rectorClass): string
